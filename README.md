@@ -1,0 +1,2 @@
+# Lazer
+A functional lazy language for the .NET platform. The goal of this project is implementing a small subset of Haskell (with some syntax changes) to run efficiently on the Common Language Runtime.

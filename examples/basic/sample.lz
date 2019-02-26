@@ -1,0 +1,40 @@
+module Program
+
+export (Tree, insert, empty, toList)
+
+infixr 3 (++)
+
+data Tree = Leaf | Node Int Tree Tree
+
+insert :: Int -> Tree -> Tree
+insert v Leaf = Node v Leaf Leaf
+insert v (Node u l r) =
+    if v < u then
+        Node u (insert v l) r
+    else
+        Node u l (insert v r)
+
+toList Leaf = []
+toList (Node v l r) = 
+    let left = toList l in
+    concat left (v : toList r)
+
+concat :: [a] -> [a] -> [a]
+concat (x:xs) = \r -> x : (concat xs r)
+concat [] = id
+
+(++) = concat
+
+id = \x -> x
+
+empty = Leaf
+
+
+//builtins
+// []   :: [a]
+// (:)  :: a -> [a] -> [a]
+// (,)  :: a -> b -> (a, b)
+// (<)
+
+// [x] => (:) (x) []
+// (a,b) => (,) a b
