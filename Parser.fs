@@ -3,7 +3,6 @@ module Parser
 #nowarn "40"
 
 open System
-open System.Text
 open FParsec
 open FParsec.Indent
 open FParsec.Utils
@@ -221,37 +220,33 @@ and pEVar = attempt valIdent |>> EVar
 and pEConstr = typeIdent |>> EConstr
 and pEList = parse {
     let! (pos, es) = withPos <| brackets (sepBy pExpr comma .>> maybe comma)
-    return EMultiContr (pos, builtIdent "[]", es)
+    return EMultiConstr (pos, builtIdent "[]", es)
   }
 and pETuple = attempt <| parse {
     let! (pos, es) = withPos <| parens (sepBy2 pExpr comma)
-    return EMultiContr (pos, tupleIdent (List.length es), es)
+    return EMultiConstr (pos, tupleIdent (List.length es), es)
   }
 and pELet = parse {
-    let inner = parse {
-        let! _ = keyword "let"
-        let! p = pPattern
-        let! _ = op "="
-        let! eb = pExpr
-        let! _ = keyword "in"
-        let! ec = pExpr
-        return (p, eb, ec)
-    }
-    let! (pos, (p, eb, ec)) = withPos inner
-    return ELet (pos, p, eb, ec)
+    let! pB = getStartPos
+    let! _ = keyword "let"
+    let! p = pPattern
+    let! _ = op "="
+    let! eb = pExpr
+    let! _ = keyword "in"
+    let! ec = atLeast pB pExpr
+    let! pE = getEndPos
+    return ELet (makePos pB pE, p, eb, ec)
   }
 and pEIf = parse {
-    let inner = parse {
-        let! _ = keyword "if"
-        let! c = pExpr
-        let! _ = keyword "then"
-        let! t = pExpr
-        let! _ = keyword "else"
-        let! f = pExpr
-        return (c, t, f)
-    }
-    let! (pos, (c, t, f)) = withPos inner
-    return EIf (pos, c, t, f)
+    let! pB = getStartPos
+    let! _ = keyword "if"
+    let! c = pExpr
+    let! _ = keyword "then"
+    let! t = greater pB pExpr
+    let! _ = keyword "else"
+    let! f = greater pB pExpr
+    let! pE = getEndPos
+    return EIf (makePos pB pE, c, t, f)
   }
 and pELambda = parse {
     let inner = parse {

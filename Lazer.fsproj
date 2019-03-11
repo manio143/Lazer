@@ -4,7 +4,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ResultMonad.fs" />
     <Compile Include="Model.fs" />
+    <Compile Include="TypeCheck.fs" />
     <Compile Include="FParsec.Indent.fs" />
     <Compile Include="FParsec.Utils.fs" />
     <Compile Include="FParsec.Expr.fs" />

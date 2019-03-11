@@ -5,7 +5,18 @@ open System
 open FParsec
 open FParsec.Indent
 
-let keyword str = tokeniser (pstring str >>? (nextCharSatisfiesNot (fun c -> isLetter c || isDigit c) <?> str))
+let rec oneOf = function
+    | [p] -> p
+    | (h::t) -> h <|> oneOf t
+
+let underscore<'u> : IndentParser<_,'u> = tokeniser <| pchar '_'
+let dot<'u> : IndentParser<_,'u> = tokeniser <| pchar '.'
+let comma<'u> : IndentParser<_,'u> = tokeniser <| pchar ','
+let semi<'u> : IndentParser<_,'u> = tokeniser <| pchar ';'
+let colon<'u> : IndentParser<_,'u> = tokeniser <| pchar ':'
+let prim<'u> : IndentParser<_,'u> = tokeniser <| pchar '\''
+
+let keyword str = tokeniser (pstring str >>? (notFollowedBy (oneOf [asciiLetter; digit ; underscore; prim]) <?> str))
 let op str = tokeniser (pstring str >>? (nextCharSatisfiesNot (isAnyOf "!@#$%^&*()-+=?/><|") <?> str))
 
 let operator<'u> : IndentParser<_, 'u> = tokeniser (many1 (anyOf "!@#$%^&*-+=?/><|") |>> String.Concat)
@@ -43,17 +54,7 @@ let many1 p = tokeniser (many1 p)
 let sepBy p s = tokeniser (sepBy p s)
 let sepBy1 p s = tokeniser (sepBy1 p s)
 
-let underscore<'u> : IndentParser<_,'u> = tokeniser <| pchar '_'
-let dot<'u> : IndentParser<_,'u> = tokeniser <| pchar '.'
-let comma<'u> : IndentParser<_,'u> = tokeniser <| pchar ','
-let semi<'u> : IndentParser<_,'u> = tokeniser <| pchar ';'
-let colon<'u> : IndentParser<_,'u> = tokeniser <| pchar ':'
-
 let str s = tokeniser <| pstring s .>> spaces
-
-let rec oneOf = function
-    | [p] -> p
-    | (h::t) -> h <|> oneOf t
 
 let makeIdent (body: Parser<char,_>) reserved start = parse {
     let! s = start
@@ -64,8 +65,8 @@ let makeIdent (body: Parser<char,_>) reserved start = parse {
     else return str
 }
 
-let ident r s = tokeniser <| makeIdent (oneOf [asciiLetter; digit ; underscore; dot]) r s
-let dottedIdent r s = tokeniser <| makeIdent (oneOf [asciiLetter; digit ; underscore]) r s
+let ident r s = tokeniser <| makeIdent (oneOf [asciiLetter; digit ; underscore; prim]) r s
+let dottedIdent r s = tokeniser <| makeIdent (oneOf [asciiLetter; digit ; underscore; prim; dot]) r s
 
 let delimitedStr s e = tokeniser << between (str s) (str e)
 let parens p = delimitedStr "(" ")" p
@@ -83,3 +84,8 @@ let escapedChar<'u> : IndentParser<_,'u> =
     }
     let nonEscape = noneOf "\\\'\"nt"
     tokeniser (nonEscape <|> escape)
+
+let toResult c =
+    match c with
+    | Success (r,s,p) -> Result.Ok r
+    | Failure (r,s,p) -> Result.Error r
