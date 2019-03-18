@@ -130,6 +130,9 @@ type Ident<'a> with
     member this.Context =
         match this with
         | Ident (ctx,_) -> ctx
+    member this.Value =
+        match this with
+        | Ident (_, n) -> n
     member this.Map (f : 'a -> 'b) =
         match this with
         | Ident (ctx, s) -> Ident (f ctx, s)

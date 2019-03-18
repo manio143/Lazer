@@ -13,5 +13,19 @@ type ResultBuilder() =
     member z.Combine(m, f:unit -> _) = z.Bind(m, f)
     member z.For(s, f) =
         Seq.map f s |> Seq.fold (fun l r -> z.Bind(l, fun _ -> r)) (z.Zero())
+    member z.Fail(x) = Error x
 
 let result = ResultBuilder()
+
+let combineResults rl =
+    let rec inner l sl el =
+        match l with
+        | h :: t ->
+            match h with
+            | Ok x -> inner t (x::sl) el
+            | Error x -> inner t sl (x::el)
+        | [] -> if List.isEmpty el then
+                    Ok sl
+                else
+                    Error el
+    inner rl [] []

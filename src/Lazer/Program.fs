@@ -12,4 +12,5 @@ open Parser
 let main argv =
     let result = runParserOnStream pModule defaultState "stdin" (Console.OpenStandardInput())
     printfn "%A" (toResult result |> Result.map (fun x -> x.Map ignore))
+
     0 // return an integer exit code
