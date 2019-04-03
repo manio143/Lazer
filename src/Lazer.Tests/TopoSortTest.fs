@@ -2,7 +2,7 @@ namespace Tests
 
 open NUnit.Framework
 
-open Alogrithms
+open Algorithms
 
 [<TestFixture>]
 type TopoSortTest () =

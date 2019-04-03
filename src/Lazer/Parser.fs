@@ -173,14 +173,21 @@ and pPConstr =
         return PConstr (pos, c, ps)
     }
     pC <|> attempt pCA
-and pPList = parse {
-    let! (pos, ps) = withPos <| brackets (sepBy pPattern comma)
-    return PConstr (pos, builtIdent "[]", ps)
+and pPList = attempt <| parse {
+    let! pB = getStartPos
+    let! pats = brackets (sepBy (getStartPos .>>. pPattern) comma)
+    let! pE = getEndPos
+    if List.isEmpty pats then
+        return PConstr (makePos pB pE, builtIdent "[]", [])
+    else
+    let f pB ps = PConstr (makePos pB pE, builtIdent ":", ps)
+    let rest = List.foldBack (fun (pB, p) acc -> f pB [p; acc]) (List.tail pats |> init) (snd (List.last pats))
+    return PConstr (makePos pB pE, builtIdent ":", [snd <| List.head pats; rest])
   }
 and pPListHead = attempt <| parse {
     let! pB = getStartPos
     let! pats = parens (sepBy2 (getStartPos .>>. pPattern) colon)
-    let! pE = getStartPos
+    let! pE = getEndPos
     let f pB ps = PConstr (makePos pB pE, builtIdent ":", ps)
     let rest = List.foldBack (fun (pB, p) acc -> f pB [p; acc]) (List.tail pats |> init) (snd (List.last pats))
     return PConstr (makePos pB pE, builtIdent ":", [snd <| List.head pats; rest])
@@ -192,7 +199,7 @@ and pPTuple = attempt <| parse {
 
 let pParensOp = parse {
     let! (pos, op) = withPos <| parens operator
-    return Ident (pos, "("+op+")")
+    return Ident (pos, op)
 }
 
 let pLInt = withPos integer64 |>> LInt
@@ -235,7 +242,11 @@ and pELet = parse {
     let! _ = keyword "in"
     let! ec = atLeast pB pExpr
     let! pE = getEndPos
-    return ELet (makePos pB pE, p, eb, ec)
+    match p with
+    | PVar n -> 
+        return ELet (makePos pB pE, BindGroup (posCombine p.Context eb.Context, [BFun(posCombine p.Context eb.Context, n, [], eb)]), ec)
+    | _ ->
+        return ELet (makePos pB pE, BindGroup (posCombine p.Context eb.Context, [BPat(posCombine p.Context eb.Context, p, eb)]), ec)
   }
 and pEIf = parse {
     let! pB = getStartPos
@@ -272,7 +283,7 @@ let pValDef =
     } <?> "value definition"
 
 let pDef =
-    pTypeDef |>> TypeDefintion
+    pTypeDef |>> TypeDefinition
     <|> (attempt pTypeSig |>> TypeSignature)
     <|> (pValDef |>> ValueDefinition)
 

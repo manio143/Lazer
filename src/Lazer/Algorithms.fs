@@ -1,4 +1,4 @@
-module Alogrithms
+module Algorithms
 
 open System.Linq
 open FSharpx.Collections
@@ -55,3 +55,18 @@ let rec mapSeen f l seen acc =
     | h :: t -> mapSeen f t (h::seen) (f h seen :: acc)
     | [] -> List.rev acc
     
+
+let rec foldr1 f l =
+    match l with
+    | [x] -> x
+    | h::t -> f h (foldr1 f t)
+let rec foldl1 f l = List.fold f (List.head l) (List.tail l)
+
+let rec zipWith f a b =
+    match a, b with
+    | ha::ta, hb::tb -> f ha hb :: zipWith f ta tb
+    | [], _ -> []
+    | _, [] -> []
+
+let inline map f (x: ^T when ^T : (member Map : (^a -> ^b) -> ^U)) =
+    (^T : (member Map : (^a -> ^b) -> ^U) (x,f))

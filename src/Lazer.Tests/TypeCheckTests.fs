@@ -100,7 +100,18 @@ data H = E F | Q
                 checkTypeDefs sett tds
             | Error s -> 
                 Assert.Fail(sprintf "Error parsing test data\n%s" s)
-                result.Return ()
+                result.Return (Set.empty,[])
         match res with
-        | Ok () -> Assert.Pass()
+        | Ok _ -> Assert.Pass()
         | Error e -> Assert.Fail(sprintf "%A" e)
+
+    [<Test>]
+    member this.``Test checkTypeDefs adds new to types to set`` () =
+        let sett = Set.add (Ident ((), "B")) Set.empty
+        let value = [
+                AliasDef ((), Ident((), "A"), TUnion (Ident ((), "B")))
+            ]
+        let expected = Set.add (Ident ((),"A")) sett
+        match checkTypeDefs sett value with
+        | Ok (s,_) -> Assert.True(Set.isSubset expected s, sprintf "Expected set %A but got %A" expected s)
+        | Error x -> Assert.Fail(sprintf "%A" x)

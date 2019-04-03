@@ -3,7 +3,7 @@ module Model
 type Position = Pos of Begin : (int64 * int64)
                      * End   : (int64 * int64)
                      * File  : string
-              | BuiltIn
+              | BuiltIn | UndefPos
 
 type Ident<'a> = Ident of Ctx   : 'a
                         * Ident : string
@@ -44,11 +44,6 @@ type TypeSig<'a> = TypeSig of Ctx   : 'a
                             * Name  : Ident<'a>
                             * Type  : Type<'a>
 
-type Pattern<'a> = PVar of Ident<'a>
-                 | PConstr of Context    : 'a
-                            * ConstrName : Ident<'a>
-                            * Patterns   : Pattern<'a> list
-
 type Literal<'a> = LInt of Context : 'a
                          * Value   : int64
                  | LChar of Context : 'a
@@ -56,13 +51,29 @@ type Literal<'a> = LInt of Context : 'a
                  | LString of Context : 'a
                             * Value   : string
 
-type Expr<'a> = EVar of Ident<'a>
+type Pattern<'a> = PVar of Ident<'a>
+                 | PWildcard of Ctx : 'a
+                 | PLit of Literal<'a>
+                 | PConstr of Context    : 'a
+                            * ConstrName : Ident<'a>
+                            * Patterns   : Pattern<'a> list
+
+type Binding<'a> = BSig of TypeSig<'a>
+                 | BFun of Context : 'a
+                         * Name    : Ident<'a>
+                         * Patterns: Pattern<'a> list
+                         * BExpr   : Expr<'a>
+                 | BPat of Context : 'a
+                         * Pattern : Pattern<'a>
+                         * BExpr   : Expr<'a>
+and BindingGroup<'a> = BindGroup of 'a * Binding<'a> list
+
+and Expr<'a> = EVar of Ident<'a>
               | EConstr of Ident<'a>
               | ELiteral of Literal<'a>
-              | ELet of Context : 'a
-                      * Pattern : Pattern<'a>
-                      * BExpr   : Expr<'a>
-                      * IExpr   : Expr<'a>
+              | ELet of Context   : 'a
+                      * BindGroup : BindingGroup<'a>
+                      * IExpr     : Expr<'a>
               | EIf of Context : 'a
                      * Cond    : Expr<'a>
                      * Then    : Expr<'a>
@@ -87,8 +98,11 @@ type ValDef<'a> = ValDef of Ctx        : 'a
                           * Name       : Ident<'a>
                           * Patterns   : Pattern<'a> list
                           * Expression : Expr<'a>
+                | MergedValDef of Ctx  : 'a
+                                * Name : Ident<'a>
+                                * (Pattern<'a> list * Expr<'a>) list
 
-type Definition<'a> = TypeDefintion of TypeDef<'a>
+type Definition<'a> = TypeDefinition of TypeDef<'a>
                     | ValueDefinition of ValDef<'a>
                     | TypeSignature of TypeSig<'a>
 
@@ -198,31 +212,53 @@ type Pattern<'a> with
     member this.Context =
         match this with
         | PVar id -> id.Context
+        | PWildcard ctx -> ctx
+        | PLit l -> l.Context
         | PConstr (ctx, i, ps) -> ctx
     member this.Map f =
         match this with
         | PVar id -> PVar (id.Map f)
+        | PWildcard ctx -> PWildcard (f ctx)
+        | PLit l -> PLit (l.Map f)
         | PConstr (ctx, i, ps) -> PConstr (f ctx, i.Map f, ps |> List.map (fun x -> x.Map f))
 
-type Expr<'a> with
+type Binding<'a> with
+    member this.Context =
+        match this with
+        | BSig s -> s.Context
+        | BFun (ctx,_,_,_) -> ctx
+        | BPat (ctx,_,_) -> ctx
+    member this.Map<'b> (f : 'a -> 'b) : Binding<'b> =
+        match this with
+        | BSig s -> BSig (s.Map f)
+        | BFun (ctx, n,ps,e) -> BFun (f ctx, n.Map f, ps |> List.map (fun x -> x.Map f), e.Map f)
+        | BPat (ctx,p,e) -> BPat (f ctx, p.Map f, e.Map f)
+and BindingGroup<'a> with
+    member this.Context =
+        match this with
+        | BindGroup (ctx,bs) -> ctx
+    member this.Map<'b> (f : 'a -> 'b) : BindingGroup<'b> =
+        match this with
+        | BindGroup (ctx,bs) -> BindGroup (f ctx, bs |> List.map (fun x -> x.Map f))
+and Expr<'a> with
     member this.Context =
         match this with
         | EVar (Ident (ctx,_)) -> ctx
         | EConstr (Ident (ctx, _)) -> ctx
         | ELiteral lit -> lit.Context
-        | ELet (ctx, _, _, _) -> ctx
+        | ELet (ctx, _, _) -> ctx
         | EIf (ctx, _, _, _) -> ctx
         | EMultiConstr (ctx, _, _) -> ctx
         | EApp (ctx, _, _) -> ctx
         | ELambda (ctx, _, _) -> ctx
         | EBinOp (ctx, _, _, _) -> ctx
         | EUnOp (ctx, _, _) -> ctx
-    member this.Map (f : 'a -> 'b) =
+    member this.Map<'b> (f : 'a -> 'b) : Expr<'b> =
         match this with
         | EVar id -> EVar (id.Map f)
         | EConstr id -> EVar (id.Map f)
         | ELiteral lit -> ELiteral (lit.Map f)
-        | ELet (ctx, p, b, i) -> ELet (f ctx, p.Map f, b.Map f, i.Map f)
+        | ELet (ctx, bg, i) -> ELet (f ctx, bg.Map f, i.Map f)
         | EIf (ctx, c, t, ff) -> EIf (f ctx, c.Map f, t.Map f, ff.Map f)
         | EMultiConstr (ctx, c, es) -> EMultiConstr (f ctx, c.Map f, es |> List.map (fun x -> x.Map f))
         | EApp (ctx, el, er) -> EApp (f ctx, el.Map f, er.Map f)
@@ -234,19 +270,25 @@ type ValDef<'a> with
     member this.Context =
         match this with
         | ValDef (ctx, i, ps, e) -> ctx
+        | MergedValDef (ctx,_,_) -> ctx
+    member this.Name =
+        match this with
+        | ValDef (_, id,_,_) -> id
+        | MergedValDef (_, id,_) -> id
     member this.Map (f : 'a -> 'b) =
         match this with
         | ValDef (ctx, i, ps, e) -> ValDef (f ctx, i.Map f, ps |> List.map (fun x -> x.Map f), e.Map f)
+        | MergedValDef (ctx, i, p) -> MergedValDef (f ctx, i.Map f, p |> List.map (fun (a,b) -> (a |> List.map (fun x -> x.Map f), b.Map f)))
     
 type Definition<'a> with
     member this.Context =
         match this with
-        | TypeDefintion td -> td.Context
+        | TypeDefinition td -> td.Context
         | ValueDefinition vd -> vd.Context
         | TypeSignature ts -> ts.Context
     member this.Map (f : 'a -> 'b) =
         match this with
-        | TypeDefintion td -> TypeDefintion (td.Map f)
+        | TypeDefinition td -> TypeDefinition (td.Map f)
         | ValueDefinition vd -> ValueDefinition (vd.Map f)
         | TypeSignature ts -> TypeSignature (ts.Map f)
     
