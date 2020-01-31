@@ -9,15 +9,26 @@ namespace Lazer.Runtime
     public abstract class Thunk : Closure
     {
         public Closure ind;
-        public Closure compute;
+        private bool firstEval = true;
+        public abstract Closure Compute(StgContext ctx);
         public override Closure Eval(StgContext ctx)
         {
             if (ind != null) 
                 // if it's a Blackhole then Eval will throw
                 // otherwise it just returns the ind object
-                return ind.Eval(ctx); 
+                return ind.Eval(ctx);
+            
+            // When we start to evaluate a thunk we need to setup the 
+            // trampoline for the Update continuation
+            if (firstEval)
+            {
+                firstEval = false;
+                return StgEval.EvalAndContinueWith(ctx, this, ctx.UpdatePool.Get(this));
+            }
+            // Having pushed the Update we setup loop detection
+            // and evaluate the actual thunk code
             ind = Blackhole.Instance;
-            return StgEval.EvalAndContinueWith(ctx, compute, ctx.UpdatePool.Get(this));
+            return Compute(ctx);
         }
     }
 

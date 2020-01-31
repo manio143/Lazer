@@ -11,25 +11,52 @@ namespace Lazer.Runtime
 
     public sealed class App1u : Thunk
     {
+        private Closure f;
+        private Closure arg1;
         public App1u(Closure f, Closure arg1)
         {
-            compute = new App1n(f, arg1);
+            this.f = f;
+            this.arg1 = arg1;
+        }
+        public override Closure Compute(StgContext ctx)
+        {
+            return StgApply.Apply(ctx, f, arg1);
         }
     }
 
     public sealed class App2u : Thunk
     {
+        private Closure f;
+        private Closure arg1;
+        private Closure arg2;
         public App2u(Closure f, Closure arg1, Closure arg2)
         {
-            compute = new App2n(f, arg1, arg2);
+            this.f = f;
+            this.arg1 = arg1;
+            this.arg2 = arg2;
+        }
+        public override Closure Compute(StgContext ctx)
+        {
+            return StgApply.Apply(ctx, f, arg1, arg2);
         }
     }
 
     public sealed class App3u : Thunk
     {
+        private Closure f;
+        private Closure arg1;
+        private Closure arg2;
+        private Closure arg3;
         public App3u(Closure f, Closure arg1, Closure arg2, Closure arg3)
         {
-            compute = new App3n(f, arg1, arg2, arg3);
+            this.f = f;
+            this.arg1 = arg1;
+            this.arg2 = arg2;
+            this.arg3 = arg3;
+        }
+        public override Closure Compute(StgContext ctx)
+        {
+            return StgApply.Apply(ctx, f, arg1, arg2, arg3);
         }
     }
     public sealed class App1n : Closure
