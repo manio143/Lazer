@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Lazer.Runtime
 {
     /**
@@ -7,19 +9,17 @@ namespace Lazer.Runtime
     public sealed class Update : Continuation
     {
         public Thunk t;
-        public bool pooled;
+        public bool notPooled;
         public Update(Thunk t)
         {
             this.t = t;
+            this.notPooled = true;
         }
 
         /**
             Used by the UpdatePool.
          */
-        internal Update()
-        {
-            pooled = true;
-        }
+        internal Update() { }
 
         /**
             Called with an evaluated closure, updates the referenced thunk.
@@ -28,7 +28,7 @@ namespace Lazer.Runtime
         public override Closure Call(StgContext ctx, Closure c)
         {
             t.ind = c;
-            if (pooled)
+            if (!notPooled)
                 ctx.UpdatePool.Return(this);
             return c;
         }
@@ -39,7 +39,7 @@ namespace Lazer.Runtime
      */
     public sealed class UpdatePool
     {
-        private Update[] pool;
+        private List<Update> pool;
         private int index;
 
         /**
@@ -49,44 +49,43 @@ namespace Lazer.Runtime
         public int maxIndex;
         public UpdatePool(int initSize)
         {
-            pool = new Update[initSize];
+            pool = new List<Update>(initSize);
             for (int i = 0; i < initSize; i++)
-                pool[i] = new Update();
+                pool.Add(new Update());
             index = 0;
         }
 
         /**
             Gets a free Update from the pool or if there are no free ones
-            creates a new object.
-            FUTURE: after X attempts to get a continuation from a full 
-                    pool, increase the size.
+            creates a new object and adds it to the pool.
          */
         public Update Get(Thunk t)
         {
-            if (index < pool.Length)
+            if (index < pool.Count)
             {
                 var u = pool[index++];
                 maxIndex = index > maxIndex ? index : maxIndex;
                 u.t = t;
                 return u;
             }
-            else return new Update(t);
+            else
+            {
+                var u = new Update();
+                pool.Add(u);
+                index++;
+                maxIndex++;
+                u.t = t;
+                return u;
+            }
         }
 
         /**
             After Update continuation has been used it's returned to the pool.
-            We don't really need to check if it last right now, it 
-            always is, but if there were multiple threads this can change.
          */
         public void Return(Update u)
         {
-            if (pool[index - 1] == u)
-            {
-                u.t = null; //free thunk to GC
-                index--;
-            }
-            else
-                System.Console.Error.WriteLine("WARN, returned update is not the last one");
+            u.t = null; //free thunk to GC
+            index--;
         }
     }
 }

@@ -16,11 +16,6 @@ namespace Lazer.Runtime
         public bool Empty => stack.Count == 0;
 
         /**
-            If true then we're evaluating with a non-empty continuation stack. See StgEval class.
-         */
-        public bool trampoline;
-
-        /**
             To decrease Update continuation allocation we use a pool.
          */
         public UpdatePool UpdatePool = new UpdatePool(20);

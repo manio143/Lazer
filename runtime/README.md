@@ -15,8 +15,15 @@ This is a core library with abstractions and a set of classes that will allow us
     * `Update` - a continuation for updating thunks
     * `UpdatePool` - reusable Update objects
 * `IFunction.cs` - interfaces for functions (you need to know function arity to call it)
-* `AppNx.cs` - closures for delaying function application
 * `PAP.cs` - a partial application object
+* `Box.cs` - generic closure container for unlifted structs
 * `StgApply.cs` - static helper methods to perform application of unknown functions
 * `StgEval.cs` - static helper methods to perform trampoline bouncing
 * `StgContext.cs` - a computation context
+* `CLRPointers.cs` - compiler intrinsic functions for function pointers
+* Generic helpers
+    * `AppNx.cs` - closures for delaying function application
+    * `Continuations.cs` - continuations from static functions
+    * `Functions.cs` - function closures from static functions
+    * `Updatables.cs` - thunks from static functions
+    * `SingleEntries.cs` - closures from static functions

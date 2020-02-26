@@ -9,29 +9,25 @@ namespace Lazer.Runtime
      */
     public static class StgEval
     {
-        public static Closure EvalAndContinueWith(StgContext ctx, Closure c, Continuation cont)
+        public static Closure EvalThen(StgContext ctx, Closure c, Continuation cont)
         {
             ctx.Push(cont);
-            if (!ctx.trampoline)
-            { // start a trampoline
-                ctx.trampoline = true;
-                return Eval(ctx, c);
-            }
-            else
-            {
-                return c.Eval(ctx); // continue the trampoline from continuation
-            }
+            return c.Eval(ctx); // continue the trampoline from continuation
         }
-        
+
+        /*
+            Evaluates a closure in a trampolined environment.
+            This must be called when working in a non-lazy context.
+         */
         public static Closure Eval(StgContext ctx, Closure next)
         {
             next = next.Eval(ctx);
-            while (!ctx.Empty)
+            if (!ctx.Empty)
             {
                 Continuation cont = ctx.Pop();
-                next = cont.Call(ctx, next).Eval(ctx);
+                next = cont.Call(ctx, next);
+                return Eval(ctx, next);
             }
-            ctx.trampoline = false;
             return next;
         }
     }
