@@ -1,0 +1,203 @@
+% Copyright (c) 2020 by Marian Dziubiak <marian.dziubiak@gmail.com>
+
+\documentclass[en]{pracamgr}
+
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+% Dane magistranta:
+\autor{Marian Dziubiak}{370784}
+
+\title{Implementation of a lazy runtime environment on the .NET platform}
+\titlepl{Implementacja leniwego środowiska uruchomieniowego na platformie .NET}
+
+%kierunek: 
+% - matematyka, informacyka, ...
+% - Mathematics, Computer Science, ...
+\kierunek{Computer Science}
+
+% Praca wykonana pod kierunkiem:
+% (podać tytuł/stopień imię i nazwisko opiekuna
+% Instytut
+\opiekun{dr Marcin Benke\\
+  Institute of Informatics\\
+  }
+
+% miesiąc i~rok:
+\date{May 2020}
+
+%Podać dziedzinę wg klasyfikacji Socrates-Erasmus:
+\dziedzina{ 
+11.3 Computer Science\\ 
+}
+
+%Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
+\klasyfikacja{Software and its engineering\\
+  Software notations and tools\\
+  Compilers\\
+  Runtime environments}
+
+% Słowa kluczowe:
+\keywords{functional programming, lazy evaluation, .NET CLR}
+
+% Tu jest dobre miejsce na Twoje własne makra i~środowiska:
+\newtheorem{defi}{Definicja}[section]
+\newcommand{\shrp}{%
+  {\settoheight{\dimen0}{C}\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\textbf{\#}}}\hspace{1ex}}}
+\newcommand{\myref}[1]{\ref{#1}. \nameref{#1}}
+
+\definecolor{brown}{RGB}{104,55,0}
+\definecolor{gray}{RGB}{110,110,110}
+\hypersetup{
+    colorlinks,
+    linkcolor=brown,
+    citecolor=gray,
+    urlcolor=blue
+}
+
+% koniec definicji
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  TODO: Write a nice abstract
+\end{abstract}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+Functional programming is reliving a peak in its popularity.
+One of the more interesting features of pure functional programming
+is lazy evaluation. This means delaying the evaluation of an expression
+until its value is actually needed. This allows the programmer to use
+infinite data structures and certain types of algorithms that wouldn't
+be possible in a strict language. Currently the main programming language
+supporting lazy evaluation is Haskell.
+
+Haskell is compiled to native code or to LLVM representation by~the~optimizing
+compiler GHC. Like many other programming languages Haskell is mostly
+tied to its compiler and the native platform (as opposed to a~managed platform).
+Actually, Haskell did in fact have more compilers available, however,
+GHC is leading the language development and left competition far behind.
+There exist a couple of managed platforms that provide a common ecosystem
+for multiple languages. The two most popular are JVM and .NET.
+There has been some work done for the JVM \cite{Tullsen} \cite{Choi} \cite{Alliet}
+and there exist two Haskell implementations: 
+\href{https://github.com/Frege/frege}{Frege}~and~\href{https://eta-lang.org/}{Eta}.
+In~this work I will focus on the idea of bringing
+Haskell to the .NET platform. \\
+
+In 2002 Microsoft has released the first version of .NET Framework with
+C\shrp programming language. Since the initial release, the .NET ecosystem
+has grown mature with many languages targeting the platform. 
+Some of them are functional programming languages -- \mbox{F\shrp, SML.NET, Nemerle}.
+In 2015 most of the platform has been open sourced and gained a lot of
+interest from the community. This lead to some interesting performance
+improvements.\\ \\
+Previous attempts to bring
+Haskell to the .NET CLR (\textit{Common Language Runtime}):
+\begin{itemize}
+  \item
+  In 2001 Nigel Perry, Erik Meijer and Arjan van Yzendoorn implemented a 
+  non-strict scripting language called Mondrian
+  \cite{MondrianImplDetails}\cite{PerryMeijer}.
+  
+  \item
+  In 2005 Monique Monteiro, Mauro Ara\'ujo, Rafael Borges and Andr\'e Santos
+  created Haskell.NET
+  \cite{Brazil}.
+
+  \item
+  In 2006 Oliver Hunt created a compiler from Core language to C\shrp, leveraging
+  OOVM (\textit{Object Oriented Virtual Machine}) features to simplify interoperability
+  with non-strict code from CLI languages \cite{Hunt}.
+\end{itemize}
+
+What is the reason for bringing Haskell to a managed platform?\\There will be
+additional performance overhead, but the generated code will be portable
+and users can leverage a~variety of libraries, including the mature web framework
+ASP.NET. This also goes the other way -- .NET developers could access some of
+the libraries in the Hackage package repository.
+
+\section*{Chapter contents}
+
+Chapter \myref{r:lazyEval} takes a closer look at semantics of lazy evaluation,
+the data structures involved, and the storage of information on the stack vs on the heap. \vspace{.7ex}\\
+Chapter \myref{r:funApp} describes the two popular application mechanisms -- \\
+\textit{Push/Enter} and \textit{Eval/Apply}, how do they work on
+a~stack based OOVM such as CLR, and which seems better. \vspace{.7ex}\\
+Chapter \myref{r:lowlevel} describes mechanisms in the CLR that allow
+for valid and performant execution of a lazy program -- mainly tail calls
+and function pointers. \vspace{.7ex}\\
+Chapter \myref{r:runtime} showcases an implementation of a lazy runtime,
+building on the concepts introduced in previous chapters. \vspace{.7ex}\\
+Chapter \myref{r:alternatives} compares this and other implementations by
+showing important differences and arguing for their pros and cons. \vspace{.7ex}\\
+Chapter \myref{r:perf} looks at performance bottlenecks, presents
+benchmark results and compares those to Haskell compilers. \vspace{.7ex}\\
+Chapter \myref{r:compiler} presents some aspects of the translation
+mechanism from STG representation of a Haskell program into C\shrp. \vspace{.7ex}\\
+Chapter \myref{r:future} looks into future improvements to the runtime
+and extending Haskell for CLI interoperability.
+
+\chapter{Lazy evaluation}\label{r:lazyEval}
+TODO
+
+\chapter{Function application}\label{r:funApp}
+TODO
+
+\chapter{Low level CLR features}\label{r:lowlevel}
+TODO
+
+\chapter{Lazy runtime}\label{r:runtime}
+TODO
+
+\chapter{Comparison to alternative runtimes}\label{r:alternatives}
+TODO
+
+\chapter{Performance}\label{r:perf}
+TODO
+
+\chapter{Compiling Haskell to C\#}\label{r:compiler}
+TODO
+
+\chapter{Future work}\label{r:future}
+TODO
+
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\bibitem[T96]{Tullsen} Mark Tullsen, \textit{,,Compiling Haskell to Java''}, YALEU/DCS/RR-1204
+1996.
+
+\bibitem[A07]{Alliet} Brian Alliet, \textit{,,Efficient Translation of Haskell to Java
+Master’s Thesis Proposal''}, 2007.
+
+\bibitem[CLH01]{Choi} Kwanghoon Choi, Hyun-il Lim, Taisook Han, \textit{,,Compiling Lazy Functional Programs Based othe Spineless Tagless G-machine for the Java Virtual Machine''}, FLOPS 2001.
+
+\bibitem[PM04]{PerryMeijer} Nigel Perry, Erik Meijer, \textit{,,Implementing functional languages on object-oriented virtual machines''}, IEE Proceedings on Software, 151(1):1-9, 2004.
+
+\bibitem[H06]{Hunt} Oliver Hunt, \textit{,,The Provision of Non-Strictness, Higher Kinded Types
+and Higher Ranked Types on an Object Oriented Virtual Machine''}, 2006.
+
+\bibitem[MPY01]{MondrianImplDetails} Erik Meijer, Nigel Perry, Arjan van Yzendoorn, \textit{,,Scripting .NET using Mondrian''}, ECOOP 2001.
+
+\bibitem[MABS05]{Brazil} Monique Monteiro, Mauro Ara\'ujo, Rafael Borges, Andr\'e Santos,  \textit{,,Compiling Non-strict Functional Languages for the .NET Platform''}, Journal of Universal Computer Science, vol. 11, no. 7 (2005), 1255-1274.
+
+\end{thebibliography}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% coding: latin-2
+%%% End:
