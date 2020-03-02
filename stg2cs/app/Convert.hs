@@ -40,7 +40,7 @@ type Arg = Id
 
 data CSType = Closure | Int32 | Int64 | Char | Boolean | Float | Double | String | Class Name [CSType]
     deriving (Eq)
-data CSValue = CSCon Name [CSValue] | CSRef Id | CSLit Literal
+data CSValue = CSCon Name [CSValue] | CSRef Id | CSLit Literal | CSNull
 
 data CSEntity =
     CSTDataType Id [CSType]
@@ -76,12 +76,15 @@ data CSExpr =
     | CSEEvalThen Id Name [Id] -- evaluate <Id> then proceed to method <Name> with live parameters <[Id]>
     | CSELet Id CSExpr CSExpr  -- non-rec assign <Id> := <CSExpr> and continue to evaluate <CSExpr₂>
     | CSECase Id [CSAlt]  -- unpack an evaluated value
-    | CSELetRec [(Id,CSExpr,[Id])] CSExpr
+    -- | CSELetRec [(Id,CSExpr,[Id])] CSExpr !! Deprecated by CSEAssign
         -- recursive assign <Id> := <CSExpr'>
         -- where CSExpr' is CSExpr with <[Id]> replaced by null
         -- after all let assignments we need to feed them created values
         -- to do that when emitting nulls we need to remember their position
         -- because parameters are called xN
+    | CSEAssign Id Index Id CSExpr 
+        -- assign <Id₁>.x<Index> = <Id₂>; <CSExpr>
+        -- used in conjecture with CSELet for recursive declarations
     | CSEPrimOp PrimOp [CSValue]  -- a primitive operation
         -- Note: it seems there's a lot of those
     | CSECreateFun Name Arity [CSValue]
@@ -204,11 +207,11 @@ processTop (StgTopLifted (StgRec bndrs)) = mapM_ processAsNonRec bndrs
     where
         processAsNonRec (id, rhs) = processTop (StgTopLifted (StgNonRec id rhs))
 
-makeMethods :: Id -> [Arg] -> GenStgExpr Id Id -> CSST [CSMethod]
+makeMethods :: Id -> [Arg] -> StgExpr -> CSST [CSMethod]
 makeMethods id args expr = do
     let retType = funRetType id args
     setLiftedFlag retType
-    (e, ms) <- convertExpr id args expr
+    (e, ms) <- convertExpr id expr --TODO make all local variables unique
     name <- toName id
     return $ Method (name ++ "_Entry") retType args e : ms
 
@@ -218,9 +221,9 @@ makeMethods id args expr = do
 ######################################
 -}
 
-convertExpr :: Id -> [Arg] -> GenStgExpr Id Id -> CSST (CSExpr, [CSMethod])
-convertExpr _ _ (StgLit l) = return (CSELit l, [])
-convertExpr _ _ (StgApp fid args) = do
+convertExpr :: Id -> StgExpr -> CSST (CSExpr, [CSMethod])
+convertExpr _ (StgLit l) = return (CSELit l, [])
+convertExpr _ (StgApp fid args) = do
     if length args == 0 then
         return (CSEVar fid, [])
     else do
@@ -229,30 +232,31 @@ convertExpr _ _ (StgApp fid args) = do
         case lookup (varName fid) callableVars of
             Just methodName -> return (CSECall methodName as, [])
             Nothing -> return (CSEApp fid as, [])
-convertExpr _ _ (StgConApp con args _) = do
+convertExpr _ (StgConApp con args _) = do
     let as = map convertArg args
     name <- getConName con
     return (CSECon name as, [])
-convertExpr _ _ (StgOpApp (StgPrimOp op) args _) = do
+convertExpr _ (StgOpApp (StgPrimOp op) args _) = do
     let as = map convertArg args
     return (CSEPrimOp op as, [])
-convertExpr _ _ (StgOpApp (StgPrimCallOp (PrimCall label _)) args _) = do
+convertExpr _ (StgOpApp (StgPrimCallOp (PrimCall label _)) args _) = do
     name <- showWithFlags label
     let as = map convertArg args
     return (CSECall name as, [])
 
-convertExpr id args (StgCase (StgApp v []) _ _ alts) 
+convertExpr id (StgCase (StgApp v []) _ _ alts) 
     | isVoidRep (idPrimRep v) -- state void# token
     , [(DEFAULT, _, rhs)] <- alts 
-    = convertExpr id args rhs 
-convertExpr id args (StgCase e alias _ alts) = do
-    (csalts, free, ms) <- convertAlts alias id args alts
+    = convertExpr id rhs 
+convertExpr id (StgCase e alias _ alts) = do
+    (csalts, free, ms) <- convertAlts alias id alts
     name <- toName id
     aliasName <- toName alias
-    (caseExpr, _) <- convertExpr id args e -- asumes simple expr
+    (caseExpr, _) <- convertExpr id e -- asumes simple expr
     let vt = idType alias
     case isUnliftedType vt of
-        True -> do
+        True -> do -- unlifted expressions are scrutinized on stack
+                   -- rather than on the trampoline
             case caseExpr of 
                 CSEApp id' args' -> do
                     n <- toName id'
@@ -263,39 +267,29 @@ convertExpr id args (StgCase e alias _ alts) = do
         False -> do
             isLifted <- liftedContext
             case isLifted of
-                True -> do
+                True -> do -- the function returns a lifted type (Closure)
+                           -- we create a continuation for switch-expression
+                           -- and bounce on the trampoline to evaluate
+                           -- the scrutinee
                     let caseMethodName = name ++ "_Case_" ++ aliasName
                     let caseMethod = Method caseMethodName Closure (alias : free) (CSECase alias csalts)
                     let evalExpr = CSEEvalThen alias caseMethodName free
                     return (CSELet alias caseExpr evalExpr, caseMethod : ms)
-                False -> do
+                False -> do -- the function returns an unlifted value
+                            -- so we cannot use the trampoline
+                            -- instead we create a new trampoline on the stack
+                            -- with StgEval.Eval(ctx, closure)
                     let evalExpr = CSEEval alias (CSECase alias csalts)
                     return (CSELet alias caseExpr evalExpr, ms)
-                    
-{-
-    case e of alias {
-        alts...
-    }
-
-    =>
-
-    var alias = e;
-    eval alias then m
-
-    m(alias) {
-        switch (alias)
-            alts...
-    }
--}
-convertExpr id' args' (StgLet (StgNonRec id (StgRhsCon _ dataCon args)) e) = do
+convertExpr id' (StgLet (StgNonRec id (StgRhsCon _ dataCon args)) e) = do
     let as = map convertArg args
     name <- getConName dataCon
     let conExpr = CSECon name as
-    (ex, ms) <- convertExpr id' args' e
+    (ex, ms) <- convertExpr id' e
     return (CSELet id conExpr ex, ms)
-convertExpr id' args' (StgLet (StgNonRec id (StgRhsClosure _ _ occs flag bndrs e1)) ec) = do
+convertExpr id' (StgLet (StgNonRec id (StgRhsClosure _ _ occs flag bndrs e1)) ec) = do
     let t = typeToCSType (idType id)
-    (e1x, ms2) <- withLifted (t == Closure) $ convertExpr id (occs++bndrs) e1
+    (e1x, ms2) <- withLifted (t == Closure) $ convertExpr id e1
     name <- toName id
     let methodName = name++"_Entry"
     let method = Method methodName Closure (occs++bndrs) e1x
@@ -306,17 +300,72 @@ convertExpr id' args' (StgLet (StgNonRec id (StgRhsClosure _ _ occs flag bndrs e
     (ecx, ms) <- case flag of
                     ReEntrant -> 
                         case occs of
-                            [] -> withCallable id methodName (convertExpr id' args' ec)
-                            _ -> convertExpr id' args' ec
-                    _ -> convertExpr id' args' ec
+                            [] -> withCallable id methodName (convertExpr id' ec)
+                            _ -> convertExpr id' ec
+                    _ -> convertExpr id' ec
     return (CSELet id assExpr ecx, method : ms2 ++ ms)
--- TODO
--- convertExpr (StgLet (StgRec rhss) ec) = do
---     ecx <- convertExpr ec
---     bs <- mapM convertRhs rhss
---     return (LetRec bs ecx)
-convertExpr id args (StgLetNoEscape binding ec) = convertExpr id args (StgLet binding ec)
-convertExpr _ _ _ = return (CSENotImplemented, [])
+convertExpr id' (StgLet (StgRec bndrs) ec) = convertBndrs id' bndrs ec
+convertExpr id (StgLetNoEscape binding ec) = convertExpr id (StgLet binding ec)
+convertExpr _ _ = return (CSENotImplemented, [])
+
+convertBndrs :: Id -> [(Id, StgRhs)] -> StgExpr -> CSST (CSExpr, [CSMethod])
+convertBndrs id' bndrs ec = do
+    let boundIds = map fst bndrs
+        boundIdNames = map varName boundIds
+        boundInOccs = map (findBound boundIdNames . snd) bndrs
+        mappedBoundInOccs = zip boundIds boundInOccs
+        callableLocals = concat $ map findCallable bndrs
+    st <- get
+    (idexs,ms) <- foldM (\(iexs,ms') rhs -> do {
+          (id, ex, ms) <- convertRhs id' boundIdNames rhs
+        ; return ((id, ex):iexs, ms++ms') }) ([],[]) bndrs
+    mkAssignments id' ec callableLocals ms idexs mappedBoundInOccs
+    where
+        findBound :: [GHC.Name] -> StgRhs -> [(Id, Index)]
+        findBound boundIds (StgRhsCon _ _ args) =
+            let zipped = zip args [0..]
+                refs = filter (\(a,_) -> isRefArg a) zipped
+                named = map (\(StgVarArg id,idx) -> (id, idx)) refs
+            in
+            filter (\(id,idx) -> elem (varName id) boundIds) named
+            where
+                isRefArg (StgVarArg _) = True
+                isRefArg             _ = False
+        findBound boundIds (StgRhsClosure _ _ occs _ _ _) =
+            filter (\(id,idx) -> elem (varName id) boundIds) $ zip occs [0..]
+        
+        findCallable :: (Id, StgRhs) -> [Id]
+        findCallable (id, StgRhsClosure _ _ [] ReEntrant _ _) = [id]
+        findCallable _ = []
+
+        mkAssignments :: Id -> StgExpr -> [Id] -> [CSMethod] -> [(Id, CSExpr)] -> 
+                        [(Id, [(Id, Index)])] -> CSST (CSExpr, [CSMethod])
+        mkAssignments id_e ec callableLocals ms idexs mappedBoundInOccs = do
+            (ecx, ms') <- foldr (\id -> withCallable id ((nameToStr $ varName id)++"_Entry"))
+                            (convertExpr id_e ec) callableLocals
+            let assExpr = foldr (\(id, l) e -> foldr (\(id',i) -> CSEAssign id i id') e l) ecx mappedBoundInOccs
+            let letExpr = foldr (\(id,cse) -> CSELet id cse) assExpr idexs
+            return (letExpr, ms'++ms)
+convertRhs id' boundIds (id, StgRhsCon _ dataCon args) = do
+    let as = map convertArg args
+        as' = map (\a -> case a of {CSRef x -> if elem (varName x) boundIds then CSNull else a; _ -> a}) as
+    name <- getConName dataCon
+    let conExpr = CSECon name as'
+    return (id, conExpr, [])
+convertRhs id' boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
+    let t = typeToCSType (idType id)
+    (e1x, ms2) <- withLifted (t == Closure) $ convertExpr id e1
+    name <- toName id
+    let methodName = name++"_Entry"
+    let retType = funRetType id bndrs -- TODO if fun is unlifted and has occs we would
+                                      -- have to call it with occs and args - currently impossible
+    let method = Method methodName retType (occs++bndrs) e1x
+    let params = map (\i -> if elem (varName i) boundIds then CSNull else CSRef i) occs
+    let assExpr = case flag of
+                    ReEntrant -> CSECreateFun methodName (length bndrs) params
+                    Updatable -> CSECreateThunk methodName params
+                    SingleEntry -> CSECreateClosure methodName params
+    return (id, assExpr, method : ms2)
 
 withCallable :: Id -> Name -> CSST a -> CSST a
 withCallable id name m = do
@@ -325,37 +374,37 @@ withCallable id name m = do
     popCallable
     return x
 
-convertAlts :: Id -> Id -> [Arg] -> [GenStgAlt Id Id] -> CSST ([CSAlt], [Id], [CSMethod])
-convertAlts alias id args alts = do
-    (csalts, free, ms) <- convertAlts' alias id args alts
+convertAlts :: Id -> Id -> [StgAlt] -> CSST ([CSAlt], [Id], [CSMethod])
+convertAlts alias id alts = do
+    (csalts, free, ms) <- convertAlts' alias id alts
     globalVars <- globals <$> get
     let freeWithoutGlobals = filter (\i -> notElem (varName i) globalVars) free
     case head csalts of
         CSADefault _ -> return (csalts, freeWithoutGlobals, ms)
         _ -> return (CSADefault CSEImpossible : csalts, freeWithoutGlobals, ms)
     where
-        convertAlts' alias id args [a] = do
-            (a', f', m') <- convertAlt alias id args a
+        convertAlts' alias id [a] = do
+            (a', f', m') <- convertAlt alias id a
             return ([a'], nubFreeVars f', m')
-        convertAlts' alias id args (a:as) = do
-            (a', free, ms) <- convertAlt alias id args a
-            (as', free', ms') <- convertAlts' alias id args as
+        convertAlts' alias id (a:as) = do
+            (a', free, ms) <- convertAlt alias id a
+            (as', free', ms') <- convertAlts' alias id as
             return (a':as', nubFreeVars (free ++ free'), ms ++ ms')
 
-convertAlt :: Id -> Id -> [Arg] -> GenStgAlt Id Id -> CSST (CSAlt, [Id], [CSMethod])
-convertAlt _ id args (DEFAULT, _, e) = do
+convertAlt :: Id -> Id -> StgAlt -> CSST (CSAlt, [Id], [CSMethod])
+convertAlt _ id (DEFAULT, _, e) = do
     let free = exprFreeVars e
-    (ex, ms) <- convertExpr id args e
+    (ex, ms) <- convertExpr id e
     return (CSADefault ex, free, ms)
-convertAlt _ id args (LitAlt l, _, e) = do
+convertAlt _ id (LitAlt l, _, e) = do
     let free = exprFreeVars e
-    (ex, ms) <- convertExpr id args e
+    (ex, ms) <- convertExpr id e
     return (CSALit l ex, free, ms)
-convertAlt alias id args (DataAlt con, bndrs, e) = do
+convertAlt alias id (DataAlt con, bndrs, e) = do
     let free = exprFreeVars e
     let boundUniques = map varName bndrs
     let nonBoundFree = filter (\i -> notElem (varName i) boundUniques) free
-    (ex, ms) <- convertExpr id args e
+    (ex, ms) <- convertExpr id e
     conName <- getConName con
     aliasName <- toName alias
     let varName = aliasName ++ "_" ++ conName
@@ -372,7 +421,7 @@ convertAlt alias id args (DataAlt con, bndrs, e) = do
 ######################################
 -}
 
-exprFreeVars :: GenStgExpr Id Id -> [Id]
+exprFreeVars :: StgExpr -> [Id]
 exprFreeVars (StgApp id args) = id : argFreeVars args
 exprFreeVars (StgLit _) = []
 exprFreeVars (StgConApp _ args _) = argFreeVars args
@@ -418,7 +467,7 @@ Helper conversion and monad functions
 ######################################
 -}
 
-convertArg :: GenStgArg Id -> CSValue
+convertArg :: StgArg -> CSValue
 convertArg (StgVarArg id) = CSRef id
 convertArg (StgLitArg lit) = CSLit lit
 
@@ -557,7 +606,19 @@ instance Outputable CSValue where
     ppr (CSCon name args) =
         hsep [text $ "new "++name++"(", pprArgs args, text ")"]
     ppr (CSRef id) = pprWithUnique id
-    ppr (CSLit l) = ppr l
+    ppr (CSLit l) = pprLit l
+    ppr CSNull = text "null"
+
+pprLit (MachChar c) = text $ showLitChar c ""
+pprLit (LitNumber LitNumInt64 i _) = text $ show i ++ "L"
+pprLit (LitNumber LitNumWord64 i _) = text $ show i ++ "L"
+pprLit (LitNumber LitNumWord i _) = text $ show i ++ "L"
+pprLit (LitNumber _ i _) = text $ show i
+pprLit (MachStr bs) = text $ show bs
+pprLit MachNullAddr = text "null"
+pprLit (MachFloat r) = text $ show r ++ "f"
+pprLit (MachDouble r) = text $ show r
+pprLit (MachLabel l _ _) = error $ "Can't emit label: "++show l
 
 instance Outputable CSMethod where
     ppr (Method name typ args ex) =
@@ -572,22 +633,7 @@ pprArguments [] = text ""
 pprArguments [a] = hsep [pprVarType a, pprWithUnique a]
 pprArguments (a:as) = hsep [pprVarType a, pprWithUnique a, text ",", pprArguments as]
 
-pprVarType a =
-    let t = idType a in
-    case isUnliftedType t of
-        False -> ppr Closure
-        True -> 
-            case t of
-                TyConApp tc _ -> 
-                    let name = tyConName tc 
-                        occ = nameOccName name
-                        fs = occNameFS occ
-                        strName = unpackFS fs in
-                    case strName of
-                        "Int#" -> ppr Int32
-                        "Char#" -> ppr Char
-                        "Double#" -> ppr Double
-                        _ -> text strName -- TODO
+pprVarType a = ppr $ typeToCSType $ idType a
 
 pprArgs [] = text ""
 pprArgs [a] = ppr a
@@ -597,7 +643,7 @@ pprMultiline [a] = ppr a
 pprMultiline (a:as) = ppr a $$ pprMultiline as
 
 instance Outputable CSExpr where
-    ppr (CSELit l) = hsep [text "return", ppr l, text ";"]
+    ppr (CSELit l) = hsep [text "return", pprLit l, text ";"]
     ppr (CSEVar id) = hsep [text "return", pprWithUnique id, text ";"]
     ppr (CSECon name args) =
         hsep [text $ "return new "++name++"(", pprArgs args, text ");"]
@@ -609,16 +655,24 @@ instance Outputable CSExpr where
         hsep [text $ "return "++name++"(ctx,", pprArgs args, text ");"]
     ppr (CSEEval id ex) = 
         sep [
-            hsep [ppr id, text "= StgEval.Eval(ctx, ", pprWithUnique id, text ");"],
+            hsep [pprWithUnique id, text "= StgEval.Eval(ctx, ", pprWithUnique id, text ");"],
             ppr ex
         ]
     ppr (CSEEvalThen id name []) =
         hsep [text "return StgEval.EvalThen(ctx,", pprWithUnique id, text $ ", StgCont.Make("++name++"));"] 
     ppr (CSEEvalThen id name free) =
         hsep [text "return StgEval.EvalThen(ctx,", pprWithUnique id, text $ ", StgCont.Make("++name++",", pprArgs (map CSRef free), text "));"] 
+    ppr (CSEAssign id idx id' ex) =
+        sep [
+            hsep [
+                hcat [pprWithUnique id, text $".x" ++ show idx],
+                text "=", pprWithUnique id', text ";"
+            ],
+            ppr ex
+        ]
     ppr (CSELet id (CSELit l) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text "=", ppr l, text ";"],
+            hsep [text "var", pprWithUnique id, text "=", pprLit l, text ";"],
             ppr ex
         ]
     ppr (CSELet id (CSEVar id') ex) =
@@ -643,7 +697,7 @@ instance Outputable CSExpr where
         ]
     ppr (CSELet id (CSEPrimOp op args) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text "=", ppr op, text "(", pprArgs args, text ");"],
+            hsep [text "var", pprWithUnique id, text "=", pprOp op args, text ";"],
             ppr ex
         ]
     ppr (CSELet id (CSECreateFun name arity args) ex) =
@@ -680,15 +734,24 @@ instance Outputable CSExpr where
                 (sep [text "switch (", pprWithUnique id, text ") {"])
                 4
                 (sep [pprMultiline alts, text "}"])]
-    ppr (CSEPrimOp op args) = hsep [text "return", ppr op, text "(", pprArgs args, text ");"]
+    ppr (CSEPrimOp op args) = hsep [text "return", pprOp op args, text ";"]
     ppr (CSEThrow id) = hsep [text "throw new Exception(",pprWithUnique id,text ");"]
     ppr (CSENotImplemented) = text "throw new NotImplementedException();"
     ppr (CSEImpossible) = text "throw new ImpossibleException();"
 
+pprOp IntAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
+pprOp IntSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
+pprOp IntMulOp [a1, a2] = hsep [ppr a1, text "*", ppr a2]
+pprOp IntLeOp [a1, a2] = hsep [text "(",ppr a1, text "<=", ppr a2, text ") ? 1 : 0"]
+pprOp IntLtOp [a1, a2] = hsep [text "(",ppr a1, text "<", ppr a2, text ") ? 1 : 0"]
+pprOp IntGeOp [a1, a2] = hsep [text "(",ppr a1, text ">=", ppr a2, text ") ? 1 : 0"]
+pprOp IntGtOp [a1, a2] = hsep [text "(",ppr a1, text ">", ppr a2, text ") ? 1 : 0"]
+pprOp op args = hsep [ppr op, text "(", pprArgs args, text ")"]
+
 instance Outputable CSAlt where
     ppr (CSALit l ex) =
         hsep [hang 
-                (sep [text "case", ppr l, text ": {"])
+                (sep [text "case", pprLit l, text ": {"])
                 4
                 (sep [ppr ex, text "}"])]
     ppr (CSADefault ex) =
