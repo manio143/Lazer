@@ -5,6 +5,14 @@ namespace Lazer.Runtime
         and closure parameters.
      */
 
+    public static unsafe class StgCont
+    {
+        public static Continuation Make(void* f) => new Cont0(f);
+        public static Continuation Make<T0>(void* f, T0 x0) => new Cont1<T0>(f, x0);
+        public static Continuation Make<T0, T1>(void* f, T0 x0, T1 x1) => new Cont2<T0, T1>(f, x0, x1);
+        public static Continuation Make<T0, T1, T2>(void* f, T0 x0, T1 x1, T2 x2) => new Cont3<T0, T1, T2>(f, x0, x1, x2);
+    }
+
     public unsafe class Cont0 : Continuation
     {
         protected internal void* f;

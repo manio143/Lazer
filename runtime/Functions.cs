@@ -17,6 +17,9 @@ namespace Lazer.Runtime
         {
             return CLR.TailCallIndirectGeneric<StgContext, Closure, Closure>(ctx, a0, f);
         }
+        public static Function Make(void* f) => new Function1(f);
+        public static Function1<T0> Make<T0>(void* f, T0 x0) => new Function1<T0>(f, x0);
+        public static Function1<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new Function1<T0, T1>(f, x0, x1);
     }
     public unsafe class Function1<T0> : Function, IFunction1
     {
@@ -62,6 +65,9 @@ namespace Lazer.Runtime
         {
             return CLR.TailCallIndirectGeneric<StgContext, Closure, Closure, Closure>(ctx, a0, a1, f);
         }
+        public static Function2 Make(void* f) => new Function2(f);
+        public static Function2<T0> Make<T0>(void* f, T0 x0) => new Function2<T0>(f, x0);
+        public static Function2<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new Function2<T0, T1>(f, x0, x1);
     }
     public unsafe class Function2<T0> : Function, IFunction2
     {
@@ -107,5 +113,6 @@ namespace Lazer.Runtime
         {
             return CLR.TailCallIndirectGeneric<StgContext, Closure, Closure, Closure, Closure>(ctx, a0, a1, a2, f);
         }
+        public static Function3 Make(void* f) => new Function3(f);
     }
 }

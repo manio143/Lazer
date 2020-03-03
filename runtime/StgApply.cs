@@ -11,6 +11,12 @@ namespace Lazer.Runtime
      */
     public static unsafe class StgApply
     {
+        private static Closure Apply1(StgContext ctx, Closure func, Closure arg1)
+            => Apply(ctx, func, arg1);
+        private static Closure Apply2(StgContext ctx, Closure func, Closure arg1, Closure arg2)
+            => Apply(ctx, func, arg1, arg2);
+        private static Closure Apply3(StgContext ctx, Closure func, Closure arg1, Closure arg2, Closure arg3)
+            => Apply(ctx, func, arg1, arg2, arg3);
         public static Closure Apply(StgContext ctx, Closure func, Closure arg1)
         {
             if (func is Function f)
@@ -19,7 +25,7 @@ namespace Lazer.Runtime
             }
             else if (func is Thunk)
             {
-                var cont = CLR.LoadFunctionPointer<StgContext, Closure, Closure, Closure>(Apply);
+                var cont = CLR.LoadFunctionPointer(Apply1);
                 return StgEval.EvalThen(ctx, func, new Cont1<Closure>(cont, arg1));
             }
             else if (func is PAP pap)
@@ -36,7 +42,7 @@ namespace Lazer.Runtime
             }
             else if (func is Thunk)
             {
-                var cont = CLR.LoadFunctionPointer<StgContext, Closure, Closure, Closure, Closure>(Apply);
+                var cont = CLR.LoadFunctionPointer(Apply2);
                 return StgEval.EvalThen(ctx, func, new Cont2<Closure, Closure>(cont, arg1, arg2));
             }
             else if (func is PAP pap)
@@ -54,7 +60,7 @@ namespace Lazer.Runtime
             }
             else if (func is Thunk)
             {
-                var cont = CLR.LoadFunctionPointer<StgContext, Closure, Closure, Closure, Closure, Closure>(Apply);
+                var cont = CLR.LoadFunctionPointer(Apply3);
                 return StgEval.EvalThen(ctx, func, new Cont3<Closure, Closure, Closure>(cont, arg1, arg2, arg3));
             }
             else if (func is PAP)
@@ -80,7 +86,7 @@ namespace Lazer.Runtime
             switch (f.Arity)
             {
                 case 1:
-                    var cont = CLR.LoadFunctionPointer<StgContext, Closure, Closure, Closure>(Apply);
+                    var cont = CLR.LoadFunctionPointer(Apply1);
                     ctx.Push(new Cont1<Closure>(cont, arg2));
                     return ((IFunction1)f).Apply(ctx, arg1);
                 case 2:
@@ -95,13 +101,13 @@ namespace Lazer.Runtime
             {
                 case 1:
                     {
-                        var cont = CLR.LoadFunctionPointer<StgContext, Closure, Closure, Closure>(Apply);
+                        var cont = CLR.LoadFunctionPointer(Apply2);
                         ctx.Push(new Cont2<Closure, Closure>(cont, arg2, arg3));
                         return ((IFunction1)f).Apply(ctx, arg1);
                     }
                 case 2:
                     {
-                        var cont = CLR.LoadFunctionPointer<StgContext, Closure, Closure, Closure>(Apply);
+                        var cont = CLR.LoadFunctionPointer(Apply1);
                         ctx.Push(new Cont1<Closure>(cont, arg3));
                         return ((IFunction2)f).Apply(ctx, arg1, arg2);
                     }
@@ -140,7 +146,7 @@ namespace Lazer.Runtime
             switch (pap.Arity)
             {
                 case 1:
-                    var cont = CLR.LoadFunctionPointer<StgContext, Closure, Closure, Closure>(Apply);
+                    var cont = CLR.LoadFunctionPointer(Apply1);
                     ctx.Push(new Cont1<Closure>(cont, arg2));
                     switch (pap.f)
                     {

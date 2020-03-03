@@ -20,15 +20,15 @@ namespace Lazer.Runtime
     public static class CLR
     {
         [CompilerIntrinsic]
-        public static unsafe extern void* LoadFunctionPointer<T0, U>(Func<T0, U> fun);
+        public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure> fun);
         [CompilerIntrinsic]
-        public static unsafe extern void* LoadFunctionPointer<T0, T1, U>(Func<T0, T1, U> fun);
+        public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure, Closure> fun);
         [CompilerIntrinsic]
-        public static unsafe extern void* LoadFunctionPointer<T0, T1, T2, U>(Func<T0, T1, T2, U> fun);
+        public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure, Closure, Closure> fun);
         [CompilerIntrinsic]
-        public static unsafe extern void* LoadFunctionPointer<T0, T1, T2, T3, U>(Func<T0, T1, T2, T3, U> fun);
+        public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure, Closure, Closure, Closure> fun);
         [CompilerIntrinsic]
-        public static unsafe extern void* LoadFunctionPointer<T0, T1, T2, T3, T4, U>(Func<T0, T1, T2, T3, T4, U> fun);
+        public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure, Closure, Closure, Closure, Closure> fun);
 
         [CompilerIntrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

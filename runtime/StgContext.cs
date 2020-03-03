@@ -10,10 +10,12 @@ namespace Lazer.Runtime
      */
     public sealed class StgContext
     {
-        private Stack<Continuation> stack = new Stack<Continuation>();
+        public Stack<Continuation> stack = new Stack<Continuation>();
         public void Push(Continuation c) => stack.Push(c);
         public Continuation Pop() => stack.Pop();
-        public bool Empty => stack.Count == 0;
+        public bool Empty => stack.Count <= stackBottom;
+
+        public int stackBottom = 0;
 
         /**
             To decrease Update continuation allocation we use a pool.

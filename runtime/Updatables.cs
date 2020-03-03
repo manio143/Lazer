@@ -5,6 +5,14 @@ namespace Lazer.Runtime
         and closure parameters.
      */
 
+    public static unsafe class Updatable
+    {
+        public static Updatable0 Make(void* f) => new Updatable0(f);
+        public static Updatable1<T0> Make<T0>(void* f, T0 x0) => new Updatable1<T0>(f, x0);
+        public static Updatable2<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new Updatable2<T0, T1>(f, x0, x1);
+        public static Updatable3<T0, T1, T2> Make<T0, T1, T2>(void* f, T0 x0, T1 x1, T2 x2) => new Updatable3<T0, T1, T2>(f, x0, x1, x2);
+    }
+
     public unsafe class Updatable0 : Thunk
     {
         protected internal void* f;

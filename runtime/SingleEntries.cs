@@ -5,6 +5,15 @@ namespace Lazer.Runtime
         and closure parameters.
      */
 
+    public static unsafe class SingleEntry
+    {
+        public static SingleEntry0 Make(void* f) => new SingleEntry0(f);
+        public static SingleEntry1<T0> Make<T0>(void* f, T0 x0) => new SingleEntry1<T0>(f, x0);
+        public static SingleEntry2<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new SingleEntry2<T0, T1>(f, x0, x1);
+        public static SingleEntry3<T0, T1, T2> Make<T0, T1, T2>(void* f, T0 x0, T1 x1, T2 x2) => new SingleEntry3<T0, T1, T2>(f, x0, x1, x2);
+        public static SingleEntry4<T0, T1, T2, T3> Make<T0, T1, T2, T3>(void* f, T0 x0, T1 x1, T2 x2, T3 x3) => new SingleEntry4<T0, T1, T2, T3>(f, x0, x1, x2, x3);
+    }
+
     public unsafe class SingleEntry0 : Closure
     {
         protected internal void* f;

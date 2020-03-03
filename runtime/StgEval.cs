@@ -30,5 +30,14 @@ namespace Lazer.Runtime
             }
             return next;
         }
+
+        public static Closure EvalTrampoline(StgContext ctx, Closure c)
+        {
+            var bottom = ctx.stackBottom;
+            ctx.stackBottom = ctx.stack.Count;
+            var evaluated = Eval(ctx, c);
+            ctx.stackBottom = bottom;
+            return evaluated;
+        }
     }
 }
