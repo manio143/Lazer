@@ -5,6 +5,9 @@
     * tail. calli - perform an indirect tail call
     In order to be able to use those you need to compile the code with
     a modified Roslyn compiler. See: https://github.com/manio143/roslyn/
+
+    Hopefully in the future C# will be have function pointers.
+    See: https://github.com/dotnet/csharplang/issues/302
  */
 using System;
 using System.Runtime.CompilerServices;

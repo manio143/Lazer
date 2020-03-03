@@ -1,5 +1,9 @@
 namespace Lazer.Runtime
 {
+    /**
+        This ImpossibleException is used for the purpose of suppressing
+        compiler errors in saturated pattern matching.
+     */
     [System.Serializable]
     public class ImpossibleException : System.Exception
     {

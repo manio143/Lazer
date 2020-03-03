@@ -20,6 +20,6 @@ namespace Lazer.Runtime
             this.f = f;
             this.args = args;
         }
-        public override Closure Eval(StgContext ctx) => this;
+        public override Closure Eval(StgContext ctx) => ctx.Cont.Call(ctx, this);
     }
 }

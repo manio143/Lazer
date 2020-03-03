@@ -11,6 +11,7 @@ namespace Lazer.Runtime
      */
     public static unsafe class StgApply
     {
+        // Those AppN functions are meant to simplify ldftn below
         private static Closure Apply1(StgContext ctx, Closure func, Closure arg1)
             => Apply(ctx, func, arg1);
         private static Closure Apply2(StgContext ctx, Closure func, Closure arg1, Closure arg2)
@@ -26,7 +27,7 @@ namespace Lazer.Runtime
             else if (func is Thunk)
             {
                 var cont = CLR.LoadFunctionPointer(Apply1);
-                return StgEval.EvalThen(ctx, func, new Cont1<Closure>(cont, arg1));
+                return ctx.Eval(func, new Cont1<Closure>(cont, arg1));
             }
             else if (func is PAP pap)
             {
@@ -43,7 +44,7 @@ namespace Lazer.Runtime
             else if (func is Thunk)
             {
                 var cont = CLR.LoadFunctionPointer(Apply2);
-                return StgEval.EvalThen(ctx, func, new Cont2<Closure, Closure>(cont, arg1, arg2));
+                return ctx.Eval(func, new Cont2<Closure, Closure>(cont, arg1, arg2));
             }
             else if (func is PAP pap)
             {
@@ -61,7 +62,7 @@ namespace Lazer.Runtime
             else if (func is Thunk)
             {
                 var cont = CLR.LoadFunctionPointer(Apply3);
-                return StgEval.EvalThen(ctx, func, new Cont3<Closure, Closure, Closure>(cont, arg1, arg2, arg3));
+                return ctx.Eval(func, new Cont3<Closure, Closure, Closure>(cont, arg1, arg2, arg3));
             }
             else if (func is PAP)
             {
@@ -78,7 +79,7 @@ namespace Lazer.Runtime
                 case 1:
                     return ((IFunction1)f).Apply(ctx, arg1);
                 default:
-                    return new PAP(f, arg1);
+                    return new PAP(f, arg1).Eval(ctx);
             }
         }
         private static Closure ApplyFun(StgContext ctx, Function f, Closure arg1, Closure arg2)
@@ -92,7 +93,7 @@ namespace Lazer.Runtime
                 case 2:
                     return ((IFunction2)f).Apply(ctx, arg1, arg2);
                 default:
-                    return new PAP(f, arg1, arg2);
+                    return new PAP(f, arg1, arg2).Eval(ctx);
             }
         }
         private static Closure ApplyFun(StgContext ctx, Function f, Closure arg1, Closure arg2, Closure arg3)
@@ -115,7 +116,7 @@ namespace Lazer.Runtime
                     return ((IFunction3)f).Apply(ctx, arg1, arg2, arg3);
                 default:
                     System.Console.WriteLine("WARN: creating partial app of fun >3");
-                    return new PAP(f, arg1, arg2, arg3);
+                    return new PAP(f, arg1, arg2, arg3).Eval(ctx);
             }
         }
 
@@ -137,7 +138,7 @@ namespace Lazer.Runtime
                 default:
                     Array.Resize(ref args, args.Length + 1);
                     args[args.Length - 1] = arg1;
-                    return new PAP(pap.f, args);
+                    return new PAP(pap.f, args).Eval(ctx);
             }
         }
         private static Closure ApplyPAP(StgContext ctx, PAP pap, Closure arg1, Closure arg2)
@@ -170,7 +171,7 @@ namespace Lazer.Runtime
                 default:
                     Array.Resize(ref args, args.Length + 1);
                     args[args.Length - 1] = arg1;
-                    return new PAP(pap.f, args);
+                    return new PAP(pap.f, args).Eval(ctx);
             }
         }
     }

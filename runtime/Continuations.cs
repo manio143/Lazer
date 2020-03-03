@@ -1,6 +1,20 @@
 namespace Lazer.Runtime
 {
     /**
+        Identity continuation - placed at the bottom of the continuation stack.
+        Returns the result of the computation to the caller.
+     */
+
+    internal class IdCont : Continuation
+    {
+        public override Closure Call(StgContext ctx, Closure c)
+        {
+            ctx.Pop();
+            return c;
+        }
+    }
+
+    /**
         Generic continuation. Takes a pointer to the static computation function
         and closure parameters.
      */
@@ -22,6 +36,7 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
+            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, Closure>(ctx, c, f);
         }
     }
@@ -36,6 +51,7 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
+            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, Closure>(ctx, c, x0, f);
         }
     }
@@ -52,6 +68,7 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
+            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, Closure>(ctx, c, x0, x1, f);
         }
     }
@@ -70,6 +87,7 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
+            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, T2, Closure>(ctx, c, x0, x1, x2, f);
         }
     }

@@ -1,9 +1,7 @@
 namespace Lazer.Runtime
 {
     /**
-        Thunk is an updateable closure. It has two references - one to a 
-        single entry computation closure and one to an indirection, the 
-        result of the computation.
+        Thunk is an updateable closure.
         Once a Thunk has been evaluated it returns the indirection value.
      */
     public abstract class Thunk : Closure

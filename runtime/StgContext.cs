@@ -10,16 +10,47 @@ namespace Lazer.Runtime
      */
     public sealed class StgContext
     {
-        public Stack<Continuation> stack = new Stack<Continuation>();
-        public void Push(Continuation c) => stack.Push(c);
-        public Continuation Pop() => stack.Pop();
-        public bool Empty => stack.Count <= stackBottom;
-
-        public int stackBottom = 0;
+        public StgContext()
+        {
+            Cont = new IdCont();
+            // Doing Pop() at the bottom of continuation stack
+            // will keep IdCont
+            Cont.With(Cont);
+        }
+        public Continuation Cont;
 
         /**
             To decrease Update continuation allocation we use a pool.
          */
-        public UpdatePool UpdatePool = new UpdatePool(20);
+        public UpdatePool UpdatePool = new UpdatePool(128);
+
+        /**
+            Evaluates closure x, which continues with cont,
+            which later continues with Cont.
+            This is a CPS style trampoline.
+         */
+        public Closure Eval(Closure x, Continuation cont)
+        {
+            Cont = cont.With(Cont);
+            return x.Eval(this);
+        }
+
+        /**
+            Evaluates closure x on a new trampoline.
+         */
+        public Closure Eval(Closure x)
+        {
+            return Eval(x, new IdCont());
+        }
+
+        public void Push(Continuation cont)
+        {
+            Cont = cont.With(Cont);
+        }
+        public void Pop()
+        {
+            Cont = Cont.next;
+        }
+
     }
 }

@@ -4,7 +4,8 @@ namespace Lazer.Runtime
 {
     /**
         An update continuation. It's pushed onto the continuation stack 
-        when a thunk is evaluated. After evaluation finishes Update is called and sets the indirection in the reference thunk.
+        when a thunk is evaluated. After evaluation finishes Update is called
+        and sets the indirection in the reference thunk.
      */
     public sealed class Update : Continuation
     {
@@ -30,7 +31,8 @@ namespace Lazer.Runtime
             t.ind = c;
             if (!notPooled)
                 ctx.UpdatePool.Return(this);
-            return c;
+            ctx.Pop();
+            return c.Eval(ctx);
         }
     }
 
