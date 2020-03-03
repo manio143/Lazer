@@ -166,6 +166,7 @@ stg2cs df stg = evalState (go >> prettyPrint) $ initState df
         go = do
             mapM_ gatherGlobals stg
             mapM_ processTop stg
+            --TODO simplify method bodies (ie case with default)
 
 prettyPrint = do
     st <- get
@@ -644,9 +645,9 @@ pprMultiline (a:as) = ppr a $$ pprMultiline as
 
 instance Outputable CSExpr where
     ppr (CSELit l) = hsep [text "return", pprLit l, text ";"]
-    ppr (CSEVar id) = hsep [text "return", pprWithUnique id, text ";"]
+    ppr (CSEVar id) = hsep [text "return", hcat [pprWithUnique id, text ".Eval(ctx)"], text ";"]
     ppr (CSECon name args) =
-        hsep [text $ "return new "++name++"(", pprArgs args, text ");"]
+        hsep [text $ "return new "++name++"(", pprArgs args, text ").Eval(ctx);"]
     ppr (CSEApp id args) = 
         hsep [text "return StgApply.Apply(ctx,", pprWithUnique id, text ",", pprArgs args, text ");"]
     ppr (CSECall name []) = 
@@ -655,13 +656,13 @@ instance Outputable CSExpr where
         hsep [text $ "return "++name++"(ctx,", pprArgs args, text ");"]
     ppr (CSEEval id ex) = 
         sep [
-            hsep [pprWithUnique id, text "= StgEval.Eval(ctx, ", pprWithUnique id, text ");"],
+            hsep [pprWithUnique id, text "= ctx.Eval(", pprWithUnique id, text ");"],
             ppr ex
         ]
     ppr (CSEEvalThen id name []) =
-        hsep [text "return StgEval.EvalThen(ctx,", pprWithUnique id, text $ ", StgCont.Make("++name++"));"] 
+        hsep [text "return ctx.Eval(", pprWithUnique id, text $ ", StgCont.Make(CLR.LoadFunctionPointer("++name++")));"] 
     ppr (CSEEvalThen id name free) =
-        hsep [text "return StgEval.EvalThen(ctx,", pprWithUnique id, text $ ", StgCont.Make("++name++",", pprArgs (map CSRef free), text "));"] 
+        hsep [text "return ctx.Eval(", pprWithUnique id, text $ ", StgCont.Make(CLR.LoadFunctionPointer("++name++"),", pprArgs (map CSRef free), text "));"] 
     ppr (CSEAssign id idx id' ex) =
         sep [
             hsep [
@@ -692,7 +693,7 @@ instance Outputable CSExpr where
         ]
     ppr (CSELet id (CSECall name args) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text $ "= "++name++"(", pprArgs args, text ");"],
+            hsep [text "var", pprWithUnique id, text $ "= "++name++"(ctx,", pprArgs args, text ");"],
             ppr ex
         ]
     ppr (CSELet id (CSEPrimOp op args) ex) =
@@ -702,19 +703,19 @@ instance Outputable CSExpr where
         ]
     ppr (CSELet id (CSECreateFun name arity args) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text $ "= Function"++(show arity)++".Make("++name++
+            hsep [text "var", pprWithUnique id, text $ "= Function"++(show arity)++".Make(CLR.LoadFunctionPointer("++name++")"++
                                                 (case args of [] -> ""; _ -> ","), pprArgs args, text ");"],
             ppr ex
         ]
     ppr (CSELet id (CSECreateThunk name args) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text $ "= Updatable.Make("++name++
+            hsep [text "var", pprWithUnique id, text $ "= Updatable.Make(CLR.LoadFunctionPointer("++name++")"++
                                                 (case args of [] -> ""; _ -> ","), pprArgs args, text ");"],
             ppr ex
         ]
     ppr (CSELet id (CSECreateClosure name args) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text $ "= SingleEntry.Make("++name++
+            hsep [text "var", pprWithUnique id, text $ "= SingleEntry.Make(CLR.LoadFunctionPointer("++name++")"++
                                                 (case args of [] -> ""; _ -> ","), pprArgs args, text ");"],
             ppr ex
         ]
@@ -728,7 +729,6 @@ instance Outputable CSExpr where
             hsep [text "var", pprWithUnique id, text "=", pprWithUnique id', text $ "as "++name++";"],
             ppr ex
         ]
-    --ppr (CSELetRec [(Id,CSExpr,[Id])] CSExpr) = 
     ppr (CSECase id alts) = 
         hsep [hang 
                 (sep [text "switch (", pprWithUnique id, text ") {"])
