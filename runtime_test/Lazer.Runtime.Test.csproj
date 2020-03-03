@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TieredCompilation>false</TieredCompilation>
+    <!--<Optimize>true</Optimize>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-27*" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <IlcInvariantGlobalization>true</IlcInvariantGlobalization>
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <IlcDisableReflection>true</IlcDisableReflection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--<Reference Include="Lazer.Runtime">
+      <HintPath>../runtime/bin/Release/netstandard2.0/Lazer.Runtime.dll</HintPath>
+    </Reference> -->
+    <ProjectReference Include="../runtime/Lazer.Runtime.csproj" />
+  </ItemGroup>
+
+</Project>
