@@ -5,6 +5,7 @@ import Data.Char
 import Data.List
 import Control.Monad.Trans
 import Control.Monad.State
+import Control.Monad.Reader
 import DynFlags
 import Outputable
 import HscTypes
@@ -15,10 +16,11 @@ import StgSyn
 import TyCon
 import TyCoRep
 import DataCon
+import Unique
 import Var
 import Literal
-import Name (nameStableString, nameOccName)
-import OccName (occNameFS)
+import Name (nameStableString, nameOccName, mkInternalName, nameUnique)
+import OccName (occNameFS, mkVarOcc)
 import FastString (unpackFS)
 import Kind
 import IdInfo
@@ -101,8 +103,8 @@ data CSExpr =
         -- creates a generic SingleEntryK object (K is len [CSExpr])
         -- new SingleEntryK(ldftn <Name>, <[CSExpr]>)
     | CSEUnpack Name Index  -- access data field <Name>.x<Index>
-    | CSECastAs Id Name     -- cast expression onto type
-        -- (<CSExpr> as <Name>)
+    | CSECastAs Name Id Name CSExpr -- cast expression onto type
+        -- (var <Name> := <Id> as <Name>; <CSExpr>)
     | CSEThrow Id  -- throw new Exception(<Id>) where Id points to a constant string
     | CSENotImplemented -- throw new NotImplementedException()
     | CSEImpossible -- throw new ImpossibleException()
@@ -136,6 +138,8 @@ data CSState = ST {
     -- we can use the trampoline properly with StgEval.EvalThen
     -- otherwise use StgEval.Eval
 
+    uniqueSeed :: Int,
+
     dynFlags :: DynFlags
 }
 
@@ -148,6 +152,8 @@ initState df = ST {
     globals = [],
 
     lifted = Nothing,
+
+    uniqueSeed = 0,
 
     dynFlags = df
 }
@@ -166,7 +172,7 @@ stg2cs df stg = evalState (go >> prettyPrint) $ initState df
         go = do
             mapM_ gatherGlobals stg
             mapM_ processTop stg
-            --TODO simplify method bodies (ie case with default)
+            modify (\s -> s { code = map (\(Method n t a e) -> Method n t a (simplify e)) (code s) })
 
 prettyPrint = do
     st <- get
@@ -212,7 +218,8 @@ makeMethods :: Id -> [Arg] -> StgExpr -> CSST [CSMethod]
 makeMethods id args expr = do
     let retType = funRetType id args
     setLiftedFlag retType
-    (e, ms) <- convertExpr id expr --TODO make all local variables unique
+    expr' <- renameLocalsM expr
+    (e, ms) <- convertExpr id expr'
     name <- toName id
     return $ Method (name ++ "_Entry") retType args e : ms
 
@@ -415,6 +422,134 @@ convertAlt alias id (DataAlt con, bndrs, e) = do
         makeBoundExpr b e _ [] = e
         makeBoundExpr b e i (id:ids) =
             CSELet id (CSEUnpack b i) $ makeBoundExpr b e (i+1) ids
+
+{-
+######################################
+        CSExpr Simplifier
+######################################
+-}
+
+simplify (CSECase id [CSADefault e]) = simplify e
+simplify (CSECase id [CSADefault CSEImpossible, CSACon conName varName e]) =
+    CSECastAs varName id conName (simplify e)
+simplify (CSECase id alts) = CSECase id (map simplifyAlt alts)
+    where
+        simplifyAlt (CSADefault e) = CSADefault (simplify e)
+        simplifyAlt (CSALit l e) = CSALit l (simplify e)
+        simplifyAlt (CSACon n1 n2 e) = CSACon n1 n2 (simplify e)
+simplify (CSEEval id e) = CSEEval id (simplify e)
+simplify (CSELet id e1 ec) = CSELet id e1 (simplify ec) -- e1 is a simple expr
+simplify (CSEAssign id idx id' e) = CSEAssign id idx id' (simplify e)
+simplify e = e 
+
+{-
+######################################
+  STG Expression local var renaming
+######################################
+-}
+
+renameLocalsM e = do
+    seed <- uniqueSeed <$> get
+    let (e', seed') = renameLocals seed e
+    modify (\s -> s { uniqueSeed = seed' })
+    return e'
+
+renameLocals :: Int -> StgExpr -> (StgExpr, Int)
+renameLocals i e = runReader (runStateT (renameExpr e) i) []
+
+renameExpr :: StgExpr -> StateT Int (Reader [(GHC.Name, Id)]) StgExpr
+renameExpr (StgLit l) = return $ StgLit l
+renameExpr (StgApp id args) = do
+    id' <- renameId id
+    args' <- renameArgs args
+    return $ StgApp id' args'
+renameExpr (StgConApp dataCon args type') = do
+    args' <- renameArgs args
+    return $ StgConApp dataCon args' type'
+renameExpr (StgOpApp op args type') = do
+    args' <- renameArgs args
+    return $ StgOpApp op args' type'
+renameExpr (StgCase e alias at alts) = do
+    e' <- renameExpr e
+    (alias', f) <- renamerAddId alias
+    alts' <- local f $ mapM renameAlt alts
+    return $ StgCase e' alias' at alts'
+renameExpr (StgLet bnd expr) = do
+    (bnd', f) <- renameBndr bnd
+    expr' <- local f $ renameExpr expr
+    return $ StgLet bnd' expr'
+renameExpr (StgLetNoEscape bnd expr) = do
+    (bnd', f) <- renameBndr bnd
+    expr' <- local f $ renameExpr expr
+    return $ StgLetNoEscape bnd' expr'
+
+renameAlt (DEFAULT, bndrs, e) = do
+    e' <- renameExpr e
+    return (DEFAULT, bndrs, e')
+renameAlt (LitAlt l, bndrs, e) = do
+    e' <- renameExpr e
+    return (LitAlt l, bndrs, e')
+renameAlt (DataAlt con, bndrs, e) = do
+    (bndrs', f) <- renamerAddIds bndrs
+    e' <- local f $ renameExpr e
+    return (DataAlt con, bndrs', e')
+
+renameBndr (StgNonRec id rhs) = do
+    (id', f) <- renamerAddId id
+    rhs' <- renameRhs rhs
+    return (StgNonRec id' rhs', f)
+renameBndr (StgRec idrhss) = do
+    let ids = map fst idrhss
+    (ids', f) <- renamerAddIds ids
+    idrhss' <- local f $ mapM renamePair idrhss
+    return $ (StgRec idrhss', f)
+    where
+        renamePair :: (Id, StgRhs) -> StateT Int (Reader [(GHC.Name, Id)]) (Id, StgRhs)
+        renamePair (id, rhs) = do
+            id' <- renameId id
+            rhs' <- renameRhs rhs
+            return (id', rhs')
+
+renameRhs (StgRhsCon cc con args) = do
+    args' <- renameArgs args
+    return $ StgRhsCon cc con args'
+renameRhs (StgRhsClosure cc info occ flag args e) = do
+    occ' <- mapM renameId occ
+    (args', f) <- renamerAddIds args
+    e' <- local f $ renameExpr e
+    return $ StgRhsClosure cc info occ' flag args' e'
+
+renameArgs args = mapM renameArg args
+renameArg (StgLitArg l) = return $ StgLitArg l
+renameArg (StgVarArg id) = do
+    id' <- renameId id
+    return $ StgVarArg id'
+
+renameId id = do
+    dict <- ask
+    case lookup (varName id) dict of
+        Nothing -> return id
+        Just id' -> return id'
+
+renamerAddIds ids = do
+    newIdFs <- mapM renamerAddId ids
+    let (ids', fs) = unzip newIdFs
+    return (ids', foldl (.) id fs)
+
+renamerAddId id = do
+    i <- get
+    let prevname = varName id
+    let name = uniqueNameFromInteger i
+    let unique = nameUnique prevname
+    let occName = mkVarOcc name
+    let ghcName = mkInternalName unique occName (nameSrcSpan prevname)
+    let newVar = mkLocalVar (idDetails id) ghcName (varType id) (idInfo id)
+    put (i+1)
+    return (newVar, \dict -> (prevname, newVar) : dict)
+
+uniqueNameFromInteger i =
+    if i <= 25 then [chr (i+97), '_']
+    else chr (97 + (i `mod` 25)) : uniqueNameFromInteger (i `div` 25)
 
 {-
 ######################################
@@ -724,9 +859,9 @@ instance Outputable CSExpr where
             hsep [text "var", pprWithUnique id, text $ "= "++name++".x"++show idx++";"],
             ppr ex
         ]
-    ppr (CSELet id (CSECastAs id' name) ex) =
+    ppr (CSECastAs varName id conName ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text "=", pprWithUnique id', text $ "as "++name++";"],
+            hsep [text $ "var " ++ varName ++ " =", pprWithUnique id, text $ "as "++conName++";"],
             ppr ex
         ]
     ppr (CSECase id alts) = 
