@@ -147,7 +147,50 @@ Chapter \myref{r:future} looks into future improvements to the runtime
 and extending Haskell for CLI interoperability.
 
 \chapter{Lazy evaluation}\label{r:lazyEval}
-TODO
+
+Every high level programming language has some form of expressions.
+They are used to represent algebraic operations, application of
+functions or method calls, access to fields of an object, and many more.
+When the program is compiled expressions are converted to sets of
+instructions that will be executed. In most languages those instructions
+are executed at the spot where the expression has appeared in the program.
+This means that the order of expression evaluation is explicitly provided
+by the programmer (or defined by the language semantics i.e. order of function arguments).
+We call this evaluation strategy \textit{strict}.
+
+On the other hand we can delay the evaluation and instead construct
+a promise of a value, which we will call a \textit{thunk}, that is passed around
+and evaluated only when the promised value is actually needed.
+This strategy is called \textit{non-strict}. There is one more thing
+necessary to get \textit{laziness} -- after a value has been evaluated
+any future reference to the promise should return the value without
+the need to repeat the computation. In other words, the expression
+is evaluated at most once.
+
+With lazy evaluation the order of evaluation is less obvious and thus
+programmers don't rely on it for correctness. However, they still have
+the tools to control evaluation order which is needed when dealing with
+certain operations, i.e. through the use of monads. This allows to focus
+on other aspects -- full program laziness forces purity of functions.
+A pure function has no side effects. It cannot modify global state.
+From this follows referential transparency, a property that allows
+replacement of an expression by the value it evaluates to.
+Therefore if an expression is used twice it can be evaluated only once.
+In contrast an impure expression with side effects has to be reevaluated
+every time it occurs.
+
+In most strict languages there is a minimal amount of laziness
+in conditional expressions. For example: if the left argument of the
+boolean \texttt{\&\&} operator is false then the right argument is not
+evaluated. This is especially useful when strict evaluation would lead
+to an error.
+
+\section{Closures and Thunks}
+TODO: rozpatrz idę tworzenia thunka, capture lokalnych zmiennych w closure,
+potrzebę aktualizacji po ewaluacji i strutinization w case. \\
+Możesz tutaj pokazać trochę pseudo kodu i trochę STG podobnego kodu.
+
+\section{Operating on the heap vs. on the stack}
 
 \chapter{Function application}\label{r:funApp}
 TODO
