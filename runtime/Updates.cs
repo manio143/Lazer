@@ -29,6 +29,7 @@ namespace Lazer.Runtime
         public override Closure Call(StgContext ctx, Closure c)
         {
             t.ind = c;
+            t.Cleanup();
             if (!notPooled)
                 ctx.UpdatePool.Return(this);
             ctx.Pop();

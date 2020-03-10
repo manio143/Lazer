@@ -18,9 +18,14 @@ namespace Lazer.Runtime
             this.f = f;
             this.arg1 = arg1;
         }
-        public override Closure Compute(StgContext ctx)
+        protected override Closure Compute(StgContext ctx)
         {
             return StgApply.Apply(ctx, f, arg1);
+        }
+        protected internal override void Cleanup()
+        {
+            f = null;
+            arg1 = null;
         }
     }
 
@@ -35,9 +40,15 @@ namespace Lazer.Runtime
             this.arg1 = arg1;
             this.arg2 = arg2;
         }
-        public override Closure Compute(StgContext ctx)
+        protected override Closure Compute(StgContext ctx)
         {
             return StgApply.Apply(ctx, f, arg1, arg2);
+        }
+        protected internal override void Cleanup()
+        {
+            f = null;
+            arg1 = null;
+            arg2 = null;
         }
     }
 
@@ -54,9 +65,16 @@ namespace Lazer.Runtime
             this.arg2 = arg2;
             this.arg3 = arg3;
         }
-        public override Closure Compute(StgContext ctx)
+        protected override Closure Compute(StgContext ctx)
         {
             return StgApply.Apply(ctx, f, arg1, arg2, arg3);
+        }
+        protected internal override void Cleanup()
+        {
+            f = null;
+            arg1 = null;
+            arg2 = null;
+            arg3 = null;
         }
     }
     public sealed class App1n : Closure

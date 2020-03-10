@@ -7,7 +7,8 @@ namespace Lazer.Runtime
     public abstract class Thunk : Closure
     {
         public Closure ind;
-        public abstract Closure Compute(StgContext ctx);
+        protected abstract Closure Compute(StgContext ctx);
+        protected internal virtual void Cleanup() { }
         public override Closure Eval(StgContext ctx)
         {
             if (ind != null) 
