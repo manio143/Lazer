@@ -151,7 +151,7 @@ and extending Haskell for CLI interoperability.
 Every high level programming language has some form of expressions.
 They are used to represent algebraic operations, application of
 functions or method calls, access to fields of an object, and many more.
-When the program is compiled expressions are converted to sets of
+When the program is compiled expressions are converted to chains of
 instructions that will be executed. In most languages those instructions
 are executed at the spot where the expression has appeared in the program.
 This means that the order of expression evaluation is explicitly provided
@@ -162,7 +162,7 @@ On the other hand we can delay the evaluation and instead construct
 a promise of a value, which we will call a \textit{thunk}, that is passed around
 and evaluated only when the promised value is actually needed.
 This strategy is called \textit{non-strict}. There is one more thing
-necessary to get \textit{laziness} -- after a value has been evaluated
+necessary to achieve \textit{laziness} -- after a value has been evaluated
 any future reference to the promise should return the value without
 the need to repeat the computation. In other words, the expression
 is evaluated at most once.
@@ -170,10 +170,11 @@ is evaluated at most once.
 With lazy evaluation the order of evaluation is less obvious and thus
 programmers don't rely on it for correctness. However, they still have
 the tools to control evaluation order which is needed when dealing with
-certain operations, i.e. through the use of monads. This allows to focus
-on other aspects -- full program laziness forces purity of functions.
-A pure function has no side effects. It cannot modify global state.
-From this follows referential transparency, a property that allows
+certain operations, i.e. through the use of monads. 
+Full program laziness forces purity of functions.
+A pure function has no side effects -- it cannot modify the global state.
+From this follows referential transparency \cite{referentialTransparency},
+a property that allows
 replacement of an expression by the value it evaluates to.
 Therefore if an expression is used twice it can be evaluated only once.
 In contrast an impure expression with side effects has to be reevaluated
@@ -185,12 +186,126 @@ boolean \texttt{\&\&} operator is false then the right argument is not
 evaluated. This is especially useful when strict evaluation would lead
 to an error.
 
+There are a couple reasons why using lazy evaluation can be beneficial.
+First of all it allows to think about certain problems in more mathematical
+ways -- i.e. list of all prime numbers. Such a data structure cannot
+be computed in finite memory, but it's possible to operate on it as if it
+was. This is especially important when dealing with Big Data as large
+amounts of information cannot be kept fully in memory, but their subset can.
+This is leveraged by frameworks such as Spark and found to increase performance
+of computations \cite{lazySpark}. Lazy evaluation also allows to avoid
+performing expensive computations when the result is not going to be used.
+If we are passing a value to an unknown function we don't know if it 
+will be used. In a strict language this computation would have to
+be performed either way. Finally, there exist certain data structures that
+leverage lazy evaluation to provide amortization of asymptotic complexity,
+i.e. queues \cite{amortized}.
+
 \section{Closures and Thunks}
-TODO: rozpatrz idę tworzenia thunka, capture lokalnych zmiennych w closure,
-potrzebę aktualizacji po ewaluacji i strutinization w case. \\
-Możesz tutaj pokazać trochę pseudo kodu i trochę STG podobnego kodu.
+
+There have been a few solutions to the problem of implementing lazy evaluation:
+lazy SECD machine \cite{SECDM}, G-Machine \cite{G-Machine}, 
+combinator machines (i.e. SKIM) \cite{combinators},
+Categorical Abstract Machine (CAM) \cite{CAM}, 
+Three-Instruction-Machine (TIM) \cite{TIM} and others.
+All of those are approaches to implementing efficient expression graph reductions
+as a means of expression evaluation.
+This work focuses on the STG-Machine \cite{STGM} which is the mechanism used
+in the Glasgow Haskell Compiler (GHC).
+
+The Spineless Tagless G-Machine (STGM) is a concrete implementation of the STG language.
+The language is an extension of lambda calculus and this chapter presents
+the \texttt{let-in} and \texttt{case-of} expressions that are
+used for delaying and forcing expression evaluation.
+In STG functions can be applied only to \textit{atoms} -- declared constants or simple
+value literals. In order to pass an expression to a function it first has to be
+let-bound:
+
+\begin{verbatim}
+  let x = expr in f x
+\end{verbatim}
+
+For \texttt{x} to be lazy, the \texttt{let-in} expression is interpreted as an
+allocation of a \textit{thunk} -- the delayed computation. 
+In general, a \textit{closure} is an object with a pointer
+to some code and possibly some set of data.
+A thunk is a special kind of a closure -- it is represented
+by a pointer to the code that evaluates \texttt{expr}, a set of captured
+free variables and an update mechanism that allows to return the
+evaluated value on any future requests.
+
+The only time a thunk is evaluated (forced) is when its value has to be scrutinized.
+This is done by a \texttt{case-of} expression which checks the evaluated value
+and performs an alternative selection. Each alternative is represented by a
+pattern -- a data constructor or a value literal, and an expression to be evaluated
+if the pattern matches the scrutinized value. There also can be a default alternative.
+The alternatives in a case expression have to be saturated -- there cannot be a value
+that matches no alternative.
+
+\begin{verbatim}
+  case x of
+    DEFAULT -> expr3
+    1 -> expr1
+    0 -> expr2
+\end{verbatim}
+
+It is worth noting that \texttt{let-in} expression may not always create a thunk.
+It turns out that in many cases laziness can cause a slow down in a function
+that operates strictly -- scrutinizes its arguments. Therefore a process 
+called strictness analysis is
+performed by the compiler to decide if a value should be evaluated lazily or
+eagerly \cite{demand analysis}.
+
+In particular, expressions that apply a data constructor to the correct number
+of arguments (saturated application) are executed eagerly. However, the
+arguments may still point to thunks, so lazy semantics are kept.
+Constructed data values are also closures and can be scrutinized
+in a case expression. Their code is simple as no computation needs to be
+performed and the closure body contains the provided arguments.
 
 \section{Operating on the heap vs. on the stack}
+
+There are two main approaches to managing memory usage for program variables.
+The stack allows to allocate objects in memory in a sequential manner.
+The deallocation has to be performed in a reverse order -- you cannot
+reuse memory below the newest variable.
+The heap allows to allocate objects in a non-sequential manner which allows
+for greater memory reusability, but this has an additional cost.
+Programs usually make use of both of those memory structures.
+
+On the .NET platform the heap is maintained by a garbage collector (GC)
+that performs complicated algorithms to deallocate objects and
+reclaim and compact memory. Thus, using fewer allocations is recommended
+to increase performance. However, when it comes to lazy evaluation it
+is impossible to do it purely on the stack as the number of created objects
+is quite large and their lifetimes less predictable than with strict evaluation.
+
+The operational stack consists of function frames. A frame is the
+return pointer to the previous function, local variables and in some cases
+arguments to the next called function.
+When calling a function a frame for it has to be allocated and later removed when
+returning from that function.
+It turns out that making such calls is rather expensive -- this can be especially seen
+in recursive functions and a reason for them being less popular in 
+imperative programming. Tail calls can be used to mitigate frame allocations.
+A tail call is such a call that it is the last operation before the function returns.
+So the \texttt{call} and \texttt{return} instructions
+can be replaced by a \texttt{jump} instruction.
+
+Haskell programs compiled with GHC operate on the stack in a ``non-standard'' way
+due to many optimizations. On the .NET platform the stack is used according to the
+x86 ABI. Moreover, the .NET stack has a fixed size, whereas GHC can manipulate its stack size.
+This means extensive non-tail calls usage can lead to a stack overflow and program crash.
+In order to maximize tail calls the runtime described in chapter \myref{r:runtime}
+uses heap allocated continuations.
+
+All constructed data values, thunks and other closures (i.e. functions) are heap allocated.
+This means they are passed around in the form of pointers.
+\textit{Unlifted} values such as integers and floating point values
+are passed around in their native form.
+Pointers and unlifted values may be kept on the stack
+for non-tail function calls when a lifted value has to be scrutinized in
+an unlifted-returning function (see \{TODO ref\} for details).
 
 \chapter{Function application}\label{r:funApp}
 TODO
@@ -201,11 +316,21 @@ TODO
 \chapter{Lazy runtime}\label{r:runtime}
 TODO
 
-\chapter{Comparison to alternative runtimes}\label{r:alternatives}
+\chapter{Comparison to related work}\label{r:alternatives}
 TODO
 
 \chapter{Performance}\label{r:perf}
 TODO
+
+\section{Bottlenecks}
+\subsection{Branching}
+\subsection{Garbage Collection}
+stack length and traversing for pointers \\
+continuation polling (update and identity)
+\subsection{Method devirtualization}
+\subsection{Derivable data classes}
+\subsection{Data structures}
+continuations stack implementation (System.Stack vs Pointer linked list) \\
 
 \chapter{Compiling Haskell to C\#}\label{r:compiler}
 TODO
@@ -217,22 +342,43 @@ TODO
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliography}
 
-\bibitem[T96]{Tullsen} Mark Tullsen, \textit{,,Compiling Haskell to Java''}, YALEU/DCS/RR-1204
+\bibitem[MT-96]{Tullsen} Mark Tullsen, \textit{,,Compiling Haskell to Java''}, YALEU/DCS/RR-1204
 1996.
 
-\bibitem[A07]{Alliet} Brian Alliet, \textit{,,Efficient Translation of Haskell to Java
+\bibitem[BA-07]{Alliet} Brian Alliet, \textit{,,Efficient Translation of Haskell to Java
 Master’s Thesis Proposal''}, 2007.
 
-\bibitem[CLH01]{Choi} Kwanghoon Choi, Hyun-il Lim, Taisook Han, \textit{,,Compiling Lazy Functional Programs Based othe Spineless Tagless G-machine for the Java Virtual Machine''}, FLOPS 2001.
+\bibitem[KC,HL,TH-01]{Choi} Kwanghoon Choi, Hyun-il Lim, Taisook Han, \textit{,,Compiling Lazy Functional Programs Based othe Spineless Tagless G-machine for the Java Virtual Machine''}, FLOPS 2001.
 
-\bibitem[PM04]{PerryMeijer} Nigel Perry, Erik Meijer, \textit{,,Implementing functional languages on object-oriented virtual machines''}, IEE Proceedings on Software, 151(1):1-9, 2004.
+\bibitem[NP,EM-04]{PerryMeijer} Nigel Perry, Erik Meijer, \textit{,,Implementing functional languages on object-oriented virtual machines''}, IEE Proceedings on Software, 151(1):1-9, 2004.
 
-\bibitem[H06]{Hunt} Oliver Hunt, \textit{,,The Provision of Non-Strictness, Higher Kinded Types
+\bibitem[OH-06]{Hunt} Oliver Hunt, \textit{,,The Provision of Non-Strictness, Higher Kinded Types
 and Higher Ranked Types on an Object Oriented Virtual Machine''}, 2006.
 
-\bibitem[MPY01]{MondrianImplDetails} Erik Meijer, Nigel Perry, Arjan van Yzendoorn, \textit{,,Scripting .NET using Mondrian''}, ECOOP 2001.
+\bibitem[EM,NP,AY-01]{MondrianImplDetails} Erik Meijer, Nigel Perry, Arjan van Yzendoorn, \textit{,,Scripting .NET using Mondrian''}, ECOOP 2001.
 
-\bibitem[MABS05]{Brazil} Monique Monteiro, Mauro Ara\'ujo, Rafael Borges, Andr\'e Santos,  \textit{,,Compiling Non-strict Functional Languages for the .NET Platform''}, Journal of Universal Computer Science, vol. 11, no. 7 (2005), 1255-1274.
+\bibitem[MM,MA,RB,AS-05]{Brazil} Monique Monteiro, Mauro Ara\'ujo, Rafael Borges, Andr\'e Santos,  \textit{,,Compiling Non-strict Functional Languages for the .NET Platform''}, Journal of Universal Computer Science, vol. 11, no. 7 (2005), 1255-1274.
+
+\bibitem[HS,PS-90]{referentialTransparency} Harald Søndergaard, Peter Sestoft, \textit{,,Referential Transparency, Definiteness and Unfoldability''}, Acta Informatica 27, 505-517, 1990.
+
+\bibitem[VH,SB,TG-19]{lazySpark} Val\'erie Hayot-Sasson, Shawn T Brown, Tristan Glatard, \textit{,,Performance Evaluation of Big Data Processing Strategies for Neuroimaging''}, CCGRID, 2019.
+
+\bibitem[CO-96]{amortized} Chris Okasaki, \textit{,,The Role of Lazy Evaluation in Amortized Data Structures''} ICFP'96, 62-72, 1996.
+
+\bibitem[PH-80]{SECDM} Peter Henderson, \textit{,,Functional Programming: Application and Implementation''},
+Prentice-Hall, Englewood Cliffs, NJ, 1980.
+
+\bibitem[K85]{G-Machine} Richard B. Kieburtz, \textit{,,The G-machine: a fast, graph-reduction evaluator''}, Technical Report CS/E-85-002, Dept. of Computer Science, Oregon Graduate Center, January 1985.
+
+\bibitem[DT-79]{combinators} David A. Turner, \textit{,,A new implementation technique for applicative languages''}, Software -- Practice and Experience, 9:31–49, 1979.
+
+\bibitem[MM,AS-86]{CAM} Michel Mauny, Asc\'ander Su\'arez, \textit{,,Implementing functional languages in the categorical abstract machine''}, In \texttt{Proceedings 1986 ACM Conference on Lisp and Functional Programming}, pages 266–278, Cambridge, Massachusetts, August 1986.
+
+\bibitem[JF,SW-87]{TIM} Jon Fairbairn, Stuart Wray, \textit{,,Tim: a simple, lazy abstract machine to execute supercombinators''},  In \texttt{Proceedings of 1987 Functional Programming Languages and Computer Architecture Conference}, pages 34–45, Springer Verlag LNCS 274, September 1987.
+
+\bibitem[SPJ-92]{STGM} Simon Peyton Jones, \textit{,,Implementing lazy functional languages on stock hardware: the Spineless Tagless G-machine''}, 1992.
+
+\bibitem[IS,SPJ,DV-17]{demand analysis} Ilya Sergey, Simon Peyton Jones, Dimitrios Vytiniotis, \textit{,,Theory and Practice of Demand Analysis in Haskell''}, 2017.
 
 \end{thebibliography}
 
