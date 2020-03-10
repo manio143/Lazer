@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Lazer.Runtime
 {
     /**
@@ -7,9 +9,14 @@ namespace Lazer.Runtime
 
     internal class IdCont : Continuation
     {
+        bool nonPooled;
+        public IdCont(bool nonPooled) => this.nonPooled = nonPooled;
+        public IdCont() { }
         public override Closure Call(StgContext ctx, Closure c)
         {
             ctx.Pop();
+            if (!nonPooled)
+                ctx.IdContPool.Return(this);
             return c;
         }
     }
@@ -89,6 +96,39 @@ namespace Lazer.Runtime
         {
             ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, T2, Closure>(ctx, c, x0, x1, x2, f);
+        }
+    }
+
+    internal sealed class IdContPool
+    {
+        private List<IdCont> pool;
+        private int index;
+        public IdContPool(int initSize)
+        {
+            pool = new List<IdCont>(initSize);
+            for (int i = 0; i < initSize; i++)
+                pool.Add(new IdCont());
+            index = 0;
+        }
+        public IdCont Get()
+        {
+            if (index < pool.Count)
+            {
+                var u = pool[index++];
+                return u;
+            }
+            else
+            {
+                var u = new IdCont();
+                pool.Add(u);
+                index++;
+                return u;
+            }
+        }
+        public void Return(IdCont u)
+        {
+            u.next = null;
+            index--;
         }
     }
 }

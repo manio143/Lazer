@@ -12,7 +12,7 @@ namespace Lazer.Runtime
     {
         public StgContext()
         {
-            Cont = new IdCont();
+            Cont = new IdCont(nonPooled: true);
             // Doing Pop() at the bottom of continuation stack
             // will keep IdCont
             Cont.With(Cont);
@@ -20,9 +20,10 @@ namespace Lazer.Runtime
         public Continuation Cont;
 
         /**
-            To decrease Update continuation allocation we use a pool.
+            To decrease continuation allocation we use a pool.
          */
         public UpdatePool UpdatePool = new UpdatePool(128);
+        internal IdContPool IdContPool = new IdContPool(128);
 
         /**
             Evaluates closure x, which continues with cont,
@@ -40,7 +41,7 @@ namespace Lazer.Runtime
          */
         public Closure Eval(Closure x)
         {
-            return Eval(x, new IdCont());
+            return Eval(x, IdContPool.Get());
         }
 
         public void Push(Continuation cont)
