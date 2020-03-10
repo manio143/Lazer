@@ -20,56 +20,49 @@ namespace Lazer.Runtime
             => Apply(ctx, func, arg1, arg2, arg3);
         public static Closure Apply(StgContext ctx, Closure func, Closure arg1)
         {
-            if (func is Function f)
+            switch (func.Type)
             {
-                return ApplyFun(ctx, f, arg1);
+                case ClosureType.Function:
+                    return ApplyFun(ctx, func as Function, arg1);
+                case ClosureType.PartialApplication:
+                    return ApplyPAP(ctx, func as PAP, arg1);
+                case ClosureType.Data:
+                    throw new Exception($"Cannot apply a value ({func.GetType()})");
+                default:
+                    var cont = CLR.LoadFunctionPointer(Apply1);
+                    return ctx.Eval(func, new Cont1<Closure>(cont, arg1));
             }
-            else if (func is Thunk)
-            {
-                var cont = CLR.LoadFunctionPointer(Apply1);
-                return ctx.Eval(func, new Cont1<Closure>(cont, arg1));
-            }
-            else if (func is PAP pap)
-            {
-                return ApplyPAP(ctx, pap, arg1);
-            }
-            throw new Exception($"Cannot apply a value ({func.GetType()})");
         }
         public static Closure Apply(StgContext ctx, Closure func, Closure arg1, Closure arg2)
         {
-            if (func is Function f)
+            switch (func.Type)
             {
-                return ApplyFun(ctx, f, arg1, arg2);
+                case ClosureType.Function:
+                    return ApplyFun(ctx, func as Function, arg1, arg2);
+                case ClosureType.PartialApplication:
+                    return ApplyPAP(ctx, func as PAP, arg1, arg2);
+                case ClosureType.Data:
+                    throw new Exception($"Cannot apply a value ({func.GetType()})");
+                default:
+                    var cont = CLR.LoadFunctionPointer(Apply1);
+                    return ctx.Eval(func, new Cont2<Closure, Closure>(cont, arg1, arg2));
             }
-            else if (func is Thunk)
-            {
-                var cont = CLR.LoadFunctionPointer(Apply2);
-                return ctx.Eval(func, new Cont2<Closure, Closure>(cont, arg1, arg2));
-            }
-            else if (func is PAP pap)
-            {
-                return ApplyPAP(ctx, pap, arg1, arg2);
-            }
-            throw new Exception($"Cannot apply a value ({func.GetType()})");
         }
 
         public static Closure Apply(StgContext ctx, Closure func, Closure arg1, Closure arg2, Closure arg3)
         {
-            if (func is Function f)
+            switch (func.Type)
             {
-                return ApplyFun(ctx, f, arg1, arg2, arg3);
+                case ClosureType.Function:
+                    return ApplyFun(ctx, func as Function, arg1, arg2, arg3);
+                case ClosureType.PartialApplication:
+                    throw new System.NotSupportedException("cannot apply arguments to a PAP that makes >3");
+                case ClosureType.Data:
+                    throw new Exception($"Cannot apply a value ({func.GetType()})");
+                default:
+                    var cont = CLR.LoadFunctionPointer(Apply1);
+                    return ctx.Eval(func, new Cont3<Closure, Closure, Closure>(cont, arg1, arg2, arg3));
             }
-            else if (func is Thunk)
-            {
-                var cont = CLR.LoadFunctionPointer(Apply3);
-                return ctx.Eval(func, new Cont3<Closure, Closure, Closure>(cont, arg1, arg2, arg3));
-            }
-            else if (func is PAP)
-            {
-                System.Console.WriteLine("WARN: applying partial app of fun >3");
-                throw new System.NotSupportedException("cannot apply arguments to a PAP that makes >3");
-            }
-            throw new Exception($"Cannot apply a value ({func.GetType()})");
         }
 
         private static Closure ApplyFun(StgContext ctx, Function f, Closure arg1)

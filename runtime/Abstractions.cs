@@ -14,6 +14,23 @@ namespace Lazer.Runtime
             Eval **must** return into ctx.Cont.
          */
         public abstract Closure Eval(StgContext ctx);
+
+        /**
+            A more performant way of checking closure type
+            than doing `isinst` and traversing inheritance tree.
+         */
+        public virtual ClosureType Type => ClosureType.Closure;
+    }
+
+    [System.Flags]
+    public enum ClosureType : byte
+    {
+        Closure = 0,
+        Thunk = 0,
+        SingleEntry = 0,
+        Data = 1,
+        Function = 2,
+        PartialApplication = 4,
     }
 
     /**
@@ -22,6 +39,7 @@ namespace Lazer.Runtime
     public abstract class Data : Closure
     {
         public override Closure Eval(StgContext ctx) => ctx.Cont.Call(ctx, this);
+        public override ClosureType Type => ClosureType.Data;
     }
 
     /**
@@ -30,6 +48,7 @@ namespace Lazer.Runtime
     public abstract class Function : Closure
     {
         public override Closure Eval(StgContext ctx) => ctx.Cont.Call(ctx, this);
+        public override ClosureType Type => ClosureType.Function;
 
         /**
             Each function has an arity which is used during application

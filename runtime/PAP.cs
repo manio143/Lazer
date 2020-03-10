@@ -21,5 +21,6 @@ namespace Lazer.Runtime
             this.args = args;
         }
         public override Closure Eval(StgContext ctx) => ctx.Cont.Call(ctx, this);
+        public override ClosureType Type => ClosureType.PartialApplication;
     }
 }
