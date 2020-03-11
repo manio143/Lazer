@@ -5,7 +5,7 @@ namespace Lazer.Runtime
         and closure parameters.
      */
 
-    public unsafe class Function1 : Function, IFunction1
+    public unsafe class Function1 : Function
     {
         protected internal void* f;
         public override int Arity => 1;
@@ -13,7 +13,7 @@ namespace Lazer.Runtime
         {
             this.f = f;
         }
-        public Closure Apply(StgContext ctx, Closure a0)
+        public override Closure Apply(StgContext ctx, Closure a0)
         {
             return CLR.TailCallIndirectGeneric<StgContext, Closure, Closure>(ctx, a0, f);
         }
@@ -21,7 +21,7 @@ namespace Lazer.Runtime
         public static Function1<T0> Make<T0>(void* f, T0 x0) => new Function1<T0>(f, x0);
         public static Function1<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new Function1<T0, T1>(f, x0, x1);
     }
-    public unsafe class Function1<T0> : Function, IFunction1
+    public unsafe class Function1<T0> : Function
     {
         protected internal void* f;
         public T0 x0;
@@ -31,12 +31,12 @@ namespace Lazer.Runtime
             this.f = f;
             this.x0 = x0;
         }
-        public Closure Apply(StgContext ctx, Closure a0)
+        public override Closure Apply(StgContext ctx, Closure a0)
         {
             return CLR.TailCallIndirectGeneric<StgContext, T0, Closure, Closure>(ctx, x0, a0, f);
         }
     }
-    public unsafe class Function1<T0, T1> : Function, IFunction1
+    public unsafe class Function1<T0, T1> : Function
     {
         protected internal void* f;
         public T0 x0;
@@ -48,12 +48,12 @@ namespace Lazer.Runtime
             this.x0 = x0;
             this.x1 = x1;
         }
-        public Closure Apply(StgContext ctx, Closure a0)
+        public override Closure Apply(StgContext ctx, Closure a0)
         {
             return CLR.TailCallIndirectGeneric<StgContext, T0, T1, Closure, Closure>(ctx, x0, x1, a0, f);
         }
     }
-    public unsafe class Function2 : Function, IFunction2
+    public unsafe class Function2 : Function
     {
         protected internal void* f;
         public override int Arity => 2;
@@ -61,7 +61,7 @@ namespace Lazer.Runtime
         {
             this.f = f;
         }
-        public Closure Apply(StgContext ctx, Closure a0, Closure a1)
+        public override Closure Apply(StgContext ctx, Closure a0, Closure a1)
         {
             return CLR.TailCallIndirectGeneric<StgContext, Closure, Closure, Closure>(ctx, a0, a1, f);
         }
@@ -69,7 +69,7 @@ namespace Lazer.Runtime
         public static Function2<T0> Make<T0>(void* f, T0 x0) => new Function2<T0>(f, x0);
         public static Function2<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new Function2<T0, T1>(f, x0, x1);
     }
-    public unsafe class Function2<T0> : Function, IFunction2
+    public unsafe class Function2<T0> : Function
     {
         protected internal void* f;
         public T0 x0;
@@ -79,12 +79,12 @@ namespace Lazer.Runtime
             this.f = f;
             this.x0 = x0;
         }
-        public Closure Apply(StgContext ctx, Closure a0, Closure a1)
+        public override Closure Apply(StgContext ctx, Closure a0, Closure a1)
         {
             return CLR.TailCallIndirectGeneric<StgContext, T0, Closure, Closure, Closure>(ctx, x0, a0, a1, f);
         }
     }
-    public unsafe class Function2<T0, T1> : Function, IFunction2
+    public unsafe class Function2<T0, T1> : Function
     {
         protected internal void* f;
         public T0 x0;
@@ -96,12 +96,12 @@ namespace Lazer.Runtime
             this.x0 = x0;
             this.x1 = x1;
         }
-        public Closure Apply(StgContext ctx, Closure a0, Closure a1)
+        public override Closure Apply(StgContext ctx, Closure a0, Closure a1)
         {
             return CLR.TailCallIndirectGeneric<StgContext, T0, T1, Closure, Closure, Closure>(ctx, x0, x1, a0, a1, f);
         }
     }
-    public unsafe class Function3 : Function, IFunction3
+    public unsafe class Function3 : Function
     {
         protected internal void* f;
         public override int Arity => 3;
@@ -109,7 +109,7 @@ namespace Lazer.Runtime
         {
             this.f = f;
         }
-        public Closure Apply(StgContext ctx, Closure a0, Closure a1, Closure a2)
+        public override Closure Apply(StgContext ctx, Closure a0, Closure a1, Closure a2)
         {
             return CLR.TailCallIndirectGeneric<StgContext, Closure, Closure, Closure, Closure>(ctx, a0, a1, a2, f);
         }

@@ -70,7 +70,7 @@ namespace Lazer.Runtime
             switch (f.Arity)
             {
                 case 1:
-                    return ((IFunction1)f).Apply(ctx, arg1);
+                    return f.Apply(ctx, arg1);
                 default:
                     return new PAP(f, arg1).Eval(ctx);
             }
@@ -82,9 +82,9 @@ namespace Lazer.Runtime
                 case 1:
                     var cont = CLR.LoadFunctionPointer(Apply1);
                     ctx.Push(new Cont1<Closure>(cont, arg2));
-                    return ((IFunction1)f).Apply(ctx, arg1);
+                    return f.Apply(ctx, arg1);
                 case 2:
-                    return ((IFunction2)f).Apply(ctx, arg1, arg2);
+                    return f.Apply(ctx, arg1, arg2);
                 default:
                     return new PAP(f, arg1, arg2).Eval(ctx);
             }
@@ -97,16 +97,16 @@ namespace Lazer.Runtime
                     {
                         var cont = CLR.LoadFunctionPointer(Apply2);
                         ctx.Push(new Cont2<Closure, Closure>(cont, arg2, arg3));
-                        return ((IFunction1)f).Apply(ctx, arg1);
+                        return f.Apply(ctx, arg1);
                     }
                 case 2:
                     {
                         var cont = CLR.LoadFunctionPointer(Apply1);
                         ctx.Push(new Cont1<Closure>(cont, arg3));
-                        return ((IFunction2)f).Apply(ctx, arg1, arg2);
+                        return f.Apply(ctx, arg1, arg2);
                     }
                 case 3:
-                    return ((IFunction3)f).Apply(ctx, arg1, arg2, arg3);
+                    return f.Apply(ctx, arg1, arg2, arg3);
                 default:
                     System.Console.WriteLine("WARN: creating partial app of fun >3");
                     return new PAP(f, arg1, arg2, arg3).Eval(ctx);
@@ -116,15 +116,16 @@ namespace Lazer.Runtime
         private static Closure ApplyPAP(StgContext ctx, PAP pap, Closure arg1)
         {
             var args = pap.args;
+            var f = pap.f;
             switch (pap.Arity)
             {
                 case 1:
-                    switch (pap.f)
+                    switch (f.Arity)
                     {
-                        case IFunction2 f2:
-                            return f2.Apply(ctx, args[0], arg1);
-                        case IFunction3 f3:
-                            return f3.Apply(ctx, args[0], args[1], arg1);
+                        case 2:
+                            return f.Apply(ctx, args[0], arg1);
+                        case 3:
+                            return f.Apply(ctx, args[0], args[1], arg1);
                         default:
                             throw new NotSupportedException();
                     }
@@ -137,26 +138,27 @@ namespace Lazer.Runtime
         private static Closure ApplyPAP(StgContext ctx, PAP pap, Closure arg1, Closure arg2)
         {
             var args = pap.args;
+            var f = pap.f;
             switch (pap.Arity)
             {
                 case 1:
                     var cont = CLR.LoadFunctionPointer(Apply1);
                     ctx.Push(new Cont1<Closure>(cont, arg2));
-                    switch (pap.f)
+                    switch (f.Arity)
                     {
-                        case IFunction2 f1_2:
-                            return f1_2.Apply(ctx, args[0], arg1);
-                        case IFunction3 f1_3:
-                            return f1_3.Apply(ctx, args[0], args[1], arg1);
+                        case 2:
+                            return f.Apply(ctx, args[0], arg1);
+                        case 3:
+                            return f.Apply(ctx, args[0], args[1], arg1);
                         default:
                             throw new System.NotSupportedException();
                     }
                 case 2:
-                    switch (pap.f)
+                    switch (f.Arity)
                     {
-                        case IFunction3 f2_3:
-                            return f2_3.Apply(ctx, args[0], arg1, arg2);
-                        case IFunction2 f2_2:
+                        case 3:
+                            return f.Apply(ctx, args[0], arg1, arg2);
+                        case 2:
                             throw new System.NotSupportedException("PAP of IFunction2 with arity 2?");
                         default:
                             throw new System.NotSupportedException();

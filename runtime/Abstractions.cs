@@ -1,3 +1,5 @@
+using System;
+
 namespace Lazer.Runtime
 {
     /**
@@ -55,6 +57,13 @@ namespace Lazer.Runtime
             when the function is not statically known.
          */
         public abstract int Arity { get; }
+
+        public virtual Closure Apply(StgContext ctx, Closure x0)
+            => throw new NotImplementedException();
+        public virtual Closure Apply(StgContext ctx, Closure x0, Closure x1)
+            => throw new NotImplementedException();
+        public virtual Closure Apply(StgContext ctx, Closure x0, Closure x1, Closure x2)
+            => throw new NotImplementedException();
 
         /**
             Whenever returning a data object from a Function.Apply you need to
