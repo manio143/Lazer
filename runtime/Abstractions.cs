@@ -32,7 +32,6 @@ namespace Lazer.Runtime
         SingleEntry = 0,
         Data = 1,
         Function = 2,
-        PartialApplication = 4,
     }
 
     /**
@@ -58,11 +57,11 @@ namespace Lazer.Runtime
          */
         public abstract int Arity { get; }
 
-        public virtual Closure Apply(StgContext ctx, Closure x0)
+        public virtual Closure Apply(StgContext ctx, Closure a0)
             => throw new NotImplementedException();
-        public virtual Closure Apply(StgContext ctx, Closure x0, Closure x1)
+        public virtual Closure Apply(StgContext ctx, Closure a0, Closure a1)
             => throw new NotImplementedException();
-        public virtual Closure Apply(StgContext ctx, Closure x0, Closure x1, Closure x2)
+        public virtual Closure Apply(StgContext ctx, Closure a0, Closure a1, Closure a2)
             => throw new NotImplementedException();
 
         /**
