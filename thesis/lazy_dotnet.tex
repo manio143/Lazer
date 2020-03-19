@@ -45,7 +45,7 @@
 \newtheorem{defi}{Definicja}[section]
 \newcommand{\shrp}{%
   {\settoheight{\dimen0}{C}\kern-.05em \resizebox{!}{\dimen0}{\raisebox{\depth}{\textbf{\#}}}\hspace{1ex}}}
-\newcommand{\myref}[1]{\ref{#1}. \nameref{#1}}
+\newcommand{\myref}[1]{\ref{#1}.~\nameref{#1}}
 
 \definecolor{brown}{RGB}{104,55,0}
 \definecolor{gray}{RGB}{110,110,110}
@@ -201,7 +201,7 @@ be performed either way. Finally, there exist certain data structures that
 leverage lazy evaluation to provide amortization of asymptotic complexity,
 i.e. queues \cite{amortized}.
 
-\section{Closures and Thunks}
+\section{Closures and Thunks}\label{s:closures}
 
 There have been a few solutions to the problem of implementing lazy evaluation:
 lazy SECD machine \cite{SECDM}, G-Machine \cite{G-Machine}, 
@@ -294,7 +294,7 @@ can be replaced by a \texttt{jump} instruction.
 
 Haskell programs compiled with GHC operate on the stack in a ``non-standard'' way
 due to many optimizations. On the .NET platform the stack is used according to the
-x86 ABI. Moreover, the .NET stack has a fixed size, whereas GHC can manipulate its stack size.
+\texttt{x86\_64} ABI. Moreover, the .NET stack has a fixed size, whereas GHC can manipulate its stack size.
 This means extensive non-tail calls usage can lead to a stack overflow and program crash.
 In order to maximize tail calls the runtime described in chapter \myref{r:runtime}
 uses heap allocated continuations.
@@ -308,7 +308,162 @@ for non-tail function calls when a lifted value has to be scrutinized in
 an unlifted-returning function (see \{TODO ref\} for details).
 
 \chapter{Function application}\label{r:funApp}
-TODO
+
+In functional languages, unlike in many imperative languages,
+functions are first-class values. This means functions may be passed
+to other functions or return new functions, just as easily as manipulating
+numbers. Although some languages, like C, have function pointers, they don't
+allow for the simplicity of manipulating functions that are offered
+by \textit{lambda expressions}.
+
+A lambda expression is of the form $\lambda x. \mathsf{expr}$ and describes
+a function that takes an argument $x$ and returns the value of the expression
+with $x$ substituted by the value it is applied to. A function that takes
+multiple arguments can be described by nested lambda expressions
+(i.e.~$\lambda x.\lambda y. x+y$). This is called \textit{currying} after
+the work of Haskell Curry in combinatory logic \cite{Curry}.
+Another property of lambda expressions is the ability to capture
+values of free variables from the enclosing environment.
+A variable is free if it is not provided as an argument
+(i.e.~in~$\lambda x. x + y$ the variable $y$ is free).
+In the implementation of a lambda expression a closure has to
+be created that holds its free variables and can be accessed by the
+code of the inner expression. Function values described above satisfy
+the definition of a \textit{closure} in \myref{s:closures}.
+
+In a program there will be top-level functions whose free variables
+can only be other top-level constants and local functions instantiated
+each time their binding expression is evaluated.
+We differentiate between known and unknown functions.
+A function that is known can be applied by simply
+calling it with all the required arguments (\textit{saturated application}).
+If there's not enough arguments or the function is unknown then it has
+to be applied, possibly partially.
+
+Partial application is a technique that allows providing less than
+the required number of arguments to a function.
+A partially applied function is a function
+that takes the remaining arguments and then applies the original function
+to the previously and currently provided arguments.
+
+\begin{verbatim}
+  f = \x y -> x + y
+  g = f 1           -- g = \y -> f 1 y
+\end{verbatim}
+
+Partial applications are common in functional programming.
+They allow to write succinct code in applicative style and often
+abstract out dependencies of a function.
+
+\begin{verbatim}
+  let sort = \order -> \list -> ...
+  let sortAsc = sort (<=)
+  let sortDsc = sort (>=)
+\end{verbatim}
+
+There are two common ways of applying unknown functions:
+\textit{Push/Enter} and \textit{Eval/Apply}. They are described
+below, according to the
+definitions by Simon Marlow and Simon Peyton Jones \cite{fastcurry}.
+
+\section{Push/Enter}
+In this model each function is responsible for handling its arguments.
+The caller \textit{pushes} available arguments on the stack and calls the
+function entry point (\textit{enters} the function).
+The function inspects the stack to see if it was called with the
+sufficient number of arguments and if so pops the arguments from
+the stack and begins evaluation of its body. If there's not enough
+arguments then the function creates a partial application object (PAP)
+and returns that. If there is more than enough arguments then the result
+of the function will be also entered.
+
+Usually this means each function gets a slow and a fast entry point.
+The slow entry point is responsible for checking the stack, removing
+pending arguments and either creating a PAP or calling the fast entry point.
+
+The reason \textit{Push/Enter} was popular is the simplicity of
+making a call. No matter what the function being applied is,
+the caller pushes arguments on the stack and enters the closure.
+Before the introduction of \texttt{x86\_64} there weren't many
+general purpose registers so passing arguments on the stack made
+more sense.
+
+In the GHC the stack holds both arguments and continuations, but that is
+less than optimal in the strongly typed managed environment as it would
+require a lot of type checks. Therefore, when implementing this model,
+a separate argument stack can be used and a separete continuation stack.
+The arguments between continuations have to be
+separated in some way. In \cite{Brazil} the sizes of HSNET's stacks',
+which represent argument stacks for each primitive type (int, float, closure),
+are pushed onto an update stack, zeroed, and later restored.
+
+The stacks can either be accessible from a static object, or passed
+to each method in a context object. A context object may be preferred
+as it allows for future introduction of multithreading.
+
+\begin{verbatim}
+  class Context {
+      public Stack<Closure> ArgumentsStack;
+      public Stack<Continuation> ContinuationStack;
+  }
+
+  class Plus_function : Function {
+      public override Closure Enter(Context ctx) {
+          if (ctx.ArgumentsStack.Count >= 2) {
+              var x1 = ctx.ArgumentsStack.Pop();
+              var x2 = ctx.ArgumentsStack.Pop();
+              return FastEnter(ctx, x1, x2);
+          } else if (ctx.ArgumentsStack.Count == 0) {
+              return this;
+          } else {
+              return new PAP(this, ctx.ArgumentsStack.Pop());
+          }
+      }
+      public static Closure FastEnter(Context ctx, Closure x1, Closure x2) {
+          var a1 = x1.Enter(ctx);
+          var a2 = x2.Enter(ctx);
+          return new Number(a1 + a2);
+      }
+  }
+\end{verbatim}
+
+\section{Eval/Apply}
+The second model requires the caller to inspect the arity of a function and
+pass it the exact number of arguments. This means it is the caller,
+rather than the callee, that creates a PAP if there's not enough arguments.
+The caller first has to \textit{evaluate} the function, to check its arity, and then
+\textit{apply} it to the arguments.
+
+To make function application easier on the caller function, a set of helper functions
+are created that do evaluation and application.
+
+\begin{verbatim}
+  public static Closure ApplyHelper(Context ctx, 
+                                    Closure func, Closure arg1, Closure arg2) {
+      if (func is Function f) {
+          // check f's arity
+          // if arity = 2 then apply f to all arguments
+          // if arity < 2 then apply f to some arguments and
+          //    then use a helper to apply the rest
+          // if arity > 2 then create a PAP
+      } else if (func is PAP p) {
+          // extract previous parameters from p
+          // apply all available parameters to function in p
+      } else if (func is Data) {
+          throw new Exception("Cannot apply data");
+      } else {
+          // eval func and use helper again
+      }
+  }
+\end{verbatim}
+
+This way only one function entry has to be generated and most arguments
+will be passed through registers. This style of argument passing is
+native to the .NET CLR where JIT (\textit{Just-In-Time} compiler) generates
+codes compliant with \texttt{x86\_64} ABI and can potentially be subject to
+some additional optimizations.
+
+This model is used in the lazy runtime in chapter \myref{r:runtime}.
 
 \chapter{Low level CLR features}\label{r:lowlevel}
 TODO
@@ -379,6 +534,11 @@ Prentice-Hall, Englewood Cliffs, NJ, 1980.
 \bibitem[SPJ-92]{STGM} Simon Peyton Jones, \textit{,,Implementing lazy functional languages on stock hardware: the Spineless Tagless G-machine''}, 1992.
 
 \bibitem[IS,SPJ,DV-17]{demand analysis} Ilya Sergey, Simon Peyton Jones, Dimitrios Vytiniotis, \textit{,,Theory and Practice of Demand Analysis in Haskell''}, 2017.
+
+\bibitem[HC-36]{Curry} Haskell Curry, \textit{,,Functionality in combinatory logic''}, \texttt{Proceedings
+of the National Academy of Sciences (U.S.A.)}, XX, pp. 584—590, 1936.
+
+\bibitem[SM,SPJ-04]{fastcurry} Simon Marlow, Simon Peyton Jones, \textit{,,Making a fast Curry: Push/Enter vs. Eval/Apply for Higher-order Languages''} ICFP'04, pp. 4-15, 2004.
 
 \end{thebibliography}
 
