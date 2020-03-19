@@ -170,6 +170,7 @@ stg2cs :: DynFlags -> [StgTopBinding] -> String
 stg2cs df stg = evalState (go >> prettyPrint) $ initState df
     where
         go = do
+            -- TODO rename top level non-global (isGlobalId) bindings to prevent name clash
             mapM_ gatherGlobals stg
             mapM_ processTop stg
             modify (\s -> s { code = map (\(Method n t a e) -> Method n t a (simplify e)) (code s) })
@@ -239,6 +240,7 @@ convertExpr _ (StgApp fid args) = do
         callableVars <- callables <$> get
         case lookup (varName fid) callableVars of
             Just methodName -> return (CSECall methodName as, [])
+                -- TODO only convert to a call if saturated
             Nothing -> return (CSEApp fid as, [])
 convertExpr _ (StgConApp con args _) = do
     let as = map convertArg args
@@ -367,6 +369,7 @@ convertRhs id' boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
     let methodName = name++"_Entry"
     let retType = funRetType id bndrs -- TODO if fun is unlifted and has occs we would
                                       -- have to call it with occs and args - currently impossible
+                                      -- we need to lift that function => put a con at the end
     let method = Method methodName retType (occs++bndrs) e1x
     let params = map (\i -> if elem (varName i) boundIds then CSNull else CSRef i) occs
     let assExpr = case flag of
@@ -386,7 +389,8 @@ convertAlts :: Id -> Id -> [StgAlt] -> CSST ([CSAlt], [Id], [CSMethod])
 convertAlts alias id alts = do
     (csalts, free, ms) <- convertAlts' alias id alts
     globalVars <- globals <$> get
-    let freeWithoutGlobals = filter (\i -> notElem (varName i) globalVars) free
+    let freeWithoutAlias = filter (\i -> varName i /= varName alias) free
+    let freeWithoutGlobals = filter (\i -> notElem (varName i) globalVars) freeWithoutAlias
     case head csalts of
         CSADefault _ -> return (csalts, freeWithoutGlobals, ms)
         _ -> return (CSADefault CSEImpossible : csalts, freeWithoutGlobals, ms)
@@ -429,6 +433,7 @@ convertAlt alias id (DataAlt con, bndrs, e) = do
 ######################################
 -}
 
+-- TODO simplify let x = CSEApp in EvalThen x cont => Push cont; CSEApp 
 simplify (CSECase id [CSADefault e]) = simplify e
 simplify (CSECase id [CSADefault CSEImpossible, CSACon conName varName e]) =
     CSECastAs varName id conName (simplify e)
@@ -780,9 +785,14 @@ pprMultiline (a:as) = ppr a $$ pprMultiline as
 
 instance Outputable CSExpr where
     ppr (CSELit l) = hsep [text "return", pprLit l, text ";"]
-    ppr (CSEVar id) = hsep [text "return", hcat [pprWithUnique id, text ".Eval(ctx)"], text ";"]
+    ppr (CSEVar id)
+        | (typeToCSType $ idType id) == Closure
+            = hsep [text "return", hcat [pprWithUnique id, text ".Eval(ctx)"], text ";"]
+        | otherwise
+            = hsep [text "return", pprWithUnique id, text ";"]
     ppr (CSECon name args) =
         hsep [text $ "return new "++name++"(", pprArgs args, text ").Eval(ctx);"]
+        --TODO don't Eval unlifted constructors
     ppr (CSEApp id args) = 
         hsep [text "return StgApply.Apply(ctx,", pprWithUnique id, text ",", pprArgs args, text ");"]
     ppr (CSECall name []) = 
@@ -794,7 +804,7 @@ instance Outputable CSExpr where
             hsep [pprWithUnique id, text "= ctx.Eval(", pprWithUnique id, text ");"],
             ppr ex
         ]
-    ppr (CSEEvalThen id name []) =
+    ppr (CSEEvalThen id name []) = --TODO add generic type application
         hsep [text "return ctx.Eval(", pprWithUnique id, text $ ", StgCont.Make(CLR.LoadFunctionPointer("++name++")));"] 
     ppr (CSEEvalThen id name free) =
         hsep [text "return ctx.Eval(", pprWithUnique id, text $ ", StgCont.Make(CLR.LoadFunctionPointer("++name++"),", pprArgs (map CSRef free), text "));"] 
