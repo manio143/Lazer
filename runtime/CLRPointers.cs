@@ -51,5 +51,11 @@ namespace Lazer.Runtime
         [CompilerIntrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe extern U TailCallIndirectGeneric<T0, T1, T2, T3, T4, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, void* funPtr);
+        [CompilerIntrinsic]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe extern U TailCallIndirectGeneric<T0, T1, T2, T3, T4, T5, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, T5 x5, void* funPtr);
+        [CompilerIntrinsic]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe extern U TailCallIndirectGeneric<T0, T1, T2, T3, T4, T5, T6, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, T5 x5, T6 x6, void* funPtr);
     }
 }

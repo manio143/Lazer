@@ -32,6 +32,8 @@ namespace Lazer.Runtime
         public static Continuation Make<T0>(void* f, T0 x0) => new Cont1<T0>(f, x0);
         public static Continuation Make<T0, T1>(void* f, T0 x0, T1 x1) => new Cont2<T0, T1>(f, x0, x1);
         public static Continuation Make<T0, T1, T2>(void* f, T0 x0, T1 x1, T2 x2) => new Cont3<T0, T1, T2>(f, x0, x1, x2);
+        public static Continuation Make<T0, T1, T2, T3>(void* f, T0 x0, T1 x1, T2 x2, T3 x3) => new Cont4<T0, T1, T2, T3>(f, x0, x1, x2, x3);
+        public static Continuation Make<T0, T1, T2, T3, T4>(void* f, T0 x0, T1 x1, T2 x2, T3 x3, T4 x4) => new Cont5<T0, T1, T2, T3, T4>(f, x0, x1, x2, x3, x4);
     }
 
     public unsafe class Cont0 : Continuation
@@ -96,6 +98,50 @@ namespace Lazer.Runtime
         {
             ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, T2, Closure>(ctx, c, x0, x1, x2, f);
+        }
+    }
+    public unsafe class Cont4<T0, T1, T2, T3> : Continuation
+    {
+        protected internal void* f;
+        public T0 x0;
+        public T1 x1;
+        public T2 x2;
+        public T3 x3;
+        public Cont4(void* f, T0 x0, T1 x1, T2 x2, T3 x3)
+        {
+            this.f = f;
+            this.x0 = x0;
+            this.x1 = x1;
+            this.x2 = x2;
+            this.x3 = x3;
+        }
+        public override Closure Call(StgContext ctx, Closure c)
+        {
+            ctx.Pop();
+            return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, T2, T3, Closure>(ctx, c, x0, x1, x2, x3, f);
+        }
+    }
+    public unsafe class Cont5<T0, T1, T2, T3, T4> : Continuation
+    {
+        protected internal void* f;
+        public T0 x0;
+        public T1 x1;
+        public T2 x2;
+        public T3 x3;
+        public T4 x4;
+        public Cont5(void* f, T0 x0, T1 x1, T2 x2, T3 x3, T4 x4)
+        {
+            this.f = f;
+            this.x0 = x0;
+            this.x1 = x1;
+            this.x2 = x2;
+            this.x3 = x3;
+            this.x4 = x4;
+        }
+        public override Closure Call(StgContext ctx, Closure c)
+        {
+            ctx.Pop();
+            return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, T2, T3, T4, Closure>(ctx, c, x0, x1, x2, x3, x4, f);
         }
     }
 
