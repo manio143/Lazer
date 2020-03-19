@@ -69,8 +69,10 @@
 %\listoffigures
 %\listoftables
 
+% ##########################
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
+% ##########################
 
 Functional programming is reliving a peak in its popularity.
 One of the more interesting features of pure functional programming
@@ -146,7 +148,9 @@ mechanism from STG representation of a Haskell program into C\shrp. \vspace{.7ex
 Chapter \myref{r:future} looks into future improvements to the runtime
 and extending Haskell for CLI interoperability.
 
+% ##########################
 \chapter{Lazy evaluation}\label{r:lazyEval}
+% ##########################
 
 Every high level programming language has some form of expressions.
 They are used to represent algebraic operations, application of
@@ -307,7 +311,9 @@ Pointers and unlifted values may be kept on the stack
 for non-tail function calls when a lifted value has to be scrutinized in
 an unlifted-returning function (see \{TODO ref\} for details).
 
+% ##########################
 \chapter{Function application}\label{r:funApp}
+% ##########################
 
 In functional languages, unlike in many imperative languages,
 functions are first-class values. This means functions may be passed
@@ -465,32 +471,156 @@ some additional optimizations.
 
 This model is used in the lazy runtime in chapter \myref{r:runtime}.
 
+% ##########################
 \chapter{Low level CLR features}\label{r:lowlevel}
-TODO
+% ##########################
 
+The C\shrp language is usually considered a high-level language.
+However, it has some low-level features allowing the user to
+manipulate pointers in \texttt{unsafe} contexts.
+Moreover, the Common Intermediate Language (CIL) has additional
+instructions not available to C\shrp developers.
+
+\section{Tail calls}
+
+One of those CLR \textit{intrinsics} is the tail call modifier.
+It is used to force the JIT to emit a tail call.
+The \texttt{.tail} modifier has to be placed before a \texttt{call},
+\texttt{callvirt} or \texttt{calli} instruction that is followed by
+\texttt{ret} instruction. However, in most cases when the JIT is
+working in Release mode, or with the Optimized flag, it will
+emit tail calls correctly even without the modifier. Sometimes,
+especially for long functions, the JIT won't emit a tail call
+on its own and in those cases it would be beneficial to decorate
+all tail calls with the \texttt{.tail} modifier. Currently the
+C\shrp compiler doesn't allow such decorations and this would
+therefore require the Haskell to .NET compiler to emit CIL bytecode
+directly.
+
+\begin{verbatim}
+    .tail
+    call int64 class Code::f(int64, int64)
+    ret
+\end{verbatim}
+
+\section{Function pointers}
+
+Another useful CLR intrinsic instruction is \texttt{ldftn}.
+It allows the user to obtain a pointer to a function.
+Such a pointer can be then used as an argument to a
+ \texttt{calli} instruction.
+There may be security issues involved in dealing with function
+pointers when the program makes use of dynamically loaded application
+domains (when calling a function from an unloaded domain), but
+those are outside the scope of this project.
+The C\shrp compiler in the version 8.0 doesn't allow for obtaining
+function pointers and in this work a modified compiler has been used
+to overcome this limitation.
+
+\begin{verbatim}
+    ldftn Closure class Code::sfoldl_Case(StgContext, Closure, Closure)
+\end{verbatim}
+
+There exists a `safe' function pointer in the form of a \texttt{delegate}.
+However, comparison of runtime performance between creating delegates and
+using function pointers shows the superiority of the latter (2-3x faster)
+\cite{ldftnVSdelegate}.
+
+\section{Switch statements}
+
+When dealing with case expressions with many alternatives the C\shrp compiler
+can emit a \texttt{switch} instruction that uses a lookup table to improve
+performance. This can only happen when switching on integers and may be
+a motivation to add a number tag to each data constructor.
+However, for types with a small number (less than five) of
+data constructors it appears that a linear switch on their types is faster
+than using a number tag, because the necessary type cast is used
+to compare cases.
+
+\begin{verbatim}
+    switch (variable.Tag) {               switch (variable) {
+        case 1:                              case Con1 c1: ...
+            var c1 = variable as Con1;       case Con2 c2: ...
+            ...                              case Con3 c3: ...
+        case 2:                              default: ...
+            var c2 = variable as Con2;    }
+            ...
+        case 3: 
+            var c3 = variable as Con3;
+            ...
+        default: ...
+    }
+\end{verbatim}
+
+% ##########################
 \chapter{Lazy runtime}\label{r:runtime}
-TODO
+% ##########################
 
+intro to why I used C\# with a modified compiler
+
+\section{Closures}
+
+\section{Continuations}
+
+\section{Context object}
+
+\section{Function application}
+
+\section{Algebraic data types}
+
+\section{Universal closures}
+
+\section{Example user code implementation}
+
+
+% ##########################
 \chapter{Comparison to related work}\label{r:alternatives}
-TODO
+% ##########################
 
+\section{JVM based solutions}
+In general, issues with tail calls, Tullsen and Choi
+\subsection{Eta}
+Achievements, issues, similarities and differences
+
+\section{Mondrian}
+\cite{PerryMeijer}
+
+\section{Haskell.NET}
+\cite{Brazil}
+
+\section{Oliver Hunt's work}
+\cite{Hunt}
+
+% ##########################
 \chapter{Performance}\label{r:perf}
+% ##########################
+
 TODO
 
 \section{Bottlenecks}
 \subsection{Branching}
 \subsection{Garbage Collection}
 stack length and traversing for pointers \\
-continuation polling (update and identity)
+continuation pooling (update and identity)
 \subsection{Method devirtualization}
 \subsection{Derivable data classes}
 \subsection{Data structures}
 continuations stack implementation (System.Stack vs Pointer linked list) \\
 
+% ##########################
 \chapter{Compiling Haskell to C\#}\label{r:compiler}
-TODO
+% ##########################
 
+\section{GHC compiler library}
+
+\section{Translating STG}
+
+\section{Optimizations}
+
+% ##########################
 \chapter{Future work}\label{r:future}
+% ##########################
+
 TODO
 
 
@@ -539,6 +669,9 @@ Prentice-Hall, Englewood Cliffs, NJ, 1980.
 of the National Academy of Sciences (U.S.A.)}, XX, pp. 584—590, 1936.
 
 \bibitem[SM,SPJ-04]{fastcurry} Simon Marlow, Simon Peyton Jones, \textit{,,Making a fast Curry: Push/Enter vs. Eval/Apply for Higher-order Languages''} ICFP'04, pp. 4-15, 2004.
+
+\bibitem[MD-20]{ldftnVSdelegate} Marian Dziubiak, blog: \textit{,,Wskaźniki do funkcji w C\shrp''},
+    \url{https://www.md-techblog.net.pl/2020/02/dotnet-function-pointer/}, 2020.
 
 \end{thebibliography}
 
