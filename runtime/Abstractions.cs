@@ -22,6 +22,14 @@ namespace Lazer.Runtime
             than doing `isinst` and traversing inheritance tree.
          */
         public virtual ClosureType Type => ClosureType.Closure;
+
+        /**
+            A tag for switching on alternatives when dealing with
+            more than 4-5 data constructors.
+         */
+        public virtual int Tag
+            => throw new NotImplementedException("Accessing Tag on a non-data closure.");
+
     }
 
     [System.Flags]
@@ -41,6 +49,7 @@ namespace Lazer.Runtime
     {
         public override Closure Eval(StgContext ctx) => ctx.Cont.Call(ctx, this);
         public override ClosureType Type => ClosureType.Data;
+        public override int Tag => 0;
     }
 
     /**
