@@ -47,7 +47,7 @@ namespace Lazer.Runtime
      */
     public abstract class Data : Closure
     {
-        public override Closure Eval(StgContext ctx) => ctx.Cont.Call(ctx, this);
+        public override Closure Eval(StgContext ctx) => ctx.Return(this);
         public override ClosureType Type => ClosureType.Data;
         public override int Tag => 0;
     }
@@ -57,7 +57,7 @@ namespace Lazer.Runtime
      */
     public abstract class Function : Closure
     {
-        public override Closure Eval(StgContext ctx) => ctx.Cont.Call(ctx, this);
+        public override Closure Eval(StgContext ctx) => ctx.Return(this);
         public override ClosureType Type => ClosureType.Function;
 
         /**

@@ -32,7 +32,6 @@ namespace Lazer.Runtime
             t.Cleanup();
             if (!notPooled)
                 ctx.UpdatePool.Return(this);
-            ctx.Pop();
             return c.Eval(ctx);
         }
     }

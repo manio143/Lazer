@@ -14,7 +14,6 @@ namespace Lazer.Runtime
         public IdCont() { }
         public override Closure Call(StgContext ctx, Closure c)
         {
-            ctx.Pop();
             if (!nonPooled)
                 ctx.IdContPool.Return(this);
             return c;
@@ -45,7 +44,6 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
-            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, Closure>(ctx, c, f);
         }
     }
@@ -60,7 +58,6 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
-            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, Closure>(ctx, c, x0, f);
         }
     }
@@ -77,7 +74,6 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
-            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, Closure>(ctx, c, x0, x1, f);
         }
     }
@@ -96,7 +92,6 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
-            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, T2, Closure>(ctx, c, x0, x1, x2, f);
         }
     }
@@ -117,7 +112,6 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
-            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, T2, T3, Closure>(ctx, c, x0, x1, x2, x3, f);
         }
     }
@@ -140,7 +134,6 @@ namespace Lazer.Runtime
         }
         public override Closure Call(StgContext ctx, Closure c)
         {
-            ctx.Pop();
             return CLR.TailCallIndirectGeneric<StgContext, Closure, T0, T1, T2, T3, T4, Closure>(ctx, c, x0, x1, x2, x3, x4, f);
         }
     }

@@ -53,5 +53,11 @@ namespace Lazer.Runtime
             Cont = Cont.next;
         }
 
+        public Closure Return(Closure c)
+        {
+            var cont = Cont;
+            Pop();
+            return cont.Call(this, c);
+        }
     }
 }
