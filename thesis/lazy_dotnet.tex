@@ -5,6 +5,7 @@
 \usepackage{color}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{fancyvrb}
 
 % Dane magistranta:
 \autor{Marian Dziubiak}{370784}
@@ -503,7 +504,7 @@ directly.
     ret
 \end{verbatim}
 
-\section{Function pointers}
+\section{Function pointers}\label{ldftn}
 
 Another useful CLR intrinsic instruction is \texttt{ldftn}.
 It allows the user to obtain a pointer to a function.
@@ -556,9 +557,64 @@ to compare cases.
 \chapter{Lazy runtime}\label{r:runtime}
 % ##########################
 
-intro to why I used C\# with a modified compiler
+This paper presents an implementation of a lazy runtime environment
+on the .NET platform. It has been implemented in C\shrp with some
+extensions to allow emitting \texttt{ldftn} and \texttt{calli}
+CIL instructions (see \myref{ldftn}). This way the implementation
+is clear to read and easy to explain.
 
 \section{Closures}
+Chapter \myref{s:closures} defined a \textit{closure} as a piece of
+code with some data. An object like that can be easily represented
+by a class with a specific method -- the code, and some fields for the data.
+Therefore a base class for all closures can be defined as following:
+
+\begin{verbatim}
+  abstract class Closure
+  {
+      public abstract Closure Eval(StgContext ctx);
+  }
+\end{verbatim}
+
+The method \texttt{Eval} is the entry point to any closure. It is responsible for
+evaluating the closure in the provided context.
+It has a return type of \texttt{Closure}, because the result of the evaluation,
+either a data constructor, a function, or a PAP, is another \texttt{Closure}.
+
+For example a data constructor should just return itself (the data).
+This is achieved by tail calling the continuation on top of the
+continuation stack (explained in the next section).
+
+\begin{verbatim}
+  abstract class Data : Closure
+  {
+      public override Closure Eval(StgContext ctx)
+          => ctx.Continuation.Call(ctx, this);
+  }
+\end{verbatim}
+
+The same goes for functions and PAPs. However, there can be
+closures that represent computations. Thunk is a closure
+that upon first evaluation performs the computation
+and every time after returns the result of that computation.
+Whenever a method returns a closure variable it has to be \textit{entered}
+-- its \texttt{Eval} method has to be tail called.
+
+\begin{verbatim}
+  abstract class Thunk : Closure
+  {
+      public Closure ind;
+      protected abstract Closure Compute(StgContext ctx);
+      public override Closure Eval(StgContext ctx)
+      {
+          if (ind != null) return ind.Eval(ctx);
+  
+          ctx.PushUpdate(this);
+          ind = Blackhole.Instance;
+          return Compute(ctx);
+      }
+  }
+\end{verbatim}
 
 \section{Continuations}
 
