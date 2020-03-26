@@ -20,6 +20,7 @@ namespace Lazer.Runtime
             // and evaluate the actual thunk code
             ind = Blackhole.Instance;
             ind = Compute();
+            Cleanup();
             return ind;
         }
     }
