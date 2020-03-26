@@ -5,44 +5,44 @@ using Lazer.Runtime;
 
 namespace Lazer.Runtime.Test
 {
-    public class Tester
+    public unsafe class Tester
     {
-        private Closure InfList = new App2u(Module.take, new I(100_000), Module.inf);
-        private Closure InfList2 = new App2u(Module.takeOnStack, new I(100_000), Module.inf);
-        private Closure MakeList = new App2u(Module.makeList, new I(1), new I(100_000));
+        private Closure InfList = Updatable.Make(global::CLR.LoadFunctionPointer(StgApply.Apply<Closure,Closure,Closure>), Module.take, new I(100_000), Module.inf);
+        private Closure InfList2 = Updatable.Make(global::CLR.LoadFunctionPointer(StgApply.Apply<Closure,Closure,Closure>), Module.takeOnStack, new I(100_000), Module.inf);
+        private Closure MakeList = Updatable.Make(global::CLR.LoadFunctionPointer(StgApply.Apply<Closure,Closure,Closure>), Module.makeList, new I(1), new I(100_000));
 
         public Closure SumTakeInf()
-            => new App1n(Module.sum, InfList);
+            => StgApply.Apply<Closure,Closure>(Module.sum, InfList);
         public Closure Sum2TakeInf()
-                    => new App1n(Module.sum2, InfList);
+                    => StgApply.Apply<Closure,Closure>(Module.sum2, InfList);
         public Closure SumTakeInf2()
-            => new App1n(Module.sum, InfList2);
+            => StgApply.Apply<Closure,Closure>(Module.sum, InfList2);
 
         public Closure SumMakeList()
-            => new App1n(Module.sum, MakeList);
+            => StgApply.Apply<Closure,Closure>(Module.sum, MakeList);
 
         public Closure Sum2MakeList()
-            => new App1n(Module.sum2, MakeList);
+            => StgApply.Apply<Closure,Closure>(Module.sum2, MakeList);
         public Closure SumATakeInf()
-            => new App2n(Module.suma, InfList, new I(0));
+            => StgApply.Apply<Closure,Closure,Closure>(Module.suma, InfList, new I(0));
 
         public Closure SumATakeInf2()
-            => new App2n(Module.suma, InfList2, new I(0));
+            => StgApply.Apply<Closure,Closure,Closure>(Module.suma, InfList2, new I(0));
 
         public Closure SumAMakeList()
-            => new App2n(Module.suma, MakeList, new I(0));
+            => StgApply.Apply<Closure,Closure,Closure>(Module.suma, MakeList, new I(0));
 
         public Closure Fibt()
-            => new App1n(Module.fibt, new I(800_000));
+            => StgApply.Apply<Closure,Closure>(Module.fibt, new I(800_000));
 
         public Closure FoldMakeList()
-            => new App2n(Module.sfoldl, new I(0), MakeList);
+            => StgApply.Apply<Closure,Closure,Closure>(Module.sfoldl, new I(0), MakeList);
 
         public Closure FoldTakeInf()
-            => new App2n(Module.sfoldl, new I(0), InfList);
+            => StgApply.Apply<Closure,Closure,Closure>(Module.sfoldl, new I(0), InfList);
 
         public Closure PiSum()
-            => new App2n(Module.suma, new App2n(Module.map, Module.integerToInt, new App2n(Module.take, new I(4000), Module.pi_)), new I(0));
+            => StgApply.Apply<Closure,Closure,Closure>(Module.suma, StgApply.Apply<Closure,Closure,Closure>(Module.map, Module.integerToInt, StgApply.Apply<Closure,Closure,Closure>(Module.take, new I(4000), Module.pi_)), new I(0));
 
         public Closure LinqSumRange()
             => new I(Enumerable.Range(0, 100_000).Aggregate(0, (a, i) => unchecked(a + i)));
@@ -56,7 +56,7 @@ namespace Lazer.Runtime.Test
         }
 
         public Closure SumFromTo()
-            => new App2n(Module.sumFromTo, new I(0), new I(100_000));
+            => StgApply.Apply<Closure,Closure,Closure>(Module.sumFromTo, new I(0), new I(100_000));
 
         public (double, Closure) RunTest(Func<Closure> testCase)
         {
@@ -120,7 +120,7 @@ namespace Lazer.Runtime.Test
             ExecTest("Fold(+,0, Take(100000,Inf))", FoldTakeInf);
             ExecTest("Fold(+,0, MakeList(1,100000))", FoldMakeList);
             ExecTest("SumA(Take(4000,Pi), 0)", PiSum);
-            Console.WriteLine(new App2n(Module.take, new I(15), Module.pi_).Eval());
+            Console.WriteLine(StgApply.Apply<Closure,Closure,Closure>(Module.take, new I(15), Module.pi_).Eval());
         }
     }
 }

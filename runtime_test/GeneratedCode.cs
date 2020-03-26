@@ -65,26 +65,26 @@ public static unsafe class Module
     public static S lvl_s4AQ = new S(2);
     public static S lvl_s4AP = new S(1);
     public static Thunk pi_ = new Updatable0(CLR.LoadFunctionPointer(Code.pi__Entry));
-    public static Function inc = new Function1(CLR.LoadFunctionPointer(Code.inc_Entry));
-    public static Function inc_ = new Function1(CLR.LoadFunctionPointer(Code.inc__Entry));
-    public static Function gcd = new Function2(CLR.LoadFunctionPointer(Code.gcd_Entry));
-    public static Function fibt = new Function1(CLR.LoadFunctionPointer(Code.fibt_Entry));
-    public static Function fiba = new Function3(CLR.LoadFunctionPointer(Code.fiba_Entry));
-    public static Function sum = new Function1(CLR.LoadFunctionPointer(Code.sum_Entry));
-    public static Function sum2 = new Function1(CLR.LoadFunctionPointer(Code.sum2_Entry));
-    public static Function suma = new Function2(CLR.LoadFunctionPointer(Code.suma_Entry));
-    public static Function takeOnStack = new Function2(CLR.LoadFunctionPointer(Code.takeOnStack_Entry));
-    public static Function take = new Function2(CLR.LoadFunctionPointer(Code.take_Entry));
-    public static Function facc2 = new Function1(CLR.LoadFunctionPointer(Code.facc2_Entry));
-    public static Function foldl = new Function3(CLR.LoadFunctionPointer(Code.foldl_Entry));
-    public static Function map = new Function2(CLR.LoadFunctionPointer(Code.map_Entry));
-    public static Function sfoldl = new Function2(CLR.LoadFunctionPointer(Code.sfoldl_Entry));
-    public static Function makeList = new Function2(CLR.LoadFunctionPointer(Code.makelist_Entry));
-    public static Function sumFromTo = new Function2(CLR.LoadFunctionPointer(Code.sumFromTo_Entry));
-    public static Function timesInteger = new Function2(CLR.LoadFunctionPointer(Code.timesInteger_Entry));
-    public static Function plusInteger = new Function2(CLR.LoadFunctionPointer(Code.plusInteger_Entry));
-    public static Function minusInteger = new Function2(CLR.LoadFunctionPointer(Code.minusInteger_Entry));
-    public static Function integerToInt = new Function1(CLR.LoadFunctionPointer(Code.integerToInt_Entry));
+    public static Function inc = new Fun(1, CLR.LoadFunctionPointer(Code.inc_Entry));
+    public static Function inc_ = new Fun(1, CLR.LoadFunctionPointer(Code.inc__Entry));
+    public static Function gcd = new Fun(2, CLR.LoadFunctionPointer(Code.gcd_Entry));
+    public static Function fibt = new Fun(1, CLR.LoadFunctionPointer(Code.fibt_Entry));
+    public static Function fiba = new Fun(3, CLR.LoadFunctionPointer(Code.fiba_Entry));
+    public static Function sum = new Fun(1, CLR.LoadFunctionPointer(Code.sum_Entry));
+    public static Function sum2 = new Fun(1, CLR.LoadFunctionPointer(Code.sum2_Entry));
+    public static Function suma = new Fun(2, CLR.LoadFunctionPointer(Code.suma_Entry));
+    public static Function takeOnStack = new Fun(2, CLR.LoadFunctionPointer(Code.takeOnStack_Entry));
+    public static Function take = new Fun(2, CLR.LoadFunctionPointer(Code.take_Entry));
+    public static Function facc2 = new Fun(1, CLR.LoadFunctionPointer(Code.facc2_Entry));
+    public static Function foldl = new Fun(3, CLR.LoadFunctionPointer(Code.foldl_Entry));
+    public static Function map = new Fun(2, CLR.LoadFunctionPointer(Code.map_Entry));
+    public static Function sfoldl = new Fun(2, CLR.LoadFunctionPointer(Code.sfoldl_Entry));
+    public static Function makeList = new Fun(2, CLR.LoadFunctionPointer(Code.makelist_Entry));
+    public static Function sumFromTo = new Fun(2, CLR.LoadFunctionPointer(Code.sumFromTo_Entry));
+    public static Function timesInteger = new Fun(2, CLR.LoadFunctionPointer(Code.timesInteger_Entry));
+    public static Function plusInteger = new Fun(2, CLR.LoadFunctionPointer(Code.plusInteger_Entry));
+    public static Function minusInteger = new Fun(2, CLR.LoadFunctionPointer(Code.minusInteger_Entry));
+    public static Function integerToInt = new Fun(1, CLR.LoadFunctionPointer(Code.integerToInt_Entry));
     public static Nil nil = new Nil();
 }
 
@@ -100,7 +100,7 @@ public static unsafe class Code
     {
         if (from <= to)
         {
-            var t = Updatable.Make(CLR.LoadFunctionPointer<long, long>(makelist_Go), from + 1, to);
+            var t = Updatable.Make(CLR.LoadFunctionPointer<long, long, Closure>(makelist_Go), from + 1, to);
             return new Cons(new I(from), t);
         }
         return nil;
@@ -261,11 +261,6 @@ public static unsafe class Code
             case 1: { return ww_s3bL; }
         }
     }
-    public static Closure sum_Entry(Closure w_s3bI)
-    {
-        var ww_s3bJ = wsums3bz_Entry(w_s3bI);
-        switch (ww_s3bJ) { default: { return new I(ww_s3bJ); } }
-    }
 
     public static Closure sum2_Entry(Closure l)
     {
@@ -295,6 +290,11 @@ public static unsafe class Code
         }
     }
 
+    public static Closure sum_Entry(Closure w_s3bI)
+    {
+        var ww_s3bJ = wsums3bz_Entry(w_s3bI);
+        switch (ww_s3bJ) { default: { return new I(ww_s3bJ); } }
+    }
     public static long wsums3bz_Entry(Closure w_s3bA)
     {
         var wild_s3bB = w_s3bA;
@@ -378,7 +378,7 @@ public static unsafe class Code
                 {
                     var h = wild_s3MH_Cons.x0;
                     var t = wild_s3MH_Cons.x1;
-                    var takeOnStack = Updatable.Make(CLR.LoadFunctionPointer<long, Closure>(takeOnStack_Thunk), nn, t);
+                    var takeOnStack = Updatable.Make(CLR.LoadFunctionPointer<long, Closure,Closure>(takeOnStack_Thunk), nn, t);
                     return new Cons(h, takeOnStack);
                 }
             case Nil wild_s3MH_Nil: { return nil; }
@@ -410,7 +410,7 @@ public static unsafe class Code
                             {
                                 var h = wild_s3MH_Cons.x0;
                                 var t = wild_s3MH_Cons.x1;
-                                var sat_s3ML = Updatable.Make(CLR.LoadFunctionPointer<long, Closure>(sat_s3ML_Entry), ds_s3MG, t);
+                                var sat_s3ML = Updatable.Make(CLR.LoadFunctionPointer<long, Closure,Closure>(sat_s3ML_Entry), ds_s3MG, t);
                                 return new Cons(h, sat_s3ML);
                             }
                         case Nil wild_s3MH_Nil: { return nil; }
@@ -463,9 +463,9 @@ public static unsafe class Code
     }
     public static Closure foldl_Entry(Closure f, Closure x0, Closure xs)
     {
-        var foldl_go = Function2.Make<Closure, Closure>(CLR.LoadFunctionPointer(foldl_go_Entry), f, null);
+        var foldl_go = new Fun<Closure,Closure>(2, CLR.LoadFunctionPointer(foldl_go_Entry), f, null);
         foldl_go.x1 = foldl_go;
-        return StgApply.Apply(foldl_go, x0, xs);
+        return StgApply.Apply<Closure,Closure,Closure>(foldl_go, x0, xs);
     }
     public static Closure foldl_go_Entry(Closure f, Closure foldl_go, Closure x0, Closure ds_s3aN)
     {
@@ -480,13 +480,13 @@ public static unsafe class Code
                     var x = wild_s3aO_Cons.x0;
                     var xs = wild_s3aO_Cons.x1;
                     var sat_s3aR = Updatable.Make(CLR.LoadFunctionPointer(sat_s3aR_Entry), f, x0, x);
-                    return StgApply.Apply(foldl_go, sat_s3aR, xs);
+                    return StgApply.Apply<Closure,Closure,Closure>(foldl_go, sat_s3aR, xs);
                 }
         }
     }
     public static Closure sat_s3aR_Entry(Closure f, Closure x0, Closure x)
     {
-        return StgApply.Apply(f, x0, x);
+        return StgApply.Apply<Closure,Closure,Closure>(f, x0, x);
     }
     public static Closure map_Entry(Closure f, Closure ds_s3aB)
     {
@@ -508,7 +508,7 @@ public static unsafe class Code
     }
     public static Closure sat_s3aF_Entry(Closure f, Closure h)
     {
-        return StgApply.Apply(f, h);
+        return StgApply.Apply<Closure,Closure>(f, h);
     }
 
     public static Closure sumFromTo_Entry(Closure from, Closure to)
@@ -519,7 +519,10 @@ public static unsafe class Code
         var xc_ = to.Eval();
         var xc__I = xc_ as I;
         var yc_ = xc__I.x0;
-        var ad_ = wgos49U_Entry(wc_, yc_, 0);
+        var wgo = new Fun(3, CLR.LoadFunctionPointer<long,long,long,long>(wgos49U_Entry));
+        var part1 = StgApply.Apply<long,Closure>(wgo, wc_);
+        var part2 = StgApply.Apply<long,Closure>(part1, yc_);
+        var ad_ = StgApply.Apply<long,long>(part2, 0);
         return new I(ad_);
     }
     public static long wgos49U_Entry(long ww_s49V, long ww_s49W, long ww_s49X)

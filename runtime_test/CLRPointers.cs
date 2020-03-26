@@ -19,17 +19,17 @@ namespace System.Runtime.CompilerServices
 public static class CLR
 {
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T1>(Func<T1, Closure> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1>(Func<T1> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T1, T2>(Func<T1, T2, Closure> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2>(Func<T1, T2> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3>(Func<T1, T2, T3, Closure> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3>(Func<T1, T2, T3> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4>(Func<T1, T2, T3, T4, Closure> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4>(Func<T1, T2, T3, T4> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, Closure> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, Closure> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6> fun);
     [CompilerIntrinsic]
     public static unsafe extern void* LoadFunctionPointer(Func<Closure> fun);
     [CompilerIntrinsic]
