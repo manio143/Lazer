@@ -39,6 +39,7 @@ namespace Lazer.Runtime
         SingleEntry = 0,
         Data = 1,
         Function = 2,
+        PartialApplication = 4,
     }
 
     /**
@@ -64,44 +65,9 @@ namespace Lazer.Runtime
             when the function is not statically known.
          */
         public abstract int Arity { get; }
-
-        public virtual Closure Apply(Closure a0)
-            => throw new NotImplementedException();
-        public virtual Closure Apply(Closure a0, Closure a1)
-            => throw new NotImplementedException();
-        public virtual Closure Apply(Closure a0, Closure a1, Closure a2)
-            => throw new NotImplementedException();
-
-        /**
-            Whenever returning a data object from a Function.Apply you need to
-            tail call into Eval of the data object.
-            i.e. return new Box<int>(1).Eval(ctx);
-         */
-    }
-
-    /**
-        A continuation object is used during evaluation in order to do something after a Closure is evaluted.
-        The main two uses are Case expressions and Updates.
-     */
-    public abstract class Continuation
-    {
-        /**
-            This method is called with an evaluated Closure (in WHNF).
-            Before returning it has to peform a `ctx.Pop()` to remove itself
-            from the continuation stack.
-         */
-        public abstract Closure Call(Closure c);
-
-        /** The next continuation in the stack. */
-        protected internal Continuation next;
-        /**
-            After executing this continuation continue with argument.
-            `next` is later loaded by StgContext.Pop().
-         */
-        public Continuation With(Continuation cont)
-        {
-            next = cont;
-            return this;
-        }
+        
+        public abstract R Apply<A0, R>(A0 a0);
+        public abstract R Apply<A0, A1, R>(A0 a0, A1 a1);
+        public abstract R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2);
     }
 }

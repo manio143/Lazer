@@ -11,93 +11,92 @@ namespace Lazer.Runtime
      */
     public static unsafe class StgApply
     {
-        // Those AppN functions are meant to simplify ldftn below
-        private static Closure Apply1(Closure func, Closure arg1)
-            => Apply(func, arg1);
-        private static Closure Apply2(Closure func, Closure arg1, Closure arg2)
-            => Apply(func, arg1, arg2);
-        private static Closure Apply3(Closure func, Closure arg1, Closure arg2, Closure arg3)
-            => Apply(func, arg1, arg2, arg3);
-        public static Closure Apply(Closure func, Closure arg1)
+        public static R Apply<A0, R>(Closure func, A0 a0)
         {
             switch (func.Type)
             {
                 case ClosureType.Function:
-                    return ApplyFun(func as Function, arg1);
+                    return ApplyFun<A0, R>(func as Function, a0);
+                case ClosureType.PartialApplication:
+                    return (func as PAP).Apply<A0, R>(a0);
                 case ClosureType.Data:
                     throw new Exception($"Cannot apply a value ({func.GetType()})");
                 default:
                     func = func.Eval();
-                    return Apply(func, arg1);
+                    return Apply<A0, R>(func, a0);
             }
         }
-        public static Closure Apply(Closure func, Closure arg1, Closure arg2)
+        public static R Apply<A0, A1, R>(Closure func, A0 a0, A1 a1)
         {
             switch (func.Type)
             {
                 case ClosureType.Function:
-                    return ApplyFun(func as Function, arg1, arg2);
+                    return ApplyFun<A0, A1, R>(func as Function, a0, a1);
+                case ClosureType.PartialApplication:
+                    return (func as PAP).Apply<A0, A1, R>(a0, a1);
                 case ClosureType.Data:
                     throw new Exception($"Cannot apply a value ({func.GetType()})");
                 default:
                     func = func.Eval();
-                    return Apply(func, arg1, arg2);
+                    return Apply<A0, A1, R>(func, a0, a1);
             }
         }
 
-        public static Closure Apply(Closure func, Closure arg1, Closure arg2, Closure arg3)
+        public static R Apply<A0, A1, A2, R>(Closure func, A0 a0, A1 a1, A2 a2)
         {
             switch (func.Type)
             {
                 case ClosureType.Function:
-                    return ApplyFun(func as Function, arg1, arg2, arg3);
+                    return ApplyFun<A0, A1, A2, R>(func as Function, a0, a1, a2);
+                case ClosureType.PartialApplication:
+                    throw new NotSupportedException("Cannot apply more than 3 parameters to a function");
                 case ClosureType.Data:
                     throw new Exception($"Cannot apply a value ({func.GetType()})");
                 default:
                     func = func.Eval();
-                    return Apply(func, arg1, arg2, arg3);
+                    return Apply<A0, A1, A2, R>(func, a0, a1, a2);
             }
         }
 
-        private static Closure ApplyFun(Function f, Closure arg1)
+        private static R ApplyFun<A0, R>(Function f, A0 a0)
         {
             switch (f.Arity)
             {
                 case 1:
-                    return f.Apply(arg1);
+                    return f.Apply<A0, R>(a0);
                 default:
-                    return new PAP1(f, arg1).Eval();
+                    return (R)(object)new PAP<A0>(f, a0);
             }
         }
-        private static Closure ApplyFun(Function f, Closure arg1, Closure arg2)
+        private static R ApplyFun<A0, A1, R>(Function f, A0 a0, A1 a1)
         {
             switch (f.Arity)
             {
                 case 1:
-                    var h = f.Apply(arg1);
-                    return Apply(h, arg2);
+                    var h = f.Apply<A0, Closure>(a0);
+                    return Apply<A1, R>(h, a1);
                 case 2:
-                    return f.Apply(arg1, arg2);
+                    return f.Apply<A0, A1, R>(a0, a1);
                 default:
-                    return new PAP2(f, arg1, arg2).Eval();
+                    return (R)(object)new PAP<A0, A1>(f, a0, a1);
             }
         }
-        private static Closure ApplyFun(Function f, Closure arg1, Closure arg2, Closure arg3)
+        private static R ApplyFun<A0, A1, A2, R>(Function f, A0 a0, A1 a1, A2 a2)
         {
             switch (f.Arity)
             {
                 case 1:
                     {
-                        var h = f.Apply(arg1);
-                        return Apply(h, arg2, arg3);
+                        var h = f.Apply<A0, Closure>(a0);
+                        return Apply<A1, A2, R>(h, a1, a2);
                     }
                 case 2:
                     {
-                        var h = f.Apply(arg1, arg2);
-                        return Apply(h, arg3);
+                        var h = f.Apply<A0, A1, Closure>(a0, a1);
+                        return Apply<A2, R>(h, a2);
                     }
                 case 3:
-                    return f.Apply(arg1, arg2, arg3);
+                    return f.Apply<A0, A1, A2, R>(a0, a1, a2);
                 default:
                     throw new NotSupportedException();
             }

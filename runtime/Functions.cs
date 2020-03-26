@@ -5,114 +5,70 @@ namespace Lazer.Runtime
         and closure parameters.
      */
 
-    public unsafe class Function1 : Function
+    public unsafe class Fun : Function
     {
         protected internal void* f;
-        public override int Arity => 1;
-        public Function1(void* f)
+        public override int Arity => arity;
+        protected internal int arity;
+        public Fun(int arity, void* f)
         {
+            this.arity = arity;
             this.f = f;
         }
-        public override Closure Apply(Closure a0)
+        public override R Apply<A0, R>(A0 a0)
         {
-            return CLR.TailCallIndirectGeneric<Closure, Closure>(a0, f);
+            return CLR.TailCallIndirectGeneric<A0, R>(a0, f);
         }
-        public static Function Make(void* f) => new Function1(f);
-        public static Function1<T0> Make<T0>(void* f, T0 x0) => new Function1<T0>(f, x0);
-        public static Function1<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new Function1<T0, T1>(f, x0, x1);
+        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+        {
+            return CLR.TailCallIndirectGeneric<A0, A1, R>(a0, a1, f);
+        }
+        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+        {
+            return CLR.TailCallIndirectGeneric<A0, A1, A2, R>(a0, a1, a2, f);
+        }
     }
-    public unsafe class Function1<T0> : Function
+
+    public unsafe class Fun<F0> : Fun
     {
-        protected internal void* f;
-        public T0 x0;
-        public override int Arity => 1;
-        public Function1(void* f, T0 x0)
+        public F0 x0;
+        public Fun(int arity, void* f, F0 x0) : base(arity, f)
         {
-            this.f = f;
             this.x0 = x0;
         }
-        public override Closure Apply(Closure a0)
+        public override R Apply<A0, R>(A0 a0)
         {
-            return CLR.TailCallIndirectGeneric<T0, Closure, Closure>(x0, a0, f);
+            return CLR.TailCallIndirectGeneric<F0, A0, R>(x0, a0, f);
+        }
+        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+        {
+            return CLR.TailCallIndirectGeneric<F0, A0, A1, R>(x0, a0, a1, f);
+        }
+        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+        {
+            return CLR.TailCallIndirectGeneric<F0, A0, A1, A2, R>(x0, a0, a1, a2, f);
         }
     }
-    public unsafe class Function1<T0, T1> : Function
+    public unsafe class Fun<F0, F1> : Fun
     {
-        protected internal void* f;
-        public T0 x0;
-        public T1 x1;
-        public override int Arity => 1;
-        public Function1(void* f, T0 x0, T1 x1)
+        public F0 x0;
+        public F1 x1;
+        public Fun(int arity, void* f, F0 x0, F1 x1) : base(arity, f)
         {
-            this.f = f;
-            this.x0 = x0;
-            this.x1 = x1;
-        }
-        public override Closure Apply(Closure a0)
-        {
-            return CLR.TailCallIndirectGeneric<T0, T1, Closure, Closure>(x0, x1, a0, f);
-        }
-    }
-    public unsafe class Function2 : Function
-    {
-        protected internal void* f;
-        public override int Arity => 2;
-        public Function2(void* f)
-        {
-            this.f = f;
-        }
-        public override Closure Apply(Closure a0, Closure a1)
-        {
-            return CLR.TailCallIndirectGeneric<Closure, Closure, Closure>(a0, a1, f);
-        }
-        public static Function2 Make(void* f) => new Function2(f);
-        public static Function2<T0> Make<T0>(void* f, T0 x0) => new Function2<T0>(f, x0);
-        public static Function2<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new Function2<T0, T1>(f, x0, x1);
-    }
-    public unsafe class Function2<T0> : Function
-    {
-        protected internal void* f;
-        public T0 x0;
-        public override int Arity => 2;
-        public Function2(void* f, T0 x0)
-        {
-            this.f = f;
-            this.x0 = x0;
-        }
-        public override Closure Apply(Closure a0, Closure a1)
-        {
-            return CLR.TailCallIndirectGeneric<T0, Closure, Closure, Closure>(x0, a0, a1, f);
-        }
-    }
-    public unsafe class Function2<T0, T1> : Function
-    {
-        protected internal void* f;
-        public T0 x0;
-        public T1 x1;
-        public override int Arity => 2;
-        public Function2(void* f, T0 x0, T1 x1)
-        {
-            this.f = f;
             this.x0 = x0;
             this.x1 = x1;
         }
-        public override Closure Apply(Closure a0, Closure a1)
+        public override R Apply<A0, R>(A0 a0)
         {
-            return CLR.TailCallIndirectGeneric<T0, T1, Closure, Closure, Closure>(x0, x1, a0, a1, f);
+            return CLR.TailCallIndirectGeneric<F0, F1, A0, R>(x0, x1, a0, f);
         }
-    }
-    public unsafe class Function3 : Function
-    {
-        protected internal void* f;
-        public override int Arity => 3;
-        public Function3(void* f)
+        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
         {
-            this.f = f;
+            return CLR.TailCallIndirectGeneric<F0, F1, A0, A1, R>(x0, x1, a0, a1, f);
         }
-        public override Closure Apply(Closure a0, Closure a1, Closure a2)
+        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
         {
-            return CLR.TailCallIndirectGeneric<Closure, Closure, Closure, Closure>(a0, a1, a2, f);
+            return CLR.TailCallIndirectGeneric<F0, F1, A0, A1, A2, R>(x0, x1, a0, a1, a2, f);
         }
-        public static Function3 Make(void* f) => new Function3(f);
     }
 }
