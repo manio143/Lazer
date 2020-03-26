@@ -19,15 +19,17 @@ namespace System.Runtime.CompilerServices
 public static class CLR
 {
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T0, U>(Func<T0, U> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1>(Func<StgContext, T1, Closure> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T0, T1, U>(Func<T0, T1, U> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2>(Func<StgContext, T1, T2, Closure> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T0, T1, T2, U>(Func<T0, T1, T2, U> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3>(Func<StgContext, T1, T2, T3, Closure> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T0, T1, T2, T3, U>(Func<T0, T1, T2, T3, U> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4>(Func<StgContext, T1, T2, T3, T4, Closure> fun);
     [CompilerIntrinsic]
-    public static unsafe extern void* LoadFunctionPointer<T0, T1, T2, T3, T4, U>(Func<T0, T1, T2, T3, T4, U> fun);
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4, T5>(Func<StgContext, T1, T2, T3, T4, T5, Closure> fun);
+    [CompilerIntrinsic]
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4, T5, T6>(Func<StgContext, T1, T2, T3, T4, T5, T6, Closure> fun);
     [CompilerIntrinsic]
     public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure> fun);
     [CompilerIntrinsic]
@@ -38,4 +40,8 @@ public static class CLR
     public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure, Closure, Closure, Closure> fun);
     [CompilerIntrinsic]
     public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure, Closure, Closure, Closure, Closure> fun);
+    [CompilerIntrinsic]
+    public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure, Closure, Closure, Closure, Closure, Closure> fun);
+    [CompilerIntrinsic]
+    public static unsafe extern void* LoadFunctionPointer(Func<StgContext, Closure, Closure, Closure, Closure, Closure, Closure, Closure> fun);
 }
