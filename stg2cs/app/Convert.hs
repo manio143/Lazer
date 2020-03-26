@@ -3,6 +3,7 @@ module Convert (stg2cs) where
 
 import Data.Char
 import Data.List
+import Data.List.Utils (replace)
 import Control.Monad.Trans
 import Control.Monad.State
 import Control.Monad.Reader
@@ -166,13 +167,16 @@ type CSST a = State CSState a
 -}
 
 stg2cs :: DynFlags -> [StgTopBinding] -> String
-stg2cs df stg = evalState (go >> prettyPrint) $ initState df
+stg2cs df stg = cleanup $ evalState (go >> prettyPrint) $ initState df
     where
         go = do
             -- TODO rename top level non-global (isGlobalId) bindings to prevent name clash
             mapM_ gatherGlobals stg
             mapM_ processTop stg
             modify (\s -> s { code = map (\(Method n t a e) -> Method n t a (simplify e)) (code s) })
+        cleanup = replace "'" "_" . replace "$" "" . replace "::" "Cons:" .
+                  replace "[]" "Nil" . replace "case :" "case Cons" . replace "#" "" .
+                  replace "new :" "new Cons" . replace "static :" "static Cons"
 
 prettyPrint = do
     st <- get
@@ -420,6 +424,7 @@ simplify (CSECase id alts) = CSECase id (map simplifyAlt alts)
         simplifyAlt (CSALit l e) = CSALit l (simplify e)
         simplifyAlt (CSACon n1 n2 e) = CSACon n1 n2 (simplify e)
 simplify (CSEEval id e) = CSEEval id (simplify e)
+simplify (CSELet id (CSEApp m args) (CSEEval id' e)) | id == id' = CSELet id (CSEApp m args) (simplify e)
 simplify (CSELet id (CSECall m args) (CSEEval id' e)) | id == id' = CSELet id (CSECall m args) (simplify e)
 simplify (CSELet id e1 ec) = CSELet id e1 (simplify ec) -- e1 is a simple expr
 simplify (CSEAssign id idx id' e) = CSEAssign id idx id' (simplify e)
@@ -648,17 +653,14 @@ showWithFlags x = do
     return $ showPpr df x
 
 litType (MachChar _) = Char
-litType (LitNumber LitNumInt64 _ _) = Int64
-litType (LitNumber LitNumWord64 _ _) = Int64
-litType (LitNumber LitNumWord i _) = Int64
-litType (LitNumber _ _ _) = Int32
+litType (LitNumber _ _ _) = Int64
 litType (MachStr bs) = String
 litType (MachFloat r) = Float
 litType (MachDouble r) = Double
 litType _ = error "unsupported literal"
 
 valueType (CSCon name _ ) = Class name []
-valueType (CSRef _) = Closure
+valueType (CSRef i) = typeToCSType (idType i)
 valueType (CSLit l) = litType l
 
 funRetType id args = funRetType' (length args) (idType id)
@@ -677,7 +679,7 @@ unliftedTypeToCSType t =
                 TyConApp tc tyArgs -> 
                     let name = tyConName tc in
                     case nameToStr name of
-                        "Int#" -> Int32
+                        "Int#" -> Int64
                         "Char#" -> Char
                         "Double#" -> Double
                         "Int64#" -> Int64
@@ -774,13 +776,18 @@ pprArgs (a:as) = hsep [ppr a, text ",", pprArgs as]
 pprMultiline [a] = ppr a
 pprMultiline (a:as) = ppr a $$ pprMultiline as
 
+appGenArgs id args =
+    let ret = funRetType id args in
+    let types = map valueType args in
+    hsep [text "<", pprArgs types, text ",", ppr ret, text ">"]
+
 instance Outputable CSExpr where
     ppr (CSELit l) = hsep [text "return", pprLit l, text ";"]
     ppr (CSEVar id) = hsep [text "return", pprWithUnique id, text ";"]
     ppr (CSECon name args) =
         hsep [text $ "return new "++name++"(", pprArgs args, text ");"]
     ppr (CSEApp id args) = 
-        hsep [text "return StgApply.Apply(", pprWithUnique id, text ",", pprArgs args, text ");"]
+        hsep [hcat [text "return StgApply.Apply", appGenArgs id args, text "("], pprWithUnique id, text ",", pprArgs args, text ");"]
     ppr (CSECall name []) = 
         hsep [text $ "return "++name++"();"]
     ppr (CSECall name args) = 
@@ -815,7 +822,7 @@ instance Outputable CSExpr where
         ]
     ppr (CSELet id (CSEApp id' args) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text "= StgApply.Make(", pprWithUnique id', text ",", pprArgs args, text ");"],
+            hsep [text "var", pprWithUnique id, text "=", hcat [text "StgApply.Apply", appGenArgs id' args, text "("], pprWithUnique id', text ",", pprArgs args, text ");"],
             ppr ex
         ]
     ppr (CSELet id (CSECall name args) ex) =
@@ -830,7 +837,7 @@ instance Outputable CSExpr where
         ]
     ppr (CSELet id (CSECreateFun name arity args) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text $ "= Function"++(show arity)++".Make(CLR.LoadFunctionPointer("++name++")"++
+            hsep [text "var", pprWithUnique id, text $ "= new Fun("++(show arity)++", CLR.LoadFunctionPointer("++name++")"++
                                                 (case args of [] -> ""; _ -> ","), pprArgs args, text ");"],
             ppr ex
         ]
