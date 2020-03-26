@@ -21,9 +21,9 @@ namespace Lazer.Runtime
         {
             this.f = f;
         }
-        public override Closure Eval(StgContext ctx)
+        public override Closure Eval()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, Closure>(ctx, f);
+            return CLR.TailCallIndirectGeneric<Closure>(f);
         }
     }
     public unsafe class SingleEntry1<T0> : Closure
@@ -35,9 +35,9 @@ namespace Lazer.Runtime
             this.f = f;
             this.x0 = x0;
         }
-        public override Closure Eval(StgContext ctx)
+        public override Closure Eval()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, Closure>(ctx, x0, f);
+            return CLR.TailCallIndirectGeneric<T0, Closure>(x0, f);
         }
     }
     public unsafe class SingleEntry2<T0, T1> : Closure
@@ -51,9 +51,9 @@ namespace Lazer.Runtime
             this.x0 = x0;
             this.x1 = x1;
         }
-        public override Closure Eval(StgContext ctx)
+        public override Closure Eval()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, T1, Closure>(ctx, x0, x1, f);
+            return CLR.TailCallIndirectGeneric<T0, T1, Closure>(x0, x1, f);
         }
     }
     public unsafe class SingleEntry3<T0, T1, T2> : Closure
@@ -69,9 +69,9 @@ namespace Lazer.Runtime
             this.x1 = x1;
             this.x2 = x2;
         }
-        public override Closure Eval(StgContext ctx)
+        public override Closure Eval()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, T1, T2, Closure>(ctx, x0, x1, x2, f);
+            return CLR.TailCallIndirectGeneric<T0, T1, T2, Closure>(x0, x1, x2, f);
         }
     }
     public unsafe class SingleEntry4<T0, T1, T2, T3> : Closure
@@ -89,9 +89,9 @@ namespace Lazer.Runtime
             this.x2 = x2;
             this.x3 = x3;
         }
-        public override Closure Eval(StgContext ctx)
+        public override Closure Eval()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, T1, T2, T3, Closure>(ctx, x0, x1, x2, x3, f);
+            return CLR.TailCallIndirectGeneric<T0, T1, T2, T3, Closure>(x0, x1, x2, x3, f);
         }
     }
 }

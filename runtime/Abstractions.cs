@@ -13,9 +13,8 @@ namespace Lazer.Runtime
             Eval function called on a value (data/function) will just
             return the object itself.
             Eval function on a Thunk or App will actually perform a computation.
-            Eval **must** return into ctx.Cont.
          */
-        public abstract Closure Eval(StgContext ctx);
+        public abstract Closure Eval();
 
         /**
             A more performant way of checking closure type
@@ -47,7 +46,7 @@ namespace Lazer.Runtime
      */
     public abstract class Data : Closure
     {
-        public override Closure Eval(StgContext ctx) => ctx.Return(this);
+        public override Closure Eval() => this;
         public override ClosureType Type => ClosureType.Data;
         public override int Tag => 0;
     }
@@ -57,7 +56,7 @@ namespace Lazer.Runtime
      */
     public abstract class Function : Closure
     {
-        public override Closure Eval(StgContext ctx) => ctx.Return(this);
+        public override Closure Eval() => this;
         public override ClosureType Type => ClosureType.Function;
 
         /**
@@ -66,11 +65,11 @@ namespace Lazer.Runtime
          */
         public abstract int Arity { get; }
 
-        public virtual Closure Apply(StgContext ctx, Closure a0)
+        public virtual Closure Apply(Closure a0)
             => throw new NotImplementedException();
-        public virtual Closure Apply(StgContext ctx, Closure a0, Closure a1)
+        public virtual Closure Apply(Closure a0, Closure a1)
             => throw new NotImplementedException();
-        public virtual Closure Apply(StgContext ctx, Closure a0, Closure a1, Closure a2)
+        public virtual Closure Apply(Closure a0, Closure a1, Closure a2)
             => throw new NotImplementedException();
 
         /**
@@ -91,7 +90,7 @@ namespace Lazer.Runtime
             Before returning it has to peform a `ctx.Pop()` to remove itself
             from the continuation stack.
          */
-        public abstract Closure Call(StgContext ctx, Closure c);
+        public abstract Closure Call(Closure c);
 
         /** The next continuation in the stack. */
         protected internal Continuation next;

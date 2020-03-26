@@ -7,8 +7,6 @@ namespace Lazer.Runtime.Test
 {
     public class Tester
     {
-        private StgContext context = new StgContext();
-
         private Closure InfList = new App2u(Module.take, new I(100_000), Module.inf);
         private Closure InfList2 = new App2u(Module.takeOnStack, new I(100_000), Module.inf);
         private Closure MakeList = new App2u(Module.makeList, new I(1), new I(100_000));
@@ -63,7 +61,7 @@ namespace Lazer.Runtime.Test
         public (double, Closure) RunTest(Func<Closure> testCase)
         {
             var sw = Stopwatch.StartNew();
-            var res = testCase().Eval(context);
+            var res = testCase().Eval();
             sw.Stop();
             return (sw.Elapsed.TotalMilliseconds, res);
         }
@@ -122,7 +120,7 @@ namespace Lazer.Runtime.Test
             ExecTest("Fold(+,0, Take(100000,Inf))", FoldTakeInf);
             ExecTest("Fold(+,0, MakeList(1,100000))", FoldMakeList);
             ExecTest("SumA(Take(4000,Pi), 0)", PiSum);
-            Console.WriteLine(new App2n(Module.take, new I(15), Module.pi_).Eval(context));
+            Console.WriteLine(new App2n(Module.take, new I(15), Module.pi_).Eval());
         }
     }
 }

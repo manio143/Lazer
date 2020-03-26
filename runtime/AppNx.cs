@@ -18,9 +18,9 @@ namespace Lazer.Runtime
             this.f = f;
             this.arg1 = arg1;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return StgApply.Apply(ctx, f, arg1);
+            return StgApply.Apply(f, arg1);
         }
         protected internal override void Cleanup()
         {
@@ -40,9 +40,9 @@ namespace Lazer.Runtime
             this.arg1 = arg1;
             this.arg2 = arg2;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return StgApply.Apply(ctx, f, arg1, arg2);
+            return StgApply.Apply(f, arg1, arg2);
         }
         protected internal override void Cleanup()
         {
@@ -65,9 +65,9 @@ namespace Lazer.Runtime
             this.arg2 = arg2;
             this.arg3 = arg3;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return StgApply.Apply(ctx, f, arg1, arg2, arg3);
+            return StgApply.Apply(f, arg1, arg2, arg3);
         }
         protected internal override void Cleanup()
         {
@@ -86,9 +86,9 @@ namespace Lazer.Runtime
             this.f = f;
             this.arg1 = arg1;
         }
-        public override Closure Eval(StgContext ctx)
+        public override Closure Eval()
         {
-            return StgApply.Apply(ctx, f, arg1);
+            return StgApply.Apply(f, arg1);
         }
     }
     public sealed class App2n : Closure
@@ -102,9 +102,9 @@ namespace Lazer.Runtime
             this.arg1 = arg1;
             this.arg2 = arg2;
         }
-        public override Closure Eval(StgContext ctx)
+        public override Closure Eval()
         {
-            return StgApply.Apply(ctx, f, arg1, arg2);
+            return StgApply.Apply(f, arg1, arg2);
         }
     }
     public sealed class App3n : Closure
@@ -120,9 +120,9 @@ namespace Lazer.Runtime
             this.arg2 = arg2;
             this.arg3 = arg3;
         }
-        public override Closure Eval(StgContext ctx)
+        public override Closure Eval()
         {
-            return StgApply.Apply(ctx, f, arg1, arg2, arg3);
+            return StgApply.Apply(f, arg1, arg2, arg3);
         }
     }
 }

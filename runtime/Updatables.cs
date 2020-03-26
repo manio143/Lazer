@@ -23,9 +23,9 @@ namespace Lazer.Runtime
         {
             this.f = f;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, Closure>(ctx, f);
+            return CLR.TailCallIndirectGeneric<Closure>(f);
         }
     }
     public unsafe class Updatable1<T0> : Thunk
@@ -37,9 +37,9 @@ namespace Lazer.Runtime
             this.f = f;
             this.x0 = x0;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, Closure>(ctx, x0, f);
+            return CLR.TailCallIndirectGeneric<T0, Closure>(x0, f);
         }
         protected internal override void Cleanup()
         {
@@ -57,9 +57,9 @@ namespace Lazer.Runtime
             this.x0 = x0;
             this.x1 = x1;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, T1, Closure>(ctx, x0, x1, f);
+            return CLR.TailCallIndirectGeneric<T0, T1, Closure>(x0, x1, f);
         }
         protected internal override void Cleanup()
         {
@@ -80,9 +80,9 @@ namespace Lazer.Runtime
             this.x1 = x1;
             this.x2 = x2;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, T1, T2, Closure>(ctx, x0, x1, x2, f);
+            return CLR.TailCallIndirectGeneric<T0, T1, T2, Closure>(x0, x1, x2, f);
         }
         protected internal override void Cleanup()
         {
@@ -106,9 +106,9 @@ namespace Lazer.Runtime
             this.x2 = x2;
             this.x3 = x3;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, T1, T2, T3, Closure>(ctx, x0, x1, x2, x3, f);
+            return CLR.TailCallIndirectGeneric<T0, T1, T2, T3, Closure>(x0, x1, x2, x3, f);
         }
         protected internal override void Cleanup()
         {
@@ -135,9 +135,9 @@ namespace Lazer.Runtime
             this.x3 = x3;
             this.x4 = x4;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, T1, T2, T3, T4, Closure>(ctx, x0, x1, x2, x3, x4, f);
+            return CLR.TailCallIndirectGeneric<T0, T1, T2, T3, T4, Closure>(x0, x1, x2, x3, x4, f);
         }
         protected internal override void Cleanup()
         {
@@ -167,9 +167,9 @@ namespace Lazer.Runtime
             this.x4 = x4;
             this.x5 = x5;
         }
-        protected override Closure Compute(StgContext ctx)
+        protected override Closure Compute()
         {
-            return CLR.TailCallIndirectGeneric<StgContext, T0, T1, T2, T3, T4, T5, Closure>(ctx, x0, x1, x2, x3, x4, x5, f);
+            return CLR.TailCallIndirectGeneric<T0, T1, T2, T3, T4, T5, Closure>(x0, x1, x2, x3, x4, x5, f);
         }
         protected internal override void Cleanup()
         {
