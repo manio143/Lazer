@@ -75,7 +75,6 @@ data CSExpr =
     | CSECall Name [CSValue]    -- continue with another method
                                -- or call a foreign/system function
     | CSEEval Id CSExpr -- evaluate <Id> on the stack and continue with <CSExpr>
-    | CSEEvalThen Id Name [Id] -- evaluate <Id> then proceed to method <Name> with live parameters <[Id]>
     | CSELet Id CSExpr CSExpr  -- non-rec assign <Id> := <CSExpr> and continue to evaluate <CSExpr₂>
     | CSECase Id [CSAlt]  -- unpack an evaluated value
     -- | CSELetRec [(Id,CSExpr,[Id])] CSExpr !! Deprecated by CSEAssign
@@ -237,8 +236,8 @@ convertExpr _ (StgApp fid args) = do
         return (CSEVar fid, [])
     else do
         let as = map convertArg args
-        callableVars <- callables <$> get
-        case lookup (varName fid) callableVars of
+        m_method <- isCallable fid
+        case m_method of
             Just methodName -> return (CSECall methodName as, [])
                 -- TODO only convert to a call if saturated
             Nothing -> return (CSEApp fid as, [])
@@ -265,32 +264,11 @@ convertExpr id (StgCase e alias _ alts) = do
     (caseExpr, _) <- convertExpr id e -- asumes simple expr
     let vt = idType alias
     case isUnliftedType vt of
-        True -> do -- unlifted expressions are scrutinized on stack
-                   -- rather than on the trampoline
-            case caseExpr of 
-                CSEApp id' args' -> do
-                    n <- toName id'
-                    let n' = n++"_Entry"
-                    return (CSELet alias (CSECall n' args') (CSECase alias csalts), ms)
-                _ ->
-                    return (CSELet alias caseExpr (CSECase alias csalts), ms)
+        True -> do
+            return (CSELet alias caseExpr (CSECase alias csalts), ms)
         False -> do
-            isLifted <- liftedContext
-            case isLifted of
-                True -> do -- the function returns a lifted type (Closure)
-                           -- we create a continuation for switch-expression
-                           -- and bounce on the trampoline to evaluate
-                           -- the scrutinee
-                    let caseMethodName = name ++ "_Case_" ++ aliasName
-                    let caseMethod = Method caseMethodName Closure (alias : free) (CSECase alias csalts)
-                    let evalExpr = CSEEvalThen alias caseMethodName free
-                    return (CSELet alias caseExpr evalExpr, caseMethod : ms)
-                False -> do -- the function returns an unlifted value
-                            -- so we cannot use the trampoline
-                            -- instead we create a new trampoline on the stack
-                            -- with StgEval.Eval(ctx, closure)
-                    let evalExpr = CSEEval alias (CSECase alias csalts)
-                    return (CSELet alias caseExpr evalExpr, ms)
+            let evalExpr = CSEEval alias (CSECase alias csalts)
+            return (CSELet alias caseExpr evalExpr, ms)
 convertExpr id' (StgLet (StgNonRec id (StgRhsCon _ dataCon args)) e) = do
     let as = map convertArg args
     name <- getConName dataCon
@@ -433,7 +411,6 @@ convertAlt alias id (DataAlt con, bndrs, e) = do
 ######################################
 -}
 
--- TODO simplify let x = CSEApp in EvalThen x cont => Push cont; CSEApp 
 simplify (CSECase id [CSADefault e]) = simplify e
 simplify (CSECase id [CSADefault CSEImpossible, CSACon conName varName e]) =
     CSECastAs varName id conName (simplify e)
@@ -443,6 +420,7 @@ simplify (CSECase id alts) = CSECase id (map simplifyAlt alts)
         simplifyAlt (CSALit l e) = CSALit l (simplify e)
         simplifyAlt (CSACon n1 n2 e) = CSACon n1 n2 (simplify e)
 simplify (CSEEval id e) = CSEEval id (simplify e)
+simplify (CSELet id (CSECall m args) (CSEEval id' e)) | id == id' = CSELet id (CSECall m args) (simplify e)
 simplify (CSELet id e1 ec) = CSELet id e1 (simplify ec) -- e1 is a simple expr
 simplify (CSEAssign id idx id' e) = CSEAssign id idx id' (simplify e)
 simplify e = e 
@@ -621,6 +599,20 @@ addGlobal id = modify (\s -> s { globals = varName id : globals s})
 addCallable id name = modify (\s -> s { callables = (varName id,name) : callables s})
 popCallable = modify (\s -> s { callables = tail $ callables s})
 
+isCallable id = do
+    callableVars <- callables <$> get
+    case lookup (varName id) callableVars of
+        Nothing -> do
+            n <- toName id
+            if n `elem` hackGlobalList then
+                return $ Just $ n ++ "_Entry"
+            else return Nothing
+        just -> return just
+
+-- Prelude functions
+-- will be removed once I can get module imports information
+hackGlobalList = ["timesInteger","plusInteger","minusInteger","eqInteger#","divInteger"]
+
 getConName :: DataCon -> CSST Name
 getConName dataCon = showWithFlags $ dataConName dataCon
 
@@ -764,8 +756,7 @@ pprLit (MachLabel l _ _) = error $ "Can't emit label: "++show l
 instance Outputable CSMethod where
     ppr (Method name typ args ex) =
         hsep [hang 
-                (hsep [text "public static", ppr typ, text $ name ++ "(StgContext ctx" ++
-                                                        (case args of [] -> ""; _ -> ","), pprArguments args, text ") {"])
+                (hsep [text "public static", ppr typ, text $ name ++ "(", pprArguments args, text ") {"])
                 4
                 (sep [ppr ex, text "}"])]
 
@@ -785,29 +776,20 @@ pprMultiline (a:as) = ppr a $$ pprMultiline as
 
 instance Outputable CSExpr where
     ppr (CSELit l) = hsep [text "return", pprLit l, text ";"]
-    ppr (CSEVar id)
-        | (typeToCSType $ idType id) == Closure
-            = hsep [text "return", hcat [pprWithUnique id, text ".Eval(ctx)"], text ";"]
-        | otherwise
-            = hsep [text "return", pprWithUnique id, text ";"]
+    ppr (CSEVar id) = hsep [text "return", pprWithUnique id, text ";"]
     ppr (CSECon name args) =
-        hsep [text $ "return new "++name++"(", pprArgs args, text ").Eval(ctx);"]
-        --TODO don't Eval unlifted constructors
+        hsep [text $ "return new "++name++"(", pprArgs args, text ");"]
     ppr (CSEApp id args) = 
-        hsep [text "return StgApply.Apply(ctx,", pprWithUnique id, text ",", pprArgs args, text ");"]
+        hsep [text "return StgApply.Apply(", pprWithUnique id, text ",", pprArgs args, text ");"]
     ppr (CSECall name []) = 
-        hsep [text $ "return "++name++"(ctx);"]
+        hsep [text $ "return "++name++"();"]
     ppr (CSECall name args) = 
-        hsep [text $ "return "++name++"(ctx,", pprArgs args, text ");"]
+        hsep [text $ "return "++name++"(", pprArgs args, text ");"]
     ppr (CSEEval id ex) = 
         sep [
-            hsep [pprWithUnique id, text "= ctx.Eval(", pprWithUnique id, text ");"],
+            hsep [pprWithUnique id, text "=", hcat[pprWithUnique id, text ".Eval();"]],
             ppr ex
         ]
-    ppr (CSEEvalThen id name []) = --TODO add generic type application
-        hsep [text "return ctx.Eval(", pprWithUnique id, text $ ", StgCont.Make(CLR.LoadFunctionPointer("++name++")));"] 
-    ppr (CSEEvalThen id name free) =
-        hsep [text "return ctx.Eval(", pprWithUnique id, text $ ", StgCont.Make(CLR.LoadFunctionPointer("++name++"),", pprArgs (map CSRef free), text "));"] 
     ppr (CSEAssign id idx id' ex) =
         sep [
             hsep [
@@ -838,7 +820,7 @@ instance Outputable CSExpr where
         ]
     ppr (CSELet id (CSECall name args) ex) =
         sep [
-            hsep [text "var", pprWithUnique id, text $ "= "++name++"(ctx,", pprArgs args, text ");"],
+            hsep [text "var", pprWithUnique id, text $ "= "++name++"(", pprArgs args, text ");"],
             ppr ex
         ]
     ppr (CSELet id (CSEPrimOp op args) ex) =
