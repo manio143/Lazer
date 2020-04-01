@@ -9,7 +9,7 @@ namespace Lazer.Runtime
         Currently I only support functions up to three arguments.
         In my tests so far I didn't have many PAPs.
      */
-    public static unsafe class StgApply
+    public static class StgApply
     {
         public static R Apply<A0, R>(Closure func, A0 a0)
         {

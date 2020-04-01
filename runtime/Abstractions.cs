@@ -36,7 +36,6 @@ namespace Lazer.Runtime
     {
         Closure = 0,
         Thunk = 0,
-        SingleEntry = 0,
         Data = 1,
         Function = 2,
         PartialApplication = 4,

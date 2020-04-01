@@ -3,6 +3,10 @@ namespace Lazer.Runtime
     /**
         Generic function. Takes a pointer to the static computation function
         and closure parameters.
+
+        Usage:
+        given static method F(Closure) and free variable long x
+            new Fun<long>(1, CLR.LoadFunctionPointer(F), x)
      */
 
     public unsafe class Fun : Function

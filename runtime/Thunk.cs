@@ -16,10 +16,12 @@ namespace Lazer.Runtime
                 // otherwise it just returns the ind object
                 return ind.Eval();
 
-            // Having pushed the Update we setup loop detection
+            // setup loop detection
             // and evaluate the actual thunk code
             ind = Blackhole.Instance;
             ind = Compute();
+            // cleanup - release any resources so that 
+            // they can be collected by GC
             Cleanup();
             return ind;
         }

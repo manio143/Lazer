@@ -4,6 +4,9 @@ namespace Lazer.Runtime
 {
     /**
         PAP - Partial Application object
+        It's an intermediate object used to apply functions
+        to it's arguments. Uses StgApply methods to perform
+        further application.
      */
     public class PAP : Closure
     {
