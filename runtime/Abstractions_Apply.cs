@@ -10,11 +10,18 @@ namespace Lazer.Runtime
             closures - both functions and unevaluated functions
             without helper static methods
          */
-        public virtual R Apply<A0, R>(A0 a0)
+        public abstract R Apply<A0, R>(A0 a0);
+        public abstract R Apply<A0, A1, R>(A0 a0, A1 a1);
+        public abstract R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2);
+    }
+
+    public abstract partial class Computation
+    {
+        public override R Apply<A0, R>(A0 a0)
             => this.Eval().Apply<A0, R>(a0);
-        public virtual R Apply<A0, A1, R>(A0 a0, A1 a1)
+        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
             => this.Eval().Apply<A0, A1, R>(a0, a1);
-        public virtual R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
             => this.Eval().Apply<A0, A1, A2, R>(a0, a1, a2);
     }
 

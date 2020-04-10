@@ -14,7 +14,7 @@ namespace Lazer.Runtime
         public static SingleEntry4<T0, T1, T2, T3> Make<T0, T1, T2, T3>(void* f, T0 x0, T1 x1, T2 x2, T3 x3) => new SingleEntry4<T0, T1, T2, T3>(f, x0, x1, x2, x3);
     }
 
-    public unsafe class SingleEntry0 : Closure
+    public unsafe class SingleEntry0 : Computation
     {
         protected internal void* f;
         public SingleEntry0(void* f)
@@ -26,7 +26,7 @@ namespace Lazer.Runtime
             return CLR.TailCallIndirectGeneric<Closure>(f);
         }
     }
-    public unsafe class SingleEntry1<T0> : Closure
+    public unsafe class SingleEntry1<T0> : Computation
     {
         protected internal void* f;
         public T0 x0;
@@ -40,7 +40,7 @@ namespace Lazer.Runtime
             return CLR.TailCallIndirectGeneric<T0, Closure>(x0, f);
         }
     }
-    public unsafe class SingleEntry2<T0, T1> : Closure
+    public unsafe class SingleEntry2<T0, T1> : Computation
     {
         protected internal void* f;
         public T0 x0;
@@ -56,7 +56,7 @@ namespace Lazer.Runtime
             return CLR.TailCallIndirectGeneric<T0, T1, Closure>(x0, x1, f);
         }
     }
-    public unsafe class SingleEntry3<T0, T1, T2> : Closure
+    public unsafe class SingleEntry3<T0, T1, T2> : Computation
     {
         protected internal void* f;
         public T0 x0;
@@ -74,7 +74,7 @@ namespace Lazer.Runtime
             return CLR.TailCallIndirectGeneric<T0, T1, T2, Closure>(x0, x1, x2, f);
         }
     }
-    public unsafe class SingleEntry4<T0, T1, T2, T3> : Closure
+    public unsafe class SingleEntry4<T0, T1, T2, T3> : Computation
     {
         protected internal void* f;
         public T0 x0;

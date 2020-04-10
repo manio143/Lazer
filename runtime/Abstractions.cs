@@ -20,8 +20,13 @@ namespace Lazer.Runtime
             A tag for switching on alternatives when dealing with
             more than 4-5 data constructors.
          */
-        public virtual int Tag
-            => throw new NotSupportedException("Accessing Tag on a non-data closure.");
+        public abstract int Tag { get; }
+    }
+
+    public abstract partial class Computation : Closure
+    {
+        public override int Tag
+            => throw new NotSupportedException("Accessing Tag on a computation.");
     }
 
     /**
@@ -45,13 +50,16 @@ namespace Lazer.Runtime
             when the function is not statically known.
          */
         public abstract int Arity { get; }
+
+        public override int Tag
+            => throw new NotSupportedException("Accessing Tag on a function.");
     }
 
     /**
         Thunk is an updateable closure.
         Once a Thunk has been evaluated it returns the indirection value.
      */
-    public abstract class Thunk : Closure
+    public abstract class Thunk : Computation
     {
         public Closure ind;
         protected abstract Closure Compute();
@@ -79,7 +87,7 @@ namespace Lazer.Runtime
         computation. If the during thunk evaluation we need to evaluate 
         it then it's an error and there's an infinite loop in our program.
      */
-    public sealed class Blackhole : Closure
+    public sealed class Blackhole : Computation
     {
         public override Closure Eval() =>
             throw new System.Exception("BLACKHOLE");
