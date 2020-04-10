@@ -48,10 +48,47 @@ public sealed class S : Data
     public override string ToString() => x0.ToString();
 }
 
+public sealed class O0 : Data
+{
+    public int x0;
+    public O0(int x0) => this.x0 = x0;
+    public override int Tag => 0;
+}
+public sealed class O1 : Data
+{
+    public int x0;
+    public O1(int x0) => this.x0 = x0;
+    public override int Tag => 1;
+}
+public sealed class O2 : Data
+{
+    public int x0;
+    public O2(int x0) => this.x0 = x0;
+    public override int Tag => 2;
+}
+public sealed class O3 : Data
+{
+    public int x0;
+    public O3(int x0) => this.x0 = x0;
+    public override int Tag => 3;
+}
+public sealed class O4 : Data
+{
+    public int x0;
+    public O4(int x0) => this.x0 = x0;
+    public override int Tag => 4;
+}
+public sealed class OFucked : Data
+{
+    public int x0;
+    public OFucked(int x0) => this.x0 = x0;
+    public override int Tag => 5;
+}
+
 public static unsafe class Module
 {
-    public static Thunk fibs = new Updatable0(CLR.LoadFunctionPointer(Code.fibs_Entry));
-    public static Thunk inf_s3cv = new Updatable0(CLR.LoadFunctionPointer(Code.inf_s3cv_Entry));
+    public static Thunk fibs = new Updatable(CLR.LoadFunctionPointer(Code.fibs_Entry));
+    public static Thunk inf_s3cv = new Updatable(CLR.LoadFunctionPointer(Code.inf_s3cv_Entry));
     public static I inf_s3ct = new I(1);
     public static Cons inf = new Cons(inf_s3ct, inf_s3cv);
     public static S lvl_s4BA = new S(60);
@@ -64,7 +101,7 @@ public static unsafe class Module
     public static S lvl_s4AR = new S(5);
     public static S lvl_s4AQ = new S(2);
     public static S lvl_s4AP = new S(1);
-    public static Thunk pi_ = new Updatable0(CLR.LoadFunctionPointer(Code.pi__Entry));
+    public static Thunk pi_ = new Updatable(CLR.LoadFunctionPointer(Code.pi__Entry));
     public static Function inc = new Fun(1, CLR.LoadFunctionPointer(Code.inc_Entry));
     public static Function inc_ = new Fun(1, CLR.LoadFunctionPointer(Code.inc__Entry));
     public static Function gcd = new Fun(2, CLR.LoadFunctionPointer(Code.gcd_Entry));
@@ -86,6 +123,10 @@ public static unsafe class Module
     public static Function minusInteger = new Fun(2, CLR.LoadFunctionPointer(Code.minusInteger_Entry));
     public static Function integerToInt = new Fun(1, CLR.LoadFunctionPointer(Code.integerToInt_Entry));
     public static Nil nil = new Nil();
+    public static Function extractOtype = new Fun(1, CLR.LoadFunctionPointer(Code.extractOtype_Entry));
+    public static Function extractOtag = new Fun(1, CLR.LoadFunctionPointer(Code.extractOtag_Entry));
+    public static Function extractOtypeL = new Fun(1, CLR.LoadFunctionPointer(Code.extractOtypeL_Entry));
+    public static Function extractOtagL = new Fun(1, CLR.LoadFunctionPointer(Code.extractOtagL_Entry));
 }
 
 public static unsafe class Code
@@ -465,7 +506,7 @@ public static unsafe class Code
     {
         var foldl_go = new Fun<Closure,Closure>(2, CLR.LoadFunctionPointer(foldl_go_Entry), f, null);
         foldl_go.x1 = foldl_go;
-        return StgApply.Apply<Closure,Closure,Closure>(foldl_go, x0, xs);
+        return foldl_go.Apply<Closure,Closure,Closure>(x0, xs);
     }
     public static Closure foldl_go_Entry(Closure f, Closure foldl_go, Closure x0, Closure ds_s3aN)
     {
@@ -480,13 +521,13 @@ public static unsafe class Code
                     var x = wild_s3aO_Cons.x0;
                     var xs = wild_s3aO_Cons.x1;
                     var sat_s3aR = Updatable.Make(CLR.LoadFunctionPointer(sat_s3aR_Entry), f, x0, x);
-                    return StgApply.Apply<Closure,Closure,Closure>(foldl_go, sat_s3aR, xs);
+                    return foldl_go.Apply<Closure,Closure,Closure>(sat_s3aR,xs);
                 }
         }
     }
     public static Closure sat_s3aR_Entry(Closure f, Closure x0, Closure x)
     {
-        return StgApply.Apply<Closure,Closure,Closure>(f, x0, x);
+        return f.Apply<Closure,Closure,Closure>(x0,x);
     }
     public static Closure map_Entry(Closure f, Closure ds_s3aB)
     {
@@ -508,7 +549,7 @@ public static unsafe class Code
     }
     public static Closure sat_s3aF_Entry(Closure f, Closure h)
     {
-        return StgApply.Apply<Closure,Closure>(f, h);
+        return f.Apply<Closure,Closure>(h);
     }
 
     public static Closure sumFromTo_Entry(Closure from, Closure to)
@@ -520,9 +561,9 @@ public static unsafe class Code
         var xc__I = xc_ as I;
         var yc_ = xc__I.x0;
         var wgo = new Fun(3, CLR.LoadFunctionPointer<long,long,long,long>(wgos49U_Entry));
-        var part1 = StgApply.Apply<long,Closure>(wgo, wc_);
-        var part2 = StgApply.Apply<long,Closure>(part1, yc_);
-        var ad_ = StgApply.Apply<long,long>(part2, 0);
+        var part1 = wgo.Apply<long,Closure>(wc_);
+        var part2 = part1.Apply<long,Closure>(yc_);
+        var ad_ = part2.Apply<long,long>(0);
         return new I(ad_);
     }
     public static long wgos49U_Entry(long ww_s49V, long ww_s49W, long ww_s49X)
@@ -644,5 +685,123 @@ public static unsafe class Code
     {
         i = i.Eval();
         return new I((long)(i as S).x0);
+    }
+
+    public static Closure extractOtype_Entry(Closure o) {
+        o = o.Eval();
+        switch (o) {
+            default: throw new ImpossibleException();
+            case O0 o0:
+                var i0 = o0.x0;
+                return new I(i0);
+            case O1 o1:
+                var i1 = o1.x0;
+                return new I(i1);
+            case O2 o2:
+                var i2 = o2.x0;
+                return new I(i2);
+            case O3 o3:
+                var i3 = o3.x0;
+                return new I(i3);
+            case O4 o4:
+                var i4 = o4.x0;
+                return new I(i4);
+            case I i:
+                throw new Exception();
+            case S s:
+                throw new Exception();
+            case Nil n:
+                throw new Exception();
+            case Cons c:
+                throw new Exception();
+            case OFucked of:
+                var @if = of.x0;
+                return new I(@if);
+        }
+    }
+    public static Closure extractOtypeL_Entry(Closure o) {
+        o = o.Eval();
+        switch (o) {
+            default: return new I(0);
+            case O0 o0:
+                var i0 = o0.x0;
+                return new I(i0);
+            case O1 o1:
+                var i1 = o1.x0;
+                return new I(i1);
+        }
+    }
+    public static Closure extractOtag_Entry(Closure o) {
+        o = o.Eval();
+        switch (o.Tag) {
+            default: throw new ImpossibleException();
+            case 0:
+                var o0 = o as O0;
+                var i0 = o0.x0;
+                return new I(i0);
+            case 1:
+                var o1 = o as O1;
+                var i1 = o1.x0;
+                return new I(i1);
+            case 2:
+                var o2 = o as O2;
+                var i2 = o2.x0;
+                return new I(i2);
+            case 3:
+                var o3 = o as O3;
+                var i3 = o3.x0;
+                return new I(i3);
+            case 4:
+                var o4 = o as O4;
+                var i4 = o4.x0;
+                return new I(i4);
+            case 5:
+                var of = o as OFucked;
+                var @if = of.x0;
+                return new I(@if);
+        }
+    }
+    public static Closure extractOtagL_Entry(Closure o) {
+        o = o.Eval();
+        switch (o.Tag) {
+            default: return new I(0);
+            case 0:
+                var o0 = o as O0;
+                var i0 = o0.x0;
+                return new I(i0);
+            case 1:
+                var o1 = o as O1;
+                var i1 = o1.x0;
+                return new I(i1);
+        }
+    }
+    public static Closure loopArray(Closure[] arr, int currentIndex) {
+        if(currentIndex >= arr.Length)
+            currentIndex = 0;
+        var head = arr[currentIndex];
+        var tail = SingleEntry.Make(CLR.LoadFunctionPointer<Closure[],int,Closure>(loopArray), arr, currentIndex + 1);
+        return new Cons(head, tail);
+    }
+    private static Random rand = new Random();
+    public static Closure RandomO() {
+        var i = rand.Next(0,4);
+        Closure w = null;
+        switch(i) {
+            case 0: w = new O0(1);break;
+            case 1: w = new O1(1);break;
+            case 2: w = new O2(1);break;
+            case 3: w = new O3(1);break;
+            case 4: w = new O4(1);break;
+        }
+        return new Cons(w, SingleEntry.Make(CLR.LoadFunctionPointer(RandomO)));
+    }
+    public static Closure RandomOL() {
+        var i = rand.Next(0,1);
+        Closure w = null;
+        switch(i) {
+            case 0: w = new O0(1);break;
+            case 1: w = new O1(1);break;
+        }
+        return new Cons(w, SingleEntry.Make(CLR.LoadFunctionPointer(RandomOL)));
     }
 }
