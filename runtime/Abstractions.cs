@@ -7,7 +7,7 @@ namespace Lazer.Runtime
         In this runtime nearly everything is a Closure and most methods
         will be returning one.
      */
-    public abstract class Closure
+    public abstract partial class Closure
     {
         /**
             Eval function called on a value (data/function) will just
@@ -17,56 +17,72 @@ namespace Lazer.Runtime
         public abstract Closure Eval();
 
         /**
-            A more performant way of checking closure type
-            than doing `isinst` and traversing inheritance tree.
-         */
-        public virtual ClosureType Type => ClosureType.Closure;
-
-        /**
             A tag for switching on alternatives when dealing with
             more than 4-5 data constructors.
          */
         public virtual int Tag
             => throw new NotImplementedException("Accessing Tag on a non-data closure.");
-
-    }
-
-    [System.Flags]
-    public enum ClosureType : byte
-    {
-        Closure = 0,
-        Thunk = 0,
-        Data = 1,
-        Function = 2,
-        PartialApplication = 4,
     }
 
     /**
         Base class for any data constructor.
      */
-    public abstract class Data : Closure
+    public abstract partial class Data : Closure
     {
         public override Closure Eval() => this;
-        public override ClosureType Type => ClosureType.Data;
         public override int Tag => 0;
     }
 
     /**
         Base class for any function.
      */
-    public abstract class Function : Closure
+    public abstract partial class Function : Closure
     {
         public override Closure Eval() => this;
-        public override ClosureType Type => ClosureType.Function;
 
         /**
             Each function has an arity which is used during application
             when the function is not statically known.
          */
         public abstract int Arity { get; }
-        
-        public abstract R Apply<A0, R>(A0 a0);
-        public abstract R Apply<A0, A1, R>(A0 a0, A1 a1);
-        public abstract R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2);
+    }
+
+    /**
+        Thunk is an updateable closure.
+        Once a Thunk has been evaluated it returns the indirection value.
+     */
+    public abstract class Thunk : Closure
+    {
+        public Closure ind;
+        protected abstract Closure Compute();
+        protected internal virtual void Cleanup() { }
+        public override Closure Eval()
+        {
+            if (ind != null) 
+                // if it's a Blackhole then Eval will throw
+                // otherwise it just returns the ind object
+                return ind.Eval();
+
+            // setup loop detection
+            // and evaluate the actual thunk code
+            ind = Blackhole.Instance;
+            ind = Compute();
+            // cleanup - release any resources so that 
+            // they can be collected by GC
+            Cleanup();
+            return ind;
+        }
+    }
+
+    /**
+        This is a temporary object used by Thunk to mark a started 
+        computation. If the during thunk evaluation we need to evaluate 
+        it then it's an error and there's an infinite loop in our program.
+     */
+    public sealed class Blackhole : Closure
+    {
+        public override Closure Eval() =>
+            throw new System.Exception("BLACKHOLE");
+        public static Blackhole Instance = new Blackhole();
     }
 }

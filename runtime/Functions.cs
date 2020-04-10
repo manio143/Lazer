@@ -19,15 +19,15 @@ namespace Lazer.Runtime
             this.arity = arity;
             this.f = f;
         }
-        public override R Apply<A0, R>(A0 a0)
+        public override R ApplyImpl<A0, R>(A0 a0)
         {
             return CLR.TailCallIndirectGeneric<A0, R>(a0, f);
         }
-        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+        public override R ApplyImpl<A0, A1, R>(A0 a0, A1 a1)
         {
             return CLR.TailCallIndirectGeneric<A0, A1, R>(a0, a1, f);
         }
-        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+        public override R ApplyImpl<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
         {
             return CLR.TailCallIndirectGeneric<A0, A1, A2, R>(a0, a1, a2, f);
         }
@@ -40,15 +40,15 @@ namespace Lazer.Runtime
         {
             this.x0 = x0;
         }
-        public override R Apply<A0, R>(A0 a0)
+        public override R ApplyImpl<A0, R>(A0 a0)
         {
             return CLR.TailCallIndirectGeneric<F0, A0, R>(x0, a0, f);
         }
-        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+        public override R ApplyImpl<A0, A1, R>(A0 a0, A1 a1)
         {
             return CLR.TailCallIndirectGeneric<F0, A0, A1, R>(x0, a0, a1, f);
         }
-        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+        public override R ApplyImpl<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
         {
             return CLR.TailCallIndirectGeneric<F0, A0, A1, A2, R>(x0, a0, a1, a2, f);
         }
@@ -62,15 +62,15 @@ namespace Lazer.Runtime
             this.x0 = x0;
             this.x1 = x1;
         }
-        public override R Apply<A0, R>(A0 a0)
+        public override R ApplyImpl<A0, R>(A0 a0)
         {
             return CLR.TailCallIndirectGeneric<F0, F1, A0, R>(x0, x1, a0, f);
         }
-        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+        public override R ApplyImpl<A0, A1, R>(A0 a0, A1 a1)
         {
             return CLR.TailCallIndirectGeneric<F0, F1, A0, A1, R>(x0, x1, a0, a1, f);
         }
-        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+        public override R ApplyImpl<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
         {
             return CLR.TailCallIndirectGeneric<F0, F1, A0, A1, A2, R>(x0, x1, a0, a1, a2, f);
         }
