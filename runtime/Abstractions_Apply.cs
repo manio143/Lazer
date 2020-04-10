@@ -21,11 +21,11 @@ namespace Lazer.Runtime
     public abstract partial class Data
     {
         public override R Apply<A0, R>(A0 a0)
-            => throw new Exception($"Cannot apply a value ({GetType()})");
+            => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
         public override R Apply<A0, A1, R>(A0 a0, A1 a1)
-            => throw new Exception($"Cannot apply a value ({GetType()})");
+            => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
         public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
-            => throw new Exception($"Cannot apply a value ({GetType()})");
+            => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
     }
 
     public abstract partial class Function
@@ -34,7 +34,7 @@ namespace Lazer.Runtime
         public abstract R ApplyImpl<A0, R>(A0 a0);
         public abstract R ApplyImpl<A0, A1, R>(A0 a0, A1 a1);
         public abstract R ApplyImpl<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2);
-        
+
         public override R Apply<A0, R>(A0 a0)
         {
             switch (this.Arity)

@@ -21,7 +21,7 @@ namespace Lazer.Runtime
             more than 4-5 data constructors.
          */
         public virtual int Tag
-            => throw new NotImplementedException("Accessing Tag on a non-data closure.");
+            => throw new NotSupportedException("Accessing Tag on a non-data closure.");
     }
 
     /**
