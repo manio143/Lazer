@@ -59,26 +59,35 @@ namespace Lazer.Runtime
         Thunk is an updateable closure.
         Once a Thunk has been evaluated it returns the indirection value.
      */
-    public abstract class Thunk : Computation
+    public unsafe abstract class Thunk : Computation
     {
         public Closure ind;
+        private void* eval;
+        protected Thunk()
+        {
+            eval = CLR.LoadFunctionPointer(PerformComputation);
+        }
         protected abstract Closure Compute();
         protected internal virtual void Cleanup() { }
         public override Closure Eval()
         {
-            if (ind != null) 
-                // if it's a Blackhole then Eval will throw
-                // otherwise it just returns the ind object
-                return ind.Eval();
-
+            return CLR.TailCallIndirectGeneric<Thunk, Closure>(this, eval);
+        }
+        private Closure PerformComputation()
+        {
             // setup loop detection
             // and evaluate the actual thunk code
             ind = Blackhole.Instance;
             ind = Compute();
+            eval = CLR.LoadFunctionPointer(ReturnIndirection);
             // cleanup - release any resources so that 
             // they can be collected by GC
             Cleanup();
             return ind;
+        }
+        private Closure ReturnIndirection()
+        {
+            return ind.Eval();
         }
     }
 
