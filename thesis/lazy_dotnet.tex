@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
+\usepackage{multirow}
 
 % Dane magistranta:
 \autor{Marian Dziubiak}{370784}
@@ -57,6 +58,8 @@
     urlcolor=blue
 }
 
+\setcounter{secnumdepth}{3}
+
 % koniec definicji
 
 \begin{document}
@@ -88,13 +91,19 @@ compiler GHC. Like many other programming languages Haskell is mostly
 tied to its compiler and the native platform (as opposed to a~managed platform).
 Actually, Haskell did in fact have more compilers available, however,
 GHC is leading the language development and left competition far behind.
+
 There exist a couple of managed platforms that provide a common ecosystem
 for multiple languages. The two most popular are JVM and .NET.
-There has been some work done for the JVM \cite{Tullsen} \cite{Choi} \cite{Alliet}
+There has been some work done for the JVM \cite{Tullsen} \cite{Choi} \cite{Stewart}
 and there exist two Haskell implementations: 
 \href{https://github.com/Frege/frege}{Frege}~and~\href{https://eta-lang.org/}{Eta}.
 In~this work I will focus on the idea of bringing
-Haskell to the .NET platform. \\
+Haskell to the .NET platform.
+
+{
+    \centering \rule[3pt]{9cm}{.3pt}
+
+}
 
 In 2002 Microsoft has released the first version of .NET Framework with
 C\shrp programming language. Since the initial release, the .NET ecosystem
@@ -150,45 +159,74 @@ Chapter \myref{r:future} looks into future improvements to the runtime
 and extending Haskell for CLI interoperability.
 
 % ##########################
-\chapter{Lazy evaluation}\label{r:lazyEval}
+\chapter{Laziness in functional languages}\label{r:lazyEval}
 % ##########################
 
-Every high level programming language has some form of expressions.
-They are used to represent algebraic operations, application of
-functions or method calls, access to fields of an object, and many more.
-When the program is compiled expressions are converted to chains of
-instructions that will be executed. In most languages those instructions
-are executed at the spot where the expression has appeared in the program.
-This means that the order of expression evaluation is explicitly provided
-by the programmer (or defined by the language semantics i.e. order of function arguments).
-We call this evaluation strategy \textit{strict}.
+Functional programming languages are characterized by first
+class functions and easy to model data types. Many modern
+languages have functional features, but much fewer have
+syntax and features that make them easy to use. In
+particular, languages from the ML family such as Haskell,
+Elm, OCaml and F\shrp have become fairly popular in the
+community interested in functional programming.
 
-On the other hand we can delay the evaluation and instead construct
-a promise of a value, which we will call a \textit{thunk}, that is passed around
-and evaluated only when the promised value is actually needed.
-This strategy is called \textit{non-strict}. There is one more thing
-necessary to achieve \textit{laziness} -- after a value has been evaluated
-any future reference to the promise should return the value without
-the need to repeat the computation. In other words, the expression
-is evaluated at most once.
+\section{Desired properties of functional languages}
 
-With lazy evaluation the order of evaluation is less obvious and thus
-programmers don't rely on it for correctness. However, they still have
-the tools to control evaluation order which is needed when dealing with
-certain operations, i.e. through the use of monads. 
-Full program laziness forces purity of functions.
-A pure function has no side effects -- it cannot modify the global state.
-From this follows referential transparency \cite{referentialTransparency},
-a property that allows
-replacement of an expression by the value it evaluates to.
-Therefore if an expression is used twice it can be evaluated only once.
-In contrast an impure expression with side effects has to be reevaluated
-every time it occurs.
+One of the great things about functional languages is that
+they bring the program closer to mathematical notations.
+Why is that a good thing? Mathematicians are able to
+provide proofs for correctness of their formulas. Therefore,
+an algorithm expressed in mathematical functions can be
+reasoned about in a similar manner.
 
-In most strict languages there is a minimal amount of laziness
-in conditional expressions. For example: if the left argument of the
+\subsection{Purity}
+
+All functions in mathematics are pure. However, functions
+in programs can have side effects, like modifying memory or
+communicating with external devices. This makes a lot of
+algorithms harder to model in terms of mathematical
+functions. We call a function \textit{pure} if it has no
+side effects.
+
+A pure function will always return the same result for the
+same set of arguments. This means expressions that apply a
+pure function to some arguments are referentially
+transparent \cite{referentialTransparency} -- can be substituted by the value they would
+evaluate to. Referential transparency isn't a property of
+impure functions that may rely on their code getting
+invoked multiple times, each time returning a different
+value.
+
+Furthermore, when dealing with just pure functions, the
+compiler may apply an optimization called Common
+Subexpression Elimination (CSE) which computes the value of
+an expression once and uses it in multiple places.
+
+\begin{verbatim}
+                              f a <*> f a <*> f a
+                            ----------------------
+                                let x = f a in
+                                x <*> x <*> x
+\end{verbatim}
+
+\subsection{Laziness}\label{s:laziness}
+
+In mathematics it doesn't matter which part of the formula
+is computed first. In a language with only pure functions,
+such as Haskell, because there are no side effects that may
+have to happen in a particular order, the order of
+expression evaluation can be changed. In particular we can
+delay the evaluation until the moment when we actually need
+to know the computed value. It may turn out we don't
+actually need to perform the computation. But if we do
+evaluate the expression, its value should be saved so that
+subsequent evaluations of that same expression can use that value.
+
+In most strict languages there is a minimal amount of
+laziness. It can be most often found in conditional expressions.
+For example: if the left argument of the
 boolean \texttt{\&\&} operator is false then the right argument is not
-evaluated. This is especially useful when strict evaluation would lead
+evaluated. This is especially useful when eager evaluation would lead
 to an error.
 
 There are a couple reasons why using lazy evaluation can be beneficial.
@@ -206,352 +244,121 @@ be performed either way. Finally, there exist certain data structures that
 leverage lazy evaluation to provide amortization of asymptotic complexity,
 i.e. queues \cite{amortized}.
 
-\section{Closures and Thunks}\label{s:closures}
+\section{Representation of functional programs}
 
-There have been a few solutions to the problem of implementing lazy evaluation:
-lazy SECD machine \cite{SECDM}, G-Machine \cite{G-Machine}, 
-combinator machines (i.e. SKIM) \cite{combinators},
-Categorical Abstract Machine (CAM) \cite{CAM}, 
-Three-Instruction-Machine (TIM) \cite{TIM} and others.
-All of those are approaches to implementing efficient expression graph reductions
-as a means of expression evaluation.
-This work focuses on the STG-Machine \cite{STGM} which is the mechanism used
-in the Glasgow Haskell Compiler (GHC).
+A functional program can often be expressed in terms of
+nested expressions that form a tree. By rewriting the
+simple expressions representing a named value into a
+reference to the bound expression, we obtain an expression
+graph. The process of evaluation of that program is
+equivalent to the process of graph reduction of the expression graph.
 
-The Spineless Tagless G-Machine (STGM) is a concrete implementation of the STG language.
-The language is an extension of lambda calculus and this chapter presents
-the \texttt{let-in} and \texttt{case-of} expressions that are
-used for delaying and forcing expression evaluation.
-In STG functions can be applied only to \textit{atoms} -- declared constants or simple
-value literals. In order to pass an expression to a function it first has to be
-let-bound:
+An example of such a reduction is the $\beta$-reduction in lambda calculus.
+Given a function application $\mathtt{f\cdot a}$ where
+\texttt{f} is a lambda abstraction $\mathtt{\lambda x. e}$,
+performing a $\beta$-reduction yields a new expression
+\texttt{e'} that is equal to \texttt{e} with all
+occurrences of \texttt{x} replaced by \texttt{a}.
 
-\begin{verbatim}
-  let x = expr in f x
-\end{verbatim}
+Expressions are reduced to weak had normal form (WHNF)
+which is either a literal value, a data cell, a function
+value or a non-saturated function application (not enough arguments).
+For more theoretical information on evaluating expression see \cite{spj-book}.
 
-For \texttt{x} to be lazy, the \texttt{let-in} expression is interpreted as an
-allocation of a \textit{thunk} -- the delayed computation. 
-In general, a \textit{closure} is an object with a pointer
-to some code and possibly some set of data.
-A thunk is a special kind of a closure -- it is represented
-by a pointer to the code that evaluates \texttt{expr}, a set of captured
-free variables and an update mechanism that allows to return the
-evaluated value on any future requests.
+\subsection{Practical approaches}
 
-The only time a thunk is evaluated (forced) is when its value has to be scrutinized.
-This is done by a \texttt{case-of} expression which checks the evaluated value
-and performs an alternative selection. Each alternative is represented by a
-pattern -- a data constructor or a value literal, and an expression to be evaluated
-if the pattern matches the scrutinized value. There also can be a default alternative.
-The alternatives in a case expression have to be saturated -- there cannot be a value
-that matches no alternative.
+Graph reduction is rather simple conceptually, but it turns
+out to be harder to implement efficiently. Over the
+years different approaches were created to compute lazy languages: 
 
-\begin{verbatim}
-  case x of
-    DEFAULT -> expr3
-    1 -> expr1
-    0 -> expr2
-\end{verbatim}
+\begin{itemize}
+    \item combinator machines (i.e. SKIM) \cite{combinators},
+    \item lazy SECD machine \cite{SECDM},
+    \item G-Machine \cite{G-Machine},
+    \item Categorical Abstract Machine \cite{CAM},
+    \item Three-Instruction-Machine (TIM) \cite{TIM},
+    \item Spineless Tagless G-Machine (STGM) \cite{STGM}.
+\end{itemize}
 
-It is worth noting that \texttt{let-in} expression may not always create a thunk.
-It turns out that in many cases laziness can cause a slow down in a function
-that operates strictly -- scrutinizes its arguments. Therefore a process 
-called strictness analysis is
-performed by the compiler to decide if a value should be evaluated lazily or
-eagerly \cite{demand analysis}.
+The Glasgow Haskell Compiler (GHC) uses the last approach~--~STGM.
+The STG language extends simple lambda calculus with a few
+constructs. In particular, it defines a \texttt{let..in} expression
+for binding expressions to identifiers and delaying their evaluation,
+and a \texttt{case..of} expression for forcing expressions (evaluating them to WHNF) and pattern matching.
 
-In particular, expressions that apply a data constructor to the correct number
-of arguments (saturated application) are executed eagerly. However, the
-arguments may still point to thunks, so lazy semantics are kept.
-Constructed data values are also closures and can be scrutinized
-in a case expression. Their code is simple as no computation needs to be
-performed and the closure body contains the provided arguments.
+\subsection{Closures and Thunks}\label{s:closures}
 
-\section{Operating on the heap vs. on the stack}
+Let's introduce the concept of a \textit{closure}.
+Every lambda expression containing free variables is represented by a closure --
+an object in memory holding references or values of those free variables
+as well as a pointer to the code that evaluates this expression.
 
-There are two main approaches to managing memory usage for program variables.
-The stack allows to allocate objects in memory in a sequential manner.
-The deallocation has to be performed in a reverse order -- you cannot
-reuse memory below the newest variable.
-The heap allows to allocate objects in a non-sequential manner which allows
-for greater memory reusability, but this has an additional cost.
-Programs usually make use of both of those memory structures.
+A closure can represent either a computation or
+a function that would be applied to some arguments.
+Even data can be represented by a closure, with it's code
+being a simple expression returning this data.
 
-On the .NET platform the heap is maintained by a garbage collector (GC)
-that performs complicated algorithms to deallocate objects and
-reclaim and compact memory. Thus, using fewer allocations is recommended
-to increase performance. However, when it comes to lazy evaluation it
-is impossible to do it purely on the stack as the number of created objects
-is quite large and their lifetimes less predictable than with strict evaluation.
+Section \myref{s:laziness} required lazy computations to
+save the computed value and return it on all future
+evaluations. A closure that represents an updatable
+computations is called a \textit{thunk}.
+Most of the \texttt{let} expressions create thunks. \\
 
-The operational stack consists of function frames. A frame is the
-return pointer to the previous function, local variables and in some cases
-arguments to the next called function.
-When calling a function a frame for it has to be allocated and later removed when
-returning from that function.
-It turns out that making such calls is rather expensive -- this can be especially seen
-in recursive functions and a reason for them being less popular in 
-imperative programming. Tail calls can be used to mitigate frame allocations.
-A tail call is such a call that it is the last operation before the function returns.
-So the \texttt{call} and \texttt{return} instructions
-can be replaced by a \texttt{jump} instruction.
+After analyzing performance of lazy programs research shows that
+many algorithms are actually faster if they are evaluated eagerly.
+Therefore a process called strictness analysis is
+performed by the compiler to decide if a value should be
+evaluated lazily or eagerly \cite{demand analysis}.
+So there are cases when a \texttt{let} expression may actually evaluate its subexpression instead of creating a thunk for it.
 
-Haskell programs compiled with GHC operate on the stack in a ``non-standard'' way
-due to many optimizations. On the .NET platform the stack is used according to the
-\texttt{x86\_64} ABI. Moreover, the .NET stack has a fixed size, whereas GHC can manipulate its stack size.
-This means extensive non-tail calls usage can lead to a stack overflow and program crash.
-In order to maximize tail calls the runtime described in chapter \myref{r:runtime}
-uses heap allocated continuations.
+\subsection{Example evaluation process}\label{s:example_eval}
 
-All constructed data values, thunks and other closures (i.e. functions) are heap allocated.
-This means they are passed around in the form of pointers.
-\textit{Unlifted} values such as integers and floating point values
-are passed around in their native form.
-Pointers and unlifted values may be kept on the stack
-for non-tail function calls when a lifted value has to be scrutinized in
-an unlifted-returning function (see \{TODO ref\} for details).
-
-% ##########################
-\chapter{Function application}\label{r:funApp}
-% ##########################
-
-In functional languages, unlike in many imperative languages,
-functions are first-class values. This means functions may be passed
-to other functions or return new functions, just as easily as manipulating
-numbers. Although some languages, like C, have function pointers, they don't
-allow for the simplicity of manipulating functions that are offered
-by \textit{lambda expressions}.
-
-A lambda expression is of the form $\lambda x. \mathsf{expr}$ and describes
-a function that takes an argument $x$ and returns the value of the expression
-with $x$ substituted by the value it is applied to. A function that takes
-multiple arguments can be described by nested lambda expressions
-(i.e.~$\lambda x.\lambda y. x+y$). This is called \textit{currying} after
-the work of Haskell Curry in combinatory logic \cite{Curry}.
-Another property of lambda expressions is the ability to capture
-values of free variables from the enclosing environment.
-A variable is free if it is not provided as an argument
-(i.e.~in~$\lambda x. x + y$ the variable $y$ is free).
-In the implementation of a lambda expression a closure has to
-be created that holds its free variables and can be accessed by the
-code of the inner expression. Function values described above satisfy
-the definition of a \textit{closure} in \myref{s:closures}.
-
-In a program there will be top-level functions whose free variables
-can only be other top-level constants and local functions instantiated
-each time their binding expression is evaluated.
-We differentiate between known and unknown functions.
-A function that is known can be applied by simply
-calling it with all the required arguments (\textit{saturated application}).
-If there's not enough arguments or the function is unknown then it has
-to be applied, possibly partially.
-
-Partial application is a technique that allows providing less than
-the required number of arguments to a function.
-A partially applied function is a function
-that takes the remaining arguments and then applies the original function
-to the previously and currently provided arguments.
+To make sure the reader can better understand the
+evaluation process a simple example is presented.
+The Haskell code below is written very close to its STG representation.
+It shows a \texttt{Maybe} data type with a monadic \texttt{bind} operation,
+a source computation \texttt{divide} and a modifying
+computation \texttt{add n} represented in terms of bind.
 
 \begin{verbatim}
-  f = \x y -> x + y
-  g = f 1           -- g = \y -> f 1 y
+    data Maybe a = Nothing | Just a
+    bind f m = case m of
+                Just x -> f x
+                Nothing -> Nothing
+    divide x y =
+        case y of
+            0 -> Nothing
+            _ -> let v = x / y
+                 in Just v
+    add n = let f = \x -> let v = x + n 
+                          in Just v
+            in bind f
+    main = let d = divide 4 2
+           in add 5 d
 \end{verbatim}
 
-Partial applications are common in functional programming.
-They allow to write succinct code in applicative style and often
-abstract out dependencies of a function.
+The steps below represent evaluation of \texttt{main}:
 
-\begin{verbatim}
-  let sort = \order -> \list -> ...
-  let sortAsc = sort (<=)
-  let sortDsc = sort (>=)
-\end{verbatim}
+\begin{enumerate}
+    \item create a thunk \texttt{d} for computation \texttt{divide 4 2};
+    \item apply function \texttt{add} to \texttt{5};
+    \item \textit{(in \texttt{add})} create a function \texttt{f} that captures value \texttt{n = 5};
+    \item return a partially applied function \texttt{bind f}
+    \item apply \texttt{bind f} to \texttt{d};
+    \item \textit{(in \texttt{bind})} evaluate \texttt{m = d};
+    \item apply \texttt{divide} to \texttt{4} and \texttt{2};
+    \item \textit{(in \texttt{divide})} eval \texttt{y = 2}
+    \item check if \texttt{2} is \texttt{0}
+    \item create a thunk \texttt{v} for computation \texttt{4 / 2};
+    \item return \texttt{Just v}
+    \item \textit{(in \texttt{bind})} check if the result is \texttt{Just};
+    \item apply \texttt{f} to \texttt{v = 4 / 2};
+    \item \textit{(in \texttt{f})} create a thunk \texttt{v'} for computation \texttt{(v = 4 / 2) + 5};
+    \item return \texttt{Just v'};
+\end{enumerate}
 
-There are two common ways of applying unknown functions:
-\textit{Push/Enter} and \textit{Eval/Apply}. They are described
-below, according to the
-definitions by Simon Marlow and Simon Peyton Jones \cite{fastcurry}.
+If we now unpack \texttt{Just v'} and evaluate \texttt{v'} we will obtain the value \texttt{7}.
 
-\section{Push/Enter}
-In this model each function is responsible for handling its arguments.
-The caller \textit{pushes} available arguments on the stack and calls the
-function entry point (\textit{enters} the function).
-The function inspects the stack to see if it was called with the
-sufficient number of arguments and if so pops the arguments from
-the stack and begins evaluation of its body. If there's not enough
-arguments then the function creates a partial application object (PAP)
-and returns that. If there is more than enough arguments then the result
-of the function will be also entered.
-
-Usually this means each function gets a slow and a fast entry point.
-The slow entry point is responsible for checking the stack, removing
-pending arguments and either creating a PAP or calling the fast entry point.
-
-The reason \textit{Push/Enter} was popular is the simplicity of
-making a call. No matter what the function being applied is,
-the caller pushes arguments on the stack and enters the closure.
-Before the introduction of \texttt{x86\_64} there weren't many
-general purpose registers so passing arguments on the stack made
-more sense.
-
-In the GHC the stack holds both arguments and continuations, but that is
-less than optimal in the strongly typed managed environment as it would
-require a lot of type checks. Therefore, when implementing this model,
-a separate argument stack can be used and a separete continuation stack.
-The arguments between continuations have to be
-separated in some way. In \cite{Brazil} the sizes of HSNET's stacks',
-which represent argument stacks for each primitive type (int, float, closure),
-are pushed onto an update stack, zeroed, and later restored.
-
-The stacks can either be accessible from a static object, or passed
-to each method in a context object. A context object may be preferred
-as it allows for future introduction of multithreading.
-
-\begin{verbatim}
-  class Context {
-      public Stack<Closure> ArgumentsStack;
-      public Stack<Continuation> ContinuationStack;
-  }
-
-  class Plus_function : Function {
-      public override Closure Enter(Context ctx) {
-          if (ctx.ArgumentsStack.Count >= 2) {
-              var x1 = ctx.ArgumentsStack.Pop();
-              var x2 = ctx.ArgumentsStack.Pop();
-              return FastEnter(ctx, x1, x2);
-          } else if (ctx.ArgumentsStack.Count == 0) {
-              return this;
-          } else {
-              return new PAP(this, ctx.ArgumentsStack.Pop());
-          }
-      }
-      public static Closure FastEnter(Context ctx, Closure x1, Closure x2) {
-          var a1 = x1.Enter(ctx);
-          var a2 = x2.Enter(ctx);
-          return new Number(a1 + a2);
-      }
-  }
-\end{verbatim}
-
-\section{Eval/Apply}
-The second model requires the caller to inspect the arity of a function and
-pass it the exact number of arguments. This means it is the caller,
-rather than the callee, that creates a PAP if there's not enough arguments.
-The caller first has to \textit{evaluate} the function, to check its arity, and then
-\textit{apply} it to the arguments.
-
-To make function application easier on the caller function, a set of helper functions
-are created that do evaluation and application.
-
-\begin{verbatim}
-  public static Closure ApplyHelper(Context ctx, 
-                                    Closure func, Closure arg1, Closure arg2) {
-      if (func is Function f) {
-          // check f's arity
-          // if arity = 2 then apply f to all arguments
-          // if arity < 2 then apply f to some arguments and
-          //    then use a helper to apply the rest
-          // if arity > 2 then create a PAP
-      } else if (func is PAP p) {
-          // extract previous parameters from p
-          // apply all available parameters to function in p
-      } else if (func is Data) {
-          throw new Exception("Cannot apply data");
-      } else {
-          // eval func and use helper again
-      }
-  }
-\end{verbatim}
-
-This way only one function entry has to be generated and most arguments
-will be passed through registers. This style of argument passing is
-native to the .NET CLR where JIT (\textit{Just-In-Time} compiler) generates
-codes compliant with \texttt{x86\_64} ABI and can potentially be subject to
-some additional optimizations.
-
-This model is used in the lazy runtime in chapter \myref{r:runtime}.
-
-% ##########################
-\chapter{Low level CLR features}\label{r:lowlevel}
-% ##########################
-
-The C\shrp language is usually considered a high-level language.
-However, it has some low-level features allowing the user to
-manipulate pointers in \texttt{unsafe} contexts.
-Moreover, the Common Intermediate Language (CIL) has additional
-instructions not available to C\shrp developers.
-
-\section{Tail calls}
-
-One of those CLR \textit{intrinsics} is the tail call modifier.
-It is used to force the JIT to emit a tail call.
-The \texttt{.tail} modifier has to be placed before a \texttt{call},
-\texttt{callvirt} or \texttt{calli} instruction that is followed by
-\texttt{ret} instruction. However, in most cases when the JIT is
-working in Release mode, or with the Optimized flag, it will
-emit tail calls correctly even without the modifier. Sometimes,
-especially for long functions, the JIT won't emit a tail call
-on its own and in those cases it would be beneficial to decorate
-all tail calls with the \texttt{.tail} modifier. Currently the
-C\shrp compiler doesn't allow such decorations and this would
-therefore require the Haskell to .NET compiler to emit CIL bytecode
-directly.
-
-\begin{verbatim}
-    .tail
-    call int64 class Code::f(int64, int64)
-    ret
-\end{verbatim}
-
-\section{Function pointers}\label{ldftn}
-
-Another useful CLR intrinsic instruction is \texttt{ldftn}.
-It allows the user to obtain a pointer to a function.
-Such a pointer can be then used as an argument to a
- \texttt{calli} instruction.
-There may be security issues involved in dealing with function
-pointers when the program makes use of dynamically loaded application
-domains (when calling a function from an unloaded domain), but
-those are outside the scope of this project.
-The C\shrp compiler in the version 8.0 doesn't allow for obtaining
-function pointers and in this work a modified compiler has been used
-to overcome this limitation.
-
-\begin{verbatim}
-    ldftn Closure class Code::sfoldl_Case(StgContext, Closure, Closure)
-\end{verbatim}
-
-There exists a `safe' function pointer in the form of a \texttt{delegate}.
-However, comparison of runtime performance between creating delegates and
-using function pointers shows the superiority of the latter (2-3x faster)
-\cite{ldftnVSdelegate}.
-
-\section{Switch statements}
-
-When dealing with case expressions with many alternatives the C\shrp compiler
-can emit a \texttt{switch} instruction that uses a lookup table to improve
-performance. This can only happen when switching on integers and may be
-a motivation to add a number tag to each data constructor.
-However, for types with a small number (less than five) of
-data constructors it appears that a linear switch on their types is faster
-than using a number tag, because the necessary type cast is used
-to compare cases.
-
-\begin{verbatim}
-    switch (variable.Tag) {               switch (variable) {
-        case 1:                              case Con1 c1: ...
-            var c1 = variable as Con1;       case Con2 c2: ...
-            ...                              case Con3 c3: ...
-        case 2:                              default: ...
-            var c2 = variable as Con2;    }
-            ...
-        case 3: 
-            var c3 = variable as Con3;
-            ...
-        default: ...
-    }
-\end{verbatim}
 
 % ##########################
 \chapter{Lazy runtime}\label{r:runtime}
@@ -559,109 +366,1243 @@ to compare cases.
 
 This paper presents an implementation of a lazy runtime environment
 on the .NET platform. It has been implemented in C\shrp with some
-extensions to allow emitting \texttt{ldftn} and \texttt{calli}
-CIL instructions (see \myref{ldftn}). This way the implementation
-is clear to read and easy to explain.
+extensions to allow emitting certain Common Intermediate Language (CIL)
+instructions not available in the regular compiler.
 
-\section{Closures}
-Chapter \myref{s:closures} defined a \textit{closure} as a piece of
-code with some data. An object like that can be easily represented
-by a class with a specific method -- the code, and some fields for the data.
-Therefore a base class for all closures can be defined as following:
+The implementation is best explained by following the example code execution from chapter \myref{s:example_eval}.
+But a few key concepts have to be introduced first.
 
-\begin{verbatim}
-  abstract class Closure
-  {
-      public abstract Closure Eval(StgContext ctx);
-  }
-\end{verbatim}
+\section{Types and data representation}
 
-The method \texttt{Eval} is the entry point to any closure. It is responsible for
-evaluating the closure in the provided context.
-It has a return type of \texttt{Closure}, because the result of the evaluation,
-either a data constructor, a function, or a PAP, is another \texttt{Closure}.
+Types can be divided into \textit{lifted} and \textit{unlifted}.
+Lifted types include $\bot$ (bottom) as a possible value.
+Actually, $\bot$ represents an infinite computation or
+a program error. Unlifted types on the other hand will
+always represent a proper value.
 
-For example a data constructor should just return itself (the data).
-This is achieved by tail calling the continuation on top of the
-continuation stack (explained in the next section).
+Unlifted types such as \texttt{Int\#}, \texttt{Double\#}
+and \texttt{Char\#} can be represented in C\shrp by
+primitive types like \texttt{int}/\texttt{long}, \texttt{double} and \texttt{char}.
+Other unlifted types include tuples \texttt{(\#,\#)} and
+arrays \texttt{ByteArray\#}, which can be represented by
+\textit{structs} (.NET value types) and arrays (\texttt{byte[]}).
 
-\begin{verbatim}
-  abstract class Data : Closure
-  {
-      public override Closure Eval(StgContext ctx)
-          => ctx.Continuation.Call(ctx, this);
-  }
-\end{verbatim}
-
-The same goes for functions and PAPs. However, there can be
-closures that represent computations. Thunk is a closure
-that upon first evaluation performs the computation
-and every time after returns the result of that computation.
-Whenever a method returns a closure variable it has to be \textit{entered}
--- its \texttt{Eval} method has to be tail called.
+Lifted types will be represented by a pointer reference.
+For example an instance of a lifted type \texttt{Int} is an object representing
+its data constructor \texttt{I\#} that has one field of type \texttt{Int\#}.
+In practice this means data constructors represent .NET classes.
 
 \begin{verbatim}
-  abstract class Thunk : Closure
-  {
-      public Closure ind;
-      protected abstract Closure Compute(StgContext ctx);
-      public override Closure Eval(StgContext ctx)
-      {
-          if (ind != null) return ind.Eval(ctx);
-  
-          ctx.PushUpdate(this);
-          ind = Blackhole.Instance;
-          return Compute(ctx);
-      }
-  }
+    public sealed class I : Data {
+        public int x0;
+        public I(int x0) {
+            this.x0 = x0;
+        }
+    }
 \end{verbatim}
 
-\section{Continuations}
+Haskell has a very rich type system.
+One of the more advanced features are higher-kinded types (HKT).
+This allows type constructors to take polymorphic parameters
+that are also type constructors, i.e.:
 
-\section{Context object}
+\begin{verbatim}
+    newtype IdentityT f a = IdentityT { runIdentityT :: f a }
+\end{verbatim}
 
-\section{Function application}
+The .NET runtime does not allow for generic parameters to be
+type constructors. So types like \texttt{IdentityT} are not
+expressible in C\shrp without \texttt{implementation leakage}.
+The user of \texttt{IdentityT} would have to know how it
+uses its type parameters and provide an appropriate
+combination~--~\verb|IdentityT<Maybe<Int>>|. This can be
+problematic and therefore this runtime ignores types, by
+means of type erasure.
 
-\section{Algebraic data types}
+\subsection{Data superclass}
 
-\section{Universal closures}
+Every data constructor extends the \texttt{Data} class.
+As mentioned in \myref{s:closures}, data constructors are
+also closures, but very simple ones, having a simple
+\texttt{return this;} in their evaluation method.
 
-\section{Example user code implementation}
+\begin{verbatim}
+    public abstract partial class Data : Closure
+    {
+        public override Closure Eval() => this;
+        public override int Tag => 0;
+    }
+\end{verbatim}
 
+The \texttt{Data} class also provides a default \texttt{Tag}
+value so that single constructor types don't have to override it.
+
+\subsection{Data constructor definition}
+
+All data constructors fit a simple template.
+If the type has more than one constructor, each one has to
+override the \texttt{Tag} property with an appropriate integer value.
+Fields in the constructor are all public, ordered and named accordingly
+(\texttt{x0}, \texttt{x1}, \texttt{x2}, ...).
+The constructor's class has a \textit{constructor} that takes
+as many arguments as there are fields.
+The class is sealed (cannot be extended) so that efficient
+type checks can be performed.
+
+\begin{verbatim}
+    public sealed class [Name] : Data {
+        public [Type0] x0;
+        ...
+        public [TypeN] xN;
+
+        public [Name]([Type0] x0, ..., [TypeN] xN) {
+            this.x0 = x0;
+            ...
+            this.xN = xN;
+        }
+
+        public override int Tag => [Tag]
+    }
+\end{verbatim}
+
+The \verb|[Type]| is either an unlifted value type
+(i.e. \texttt{int}, \texttt{double}) or a pointer reference
+of type \texttt{Closure}. Why \texttt{Closure} and not \texttt{Data}?
+Because, data constructors can be applied to unevaluated computations.
+
+\section{Computation representation}\label{s:computations}
+
+In C\shrp a unit of computation is a method.
+When creating this runtime a choice had to be made
+whether to implement computations as instance methods
+of closures (and have a lot of types) or as static methods
+(with fewer universal types).
+The second approach has been chosen in favor of keeping
+the number of types small and allowing direct method calls
+from one computation to the next.
+
+\subsection{Computation as a static method}
+
+Every computation is represented by a static method that follows a simple template:
+
+\begin{verbatim}
+    public static [RetType] [Name]_Entry(
+        [FreeType0] [FreeName0], ..., [FreeTypeK] [FreeNameK],
+        [ArgsType0] [ArgsName0], ..., [ArgsTypeN] [ArgsNameN]) {
+            [Expression]
+        }
+\end{verbatim}
+
+The \verb|[RetType]| is the return type of the method,
+equivalent to the type of \verb|[Expression]|
+(for all lifted types it's \texttt{Closure}).
+The \verb|[Name]| is the bound identifier of the computation.
+The first $k$ arguments are the free variables of the computation.
+The following $n$ arguments are formal parameters, if the computation represents a function.
+
+\subsection{Computing a data cell}\label{s:compute_data}
+
+Let's look at the \texttt{divide} function from \myref{s:example_eval}.
+It evaluates its seconds argument and performs a value check on it.
+Then it delays the actual division (a costly operation) and returns a new data cell.
+This can be represented in C\shrp by the following methods:
+
+\begin{verbatim}
+    public static Closure divide_Entry(Closure x, Closure y) {
+        y = y.Eval();
+        var yVal = (y as I).x0;
+        switch (yVal) {
+            case 0:
+                return new Nothing();
+            default:
+                var v = new Updatable<Closure, int>(divide_v_Entry, x, yVal);
+                return new Just(v);
+        }
+    }
+    public static Closure divide_v_Entry(Closure x, int yVal)   {
+        x = x.Eval();
+        var xVal = (x as I).x0;
+        var d = xVal / yVal;
+        return new I(d);
+    }
+\end{verbatim}
+
+Creating a new heap allocated object ––~a data cell~--
+is easy in C\shrp. In STG all constructor applications are
+saturated so we don't have to deal with an
+insufficient number of constructor arguments. Here we can
+also see that \texttt{v} is not a data value, but a delayed,
+updatable computation. When \texttt{Eval} method is called
+on \texttt{v}, the \verb|divide_v_Entry| method will be
+invoked with captured values \texttt{x} and \texttt{yVal}.
+
+\subsection{Computing a function}
+
+Let's look at the \texttt{add n} function from \myref{s:example_eval}.
+It creates a new function \texttt{f} that captures argument \texttt{n}
+and partially applies function \texttt{bind} to the created function.
+This can be represented in C\shrp by the following methods:
+
+\begin{verbatim}
+    public static Function bind = new Fun(2, bind_Entry);
+    ...
+    public static Closure add_Entry(Closure n) {
+        var f = new Fun<Closure>(1, add_f_Entry, n);
+        return bind.Apply<Closure,Closure>(f);
+    }
+    public static Closure add_f_Entry(Closure n, Closure x) {
+        var v = new Updatable<Closure, Closure>(Int_add, x, n);
+        return new Just(v);
+    }
+\end{verbatim}
+
+The \texttt{Fun} class takes a reference to the computation method
+and the function's arity -- number of arguments.
+It also can capture free variables,
+as is the case here when we pass it~\texttt{n}.
+The \texttt{Apply} method checks the number of provided
+arguments and if saturated performs the computation.
+Otherwise it returns a partial application object (PAP).
+
+\subsection{Performing conditional computations}\label{s:compute_cond}
+
+Let's look at the \texttt{bind f m} function from \myref{s:example_eval}.
+It performs pattern matching on its second argument.
+An alternative computation is performed based on the satisfied condition.
+This can be represented in C\shrp by the following method:
+
+\begin{verbatim}
+    public static Closure bind_Entry(Closure f, Closure m) {
+        m = m.Eval();
+        switch (m) {
+            default: 
+                throw new ImpossibleException();
+            case Nothing m_Nothing:
+                return new Nothing();
+            case Just m_Just:
+                var x = m_Just.x0;
+                return f.Apply<Closure,Closure>(x);
+        }
+    }
+\end{verbatim}
+
+In C\shrp \texttt{case} expressions are translated to
+\texttt{switch} statements. An example of this has already
+been shown in \myref{s:compute_data} when checking if an
+argument had value \texttt{0}. While switching on primitive
+values is simple, it's a little more complex with data constructors.
+
+To get the arguments of a data constructor, the object has
+to be cast from type \texttt{Closure} to the type of the constructor.
+The .NET Runtime is type safe in that it performs type
+checks on casts to validate data consistency.
+The most efficient cast available is an \texttt{isinst} CIL
+instruction that applied on a sealed type results in four ASM instructions:
+
+\begin{enumerate}
+    \item get pointer to object's MethodTable,
+    \item compare it to the sealed type's MethodTable pointer
+    \item jump forward one instruction if pointers are equal
+    \item otherwise assign \texttt{null} to the variable 
+\end{enumerate}
+
+There are two ways to perform constructor choice in a switch statement:
+by tag or by type. Doing a switch on type performs the type
+cast and choice simultaneously but it is linear to the
+number of alternatives. Doing a switch by tag still
+requires the type cast, but for more than 2 constructors (3
+branches including the \texttt{default}) it is implemented efficiently as a jump table.
+Tests in \myref{perf:switching} show that switching on tag
+becomes beneficial with switches of 5 or more alternatives.
+
+In the \texttt{default} branch an exception is thrown.
+The reason why it had to be included is because C\shrp
+cannot tell that no other values are possible.
+That's not due to type erasure -- any switch statement that
+is the last statement in a function has to have a default case.
+
+\section{Runtime implementation}
+
+The lazy runtime is a set of abstractions and tools
+that allow for efficient execution of lazy code.
+This section presents the details of what has been implemented,
+how it works, and why it is efficient.
+
+\subsection{Abstract Closure class}
+
+All heap allocated objects: computations, lifted values,
+and functions share a common superclass –– the \texttt{Closure}.
+Closure provides three distinct interfaces for each of the aforementioned object types:
+
+\begin{enumerate}
+    \item \texttt{Eval()} method -- computations are
+    invoked and expressions evaluated to WHNF, resulting in
+    the returned value. For data and functions there is
+    nothing to compute as they are already in WHNF so they
+    can just return themselves.
+    \item \texttt{Tag} property -- allows to switch on data
+    constructors without a cast beforehand. Functions and
+    computations throw an exception if used.
+    \item \texttt{Apply(...)} methods -- used to apply
+    functions to their arguments. Data values cannot be
+    applied and throw an exception. Computations are first
+    evaluated and then the result is applied.
+\end{enumerate}
+
+\begin{verbatim}
+    public abstract class Closure {
+        public abstract Closure Eval();
+        public abstract     int Tag { get; }
+        public abstract       R Apply<A0,R>(A0 a0);
+        public abstract       R Apply<A0,A1,R>(A0 a0, A1 a1);
+        public abstract       R Apply<A0,A1,A2,R>(A0 a0, A1 a1, A2 a2);
+    }
+\end{verbatim}
+
+Every method in C\shrp has a fixed number of parameters (no varargs).
+This means the runtime establishes maximal arity of functions.
+Thanks to currying any function of greater arity can be
+rewritten to return a function of smaller arity \cite{Curry}.
+Furthermore, \texttt{Apply} methods are generic to achieve
+the most flexibility and succinctness.
+This in turn means type parameters need to be provided at every call site.
+
+\newpage
+\subsection{Abstract Computation and Data classes}
+
+From the previous section follow the definitions of  abstract \texttt{Computation} and \texttt{Data} classes:
+
+\begin{verbatim}
+    public abstract class Computation : Closure
+    {
+        public override int Tag
+            => throw new NotSupportedException(
+                            "Accessing Tag on a computation.");
+
+        public override R Apply<A0, R>(A0 a0)
+            => this.Eval().Apply<A0, R>(a0);
+
+        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+            => this.Eval().Apply<A0, A1, R>(a0, a1);
+
+        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+            => this.Eval().Apply<A0, A1, A2, R>(a0, a1, a2);
+    }
+\end{verbatim}
+\begin{verbatim}
+    public abstract class Data : Closure
+    {
+        public override Closure Eval() => this;
+        public override int Tag => 0;
+
+        public override R Apply<A0, R>(A0 a0)
+            => throw new NotSupportedException(
+                            $"Cannot apply a value ({GetType()})");
+
+        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+            => throw new NotSupportedException(
+                            $"Cannot apply a value ({GetType()})");
+
+        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+            => throw new NotSupportedException(
+                            $"Cannot apply a value ({GetType()})");
+    }
+\end{verbatim}
+
+\newpage
+\subsection{Abstract Function class}\label{s:function_class}
+
+While previous abstractions were pretty straight forward,
+functions are a bit more complicated. As mentioned before,
+C\shrp methods have to be invoked with all of the
+parameters they require.
+This means functions have to provide an additional check of arity.
+There are three possible situations:
+
+\begin{enumerate}
+    \item function is applied to the exact number of arguments
+    -- invoke the computation method;
+    \item function is applied to too many arguments
+    -- apply the function to the exact number of arguments
+    and then apply the result to the rest;
+    \item function is applied to too few arguments 
+    -- create a partial application object.
+\end{enumerate}
+
+\begin{verbatim}
+    public abstract partial class Function : Closure
+    {
+        public override Closure Eval() => this;
+
+        public override int Tag
+            => throw new NotSupportedException(
+                            "Accessing Tag on a computation.");
+        
+        public abstract int Arity { get; }
+            
+        public abstract R ApplyImpl<A0, R>(A0 a0);
+        public abstract R ApplyImpl<A0, A1, R>(A0 a0, A1 a1);
+        public abstract R ApplyImpl<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2);
+    }
+\end{verbatim}
+
+The above part of the \texttt{Function} class implements \texttt{Eval}
+and \texttt{Tag} inherited from \texttt{Closure} and introduces
+new members: \texttt{Arity} property and \texttt{ApplyImpl} methods.
+Below is one of the \texttt{Apply} methods that shows the three situations outlined above:
+
+\begin{verbatim}
+    public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+    {
+        Closure h;
+        switch (this.Arity)
+        {
+            case 1:
+                // too few arguments
+                h = this.ApplyImpl<A0, Closure>(a0);
+                return h.Apply<A1, R>(a1);
+            case 2:
+                // exact number of arguments
+                return this.ApplyImpl<A0, A1, R>(a0, a1);
+            default:
+                // too many arguments
+                return (R)(object)new PAP<A0, A1>(this, a0, a1);
+        }
+    }
+\end{verbatim}
+
+The partial application object holds a reference to the
+applied function and captured arguments.
+When applied it applies the original function to all available arguments.
+
+\begin{verbatim}
+    public abstract class PAP : Closure
+    {
+        public Function f;
+        protected PAP(Function f) => this.f = f;
+
+        public override Closure Eval() => this;
+
+        public override int Tag
+            => throw new NotSupportedException(
+                            "Accessing Tag on a PAP.");
+    }
+\end{verbatim}
+\begin{verbatim}
+    public sealed class PAP<B0> : PAP
+    {
+        public B0 x0;
+        public PAP(Function f, B0 x0) : base(f)
+            => this.x0 = x0;
+
+        public override R Apply<A0, R>(A0 a0)
+            => f.Apply<B0, A0, R>(x0, a0);
+        
+        public override R Apply<A0, A1, R>(A0 a0, A1 a1) 
+            => f.Apply<B0, A0, A1, R>(x0, a0, a1);
+        
+        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+            => throw new NotSupportedException(
+                            "Application exceeds runtime argument limit.");
+    }
+\end{verbatim}
+
+With this implementation PAPs never form a chain of objects, but rather return a new ``flat'' PAP when applied to too few arguments.
+
+\subsection{Abstract Thunk class}\label{s:thunk_class}
+
+In \myref{s:closures} a thunk has been defined as a
+closure that updates itself after it is evaluated.
+The \texttt{Thunk} class is going to extend
+\texttt{Computation} class and provide this update
+mechanism. Upon invoking the \texttt{Eval} method the first
+time, the computation is performed and the result saved.
+The thunk now becomes an indirection and on future evaluations
+the the saved result is returned.
+
+This can be implemented in two ways. One is to perform a comparison
+of the result pointer with \texttt{null} to see if
+the computation has been performed.
+The other one involves modifying the method that is called
+to perform evaluation.
+Performance tests show that on the .NET platform the first approach is more efficient
+due to a more expensive constructor call for every thunk
+(see \myref{perf:thunk_ind} for more details).
+
+\newpage
+\begin{verbatim}
+    public abstract class Thunk : Computation
+    {
+        public Closure ind;
+
+        protected abstract Closure Compute();
+        protected virtual void Cleanup() { }
+        
+        public override Closure Eval()
+        {
+            if (ind != null) 
+                return ind.Eval();
+
+            ind = Blackhole.Instance;
+            ind = Compute();
+            Cleanup();
+            return ind;
+        }
+    }
+\end{verbatim}
+
+The \texttt{Compute} method is implemented in subclasses
+and performs the actual computation.
+It's result is saved in the \texttt{ind} field.
+But during the computation \texttt{ind} is assigned a special
+value called the black hole that allows detecting
+invalid self-references (computation loops) and can
+be further used to implement synchronization in
+multithreaded contexts \cite{multiprocessor}.
+However, the currently used implementation is extremely simple:
+
+\begin{verbatim}
+    public sealed class Blackhole : Computation
+    {
+        public override Closure Eval() =>
+            throw new System.Exception("BLACKHOLE");
+        public static Blackhole Instance = new Blackhole();
+    }
+\end{verbatim}
+
+For explanation on the \texttt{Cleanup} method, see \myref{s:updatables}.
+
+\subsection{CLR intrinsic functions}
+
+The user code examples shown in \myref{s:computations}
+have been simplified for clarity. However,
+whenever a reference to a method is mentioned, it is
+understood as a pointer to the methods entry point.
+
+The .NET's Common Language Runtime (CLR) provides primitives
+that make it possible to obtain a pointer to a method
+and to later call this method indirectly via that pointer.
+Unfortunately, the C\shrp language doesn't provide means to
+utilize those features. As such a modified version of the compiler
+had to be used that includes a sort of a \textit{hack} that
+enables compiling C\shrp code with those CLR intrinsic instructions.
+
+Attributing a \texttt{static unsafe extern} method with a
+\texttt{CompilerIntrinsicAttribute}
+declared in \texttt{System.Runtime.CompilerServices}
+namespace tells the modified compiler to emit an
+instruction described by that methods name and type signature.
+This runtime uses the following two functions:
+
+\begin{itemize}
+    \item \texttt{LoadFunctionPointer} -- represents the 
+    \texttt{ldftn} instruction and takes a method group as a parameter;
+    \item \texttt{TailCallIndirectGeneric} -- represents a 
+    new method whose body is composed of a \texttt{calli} 
+    instruction with a \texttt{.tail} modifier --
+    this method takes arguments followed by the function pointer
+    to be called with those arguments.
+\end{itemize}
+
+The C\shrp language provides a type safe mechanism for manipulating
+functions -- delegates. However, due to the overhead of
+additional allocations and checks on delegate creation they
+don't seem to be a good fit for an efficient runtime implementation. For more details see \myref{perf:fun_pointers}.
+
+\begin{verbatim}
+    [CompilerIntrinsic]
+    public static unsafe extern void*
+        LoadFunctionPointer<T1, T2>(Func<T1, T2> fun);
+
+    [CompilerIntrinsic]
+    public static unsafe extern U
+        TailCallIndirectGeneric<T0, U>(T0 x0, void* funPtr);
+\end{verbatim}
+
+It is worth mentioning that the RyuJIT, which generates
+machine code during execution of a .NET program,
+can in fact optimize method calls in tail position
+to proper tail calls, even without the \texttt{.tail}
+modifier. In order to do so, the program has to be compiled
+in Release mode or with optimization flag enabled.
+
+\subsection{Universal classes}
+
+In order to limit the amount of types, rather than having
+a type per closure a different approach has been chosen.
+Universal types take a function pointer and make
+indirect calls to it.
+They also have generic type parameters to allow creating
+type safe and efficient instances with customized fields.
+
+% point to performance difference
+
+\subsubsection{Updatable class family}\label{s:updatables}
+
+Section \myref{s:compute_data} presented usage of an Updatable class.
+It is a subclass of \texttt{Thunk} that takes a function
+pointer and free variables. When evaluated, it performs an
+indirect call to the function pointer with those free variables as arguments.
+
+There is an \texttt{Updatable} class per number of free variables. The types of free variables are provided in generic parameters. Currently the runtime supports up to 6
+free variables.
+\\ Below is an example of such a class:
+
+\begin{verbatim}
+    public unsafe class Updatable<T0> : Thunk
+    {
+        protected internal void* f;
+        public T0 x0;
+
+        public Updatable(void* f, T0 x0)
+        {
+            this.f = f;
+            this.x0 = x0;
+        }
+
+        protected override Closure Compute()
+            => CLR.TailCallIndirectGeneric<T0, Closure>(x0, f);
+        
+        protected internal override void Cleanup()
+            => this.x0 = default;
+    }
+\end{verbatim}
+
+The \texttt{Cleanup} method is responsible for freeing
+any references to other heap allocated objects, so that
+they can be collected by the Garbage Collector (GC).
+Cleanup is invoked after the computation has finished
+and those free variables are no longer needed.
+It's currently not possible to only set object references to null,
+but all values are zeroed, because of the generic nature
+of the class.
+
+\subsubsection{Fun class family}
+
+Similarly to \texttt{Updatable} classes the \texttt{Fun}
+classes take a function pointer and free variables. But they also take the arity of the function. Below is an example of such a class:
+
+\begin{verbatim}
+    public unsafe class Fun<F0> : Fun
+    {
+        public F0 x0;
+
+        public Fun(int arity, void* f, F0 x0) : base(arity, f)
+            => this.x0 = x0;
+
+        public override R ApplyImpl<A0, R>(A0 a0)
+            => CLR.TailCallIndirectGeneric<F0, A0, R>(x0, a0, f);
+
+        public override R ApplyImpl<A0, A1, R>(A0 a0, A1 a1)
+            => CLR.TailCallIndirectGeneric<F0, A0, A1, R>(x0, a0, a1, f);
+
+        public override R ApplyImpl<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
+            => CLR.TailCallIndirectGeneric<F0, A0, A1, A2, R>(x0, a0, a1, a2, f);
+    }
+\end{verbatim}
+
+The base \texttt{Fun} class without free variables declares the protected fields for the function pointer and arity. As was described in section \myref{s:function_class}, the universal classes provide all the \texttt{ApplyImpl} methods, but depending on the \texttt{Arity} property, only the one with the exact number of arguments may be invoked.
+
+\subsubsection{SingleEntry class family}
+
+There some thunks that are evaluated just once. In that case
+it's not necessary for them to perform updates.
+A thunk-like one time computation is called a \textit{single entry thunk}.
+A~\texttt{SingleEntry} takes a function pointer and free
+variables. When evaluated it makes an indirect call to the
+function pointer with free variables as arguments.
+Upon returning the result the \texttt{SingleEntry} object
+is free to be collected by the GC.
+\\ Below is an example of such a class:
+
+\begin{verbatim}
+    public unsafe class SingleEntry<T0> : Computation
+    {
+        protected internal void* f;
+        public T0 x0;
+
+        public SingleEntry(void* f, T0 x0)
+        {
+            this.f = f;
+            this.x0 = x0;
+        }
+
+        public override Closure Eval()
+            => CLR.TailCallIndirectGeneric<T0, Closure>(x0, f);
+    }
+\end{verbatim}
+
+\section{Standard library}
+
+One of the goals of this project is to allow compiling
+Haskell code to run on the lazy .NET runtime.
+Chapter \myref{r:compiler} presents an experimental implementation
+of a compiler based on GHC.
+Ideally the standard haskell functions can be all ported,
+but there exists a mechanism to provide a different \texttt{Prelude}
+module to be used. Possibly one with some limitations
+to allow for testing most common cases, while leaving
+more advanced cases for the future.
 
 % ##########################
 \chapter{Comparison to related work}\label{r:alternatives}
 % ##########################
 
+The development of the lazy runtime was influenced by a
+number of existing solutions. However, most papers on the
+topic did not provide publicly available source code
+material, or such source code is no longer available because
+of time passage. This makes it a bit harder
+to reason about practical efficiency of those solutions.
+
+First, we'll look at the work done for the Java Virtual Machine (JVM),
+especially the very robust GHC port called Eta.
+Then we'll compare the lazy runtime to other .NET based works.
+
 \section{JVM based solutions}
-In general, issues with tail calls, Tullsen and Choi
+
+In 2007 Brian Alliet wrote a paper \cite{Alliet} in which
+he pointed out previous work done on the subject of
+translating Haskell to Java and suggested possible improvements.
+It mentions the works of Mark Tullsen \cite{Tullsen},
+Kwanghoon Choi et al. \cite{Choi}
+and Don Stewart \cite{Stewart} and their key differences.
+It also points out that the use of \textit{eval/apply} application method
+may be better suiting for the Object Oriented Virtual Machine (OOVM)
+then the previously popular \textit{push/enter} method
+\cite{fastcurry}.
+
+One of the biggest challenges on the JVM is the lack of
+tail calls. For most functional recursive programs this
+is a huge obstacle. The solution to this problem
+usually comes down to implementing an iterative interpreter
+that substitutes recursion. This detail in particular is 
+why the .NET platform is better suited for a lazy runtime
+implementation as it supports efficient tail calls.
+
+Moreover, functions are not first-class values in Java
+and therefore there is no efficient mechanism similar
+to CLR's function pointers in the JVM.
+Instead more emphasis is placed on passing around objects
+that implement a particular interface.
+The JVM also performs type erasure on its generics
+which then can lead to an increase in
+method overloads for such methods as \texttt{apply},
+because primitive types cannot be described by generics.
+
+There is, however, a somewhat successful implementation of
+Haskell (particularly GHC Haskell) on the JVM -- the Eta
+platform developed by Typelead. Unfortunately, there seem
+to be no papers related to its development, but it is
+open source and available on GitHub.
+
 \subsection{Eta}
-Achievements, issues, similarities and differences
+
+Eta is presented as a variant of Haskell. It is based on
+GHC 7.10.3. The project is composed of a GHC fork with
+modified backend and additional tooling for building
+and managing packages.
+
+One of the key features of Eta is its Foreign Function Interface (FFI)
+that allows to export Haskell functions as Java methods
+as well as to import and use Java objects.
+The latter is done by providing a special \texttt{Class} type class
+that can be evaluated in the \texttt{IO} monad.
+
+The Eta runtime is much more complex than this lazy runtime.
+It provides advanced features for IO, managing threads, mutable variables,
+selector thunks, Software Transactional Memory, and more.
+But it is still limited by the JVM and the aforementioned
+constraints. This leads to more work involved in porting
+Haskell libraries as special trampolines have to be used
+to mark recursive functions.
+
+Let's compare the way a \texttt{map} function would be compiled
+on Eta and this lazy runtime:
+
+\begin{verbatim}
+    // Eta_map.java
+    public static class Map extends Function2 {
+      public static Map INSTANCE = new Map();
+
+      public static Closure call(StgContext ctx, Closure f, Closure l) {
+         Closure l_ = l.evaluate(ctx);
+         if (l_ instanceof Nil) {
+            return Types.NilInstance();
+         } else {
+            Cons cons = (Cons)l_;
+            MapThunk tail = new MapThunk(f, cons.x2);
+            Ap2Upd head = new Ap2Upd(f, cons.x1);
+            return new Cons(head, tail);
+         }
+      }
+
+      public final Closure apply2(StgContext ctx, Closure f, Closure l) {
+         if (ctx.trampoline) {
+            Stg.apply2Tail(ctx, this, f, l);
+         }
+         return call(ctx, f, l);
+      }
+      public final Closure enter(StgContext ctx) {
+         if (ctx.trampoline) {
+            Stg.enterTail(ctx, this);
+         }
+         return call(ctx, ctx.R1, ctx.R2);
+      }
+    }
+\end{verbatim}
+
+The \texttt{map} function is represented by a class deriving
+from \texttt{Function2} -- a function of arity 2.
+The computation is described by the static method \texttt{call}
+that evaluates its second argument and checks which data
+constructor it is. If it is \texttt{Cons} then it
+allocates a new thunk that applies \texttt{map} on the function and tail, another thunk that applies the
+function on the head, and returns a new data cell.
+
+Then two instance methods are shown: \texttt{apply2} and \texttt{enter}.
+Eta supports both \textit{eval/apply} and \textit{push/enter}
+function application methods.
+Both of those functions check if the computation is
+executed on a trampoline in which case they have to
+perform a `bounce' (unroll the stack)
+and then call the static method \texttt{call}.
+
+\begin{verbatim}
+    // Lazer_map.cs
+    public static Function map = 
+        new Fun(2, CLR.LoadFunctionPointer(map_Entry));
+
+    public static Closure map_Entry(Closure f, Closure l)
+    {
+        var l_ = l.Eval();
+        switch (l_)
+        {
+            default: { throw new ImpossibleException(); }
+            case Nil l_Nil: { return nil; }
+            case Cons l_Cons:
+                {
+                    var h = l_Cons.x0;
+                    var t = l_Cons.x1;
+                    var tail = Updatable.Make(
+                        CLR.LoadFunctionPointer(map_Entry), f, t);
+                    var head = Updatable.Make(
+                        CLR.LoadFunctionPointer(map_head_Entry), f, h);
+                    return new Cons(head, tail);
+                }
+        }
+    }
+    public static Closure map_head_Entry(Closure f, Closure h)
+    {
+        return f.Apply<Closure,Closure>(h);
+    }
+\end{verbatim}
+
+The main difference is that there is no special class for map,
+but rather a universal class \texttt{Fun} is instantiated
+with the pointer to the static computation method.
+The same goes for the thunks created in the Cons branch.
+Thanks to tail calls no trampolines are involved, which
+increases performance.
+
+The \textit{eval/apply} model has been implemented a bit differently
+in Eta in that there are abstract subclasses \texttt{FunctionN}
+of the base class \texttt{Function} that implement all
+apply methods except \texttt{applyN} that is implemented
+by the actual function implementation.
+Those already implemented methods take care of creating
+PAPs and further result applications.
 
 \section{Mondrian}
-\cite{PerryMeijer}
+
+Mondrian was a lazy functional scripting language for
+the .NET platform. It was developed during early access
+to the first version of the runtime.
+So it was the first approach to bringing non-strict
+semantics to .NET.
+
+During research two papers have been discovered that
+describe Mondrian. The first one \cite{MondrianImplDetails}
+introduces the language and provides its implementation details.
+The second paper \cite{PerryMeijer} discusses more generally
+the implementation of Mondrian and other lazy languages
+for both .NET and JVM (OOVMs in general).
+Mondrian is a separate language from Haskell and has
+been designed for interoperability with other .NET languages.
+
+Let's take an overview look on its implementation.
+There is no common base class (except for \texttt{Object}).
+Data types are POCO (plain old CLR object) and functions
+implement the following interface:
+\begin{verbatim}
+    interface Code {
+        public Object ENTER();
+    }
+\end{verbatim}
+
+This means there is one class per function.
+From the interface we can also see that it uses
+\textit{push/enter} function application model.
+The argument stack is just a stack of \texttt{Object}s
+which leads to inefficient boxing of primitive values.
+A trampoline is used to apply functions with exception handling
+as means of creating PAP objects.
+This is probably due to a lack of tail calls in the early
+versions of the .NET runtime.
+
+Mondrian is no longer available in any shape or form (even the projects web domain points to a different site).
 
 \section{Haskell.NET}
-\cite{Brazil}
+
+In 2005 appeared the first project to bring Haskell
+to the .NET platform.
+Monique Monteiro et al. published a paper \cite{Brazil}
+describing the implementation. This work also
+uses predefined universal classes for thunks and was
+a primary motivator to do the same for this lazy runtime.
+
+Haskell.NET also uses universal objects for data constructors.
+Therefore all switching is done on their tags.
+For function application \textit{push/enter} method is used
+with multiple static stacks -- one for object references and
+one for each primitve type.
+
+The paper mentions a modified version of GHC
+with a new backend for .NET compilation, which
+unfortunately is no longer available.
+Similarly to the compiler described in chapter \myref{r:compiler},
+the modified GHC generated code from STG representation.
+However, it compiled Haskell straight to CIL rather than C\shrp.
 
 \section{Oliver Hunt's work}
-\cite{Hunt}
+
+In 2006 Oliver Hunt published his Master's paper
+on \textit{,,The Provision of Non-Strictness, Higher Kinded Types
+and Higher Ranked Types on an Object Oriented
+Virtual Machine''}.
+In this paper he provides a lot of theoretical details
+on lazy functional programming and comparison with imperative programming.
+
+Hunt puts more emphasis on strongly typed data constructors
+in order to simplify interoperability.
+He describes potential support of Higher Kinded Types (HKT)
+and Higher Ranked Types by the means of generic type arguments
+and only partial type erasure.
+Another result of strong data typing is an increase of
+thunk classes as they one has to be defined for each type.
+
+When it comes to function application Hunt removes the need
+for either \textit{eval/apply} or \textit{push/enter} by
+performing lambda lifting and explicit partial application
+at compile time. Functions are implemented with classes
+extending a set of common base classes for given arity.
+Additionally Hunt presents that type classes
+may be implemented as interfaces with instances implementing those interfaces.
+
+The paper also provides a description for an experimental
+compiler. It uses GHC to compile Haskell to the Core
+intermediate language which is then processed to produce C\shrp.
+Unfortunately, again, access to this compiler wasn't possible.
+
 
 % ##########################
 \chapter{Performance}\label{r:perf}
 % ##########################
 
-TODO
+There are many consideration to be made when creating
+an efficient runtime. Some performance issues are easy
+to identify and others are extremely vague and dependent
+on very specific details of how the CPU interacts with
+our code and data.
+In this chapter some possible bottlenecks are presented
+as well as test cases that explain some choices made
+when creating the runtime.
 
 \section{Bottlenecks}
-\subsection{Branching}
+
+\subsection{Unnecessary branching}
+
+One of the first mistakes when trying to optimize the runtime
+is to write an explicit check whether the closure is
+already evaluated or not.
+Extensive branching may lead to an increase in branch
+prediction fails, which is very costly.
+
+\subsection{Nested indirection}
+
+The current implementation of the runtime uses universal
+classes that perform indirect calls.
+In fact every method call on an object is already an indirect call.
+This means some thought has to be put into the compiled code
+so that the indirectly called method isn't yet another
+indirection.
+
 \subsection{Garbage Collection}
-stack length and traversing for pointers \\
-continuation pooling (update and identity)
-\subsection{Method devirtualization}
-\subsection{Derivable data classes}
+
+In .NET there is a global GC that stops all threads
+and performs the collection.
+The stoppage may occur at any time when the program
+runs out of free allocation space.
+It is a generational tracing GC,
+which means that short living objects are cheaper to collect.
+
+The way the GC works is that it traverses the stack looking
+for pointers. References between objects form a graph with
+the stack being a root. If there isn't a path from an object
+to the root, then this object can be collected.
+A side effect of this implementation is that
+non-tail recursive functions that grow the stack
+make the traversal a bit more expensive.
+
+When dealing with lots of short lived objects it may be
+a good idea to implement some kind of pooling mechanism
+to decrease the number of allocations and the frequency of
+the GC process. The singleton pattern can be utilized
+for argumentless data constructors and local functions
+without free variables.
+
+\subsection{Derivable classes}
+
+By sealing the data classes we allow for efficient type casts
+to be formed as outlined in \myref{s:compute_cond}.
+In general, calling a method on a sealed class allows
+the JIT to perform devirtualization and call that method
+directly.
+
 \subsection{Data structures}
-continuations stack implementation (System.Stack vs Pointer linked list) \\
+
+During the development of the runtime a question was posed
+whether heap based continuations would alleviate the problems
+of limited stack space. The idea has been turned down
+due to a performance slowdown.
+However, with that implementation came an issue
+of choosing the correct data structure for a continuation stack.
+An array based stack proved to be faster then linked list of references.
+But the most efficient approach was to form a stack chain
+from the continuation objects, by giving each a reference
+to the next continuation.
+This way much fewer allocation were made, while keeping
+the O(1) cost of push and pop operations.
+
+\section{Performance Tests}
+
+\subsection{Switching on Tag vs Type}\label{perf:switching}
+
+As explained in \myref{s:compute_cond} there are two ways
+to switch on expressions, by type casting or by switching
+on constructor tag. This test is meant to compare
+performance of both. The following Haskell code has been implemented in C\shrp:
+
+\begin{verbatim}
+    data O = O0 Int# | O1 Int# | O2 Int# | O3 Int# | O4 Int#
+    
+    extractO :: O -> Int
+    extractO o =
+        case o of
+            O0 o0 -> I# o0
+            O1 o1 -> I# o1
+            O2 o2 -> I# o2
+            O3 o3 -> I# o3
+            O4 o4 -> I# o4
+    extractOL o =
+        case o of
+            O0 o0 -> I# o0
+            O1 o1 -> I# o1
+            _     -> I# 0#
+
+    suma !a []     = a
+    suma !a (x:xs) = suma xs (a+x)
+
+    take 0 _      = []
+    take _ []     = []
+    take n (x:xs) = x : take (n-1) xs
+
+    loop :: [O] -> [O]
+    loop os = os ++ loop os
+
+    test os = suma 0 (take 500000 $ map extractO $ loop os)
+\end{verbatim}
+
+The tests are run on sets of \texttt{[O0 1\#, ..., Ok 1\#]}
+to see if linear type casting gets slower with more
+constructors to check. Additional two tests are performed
+for \texttt{[O0 1\#, O1 1\#]} on \texttt{extractOL} to see
+the performance difference in linear checks on both types
+and tags. A test that used a random sequence was also
+included to counteract CPU branch prediction. Results are shown below:
+
+\begin{center}
+\begin{tabular}{c r c c c c}
+    & & MIN & AVG & MAX & $\sigma$ \\
+    \cline{3-6}
+    
+    \multirow{4}{*}{O0 - O1} & Switch Type & 179ms & 188ms & 238ms & 14.3 \\
+    & Switch Tag & 186ms & 192ms & 218ms & 6.5 \\
+    & Switch Type L & 179ms & 182ms & 191ms & 2.4 \\
+    & Switch Tag L & 170ms & 185ms & 220ms & 11.1 \\
+    \cline{2-6}
+
+    \multirow{2}{*}{O0 - O2} & Switch Type & 167ms & 170ms & 186ms & 3.5 \\
+    & Switch Tag & 173ms & 176ms & 189ms & 3.8 \\
+    \cline{2-6}
+
+    \multirow{2}{*}{O0 - O3} & Switch Type & 167ms & 172ms & 192ms & 5.4 \\
+    & Switch Tag & 173ms & 177ms & 189ms & 4.3 \\
+    \cline{2-6}
+
+    \multirow{2}{*}{O0 - O4} & Switch Type & 168ms & 171ms & 180ms & 3.1 \\
+    & Switch Tag & 174ms & 179ms & 198ms & 6.5 \\
+    \cline{2-6}
+
+    \multirow{2}{*}{Random} & Switch Type & 183ms & 185ms & 195ms & 3.3 \\
+    & Switch Tag & 184ms & 189ms & 208ms & 5.5 \\
+    \cline{2-6}
+
+    \multirow{2}{*}{Random L} & Switch Type L & 171ms & 175ms & 193ms & 5.3 \\
+    & Switch Tag L & 172ms & 177ms & 197ms & 5.2 \\
+\end{tabular}
+\end{center}
+
+Surprisingly switching on types is slightly faster in every case.
+Even in random tests when branch prediction cannot be the optimizing factor.
+However, a different test was ran that would check
+constant sequences of \texttt{O0}, \texttt{O4} and \texttt{O9}.
+This way any amortization is removed.
+
+\begin{center}
+\begin{tabular}{c r c c c c}
+    & & MIN & AVG & MAX & $\sigma$ \\
+    \cline{3-6}
+        
+    \multirow{2}{*}{O0} & Switch Type & 164ms & 171ms & 189ms & 6.8 \\
+    & Switch Tag & 167ms & 172ms & 186ms & 5.3 \\
+    \cline{2-6}
+
+    \multirow{2}{*}{O4} & Switch Type & 168ms & 173ms & 200ms & 7.2 \\
+    & Switch Tag & 165ms & 173ms & 195ms & 8.5 \\
+    \cline{2-6}
+
+    \multirow{2}{*}{O9} & Switch Type & 170ms & 177ms & 201ms & 7.3 \\
+    & Switch Tag & 169ms & 174ms & 185ms & 5.4 \\
+\end{tabular}
+\end{center}
+
+The results of both types of switches are very close.
+Switching on types, however, does get slower with more alternatives,
+but the difference seems to be mostly negligible.
+Switches with 5 or more alternatives should choose them by tag.
+
+\subsection{Dynamic Thunk indirection call}\label{perf:thunk_ind}
+
+In \myref{s:thunk_class} a mechanism has been shown were
+on each call to \texttt{Eval} a comparison is made to
+check if the indirection pointer is null.
+This may seem inefficient and could potentially be implemented
+by calling a ``dynamic'' method.
+However, .NET objects reference their types' method tables
+and cannot modify them. This forces the use of an indirect call.
+
+\begin{verbatim}
+    public unsafe abstract class Thunk : Computation {
+        public Closure ind;
+        private void* eval;
+        protected Thunk()
+            => eval = CLR.LoadFunctionPointer(PerformComputation);
+        
+        public override Closure Eval()
+            => CLR.TailCallIndirectGeneric<Thunk, Closure>(this, eval);
+        
+        private Closure PerformComputation() {
+            ind = Blackhole.Instance;
+            ind = Compute();
+            eval = CLR.LoadFunctionPointer(ReturnIndirection);
+            Cleanup();
+            return ind;
+        }
+
+        private Closure ReturnIndirection()
+            => ind.Eval();
+    }
+\end{verbatim}
+
+The following tests were performed on a slightly simplified
+implementation, keeping the idea intact:
+
+\begin{center}
+\begin{tabular}{c r c c c}
+    & & MIN & AVG & MAX \\
+    \cline{3-5}
+
+    \multirow{2}{*}{Create a million thunks}
+    & Comparison & 0.3ms & 0.4ms & 0.7ms \\
+    & Dynamic method & 7.7ms & 10.4ms & 14.4ms \\
+    \cline{2-5}
+
+    \multirow{2}{*}{Call \texttt{Eval} a million times} 
+    & Comparison & 1ms & 1.2ms & 1.7ms \\
+    & Dynamic method & 4.8ms & 5.2ms & 6.2ms \\
+    
+\end{tabular}
+\end{center}
+
+It turned out that the cost of an indirect call is much higher then the cost of comparison, not to mention the additional cost of assigning the dynamic method in the constructor.
+
+\subsection{Function pointers vs Delegates}\label{perf:fun_pointers}
+
+In .NET the legitimate way of passing functions around
+are method delegates. The standard library provides
+universal classes such as \texttt{Action} and \texttt{Func}
+that are created from a function pointer and possibly
+an additional reference to an object in case of instance methods.
+
+At the time when I was faced with the decision to accept
+the performance of delegates or try to get to the raw pointers,
+I was trying to compile lazy programs to machine code with
+CoreRT. Currently the JIT-ed program runs nearly as fast as
+the optimized binary, and due to bugs in IL to C++ compiler
+CoreRT is no longer a viable target.
+However, it can still be used for some comparisons in tests.
+
+A small test example has been created to measure the time
+it takes to create a million delegates or pointers and then measure the time it takes to invoke a single one a million times.
+
+\begin{center}
+\begin{tabular}{c r c c c}
+    & & MIN & AVG & MAX \\
+    \cline{3-5}
+
+    \multirow{2}{*}{JIT Create}
+    & Delegate & 22ms & 23.4ms & 35ms \\
+    & Pointer & 8.8ms & 9.4ms & 12.7ms \\
+    \cline{2-5}
+    
+    \multirow{2}{*}{CoreRT Create}
+    & Delegate & 17.3ms & 18.6ms & 27.1ms \\
+    & Pointer & 6.6ms & 7.2ms & 12.2ms \\
+    \cline{2-5}
+    
+    \multirow{2}{*}{JIT Invoke}
+    & Delegate & 4.6ms & 4.8ms & 5.6ms \\
+    & Pointer & 4ms & 4.3ms & 5.4ms \\
+    \cline{2-5}
+    
+    \multirow{2}{*}{CoreRT Invoke}
+    & Delegate & 3.7ms & 4ms & 5ms \\
+    & Pointer & 3.7ms & 3.8ms & 4.5ms \\
+\end{tabular}
+\end{center}
+
+The results show that invocation takes approximately the same time
+(there's one additional memory read for delegates per invocation),
+but there's nearly a 3x difference in creation time.
+This proves pointers to be a superior solution
+when efficiency is required.
+
+\subsection{Benchmarks}
+
+% TODO compare Lazer, Eta and GHC
+% based on sum tests and simpler tests from nofib
+% https://github.com/ghc/nofib
 
 % ##########################
 \chapter{Compiling Haskell to C\#}\label{r:compiler}
@@ -691,6 +1632,8 @@ Master’s Thesis Proposal''}, 2007.
 
 \bibitem[KC,HL,TH-01]{Choi} Kwanghoon Choi, Hyun-il Lim, Taisook Han, \textit{,,Compiling Lazy Functional Programs Based othe Spineless Tagless G-machine for the Java Virtual Machine''}, FLOPS 2001.
 
+\bibitem[DS-02]{Stewart} Don Stewart, \textit{,,Multi-paradigm just-in-time compilation''}, 2002.
+
 \bibitem[NP,EM-04]{PerryMeijer} Nigel Perry, Erik Meijer, \textit{,,Implementing functional languages on object-oriented virtual machines''}, IEE Proceedings on Software, 151(1):1-9, 2004.
 
 \bibitem[OH-06]{Hunt} Oliver Hunt, \textit{,,The Provision of Non-Strictness, Higher Kinded Types
@@ -705,6 +1648,8 @@ and Higher Ranked Types on an Object Oriented Virtual Machine''}, 2006.
 \bibitem[VH,SB,TG-19]{lazySpark} Val\'erie Hayot-Sasson, Shawn T Brown, Tristan Glatard, \textit{,,Performance Evaluation of Big Data Processing Strategies for Neuroimaging''}, CCGRID, 2019.
 
 \bibitem[CO-96]{amortized} Chris Okasaki, \textit{,,The Role of Lazy Evaluation in Amortized Data Structures''} ICFP'96, 62-72, 1996.
+
+\bibitem[SPJ-87]{spj-book} Simon Peyton Jones, \textit{,,The Implementation of Functional Programming Languages''}, 1987.
 
 \bibitem[PH-80]{SECDM} Peter Henderson, \textit{,,Functional Programming: Application and Implementation''},
 Prentice-Hall, Englewood Cliffs, NJ, 1980.
@@ -726,8 +1671,7 @@ of the National Academy of Sciences (U.S.A.)}, XX, pp. 584—590, 1936.
 
 \bibitem[SM,SPJ-04]{fastcurry} Simon Marlow, Simon Peyton Jones, \textit{,,Making a fast Curry: Push/Enter vs. Eval/Apply for Higher-order Languages''} ICFP'04, pp. 4-15, 2004.
 
-\bibitem[MD-20]{ldftnVSdelegate} Marian Dziubiak, blog: \textit{,,Wskaźniki do funkcji w C\shrp''},
-    \url{https://www.md-techblog.net.pl/2020/02/dotnet-function-pointer/}, 2020.
+\bibitem[TH,SM,SPJ-05]{multiprocessor} Tim Harris, Simon Marlow, Simon Peyton Jones, \textit{,,Haskell on a Shared-Memory Multiprocessor''}, 2005.
 
 \end{thebibliography}
 
