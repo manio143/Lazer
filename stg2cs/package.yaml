@@ -1,14 +1,13 @@
 name:                stg2cs
 version:             0.1.0.0
-github:              "githubuser/stg2cs"
-license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2020 Author name here"
+github:              "manio143/stg2cs"
+license:             MIT
+author:              "Marian Dziubiak"
+maintainer:          "marian.dziubiak@gmail.com"
+copyright:           "2020 Marian Dziubiak"
 
 extra-source-files:
 - README.md
-- ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -17,7 +16,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/stg2cs#readme>
+description:         Please see the README on GitHub at <https://github.com/manio143/stg2cs#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -30,7 +29,7 @@ library:
   source-dirs: src
 
 executables:
-  stg2cs-exe:
+  stg2cs:
     main:                Main.hs
     source-dirs:         app
     ghc-options:

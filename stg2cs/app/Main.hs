@@ -2,6 +2,7 @@
 module Main where
 
 import System.IO
+import System.Environment
 import Control.Monad.Trans
 import Control.Monad.State
 import DynFlags
@@ -27,19 +28,25 @@ import Convert
 main :: IO ()
 main = do
   --print libdir
-  runGhc (Just libdir) $ do
+  args <- getArgs
+  if length args < 2 then
+    hPutStrLn stderr "Usage: stg2cs ModuleName FileName [importPaths]"  
+  else do
+   let moduleToCompile = args !! 0
+   let moduleToCompileFile = args !! 1
+   let paths = drop 2 args
+   runGhc (Just libdir) $ do
     env <- getSession
     dflags <- getSessionDynFlags
-    setSessionDynFlags $ updOptLevel 1 $ dflags { hscTarget = HscAsm }
+    setSessionDynFlags $ (flip gopt_set) Opt_ForceRecomp $ 
+        updOptLevel 1 $ dflags { hscTarget = HscAsm, importPaths = paths ++ (importPaths dflags) }
     dflags <- getSessionDynFlags
 
-    liftIO $ hPutStrLn stderr "Loading target Example.hs"  
-
-    target <- guessTarget "Example.hs" Nothing
+    target <- guessTarget moduleToCompileFile Nothing
     addTarget target
     load LoadAllTargets
-    depanal [] True
-    modSum <- getModSummary $ mkModuleName "Example"
+    modGraph <- depanal [] True
+    modSum <- getModSummary $ mkModuleName moduleToCompile
 
     pmod <- parseModule modSum      -- ModuleSummary
     tmod <- typecheckModule pmod    -- TypecheckedSource
@@ -60,4 +67,5 @@ main = do
     (prep, _) <- liftIO $ corePrepPgm env' mod loc core' tcs
     let (stg,_) = coreToStg dflags' mod prep
     stg_binds2 <- liftIO $ stg2stg dflags' stg
-    liftIO $ putStrLn $ stg2cs dflags' stg_binds2
+    --liftIO $ hPutStrLn stderr (showPpr dflags' stg_binds2)
+    liftIO $ putStrLn $ stg2cs dflags' moduleToCompile stg_binds2 (mg_tcs coreMod)
