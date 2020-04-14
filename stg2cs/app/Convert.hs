@@ -47,7 +47,7 @@ type Arg = Id
 
 data CSType = Closure | Int32 | Int64 | Char | Boolean | Float | Double | String 
             | Class Name [CSType] | Tuple [CSType]
-    deriving (Eq)
+    deriving (Eq, Show)
 data CSValue = CSCon Name [CSValue] | CSRef Id | CSLit Literal | CSNull
 
 data CSDataCon = CSDataCon Name Tag [CSType]
@@ -257,13 +257,18 @@ ghcInformationTypes = [
     ]
 
 processTyCon tyCon = do
-    mapM_ processDataCon (tyConDataCons tyCon)
+    if isDataTyCon tyCon then
+        mapM_ processDataCon (tyConDataCons tyCon)
+    else return ()
     case tyConClass_maybe tyCon of
         Just cls -> processClass cls
         Nothing -> return ()
 processDataCon dataCon =
-    let (_,_,args,_) = dataConSig dataCon in
-    modify (\s -> s { types = (CSDataCon (safeConName WithoutModule dataCon) (dataConTag dataCon) (map typeToCSType args)) : types s})
+    let (_,_,args,_) = dataConSig dataCon 
+        repArgs = filter isRepresentable args
+    in modify (\s -> s { types = (CSDataCon (safeConName WithoutModule dataCon) (dataConTag dataCon) (map typeToCSType repArgs)) : types s})
+    where
+        isRepresentable = not . isState -- a hack for now
 
 processClass cls = do
     let superSelectors = classSCSelIds cls :: [Id]
@@ -343,7 +348,8 @@ convertExpr id (StgCase e alias _ alts) = do
     let aliasName = safeVarName WithoutModule alias
     (caseExpr, _) <- convertExpr id e -- asumes simple expr
     let vt = idType alias
-    case isUnliftedType vt of
+    let actualType = if isUnitHash vt then innerUnitHashType vt else vt
+    case isUnliftedType actualType of
         True -> do
             return (CSELet alias caseExpr (CSECase alias csalts), ms)
         False -> do
@@ -464,7 +470,7 @@ convertAlts alias id alts = do
             (a', ms) <- convertAlt alias id st a
             (as', ms') <- convertAlts' alias id as
             return (a':as', ms ++ ms')
-        st = if length alts >= 5 || isEnumType (idType id) then Tag else Type
+        st = if length alts >= 5 || isEnumType (idType alias) then Tag else Type
 
 convertAlt :: Id -> Id -> SwitchType -> StgAlt -> CSST (CSAlt, [CSMethod])
 convertAlt _ id _ (DEFAULT, _, e) = do
@@ -481,7 +487,12 @@ convertAlt alias id st (DataAlt con, bndrs, e) = do
     let varName = aliasName ++ "_" ++ conName
     let boundExpr = makeBoundExpr varName ex 0 bndrs
     case st of
-        Type -> return (CSACon qualifiedConName varName boundExpr, ms) 
+        Type ->
+            if isUnitHash (idType alias) then do
+                let [inside] = bndrs
+                return (CSADefault (CSELet inside (CSEVar alias) ex), ms)
+            else
+                return (CSACon qualifiedConName varName boundExpr, ms) 
         Tag -> do
             tagLit <- mkInt (fromIntegral $ dataConTag con)
             let castBoundExpr = CSECastAs varName alias qualifiedConName boundExpr
@@ -739,7 +750,7 @@ safeName c w idName mId =
                 ":" -> "Cons"
                 "[]" -> "Nil"
                 "()" -> "Unit"
-                _ -> translateOpString name
+                _ -> escapeCSKeywords $ translateOpString name
         safeOpNameWithConInfo = 
             if isJust (mId >>= isDataConId_maybe) then
                 safeOpName ++ "_DataCon"
@@ -780,6 +791,30 @@ translateOpString n = (n >>= trOp)
         trOp '\'' = "_"
         trOp x | isAlphaNum x  = [x]
         trOp x = error $ "trOp unmatched '"++[x]++"' in string '"++n++"'"
+
+escapeCSKeywords n = if n `elem` keywords then '@' : n else n
+    where
+        keywords = ["abstract", "as", "base", "bool", 
+            "break", "byte", "case", "catch", 
+            "char", "checked", "class", "const", 
+            "continue", "decimal", "default", "delegate", 
+            "do", "double", "else", "enum", 
+            "event", "explicit", "extern", "false", 
+            "finally", "fixed", "float", "for", 
+            "foreach", "goto", "if", "implicit", 
+            "in", "int", "interface", "internal", 
+            "is", "lock", "long", "namespace", 
+            "new", "null", "object", "operator", 
+            "out", "override", "params", "private", 
+            "protected", "public", "readonly", "ref", 
+            "return", "sbyte", "sealed", "short", 
+            "sizeof", "stackalloc", "static", "string", 
+            "struct", "switch", "this", "throw", 
+            "true", "try", "typeof", "uint", 
+            "ulong", "unchecked", "unsafe", "ushort", 
+            "using", "using", "static", "virtual", "void",
+            "volatile", "while"
+            ]
 
 justTrue (Just True) = True
 justTrue _ = False
@@ -841,7 +876,8 @@ isEnumType t =
         Nothing -> False
         Just tc ->
             let dataCons = tyConDataCons tc
-            in all hasNoParams dataCons
+                isEnum = all hasNoParams dataCons
+            in isEnum
             where
                 hasNoParams dc =
                     let (_,_,args,_) = dataConSig dc in
@@ -849,9 +885,17 @@ isEnumType t =
                         [] -> True
                         _  -> False
 
+isUnitHash (TyConApp tc [r1,r2,st,_]) = 
+    let tcName = nameToStr $ tyConName tc
+        stName = debugPrintType st
+    in (tcName == "(#,#)" && stName == "State#")
+isUnitHash _ = False
+innerUnitHashType (TyConApp _ [_,_,_,t]) = t
+
 debugPrintType (FunTy t1 t2) = "(FunTy "++debugPrintType t1++" "++debugPrintType t2++")"
 debugPrintType (AppTy t1 t2) = "(AppTy "++debugPrintType t1++" "++debugPrintType t2++")"
 debugPrintType (ForAllTy _ t) = "(ForAllTy "++debugPrintType t++")"
+debugPrintType (TyConApp tc _) = nameToStr $ tyConName tc
 debugPrintType _ = "τ"
 
 typeToCSType t =
@@ -879,6 +923,7 @@ unliftedTypeToCSType t =
                                 Tuple (map typeToCSType withoutState)
                                else typeToCSType $ head withoutState
                         "Void#" -> Class "GHC.Prim.Void" []
+                        "State#" -> Class "GHC.Prim.StateHash" []
                         strName -> Class (strName ++ "_UnImplemented") []
 isState t = case t of
                 TyConApp tc tyArgs -> 
@@ -886,6 +931,7 @@ isState t = case t of
                     case nameToStr name of
                         "State#" -> True
                         _ -> False
+                _ -> False
 
 nameToStr name =
     let occ = nameOccName name
@@ -1035,7 +1081,9 @@ instance Outputable CSExpr where
         | otherwise
             = hcat [text "return ", pprSafeQualifiedName id, text ".Eval();"]
     ppr (CSECon "GHC.Prim.RawTuple" args) =
-        hsep [text $ "return (", pprArgs args, text ");"]
+        hsep [text "return (", pprArgs args, text ");"]
+    ppr (CSECon "GHC.Prim.UnitHash" [arg]) =
+        hsep [text "return", ppr arg, text ";"]
     ppr (CSECon name args) =
         hsep [text $ "return new "++name++"(", pprArgs args, text ");"]
     ppr (CSEApp id args) = 
@@ -1144,6 +1192,14 @@ pprOp CharGtOp [a1, a2] = hsep [text "(",ppr a1, text ">", ppr a2, text ") ? 1 :
 pprOp CharEqOp [a1, a2] = hsep [text "(",ppr a1, text "==", ppr a2, text ") ? 1 : 0"]
 pprOp CharNeOp [a1, a2] = hsep [text "(",ppr a1, text "!=", ppr a2, text ") ? 1 : 0"]
 pprOp TagToEnumOp [a1] = hsep [text "GHC.Types.tagToEnumHash(",ppr a1, text ")"]
+pprOp RaiseOp args = hsep [text "GHC.Prim.raiseHash(",pprArgs args, text ")"]
+pprOp RaiseIOOp args = hsep [text "GHC.Prim.raiseIOHash(",pprArgs args, text ")"]
+pprOp CatchOp args = hsep [text "GHC.Prim.catchHash(",pprArgs args, text ")"]
+pprOp MaskUninterruptibleOp args = hsep [text "GHC.Prim.maskUninterruptibleHash(",pprArgs args, text ")"]
+pprOp MaskAsyncExceptionsOp args = hsep [text "GHC.Prim.maskAsyncExceptionsHash(",pprArgs args, text ")"]
+pprOp UnmaskAsyncExceptionsOp args = hsep [text "GHC.Prim.unmaskAsyncExceptionsHash(",pprArgs args, text ")"]
+pprOp MaskStatus args = hsep [text "GHC.Prim.getMaskingStateHash(",pprArgs args, text ")"]
+pprOp SeqOp args = hsep [text "GHC.Prim.seqHash(",pprArgs args, text ")"]
 pprOp op args = hsep [ppr op, text "(", pprArgs args, text ")"]
 
 instance Outputable CSAlt where
