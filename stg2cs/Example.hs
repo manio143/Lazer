@@ -24,6 +24,9 @@ inc' = map' (\x -> inc x)
 
 inf' = 1 : inc' inf'
 
+cycleA = 1 : cycleB
+cycleB = 0 : cycleA
+
 gcd' :: Int -> Int -> Int
 gcd' 0 b = b
 gcd' a 0 = a
