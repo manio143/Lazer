@@ -141,7 +141,7 @@ public static unsafe class Code
     {
         if (from <= to)
         {
-            var t = Updatable.Make(CLR.LoadFunctionPointer<long, long, Closure>(makelist_Go), from + 1, to);
+            var t = new Updatable<long,long>(CLR.LoadFunctionPointer<long, long, Closure>(makelist_Go), from + 1, to);
             return new Cons(new I(from), t);
         }
         return nil;
@@ -419,7 +419,7 @@ public static unsafe class Code
                 {
                     var h = wild_s3MH_Cons.x0;
                     var t = wild_s3MH_Cons.x1;
-                    var takeOnStack = Updatable.Make(CLR.LoadFunctionPointer<long, Closure,Closure>(takeOnStack_Thunk), nn, t);
+                    var takeOnStack = new Updatable<long,Closure>(CLR.LoadFunctionPointer<long, Closure,Closure>(takeOnStack_Thunk), nn, t);
                     return new Cons(h, takeOnStack);
                 }
             case Nil wild_s3MH_Nil: { return nil; }
@@ -451,7 +451,7 @@ public static unsafe class Code
                             {
                                 var h = wild_s3MH_Cons.x0;
                                 var t = wild_s3MH_Cons.x1;
-                                var sat_s3ML = Updatable.Make(CLR.LoadFunctionPointer<long, Closure,Closure>(sat_s3ML_Entry), ds_s3MG, t);
+                                var sat_s3ML = new Updatable<long,Closure>(CLR.LoadFunctionPointer<long, Closure,Closure>(sat_s3ML_Entry), ds_s3MG, t);
                                 return new Cons(h, sat_s3ML);
                             }
                         case Nil wild_s3MH_Nil: { return nil; }
@@ -520,7 +520,7 @@ public static unsafe class Code
                 {
                     var x = wild_s3aO_Cons.x0;
                     var xs = wild_s3aO_Cons.x1;
-                    var sat_s3aR = Updatable.Make(CLR.LoadFunctionPointer(sat_s3aR_Entry), f, x0, x);
+                    var sat_s3aR = new Updatable<Closure,Closure,Closure>(CLR.LoadFunctionPointer(sat_s3aR_Entry), f, x0, x);
                     return foldl_go.Apply<Closure,Closure,Closure>(sat_s3aR,xs);
                 }
         }
@@ -541,8 +541,8 @@ public static unsafe class Code
                 {
                     var h = wild_s3aC_Cons.x0;
                     var t = wild_s3aC_Cons.x1;
-                    var sat_s3aG = Updatable.Make(CLR.LoadFunctionPointer(map_Entry), f, t);
-                    var sat_s3aF = Updatable.Make(CLR.LoadFunctionPointer(sat_s3aF_Entry), f, h);
+                    var sat_s3aG = new Updatable<Closure,Closure>(CLR.LoadFunctionPointer(map_Entry), f, t);
+                    var sat_s3aF = new Updatable<Closure,Closure>(CLR.LoadFunctionPointer(sat_s3aF_Entry), f, h);
                     return new Cons(sat_s3aF, sat_s3aG);
                 }
         }
@@ -588,8 +588,8 @@ public static unsafe class Code
     }
     public static (Closure, Closure) wgs4AX_Entry(Closure w_s4AY, Closure w_s4AZ, Closure w_s4B0, Closure w_s4B1)
     {
-        var yd_ = Updatable.Make(CLR.LoadFunctionPointer(yd__Entry), w_s4AY, w_s4AZ, w_s4B0, w_s4B1);
-        var he_ = Updatable.Make(CLR.LoadFunctionPointer(he__Entry), w_s4AY, w_s4AZ, w_s4B0, w_s4B1, yd_);
+        var yd_ = new Updatable<Closure,Closure,Closure,Closure>(CLR.LoadFunctionPointer(yd__Entry), w_s4AY, w_s4AZ, w_s4B0, w_s4B1);
+        var he_ = new Updatable<Closure,Closure,Closure,Closure,Closure>(CLR.LoadFunctionPointer(he__Entry), w_s4AY, w_s4AZ, w_s4B0, w_s4B1, yd_);
         return (yd_, he_);
     }
     public static Closure yd__Entry(Closure w_s4AY, Closure w_s4AZ, Closure w_s4B0, Closure w_s4B1)
@@ -612,11 +612,11 @@ public static unsafe class Code
     }
     public static Closure he__Entry(Closure w_s4AY, Closure w_s4AZ, Closure w_s4B0, Closure w_s4B1, Closure yd_)
     {
-        var ie_ = Updatable.Make(CLR.LoadFunctionPointer(ie__Entry), w_s4B1);
-        var oe_ = Updatable.Make(CLR.LoadFunctionPointer(oe__Entry), w_s4B1);
-        var pe_ = Updatable.Make(CLR.LoadFunctionPointer(pe__Entry), w_s4B0, ie_);
-        var qe_ = Updatable.Make(CLR.LoadFunctionPointer(qe__Entry), w_s4AY, w_s4AZ, w_s4B0, w_s4B1, yd_, ie_);
-        var ye_ = Updatable.Make(CLR.LoadFunctionPointer(ye__Entry), w_s4AY, w_s4B1);
+        var ie_ = new Updatable<Closure>(CLR.LoadFunctionPointer(ie__Entry), w_s4B1);
+        var oe_ = new Updatable<Closure>(CLR.LoadFunctionPointer(oe__Entry), w_s4B1);
+        var pe_ = new Updatable<Closure,Closure>(CLR.LoadFunctionPointer(pe__Entry), w_s4B0, ie_);
+        var qe_ = new Updatable<Closure,Closure,Closure,Closure,Closure,Closure>(CLR.LoadFunctionPointer(qe__Entry), w_s4AY, w_s4AZ, w_s4B0, w_s4B1, yd_, ie_);
+        var ye_ = new Updatable<Closure,Closure>(CLR.LoadFunctionPointer(ye__Entry), w_s4AY, w_s4B1);
         var ef_ = wgs4AX_Entry(ye_, qe_, pe_, oe_);
         return new Cons(ef_.Item1, ef_.Item2);
     }
@@ -779,7 +779,7 @@ public static unsafe class Code
         if(currentIndex >= arr.Length)
             currentIndex = 0;
         var head = arr[currentIndex];
-        var tail = SingleEntry.Make(CLR.LoadFunctionPointer<Closure[],int,Closure>(loopArray), arr, currentIndex + 1);
+        var tail = new SingleEntry<Closure[],int>(CLR.LoadFunctionPointer<Closure[],int,Closure>(loopArray), arr, currentIndex + 1);
         return new Cons(head, tail);
     }
     private static Random rand = new Random();
@@ -793,7 +793,7 @@ public static unsafe class Code
             case 3: w = new O3(1);break;
             case 4: w = new O4(1);break;
         }
-        return new Cons(w, SingleEntry.Make(CLR.LoadFunctionPointer(RandomO)));
+        return new Cons(w, new SingleEntry(CLR.LoadFunctionPointer(RandomO)));
     }
     public static Closure RandomOL() {
         var i = rand.Next(0,1);
@@ -802,6 +802,6 @@ public static unsafe class Code
             case 0: w = new O0(1);break;
             case 1: w = new O1(1);break;
         }
-        return new Cons(w, SingleEntry.Make(CLR.LoadFunctionPointer(RandomOL)));
+        return new Cons(w, new SingleEntry(CLR.LoadFunctionPointer(RandomOL)));
     }
 }
