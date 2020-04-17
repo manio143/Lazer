@@ -53,7 +53,7 @@ data CSValue = CSCon Name [CSValue] | CSRef Id | CSLit Literal | CSNull | CSDefa
 data CSDataCon = CSDataCon Name Tag [CSType]
 
 data CSEntity = 
-    CSTClosure [Id] CSExpr --TODO add proper types to ids, otherise they cannot get assigned || hack it
+    CSTClosure [(Id,CSType)] CSExpr
     | CSTConst Id CSValue
 {-
     TODO rewrite all comments in this file to make it more readable (and correct)
@@ -233,12 +233,12 @@ processTop (StgTopLifted (StgRec bndrs)) = do
         [] -> return ()
         _ -> do
             let ids = map fst bndrs'
-            (ex, ms) <- convertBndrs bndrs' (StgApp (copyNameToNewVar (head ids) "_$nop$_") [])
+            (ex, ts, ms) <- convertBndrs bndrs' (StgApp (copyNameToNewVar (head ids) "_$nop$_") [])
             addMethods ms
             if isGenericMethod bndrs then
                 return () -- don't instantiate levity polymorphic functions
             else
-                addEntities [CSTClosure ids ex]
+                addEntities [CSTClosure (zip ids ts) ex]
     where
         filterUnwantedDecls = filter (not . isUnwanted)
         isUnwanted (id, StgRhsCon _ dataCon args) = 
@@ -308,7 +308,7 @@ processClass cls = do
                                 (CSEVar fid))
                 method = Method (name++"_Entry") (funRetType' 1 ty) [did] expr
                 staticLet = CSELet id (CSECreateFun method arity []) CSENop
-            in (CSTClosure [id] staticLet, method)
+            in (CSTClosure [(id,Class "Function" [])] staticLet, method)
         [dictDataCon] = tyConDataCons $ classTyCon cls
         dictDataConName = safeConName WithModule dictDataCon
 {-
@@ -391,11 +391,13 @@ convertExpr (StgCase e alias _ alts) = do
                     let evalExpr = CSEEval alias tagExpr
                     return (CSELet alias caseExpr evalExpr, ms)
 convertExpr (StgLet (StgNonRec id rhs) ec) = convertExpr (StgLet (StgRec [(id,rhs)]) ec)
-convertExpr (StgLet (StgRec bndrs) ec)  = convertBndrs bndrs ec
+convertExpr (StgLet (StgRec bndrs) ec)  = do
+    (ex,ts,ms) <- convertBndrs bndrs ec
+    return (ex,ms)
 convertExpr (StgLetNoEscape binding ec) = convertExpr (StgLet binding ec) -- should I try to optimize this?
 convertExpr _ = return (CSENotImplemented, [])
 
-convertBndrs :: [(Id, StgRhs)] -> StgExpr -> CSST (CSExpr, [CSMethod])
+convertBndrs :: [(Id, StgRhs)] -> StgExpr -> CSST (CSExpr, [CSType], [CSMethod])
 convertBndrs bndrs ec = do
     let boundIds = map fst bndrs
         boundIdNames = map varName boundIds
@@ -403,10 +405,10 @@ convertBndrs bndrs ec = do
         mappedBoundInOccs = zip boundIds boundInOccs
         callableLocals = concat $ map findCallable bndrs
     st <- get
-    (idexs,ms) <- foldM (\(iexs,ms') rhs -> do {
-          (id, ex, ms) <- convertRhs boundIdNames rhs
-        ; return ((id, ex):iexs, ms++ms') }) ([],[]) bndrs
-    mkAssignments ec callableLocals ms idexs mappedBoundInOccs
+    (idexs,ts,ms) <- foldM (\(iexs,ts,ms') rhs -> do {
+          (id, ex, t, ms) <- convertRhs boundIdNames rhs
+        ; return ((id, ex):iexs, t:ts, ms++ms') }) ([],[],[]) bndrs
+    mkAssignments ec callableLocals ts ms idexs mappedBoundInOccs
     where
         findBound :: [GHC.Name] -> StgRhs -> [(Id, Index)]
         findBound boundIds (StgRhsCon _ _ args) =
@@ -425,20 +427,20 @@ convertBndrs bndrs ec = do
         findCallable (id, StgRhsClosure _ _ [] ReEntrant bndrs _) = [(id, length bndrs)]
         findCallable _ = []
 
-        mkAssignments :: StgExpr -> [(Id,Arity)] -> [CSMethod] -> [(Id, CSExpr)] -> 
-                        [(Id, [(Id, Index)])] -> CSST (CSExpr, [CSMethod])
-        mkAssignments ec callableLocals ms idexs mappedBoundInOccs = do
+        mkAssignments :: StgExpr -> [(Id,Arity)] -> [CSType] -> [CSMethod] -> [(Id, CSExpr)] -> 
+                        [(Id, [(Id, Index)])] -> CSST (CSExpr, [CSType], [CSMethod])
+        mkAssignments ec callableLocals ts ms idexs mappedBoundInOccs = do
             (ecx, ms') <- foldr (\(id,ar) -> withCallable id ar ((safeVarName WithModule id)++"_Entry"))
                             (convertExpr ec) callableLocals
             let assExpr = foldr (\(id, l) e -> foldr (\(id',i) -> CSEAssign id i id') e l) ecx mappedBoundInOccs
             let letExpr = foldr (\(id,cse) -> CSELet id cse) assExpr idexs
-            return (letExpr, ms'++ms)
+            return (letExpr, ts, ms'++ms)
 convertRhs boundIds (id, StgRhsCon _ dataCon args) = do
     let as = map convertArg args
         as' = map (\a -> case a of {CSRef x -> if elem (varName x) boundIds then CSNull else a; _ -> a}) as
     let name = safeConName WithModule dataCon
     let conExpr = CSECon name as'
-    return (id, conExpr, [])
+    return (id, conExpr, Class name [], [])
 convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
     let retType = funRetType id bndrs
     (e1x, ms2) <- withRetType retType $ convertExpr e1
@@ -450,7 +452,12 @@ convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
                     ReEntrant -> CSECreateFun method (length bndrs) params
                     Updatable -> CSECreateThunk method params
                     SingleEntry -> CSECreateClosure method params
-    return (id, assExpr, method : ms2)
+    let typeFromFlag = let genPars = map (typeToCSType . idType) occs in
+                        case flag of
+                            ReEntrant -> Class "Fun" genPars
+                            Updatable -> Class "Updatable" genPars
+                            SingleEntry -> Class "SingleEntry" genPars
+    return (id, assExpr, typeFromFlag, method : ms2)
 
 withCallable :: Id -> Arity -> Name -> CSST a -> CSST a
 withCallable id arity name m = do
@@ -1035,8 +1042,8 @@ instance Outputable CSEntity where
         hsep [visibilityModifier id, text "static", ppr (valueType val), pprSafeName id, text "=", ppr val, text ";"]
     ppr (CSTClosure ids _) = pprDecl ids
         where
-            pprDeclSingle id =
-                hsep [visibilityModifier id, text "static Closure", pprSafeName id ,text ";"]
+            pprDeclSingle (id,t) =
+                hsep [visibilityModifier id, text "static", ppr t, pprSafeName id ,text ";"]
             pprDecl [] = text ""
             pprDecl (id:ids) = pprDeclSingle id $$ pprDecl ids
 

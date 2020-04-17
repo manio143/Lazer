@@ -1,122 +1,122 @@
 using Lazer.Runtime;
 
 public unsafe static class Example {
-    public static Closure o4_DataCon ;
+    public static Fun o4_DataCon ;
     
-    public static Closure o3_DataCon ;
+    public static Fun o3_DataCon ;
     
-    public static Closure o2_DataCon ;
+    public static Fun o2_DataCon ;
     
-    public static Closure o1_DataCon ;
+    public static Fun o1_DataCon ;
     
-    public static Closure o0_DataCon ;
+    public static Fun o0_DataCon ;
     
-    public static Closure cColW_DataCon ;
+    public static Fun cColW_DataCon ;
     
-    public static Closure h_DataCon ;
+    public static Fun h_DataCon ;
     
-    public static Closure c_DataCon ;
+    public static Example.C c_DataCon ;
     
-    public static Closure b_DataCon ;
+    public static Example.B b_DataCon ;
     
-    public static Closure a_DataCon ;
+    public static Example.A a_DataCon ;
     
-    public static Closure pi_ ;
+    public static Updatable pi_ ;
     
-    internal static Closure lvls6rr ;
+    internal static GHC.Integer.Type.SHash lvls6rr ;
     
-    internal static Closure lvls6rq ;
+    internal static GHC.Integer.Type.SHash lvls6rq ;
     
-    internal static Closure wgs6qO ;
+    internal static Fun wgs6qO ;
     
-    internal static Closure lvls6qN ;
+    internal static GHC.Integer.Type.SHash lvls6qN ;
     
-    internal static Closure lvls6qM ;
+    internal static GHC.Integer.Type.SHash lvls6qM ;
     
-    internal static Closure lvls6qL ;
+    internal static GHC.Integer.Type.SHash lvls6qL ;
     
-    internal static Closure lvls6qK ;
+    internal static GHC.Integer.Type.SHash lvls6qK ;
     
-    internal static Closure lvls6qJ ;
+    internal static GHC.Integer.Type.SHash lvls6qJ ;
     
-    internal static Closure lvls6qI ;
+    internal static GHC.Integer.Type.SHash lvls6qI ;
     
-    public static Closure gcd_ ;
+    public static Fun gcd_ ;
     
-    internal static Closure wgcd_s6qs ;
+    internal static Fun wgcd_s6qs ;
     
-    public static Closure fibs ;
+    public static Updatable fibs ;
     
-    public static Closure fibt ;
+    public static Fun fibt ;
     
-    public static Closure fiba ;
+    public static Fun fiba ;
     
-    internal static Closure wfibas6q4 ;
+    internal static Fun wfibas6q4 ;
     
-    public static Closure sumFromTo ;
+    public static Fun sumFromTo ;
     
-    internal static Closure gos6pL ;
+    internal static Fun gos6pL ;
     
-    internal static Closure wgos6pE ;
+    internal static Fun wgos6pE ;
     
-    public static Closure main ;
+    public static Fun main ;
     
-    internal static Closure mains6pg ;
+    internal static Fun mains6pg ;
     
-    internal static Closure lvls6pf ;
+    internal static GHC.Types.Cons lvls6pf ;
     
-    internal static Closure lvls6pd ;
+    internal static Updatable lvls6pd ;
     
     internal static string lvls6pc = "sum1" ;
-    internal static Closure lvls6pb ;
+    internal static GHC.Types.Cons lvls6pb ;
     
-    internal static Closure lvls6p9 ;
+    internal static Updatable lvls6p9 ;
     
     internal static string lvls6p8 = "sum2" ;
-    public static Closure sum1_ ;
+    public static Fun sum1_ ;
     
-    internal static Closure sum1_s6p3 ;
+    internal static Fun sum1_s6p3 ;
     
-    internal static Closure xs6p0 ;
+    internal static Updatable xs6p0 ;
     
-    public static Closure inf_ ;
-    internal static Closure inf_s6oZ ;
+    public static Updatable inf_ ;
+    internal static GHC.Types.Cons inf_s6oZ ;
     
-    public static Closure inc_ ;
+    public static Fun inc_ ;
     
-    public static Closure inc ;
+    public static Fun inc ;
     
-    public static Closure sum2_ ;
+    public static Fun sum2_ ;
     
-    internal static Closure sum2_s6oN ;
+    internal static Fun sum2_s6oN ;
     
-    internal static Closure xs6oK ;
+    internal static Updatable xs6oK ;
     
-    public static Closure sum_ ;
+    public static Fun sum_ ;
     
-    internal static Closure wsum_s6oz ;
+    internal static Fun wsum_s6oz ;
     
-    public static Closure suma ;
+    public static Fun suma ;
     
-    internal static Closure wsumas6ok ;
+    internal static Fun wsumas6ok ;
     
-    public static Closure facc2 ;
+    public static Fun facc2 ;
     
-    internal static Closure wfacc2s6o9 ;
+    internal static Fun wfacc2s6o9 ;
     
-    public static Closure sumfold ;
+    public static Fun sumfold ;
     
-    internal static Closure sumfolds6o7 ;
+    internal static GHC.Types.IHash sumfolds6o7 ;
     
-    public static Closure take_ ;
+    public static Fun take_ ;
     
-    internal static Closure wtake_s6nT ;
+    internal static Fun wtake_s6nT ;
     
-    public static Closure pp ;
+    public static Fun pp ;
     
-    internal static Closure pps6nP ;
+    internal static Fun pps6nP ;
     
-    public static Closure fWInt ;
+    public static Example.CColW fWInt ;
     
     internal static string tc_Cs6nL = "'C" ;
     internal static string tc_Bs6nI = "'B" ;
@@ -134,74 +134,74 @@ public unsafe static class Example {
     internal static string tcOs6mZ = "O" ;
     internal static string trModules6mP = "Example" ;
     internal static string trModules6mN = "main" ;
-    public static Closure letterChar ;
+    public static Fun letterChar ;
     
-    internal static Closure lvls6mJ ;
+    internal static GHC.Types.CHash lvls6mJ ;
     
-    internal static Closure lvls6mI ;
+    internal static GHC.Types.CHash lvls6mI ;
     
-    internal static Closure lvls6mH ;
+    internal static GHC.Types.CHash lvls6mH ;
     
-    public static Closure wt ;
+    public static Fun wt ;
     
-    public static Closure test ;
+    public static Fun test ;
     
-    internal static Closure tests6mn ;
+    internal static Fun tests6mn ;
     
-    public static Closure tildDollQMark ;
+    public static Fun tildDollQMark ;
     
-    public static Closure so1 ;
+    public static Example.O1 so1 ;
     
-    public static Closure o1 ;
+    public static Fun o1 ;
     
-    public static Closure wd ;
+    public static Fun wd ;
     
-    public static Closure extractO ;
+    public static Fun extractO ;
     
-    public static Closure foldl_ ;
+    public static Fun foldl_ ;
     
-    public static Closure cycleA ;
-    public static Closure cycleB ;
+    public static GHC.Types.Cons cycleA ;
+    public static GHC.Types.Cons cycleB ;
     
-    internal static Closure cycleBs6lU ;
+    internal static GHC.Integer.Type.SHash cycleBs6lU ;
     
-    internal static Closure cycleAs6lT ;
+    internal static GHC.Integer.Type.SHash cycleAs6lT ;
     
-    public static Closure map_ ;
+    public static Fun map_ ;
     
-    public static Closure fOrdH ;
+    public static Fun fOrdH ;
     
-    internal static Closure cmins6ls ;
+    internal static Fun cmins6ls ;
     
-    internal static Closure cmaxs6lj ;
+    internal static Fun cmaxs6lj ;
     
-    internal static Closure cLtEqs6la ;
+    internal static Fun cLtEqs6la ;
     
-    internal static Closure cGts6l1 ;
+    internal static Fun cGts6l1 ;
     
-    internal static Closure cGtEqs6kS ;
+    internal static Fun cGtEqs6kS ;
     
-    internal static Closure cLts6kJ ;
+    internal static Fun cLts6kJ ;
     
-    internal static Closure cp1Ords6kG ;
+    internal static Fun cp1Ords6kG ;
     
-    public static Closure fEqH ;
+    public static Fun fEqH ;
     
-    internal static Closure cSlshEqs6kt ;
+    internal static Fun cSlshEqs6kt ;
     
-    internal static Closure cEqEqs6kl ;
+    internal static Fun cEqEqs6kl ;
     
-    internal static Closure ccompares6kd ;
+    internal static Fun ccompares6kd ;
     
-    internal static Closure cidens6kb ;
+    internal static Fun cidens6kb ;
     
-    internal static Closure croots6ka ;
+    internal static GHC.Types.IHash croots6ka ;
     
-    public static Closure p1W ;
+    public static Function p1W ;
     
-    public static Closure iden ;
+    public static Function iden ;
     
-    public static Closure root ;
+    public static Function root ;
     
     static Example() {
         o4_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(o4_DataCon_Entry)   ) ;
@@ -363,11 +363,11 @@ public unsafe static class Example {
         cidens6kb = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(cidens6kb_Entry)   ) ;
         
         croots6ka = new GHC.Types.IHash( 1 ) ; 
-        p1W = new Fun  (0, CLR.LoadFunctionPointer< Closure , Closure >(p1W_Entry)   ) ;
+        p1W = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(p1W_Entry)   ) ;
         
-        iden = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(iden_Entry)   ) ;
+        iden = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure >(iden_Entry)   ) ;
         
-        root = new Fun  (0, CLR.LoadFunctionPointer< Closure , Closure >(root_Entry)   ) ;
+        root = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(root_Entry)   ) ;
         
         }
     public static Closure o4_DataCon_Entry( Closure etaB1 ) {
