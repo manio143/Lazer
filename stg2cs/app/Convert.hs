@@ -423,7 +423,7 @@ convertBndrs bndrs ec = do
     (idexs,ts,ms) <- foldM (\(iexs,ts,ms') rhs -> do {
           (id, ex, t, ms) <- convertRhs boundIdNames rhs
         ; return ((id, ex):iexs, t:ts, ms++ms') }) ([],[],[]) bndrs
-    mkAssignments ec callableLocals ts ms idexs mappedBoundInOccs
+    mkAssignments ec callableLocals (reverse ts) ms idexs mappedBoundInOccs
     where
         findBound :: [GHC.Name] -> StgRhs -> [(Id, Index)]
         findBound boundIds (StgRhsCon _ _ args) =
