@@ -6,7 +6,7 @@
 import Data.List
 
 methodCount = 6
-fvsCount = 6
+fvsCount = 11
 
 templateApp modifier fbody n = 
     "public " ++
@@ -99,6 +99,13 @@ clrTailCall n =
     (concatMap (++", ") $ formalArgs n)++
     "void* funPtr);\n"
 
+clrLdftn n =
+    "[CompilerIntrinsic]\n"++
+    "public static unsafe extern void* LoadFunctionPointer<"++
+    (concatMap (++", ") $ genAppArgs n)++
+    "U>(Func<"++
+    (concatMap (++", ") $ genAppArgs n)++
+    "U> f);\n"
 
 templateAppImpl modifier fbody n = 
     "public " ++
@@ -216,8 +223,10 @@ printAll =
     (intercalate "\n" $ map singleEntryClass [0..fvsCount])++
     "\n\n/* PAP */\n"++
     (intercalate "\n" $ map papClass [1..fvsCount]) ++
-    "\n\n/* CLR */\n"++
-    (intercalate "\n" $ map clrTailCall [0..fvsCount+methodCount])
+    "\n\n/* CLR tail calli */\n"++
+    (intercalate "\n" $ map clrTailCall [0..fvsCount+methodCount]) ++
+    "\n\n/* CLR ldftn */\n"++
+    (intercalate "\n" $ map clrLdftn [0..fvsCount+methodCount])
 
 
 main = putStrLn printAll

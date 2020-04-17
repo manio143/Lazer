@@ -188,4 +188,71 @@ namespace Lazer.Runtime
         public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
              => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, x3, x4, x5, a1, a2, a3, a4, a5, a6, f);
     }
+    public unsafe class Fun<F0, F1, F2, F3, F4, F5, F6> : Fun
+    {
+        public F0 x0;
+        public F1 x1;
+        public F2 x2;
+        public F3 x3;
+        public F4 x4;
+        public F5 x5;
+        public F6 x6;
+        public Fun(int arity, void* f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4, F5 x5, F6 x6) : base(arity, f)
+        {
+            this.x0 = x0;
+            this.x1 = x1;
+            this.x2 = x2;
+            this.x3 = x3;
+            this.x4 = x4;
+            this.x5 = x5;
+            this.x6 = x6;
+        }
+        public override R ApplyImpl<A1, R>(A1 a1)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, R>(x0, x1, x2, x3, x4, x5, x6, a1, f);
+        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, f);
+        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, A3, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, a3, f);
+        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, A3, A4, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, a3, a4, f);
+        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, A3, A4, A5, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, a3, a4, a5, f);
+        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, a3, a4, a5, a6, f);
+    }
+
+    public unsafe class Fun<F0, F1, F2, F3, F4, F5, F6, F7> : Fun
+    {
+        public F0 x0;
+        public F1 x1;
+        public F2 x2;
+        public F3 x3;
+        public F4 x4;
+        public F5 x5;
+        public F6 x6;
+        public F7 x7;
+        public Fun(int arity, void* f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4, F5 x5, F6 x6, F7 x7) : base(arity, f)
+        {
+            this.x0 = x0;
+            this.x1 = x1;
+            this.x2 = x2;
+            this.x3 = x3;
+            this.x4 = x4;
+            this.x5 = x5;
+            this.x6 = x6;
+            this.x7 = x7;
+        }
+        public override R ApplyImpl<A1, R>(A1 a1)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, f);
+        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, f);
+        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, A3, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, a3, f);
+        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, A3, A4, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, a3, a4, f);
+        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, A3, A4, A5, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, a3, a4, a5, f);
+        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, a3, a4, a5, a6, f);
+    }
 }
