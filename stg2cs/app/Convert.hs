@@ -48,7 +48,7 @@ type Arg = Id
 data CSType = Closure | Int32 | Int64 | Char | Boolean | Float | Double | String 
             | Class Name [CSType] | Tuple [CSType] | Generic
     deriving (Eq, Show)
-data CSValue = CSCon Name [CSValue] | CSRef Id | CSLit Literal | CSNull
+data CSValue = CSCon Name [CSValue] | CSRef Id | CSLit Literal | CSNull | CSDefault
 
 data CSDataCon = CSDataCon Name Tag [CSType]
 
@@ -186,7 +186,8 @@ stg2cs df modName stg tyCons = evalState (go >> prettyPrint) $ initState df
             setupNamespaceAndClassName modName
             mapM_ processTyCon tyCons
             mapM_ gatherCallables stg
-            mapM_ processTop stg --TODO sort bindings to first handle closures and thunks (static init order)
+            mapM_ processTop stg --TODO sort bindings to first handle closures and thunks 
+                                 -- and put all data constructors into a recursive bind (static init order)
             convertStaticLetExpressions
             simplifyExpressions
         simplifyExpressions = modify (\s -> s { code = map (\(Method n t a e) -> Method n t a (simplify e)) (code s) })
@@ -323,16 +324,23 @@ convertExpr (StgApp id []) -- special case representing nop for top level bindin
         return (CSENop, [])
 convertExpr (StgApp fid args) = do
     let arglen = length args
+    rt <- currentReturnType <$> get
+    at <- currentAssignType <$> get
+    let applicationResultType =
+            case at of
+                Nothing -> rt
+                Just t -> t
     if arglen == 0 then
-        return (CSEVar fid, [])
+        case applicationResultType of
+            Tuple ts ->
+                let other = tail (map (const CSDefault) ts) in
+                return (CSEEval fid $ CSECon "GHC.Prim.RawTuple" (CSRef fid : other), [])
+                -- ^ a very hacky way to handle calling an exception throwing thunk
+                --   while getting the C# typechecker what it wants
+            _ -> return (CSEVar fid, [])
     else do
         let as = map convertArg args
-        rt <- currentReturnType <$> get
-        at <- currentAssignType <$> get
-        let applicationResultType =
-                case at of
-                    Nothing -> rt
-                    Just t -> t
+
         m_method <- isCallable fid
         case m_method of
             Just (arity, methodName) ->
@@ -726,7 +734,7 @@ isCallable id = do
                                 1 -- call do select function from dict
                                   -- and use polimorphic Apply on that to deal with levity
                             else funArity id in
-                return $ Just (arity, safeVarName WithModule id ++ "_Entry")
+                trace(show arity ++"\t"++ safeVarName WithModule id ++ "_Entry") return $ Just (arity, safeVarName WithModule id ++ "_Entry")
             else return Nothing
         just -> return just
 
@@ -775,9 +783,18 @@ safeName c w idName mId =
         casedSafeName = case c of
                             SNVar -> (toLower nameHead) : nameTail
                             SNCon -> (toUpper nameHead) : nameTail
+        nameWithNoModuleRepetition =
+            let enclosingClassName = 
+                    case modName of
+                        [] -> []
+                        _ -> last $ splitList '.' modName
+            in if casedSafeName == enclosingClassName then
+                    casedSafeName ++ "_Type"
+               else casedSafeName 
+        finalName = nameWithNoModuleRepetition
     in case w of
-        WithModule -> modName ++ casedSafeName
-        WithoutModule -> casedSafeName
+        WithModule -> modName ++ finalName
+        WithoutModule -> finalName
 
 translateOpString n = (n >>= trOp)
     where
@@ -854,6 +871,7 @@ valueType (CSCon name _ ) = Class name []
 valueType (CSRef i) = typeToCSType (idType i)
 valueType (CSLit l) = litType l
 valueType CSNull = Closure
+valueType CSDefault = error "can't get type info from 'default'"
 
 funRetType id args = funRetType' (length args) (idType id)
 funRetType' 0 t = typeToCSType t
@@ -1049,6 +1067,7 @@ instance Outputable CSValue where
     ppr (CSRef id) = pprSafeQualifiedName id
     ppr (CSLit l) = pprLit l
     ppr CSNull = text "null"
+    ppr CSDefault = text "default"
 
 pprLit (MachChar c) = text $ showLitChar c ""
 pprLit (LitNumber LitNumInt64 i _) = text $ show i ++ "L"
