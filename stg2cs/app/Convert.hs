@@ -186,7 +186,8 @@ stg2cs df modName stg tyCons = evalState (go >> prettyPrint) $ initState df
             setupNamespaceAndClassName modName
             mapM_ processTyCon tyCons
             mapM_ gatherCallables stg
-            mapM_ processTop stg --TODO sort bindings to first handle closures and thunks 
+            let stgSorted = sortDeclarations stg
+            mapM_ processTop stgSorted --TODO sort bindings to first handle closures and thunks 
                                  -- and put all data constructors into a recursive bind (static init order)
             convertStaticLetExpressions
             simplifyExpressions
@@ -199,6 +200,20 @@ stg2cs df modName stg tyCons = evalState (go >> prettyPrint) $ initState df
                 convlla (CSEAssign id1 idx id2 e) = CSEAssign id1 idx id2 (convlla e)
                 convlla CSENop = CSENop
                 -- ^ there should not be anything else
+        sortDeclarations stg =
+            let (lifted,unlifted) = partition isLifted stg
+                flattened = concatMap flatten lifted
+                (closures,cons) = partition isClosure flattened
+                closureDecls = map (\(id,rhs) -> StgTopLifted (StgNonRec id rhs)) closures
+                consDecl = StgTopLifted (StgRec cons)
+            in consDecl : closureDecls ++ unlifted
+            where
+                flatten (StgTopLifted (StgNonRec id rhs)) = [(id,rhs)]
+                flatten (StgTopLifted (StgRec bndrs)) = bndrs
+                isLifted (StgTopLifted _) = True
+                isLifted _ = False
+                isClosure (_,StgRhsClosure _ _ _ _ _ _) = True
+                isClosure _ = False
 
 
 prettyPrint = do
