@@ -485,6 +485,7 @@ convertRhs boundIds (id, StgRhsCon _ dataCon args) = do
     let conExpr = CSECon name as'
     return (id, conExpr, Class name [], [])
 convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
+    --TODO never create 0 arity functions - they are actually calls?
     let retType = funRetType id bndrs
     (e1x, ms2) <- withRetType retType $ convertExpr e1
     let name = safeVarName WithoutModule id
@@ -818,6 +819,7 @@ safeName c w idName mId =
             else if not (isExternalName idName) then
                 n ++ (show $ varUnique $ fromJust mId)
             else n
+        --TODO don't add unique to worker functions
         safeOpName = 
             case name of
                 "(#,#)" -> "RawTuple"
@@ -873,6 +875,7 @@ translateOpString n = (n >>= trOp)
         trOp '#' = "Hash"
         trOp '+' = "Plus"
         trOp '-' = "Dash"
+        trOp '^' = "Hat"
         trOp '/' = "Slsh"
         trOp '\\' = "Blsh"
         trOp '&' = "Amp"
@@ -1132,7 +1135,7 @@ instance Outputable CSValue where
     ppr CSNull = text "null"
     ppr CSDefault = text "default"
 
-pprLit (MachChar c) = text $ showLitChar c ""
+pprLit (MachChar c) = text $ "'" ++ showLitChar c "" ++ "'" --TODO escape '
 pprLit (LitNumber LitNumInt64 i _) = text $ show i ++ "L"
 pprLit (LitNumber LitNumWord64 i _) = text $ show i ++ "UL"
 pprLit (LitNumber LitNumWord i _) = text $ show i ++ "UL"
@@ -1163,6 +1166,7 @@ pprArgs [] = text ""
 pprArgs [a] = ppr a
 pprArgs (a:as) = hsep [ppr a, text ",", pprArgs as]
 
+pprMultiline [] = text ""
 pprMultiline [a] = ppr a
 pprMultiline (a:as) = ppr a $$ pprMultiline as
 
@@ -1300,6 +1304,10 @@ pprOp AndIOp [a1, a2] = hsep [ppr a1, text "&", ppr a2]
 pprOp OrIOp [a1, a2] = hsep [ppr a1, text "|", ppr a2]
 pprOp XorIOp [a1, a2] = hsep [ppr a1, text "^", ppr a2]
 pprOp NotIOp [a1] = hsep [text "~", ppr a1]
+pprOp AndOp [a1, a2] = hsep [ppr a1, text "&", ppr a2]
+pprOp OrOp [a1, a2] = hsep [ppr a1, text "|", ppr a2]
+pprOp XorOp [a1, a2] = hsep [ppr a1, text "^", ppr a2]
+pprOp NotOp [a1] = hsep [text "~", ppr a1]
 pprOp SllOp [a1, a2] = hsep [ppr a1, text "<<", text "(int)", ppr a2]
 pprOp SrlOp [a1, a2] = hsep [ppr a1, text ">>", text "(int)", ppr a2]
 pprOp ISllOp [a1, a2] = hsep [ppr a1, text "<<", text "(int)", ppr a2]
@@ -1316,24 +1324,34 @@ pprOp WordGeOp [a1, a2] = hsep [text "(",ppr a1, text ">=", ppr a2, text ") ? 1 
 pprOp WordGtOp [a1, a2] = hsep [text "(",ppr a1, text ">", ppr a2, text ") ? 1 : 0"]
 pprOp WordEqOp [a1, a2] = hsep [text "(",ppr a1, text "==", ppr a2, text ") ? 1 : 0"]
 pprOp WordNeOp [a1, a2] = hsep [text "(",ppr a1, text "!=", ppr a2, text ") ? 1 : 0"]
+pprOp WordRemOp [a1, a2] = hsep [ppr a1, text "%", ppr a2]
+pprOp WordQuotOp [a1, a2] = hsep [ppr a1, text "/", ppr a2]
 pprOp FloatAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
 pprOp FloatSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
 pprOp FloatMulOp [a1, a2] = hsep [ppr a1, text "*", ppr a2]
+pprOp FloatPowerOp [a1, a2] = hsep [text "(float) System.Math.Pow(", ppr a1, text ",", ppr a2, text ")"]
 pprOp FloatLeOp [a1, a2] = hsep [text "(",ppr a1, text "<=", ppr a2, text ") ? 1 : 0"]
 pprOp FloatLtOp [a1, a2] = hsep [text "(",ppr a1, text "<", ppr a2, text ") ? 1 : 0"]
 pprOp FloatGeOp [a1, a2] = hsep [text "(",ppr a1, text ">=", ppr a2, text ") ? 1 : 0"]
 pprOp FloatGtOp [a1, a2] = hsep [text "(",ppr a1, text ">", ppr a2, text ") ? 1 : 0"]
 pprOp FloatEqOp [a1, a2] = hsep [text "(",ppr a1, text "==", ppr a2, text ") ? 1 : 0"]
 pprOp FloatNeOp [a1, a2] = hsep [text "(",ppr a1, text "!=", ppr a2, text ") ? 1 : 0"]
+pprOp FloatNegOp [a1] = hsep [text "-", ppr a1]
+pprOp Int2FloatOp [a1] = hcat [text "(float)", ppr a1]
+pprOp Int2DoubleOp [a1] = hcat [text "(float)", ppr a1]
+pprOp DoubleNegOp [a1] = hsep [text "-", ppr a1]
 pprOp DoubleAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
 pprOp DoubleSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
 pprOp DoubleMulOp [a1, a2] = hsep [ppr a1, text "*", ppr a2]
+pprOp DoublePowerOp [a1, a2] = hsep [text "System.Math.Pow(", ppr a1, text ",", ppr a2, text ")"]
 pprOp DoubleLeOp [a1, a2] = hsep [text "(",ppr a1, text "<=", ppr a2, text ") ? 1 : 0"]
 pprOp DoubleLtOp [a1, a2] = hsep [text "(",ppr a1, text "<", ppr a2, text ") ? 1 : 0"]
 pprOp DoubleGeOp [a1, a2] = hsep [text "(",ppr a1, text ">=", ppr a2, text ") ? 1 : 0"]
 pprOp DoubleGtOp [a1, a2] = hsep [text "(",ppr a1, text ">", ppr a2, text ") ? 1 : 0"]
 pprOp DoubleEqOp [a1, a2] = hsep [text "(",ppr a1, text "==", ppr a2, text ") ? 1 : 0"]
 pprOp DoubleNeOp [a1, a2] = hsep [text "(",ppr a1, text "!=", ppr a2, text ") ? 1 : 0"]
+pprOp DoubleDecode_2IntOp args = hsep [text "GHC.Prim.decodeDouble2Int(",pprArgs args, text ")"]
+pprOp FloatDecode_IntOp args = hsep [text "GHC.Prim.floatDouble2Int(",pprArgs args, text ")"]
 pprOp CharLeOp [a1, a2] = hsep [text "(",ppr a1, text "<=", ppr a2, text ") ? 1 : 0"]
 pprOp CharLtOp [a1, a2] = hsep [text "(",ppr a1, text "<", ppr a2, text ") ? 1 : 0"]
 pprOp CharGeOp [a1, a2] = hsep [text "(",ppr a1, text ">=", ppr a2, text ") ? 1 : 0"]
