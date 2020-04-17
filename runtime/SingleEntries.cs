@@ -5,93 +5,117 @@ namespace Lazer.Runtime
         and closure parameters.
      */
 
-    public static unsafe class SingleEntry
+    public unsafe class SingleEntry : Computation
     {
-        public static SingleEntry0 Make(void* f) => new SingleEntry0(f);
-        public static SingleEntry1<T0> Make<T0>(void* f, T0 x0) => new SingleEntry1<T0>(f, x0);
-        public static SingleEntry2<T0, T1> Make<T0, T1>(void* f, T0 x0, T1 x1) => new SingleEntry2<T0, T1>(f, x0, x1);
-        public static SingleEntry3<T0, T1, T2> Make<T0, T1, T2>(void* f, T0 x0, T1 x1, T2 x2) => new SingleEntry3<T0, T1, T2>(f, x0, x1, x2);
-        public static SingleEntry4<T0, T1, T2, T3> Make<T0, T1, T2, T3>(void* f, T0 x0, T1 x1, T2 x2, T3 x3) => new SingleEntry4<T0, T1, T2, T3>(f, x0, x1, x2, x3);
+        public SingleEntry(void* f)
+        {
+            this.f = f;
+        }
+        protected void* f;
+        public override Closure Eval()
+             => CLR.TailCallIndirectGeneric<Closure>(f);
+
     }
 
-    public unsafe class SingleEntry0 : Computation
+    public unsafe class SingleEntry<F0> : SingleEntry
     {
-        protected internal void* f;
-        public SingleEntry0(void* f)
+        public F0 x0;
+        public SingleEntry(void* f, F0 x0) : base(f)
         {
-            this.f = f;
-        }
-        public override Closure Eval()
-        {
-            return CLR.TailCallIndirectGeneric<Closure>(f);
-        }
-    }
-    public unsafe class SingleEntry1<T0> : Computation
-    {
-        protected internal void* f;
-        public T0 x0;
-        public SingleEntry1(void* f, T0 x0)
-        {
-            this.f = f;
             this.x0 = x0;
         }
         public override Closure Eval()
-        {
-            return CLR.TailCallIndirectGeneric<T0, Closure>(x0, f);
-        }
+             => CLR.TailCallIndirectGeneric<F0, Closure>(x0, f);
+
     }
-    public unsafe class SingleEntry2<T0, T1> : Computation
+
+    public unsafe class SingleEntry<F0, F1> : SingleEntry
     {
-        protected internal void* f;
-        public T0 x0;
-        public T1 x1;
-        public SingleEntry2(void* f, T0 x0, T1 x1)
+        public F0 x0;
+        public F1 x1;
+        public SingleEntry(void* f, F0 x0, F1 x1) : base(f)
         {
-            this.f = f;
             this.x0 = x0;
             this.x1 = x1;
         }
         public override Closure Eval()
-        {
-            return CLR.TailCallIndirectGeneric<T0, T1, Closure>(x0, x1, f);
-        }
+             => CLR.TailCallIndirectGeneric<F0, F1, Closure>(x0, x1, f);
+
     }
-    public unsafe class SingleEntry3<T0, T1, T2> : Computation
+
+    public unsafe class SingleEntry<F0, F1, F2> : SingleEntry
     {
-        protected internal void* f;
-        public T0 x0;
-        public T1 x1;
-        public T2 x2;
-        public SingleEntry3(void* f, T0 x0, T1 x1, T2 x2)
+        public F0 x0;
+        public F1 x1;
+        public F2 x2;
+        public SingleEntry(void* f, F0 x0, F1 x1, F2 x2) : base(f)
         {
-            this.f = f;
             this.x0 = x0;
             this.x1 = x1;
             this.x2 = x2;
         }
         public override Closure Eval()
-        {
-            return CLR.TailCallIndirectGeneric<T0, T1, T2, Closure>(x0, x1, x2, f);
-        }
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, Closure>(x0, x1, x2, f);
+
     }
-    public unsafe class SingleEntry4<T0, T1, T2, T3> : Computation
+
+    public unsafe class SingleEntry<F0, F1, F2, F3> : SingleEntry
     {
-        protected internal void* f;
-        public T0 x0;
-        public T1 x1;
-        public T2 x2;
-        public T3 x3;
-        public SingleEntry4(void* f, T0 x0, T1 x1, T2 x2, T3 x3)
+        public F0 x0;
+        public F1 x1;
+        public F2 x2;
+        public F3 x3;
+        public SingleEntry(void* f, F0 x0, F1 x1, F2 x2, F3 x3) : base(f)
         {
-            this.f = f;
             this.x0 = x0;
             this.x1 = x1;
             this.x2 = x2;
             this.x3 = x3;
         }
         public override Closure Eval()
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, Closure>(x0, x1, x2, x3, f);
+
+    }
+
+    public unsafe class SingleEntry<F0, F1, F2, F3, F4> : SingleEntry
+    {
+        public F0 x0;
+        public F1 x1;
+        public F2 x2;
+        public F3 x3;
+        public F4 x4;
+        public SingleEntry(void* f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4) : base(f)
         {
-            return CLR.TailCallIndirectGeneric<T0, T1, T2, T3, Closure>(x0, x1, x2, x3, f);
+            this.x0 = x0;
+            this.x1 = x1;
+            this.x2 = x2;
+            this.x3 = x3;
+            this.x4 = x4;
         }
+        public override Closure Eval()
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, Closure>(x0, x1, x2, x3, x4, f);
+
+    }
+
+    public unsafe class SingleEntry<F0, F1, F2, F3, F4, F5> : SingleEntry
+    {
+        public F0 x0;
+        public F1 x1;
+        public F2 x2;
+        public F3 x3;
+        public F4 x4;
+        public F5 x5;
+        public SingleEntry(void* f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4, F5 x5) : base(f)
+        {
+            this.x0 = x0;
+            this.x1 = x1;
+            this.x2 = x2;
+            this.x3 = x3;
+            this.x4 = x4;
+            this.x5 = x5;
+        }
+        public override Closure Eval()
+             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, Closure>(x0, x1, x2, x3, x4, x5, f);
+
     }
 }

@@ -10,76 +10,157 @@ namespace Lazer.Runtime
             closures - both functions and unevaluated functions
             without helper static methods
          */
-        public abstract R Apply<A0, R>(A0 a0);
-        public abstract R Apply<A0, A1, R>(A0 a0, A1 a1);
-        public abstract R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2);
+        public abstract R Apply<A1, R>(A1 a1);
+        public abstract R Apply<A1, A2, R>(A1 a1, A2 a2);
+        public abstract R Apply<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3);
+        public abstract R Apply<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4);
+        public abstract R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5);
+        public abstract R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6);
     }
 
     public abstract partial class Computation
     {
-        public override R Apply<A0, R>(A0 a0)
-            => this.Eval().Apply<A0, R>(a0);
-        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
-            => this.Eval().Apply<A0, A1, R>(a0, a1);
-        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
-            => this.Eval().Apply<A0, A1, A2, R>(a0, a1, a2);
+        public override R Apply<A1, R>(A1 a1)
+             => this.Eval().Apply<A1, R>(a1);
+        public override R Apply<A1, A2, R>(A1 a1, A2 a2)
+             => this.Eval().Apply<A1, A2, R>(a1, a2);
+        public override R Apply<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
+             => this.Eval().Apply<A1, A2, A3, R>(a1, a2, a3);
+        public override R Apply<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
+             => this.Eval().Apply<A1, A2, A3, A4, R>(a1, a2, a3, a4);
+        public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
+             => this.Eval().Apply<A1, A2, A3, A4, A5, R>(a1, a2, a3, a4, a5);
+        public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => this.Eval().Apply<A1, A2, A3, A4, A5, A6, R>(a1, a2, a3, a4, a5, a6);
     }
 
     public abstract partial class Data
     {
-        public override R Apply<A0, R>(A0 a0)
-            => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
-        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
-            => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
-        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
-            => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
+        public override R Apply<A1, R>(A1 a1)
+             => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
+        public override R Apply<A1, A2, R>(A1 a1, A2 a2)
+             => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
+        public override R Apply<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
+             => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
+        public override R Apply<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
+             => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
+        public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
+             => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
+        public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => throw new NotSupportedException($"Cannot apply a value ({GetType()})");
     }
 
     public abstract partial class Function
     {
-        public abstract R ApplyImpl<A0, R>(A0 a0);
-        public abstract R ApplyImpl<A0, A1, R>(A0 a0, A1 a1);
-        public abstract R ApplyImpl<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2);
+        public abstract R ApplyImpl<A1, R>(A1 a1);
+        public abstract R ApplyImpl<A1, A2, R>(A1 a1, A2 a2);
+        public abstract R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3);
+        public abstract R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4);
+        public abstract R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5);
+        public abstract R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6);
 
-        public override R Apply<A0, R>(A0 a0)
+        public override R Apply<A1, R>(A1 a1)
         {
             switch (this.Arity)
             {
                 case 1:
-                    return this.ApplyImpl<A0, R>(a0);
-                default:
-                    return (R)(object)new PAP<A0>(this, a0);
+                    return this.ApplyImpl<A1, R>(a1);
+                default: return (R)(object)new PAP<A1>(this, a1);
             }
         }
-        public override R Apply<A0, A1, R>(A0 a0, A1 a1)
+        public override R Apply<A1, A2, R>(A1 a1, A2 a2)
         {
             Closure h;
             switch (this.Arity)
             {
                 case 1:
-                    h = this.ApplyImpl<A0, Closure>(a0);
-                    return h.Apply<A1, R>(a1);
-                case 2:
-                    return this.ApplyImpl<A0, A1, R>(a0, a1);
-                default:
-                    return (R)(object)new PAP<A0, A1>(this, a0, a1);
-            }
-        }
-        public override R Apply<A0, A1, A2, R>(A0 a0, A1 a1, A2 a2)
-        {
-            Closure h;
-            switch (this.Arity)
-            {
-                case 1:
-                    h = this.ApplyImpl<A0, Closure>(a0);
-                    return h.Apply<A1, A2, R>(a1, a2);
-                case 2:
-                    h = this.ApplyImpl<A0, A1, Closure>(a0, a1);
+                    h = this.ApplyImpl<A1, Closure>(a1);
                     return h.Apply<A2, R>(a2);
+                case 2:
+                    return this.ApplyImpl<A1, A2, R>(a1, a2);
+                default: return (R)(object)new PAP<A1, A2>(this, a1, a2);
+            }
+        }
+        public override R Apply<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
+        {
+            Closure h;
+            switch (this.Arity)
+            {
+                case 1:
+                    h = this.ApplyImpl<A1, Closure>(a1);
+                    return h.Apply<A2, A3, R>(a2, a3);
+                case 2:
+                    h = this.ApplyImpl<A1, A2, Closure>(a1, a2);
+                    return h.Apply<A3, R>(a3);
                 case 3:
-                    return this.ApplyImpl<A0, A1, A2, R>(a0, a1, a2);
-                default:
-                    throw new NotSupportedException("Application exceeds runtime argument limit.");
+                    return this.ApplyImpl<A1, A2, A3, R>(a1, a2, a3);
+                default: return (R)(object)new PAP<A1, A2, A3>(this, a1, a2, a3);
+            }
+        }
+        public override R Apply<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
+        {
+            Closure h;
+            switch (this.Arity)
+            {
+                case 1:
+                    h = this.ApplyImpl<A1, Closure>(a1);
+                    return h.Apply<A2, A3, A4, R>(a2, a3, a4);
+                case 2:
+                    h = this.ApplyImpl<A1, A2, Closure>(a1, a2);
+                    return h.Apply<A3, A4, R>(a3, a4);
+                case 3:
+                    h = this.ApplyImpl<A1, A2, A3, Closure>(a1, a2, a3);
+                    return h.Apply<A4, R>(a4);
+                case 4:
+                    return this.ApplyImpl<A1, A2, A3, A4, R>(a1, a2, a3, a4);
+                default: return (R)(object)new PAP<A1, A2, A3, A4>(this, a1, a2, a3, a4);
+            }
+        }
+        public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
+        {
+            Closure h;
+            switch (this.Arity)
+            {
+                case 1:
+                    h = this.ApplyImpl<A1, Closure>(a1);
+                    return h.Apply<A2, A3, A4, A5, R>(a2, a3, a4, a5);
+                case 2:
+                    h = this.ApplyImpl<A1, A2, Closure>(a1, a2);
+                    return h.Apply<A3, A4, A5, R>(a3, a4, a5);
+                case 3:
+                    h = this.ApplyImpl<A1, A2, A3, Closure>(a1, a2, a3);
+                    return h.Apply<A4, A5, R>(a4, a5);
+                case 4:
+                    h = this.ApplyImpl<A1, A2, A3, A4, Closure>(a1, a2, a3, a4);
+                    return h.Apply<A5, R>(a5);
+                case 5:
+                    return this.ApplyImpl<A1, A2, A3, A4, A5, R>(a1, a2, a3, a4, a5);
+                default: return (R)(object)new PAP<A1, A2, A3, A4, A5>(this, a1, a2, a3, a4, a5);
+            }
+        }
+        public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+        {
+            Closure h;
+            switch (this.Arity)
+            {
+                case 1:
+                    h = this.ApplyImpl<A1, Closure>(a1);
+                    return h.Apply<A2, A3, A4, A5, A6, R>(a2, a3, a4, a5, a6);
+                case 2:
+                    h = this.ApplyImpl<A1, A2, Closure>(a1, a2);
+                    return h.Apply<A3, A4, A5, A6, R>(a3, a4, a5, a6);
+                case 3:
+                    h = this.ApplyImpl<A1, A2, A3, Closure>(a1, a2, a3);
+                    return h.Apply<A4, A5, A6, R>(a4, a5, a6);
+                case 4:
+                    h = this.ApplyImpl<A1, A2, A3, A4, Closure>(a1, a2, a3, a4);
+                    return h.Apply<A5, A6, R>(a5, a6);
+                case 5:
+                    h = this.ApplyImpl<A1, A2, A3, A4, A5, Closure>(a1, a2, a3, a4, a5);
+                    return h.Apply<A6, R>(a6);
+                case 6:
+                    return this.ApplyImpl<A1, A2, A3, A4, A5, A6, R>(a1, a2, a3, a4, a5, a6);
+                default: return (R)(object)new PAP<A1, A2, A3, A4, A5, A6>(this, a1, a2, a3, a4, a5, a6);
             }
         }
     }

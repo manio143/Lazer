@@ -63,7 +63,7 @@ namespace Lazer.Runtime
     {
         public Closure ind;
         protected abstract Closure Compute();
-        protected internal virtual void Cleanup() { }
+        protected virtual void Cleanup() { }
         public override Closure Eval()
         {
             if (ind != null) 

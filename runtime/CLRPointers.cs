@@ -35,53 +35,42 @@ namespace Lazer.Runtime
         public static unsafe extern void* LoadFunctionPointer(Func<Closure, Closure, Closure, Closure, Closure> fun);
 
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe extern U TailCallIndirectGeneric<U>(void* funPtr);
-        [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U TailCallIndirectGeneric<T0, U>(T0 x0, void* funPtr);
-        [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U TailCallIndirectGeneric<T0, T1, U>(T0 x0, T1 x1, void* funPtr);
-        [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U TailCallIndirectGeneric<T0, T1, T2, U>(T0 x0, T1 x1, T2 x2, void* funPtr);
-        [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U TailCallIndirectGeneric<T0, T1, T2, T3, U>(T0 x0, T1 x1, T2 x2, T3 x3, void* funPtr);
-        [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U TailCallIndirectGeneric<T0, T1, T2, T3, T4, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, void* funPtr);
-        [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U TailCallIndirectGeneric<T0, T1, T2, T3, T4, T5, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, T5 x5, void* funPtr);
-        [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U TailCallIndirectGeneric<T0, T1, T2, T3, T4, T5, T6, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, T5 x5, T6 x6, void* funPtr);
 
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U CallIndirectGeneric<U>(void* funPtr);
+        public static unsafe extern U TailCallIndirectGeneric<A1, U>(A1 a1, void* funPtr);
+
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U CallIndirectGeneric<T0, U>(T0 x0, void* funPtr);
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, U>(A1 a1, A2 a2, void* funPtr);
+
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U CallIndirectGeneric<T0, T1, U>(T0 x0, T1 x1, void* funPtr);
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, U>(A1 a1, A2 a2, A3 a3, void* funPtr);
+
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U CallIndirectGeneric<T0, T1, T2, U>(T0 x0, T1 x1, T2 x2, void* funPtr);
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, U>(A1 a1, A2 a2, A3 a3, A4 a4, void* funPtr);
+
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U CallIndirectGeneric<T0, T1, T2, T3, U>(T0 x0, T1 x1, T2 x2, T3 x3, void* funPtr);
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, A5, U>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, void* funPtr);
+
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U CallIndirectGeneric<T0, T1, T2, T3, T4, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, void* funPtr);
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, A5, A6, U>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, void* funPtr);
+
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U CallIndirectGeneric<T0, T1, T2, T3, T4, T5, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, T5 x5, void* funPtr);
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, A5, A6, A7, U>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, void* funPtr);
+
         [CompilerIntrinsic]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe extern U CallIndirectGeneric<T0, T1, T2, T3, T4, T5, T6, U>(T0 x0, T1 x1, T2 x2, T3 x3, T4 x4, T5 x5, T6 x6, void* funPtr);
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, A5, A6, A7, A8, U>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, void* funPtr);
+
+        [CompilerIntrinsic]
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, A5, A6, A7, A8, A9, U>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, void* funPtr);
+
+        [CompilerIntrinsic]
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, void* funPtr);
+
+        [CompilerIntrinsic]
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, void* funPtr);
+
+        [CompilerIntrinsic]
+        public static unsafe extern U TailCallIndirectGeneric<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, void* funPtr);
     }
 }
