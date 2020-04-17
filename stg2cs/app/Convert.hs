@@ -18,6 +18,7 @@ import StgSyn
 import TyCon
 import TyCoRep
 import DataCon
+import ForeignCall
 import Unique
 import Class (classMethods, classTyCon, classSCSelIds)
 import Var
@@ -45,7 +46,7 @@ type Tag = Int
 type Name = String
 type Arg = Id
 
-data CSType = Closure | Int32 | Int64 | Char | Boolean | Float | Double | String 
+data CSType = Closure | Int32 | Int64 | UInt64 | Char | Boolean | Float | Double | String 
             | Class Name [CSType] | Tuple [CSType] | Generic
     deriving (Eq, Show)
 data CSValue = CSCon Name [CSValue] | CSRef Id | CSLit Literal | CSNull | CSDefault
@@ -85,7 +86,8 @@ data CSExpr =
         -- call <Name> with first <[CSValue]> arguments and then apply
         -- result to the rest <[CSValue]>
         -- <Id> is closure id of <Name>, kept for type reasons
-    | CSEEval Id CSExpr -- evaluate <Id> on the stack and continue with <CSExpr>
+    | CSEEval CSExpr -- evaluate <Id> on the stack (can be used with let)
+    | CSEEvalAnd Id CSExpr -- evaluate <Id> on the stack and continue with <CSExpr>
     | CSELet Id CSExpr CSExpr  -- assign <Id> := <CSExpr> and continue to evaluate <CSExpr₂>
     | CSELetByName Name CSExpr CSExpr  -- assign <Name> := <CSExpr> and continue to evaluate <CSExpr₂>
     | CSELetAssign Id CSExpr CSExpr  -- assign existing <Id> := <CSExpr> and continue to evaluate <CSExpr₂>
@@ -349,7 +351,8 @@ convertExpr (StgApp fid args) = do
         case applicationResultType of
             Tuple ts ->
                 let other = tail (map (const CSDefault) ts) in
-                return (CSEEval fid $ CSECon "GHC.Prim.RawTuple" (CSRef fid : other), [])
+                let bndr = copyNameToNewVar fid "r" in
+                return (CSELet bndr (CSEEval $ CSEVar fid) $ CSECon "GHC.Prim.RawTuple" (CSRef bndr : other), [])
                 -- ^ a very hacky way to handle calling an exception throwing thunk
                 --   while getting the C# typechecker what it wants
             _ -> return (CSEVar fid, [])
@@ -381,30 +384,55 @@ convertExpr (StgOpApp (StgPrimCallOp (PrimCall label _)) args _) = do
     name <- showWithFlags label
     let as = map convertArg args
     return (CSECall name as Nothing, [])
+convertExpr (StgOpApp (StgFCallOp (CCall (CCallSpec (StaticTarget _ lbl_fs _ _) _ _)) _) args _) = do
+    let name = unpackFS lbl_fs
+    let as = map convertArg args
+    return (CSECall name as Nothing, [])
 
 convertExpr (StgCase (StgApp v []) _ _ alts) 
     | isVoidRep (idPrimRep v) -- state void# token
     , [(DEFAULT, _, rhs)] <- alts 
-    = convertExpr rhs 
+    = convertExpr rhs
 convertExpr (StgCase e alias _ alts) = do
-    (csalts, st, ms) <- convertAlts alias alts
     let aliasName = safeVarName WithoutModule alias
+    (csalts, st, ms) <- convertAlts alias alts
     let vt = idType alias
-    (caseExpr, _) <- withAssignType (typeToCSType vt) $ convertExpr e -- asumes simple expr
+    (caseExpr, mse) <- 
+        case e of
+            StgApp _ _ -> withAssignType (typeToCSType vt) $ convertExpr e
+            StgOpApp _ _ _ -> withAssignType (typeToCSType vt) $ convertExpr e
+            _ -> do -- Somehow a compound expression got through
+                (ex, mxs) <- withAssignType (typeToCSType vt) $ convertExpr e
+                let methodName = aliasName++"_Entry"
+                isCallable <- isCallablePure
+                let isLocal id = 
+                        let name = varName id
+                            ext = isExternalName name
+                            exp = isExportedId id
+                            callable = case isCallable id of
+                                            Nothing -> False
+                                            _ -> True
+                        in not (ext || exp || callable)
+                let occs = filter isLocal $ nub $ exprFreeVars e
+                let method = Method methodName (typeToCSType vt) occs ex
+                return (CSECall methodName (map CSRef occs) Nothing, method : mxs)
     let actualType = if isUnitHash vt then innerUnitHashType vt else vt
     case isUnliftedTypeSafe actualType of
         Unlifted -> do
-            return (CSELet alias caseExpr (CSECase alias csalts), ms)
+            if (debugPrintType vt) == "GHC.Prim.StateHash" then
+                case csalts of
+                    [CSADefault _, CSALit _ (CSECastAs n _ _ e)] ->
+                        return (CSELetByName n caseExpr e, ms)
+            else return (CSELet alias caseExpr (CSECase alias csalts), ms ++ mse)
         Lifted -> do
             case st of
                 Type -> do
-                    let evalExpr = CSEEval alias (CSECase alias csalts)
-                    return (CSELet alias caseExpr evalExpr, ms)
+                    let evalExpr = (CSECase alias csalts)
+                    return (CSELet alias (CSEEval caseExpr) evalExpr, ms ++ mse)
                 Tag -> do
                     let aliasTag = copyNameToNewVar alias (aliasName ++ "Tag")
                     let tagExpr = CSETag aliasTag alias (CSECase aliasTag csalts)
-                    let evalExpr = CSEEval alias tagExpr
-                    return (CSELet alias caseExpr evalExpr, ms)
+                    return (CSELet alias (CSEEval caseExpr) tagExpr, ms ++ mse)
 convertExpr (StgLet (StgNonRec id rhs) ec) = convertExpr (StgLet (StgRec [(id,rhs)]) ec)
 convertExpr (StgLet (StgRec bndrs) ec)  = do
     (ex,ts,ms) <- convertBndrs bndrs ec
@@ -544,9 +572,9 @@ simplify (CSECase id alts) = CSECase id (map simplifyAlt alts)
         simplifyAlt (CSADefault e) = CSADefault (simplify e)
         simplifyAlt (CSALit l e) = CSALit l (simplify e)
         simplifyAlt (CSACon n1 n2 e) = CSACon n1 n2 (simplify e)
-simplify (CSEEval id e) = CSEEval id (simplify e)
-simplify (CSELet id (CSEApp m args rt) (CSEEval id' e)) | id == id' = CSELet id (CSEApp m args rt) (simplify e)
-simplify (CSELet id (CSECall m args mrt) (CSEEval id' e)) | id == id' = CSELet id (CSECall m args mrt) (simplify e)
+simplify (CSEEvalAnd id e) = CSEEvalAnd id (simplify e)
+simplify (CSELet id (CSEApp m args rt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSEApp m args rt) (simplify e)
+simplify (CSELet id (CSECall m args mrt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSECall m args mrt) (simplify e)
 simplify (CSELet id e1 ec) = CSELet id e1 (simplify ec) -- e1 is a simple expr
 simplify (CSELetByName name e1 ec) = CSELetByName name e1 (simplify ec) -- e1 is a simple expr
 simplify (CSEAssign id idx id' e) = CSEAssign id idx id' (simplify e)
@@ -745,20 +773,27 @@ withAssignType t m = do
     modify (\s -> s { currentAssignType = rt})
     return x
 
+isCallablePure :: CSST (Id -> Maybe (Arity, Name))
+isCallablePure = do
+    callableVars <- callables <$> get
+    return $ isCallable' callableVars
+
 isCallable id = do
     callableVars <- callables <$> get
+    return $ isCallable' callableVars id
+isCallable' callableVars id =
     case lookup (safeVarName WithModule id) callableVars of
-        Nothing -> do
-            let classOp = (isJust $ isClassOpId_maybe id)
+        Nothing ->
+            let classOp = (isJust $ isClassOpId_maybe id) in
             if isGlobalId id || isExportedId id || isImplicitId id ||
                 classOp then
                 let arity = if classOp || isRecordSelector id then
                                 1 -- call do select function from dict
                                   -- and use polimorphic Apply on that to deal with levity
                             else funArity id in
-                return $ Just (arity, safeVarName WithModule id ++ "_Entry")
-            else return Nothing
-        just -> return just
+                Just (arity, safeVarName WithModule id ++ "_Entry")
+            else Nothing
+        just -> just
 
 data ConOrVar = SNCon | SNVar
 data WithModule = WithModule | WithoutModule
@@ -883,6 +918,8 @@ mkInt i = do
     return $ mkMachInt df i
 
 litType (MachChar _) = Char
+litType (LitNumber LitNumWord _ _) = UInt64
+litType (LitNumber LitNumWord64 _ _) = UInt64
 litType (LitNumber _ _ _) = Int64
 litType (MachStr bs) = String
 litType (MachFloat r) = Float
@@ -955,13 +992,14 @@ typeToCSType t =
         Lifted -> Closure
         LevityPolimorphic -> Generic
 unliftedTypeToCSType t =
-            case t of
+            case expandTypeSynonyms t of
                 TyConApp tc tyArgs -> 
                     let name = tyConName tc in
                     case nameToStr name of
                         "Int#" -> Int64
-                        "Word#" -> Int64
+                        "Word#" -> UInt64
                         "Char#" -> Char
+                        "Float#" -> Float
                         "Double#" -> Double
                         "Int64#" -> Int64
                         "(#,#)" -> tup 2 tyArgs
@@ -971,6 +1009,8 @@ unliftedTypeToCSType t =
                         "Void#" -> Class "GHC.Prim.Void" []
                         "State#" -> Class "GHC.Prim.StateHash" []
                         "Addr#" -> Class "System.IntPtr" []
+                        "ByteArray#" -> Class "byte[]" []
+                        "MutableByteArray#" -> Class "byte[]" []
                         strName -> Class (strName ++ "_UnImplemented") []
     where
         tup n tyArgs = 
@@ -1071,6 +1111,7 @@ instance Outputable CSType where
     ppr Closure = text "Closure"
     ppr Int32 = text "int"
     ppr Int64 = text "long"
+    ppr UInt64 = text "ulong"
     ppr Float = text "float"
     ppr Double = text "double"
     ppr Char = text "char"
@@ -1093,8 +1134,8 @@ instance Outputable CSValue where
 
 pprLit (MachChar c) = text $ showLitChar c ""
 pprLit (LitNumber LitNumInt64 i _) = text $ show i ++ "L"
-pprLit (LitNumber LitNumWord64 i _) = text $ show i ++ "L"
-pprLit (LitNumber LitNumWord i _) = text $ show i ++ "L"
+pprLit (LitNumber LitNumWord64 i _) = text $ show i ++ "UL"
+pprLit (LitNumber LitNumWord i _) = text $ show i ++ "UL"
 pprLit (LitNumber _ i _) = text $ show i
 pprLit (MachStr bs) = text $ show bs
 pprLit MachNullAddr = text "null"
@@ -1165,7 +1206,7 @@ instance Outputable CSExpr where
     ppr (CSEAppAfterCall name id cargs appargs rt) = 
         hsep [text $ "return "++name++"(", pprArgs cargs, text ").Apply",
               callAppGenArgs rt cargs appargs, text "(", pprArgs appargs ,text ");"]
-    ppr (CSEEval id ex) = 
+    ppr (CSEEvalAnd id ex) = 
         sep [
             hsep [pprSafeName id, text "=", hcat[pprSafeName id, text ".Eval();"]],
             ppr ex
@@ -1176,6 +1217,11 @@ instance Outputable CSExpr where
                 hcat [pprSafeName id, text $".x" ++ show idx],
                 text "=", pprSafeQualifiedName id', text ";"
             ],
+            ppr ex
+        ]
+    ppr (CSELet id (CSELit l) ex) =
+        sep [
+            hsep [ppr (litType l), pprSafeName id, text "=", pprLit l, text ";"],
             ppr ex
         ]
     ppr (CSELet id e ex) =
@@ -1213,8 +1259,8 @@ instance Outputable CSExpr where
     ppr (CSENotImplemented) = text "throw new NotImplementedException();"
     ppr (CSEImpossible) = text "throw new ImpossibleException();"
 
-pprLetExpr (CSELit l) = pprLit l
 pprLetExpr (CSEVar id) = pprSafeQualifiedName id
+pprLetExpr (CSEEval e) = hcat [pprLetExpr e, text ".Eval()"]
 pprLetExpr (CSECon name args) = hsep [text $ "new "++name++"(", pprArgs args, text ")"]
 pprLetExpr (CSEApp id' args rt) = hsep [hcat [pprSafeQualifiedName id', text ".Apply", appGenArgs rt args, text "("], pprArgs args, text ")"]
 pprLetExpr (CSECall name args Nothing) = hsep [text $ name++"(", pprArgs args, text ")"]
@@ -1233,6 +1279,7 @@ pprLetExpr (CSECreateClosure m args) = hsep [
     text "new SingleEntry", pprGenArgs args, text "(", pprLdftn m,
                             text (case args of [] -> ""; _ -> ","), pprArgs args, text ")"]
 pprLetExpr (CSEUnpack name idx) = text $ name++".x"++show idx
+pprLetExpr t = ppr t -- handle things like exceptions?
 
 pprLdftn (Method name retType args _) = hcat [text "CLR.LoadFunctionPointer", pprGenIdsWithRet retType args, text $"("++name++")"]
 
@@ -1249,11 +1296,26 @@ pprOp IntRemOp [a1, a2] = hsep [ppr a1, text "%", ppr a2]
 pprOp IntQuotOp [a1, a2] = hsep [ppr a1, text "/", ppr a2]
 pprOp IntQuotRemOp [a1, a2] = hsep [text "(x0:",ppr a1, text "/", ppr a2, text ", x1:", ppr a1, text "%", ppr a2, text ")"]
 pprOp IntNegOp [a1] = hsep [text "-", ppr a1]
+pprOp AndIOp [a1, a2] = hsep [ppr a1, text "&", ppr a2]
+pprOp OrIOp [a1, a2] = hsep [ppr a1, text "|", ppr a2]
+pprOp XorIOp [a1, a2] = hsep [ppr a1, text "^", ppr a2]
+pprOp NotIOp [a1] = hsep [text "~", ppr a1]
 pprOp SllOp [a1, a2] = hsep [ppr a1, text "<<", text "(int)", ppr a2]
-pprOp SrlOp [a1, a2] = hsep [text "(long)(((ulong)",ppr a1, text ")", text ">>", text "(int)", ppr a2, text ")"]
+pprOp SrlOp [a1, a2] = hsep [ppr a1, text ">>", text "(int)", ppr a2]
 pprOp ISllOp [a1, a2] = hsep [ppr a1, text "<<", text "(int)", ppr a2]
 pprOp ISraOp [a1, a2] = hsep [ppr a1, text ">>", text "(int)", ppr a2]
 pprOp ISrlOp [a1, a2] = hsep [text "(long)(((ulong)",ppr a1, text ")", text ">>", text "(int)", ppr a2, text ")"]
+pprOp WordAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
+pprOp WordSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
+pprOp WordMulOp [a1, a2] = hsep [ppr a1, text "*", ppr a2]
+pprOp WordMul2Op [a1, a2] = hsep [ppr a1, text "*", ppr a2]
+    -- ^ FIXME: Mul2 returns a tuple result of overflown multiplication
+pprOp WordLeOp [a1, a2] = hsep [text "(",ppr a1, text "<=", ppr a2, text ") ? 1 : 0"]
+pprOp WordLtOp [a1, a2] = hsep [text "(",ppr a1, text "<", ppr a2, text ") ? 1 : 0"]
+pprOp WordGeOp [a1, a2] = hsep [text "(",ppr a1, text ">=", ppr a2, text ") ? 1 : 0"]
+pprOp WordGtOp [a1, a2] = hsep [text "(",ppr a1, text ">", ppr a2, text ") ? 1 : 0"]
+pprOp WordEqOp [a1, a2] = hsep [text "(",ppr a1, text "==", ppr a2, text ") ? 1 : 0"]
+pprOp WordNeOp [a1, a2] = hsep [text "(",ppr a1, text "!=", ppr a2, text ") ? 1 : 0"]
 pprOp FloatAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
 pprOp FloatSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
 pprOp FloatMulOp [a1, a2] = hsep [ppr a1, text "*", ppr a2]
@@ -1290,6 +1352,25 @@ pprOp MaskAsyncExceptionsOp args = hsep [text "GHC.Prim.maskAsyncExceptionsHash(
 pprOp UnmaskAsyncExceptionsOp args = hsep [text "GHC.Prim.unmaskAsyncExceptionsHash(",pprArgs args, text ")"]
 pprOp MaskStatus args = hsep [text "GHC.Prim.getMaskingStateHash(",pprArgs args, text ")"]
 pprOp SeqOp args = hsep [text "GHC.Prim.seqHash(",pprArgs args, text ")"]
+pprOp SizeofByteArrayOp [a1] = hcat [ppr a1, text ".Length"]
+pprOp SizeofMutableByteArrayOp [a1,_] = hcat [ppr a1, text ".Length"]
+pprOp GetSizeofMutableByteArrayOp [a1,_] = hcat [ppr a1, text ".Length"]
+pprOp IndexByteArrayOp_Word [_,CSLit l] = hcat [text "(ulong)",pprLit l]
+pprOp IndexByteArrayOp_Word [_,sz] = ppr sz -- don't convert index, read will do that
+pprOp IndexByteArrayOp_Int [_,CSLit l] = hcat [text "(ulong)",pprLit l]
+pprOp IndexByteArrayOp_Int [_,sz] = ppr sz -- don't convert index, read will do that
+pprOp ReadByteArrayOp_Int [arr,idx,_] = hcat [text "System.Runtime.CompilerServices.Unsafe.As<byte[],long[]>(ref ", ppr arr, text")[", ppr idx, text "]"]
+pprOp ReadByteArrayOp_Word [arr,idx,_] = hcat [text "System.Runtime.CompilerServices.Unsafe.As<byte[],ulong[]>(ref ", ppr arr, text")[", ppr idx, text "]"]
+pprOp WriteByteArrayOp_Int [arr,idx,val,_] = hcat [text "System.Runtime.CompilerServices.Unsafe.As<byte[],long[]>(ref ", ppr arr, text")[", ppr idx, text "] = ", ppr val]
+pprOp WriteByteArrayOp_Word [arr,idx,val,_] = hcat [text "System.Runtime.CompilerServices.Unsafe.As<byte[],ulong[]>(ref ", ppr arr, text")[", ppr idx, text "] = ", ppr val]
+pprOp Int2WordOp [a1] = hsep [text "(ulong)", ppr a1]
+pprOp Word2IntOp [a1] = hsep [text "(long)", ppr a1]
+pprOp Narrow32IntOp [a1] = hsep [text "(int)", ppr a1]
+pprOp UnsafeFreezeByteArrayOp [a1,_] = ppr a1
+pprOp NewByteArrayOp_Char [sz,_] = hcat [text "new byte[",ppr sz,text "]"]
+pprOp ResizeMutableByteArrayOp_Char [arr,sz,_] = hcat [text "GHC.Prim.resizeArray(",ppr arr, text ", ", ppr sz, text ")"]
+pprOp ShrinkMutableByteArrayOp_Char [arr,sz,_] = hcat [text "GHC.Prim.resizeArray(",ppr arr, text ", ", ppr sz, text ")"]
+pprOp CopyByteArrayOp args = pprLetExpr (CSECall "GHC.Prim.copyArray" args Nothing)
 pprOp op args = hsep [ppr op, text "(", pprArgs args, text ")"]
 
 instance Outputable CSAlt where

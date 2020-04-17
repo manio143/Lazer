@@ -1,6 +1,24 @@
 using Lazer.Runtime;
 
 public unsafe static class Example {
+    internal static string lvls6pc = "sum1" ;
+    internal static string lvls6p8 = "sum2" ;
+    internal static string tc_Cs6nL = "'C" ;
+    internal static string tc_Bs6nI = "'B" ;
+    internal static string tc_As6nF = "'A" ;
+    internal static string tcLetters6nB = "Letter" ;
+    internal static string tc_Hs6ny = "'H" ;
+    internal static string tcHs6nt = "H" ;
+    internal static string tc_CColWs6nq = "'C:W" ;
+    internal static string tcWs6nj = "W" ;
+    internal static string tc_O4s6ng = "'O4" ;
+    internal static string tc_O3s6nd = "'O3" ;
+    internal static string tc_O2s6na = "'O2" ;
+    internal static string tc_O1s6n7 = "'O1" ;
+    internal static string tc_O0s6n4 = "'O0" ;
+    internal static string tcOs6mZ = "O" ;
+    internal static string trModules6mP = "Example" ;
+    internal static string trModules6mN = "main" ;
     public static Fun o4_DataCon ;
     
     public static Fun o3_DataCon ;
@@ -15,31 +33,9 @@ public unsafe static class Example {
     
     public static Fun h_DataCon ;
     
-    public static Example.C c_DataCon ;
-    
-    public static Example.B b_DataCon ;
-    
-    public static Example.A a_DataCon ;
-    
     public static Updatable pi_ ;
     
-    internal static GHC.Integer.Type.SHash lvls6rr ;
-    
-    internal static GHC.Integer.Type.SHash lvls6rq ;
-    
     internal static Fun wgs6qO ;
-    
-    internal static GHC.Integer.Type.SHash lvls6qN ;
-    
-    internal static GHC.Integer.Type.SHash lvls6qM ;
-    
-    internal static GHC.Integer.Type.SHash lvls6qL ;
-    
-    internal static GHC.Integer.Type.SHash lvls6qK ;
-    
-    internal static GHC.Integer.Type.SHash lvls6qJ ;
-    
-    internal static GHC.Integer.Type.SHash lvls6qI ;
     
     public static Fun gcd_ ;
     
@@ -63,24 +59,17 @@ public unsafe static class Example {
     
     internal static Fun mains6pg ;
     
-    internal static GHC.Types.Cons lvls6pf ;
-    
     internal static Updatable lvls6pd ;
-    
-    internal static string lvls6pc = "sum1" ;
-    internal static GHC.Types.Cons lvls6pb ;
     
     internal static Updatable lvls6p9 ;
     
-    internal static string lvls6p8 = "sum2" ;
     public static Fun sum1_ ;
     
     internal static Fun sum1_s6p3 ;
     
     internal static Updatable xs6p0 ;
     
-    public static Updatable inf_ ;
-    internal static GHC.Types.Cons inf_s6oZ ;
+    internal static Updatable inf_s6oZ ;
     
     public static Fun inc_ ;
     
@@ -106,8 +95,6 @@ public unsafe static class Example {
     
     public static Fun sumfold ;
     
-    internal static GHC.Types.IHash sumfolds6o7 ;
-    
     public static Fun take_ ;
     
     internal static Fun wtake_s6nT ;
@@ -116,31 +103,7 @@ public unsafe static class Example {
     
     internal static Fun pps6nP ;
     
-    public static Example.CColW fWInt ;
-    
-    internal static string tc_Cs6nL = "'C" ;
-    internal static string tc_Bs6nI = "'B" ;
-    internal static string tc_As6nF = "'A" ;
-    internal static string tcLetters6nB = "Letter" ;
-    internal static string tc_Hs6ny = "'H" ;
-    internal static string tcHs6nt = "H" ;
-    internal static string tc_CColWs6nq = "'C:W" ;
-    internal static string tcWs6nj = "W" ;
-    internal static string tc_O4s6ng = "'O4" ;
-    internal static string tc_O3s6nd = "'O3" ;
-    internal static string tc_O2s6na = "'O2" ;
-    internal static string tc_O1s6n7 = "'O1" ;
-    internal static string tc_O0s6n4 = "'O0" ;
-    internal static string tcOs6mZ = "O" ;
-    internal static string trModules6mP = "Example" ;
-    internal static string trModules6mN = "main" ;
     public static Fun letterChar ;
-    
-    internal static GHC.Types.CHash lvls6mJ ;
-    
-    internal static GHC.Types.CHash lvls6mI ;
-    
-    internal static GHC.Types.CHash lvls6mH ;
     
     public static Fun wt ;
     
@@ -150,8 +113,6 @@ public unsafe static class Example {
     
     public static Fun tildDollQMark ;
     
-    public static Example.O1 so1 ;
-    
     public static Fun o1 ;
     
     public static Fun wd ;
@@ -159,13 +120,6 @@ public unsafe static class Example {
     public static Fun extractO ;
     
     public static Fun foldl_ ;
-    
-    public static GHC.Types.Cons cycleA ;
-    public static GHC.Types.Cons cycleB ;
-    
-    internal static GHC.Integer.Type.SHash cycleBs6lU ;
-    
-    internal static GHC.Integer.Type.SHash cycleAs6lT ;
     
     public static Fun map_ ;
     
@@ -196,6 +150,30 @@ public unsafe static class Example {
     internal static Fun cidens6kb ;
     
     internal static GHC.Types.IHash croots6ka ;
+    internal static GHC.Integer.Type.SHash cycleAs6lT ;
+    internal static GHC.Integer.Type.SHash cycleBs6lU ;
+    public static GHC.Types.Cons cycleA ;
+    public static GHC.Types.Cons cycleB ;
+    public static Example.O1 so1 ;
+    internal static GHC.Types.CHash lvls6mH ;
+    internal static GHC.Types.CHash lvls6mI ;
+    internal static GHC.Types.CHash lvls6mJ ;
+    public static Example.CColW fWInt ;
+    internal static GHC.Types.IHash sumfolds6o7 ;
+    public static GHC.Types.Cons inf_ ;
+    internal static GHC.Types.Cons lvls6pb ;
+    internal static GHC.Types.Cons lvls6pf ;
+    internal static GHC.Integer.Type.SHash lvls6qI ;
+    internal static GHC.Integer.Type.SHash lvls6qJ ;
+    internal static GHC.Integer.Type.SHash lvls6qK ;
+    internal static GHC.Integer.Type.SHash lvls6qL ;
+    internal static GHC.Integer.Type.SHash lvls6qM ;
+    internal static GHC.Integer.Type.SHash lvls6qN ;
+    internal static GHC.Integer.Type.SHash lvls6rq ;
+    internal static GHC.Integer.Type.SHash lvls6rr ;
+    public static Example.A a_DataCon ;
+    public static Example.B b_DataCon ;
+    public static Example.C c_DataCon ;
     
     public static Function p1W ;
     
@@ -218,21 +196,10 @@ public unsafe static class Example {
         
         h_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(h_DataCon_Entry)   ) ;
         
-        c_DataCon = new Example.C(  ) ; 
-        b_DataCon = new Example.B(  ) ; 
-        a_DataCon = new Example.A(  ) ; 
         pi_ = new Updatable  ( CLR.LoadFunctionPointer< Closure >(pi__Entry)   ) ;
         
-        lvls6rr = new GHC.Integer.Type.SHash( 60 ) ; 
-        lvls6rq = new GHC.Integer.Type.SHash( 180 ) ; 
         wgs6qO = new Fun  (4, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure , (Closure x0 , Closure x1) >(wgs6qO_Entry)   ) ;
         
-        lvls6qN = new GHC.Integer.Type.SHash( 27 ) ; 
-        lvls6qM = new GHC.Integer.Type.SHash( 12 ) ; 
-        lvls6qL = new GHC.Integer.Type.SHash( 3 ) ; 
-        lvls6qK = new GHC.Integer.Type.SHash( 10 ) ; 
-        lvls6qJ = new GHC.Integer.Type.SHash( 5 ) ; 
-        lvls6qI = new GHC.Integer.Type.SHash( 2 ) ; 
         gcd_ = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(gcd__Entry)   ) ;
         
         wgcd_s6qs = new Fun  (2, CLR.LoadFunctionPointer< long , long , long >(wgcd_s6qs_Entry)   ) ;
@@ -255,11 +222,7 @@ public unsafe static class Example {
         
         mains6pg = new Fun  (1, CLR.LoadFunctionPointer< GHC.Prim.Void , Closure >(mains6pg_Entry)   ) ;
         
-        lvls6pf = new GHC.Types.Cons( GHC.Show.fShowPrOComPrC3r2h , lvls6pd ) ;
-        
         lvls6pd = new Updatable  ( CLR.LoadFunctionPointer< Closure >(lvls6pd_Entry)   ) ;
-        
-        lvls6pb = new GHC.Types.Cons( GHC.Show.fShowPrOComPrC3r2h , lvls6p9 ) ;
         
         lvls6p9 = new Updatable  ( CLR.LoadFunctionPointer< Closure >(lvls6p9_Entry)   ) ;
         
@@ -270,8 +233,7 @@ public unsafe static class Example {
         xs6p0 = new Updatable  ( CLR.LoadFunctionPointer< Closure >(xs6p0_Entry)   ) ;
         
         inf_s6oZ = new Updatable  ( CLR.LoadFunctionPointer< Closure >(inf_s6oZ_Entry)   ) ;
-        inf_ = new GHC.Types.Cons( croots6ka , null ) ;
-        inf_.x1 = inf_s6oZ ; 
+        
         inc_ = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(inc__Entry)   ) ;
         
         inc = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(inc_Entry)   ) ;
@@ -296,7 +258,6 @@ public unsafe static class Example {
         
         sumfold = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(sumfold_Entry)   ) ;
         
-        sumfolds6o7 = new GHC.Types.IHash( 0 ) ; 
         take_ = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(take__Entry)   ) ;
         
         wtake_s6nT = new Fun  (2, CLR.LoadFunctionPointer< long , Closure , Closure >(wtake_s6nT_Entry)   ) ;
@@ -305,13 +266,8 @@ public unsafe static class Example {
         
         pps6nP = new Fun  (2, CLR.LoadFunctionPointer< Closure , GHC.Prim.Void , Closure >(pps6nP_Entry)   ) ;
         
-        fWInt = new Example.CColW( GHC.Classes.fEqInt , cidens6kb , croots6ka ) ;
-        
         letterChar = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(letterChar_Entry)   ) ;
         
-        lvls6mJ = new GHC.Types.CHash( c ) ; 
-        lvls6mI = new GHC.Types.CHash( b ) ; 
-        lvls6mH = new GHC.Types.CHash( a ) ; 
         wt = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(wt_Entry)   ) ;
         
         test = new Fun  (5, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure , GHC.Prim.Void , Closure >(test_Entry)   ) ;
@@ -320,7 +276,6 @@ public unsafe static class Example {
         
         tildDollQMark = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(tildDollQMark_Entry)   ) ;
         
-        so1 = new Example.O1( croots6ka ) ; 
         o1 = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(o1_Entry)   ) ;
         
         wd = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(wd_Entry)   ) ;
@@ -329,11 +284,6 @@ public unsafe static class Example {
         
         foldl_ = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(foldl__Entry)   ) ;
         
-        cycleB = new GHC.Types.Cons( cycleBs6lU , null ) ;
-        cycleA = new GHC.Types.Cons( cycleAs6lT , null ) ;
-        cycleA.x1 = Example.cycleB ; cycleB.x1 = Example.cycleA ; 
-        cycleBs6lU = new GHC.Integer.Type.SHash( 0 ) ; 
-        cycleAs6lT = new GHC.Integer.Type.SHash( 1 ) ; 
         map_ = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(map__Entry)   ) ;
         
         fOrdH = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(fOrdH_Entry)   ) ;
@@ -362,7 +312,36 @@ public unsafe static class Example {
         
         cidens6kb = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(cidens6kb_Entry)   ) ;
         
-        croots6ka = new GHC.Types.IHash( 1 ) ; 
+        c_DataCon = new Example.C(  ) ;
+        b_DataCon = new Example.B(  ) ;
+        a_DataCon = new Example.A(  ) ;
+        lvls6rr = new GHC.Integer.Type.SHash( 60 ) ;
+        lvls6rq = new GHC.Integer.Type.SHash( 180 ) ;
+        lvls6qN = new GHC.Integer.Type.SHash( 27 ) ;
+        lvls6qM = new GHC.Integer.Type.SHash( 12 ) ;
+        lvls6qL = new GHC.Integer.Type.SHash( 3 ) ;
+        lvls6qK = new GHC.Integer.Type.SHash( 10 ) ;
+        lvls6qJ = new GHC.Integer.Type.SHash( 5 ) ;
+        lvls6qI = new GHC.Integer.Type.SHash( 2 ) ;
+        lvls6pf = new GHC.Types.Cons( GHC.Show.fShowPrOComPrC3r2h , lvls6pd ) ;
+        lvls6pb = new GHC.Types.Cons( GHC.Show.fShowPrOComPrC3r2h , lvls6p9 ) ;
+        inf_ = new GHC.Types.Cons( null , inf_s6oZ ) ;
+        sumfolds6o7 = new GHC.Types.IHash( 0 ) ;
+        fWInt = new Example.CColW( GHC.Classes.fEqInt , cidens6kb , null ) ;
+        lvls6mJ = new GHC.Types.CHash( c ) ;
+        lvls6mI = new GHC.Types.CHash( b ) ;
+        lvls6mH = new GHC.Types.CHash( a ) ;
+        so1 = new Example.O1( null ) ;
+        cycleB = new GHC.Types.Cons( null , null ) ;
+        cycleA = new GHC.Types.Cons( null , null ) ;
+        cycleBs6lU = new GHC.Integer.Type.SHash( 0 ) ;
+        cycleAs6lT = new GHC.Integer.Type.SHash( 1 ) ;
+        croots6ka = new GHC.Types.IHash( 1 ) ;
+        cycleA.x0 = cycleAs6lT ;
+        cycleA.x1 = Example.cycleB ;
+        cycleB.x0 = cycleBs6lU ;
+        cycleB.x1 = Example.cycleA ;
+        so1.x0 = croots6ka ; fWInt.x2 = croots6ka ; inf_.x0 = croots6ka ; 
         p1W = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(p1W_Entry)   ) ;
         
         iden = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure >(iden_Entry)   ) ;
