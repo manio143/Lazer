@@ -350,7 +350,7 @@ convertExpr (StgApp fid args) = do
                     in return (CSECall methodName as genParam, [])
                 else if arity > arglen then
                     return (CSEApp fid as applicationResultType, [])
-                else -- arity < arglen --TODO verify this is correct
+                else -- arity < arglen
                     return (CSEAppAfterCall methodName fid (take arity as) (drop arity as) applicationResultType, [])
             Nothing -> return (CSEApp fid as applicationResultType, [])
 convertExpr (StgConApp con args _) = do
@@ -734,7 +734,7 @@ isCallable id = do
                                 1 -- call do select function from dict
                                   -- and use polimorphic Apply on that to deal with levity
                             else funArity id in
-                trace(show arity ++"\t"++ safeVarName WithModule id ++ "_Entry") return $ Just (arity, safeVarName WithModule id ++ "_Entry")
+                return $ Just (arity, safeVarName WithModule id ++ "_Entry")
             else return Nothing
         just -> return just
 
@@ -884,9 +884,9 @@ funArity id = funArity' (idType id) 0
     where
         funArity' (FunTy t1 t2) !n = funArity' t2 (n+1)
         funArity' (AppTy (AppTy ft t1) t2) !n = funArity' t2 (n+1)
-        funArity' (ForAllTy _ (FunTy _ t)) !n = funArity' t n
+        funArity' (ForAllTy _ t) !n = funArity' t n
         funArity' (CastTy t _) !n = funArity' t n
-        funArity' _ !n = n --TODO check if something's missing here
+        funArity' _ !n = n
 
 isEnumType t =
     case tyConAppTyCon_maybe t of
