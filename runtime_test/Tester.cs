@@ -42,7 +42,12 @@ namespace Lazer.Runtime.Test
             => Module.sfoldl.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), InfList);
 
         public Closure PiSum()
-            => Module.suma.Apply<Closure,Closure,Closure>(Module.map.Apply<Closure,Closure,Closure>(Module.integerToInt, Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(4000), Module.pi_)), new GHC.Types.IHash(0));
+            => Module.suma.Apply<Closure,Closure,Closure>(Module.map.Apply<Closure,Closure,Closure>(Module.integerToInt, Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(6000), Module.pi_)), new GHC.Types.IHash(0));
+
+        public Closure AppProcess()
+            => Code.appProcessTest();
+        public Closure AppProcessI()
+            => Code.appProcessTestI();
 
         public Closure LinqSumRange()
             => new GHC.Types.IHash(Enumerable.Range(0, 100_000).Aggregate(0, (a, i) => unchecked(a + i)));
@@ -132,6 +137,8 @@ namespace Lazer.Runtime.Test
             => DigitsE1.TestEntry();
         public Closure NoFib_Primes()
             => Primes.TestEntry();
+        public Closure NoFib_Primes2()
+            => Primes2.TestEntry();
         public (double, Closure) RunTest(Func<Closure> testCase)
         {
             var sw = Stopwatch.StartNew();
@@ -171,20 +178,21 @@ namespace Lazer.Runtime.Test
         {
             var (_, res) = RunTest(testCase);
             Console.WriteLine("{0}\t\t =>  {1}", label, res);
-            var (avg, min, max, sd) = Run(testCase, 25);
+            var (avg, min, max, sd) = Run(testCase, 100);
             Console.WriteLine("{0}\tAVG: {1:0.0000}, SD: {4:0.00} MIN: {2:0.0000}, MAX: {3:0.0000}", label, avg, min, max, sd);
         }
 
         public void ExecTests()
         {
-            /*
+            
+            ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
+            ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
+            ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
+            Console.WriteLine("----");
             ExecTest("Sum(Take(100000,Inf))", SumTakeInf);
             // GC.TryStartNoGCRegion(200_000_000, 10_000_000);
             ExecTest("Sum(MakeList(1,100000))", SumMakeList);
             // GC.EndNoGCRegion();
-            // ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
-            // ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
-            // ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
             ExecTest("SumA(MakeList(1,100000))", SumAMakeList);
             ExecTest("SumA(Take(100000,Inf))", SumATakeInf);
             ExecTest("Fold(+,0, Take(100000,Inf))", FoldTakeInf);
@@ -194,12 +202,20 @@ namespace Lazer.Runtime.Test
             ExecTest("~LoopSum", LoopSum);
             // ExecTest("SumA(Take2(100000,Inf))", SumATakeInf2);
             ExecTest("Fibt(800000)", Fibt);
-            ExecTest("SumA(Take(4000,Pi), 0)", PiSum);
+            ExecTest("SumA(Take(6000,Pi), 0)", PiSum);
+            
+            ExecTest("appProcess (take 100000 (repeat 1))", AppProcess);
+            ExecTest("appProcessI (take 100000 (repeat 1))", AppProcessI);
+            ExecTest("appAppTest", Code.appAppTest);
+            ExecTest("appCallTest", Code.appCallTest);
+            ExecTest("loopAppTest", Code.loopAppTest);
+            ExecTest("loopCallTest", Code.loopCallTest);
             // Console.WriteLine(Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(15), Module.pi_));
+
             //ExecTest("nofib: exp3_8(8)", NoFib_Exp);
-            */
             // ExecTest("nofib: digits_e1(150)", NoFib_DigitsE1);
-            ExecTest("nofib: primes(500)", NoFib_Primes);
+            // ExecTest("nofib: primes(500)", NoFib_Primes);
+            // ExecTest("nofib: primes2(500)", NoFib_Primes2);
 
             // ExecTest("SumA(Take(500000,Map(extractOType, O1-2)), 0)", SumOs2Type);
             // ExecTest("SumA(Take(500000,Map(extractOTag, O1-2)), 0)", SumOs2Tag);

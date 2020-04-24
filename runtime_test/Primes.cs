@@ -156,11 +156,9 @@ public unsafe static class Primes
     public static Closure wws8s6_Entry(Closure wws8s7, Closure ws8s8, Closure ws8s9, long wws8sa)
     {
         var lvls8sb = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(lvls8sb_Entry), ws8s8);
-        var wws8sc = new Fun<Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, long, Closure>(wws8sc_Entry), wws8s7, ws8s8, lvls8sb, null);
-        wws8sc.x3 = wws8sc;
-        return wws8sc.Apply<Closure, long, Closure>(ws8s9, wws8sa);
+        return wws8sc_Entry(wws8s7, ws8s8, lvls8sb, ws8s9, wws8sa);
     }
-    public static Closure wws8sc_Entry(Closure wws8s7, Closure ws8s8, Closure lvls8sb, Closure wws8sc, Closure ws8sd, long wws8se)
+    public static Closure wws8sc_Entry(Closure wws8s7, Closure ws8s8, Closure lvls8sb, Closure ws8sd, long wws8se)
     {
         var wilds8sf = wws8s7.Apply<Closure, Closure, Closure>(ws8sd, lvls8sb).Eval();
         var wilds8sfTags8sf = wilds8sf.Tag;
@@ -174,7 +172,7 @@ public unsafe static class Primes
                     var wilds8sg_IHash = wilds8sg as GHC.Types.IHash;
                     var xs8sh = wilds8sg_IHash.x0;
                     var sats8si = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8si_Entry), ws8s8, lvls8sb, ws8sd);
-                    var wild1s8sj = wws8sc.Apply<Closure, long, Closure>(sats8si, wws8se).Eval();
+                    var wild1s8sj = wws8sc_Entry(wws8s7,ws8s8,lvls8sb, sats8si, wws8se);
                     var wild1s8sj_IHash = wild1s8sj as GHC.Types.IHash;
                     var ys8sk = wild1s8sj_IHash.x0;
                     var sats8sl = xs8sh + ys8sk;
