@@ -189,8 +189,7 @@ stg2cs df modName stg tyCons = evalState (go >> prettyPrint) $ initState df
             mapM_ processTyCon tyCons
             mapM_ gatherCallables stg
             let stgSorted = sortDeclarations stg
-            mapM_ processTop stgSorted --TODO sort bindings to first handle closures and thunks 
-                                 -- and put all data constructors into a recursive bind (static init order)
+            mapM_ processTop stgSorted
             convertStaticLetExpressions
             simplifyExpressions
         simplifyExpressions = modify (\s -> s { code = map (\(Method n t a e) -> Method n t a (simplify e)) (code s) })
@@ -488,6 +487,7 @@ convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
     --TODO never create 0 arity functions - they are actually calls?
     let retType = funRetType id bndrs
     (e1x, ms2) <- withRetType retType $ convertExpr e1
+        --TODO recursive application of the same function should be direct calls
     let name = safeVarName WithoutModule id
     let methodName = name++"_Entry"
     let method = Method methodName retType (occs++bndrs) e1x
@@ -574,6 +574,8 @@ simplify (CSECase id alts) = CSECase id (map simplifyAlt alts)
         simplifyAlt (CSALit l e) = CSALit l (simplify e)
         simplifyAlt (CSACon n1 n2 e) = CSACon n1 n2 (simplify e)
 simplify (CSEEvalAnd id e) = CSEEvalAnd id (simplify e)
+simplify (CSELet id (CSEEval (CSEApp m args rt)) e) = CSELet id (CSEApp m args rt) (simplify e)
+simplify (CSELet id (CSEEval (CSECall m args mrt)) e) = CSELet id (CSECall m args mrt) (simplify e)
 simplify (CSELet id (CSEApp m args rt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSEApp m args rt) (simplify e)
 simplify (CSELet id (CSECall m args mrt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSECall m args mrt) (simplify e)
 simplify (CSELet id e1 ec) = CSELet id e1 (simplify ec) -- e1 is a simple expr
@@ -876,6 +878,7 @@ translateOpString n = (n >>= trOp)
         trOp '+' = "Plus"
         trOp '-' = "Dash"
         trOp '^' = "Hat"
+        trOp '%' = "Perc"
         trOp '/' = "Slsh"
         trOp '\\' = "Blsh"
         trOp '&' = "Amp"
