@@ -685,16 +685,12 @@ namespace GHC
                             case 2:
                                 {
                                     var wilds8QA_True = wilds8QA as GHC.Types.True;
-                                    var sats8QB = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8QB_Entry), _preds8Qv, xss8Qz);
+                                    var sats8QB = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(filter_Entry), _preds8Qv, xss8Qz);
                                     return new GHC.Types.Cons(xs8Qy, sats8QB);
                                 }
                         }
                     }
             }
-        }
-        public static Closure sats8QB_Entry(Closure _preds8Qv, Closure xss8Qz)
-        {
-            return filter_Entry(_preds8Qv, xss8Qz);
         }
         public static Closure filterFB_Entry(Closure cs8Qp, Closure ps8Qq, Closure xs8Qr, Closure rs8Qs)
         {

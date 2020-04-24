@@ -4,7 +4,7 @@ namespace GHC
 {
     public unsafe static class Tuple
     {
-        public static Fun unit_DataCon;
+        public static Unit unit_DataCon = new Unit();
 
         public static Fun tuple2_DataCon;
 
@@ -16,8 +16,6 @@ namespace GHC
 
         static Tuple()
         {
-            unit_DataCon = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(unit_DataCon_Entry));
-
             tuple2_DataCon = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(tuple2_DataCon_Entry));
 
             tuple3_DataCon = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(tuple3_DataCon_Entry));
@@ -26,10 +24,6 @@ namespace GHC
 
             tuple5_DataCon = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(tuple5_DataCon_Entry));
 
-        }
-        public static Closure unit_DataCon_Entry(Closure etaB1)
-        {
-            return new GHC.Tuple.Unit(etaB1);
         }
         public static Closure tuple2_DataCon_Entry(Closure etaB2, Closure etaB1)
         {
@@ -49,9 +43,9 @@ namespace GHC
         }
         public sealed class Unit : Data
         {
-            public Closure x0;
-            public Unit(Closure x0) { this.x0 = x0; }
+            public Unit() { }
             public override int Tag => 1;
+            public override string ToString() => "()";
         }
         public sealed class Tuple2 : Data
         {
@@ -61,6 +55,7 @@ namespace GHC
                 this.x0 = x0; this.x1 = x1;
             }
             public override int Tag => 1;
+            public override string ToString() => $"({x0}, {x1})";
         }
         public sealed class Tuple3 : Data
         {
@@ -70,6 +65,7 @@ namespace GHC
                 this.x0 = x0; this.x1 = x1; this.x2 = x2;
             }
             public override int Tag => 1;
+            public override string ToString() => $"({x0}, {x1}, {x2})";
         }
         public sealed class Tuple4 : Data
         {
@@ -80,6 +76,7 @@ namespace GHC
                 this.x0 = x0; this.x1 = x1; this.x2 = x2; this.x3 = x3;
             }
             public override int Tag => 1;
+            public override string ToString() => $"({x0}, {x1}, {x2}, {x3})";
         }
         public sealed class Tuple5 : Data
         {
@@ -92,6 +89,7 @@ namespace GHC
                 this.x1 = x1; this.x2 = x2; this.x3 = x3; this.x4 = x4;
             }
             public override int Tag => 1;
+            public override string ToString() => $"({x0}, {x1}, {x2}, {x3}, {x4})";
         }
     }
 }

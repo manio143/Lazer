@@ -2156,7 +2156,7 @@ namespace GHC {
             var wilds5Rs_IHash = wilds5Rs as GHC.Types.IHash;
             var ys5Rt = wilds5Rs_IHash.x0 ;
             var sats5Ru = ( xs5Rr <= ys5Rt ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Ru ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Ru ) ;
             }
         public static Closure ltInt_Entry( Closure dss5Rg , Closure dss5Rh ) {
             var wilds5Ri = dss5Rg ;
@@ -2168,7 +2168,7 @@ namespace GHC {
             var wilds5Rk_IHash = wilds5Rk as GHC.Types.IHash;
             var ys5Rl = wilds5Rk_IHash.x0 ;
             var sats5Rm = ( xs5Rj < ys5Rl ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Rm ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Rm ) ;
             }
         public static Closure geInt_Entry( Closure dss5R8 , Closure dss5R9 ) {
             var wilds5Ra = dss5R8 ;
@@ -2180,7 +2180,7 @@ namespace GHC {
             var wilds5Rc_IHash = wilds5Rc as GHC.Types.IHash;
             var ys5Rd = wilds5Rc_IHash.x0 ;
             var sats5Re = ( xs5Rb >= ys5Rd ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Re ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Re ) ;
             }
         public static Closure gtInt_Entry( Closure dss5R0 , Closure dss5R1 ) {
             var wilds5R2 = dss5R0 ;
@@ -2192,7 +2192,7 @@ namespace GHC {
             var wilds5R4_IHash = wilds5R4 as GHC.Types.IHash;
             var ys5R5 = wilds5R4_IHash.x0 ;
             var sats5R6 = ( xs5R3 > ys5R5 ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5R6 ) ;
+            return GHC.Types.isTrueHash_Entry( sats5R6 ) ;
             }
         public static Closure neInt_Entry( Closure dss5QR , Closure dss5QS ) {
             var wilds5QT = dss5QR ;
@@ -2204,7 +2204,7 @@ namespace GHC {
             var wilds5QV_IHash = wilds5QV as GHC.Types.IHash;
             var bs5QW = wilds5QV_IHash.x0 ;
             var sats5QX = ( as5QU != bs5QW ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5QX ) ;
+            return GHC.Types.isTrueHash_Entry( sats5QX ) ;
             }
         public static Closure eqInt_Entry( Closure dss5QJ , Closure dss5QK ) {
             var wilds5QL = dss5QJ ;
@@ -2216,7 +2216,7 @@ namespace GHC {
             var wilds5QN_IHash = wilds5QN as GHC.Types.IHash;
             var bs5QO = wilds5QN_IHash.x0 ;
             var sats5QP = ( as5QM == bs5QO ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5QP ) ;
+            return GHC.Types.isTrueHash_Entry( sats5QP ) ;
             }
         public static Closure eqDouble_Entry( Closure dss5QB , Closure dss5QC ) {
             var wilds5QD = dss5QB ;
@@ -2228,7 +2228,7 @@ namespace GHC {
             var wilds5QF_DHash = wilds5QF as GHC.Types.DHash;
             var ys5QG = wilds5QF_DHash.x0 ;
             var sats5QH = ( xs5QE == ys5QG ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5QH ) ;
+            return GHC.Types.isTrueHash_Entry( sats5QH ) ;
             }
         public static Closure eqFloat_Entry( Closure dss5Qt , Closure dss5Qu ) {
             var wilds5Qv = dss5Qt ;
@@ -2240,7 +2240,7 @@ namespace GHC {
             var wilds5Qx_FHash = wilds5Qx as GHC.Types.FHash;
             var ys5Qy = wilds5Qx_FHash.x0 ;
             var sats5Qz = ( xs5Qw == ys5Qy ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Qz ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Qz ) ;
             }
         public static Closure neChar_Entry( Closure dss5Qk , Closure dss5Ql ) {
             var wilds5Qm = dss5Qk ;
@@ -2252,7 +2252,7 @@ namespace GHC {
             var wilds5Qo_CHash = wilds5Qo as GHC.Types.CHash;
             var ys5Qp = wilds5Qo_CHash.x0 ;
             var sats5Qq = ( xs5Qn != ys5Qp ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Qq ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Qq ) ;
             }
         public static Closure eqChar_Entry( Closure dss5Qc , Closure dss5Qd ) {
             var wilds5Qe = dss5Qc ;
@@ -2264,7 +2264,7 @@ namespace GHC {
             var wilds5Qg_CHash = wilds5Qg as GHC.Types.CHash;
             var ys5Qh = wilds5Qg_CHash.x0 ;
             var sats5Qi = ( xs5Qf == ys5Qh ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Qi ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Qi ) ;
             }
         public static Closure dmcompares5Q4_Entry( Closure dOrds5Q5 , Closure etas5Q6 , Closure etas5Q7 ) {
             var sats5Q8 = GHC.Classes.p1Ord_Entry( dOrds5Q5 ) ;
@@ -2407,7 +2407,7 @@ namespace GHC {
             var wilds5Po_DHash = wilds5Po as GHC.Types.DHash;
             var ys5Pp = wilds5Po_DHash.x0 ;
             var sats5Pq = ( xs5Pn < ys5Pp ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Pq ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Pq ) ;
             }
         public static Closure cLtEqs5Pb_Entry( Closure dss5Pc , Closure dss5Pd ) {
             var wilds5Pe = dss5Pc ;
@@ -2419,7 +2419,7 @@ namespace GHC {
             var wilds5Pg_DHash = wilds5Pg as GHC.Types.DHash;
             var ys5Ph = wilds5Pg_DHash.x0 ;
             var sats5Pi = ( xs5Pf <= ys5Ph ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Pi ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Pi ) ;
             }
         public static Closure cGts5P3_Entry( Closure dss5P4 , Closure dss5P5 ) {
             var wilds5P6 = dss5P4 ;
@@ -2431,7 +2431,7 @@ namespace GHC {
             var wilds5P8_DHash = wilds5P8 as GHC.Types.DHash;
             var ys5P9 = wilds5P8_DHash.x0 ;
             var sats5Pa = ( xs5P7 > ys5P9 ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Pa ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Pa ) ;
             }
         public static Closure cGtEqs5OV_Entry( Closure dss5OW , Closure dss5OX ) {
             var wilds5OY = dss5OW ;
@@ -2443,7 +2443,7 @@ namespace GHC {
             var wilds5P0_DHash = wilds5P0 as GHC.Types.DHash;
             var ys5P1 = wilds5P0_DHash.x0 ;
             var sats5P2 = ( xs5OZ >= ys5P1 ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5P2 ) ;
+            return GHC.Types.isTrueHash_Entry( sats5P2 ) ;
             }
         public static Closure ccompares5OM_Entry( Closure dss5ON , Closure dss5OO ) {
             var wilds5OP = dss5ON ;
@@ -2476,7 +2476,7 @@ namespace GHC {
             var wilds5OJ_FHash = wilds5OJ as GHC.Types.FHash;
             var ys5OK = wilds5OJ_FHash.x0 ;
             var sats5OL = ( xs5OI < ys5OK ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5OL ) ;
+            return GHC.Types.isTrueHash_Entry( sats5OL ) ;
             }
         public static Closure cLtEqs5Ow_Entry( Closure dss5Ox , Closure dss5Oy ) {
             var wilds5Oz = dss5Ox ;
@@ -2488,7 +2488,7 @@ namespace GHC {
             var wilds5OB_FHash = wilds5OB as GHC.Types.FHash;
             var ys5OC = wilds5OB_FHash.x0 ;
             var sats5OD = ( xs5OA <= ys5OC ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5OD ) ;
+            return GHC.Types.isTrueHash_Entry( sats5OD ) ;
             }
         public static Closure cGts5Oo_Entry( Closure dss5Op , Closure dss5Oq ) {
             var wilds5Or = dss5Op ;
@@ -2500,7 +2500,7 @@ namespace GHC {
             var wilds5Ot_FHash = wilds5Ot as GHC.Types.FHash;
             var ys5Ou = wilds5Ot_FHash.x0 ;
             var sats5Ov = ( xs5Os > ys5Ou ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Ov ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Ov ) ;
             }
         public static Closure cGtEqs5Og_Entry( Closure dss5Oh , Closure dss5Oi ) {
             var wilds5Oj = dss5Oh ;
@@ -2512,7 +2512,7 @@ namespace GHC {
             var wilds5Ol_FHash = wilds5Ol as GHC.Types.FHash;
             var ys5Om = wilds5Ol_FHash.x0 ;
             var sats5On = ( xs5Ok >= ys5Om ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5On ) ;
+            return GHC.Types.isTrueHash_Entry( sats5On ) ;
             }
         public static Closure cLts5O8_Entry( Closure dss5O9 , Closure dss5Oa ) {
             var wilds5Ob = dss5O9 ;
@@ -2524,7 +2524,7 @@ namespace GHC {
             var wilds5Od_CHash = wilds5Od as GHC.Types.CHash;
             var c2s5Oe = wilds5Od_CHash.x0 ;
             var sats5Of = ( c1s5Oc < c2s5Oe ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5Of ) ;
+            return GHC.Types.isTrueHash_Entry( sats5Of ) ;
             }
         public static Closure cLtEqs5O0_Entry( Closure dss5O1 , Closure dss5O2 ) {
             var wilds5O3 = dss5O1 ;
@@ -2536,7 +2536,7 @@ namespace GHC {
             var wilds5O5_CHash = wilds5O5 as GHC.Types.CHash;
             var c2s5O6 = wilds5O5_CHash.x0 ;
             var sats5O7 = ( c1s5O4 <= c2s5O6 ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5O7 ) ;
+            return GHC.Types.isTrueHash_Entry( sats5O7 ) ;
             }
         public static Closure cGts5NS_Entry( Closure dss5NT , Closure dss5NU ) {
             var wilds5NV = dss5NT ;
@@ -2548,7 +2548,7 @@ namespace GHC {
             var wilds5NX_CHash = wilds5NX as GHC.Types.CHash;
             var c2s5NY = wilds5NX_CHash.x0 ;
             var sats5NZ = ( c1s5NW > c2s5NY ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5NZ ) ;
+            return GHC.Types.isTrueHash_Entry( sats5NZ ) ;
             }
         public static Closure cGtEqs5NK_Entry( Closure dss5NL , Closure dss5NM ) {
             var wilds5NN = dss5NL ;
@@ -2560,7 +2560,7 @@ namespace GHC {
             var wilds5NP_CHash = wilds5NP as GHC.Types.CHash;
             var c2s5NQ = wilds5NP_CHash.x0 ;
             var sats5NR = ( c1s5NO >= c2s5NQ ) ? 1 : 0 ;
-            return GHC.Types.tagToEnumHash( sats5NR ) ;
+            return GHC.Types.isTrueHash_Entry( sats5NR ) ;
             }
         public static Closure ccompares5ND_Entry( Closure dss5NE , Closure dss5NF ) {
             var wilds5NG = dss5NE ;
