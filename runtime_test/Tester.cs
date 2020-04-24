@@ -7,9 +7,9 @@ namespace Lazer.Runtime.Test
 {
     public unsafe class Tester
     {
-        private Closure InfList = Module.take.Apply<Closure,Closure,Closure>(new I(100_000), Module.inf);
-        private Closure InfList2 = Module.takeOnStack.Apply<Closure,Closure,Closure>(new I(100_000), Module.inf);
-        private Closure MakeList = Module.makeList.Apply<Closure,Closure,Closure>(new I(1), new I(100_000));
+        private Closure InfList = Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(100_000), Module.inf);
+        private Closure InfList2 = Module.takeOnStack.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(100_000), Module.inf);
+        private Closure MakeList = Module.makeList.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(1), new GHC.Types.IHash(100_000));
 
         public Closure SumTakeInf()
             => Module.sum.Apply<Closure,Closure>(InfList);
@@ -24,45 +24,45 @@ namespace Lazer.Runtime.Test
         public Closure Sum2MakeList()
             => Module.sum2.Apply<Closure,Closure>(MakeList);
         public Closure SumATakeInf()
-            => Module.suma.Apply<Closure,Closure,Closure>(InfList, new I(0));
+            => Module.suma.Apply<Closure,Closure,Closure>(InfList, new GHC.Types.IHash(0));
 
         public Closure SumATakeInf2()
-            => Module.suma.Apply<Closure,Closure,Closure>(InfList2, new I(0));
+            => Module.suma.Apply<Closure,Closure,Closure>(InfList2, new GHC.Types.IHash(0));
 
         public Closure SumAMakeList()
-            => Module.suma.Apply<Closure,Closure,Closure>(MakeList, new I(0));
+            => Module.suma.Apply<Closure,Closure,Closure>(MakeList, new GHC.Types.IHash(0));
 
         public Closure Fibt()
-            => Module.fibt.Apply<Closure,Closure>(new I(800_000));
+            => Module.fibt.Apply<Closure,Closure>(new GHC.Types.IHash(800_000));
 
         public Closure FoldMakeList()
-            => Module.sfoldl.Apply<Closure,Closure,Closure>(new I(0), MakeList);
+            => Module.sfoldl.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), MakeList);
 
         public Closure FoldTakeInf()
-            => Module.sfoldl.Apply<Closure,Closure,Closure>(new I(0), InfList);
+            => Module.sfoldl.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), InfList);
 
         public Closure PiSum()
-            => Module.suma.Apply<Closure,Closure,Closure>(Module.map.Apply<Closure,Closure,Closure>(Module.integerToInt, Module.take.Apply<Closure,Closure,Closure>(new I(4000), Module.pi_)), new I(0));
+            => Module.suma.Apply<Closure,Closure,Closure>(Module.map.Apply<Closure,Closure,Closure>(Module.integerToInt, Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(4000), Module.pi_)), new GHC.Types.IHash(0));
 
         public Closure LinqSumRange()
-            => new I(Enumerable.Range(0, 100_000).Aggregate(0, (a, i) => unchecked(a + i)));
+            => new GHC.Types.IHash(Enumerable.Range(0, 100_000).Aggregate(0, (a, i) => unchecked(a + i)));
 
         public Closure LoopSum()
         {
             int sum = 0;
             for (int i = 0; i <= 100_000; i++)
                 sum += i;
-            return new I(sum);
+            return new GHC.Types.IHash(sum);
         }
 
         public Closure SumFromTo()
-            => Module.sumFromTo.Apply<Closure,Closure,Closure>(new I(0), new I(100_000));
+            => Module.sumFromTo.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), new GHC.Types.IHash(100_000));
 
         public Closure SumOs(Data[] arr, Function extract) {
             var os = Code.loopArray(arr, 0);
             var @is = Module.map.Apply<Closure, Closure, Closure>(extract, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new I(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new I(0));
+            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
         }
         public Closure SumOs2TypeL()
             => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtypeL);
@@ -88,26 +88,26 @@ namespace Lazer.Runtime.Test
         public Closure SumOsRandomType() {
             var os = Code.RandomO();
             var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new I(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new I(0));
+            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
         }
         public Closure SumOsRandomTag() {
             var os = Code.RandomO();
             var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new I(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new I(0));
+            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
         }
         public Closure SumOsRandomTypeL() {
             var os = Code.RandomOL();
             var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new I(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new I(0));
+            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
         }
         public Closure SumOsRandomTagL() {
             var os = Code.RandomOL();
             var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new I(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new I(0));
+            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
         }
         public Closure SumOsConst0Type()
             => SumOs(new Data[] { new O0(1) }, Module.extractOtype);
@@ -125,6 +125,13 @@ namespace Lazer.Runtime.Test
             => SumOs(new Data[] { new O4(1) }, Module.extractOtag);
         public Closure SumOsConst9Tag()
             => SumOs(new Data[] { new OFucked(1) }, Module.extractOtag);
+
+        public Closure NoFib_Exp()
+            => new GHC.Types.IHash(Exp3.TestEntry(8));
+        public Closure NoFib_DigitsE1()
+            => DigitsE1.TestEntry();
+        public Closure NoFib_Primes()
+            => Primes.TestEntry();
         public (double, Closure) RunTest(Func<Closure> testCase)
         {
             var sw = Stopwatch.StartNew();
@@ -137,7 +144,9 @@ namespace Lazer.Runtime.Test
         {
             var ts = new double[times];
             for (int i = 0; i < times; i++)
+            {
                 ts[i] = RunTest(testCase).Item1;
+            }
             double avg, min = double.MaxValue, max = 0, sd = 0, sum = 0;
             for (int i = 0; i < times; i++)
             {
@@ -168,28 +177,30 @@ namespace Lazer.Runtime.Test
 
         public void ExecTests()
         {
-            
-                // GC.TryStartNoGCRegion(200_000_000, 10_000_000);
-                ExecTest("Sum(Take(100000,Inf))", SumTakeInf);
-                // GC.EndNoGCRegion();
-                // GC.TryStartNoGCRegion(200_000_000, 10_000_000);
-                ExecTest("Sum(MakeList(1,100000))", SumMakeList);
-                // GC.EndNoGCRegion();
-                ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
-                ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
-                ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
-                ExecTest("SumFromTo", SumFromTo);
-                ExecTest("~LinqSumRange", LinqSumRange);
-                ExecTest("~LoopSum", LoopSum);
-                ExecTest("SumA(Take(100000,Inf))", SumATakeInf);
-                ExecTest("SumA(MakeList(1,100000))", SumAMakeList);
-                ExecTest("SumA(Take2(100000,Inf))", SumATakeInf2);
-                ExecTest("Fibt(800000)", Fibt);
-                ExecTest("Fold(+,0, Take(100000,Inf))", FoldTakeInf);
-                ExecTest("Fold(+,0, MakeList(1,100000))", FoldMakeList);
-                ExecTest("SumA(Take(4000,Pi), 0)", PiSum);
-                Console.WriteLine(Module.take.Apply<Closure,Closure,Closure>(new I(15), Module.pi_));
-            
+            /*
+            ExecTest("Sum(Take(100000,Inf))", SumTakeInf);
+            // GC.TryStartNoGCRegion(200_000_000, 10_000_000);
+            ExecTest("Sum(MakeList(1,100000))", SumMakeList);
+            // GC.EndNoGCRegion();
+            // ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
+            // ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
+            // ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
+            ExecTest("SumA(MakeList(1,100000))", SumAMakeList);
+            ExecTest("SumA(Take(100000,Inf))", SumATakeInf);
+            ExecTest("Fold(+,0, Take(100000,Inf))", FoldTakeInf);
+            ExecTest("Fold(+,0, MakeList(1,100000))", FoldMakeList);
+            ExecTest("SumFromTo", SumFromTo);
+            ExecTest("~LinqSumRange", LinqSumRange);
+            ExecTest("~LoopSum", LoopSum);
+            // ExecTest("SumA(Take2(100000,Inf))", SumATakeInf2);
+            ExecTest("Fibt(800000)", Fibt);
+            ExecTest("SumA(Take(4000,Pi), 0)", PiSum);
+            // Console.WriteLine(Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(15), Module.pi_));
+            //ExecTest("nofib: exp3_8(8)", NoFib_Exp);
+            */
+            // ExecTest("nofib: digits_e1(150)", NoFib_DigitsE1);
+            ExecTest("nofib: primes(500)", NoFib_Primes);
+
             // ExecTest("SumA(Take(500000,Map(extractOType, O1-2)), 0)", SumOs2Type);
             // ExecTest("SumA(Take(500000,Map(extractOTag, O1-2)), 0)", SumOs2Tag);
             // ExecTest("SumA(Take(500000,Map(extractOTypeL, O1-2)), 0)", SumOs2TypeL);

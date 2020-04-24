@@ -3,51 +3,6 @@ using System.Numerics;
 using Lazer.Runtime;
 using static Module;
 
-public sealed class Nil : Data
-{
-    public override string ToString() => "[]";
-    public override int Tag => 0;
-}
-public sealed class Cons : Data
-{
-    public Closure x0;
-    public Closure x1;
-
-    public override int Tag => 1;
-    public Cons(Closure x0, Closure x1)
-    {
-        this.x0 = x0;
-        this.x1 = x1;
-    }
-
-    public override string ToString()
-    {
-        var h = x0.Eval();
-        var t = x1.Eval();
-        return $"{h} : {t}";
-    }
-}
-
-public sealed class I : Data
-{
-    public long x0;
-    public I(long x0)
-    {
-        this.x0 = x0;
-    }
-
-    public override string ToString() => x0.ToString();
-}
-
-public sealed class S : Data
-{
-    public BigInteger x0;
-    public S(long x0)
-        => this.x0 = new BigInteger(x0);
-    public S(BigInteger x0) => this.x0 = x0;
-    public override string ToString() => x0.ToString();
-}
-
 public sealed class O0 : Data
 {
     public int x0;
@@ -89,18 +44,18 @@ public static unsafe class Module
 {
     public static Thunk fibs = new Updatable(CLR.LoadFunctionPointer(Code.fibs_Entry));
     public static Thunk inf_s3cv = new Updatable(CLR.LoadFunctionPointer(Code.inf_s3cv_Entry));
-    public static I inf_s3ct = new I(1);
-    public static Cons inf = new Cons(inf_s3ct, inf_s3cv);
-    public static S lvl_s4BA = new S(60);
-    public static S lvl_s4Bz = new S(180);
-    public static S lvl_s4AW = new S(27);
-    public static S lvl_s4AV = new S(12);
-    public static S lvl_s4AU = new S(0);
-    public static S lvl_s4AT = new S(3);
-    public static S lvl_s4AS = new S(10);
-    public static S lvl_s4AR = new S(5);
-    public static S lvl_s4AQ = new S(2);
-    public static S lvl_s4AP = new S(1);
+    public static GHC.Types.IHash inf_s3ct = new GHC.Types.IHash(1);
+    public static GHC.Types.Cons inf = new GHC.Types.Cons(inf_s3ct, inf_s3cv);
+    public static Data lvl_s4BA = GHC.Integer.Type.smallInteger_Entry(60) as Data;
+    public static Data lvl_s4Bz = GHC.Integer.Type.smallInteger_Entry(180) as Data;
+    public static Data lvl_s4AW = GHC.Integer.Type.smallInteger_Entry(27) as Data;
+    public static Data lvl_s4AV = GHC.Integer.Type.smallInteger_Entry(12) as Data;
+    public static Data lvl_s4AU = GHC.Integer.Type.smallInteger_Entry(0) as Data;
+    public static Data lvl_s4AT = GHC.Integer.Type.smallInteger_Entry(3) as Data;
+    public static Data lvl_s4AS = GHC.Integer.Type.smallInteger_Entry(10) as Data;
+    public static Data lvl_s4AR = GHC.Integer.Type.smallInteger_Entry(5) as Data;
+    public static Data lvl_s4AQ = GHC.Integer.Type.smallInteger_Entry(2) as Data;
+    public static Data lvl_s4AP = GHC.Integer.Type.smallInteger_Entry(1) as Data;
     public static Thunk pi_ = new Updatable(CLR.LoadFunctionPointer(Code.pi__Entry));
     public static Function inc = new Fun(1, CLR.LoadFunctionPointer(Code.inc_Entry));
     public static Function inc_ = new Fun(1, CLR.LoadFunctionPointer(Code.inc__Entry));
@@ -122,7 +77,6 @@ public static unsafe class Module
     public static Function plusInteger = new Fun(2, CLR.LoadFunctionPointer(Code.plusInteger_Entry));
     public static Function minusInteger = new Fun(2, CLR.LoadFunctionPointer(Code.minusInteger_Entry));
     public static Function integerToInt = new Fun(1, CLR.LoadFunctionPointer(Code.integerToInt_Entry));
-    public static Nil nil = new Nil();
     public static Function extractOtype = new Fun(1, CLR.LoadFunctionPointer(Code.extractOtype_Entry));
     public static Function extractOtag = new Fun(1, CLR.LoadFunctionPointer(Code.extractOtag_Entry));
     public static Function extractOtypeL = new Fun(1, CLR.LoadFunctionPointer(Code.extractOtypeL_Entry));
@@ -133,8 +87,8 @@ public static unsafe class Code
 {
     public static Closure makelist_Entry(Closure a, Closure b)
     {
-        var from = (a.Eval() as I).x0;
-        var to = (b.Eval() as I).x0;
+        var from = (a.Eval() as GHC.Types.IHash).x0;
+        var to = (b.Eval() as GHC.Types.IHash).x0;
         return makelist_Go(from, to);
     }
     public static Closure makelist_Go(long from, long to)
@@ -142,9 +96,9 @@ public static unsafe class Code
         if (from <= to)
         {
             var t = new Updatable<long,long>(CLR.LoadFunctionPointer<long, long, Closure>(makelist_Go), from + 1, to);
-            return new Cons(new I(from), t);
+            return new GHC.Types.Cons(new GHC.Types.IHash(from), t);
         }
-        return nil;
+        return GHC.Types.nil_DataCon;
     }
     public static Closure sfoldl_Entry(Closure a, Closure b)
     {
@@ -152,11 +106,11 @@ public static unsafe class Code
         switch (a)
         {
             default: { throw new ImpossibleException(); }
-            case I a_I:
+            case GHC.Types.IHash a_I:
                 {
                     var x = a_I.x0;
                     var r = wfoldl_gos3NN_Entry(x, b);
-                    return new I(r);
+                    return new GHC.Types.IHash(r);
                 }
         }
     }
@@ -167,8 +121,8 @@ public static unsafe class Code
         switch (wild_s3NQ)
         {
             default: { throw new ImpossibleException(); }
-            case Nil wild_s3NQ_Nil: { return ww_s3NO; }
-            case Cons wild_s3NQ_Cons:
+            case GHC.Types.Nil wild_s3NQ_Nil: { return ww_s3NO; }
+            case GHC.Types.Cons wild_s3NQ_Cons:
                 {
                     var x = wild_s3NQ_Cons.x0;
                     var xs = wild_s3NQ_Cons.x1;
@@ -177,7 +131,7 @@ public static unsafe class Code
                     switch (wild1)
                     {
                         default: { throw new ImpossibleException(); }
-                        case I wild1_I:
+                        case GHC.Types.IHash wild1_I:
                             {
                                 var y = wild1_I.x0;
                                 var sat_s3NV = ww_s3NO + y;
@@ -208,7 +162,7 @@ public static unsafe class Code
         switch (wild1)
         {
             default: { throw new ImpossibleException(); }
-            case I wild1_I:
+            case GHC.Types.IHash wild1_I:
                 {
                     var y = wild1_I.x0;
                     var sat_s3cr = 1 + y;
@@ -216,7 +170,7 @@ public static unsafe class Code
                     {
                         default:
                             {
-                                return new I(sat_s3cr);
+                                return new GHC.Types.IHash(sat_s3cr);
                             }
                     }
                 }
@@ -224,12 +178,12 @@ public static unsafe class Code
     }
     public static Closure gcd_Entry(Closure w_s3cg, Closure w_s3ch)
     {
-        var ww_s3ci_I = w_s3cg.Eval() as I;
+        var ww_s3ci_I = w_s3cg.Eval() as GHC.Types.IHash;
         var ww_s3cj = ww_s3ci_I.x0;
-        var ww_s3ck_I = w_s3ch.Eval() as I;
+        var ww_s3ck_I = w_s3ch.Eval() as GHC.Types.IHash;
         var ww_s3cl = ww_s3ck_I.x0;
         var ww_s3cm = wgcds3c7_Entry(ww_s3cj, ww_s3cl);
-        return new I(ww_s3cm);
+        return new GHC.Types.IHash(ww_s3cm);
     }
     public static long wgcds3c7_Entry(long ww_s3c8, long ww_s3c9)
     {
@@ -272,21 +226,21 @@ public static unsafe class Code
     }
     public static Closure fibt_Entry(Closure w_s3c3)
     {
-        var ww_s3c4_I = w_s3c3.Eval() as I;
+        var ww_s3c4_I = w_s3c3.Eval() as GHC.Types.IHash;
         var ww_s3c5 = ww_s3c4_I.x0;
         var ww_s3c6 = wfibas3bK_Entry(0, 1, ww_s3c5);
-        return new I(ww_s3c6);
+        return new GHC.Types.IHash(ww_s3c6);
     }
     public static Closure fiba_Entry(Closure w_s3bS, Closure w_s3bT, Closure w_s3bU)
     {
-        var ww_s3bV_I = w_s3bS.Eval() as I;
+        var ww_s3bV_I = w_s3bS.Eval() as GHC.Types.IHash;
         var ww_s3bW = ww_s3bV_I.x0;
-        var ww_s3bX_I = w_s3bT.Eval() as I;
+        var ww_s3bX_I = w_s3bT.Eval() as GHC.Types.IHash;
         var ww_s3bY = ww_s3bX_I.x0;
-        var ww_s3bZ_I = w_s3bU.Eval() as I;
+        var ww_s3bZ_I = w_s3bU.Eval() as GHC.Types.IHash;
         var ww_s3c0 = ww_s3bZ_I.x0;
         var ww_s3c1 = wfibas3bK_Entry(ww_s3bW, ww_s3bY, ww_s3c0);
-        return new I(ww_s3c1);
+        return new GHC.Types.IHash(ww_s3c1);
     }
     public static long wfibas3bK_Entry(long ww_s3bL, long ww_s3bM, long ww_s3bN)
     {
@@ -312,21 +266,21 @@ public static unsafe class Code
                 {
                     throw new ImpossibleException();
                 }
-            case Nil wild_s3bB_Nil:
+            case GHC.Types.Nil wild_s3bB_Nil:
                 {
-                    return new I(0);
+                    return new GHC.Types.IHash(0);
                 }
-            case Cons
+            case GHC.Types.Cons
                 wild_s3bB_Cons:
                 {
                     var x = wild_s3bB_Cons.x0;
                     var xs = wild_s3bB_Cons.x1;
-                    var wild_I = x.Eval() as I;
+                    var wild_I = x.Eval() as GHC.Types.IHash;
                     var x2 = wild_I.x0;
-                    var ww_s3bG = sum2_Entry(xs);  // puts int in I | => a lot of GC
-                    var ww_s3bG_I = ww_s3bG.Eval() as I; // unpacks   |
+                    var ww_s3bG = sum2_Entry(xs);  // puts int in GHC.Types.IHash | => a lot of GC
+                    var ww_s3bG_I = ww_s3bG.Eval() as GHC.Types.IHash; // unpacks   |
                     var x1 = ww_s3bG_I.x0;
-                    return new I(x1 + x2);
+                    return new GHC.Types.IHash(x1 + x2);
                 }
         }
     }
@@ -334,7 +288,7 @@ public static unsafe class Code
     public static Closure sum_Entry(Closure w_s3bI)
     {
         var ww_s3bJ = wsums3bz_Entry(w_s3bI);
-        switch (ww_s3bJ) { default: { return new I(ww_s3bJ); } }
+        switch (ww_s3bJ) { default: { return new GHC.Types.IHash(ww_s3bJ); } }
     }
     public static long wsums3bz_Entry(Closure w_s3bA)
     {
@@ -346,17 +300,17 @@ public static unsafe class Code
                 {
                     throw new ImpossibleException();
                 }
-            case Nil wild_s3bB_Nil:
+            case GHC.Types.Nil wild_s3bB_Nil:
                 {
                     return 0;
                 }
-            case Cons
+            case GHC.Types.Cons
                 wild_s3bB_Cons:
                 {
                     var x = wild_s3bB_Cons.x0;
                     var xs = wild_s3bB_Cons.x1;
                     x = x.Eval();
-                    var x2 = (x as I).x0;
+                    var x2 = (x as GHC.Types.IHash).x0;
                     var ww_s3bG = wsums3bz_Entry(xs);
                     return x2 + ww_s3bG;
                 }
@@ -364,10 +318,10 @@ public static unsafe class Code
     }
     public static Closure suma_Entry(Closure w_s3bu, Closure w_s3bv)
     {
-        var ww_s3bw_I = w_s3bv.Eval() as I;
+        var ww_s3bw_I = w_s3bv.Eval() as GHC.Types.IHash;
         var ww_s3bx = ww_s3bw_I.x0;
         var ww_s3by = wsumas3bk_Entry(w_s3bu, ww_s3bx);
-        return new I(ww_s3by);
+        return new GHC.Types.IHash(ww_s3by);
     }
     public static long wsumas3bk_Entry(Closure w_s3bl, long ww_s3bm)
     {
@@ -376,7 +330,7 @@ public static unsafe class Code
         switch (wild_s3bn)
         {
             default: { throw new ImpossibleException(); }
-            case Cons
+            case GHC.Types.Cons
                 wild_s3bn_Cons:
                 {
                     var x = wild_s3bn_Cons.x0;
@@ -386,7 +340,7 @@ public static unsafe class Code
                     switch (wild)
                     {
                         default: { throw new ImpossibleException(); }
-                        case I wild_I:
+                        case GHC.Types.IHash wild_I:
                             {
                                 var x2 = wild_I.x0;
                                 var sat_s3bs = x2 + ww_s3bm;
@@ -397,32 +351,32 @@ public static unsafe class Code
                             }
                     }
                 }
-            case Nil wild_s3bn_Nil: { return ww_s3bm; }
+            case GHC.Types.Nil wild_s3bn_Nil: { return ww_s3bm; }
         }
     }
     public static Closure takeOnStack_Entry(Closure n, Closure l)
     {
         n = n.Eval();
-        var nn = (n as I).x0;
+        var nn = (n as GHC.Types.IHash).x0;
         return takeOnStack_Entry2(nn, l);
     }
 
     public static Closure takeOnStack_Entry2(long nn, Closure l)
     {
         if (nn == 0)
-            return nil;
+            return GHC.Types.nil_DataCon;
         l = l.Eval();
         switch (l)
         {
             default: { throw new ImpossibleException(); }
-            case Cons wild_s3MH_Cons:
+            case GHC.Types.Cons wild_s3MH_Cons:
                 {
                     var h = wild_s3MH_Cons.x0;
                     var t = wild_s3MH_Cons.x1;
                     var takeOnStack = new Updatable<long,Closure>(CLR.LoadFunctionPointer<long, Closure,Closure>(takeOnStack_Thunk), nn, t);
-                    return new Cons(h, takeOnStack);
+                    return new GHC.Types.Cons(h, takeOnStack);
                 }
-            case Nil wild_s3MH_Nil: { return nil; }
+            case GHC.Types.Nil wild_s3MH_Nil: { return GHC.Types.nil_DataCon; }
         }
     }
     public static Closure takeOnStack_Thunk(long nn, Closure t)
@@ -432,7 +386,7 @@ public static unsafe class Code
 
     public static Closure take_Entry(Closure w_s3MN, Closure w_s3MO)
     {
-        var ww_s3MP_I = w_s3MN.Eval() as I;
+        var ww_s3MP_I = w_s3MN.Eval() as GHC.Types.IHash;
         var ww_s3MQ = ww_s3MP_I.x0;
         return wtakes3MD_Entry(ww_s3MQ, w_s3MO);
     }
@@ -447,17 +401,17 @@ public static unsafe class Code
                     switch (wild_s3MH)
                     {
                         default: { throw new ImpossibleException(); }
-                        case Cons wild_s3MH_Cons:
+                        case GHC.Types.Cons wild_s3MH_Cons:
                             {
                                 var h = wild_s3MH_Cons.x0;
                                 var t = wild_s3MH_Cons.x1;
                                 var sat_s3ML = new Updatable<long,Closure>(CLR.LoadFunctionPointer<long, Closure,Closure>(sat_s3ML_Entry), ds_s3MG, t);
-                                return new Cons(h, sat_s3ML);
+                                return new GHC.Types.Cons(h, sat_s3ML);
                             }
-                        case Nil wild_s3MH_Nil: { return nil; }
+                        case GHC.Types.Nil wild_s3MH_Nil: { return GHC.Types.nil_DataCon; }
                     }
                 }
-            case 0: { return nil; }
+            case 0: { return GHC.Types.nil_DataCon; }
         }
     }
     public static Closure sat_s3ML_Entry(long ds_s3MG, Closure t)
@@ -470,10 +424,10 @@ public static unsafe class Code
     }
     public static Closure facc2_Entry(Closure w_s3b4)
     {
-        var ww_s3b5_I = w_s3b4.Eval() as I;
+        var ww_s3b5_I = w_s3b4.Eval() as GHC.Types.IHash;
         var ww_s3b6 = ww_s3b5_I.x0;
         var ww_s3b7 = wfacc2s3aX_Entry(ww_s3b6);
-        return new I(ww_s3b7);
+        return new GHC.Types.IHash(ww_s3b7);
     }
     public static long wfacc2s3aX_Entry(long ww_s3aY)
     {
@@ -514,8 +468,8 @@ public static unsafe class Code
         switch (wild_s3aO)
         {
             default: { throw new ImpossibleException(); }
-            case Nil wild_s3aO_Nil: { return x0; }
-            case Cons
+            case GHC.Types.Nil wild_s3aO_Nil: { return x0; }
+            case GHC.Types.Cons
                 wild_s3aO_Cons:
                 {
                     var x = wild_s3aO_Cons.x0;
@@ -535,15 +489,15 @@ public static unsafe class Code
         switch (wild_s3aC)
         {
             default: { throw new ImpossibleException(); }
-            case Nil wild_s3aC_Nil: { return nil; }
-            case Cons
+            case GHC.Types.Nil wild_s3aC_Nil: { return GHC.Types.nil_DataCon; }
+            case GHC.Types.Cons
                 wild_s3aC_Cons:
                 {
                     var h = wild_s3aC_Cons.x0;
                     var t = wild_s3aC_Cons.x1;
                     var sat_s3aG = new Updatable<Closure,Closure>(CLR.LoadFunctionPointer(map_Entry), f, t);
                     var sat_s3aF = new Updatable<Closure,Closure>(CLR.LoadFunctionPointer(sat_s3aF_Entry), f, h);
-                    return new Cons(sat_s3aF, sat_s3aG);
+                    return new GHC.Types.Cons(sat_s3aF, sat_s3aG);
                 }
         }
     }
@@ -555,16 +509,16 @@ public static unsafe class Code
     public static Closure sumFromTo_Entry(Closure from, Closure to)
     {
         var vc_ = from.Eval();
-        var vc__I = vc_ as I;
+        var vc__I = vc_ as GHC.Types.IHash;
         var wc_ = vc__I.x0;
         var xc_ = to.Eval();
-        var xc__I = xc_ as I;
+        var xc__I = xc_ as GHC.Types.IHash;
         var yc_ = xc__I.x0;
         var wgo = new Fun(3, CLR.LoadFunctionPointer<long,long,long,long>(wgos49U_Entry));
         var part1 = wgo.Apply<long,Closure>(wc_);
         var part2 = part1.Apply<long,Closure>(yc_);
         var ad_ = part2.Apply<long,long>(0);
-        return new I(ad_);
+        return new GHC.Types.IHash(ad_);
     }
     public static long wgos49U_Entry(long ww_s49V, long ww_s49W, long ww_s49X)
     {
@@ -584,7 +538,7 @@ public static unsafe class Code
     public static Closure pi__Entry()
     {
         var hf_ = wgs4AX_Entry(lvl_s4AP, lvl_s4Bz, lvl_s4BA, lvl_s4AQ);
-        return new Cons(hf_.Item1, hf_.Item2);
+        return new GHC.Types.Cons(hf_.Item1, hf_.Item2);
     }
     public static (Closure, Closure) wgs4AX_Entry(Closure w_s4AY, Closure w_s4AZ, Closure w_s4B0, Closure w_s4B1)
     {
@@ -595,7 +549,7 @@ public static unsafe class Code
     public static Closure yd__Entry(Closure w_s4AY, Closure w_s4AZ, Closure w_s4B0, Closure w_s4B1)
     {
         var ae_ = timesInteger_Entry(lvl_s4AR, w_s4B0);
-        var be_ = (ae_ as S).x0 == lvl_s4AU.x0 ? 1 : 0;
+        var be_ = GHC.Integer.Type.eqIntegerHash_Entry(ae_, lvl_s4AU);
         switch (be_)
         {
             default:
@@ -618,7 +572,7 @@ public static unsafe class Code
         var qe_ = new Updatable<Closure,Closure,Closure,Closure,Closure,Closure>(CLR.LoadFunctionPointer(qe__Entry), w_s4AY, w_s4AZ, w_s4B0, w_s4B1, yd_, ie_);
         var ye_ = new Updatable<Closure,Closure>(CLR.LoadFunctionPointer(ye__Entry), w_s4AY, w_s4B1);
         var ef_ = wgs4AX_Entry(ye_, qe_, pe_, oe_);
-        return new Cons(ef_.Item1, ef_.Item2);
+        return new GHC.Types.Cons(ef_.Item1, ef_.Item2);
     }
     public static Closure ie__Entry(Closure w_s4B1)
     {
@@ -659,32 +613,23 @@ public static unsafe class Code
 
     public static Closure timesInteger_Entry(Closure a, Closure b)
     {
-        a = a.Eval();
-        b = b.Eval();
-        return new S((a as S).x0 * (b as S).x0);
+        return GHC.Integer.Type.timesInteger_Entry(a, b);
     }
     public static Closure plusInteger_Entry(Closure a, Closure b)
     {
-        a = a.Eval();
-        b = b.Eval();
-        return new S((a as S).x0 + (b as S).x0);
+        return GHC.Integer.Type.plusInteger_Entry(a,b);
     }
     public static Closure minusInteger_Entry(Closure a, Closure b)
     {
-        a = a.Eval();
-        b = b.Eval();
-        return new S((a as S).x0 - (b as S).x0);
+        return GHC.Integer.Type.minusInteger_Entry(a, b);
     }
     public static Closure divInteger_Entry(Closure a, Closure b)
     {
-        a = a.Eval();
-        b = b.Eval();
-        return new S((a as S).x0 / (b as S).x0);
+        return GHC.Integer.Type.divInteger_Entry(a, b);
     }
     public static Closure integerToInt_Entry(Closure i)
     {
-        i = i.Eval();
-        return new I((long)(i as S).x0);
+        return new GHC.Types.IHash(GHC.Integer.Type.integerToInt_Entry(i));
     }
 
     public static Closure extractOtype_Entry(Closure o) {
@@ -693,42 +638,40 @@ public static unsafe class Code
             default: throw new ImpossibleException();
             case O0 o0:
                 var i0 = o0.x0;
-                return new I(i0);
+                return new GHC.Types.IHash(i0);
             case O1 o1:
                 var i1 = o1.x0;
-                return new I(i1);
+                return new GHC.Types.IHash(i1);
             case O2 o2:
                 var i2 = o2.x0;
-                return new I(i2);
+                return new GHC.Types.IHash(i2);
             case O3 o3:
                 var i3 = o3.x0;
-                return new I(i3);
+                return new GHC.Types.IHash(i3);
             case O4 o4:
                 var i4 = o4.x0;
-                return new I(i4);
-            case I i:
+                return new GHC.Types.IHash(i4);
+            case GHC.Types.IHash i:
                 throw new Exception();
-            case S s:
+            case GHC.Types.Nil n:
                 throw new Exception();
-            case Nil n:
-                throw new Exception();
-            case Cons c:
+            case GHC.Types.Cons c:
                 throw new Exception();
             case OFucked of:
                 var @if = of.x0;
-                return new I(@if);
+                return new GHC.Types.IHash(@if);
         }
     }
     public static Closure extractOtypeL_Entry(Closure o) {
         o = o.Eval();
         switch (o) {
-            default: return new I(0);
+            default: return new GHC.Types.IHash(0);
             case O0 o0:
                 var i0 = o0.x0;
-                return new I(i0);
+                return new GHC.Types.IHash(i0);
             case O1 o1:
                 var i1 = o1.x0;
-                return new I(i1);
+                return new GHC.Types.IHash(i1);
         }
     }
     public static Closure extractOtag_Entry(Closure o) {
@@ -738,41 +681,41 @@ public static unsafe class Code
             case 0:
                 var o0 = o as O0;
                 var i0 = o0.x0;
-                return new I(i0);
+                return new GHC.Types.IHash(i0);
             case 1:
                 var o1 = o as O1;
                 var i1 = o1.x0;
-                return new I(i1);
+                return new GHC.Types.IHash(i1);
             case 2:
                 var o2 = o as O2;
                 var i2 = o2.x0;
-                return new I(i2);
+                return new GHC.Types.IHash(i2);
             case 3:
                 var o3 = o as O3;
                 var i3 = o3.x0;
-                return new I(i3);
+                return new GHC.Types.IHash(i3);
             case 4:
                 var o4 = o as O4;
                 var i4 = o4.x0;
-                return new I(i4);
+                return new GHC.Types.IHash(i4);
             case 5:
                 var of = o as OFucked;
                 var @if = of.x0;
-                return new I(@if);
+                return new GHC.Types.IHash(@if);
         }
     }
     public static Closure extractOtagL_Entry(Closure o) {
         o = o.Eval();
         switch (o.Tag) {
-            default: return new I(0);
+            default: return new GHC.Types.IHash(0);
             case 0:
                 var o0 = o as O0;
                 var i0 = o0.x0;
-                return new I(i0);
+                return new GHC.Types.IHash(i0);
             case 1:
                 var o1 = o as O1;
                 var i1 = o1.x0;
-                return new I(i1);
+                return new GHC.Types.IHash(i1);
         }
     }
     public static Closure loopArray(Closure[] arr, int currentIndex) {
@@ -780,7 +723,7 @@ public static unsafe class Code
             currentIndex = 0;
         var head = arr[currentIndex];
         var tail = new SingleEntry<Closure[],int>(CLR.LoadFunctionPointer<Closure[],int,Closure>(loopArray), arr, currentIndex + 1);
-        return new Cons(head, tail);
+        return new GHC.Types.Cons(head, tail);
     }
     private static Random rand = new Random();
     public static Closure RandomO() {
@@ -793,7 +736,7 @@ public static unsafe class Code
             case 3: w = new O3(1);break;
             case 4: w = new O4(1);break;
         }
-        return new Cons(w, new SingleEntry(CLR.LoadFunctionPointer(RandomO)));
+        return new GHC.Types.Cons(w, new SingleEntry(CLR.LoadFunctionPointer(RandomO)));
     }
     public static Closure RandomOL() {
         var i = rand.Next(0,1);
@@ -802,6 +745,6 @@ public static unsafe class Code
             case 0: w = new O0(1);break;
             case 1: w = new O1(1);break;
         }
-        return new Cons(w, new SingleEntry(CLR.LoadFunctionPointer(RandomOL)));
+        return new GHC.Types.Cons(w, new SingleEntry(CLR.LoadFunctionPointer(RandomOL)));
     }
 }

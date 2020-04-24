@@ -31,6 +31,8 @@ public static class CLR
     [CompilerIntrinsic]
     public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6> fun);
     [CompilerIntrinsic]
+    public static unsafe extern void* LoadFunctionPointer<T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7> fun);
+    [CompilerIntrinsic]
     public static unsafe extern void* LoadFunctionPointer(Func<Closure> fun);
     [CompilerIntrinsic]
     public static unsafe extern void* LoadFunctionPointer(Func<Closure, Closure> fun);
