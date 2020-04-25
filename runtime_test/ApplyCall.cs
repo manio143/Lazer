@@ -66,24 +66,30 @@ public static unsafe class ApplyCall
         var x = w + f.Apply<long, long>(n);
         return loopAppLong(f, x, n - 1);
     }
-    public static Closure loopAppLongNonGeneric(long w, long n)
+    public static Closure loopAppLongNonGenericInd(long w, long n)
     {
         if (n == 0) return new GHC.Types.IHash(w);
-        var x = w + LongApper.Instance.Apply(n);
-        return loopAppLongNonGeneric(x, n - 1);
+        var x = w + LongApper.Instance.ApplyIndirect(n);
+        return loopAppLongNonGenericInd(x, n - 1);
+    }
+    public static Closure loopAppLongNonGenericDir(long w, long n)
+    {
+        if (n == 0) return new GHC.Types.IHash(w);
+        var x = w + LongApper.Instance.ApplyIndirect(n);
+        return loopAppLongNonGenericDir(x, n - 1);
     }
     public static Closure loopAppLongGeneric(long w, long n)
     {
         if (n == 0) return new GHC.Types.IHash(w);
-        var x = w + LongApper.Instance.Apply<long, long>(n);
-        return loopAppLongNonGeneric(x, n - 1);
+        var x = w + LongApper.Instance.ApplyGen<long, long>(n);
+        return loopAppLongGeneric(x, n - 1);
     }
     private static Function funA = new FunA();
     public static Closure loopAppLongGenericClosure(long w, long n)
     {
         if (n == 0) return new GHC.Types.IHash(w);
         var x = w + funA.Apply<long, long>(n);
-        return loopAppLongNonGeneric(x, n - 1);
+        return loopAppLongGenericClosure(x, n - 1);
     }
     public static Closure loopAppClosure(Closure f, long w, long n)
     {
@@ -107,36 +113,31 @@ public static unsafe class ApplyCall
 
     public abstract class LongApperBase
     {
-        public abstract long Apply(long x);
-        public abstract R Apply<T, R>(T x);
+        public abstract long ApplyIndirect(long x);
+        public abstract long ApplyDirect(long x);
+        public abstract R ApplyGen<T, R>(T x);
     }
     public unsafe class LongApper : LongApperBase
 
     {
         public static LongApperBase Instance = new LongApper();
-        public int arity = 1;
         private void* f = CLR.LoadFunctionPointer<long, long>(add1_long);
-        public override long Apply(long x)
-        {
-            switch (arity)
-            {
-                case 1: return CLR.TailCallIndirectGeneric<long, long>(x, f); // indirect call
-                case 2: return 1; // fake cases for the switch indirect jump
-                case 3: return 2;
-                case 4: return 3;
-                default: return 0;
-            }
-        }
-        public override R Apply<T, R>(T x)
+        public override long ApplyIndirect(long x)
+            => CLR.TailCallIndirectGeneric<long, long>(x, f);
+        public override long ApplyDirect(long x)
+                => add1_long(x);
+        public override R ApplyGen<T, R>(T x)
             => CLR.TailCallIndirectGeneric<T, R>(x, f);
     }
     public unsafe class FunA : Function
     {
         private void* f = CLR.LoadFunctionPointer<long, long>(add1_long);
-        private int arity = 1;
-        public override int Arity => arity;
+        public FunA() => this.Arity = 1;
         public override R ApplyImpl<A1, R>(A1 a1)
-            => CLR.TailCallIndirectGeneric<A1, R>(a1, f);
+        {
+            var x = add1_long(Unsafe.As<A1, long>(ref a1));
+            return Unsafe.As<long, R>(ref x);
+        }
         public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
             => throw new System.Exception();
         public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)

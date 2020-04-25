@@ -212,18 +212,19 @@ namespace Lazer.Runtime.Test
             ExecTest("loopCallTest", Code.loopCallTest);*/
             // Console.WriteLine(Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(15), Module.pi_));
 
-            ExecTest("loop CALL long INL", () => ApplyCall.loopCallLongInline(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop CALL long NO ", () => ApplyCall.loopCallLongNoInline(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop CALL lonW INL", () => ApplyCall.loopCallWLongInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
-            ExecTest("loop CALL lonW NO ", () => ApplyCall.loopCallWLongNoInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
-            ExecTest("loop CALL cloN INL", () => ApplyCall.loopCallNClosureInline(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop CALL cloN NO ", () => ApplyCall.loopCallNClosureNoInline(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  long    ", () => ApplyCall.loopAppLong(ApplyCall.add1L, 0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  long STA", () => ApplyCall.loopAppLongNonGeneric(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  long GEN", () => ApplyCall.loopAppLongGeneric(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  long GCL", () => ApplyCall.loopAppLongGenericClosure(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  clos    ", () => ApplyCall.loopAppClosure(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  clos CA ", () => ApplyCall.loopAppClosureWithCache(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL call long INL", () => ApplyCall.loopCallLongInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL call long NO ", () => ApplyCall.loopCallLongNoInline(0, ApplyCall.EXEC_TIMES));
+            //ExecTest("loop CALL call lonW INL", () => ApplyCall.loopCallWLongInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
+            //ExecTest("loop CALL call lonW NO ", () => ApplyCall.loopCallWLongNoInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
+            //ExecTest("loop CALL call cloN INL", () => ApplyCall.loopCallNClosureInline(0, ApplyCall.EXEC_TIMES));
+            //ExecTest("loop CALL call cloN NO ", () => ApplyCall.loopCallNClosureNoInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long STI", () => ApplyCall.loopAppLongNonGenericInd(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long STD", () => ApplyCall.loopAppLongNonGenericDir(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long GEN", () => ApplyCall.loopAppLongGeneric(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long GCL", () => ApplyCall.loopAppLongGenericClosure(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long    ", () => ApplyCall.loopAppLong(ApplyCall.add1L, 0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt clos    ", () => ApplyCall.loopAppClosure(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt clos CA ", () => ApplyCall.loopAppClosureWithCache(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
 
 
             //ExecTest("nofib: exp3_8(8)", NoFib_Exp);

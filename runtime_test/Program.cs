@@ -7,6 +7,8 @@ namespace Lazer.Runtime.Test
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Press enter to start");
+            Console.Read();
             new Tester().ExecTests();
             // var t = new Thread(() => new Tester().ExecTests(), (int)(3.06*1024*1024));
             // t.Start();
