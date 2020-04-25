@@ -49,8 +49,8 @@ namespace Lazer.Runtime.Test
         // public Closure AppProcessI()
         //     => Code.appProcessTestI();
 
-        // public Closure LinqSumRange()
-        //     => new GHC.Types.IHash(Enumerable.Range(0, 100_000).Aggregate(0, (a, i) => unchecked(a + i)));
+        public Closure LinqSumRange()
+            => new GHC.Types.IHash(Enumerable.Range(0, 100_000).Aggregate(0, (a, i) => unchecked(a + i)));
 
         // public Closure LoopSum()
         // {
@@ -225,10 +225,18 @@ namespace Lazer.Runtime.Test
             ExecTest("loop APP  virt clos    ", () => ApplyCall.loopAppClosure(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
             ExecTest("loop APP  virt clos CA ", () => ApplyCall.loopAppClosureWithCache(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
 
-            ExecTest("sum       (take 100000 inf)", ManualTest.sumTakeInf);
-            ExecTest("sumfold 0 (take 100000 inf)", ManualTest.sumfoldTakeInf);
+            ExecTest("sum       (take 100000 inf)  ", ManualTest.sumTakeInf);
+            ExecTest("sumfold 0 (take 100000 inf)  ", ManualTest.sumfoldTakeInf);
             ExecTest("sum       (makelist 1 100000)", ManualTest.sumMakelist);
             ExecTest("sumfold 0 (makelist 1 100000)", ManualTest.sumfoldMakelist);
+            ExecTest("length    (take 100000 inf)  ", ManualTest.lengthTakeInf);
+            ExecTest("length    (makelist 1 100000)", ManualTest.lengthMakelist);
+            ExecTest("loop 100k (makelist 1 100000)", ManualTest.callMakeListInLoop);
+            ExecTest("loop 100k [1]", ManualTest.callCreateSingleton);
+            ExecTest("evaluate Data   ", ManualTest.evalData);
+            ExecTest("evaluate Thunk  ", ManualTest.evalThunk);
+            ExecTest("eval SingleEntry", ManualTest.evalRepeatWork);
+            ExecTest("initialize IHash", ManualTest.evalRepeatWorkInline);
             //ExecTest("nofib: exp3_8(8)", NoFib_Exp);
             // ExecTest("nofib: digits_e1(150)", NoFib_DigitsE1);
             // ExecTest("nofib: primes(500)", NoFib_Primes);

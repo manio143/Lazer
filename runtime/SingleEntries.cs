@@ -30,4 +30,19 @@ namespace Lazer.Runtime
 
         public override Closure Eval() => f(ref free);
     }
+    public sealed unsafe class SingleEntry<F0,F1> : Computation
+    {
+        public F0 x0;
+        public F1 x1;
+        private delegate*<F0,F1, Closure> f;
+
+        public SingleEntry(delegate*<F0,F1, Closure> f, F0 x0, F1 x1)
+        {
+            this.f = f;
+            this.x0 = x0;
+            this.x1 = x1;
+        }
+
+        public override Closure Eval() => f(x0, x1);
+    }
 }

@@ -38,8 +38,7 @@ namespace GHC
             public override string ToString()
             {
                 var sb = new System.Text.StringBuilder();
-                sb.Append("[");
-                sb.Append(x0.ToString());
+                sb.Append($"[{x0}");
                 Closure c = x1;
                 while (c != null)
                 {
@@ -48,8 +47,7 @@ namespace GHC
                         default: throw new ImpossibleException();
                         case Nil nil: c = null; break;
                         case Cons cons:
-                            sb.Append(", ");
-                            sb.Append(cons.x0.ToString());
+                            sb.Append($", {cons.x0}");
                             c = cons.x1;
                             break;
                     }

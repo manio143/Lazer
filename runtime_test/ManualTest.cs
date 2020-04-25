@@ -1,8 +1,9 @@
+using System.Runtime.CompilerServices;
 using Lazer.Runtime;
 using static Manual;
 using static GHC.Tuple;
 
-public static class ManualTest
+public static unsafe class ManualTest
 {
     public const int EXEC_TIMES = 100_000;
 
@@ -29,6 +30,69 @@ public static class ManualTest
         var list = makelist.Apply<long,long,Closure>(0, EXEC_TIMES);
         var res = sumfold.Apply<long,Closure,long>(0, list);
         return new GHC.Types.IHash(res);
+    }
+    public static Closure lengthMakelist()
+    {
+        var list = makelist.Apply<long,long,Closure>(0, EXEC_TIMES);
+        var res = length_Entry(list);
+        return new GHC.Types.IHash(res);
+    }
+    public static Closure lengthTakeInf()
+    {
+        var list = take.Apply<long,Closure,Closure>(EXEC_TIMES, inf);
+        var res = length_Entry(list);
+        return new GHC.Types.IHash(res);
+    }
+
+    public static Closure evalData()
+    {
+        var c = evalWork();
+        for (int i = 0; i < EXEC_TIMES; i++)
+            c.Eval();
+        return c;
+    }
+    public static Closure evalThunk()
+    {
+        var c = new Updatable(&evalWork);
+        for (int i = 0; i < EXEC_TIMES; i++)
+            c.Eval();
+        return c;
+    }
+    public static Closure evalRepeatWork()
+    {
+        var c = new SingleEntry(&evalWork);
+        for (int i = 0; i < EXEC_TIMES; i++)
+            c.Eval();
+        return c;
+    }
+    public static Closure evalRepeatWorkInline()
+    {
+        Closure c = null;
+        for (int i = 0; i < EXEC_TIMES; i++)
+            c = evalWork();
+        return c;
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static Closure evalWork() => new GHC.Types.IHash(1);
+
+    public static Closure callMakeListInLoop()
+    {
+        Closure c = null;
+        for (int i = 0; i < EXEC_TIMES; i++)
+            c = makelist_Go(i, EXEC_TIMES);
+        return c;
+    }
+    public static Closure callCreateSingleton()
+    {
+        Closure c = null;
+        for (int i = 0; i < EXEC_TIMES; i++)
+            c = createSingleton();
+        return c;
+    }
+    private static Closure createSingleton()
+    {
+        // accessing Manual.one take 0.3ms over 100_000 iterations
+        return new GHC.Types.Cons(null, GHC.Types.nil_DataCon);
     }
 }
 
@@ -122,4 +186,17 @@ public static unsafe class Manual
     }
     public static Closure take_Thunk(long n, Closure t)
         => take_Entry(n-1, t);
+
+    public static long length_Entry(Closure l) => length_loop_Entry(0, l);
+    public static long length_loop_Entry(long acc, Closure l)
+    {
+        var al = l.Eval();
+        switch (al)
+        {
+            default: throw new ImpossibleException("[Int#]", al.GetType().ToString());
+            case GHC.Types.Nil nil: return acc;
+            case GHC.Types.Cons cons:
+                return length_loop_Entry(acc + 1, cons.x1);
+        }
+    }
 }
