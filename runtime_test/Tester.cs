@@ -184,7 +184,7 @@ namespace Lazer.Runtime.Test
 
         public void ExecTests()
         {
-            
+            /*
             ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
             ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
             ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
@@ -207,10 +207,24 @@ namespace Lazer.Runtime.Test
             ExecTest("appProcess (take 100000 (repeat 1))", AppProcess);
             ExecTest("appProcessI (take 100000 (repeat 1))", AppProcessI);
             ExecTest("appAppTest", Code.appAppTest);
-            ExecTest("appCallTest", Code.appCallTest);
+            ExecTest("appCallTest", Code.appCallTest); 
             ExecTest("loopAppTest", Code.loopAppTest);
-            ExecTest("loopCallTest", Code.loopCallTest);
+            ExecTest("loopCallTest", Code.loopCallTest);*/
             // Console.WriteLine(Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(15), Module.pi_));
+
+            ExecTest("loop CALL long INL", () => ApplyCall.loopCallLongInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL long NO ", () => ApplyCall.loopCallLongNoInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL lonW INL", () => ApplyCall.loopCallWLongInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL lonW NO ", () => ApplyCall.loopCallWLongNoInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL cloN INL", () => ApplyCall.loopCallNClosureInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL cloN NO ", () => ApplyCall.loopCallNClosureNoInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  long    ", () => ApplyCall.loopAppLong(ApplyCall.add1L, 0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  long STA", () => ApplyCall.loopAppLongNonGeneric(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  long GEN", () => ApplyCall.loopAppLongGeneric(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  long GCL", () => ApplyCall.loopAppLongGenericClosure(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  clos    ", () => ApplyCall.loopAppClosure(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  clos CA ", () => ApplyCall.loopAppClosureWithCache(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
+
 
             //ExecTest("nofib: exp3_8(8)", NoFib_Exp);
             // ExecTest("nofib: digits_e1(150)", NoFib_DigitsE1);

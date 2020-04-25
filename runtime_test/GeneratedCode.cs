@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Lazer.Runtime;
 using static Module;
 
@@ -641,19 +642,23 @@ public static unsafe class Code
         {
             default:
                 {
-                    var sats9Jg = new GHC.Types.IHash(dss9Jf);
-                    var wilds9Jh = ws9Jc.Apply<Closure, Closure>(sats9Jg).Eval();
-                    var wilds9Jh_IHash = wilds9Jh as GHC.Types.IHash;
-                    var xs9Ji = wilds9Jh_IHash.x0;
+                    // var sats9Jg = new GHC.Types.IHash(dss9Jf);
+                    // var wilds9Jh = ws9Jc.Apply<Closure, Closure>(sats9Jg).Eval();
+                    // var wilds9Jh = appTestFC(sats9Jg).Eval();
+                    // var wilds9Jh_IHash = wilds9Jh as GHC.Types.IHash;
+                    // var xs9Ji = wilds9Jh_IHash.x0;
+                    var xs9Ji = ws9Jc.Apply<long, long>(dss9Jf);
                     var sats9Jk = dss9Jf - 1;
                     var sats9Jj = xs9Ji + wws9Jd;
                     return wloopApps9Jb_Entry(ws9Jc, sats9Jj, sats9Jk);
                 }
             case 0:
                 {
-                    var wilds9Jl = ws9Jc.Apply<Closure, Closure>(lvls9kw).Eval();
-                    var wilds9Jl_IHash = wilds9Jl as GHC.Types.IHash;
-                    var xs9Jm = wilds9Jl_IHash.x0; return xs9Jm + wws9Jd;
+                    // var wilds9Jl = ws9Jc.Apply<Closure, Closure>(lvls9kw).Eval();
+                    var xs9Jm = ws9Jc.Apply<long, long>(0);
+                    // var wilds9Jl_IHash = wilds9Jl as GHC.Types.IHash;
+                    // var xs9Jm = wilds9Jl_IHash.x0; 
+                    return xs9Jm + wws9Jd;
                 }
         }
     }
@@ -689,7 +694,7 @@ public static unsafe class Code
     }
     public static Closure loopAppTest()
     {
-        return new GHC.Types.IHash(wloopApps9Jb_Entry(appfc, 0, 100_000));
+        return new GHC.Types.IHash(wloopApps9Jb_Entry(appf, 0, 100_000));
     }
     public static Closure loopCallTest()
     {
@@ -702,7 +707,9 @@ public static unsafe class Code
         return GHC.Tuple.unit_DataCon;
     }
 
+    [MethodImpl(MethodImplOptions.NoInlining)]
     public static long appTestF(long x) => 1 + x;
+    [MethodImpl(MethodImplOptions.NoInlining)]
     public static Closure appTestFC(Closure x) => new GHC.Types.IHash(1 + (x as GHC.Types.IHash).x0);
 
     public static Closure appProcessTestI()

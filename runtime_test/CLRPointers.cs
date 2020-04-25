@@ -46,4 +46,7 @@ public static class CLR
     public static unsafe extern void* LoadFunctionPointer(Func<Closure, Closure, Closure, Closure, Closure, Closure> fun);
     [CompilerIntrinsic]
     public static unsafe extern void* LoadFunctionPointer(Func<Closure, Closure, Closure, Closure, Closure, Closure, Closure> fun);
+
+    [CompilerIntrinsic]
+    public static unsafe extern U TailCallIndirectGeneric<T, U>(T x, void* f);
 }
