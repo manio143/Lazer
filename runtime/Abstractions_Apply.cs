@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Lazer.Runtime
 {
@@ -52,21 +53,17 @@ namespace Lazer.Runtime
 
     public abstract partial class Function
     {
-        public abstract R ApplyImpl<A1, R>(A1 a1);
-        public abstract R ApplyImpl<A1, A2, R>(A1 a1, A2 a2);
-        public abstract R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3);
-        public abstract R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4);
-        public abstract R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5);
-        public abstract R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6);
-
+        /**
+            Each apply method is the 'default' behaviour.
+            If arity is less then apply exect and apply again.
+            If arity is more then construct a PAP.
+            When arity is exact this method is going to be overriden
+                in a subclass. Therefore exact application will be a step faster.
+        */
         public override R Apply<A1, R>(A1 a1)
         {
-            switch (this.Arity)
-            {
-                case 1:
-                    return this.ApplyImpl<A1, R>(a1);
-                default: return (R)(object)new PAP<A1>(this, a1);
-            }
+            var pap = new PAP<A1>(this, a1);
+            return Unsafe.As<PAP<A1>, R>(ref pap);
         }
         public override R Apply<A1, A2, R>(A1 a1, A2 a2)
         {
@@ -74,10 +71,8 @@ namespace Lazer.Runtime
             switch (this.Arity)
             {
                 case 1:
-                    h = this.ApplyImpl<A1, Closure>(a1);
+                    h = this.Apply<A1, Closure>(a1);
                     return h.Apply<A2, R>(a2);
-                case 2:
-                    return this.ApplyImpl<A1, A2, R>(a1, a2);
                 default: return (R)(object)new PAP<A1, A2>(this, a1, a2);
             }
         }
@@ -87,13 +82,11 @@ namespace Lazer.Runtime
             switch (this.Arity)
             {
                 case 1:
-                    h = this.ApplyImpl<A1, Closure>(a1);
+                    h = this.Apply<A1, Closure>(a1);
                     return h.Apply<A2, A3, R>(a2, a3);
                 case 2:
-                    h = this.ApplyImpl<A1, A2, Closure>(a1, a2);
+                    h = this.Apply<A1, A2, Closure>(a1, a2);
                     return h.Apply<A3, R>(a3);
-                case 3:
-                    return this.ApplyImpl<A1, A2, A3, R>(a1, a2, a3);
                 default: return (R)(object)new PAP<A1, A2, A3>(this, a1, a2, a3);
             }
         }
@@ -103,16 +96,14 @@ namespace Lazer.Runtime
             switch (this.Arity)
             {
                 case 1:
-                    h = this.ApplyImpl<A1, Closure>(a1);
+                    h = this.Apply<A1, Closure>(a1);
                     return h.Apply<A2, A3, A4, R>(a2, a3, a4);
                 case 2:
-                    h = this.ApplyImpl<A1, A2, Closure>(a1, a2);
+                    h = this.Apply<A1, A2, Closure>(a1, a2);
                     return h.Apply<A3, A4, R>(a3, a4);
                 case 3:
-                    h = this.ApplyImpl<A1, A2, A3, Closure>(a1, a2, a3);
+                    h = this.Apply<A1, A2, A3, Closure>(a1, a2, a3);
                     return h.Apply<A4, R>(a4);
-                case 4:
-                    return this.ApplyImpl<A1, A2, A3, A4, R>(a1, a2, a3, a4);
                 default: return (R)(object)new PAP<A1, A2, A3, A4>(this, a1, a2, a3, a4);
             }
         }
@@ -122,19 +113,17 @@ namespace Lazer.Runtime
             switch (this.Arity)
             {
                 case 1:
-                    h = this.ApplyImpl<A1, Closure>(a1);
+                    h = this.Apply<A1, Closure>(a1);
                     return h.Apply<A2, A3, A4, A5, R>(a2, a3, a4, a5);
                 case 2:
-                    h = this.ApplyImpl<A1, A2, Closure>(a1, a2);
+                    h = this.Apply<A1, A2, Closure>(a1, a2);
                     return h.Apply<A3, A4, A5, R>(a3, a4, a5);
                 case 3:
-                    h = this.ApplyImpl<A1, A2, A3, Closure>(a1, a2, a3);
+                    h = this.Apply<A1, A2, A3, Closure>(a1, a2, a3);
                     return h.Apply<A4, A5, R>(a4, a5);
                 case 4:
-                    h = this.ApplyImpl<A1, A2, A3, A4, Closure>(a1, a2, a3, a4);
+                    h = this.Apply<A1, A2, A3, A4, Closure>(a1, a2, a3, a4);
                     return h.Apply<A5, R>(a5);
-                case 5:
-                    return this.ApplyImpl<A1, A2, A3, A4, A5, R>(a1, a2, a3, a4, a5);
                 default: return (R)(object)new PAP<A1, A2, A3, A4, A5>(this, a1, a2, a3, a4, a5);
             }
         }
@@ -144,22 +133,20 @@ namespace Lazer.Runtime
             switch (this.Arity)
             {
                 case 1:
-                    h = this.ApplyImpl<A1, Closure>(a1);
+                    h = this.Apply<A1, Closure>(a1);
                     return h.Apply<A2, A3, A4, A5, A6, R>(a2, a3, a4, a5, a6);
                 case 2:
-                    h = this.ApplyImpl<A1, A2, Closure>(a1, a2);
+                    h = this.Apply<A1, A2, Closure>(a1, a2);
                     return h.Apply<A3, A4, A5, A6, R>(a3, a4, a5, a6);
                 case 3:
-                    h = this.ApplyImpl<A1, A2, A3, Closure>(a1, a2, a3);
+                    h = this.Apply<A1, A2, A3, Closure>(a1, a2, a3);
                     return h.Apply<A4, A5, A6, R>(a4, a5, a6);
                 case 4:
-                    h = this.ApplyImpl<A1, A2, A3, A4, Closure>(a1, a2, a3, a4);
+                    h = this.Apply<A1, A2, A3, A4, Closure>(a1, a2, a3, a4);
                     return h.Apply<A5, A6, R>(a5, a6);
                 case 5:
-                    h = this.ApplyImpl<A1, A2, A3, A4, A5, Closure>(a1, a2, a3, a4, a5);
+                    h = this.Apply<A1, A2, A3, A4, A5, Closure>(a1, a2, a3, a4, a5);
                     return h.Apply<A6, R>(a6);
-                case 6:
-                    return this.ApplyImpl<A1, A2, A3, A4, A5, A6, R>(a1, a2, a3, a4, a5, a6);
                 default: return (R)(object)new PAP<A1, A2, A3, A4, A5, A6>(this, a1, a2, a3, a4, a5, a6);
             }
         }

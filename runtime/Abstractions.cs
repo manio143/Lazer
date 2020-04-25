@@ -49,7 +49,7 @@ namespace Lazer.Runtime
             Each function has an arity which is used during application
             when the function is not statically known.
          */
-        public abstract int Arity { get; }
+        public int Arity;
 
         public override int Tag
             => throw new NotSupportedException("Accessing Tag on a function.");

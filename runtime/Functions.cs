@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace Lazer.Runtime
 {
     /**
@@ -6,253 +8,93 @@ namespace Lazer.Runtime
 
         Usage:
         given static method F(Closure) and free variable long x
-            new Fun<long>(1, CLR.LoadFunctionPointer(F), x)
+            new Fun1<long,Closure>(&F, x);
      */
 
-    public unsafe class Fun : Function
+    public unsafe sealed class Fun1<T0,U> : Function
     {
-        public Fun(int arity, void* f)
-        {
-            this.arity = arity;
-            this.f = f;
-        }
-        protected int arity;
-        public override int Arity => arity;
-        protected void* f;
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<A1, R>(a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<A1, A2, R>(a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<A1, A2, A3, R>(a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<A1, A2, A3, A4, R>(a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<A1, A2, A3, A4, A5, R>(a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<A1, A2, A3, A4, A5, A6, R>(a1, a2, a3, a4, a5, a6, f);
+         private delegate*<T0,U> funPtr;
+         public Fun1(delegate*<T0,U> funPtr)
+         {
+              this.Arity = 1;
+              this.funPtr = funPtr;
+         }
+         public override R Apply<A0,R>(A0 a0) {
+              var fun = (delegate*<A0,R>)funPtr;
+              return fun(a0);
+         }
+    }
+    public unsafe sealed class Fun1<F,T0,U> : Function
+    {
+         public F free;
+         private delegate*<F,T0,U> funPtr;
+         public Fun1(delegate*<F,T0,U> funPtr, F free)
+         {
+              this.Arity = 1;
+              this.funPtr = funPtr;
+              this.free = free;
+         }
+         public override R Apply<A0,R>(A0 a0) {
+              var fun = (delegate*<F,A0,R>)funPtr;
+              return fun(free,a0);
+         }
+    }
+    public unsafe sealed class Fun2<T0,T1,U> : Function
+    {
+         private delegate*<T0,T1,U> funPtr;
+         public Fun2(delegate*<T0,T1,U> funPtr)
+         {
+              this.Arity = 2;
+              this.funPtr = funPtr;
+         }
+         public override R Apply<A0,A1,R>(A0 a0, A1 a1) {
+              var fun = (delegate*<A0,A1,R>)funPtr;
+              return fun(a0,a1);
+         }
     }
 
-    public unsafe class Fun<F0> : Fun
+    public unsafe sealed class Fun2<F,T0,T1,U> : Function
     {
-        public F0 x0;
-        public Fun(int arity, void* f, F0 x0) : base(arity, f)
-        {
-            this.x0 = x0;
-        }
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<F0, A1, R>(x0, a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<F0, A1, A2, R>(x0, a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<F0, A1, A2, A3, R>(x0, a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<F0, A1, A2, A3, A4, R>(x0, a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<F0, A1, A2, A3, A4, A5, R>(x0, a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<F0, A1, A2, A3, A4, A5, A6, R>(x0, a1, a2, a3, a4, a5, a6, f);
+         private delegate*<F,T0,T1,U> funPtr;
+         public F free;
+         public Fun2(delegate*<F,T0,T1,U> funPtr, F free)
+         {
+              this.Arity = 2;
+              this.funPtr = funPtr;
+              this.free = free;
+         }
+         public override R Apply<A0,A1,R>(A0 a0, A1 a1) {
+              var fun = (delegate*<F,A0,A1,R>)funPtr;
+              return fun(free,a0,a1);
+         }
+    }
+    public unsafe sealed class Fun3<T0,T1,T2,U> : Function
+    {
+         private delegate*<T0,T1,T2,U> funPtr;
+         public Fun3(delegate*<T0,T1,T2,U> funPtr)
+         {
+              this.Arity = 3;
+              this.funPtr = funPtr;
+         }
+         public override R Apply<A0,A1,A2,R>(A0 a0, A1 a1, A2 a2) {
+              var fun = (delegate*<A0,A1,A2,R>)funPtr;
+              return fun(a0,a1, a2);
+         }
     }
 
-    public unsafe class Fun<F0, F1> : Fun
+    public unsafe sealed class Fun3<F,T0,T1,T2,U> : Function
     {
-        public F0 x0;
-        public F1 x1;
-        public Fun(int arity, void* f, F0 x0, F1 x1) : base(arity, f)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-        }
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<F0, F1, A1, R>(x0, x1, a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<F0, F1, A1, A2, R>(x0, x1, a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<F0, F1, A1, A2, A3, R>(x0, x1, a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<F0, F1, A1, A2, A3, A4, R>(x0, x1, a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<F0, F1, A1, A2, A3, A4, A5, R>(x0, x1, a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<F0, F1, A1, A2, A3, A4, A5, A6, R>(x0, x1, a1, a2, a3, a4, a5, a6, f);
-    }
-
-    public unsafe class Fun<F0, F1, F2> : Fun
-    {
-        public F0 x0;
-        public F1 x1;
-        public F2 x2;
-        public Fun(int arity, void* f, F0 x0, F1 x1, F2 x2) : base(arity, f)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-            this.x2 = x2;
-        }
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, A1, R>(x0, x1, x2, a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, A1, A2, R>(x0, x1, x2, a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, A1, A2, A3, R>(x0, x1, x2, a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, A1, A2, A3, A4, R>(x0, x1, x2, a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, A1, A2, A3, A4, A5, R>(x0, x1, x2, a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, a1, a2, a3, a4, a5, a6, f);
-    }
-
-    public unsafe class Fun<F0, F1, F2, F3> : Fun
-    {
-        public F0 x0;
-        public F1 x1;
-        public F2 x2;
-        public F3 x3;
-        public Fun(int arity, void* f, F0 x0, F1 x1, F2 x2, F3 x3) : base(arity, f)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-            this.x2 = x2;
-            this.x3 = x3;
-        }
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, A1, R>(x0, x1, x2, x3, a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, A1, A2, R>(x0, x1, x2, x3, a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, A1, A2, A3, R>(x0, x1, x2, x3, a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, A1, A2, A3, A4, R>(x0, x1, x2, x3, a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, A1, A2, A3, A4, A5, R>(x0, x1, x2, x3, a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, x3, a1, a2, a3, a4, a5, a6, f);
-    }
-
-    public unsafe class Fun<F0, F1, F2, F3, F4> : Fun
-    {
-        public F0 x0;
-        public F1 x1;
-        public F2 x2;
-        public F3 x3;
-        public F4 x4;
-        public Fun(int arity, void* f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4) : base(arity, f)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-            this.x2 = x2;
-            this.x3 = x3;
-            this.x4 = x4;
-        }
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, A1, R>(x0, x1, x2, x3, x4, a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, A1, A2, R>(x0, x1, x2, x3, x4, a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, A1, A2, A3, R>(x0, x1, x2, x3, x4, a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, A1, A2, A3, A4, R>(x0, x1, x2, x3, x4, a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, A1, A2, A3, A4, A5, R>(x0, x1, x2, x3, x4, a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, x3, x4, a1, a2, a3, a4, a5, a6, f);
-    }
-
-    public unsafe class Fun<F0, F1, F2, F3, F4, F5> : Fun
-    {
-        public F0 x0;
-        public F1 x1;
-        public F2 x2;
-        public F3 x3;
-        public F4 x4;
-        public F5 x5;
-        public Fun(int arity, void* f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4, F5 x5) : base(arity, f)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-            this.x2 = x2;
-            this.x3 = x3;
-            this.x4 = x4;
-            this.x5 = x5;
-        }
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, A1, R>(x0, x1, x2, x3, x4, x5, a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, A1, A2, R>(x0, x1, x2, x3, x4, x5, a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, A1, A2, A3, R>(x0, x1, x2, x3, x4, x5, a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, A1, A2, A3, A4, R>(x0, x1, x2, x3, x4, x5, a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, A1, A2, A3, A4, A5, R>(x0, x1, x2, x3, x4, x5, a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, x3, x4, x5, a1, a2, a3, a4, a5, a6, f);
-    }
-    public unsafe class Fun<F0, F1, F2, F3, F4, F5, F6> : Fun
-    {
-        public F0 x0;
-        public F1 x1;
-        public F2 x2;
-        public F3 x3;
-        public F4 x4;
-        public F5 x5;
-        public F6 x6;
-        public Fun(int arity, void* f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4, F5 x5, F6 x6) : base(arity, f)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-            this.x2 = x2;
-            this.x3 = x3;
-            this.x4 = x4;
-            this.x5 = x5;
-            this.x6 = x6;
-        }
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, R>(x0, x1, x2, x3, x4, x5, x6, a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, A3, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, A3, A4, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, A3, A4, A5, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, x3, x4, x5, x6, a1, a2, a3, a4, a5, a6, f);
-    }
-
-    public unsafe class Fun<F0, F1, F2, F3, F4, F5, F6, F7> : Fun
-    {
-        public F0 x0;
-        public F1 x1;
-        public F2 x2;
-        public F3 x3;
-        public F4 x4;
-        public F5 x5;
-        public F6 x6;
-        public F7 x7;
-        public Fun(int arity, void* f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4, F5 x5, F6 x6, F7 x7) : base(arity, f)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-            this.x2 = x2;
-            this.x3 = x3;
-            this.x4 = x4;
-            this.x5 = x5;
-            this.x6 = x6;
-            this.x7 = x7;
-        }
-        public override R ApplyImpl<A1, R>(A1 a1)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, f);
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, f);
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, A3, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, a3, f);
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, A3, A4, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, a3, a4, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, A3, A4, A5, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, a3, a4, a5, f);
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-             => CLR.TailCallIndirectGeneric<F0, F1, F2, F3, F4, F5, F6, F7, A1, A2, A3, A4, A5, A6, R>(x0, x1, x2, x3, x4, x5, x6, x7, a1, a2, a3, a4, a5, a6, f);
+         private delegate*<F,T0,T1,T2,U> funPtr;
+         public F free;
+         public Fun3(delegate*<F,T0,T1,T2,U> funPtr, F free)
+         {
+              this.Arity = 3;
+              this.funPtr = funPtr;
+              this.free = free;
+         }
+         public override R Apply<A0,A1,A2,R>(A0 a0, A1 a1,A2 a2) {
+              var fun = (delegate*<F,A0,A1,A2,R>)funPtr;
+              return fun(free,a0,a1,a2);
+         }
     }
 }

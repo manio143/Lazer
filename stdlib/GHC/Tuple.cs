@@ -6,25 +6,18 @@ namespace GHC
     {
         public static Unit unit_DataCon = new Unit();
 
-        public static Fun tuple2_DataCon;
+        // public static Fun tuple2_DataCon;
+        // public static Fun tuple3_DataCon;
+        // public static Fun tuple4_DataCon;
+        // public static Fun tuple5_DataCon;
+        // static Tuple()
+        // {
+        //     tuple2_DataCon = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(tuple2_DataCon_Entry));
+        //     tuple3_DataCon = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(tuple3_DataCon_Entry));
+        //     tuple4_DataCon = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(tuple4_DataCon_Entry));
+        //     tuple5_DataCon = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(tuple5_DataCon_Entry));
+        // }
 
-        public static Fun tuple3_DataCon;
-
-        public static Fun tuple4_DataCon;
-
-        public static Fun tuple5_DataCon;
-
-        static Tuple()
-        {
-            tuple2_DataCon = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(tuple2_DataCon_Entry));
-
-            tuple3_DataCon = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(tuple3_DataCon_Entry));
-
-            tuple4_DataCon = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(tuple4_DataCon_Entry));
-
-            tuple5_DataCon = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(tuple5_DataCon_Entry));
-
-        }
         public static Closure tuple2_DataCon_Entry(Closure etaB2, Closure etaB1)
         {
             return new GHC.Tuple.Tuple2(etaB2, etaB1);
@@ -90,6 +83,17 @@ namespace GHC
             }
             public override int Tag => 1;
             public override string ToString() => $"({x0}, {x1}, {x2}, {x3}, {x4})";
+        }
+
+        public struct ValueTuple<T0,T1>
+        {
+            public T0 x0;
+            public T1 x1;
+            public ValueTuple(T0 x0,T1 x1)
+            {
+                this.x0 = x0;
+                this.x1 = x1;
+            }
         }
     }
 }

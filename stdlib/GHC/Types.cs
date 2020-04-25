@@ -4,14 +4,14 @@ namespace GHC
 {
     public unsafe static class Types
     {
-        public static Function cons_DataCon = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cons_DataCon_Entry));
+        public static Function cons_DataCon = new Fun2<Closure, Closure, Closure>(&cons_DataCon_Entry);
         public static GHC.Types.Nil nil_DataCon = new GHC.Types.Nil();
         public static GHC.Types.GT gT_DataCon = new GHC.Types.GT();
         public static GHC.Types.EQ eQ_DataCon = new GHC.Types.EQ();
         public static GHC.Types.LT lT_DataCon = new GHC.Types.LT();
         public static GHC.Types.True true_DataCon = new GHC.Types.True();
         public static GHC.Types.False false_DataCon = new GHC.Types.False();
-        public static Function isTrueHash = new Fun(1, CLR.LoadFunctionPointer<long, Closure>(isTrueHash_Entry));
+        public static Function isTrueHash = new Fun1<long, Closure>(&isTrueHash_Entry);
         public static Closure cons_DataCon_Entry(Closure etaB2, Closure etaB1)
         {
             return new GHC.Types.Cons(etaB2, etaB1);

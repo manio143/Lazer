@@ -5,9 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <TieredCompilation>false</TieredCompilation>
+    <LangVersion>preview</LangVersion>
     <!--<Optimize>true</Optimize>-->
-
-    <NoWarn>0436</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
