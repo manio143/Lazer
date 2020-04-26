@@ -132,7 +132,7 @@ public static unsafe class ApplyCall
     public unsafe class FunA : Function
     {
         private void* f = CLR.LoadFunctionPointer<long, long>(add1_long);
-        public FunA() => this.Arity = 1;
+        public override int Arity => 1;
         public override R ApplyImpl<A1, R>(A1 a1)
         {
             var x = add1_long(Unsafe.As<A1, long>(ref a1));
