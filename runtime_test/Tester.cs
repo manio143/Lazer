@@ -139,20 +139,24 @@ namespace Lazer.Runtime.Test
         //     => Primes.TestEntry();
         // public Closure NoFib_Primes2()
         //     => Primes2.TestEntry();
-        public (double, Closure) RunTest(Func<Closure> testCase)
+        public (double, Closure) RunTest(Func<Closure> testCase, bool nogc = false)
         {
+            if (nogc)
+                GC.TryStartNoGCRegion(20_000_000);
             var sw = Stopwatch.StartNew();
             var res = testCase().Eval();
             sw.Stop();
+            if (nogc)
+                GC.EndNoGCRegion();
             return (sw.Elapsed.TotalMilliseconds, res);
         }
 
-        public (double, double, double, double) Run(Func<Closure> testCase, int times)
+        public (double, double, double, double) Run(Func<Closure> testCase, int times, bool nogc = false)
         {
             var ts = new double[times];
             for (int i = 0; i < times; i++)
             {
-                ts[i] = RunTest(testCase).Item1;
+                ts[i] = RunTest(testCase, nogc).Item1;
             }
             double avg, min = double.MaxValue, max = 0, sd = 0, sum = 0;
             for (int i = 0; i < times; i++)
@@ -174,11 +178,11 @@ namespace Lazer.Runtime.Test
             return (avg, min, max, sd);
         }
 
-        public void ExecTest(string label, Func<Closure> testCase)
+        public void ExecTest(string label, Func<Closure> testCase, bool nogc = false)
         {
-            var (_, res) = RunTest(testCase);
-            Console.WriteLine("{0}\t\t =>  {1}", label, res);
-            var (avg, min, max, sd) = Run(testCase, 100);
+            var (_, res) = RunTest(testCase, nogc);
+            Console.WriteLine("{0}\t\t =>  {1}\tGC0: {2}, GC1: {3}", label, res, GC.CollectionCount(0), GC.CollectionCount(1));
+            var (avg, min, max, sd) = Run(testCase, 100, nogc);
             Console.WriteLine("{0}\tAVG: {1:0.0000}, SD: {4:0.00} MIN: {2:0.0000}, MAX: {3:0.0000}", label, avg, min, max, sd);
         }
 
@@ -231,8 +235,14 @@ namespace Lazer.Runtime.Test
             ExecTest("sumfold 0 (makelist 1 100000)", ManualTest.sumfoldMakelist);
             ExecTest("length    (take 100000 inf)  ", ManualTest.lengthTakeInf);
             ExecTest("length    (makelist 1 100000)", ManualTest.lengthMakelist);
+            ExecTest("nth    (take 100000 inf)  ", ManualTest.nthTakeInf);
+            ExecTest("nth    (makelist 1 100000)", ManualTest.nthMakelist);
+            ExecTest("nth    inf                ", ManualTest.nthInf);
+
             ExecTest("loop 100k (makelist 1 100000)", ManualTest.callMakeListInLoop);
             ExecTest("loop 100k [1]", ManualTest.callCreateSingleton);
+            ExecTest("loop 100k new object()", ManualTest.callNewObj);
+
             ExecTest("evaluate Data   ", ManualTest.evalData);
             ExecTest("evaluate Thunk  ", ManualTest.evalThunk);
             ExecTest("eval SingleEntry", ManualTest.evalRepeatWork);

@@ -43,6 +43,23 @@ public static unsafe class ManualTest
         var res = length_Entry(list);
         return new GHC.Types.IHash(res);
     }
+    public static Closure nthMakelist()
+    {
+        var list = makelist.Apply<long,long,Closure>(0, EXEC_TIMES+1);
+        var res = nth_Entry(EXEC_TIMES, list);
+        return res;
+    }
+    public static Closure nthTakeInf()
+    {
+        var list = take.Apply<long,Closure,Closure>(EXEC_TIMES+1, inf);
+        var res = nth_Entry(EXEC_TIMES, list);
+        return res;
+    }
+    public static Closure nthInf()
+    {
+        var res = nth_Entry(EXEC_TIMES, inf);
+        return res;
+    }
 
     public static Closure evalData()
     {
@@ -94,6 +111,15 @@ public static unsafe class ManualTest
         // accessing Manual.one take 0.3ms over 100_000 iterations
         return new GHC.Types.Cons(null, GHC.Types.nil_DataCon);
     }
+    public static Closure callNewObj()
+    {
+        for (int i = 0; i < EXEC_TIMES; i++)
+            createNewObj();
+        return GHC.Types.nil_DataCon;
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static object createNewObj() => new object();
 }
 
 public static unsafe class Manual
@@ -129,7 +155,7 @@ public static unsafe class Manual
         var al = l.Eval();
         switch (al)
         {
-            default: throw new ImpossibleException("[Int#]", al.GetType().ToString());
+            default: throw new ImpossibleException("[Int]", al.GetType().ToString());
             case GHC.Types.Nil nil: return acc;
             case GHC.Types.Cons cons:
                 var h = cons.x0.Eval() as GHC.Types.IHash;
@@ -142,7 +168,7 @@ public static unsafe class Manual
         var al = l.Eval();
         switch (al)
         {
-            default: throw new ImpossibleException("[Int#]", al.GetType().ToString());
+            default: throw new ImpossibleException("[Int]", al.GetType().ToString());
             case GHC.Types.Nil nil: return GHC.Types.nil_DataCon.Eval();
             case GHC.Types.Cons cons:
                 var h = cons.x0.Eval() as GHC.Types.IHash;
@@ -161,7 +187,7 @@ public static unsafe class Manual
         var al = l.Eval();
         switch (al)
         {
-            default: throw new ImpossibleException("[Int#]", al.GetType().ToString());
+            default: throw new ImpossibleException("[Int]", al.GetType().ToString());
             case GHC.Types.Nil nil: return 0;
             case GHC.Types.Cons cons:
                 var h = cons.x0.Eval() as GHC.Types.IHash;
@@ -177,7 +203,7 @@ public static unsafe class Manual
         var al = l.Eval();
         switch (al)
         {
-            default: throw new ImpossibleException("[Int#]", al.GetType().ToString());
+            default: throw new ImpossibleException("[a]", al.GetType().ToString());
             case GHC.Types.Nil nil: return GHC.Types.nil_DataCon.Eval();
             case GHC.Types.Cons cons:
                 var t = new Updatable<long,Closure>(&take_Thunk, n, cons.x1);
@@ -193,10 +219,24 @@ public static unsafe class Manual
         var al = l.Eval();
         switch (al)
         {
-            default: throw new ImpossibleException("[Int#]", al.GetType().ToString());
+            default: throw new ImpossibleException("[a]", al.GetType().ToString());
             case GHC.Types.Nil nil: return acc;
             case GHC.Types.Cons cons:
                 return length_loop_Entry(acc + 1, cons.x1);
+        }
+    }
+
+    public static Closure nth_Entry(long n, Closure l)
+    {
+        var al = l.Eval();
+        switch (al)
+        {
+            default: throw new ImpossibleException("[a]", al.GetType().ToString());
+            case GHC.Types.Nil nil: throw new System.Exception("nth: empty list");
+            case GHC.Types.Cons cons:
+                if (n == 0)
+                    return cons.x0;
+                return nth_Entry(n - 1, cons.x1);
         }
     }
 }
