@@ -182,135 +182,111 @@ public unsafe static class Example {
     public static Function root ;
     
     static Example() {
-        o4_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(o4_DataCon_Entry)   ) ;
+        o4_DataCon = new Fun1 < Closure , Closure > ( &o4_DataCon_Entry   ) ;
         
-        o3_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(o3_DataCon_Entry)   ) ;
+        o3_DataCon = new Fun1 < Closure , Closure > ( &o3_DataCon_Entry   ) ;
         
-        o2_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(o2_DataCon_Entry)   ) ;
+        o2_DataCon = new Fun1 < Closure , Closure > ( &o2_DataCon_Entry   ) ;
         
-        o1_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(o1_DataCon_Entry)   ) ;
+        o1_DataCon = new Fun1 < Closure , Closure > ( &o1_DataCon_Entry   ) ;
         
-        o0_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(o0_DataCon_Entry)   ) ;
+        o0_DataCon = new Fun1 < Closure , Closure > ( &o0_DataCon_Entry   ) ;
         
-        cColW_DataCon = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cColW_DataCon_Entry)   ) ;
+        cColW_DataCon = new Fun3 < Closure , Closure , Closure , Closure > ( &cColW_DataCon_Entry   ) ;
         
-        h_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(h_DataCon_Entry)   ) ;
+        h_DataCon = new Fun1 < Closure , Closure > ( &h_DataCon_Entry   ) ;
         
-        pi_ = new Updatable  ( CLR.LoadFunctionPointer< Closure >(pi__Entry)   ) ;
+        pi_ = new Updatable  ( &pi__Entry   ) ; 
+        wgs6qO = new Fun4 < Closure , Closure , Closure , Closure , (Closure x0 , Closure x1) > ( &wgs6qO_Entry   ) ;
         
-        wgs6qO = new Fun  (4, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure , (Closure x0 , Closure x1) >(wgs6qO_Entry)   ) ;
+        gcd_ = new Fun2 < Closure , Closure , Closure > ( &gcd__Entry   ) ;
         
-        gcd_ = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(gcd__Entry)   ) ;
+        wgcd_s6qs = new Fun2 < long , long , long > ( &wgcd_s6qs_Entry   ) ;
         
-        wgcd_s6qs = new Fun  (2, CLR.LoadFunctionPointer< long , long , long >(wgcd_s6qs_Entry)   ) ;
+        fibs = new Updatable  ( &fibs_Entry   ) ; 
+        fibt = new Fun1 < Closure , Closure > ( &fibt_Entry   ) ; 
+        fiba = new Fun3 < Closure , Closure , Closure , Closure > ( &fiba_Entry   ) ;
         
-        fibs = new Updatable  ( CLR.LoadFunctionPointer< Closure >(fibs_Entry)   ) ;
+        wfibas6q4 = new Fun3 < long , long , long , long > ( &wfibas6q4_Entry   ) ;
         
-        fibt = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(fibt_Entry)   ) ;
+        sumFromTo = new Fun2 < Closure , Closure , Closure > ( &sumFromTo_Entry   ) ;
         
-        fiba = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(fiba_Entry)   ) ;
+        gos6pL = new Fun3 < Closure , Closure , Closure , Closure > ( &gos6pL_Entry   ) ;
         
-        wfibas6q4 = new Fun  (3, CLR.LoadFunctionPointer< long , long , long , long >(wfibas6q4_Entry)   ) ;
+        wgos6pE = new Fun3 < long , long , long , long > ( &wgos6pE_Entry   ) ;
         
-        sumFromTo = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(sumFromTo_Entry)   ) ;
+        main = new Fun1 < GHC.Prim.Void , Closure > ( &main_Entry   ) ; 
+        mains6pg = new Fun1 < GHC.Prim.Void , Closure > ( &mains6pg_Entry   ) ;
         
-        gos6pL = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(gos6pL_Entry)   ) ;
+        lvls6pd = new Updatable  ( &lvls6pd_Entry   ) ; 
+        lvls6p9 = new Updatable  ( &lvls6p9_Entry   ) ; 
+        sum1_ = new Fun1 < GHC.Prim.Void , Closure > ( &sum1__Entry   ) ; 
+        sum1_s6p3 = new Fun1 < GHC.Prim.Void , Closure > ( &sum1_s6p3_Entry   ) ;
         
-        wgos6pE = new Fun  (3, CLR.LoadFunctionPointer< long , long , long , long >(wgos6pE_Entry)   ) ;
+        xs6p0 = new Updatable  ( &xs6p0_Entry   ) ; 
+        inf_s6oZ = new Updatable  ( &inf_s6oZ_Entry   ) ; 
+        inc_ = new Fun1 < Closure , Closure > ( &inc__Entry   ) ; 
+        inc = new Fun1 < Closure , Closure > ( &inc_Entry   ) ; 
+        sum2_ = new Fun1 < GHC.Prim.Void , Closure > ( &sum2__Entry   ) ; 
+        sum2_s6oN = new Fun1 < GHC.Prim.Void , Closure > ( &sum2_s6oN_Entry   ) ;
         
-        main = new Fun  (1, CLR.LoadFunctionPointer< GHC.Prim.Void , Closure >(main_Entry)   ) ;
+        xs6oK = new Updatable  ( &xs6oK_Entry   ) ; 
+        sum_ = new Fun1 < Closure , Closure > ( &sum__Entry   ) ; 
+        wsum_s6oz = new Fun1 < Closure , long > ( &wsum_s6oz_Entry   ) ; 
+        suma = new Fun2 < Closure , Closure , Closure > ( &suma_Entry   ) ;
         
-        mains6pg = new Fun  (1, CLR.LoadFunctionPointer< GHC.Prim.Void , Closure >(mains6pg_Entry)   ) ;
+        wsumas6ok = new Fun2 < Closure , long , long > ( &wsumas6ok_Entry   ) ;
         
-        lvls6pd = new Updatable  ( CLR.LoadFunctionPointer< Closure >(lvls6pd_Entry)   ) ;
+        facc2 = new Fun1 < Closure , Closure > ( &facc2_Entry   ) ; 
+        wfacc2s6o9 = new Fun1 < long , long > ( &wfacc2s6o9_Entry   ) ; 
+        sumfold = new Fun1 < Closure , Closure > ( &sumfold_Entry   ) ; 
+        take_ = new Fun2 < Closure , Closure , Closure > ( &take__Entry   ) ;
         
-        lvls6p9 = new Updatable  ( CLR.LoadFunctionPointer< Closure >(lvls6p9_Entry)   ) ;
+        wtake_s6nT = new Fun2 < long , Closure , Closure > ( &wtake_s6nT_Entry   ) ;
         
-        sum1_ = new Fun  (1, CLR.LoadFunctionPointer< GHC.Prim.Void , Closure >(sum1__Entry)   ) ;
+        pp = new Fun2 < Closure , GHC.Prim.Void , Closure > ( &pp_Entry   ) ;
         
-        sum1_s6p3 = new Fun  (1, CLR.LoadFunctionPointer< GHC.Prim.Void , Closure >(sum1_s6p3_Entry)   ) ;
+        pps6nP = new Fun2 < Closure , GHC.Prim.Void , Closure > ( &pps6nP_Entry   ) ;
         
-        xs6p0 = new Updatable  ( CLR.LoadFunctionPointer< Closure >(xs6p0_Entry)   ) ;
+        letterChar = new Fun1 < Closure , Closure > ( &letterChar_Entry   ) ;
         
-        inf_s6oZ = new Updatable  ( CLR.LoadFunctionPointer< Closure >(inf_s6oZ_Entry)   ) ;
+        wt = new Fun2 < Closure , Closure , Closure > ( &wt_Entry   ) ; 
+        test = new Fun5 < Closure , Closure , Closure , Closure , GHC.Prim.Void , Closure > ( &test_Entry   ) ;
         
-        inc_ = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(inc__Entry)   ) ;
+        tests6mn = new Fun5 < Closure , Closure , Closure , Closure , GHC.Prim.Void , Closure > ( &tests6mn_Entry   ) ;
         
-        inc = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(inc_Entry)   ) ;
+        tildDollQMark = new Fun2 < Closure , Closure , Closure > ( &tildDollQMark_Entry   ) ;
         
-        sum2_ = new Fun  (1, CLR.LoadFunctionPointer< GHC.Prim.Void , Closure >(sum2__Entry)   ) ;
+        o1 = new Fun2 < Closure , Closure , Closure > ( &o1_Entry   ) ; 
+        wd = new Fun1 < Closure , Closure > ( &wd_Entry   ) ; 
+        extractO = new Fun1 < Closure , Closure > ( &extractO_Entry   ) ; 
+        foldl_ = new Fun3 < Closure , Closure , Closure , Closure > ( &foldl__Entry   ) ;
         
-        sum2_s6oN = new Fun  (1, CLR.LoadFunctionPointer< GHC.Prim.Void , Closure >(sum2_s6oN_Entry)   ) ;
+        map_ = new Fun2 < Closure , Closure , Closure > ( &map__Entry   ) ;
         
-        xs6oK = new Updatable  ( CLR.LoadFunctionPointer< Closure >(xs6oK_Entry)   ) ;
+        fOrdH = new Fun1 < Closure , Closure > ( &fOrdH_Entry   ) ; 
+        cmins6ls = new Fun3 < Closure , Closure , Closure , Closure > ( &cmins6ls_Entry   ) ;
         
-        sum_ = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(sum__Entry)   ) ;
+        cmaxs6lj = new Fun3 < Closure , Closure , Closure , Closure > ( &cmaxs6lj_Entry   ) ;
         
-        wsum_s6oz = new Fun  (1, CLR.LoadFunctionPointer< Closure , long >(wsum_s6oz_Entry)   ) ;
+        cLtEqs6la = new Fun3 < Closure , Closure , Closure , Closure > ( &cLtEqs6la_Entry   ) ;
         
-        suma = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(suma_Entry)   ) ;
+        cGts6l1 = new Fun3 < Closure , Closure , Closure , Closure > ( &cGts6l1_Entry   ) ;
         
-        wsumas6ok = new Fun  (2, CLR.LoadFunctionPointer< Closure , long , long >(wsumas6ok_Entry)   ) ;
+        cGtEqs6kS = new Fun3 < Closure , Closure , Closure , Closure > ( &cGtEqs6kS_Entry   ) ;
         
-        facc2 = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(facc2_Entry)   ) ;
+        cLts6kJ = new Fun3 < Closure , Closure , Closure , Closure > ( &cLts6kJ_Entry   ) ;
         
-        wfacc2s6o9 = new Fun  (1, CLR.LoadFunctionPointer< long , long >(wfacc2s6o9_Entry)   ) ;
+        cp1Ords6kG = new Fun1 < Closure , Closure > ( &cp1Ords6kG_Entry   ) ;
         
-        sumfold = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(sumfold_Entry)   ) ;
+        fEqH = new Fun1 < Closure , Closure > ( &fEqH_Entry   ) ; 
+        cSlshEqs6kt = new Fun3 < Closure , Closure , Closure , Closure > ( &cSlshEqs6kt_Entry   ) ;
         
-        take_ = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(take__Entry)   ) ;
+        cEqEqs6kl = new Fun3 < Closure , Closure , Closure , Closure > ( &cEqEqs6kl_Entry   ) ;
         
-        wtake_s6nT = new Fun  (2, CLR.LoadFunctionPointer< long , Closure , Closure >(wtake_s6nT_Entry)   ) ;
+        ccompares6kd = new Fun3 < Closure , Closure , Closure , Closure > ( &ccompares6kd_Entry   ) ;
         
-        pp = new Fun  (2, CLR.LoadFunctionPointer< Closure , GHC.Prim.Void , Closure >(pp_Entry)   ) ;
-        
-        pps6nP = new Fun  (2, CLR.LoadFunctionPointer< Closure , GHC.Prim.Void , Closure >(pps6nP_Entry)   ) ;
-        
-        letterChar = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(letterChar_Entry)   ) ;
-        
-        wt = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(wt_Entry)   ) ;
-        
-        test = new Fun  (5, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure , GHC.Prim.Void , Closure >(test_Entry)   ) ;
-        
-        tests6mn = new Fun  (5, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure , GHC.Prim.Void , Closure >(tests6mn_Entry)   ) ;
-        
-        tildDollQMark = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(tildDollQMark_Entry)   ) ;
-        
-        o1 = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(o1_Entry)   ) ;
-        
-        wd = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(wd_Entry)   ) ;
-        
-        extractO = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(extractO_Entry)   ) ;
-        
-        foldl_ = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(foldl__Entry)   ) ;
-        
-        map_ = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure , Closure >(map__Entry)   ) ;
-        
-        fOrdH = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(fOrdH_Entry)   ) ;
-        
-        cmins6ls = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cmins6ls_Entry)   ) ;
-        
-        cmaxs6lj = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cmaxs6lj_Entry)   ) ;
-        
-        cLtEqs6la = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cLtEqs6la_Entry)   ) ;
-        
-        cGts6l1 = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cGts6l1_Entry)   ) ;
-        
-        cGtEqs6kS = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cGtEqs6kS_Entry)   ) ;
-        
-        cLts6kJ = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cLts6kJ_Entry)   ) ;
-        
-        cp1Ords6kG = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(cp1Ords6kG_Entry)   ) ;
-        
-        fEqH = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(fEqH_Entry)   ) ;
-        
-        cSlshEqs6kt = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cSlshEqs6kt_Entry)   ) ;
-        
-        cEqEqs6kl = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cEqEqs6kl_Entry)   ) ;
-        
-        ccompares6kd = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(ccompares6kd_Entry)   ) ;
-        
-        cidens6kb = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(cidens6kb_Entry)   ) ;
+        cidens6kb = new Fun1 < Closure , Closure > ( &cidens6kb_Entry   ) ;
         
         c_DataCon = new Example.C(  ) ;
         b_DataCon = new Example.B(  ) ;
@@ -328,9 +304,9 @@ public unsafe static class Example {
         inf_ = new GHC.Types.Cons( null , inf_s6oZ ) ;
         sumfolds6o7 = new GHC.Types.IHash( 0 ) ;
         fWInt = new Example.CColW( GHC.Classes.fEqInt , cidens6kb , null ) ;
-        lvls6mJ = new GHC.Types.CHash( c ) ;
-        lvls6mI = new GHC.Types.CHash( b ) ;
-        lvls6mH = new GHC.Types.CHash( a ) ;
+        lvls6mJ = new GHC.Types.CHash( 'c' ) ;
+        lvls6mI = new GHC.Types.CHash( 'b' ) ;
+        lvls6mH = new GHC.Types.CHash( 'a' ) ;
         so1 = new Example.O1( null ) ;
         cycleB = new GHC.Types.Cons( null , null ) ;
         cycleA = new GHC.Types.Cons( null , null ) ;
@@ -342,12 +318,9 @@ public unsafe static class Example {
         cycleB.x0 = cycleBs6lU ;
         cycleB.x1 = Example.cycleA ;
         so1.x0 = croots6ka ; fWInt.x2 = croots6ka ; inf_.x0 = croots6ka ; 
-        p1W = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(p1W_Entry)   ) ;
-        
-        iden = new Fun  (2, CLR.LoadFunctionPointer< Closure , Closure >(iden_Entry)   ) ;
-        
-        root = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(root_Entry)   ) ;
-        
+        p1W = new Fun1 < Closure , Closure > ( &p1W_Entry   ) ; 
+        iden = new Fun2 < Closure , Closure > ( &iden_Entry   ) ; 
+        root = new Fun1 < Closure , Closure > ( &root_Entry   ) ; 
         }
     public static Closure o4_DataCon_Entry( Closure etaB1 ) {
         return new Example.O4( etaB1 ); }
@@ -371,16 +344,16 @@ public unsafe static class Example {
         return new GHC.Types.Cons( wws6ru , wws6rv );
         }
     public static (Closure x0 , Closure x1) wgs6qO_Entry( Closure ws6qP , Closure ws6qQ , Closure ws6qR , Closure ws6qS ) {
-        var ys6qT = new Updatable < Closure , Closure , Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure , Closure >(ys6qT_Entry) , ws6qP , ws6qQ , ws6qR , ws6qS ) ;
-        var sats6rp = new Updatable < Closure , Closure , Closure , Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure , Closure , Closure >(sats6rp_Entry) , ws6qP , ws6qQ , ws6qR , ws6qS , ys6qT ) ;
+        var ys6qT = new Updatable < Closure , Closure , Closure , Closure > ( &ys6qT_Entry , ws6qP , ws6qQ , ws6qR , ws6qS ) ;
+        var sats6rp = new Updatable < Closure , Closure , Closure , Closure , Closure > ( &sats6rp_Entry , ws6qP , ws6qQ , ws6qR , ws6qS , ys6qT ) ;
         return ( ys6qT , sats6rp );
         }
     public static Closure sats6rp_Entry( Closure ws6qP , Closure ws6qQ , Closure ws6qR , Closure ws6qS , Closure ys6qT ) {
-        var us6r1 = new Updatable < Closure > ( CLR.LoadFunctionPointer< Closure , Closure >(us6r1_Entry) , ws6qS ) ;
-        var sats6rl = new Updatable < Closure > ( CLR.LoadFunctionPointer< Closure , Closure >(sats6rl_Entry) , ws6qS ) ;
-        var sats6rk = new Updatable < Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure >(sats6rk_Entry) , ws6qR , us6r1 ) ;
-        var sats6rj = new Updatable < Closure , Closure , Closure , Closure , Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure , Closure , Closure , Closure >(sats6rj_Entry) , ws6qP , ws6qQ , ws6qR , ws6qS , ys6qT , us6r1 ) ;
-        var sats6rb = new Updatable < Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure >(sats6rb_Entry) , ws6qP , ws6qS ) ;
+        var us6r1 = new Updatable < Closure > ( &us6r1_Entry , ws6qS ) ;
+        var sats6rl = new Updatable < Closure > ( &sats6rl_Entry , ws6qS ) ;
+        var sats6rk = new Updatable < Closure , Closure > ( &sats6rk_Entry , ws6qR , us6r1 ) ;
+        var sats6rj = new Updatable < Closure , Closure , Closure , Closure , Closure , Closure > ( &sats6rj_Entry , ws6qP , ws6qQ , ws6qR , ws6qS , ys6qT , us6r1 ) ;
+        var sats6rb = new Updatable < Closure , Closure > ( &sats6rb_Entry , ws6qP , ws6qS ) ;
         var wws6rm = wgs6qO_Entry( sats6rb , sats6rj , sats6rk , sats6rl ) ;
         var wws6rm_RawTuple = wws6rm ;
         var wws6rn = wws6rm_RawTuple.x0 ;
@@ -432,12 +405,10 @@ public unsafe static class Example {
             }
         }
     public static Closure gcd__Entry( Closure ws6qB , Closure ws6qC ) {
-        var wws6qD = ws6qB ;
-        wws6qD = wws6qD.Eval();
+        var wws6qD = ws6qB.Eval() ;
         var wws6qD_IHash = wws6qD as GHC.Types.IHash;
         var wws6qE = wws6qD_IHash.x0 ;
-        var wws6qF = ws6qC ;
-        wws6qF = wws6qF.Eval();
+        var wws6qF = ws6qC.Eval() ;
         var wws6qF_IHash = wws6qF as GHC.Types.IHash;
         var wws6qG = wws6qF_IHash.x0 ;
         var wws6qH = wgcd_s6qs_Entry( wws6qE , wws6qG ) ;
@@ -471,24 +442,20 @@ public unsafe static class Example {
     public static Closure fibs_Entry(  ) {
         return map__Entry( Example.fibt , Example.inf_ ); }
     public static Closure fibt_Entry( Closure ws6qn ) {
-        var wws6qo = ws6qn ;
-        wws6qo = wws6qo.Eval();
+        var wws6qo = ws6qn.Eval() ;
         var wws6qo_IHash = wws6qo as GHC.Types.IHash;
         var wws6qp = wws6qo_IHash.x0 ;
         var wws6qq = wfibas6q4_Entry( 0 , 1 , wws6qp ) ;
         return new GHC.Types.IHash( wws6qq );
         }
     public static Closure fiba_Entry( Closure ws6qc , Closure ws6qd , Closure ws6qe ) {
-        var wws6qf = ws6qc ;
-        wws6qf = wws6qf.Eval();
+        var wws6qf = ws6qc.Eval() ;
         var wws6qf_IHash = wws6qf as GHC.Types.IHash;
         var wws6qg = wws6qf_IHash.x0 ;
-        var wws6qh = ws6qd ;
-        wws6qh = wws6qh.Eval();
+        var wws6qh = ws6qd.Eval() ;
         var wws6qh_IHash = wws6qh as GHC.Types.IHash;
         var wws6qi = wws6qh_IHash.x0 ;
-        var wws6qj = ws6qe ;
-        wws6qj = wws6qj.Eval();
+        var wws6qj = ws6qe.Eval() ;
         var wws6qj_IHash = wws6qj as GHC.Types.IHash;
         var wws6qk = wws6qj_IHash.x0 ;
         var wws6ql = wfibas6q4_Entry( wws6qg , wws6qi , wws6qk ) ;
@@ -506,28 +473,23 @@ public unsafe static class Example {
             }
         }
     public static Closure sumFromTo_Entry( Closure froms6pX , Closure tos6pY ) {
-        var wws6pZ = froms6pX ;
-        wws6pZ = wws6pZ.Eval();
+        var wws6pZ = froms6pX.Eval() ;
         var wws6pZ_IHash = wws6pZ as GHC.Types.IHash;
         var wws6q0 = wws6pZ_IHash.x0 ;
-        var wws6q1 = tos6pY ;
-        wws6q1 = wws6q1.Eval();
+        var wws6q1 = tos6pY.Eval() ;
         var wws6q1_IHash = wws6q1 as GHC.Types.IHash;
         var wws6q2 = wws6q1_IHash.x0 ;
         var wws6q3 = wgos6pE_Entry( wws6q0 , wws6q2 , 0 ) ;
         return new GHC.Types.IHash( wws6q3 );
         }
     public static Closure gos6pL_Entry( Closure ws6pM , Closure ws6pN , Closure ws6pO ) {
-        var wws6pP = ws6pM ;
-        wws6pP = wws6pP.Eval();
+        var wws6pP = ws6pM.Eval() ;
         var wws6pP_IHash = wws6pP as GHC.Types.IHash;
         var wws6pQ = wws6pP_IHash.x0 ;
-        var wws6pR = ws6pN ;
-        wws6pR = wws6pR.Eval();
+        var wws6pR = ws6pN.Eval() ;
         var wws6pR_IHash = wws6pR as GHC.Types.IHash;
         var wws6pS = wws6pR_IHash.x0 ;
-        var wws6pT = ws6pO ;
-        wws6pT = wws6pT.Eval();
+        var wws6pT = ws6pO.Eval() ;
         var wws6pT_IHash = wws6pT as GHC.Types.IHash;
         var wws6pU = wws6pT_IHash.x0 ;
         var wws6pV = wgos6pE_Entry( wws6pQ , wws6pS , wws6pU ) ;
@@ -548,24 +510,19 @@ public unsafe static class Example {
         return mains6pg_Entry( GHC.Prim.voidHash ); }
     public static Closure mains6pg_Entry( GHC.Prim.Void void0E ) {
         var ds1s6pi = GHC.IO.Handle.Text.hPutStr__Entry( GHC.IO.Handle.FD.stdout , lvls6pf , GHC.Types.true_DataCon ).Apply < GHC.Prim.Void , Closure > ( GHC.Prim.voidHash ) ;
-        ds1s6pi = ds1s6pi.Eval();
         var ipv1s6pk = ds1s6pi ;
-        var ds1s6pl = xs6p0 ;
-        ds1s6pl = ds1s6pl.Eval();
+        var ds1s6pl = xs6p0.Eval() ;
         var ds1s6pl_IHash = ds1s6pl as GHC.Types.IHash;
         var ipvs6pm = ds1s6pl_IHash.x0 ;
-        var sats6pq = new SingleEntry < long > ( CLR.LoadFunctionPointer< long , Closure >(sats6pq_Entry) , ipvs6pm ) ;
+        var sats6pq = new SingleEntry < long > ( &sats6pq_Entry , ipvs6pm ) ;
         var ds1s6pr = GHC.IO.Handle.Text.hPutStr__Entry( GHC.IO.Handle.FD.stdout , sats6pq , GHC.Types.true_DataCon ).Apply < GHC.Prim.Void , Closure > ( GHC.Prim.voidHash ) ;
-        ds1s6pr = ds1s6pr.Eval();
         var ipv1s6pt = ds1s6pr ;
         var ds1s6pu = GHC.IO.Handle.Text.hPutStr__Entry( GHC.IO.Handle.FD.stdout , lvls6pb , GHC.Types.true_DataCon ).Apply < GHC.Prim.Void , Closure > ( GHC.Prim.voidHash ) ;
-        ds1s6pu = ds1s6pu.Eval();
         var ipv1s6pw = ds1s6pu ;
-        var ds1s6px = xs6oK ;
-        ds1s6px = ds1s6px.Eval();
+        var ds1s6px = xs6oK.Eval() ;
         var ds1s6px_IHash = ds1s6px as GHC.Types.IHash;
         var ipvs6py = ds1s6px_IHash.x0 ;
-        var sats6pC = new SingleEntry < long > ( CLR.LoadFunctionPointer< long , Closure >(sats6pC_Entry) , ipvs6py ) ;
+        var sats6pC = new SingleEntry < long > ( &sats6pC_Entry , ipvs6py ) ;
         return GHC.IO.Handle.Text.hPutStr__Entry( GHC.IO.Handle.FD.stdout , sats6pC , GHC.Types.true_DataCon ).Apply < GHC.Prim.Void , Closure > ( GHC.Prim.voidHash );
         }
     public static Closure sats6pC_Entry( long ipvs6py ) {
@@ -593,8 +550,7 @@ public unsafe static class Example {
     public static Closure sum1__Entry( GHC.Prim.Void void0E ) {
         return sum1_s6p3_Entry( GHC.Prim.voidHash ); }
     public static Closure sum1_s6p3_Entry( GHC.Prim.Void void0E ) {
-        var ds1s6p5 = xs6p0 ;
-        ds1s6p5 = ds1s6p5.Eval();
+        var ds1s6p5 = xs6p0.Eval() ;
         var ds1s6p5_IHash = ds1s6p5 as GHC.Types.IHash;
         var ipvs6p6 = ds1s6p5_IHash.x0 ; return ds1s6p5 ;
         }
@@ -608,8 +564,7 @@ public unsafe static class Example {
     public static Closure inc__Entry( Closure etaB1 ) {
         return map__Entry( Example.inc , etaB1 ); }
     public static Closure inc_Entry( Closure ds1s6oT ) {
-        var wild1s6oU = ds1s6oT ;
-        wild1s6oU = wild1s6oU.Eval();
+        var wild1s6oU = ds1s6oT.Eval() ;
         var wild1s6oU_IHash = wild1s6oU as GHC.Types.IHash;
         var ys6oV = wild1s6oU_IHash.x0 ;
         var sats6oW = 1 + ys6oV ; return new GHC.Types.IHash( sats6oW );
@@ -617,8 +572,7 @@ public unsafe static class Example {
     public static Closure sum2__Entry( GHC.Prim.Void void0E ) {
         return sum2_s6oN_Entry( GHC.Prim.voidHash ); }
     public static Closure sum2_s6oN_Entry( GHC.Prim.Void void0E ) {
-        var ds1s6oP = xs6oK ;
-        ds1s6oP = ds1s6oP.Eval();
+        var ds1s6oP = xs6oK.Eval() ;
         var ds1s6oP_IHash = ds1s6oP as GHC.Types.IHash;
         var ipvs6oQ = ds1s6oP_IHash.x0 ; return ds1s6oP ;
         }
@@ -632,16 +586,14 @@ public unsafe static class Example {
         return new GHC.Types.IHash( wws6oJ );
         }
     public static long wsum_s6oz_Entry( Closure ws6oA ) {
-        var wilds6oB = ws6oA ;
-        wilds6oB = wilds6oB.Eval();
+        var wilds6oB = ws6oA.Eval() ;
         switch ( wilds6oB ) {
             default: { throw new ImpossibleException(); }
             case GHC.Types.Nil wilds6oB_Nil: { return 0 ; }
             case GHC.Types.Cons wilds6oB_Cons: {
                 var xs6oC = wilds6oB_Cons.x0 ;
                 var xss6oD = wilds6oB_Cons.x1 ;
-                var wilds6oE = xs6oC ;
-                wilds6oE = wilds6oE.Eval();
+                var wilds6oE = xs6oC.Eval() ;
                 var wilds6oE_IHash = wilds6oE as GHC.Types.IHash;
                 var xs6oF = wilds6oE_IHash.x0 ;
                 var wws6oG = wsum_s6oz_Entry( xss6oD ) ; return xs6oF + wws6oG ;
@@ -649,24 +601,21 @@ public unsafe static class Example {
             }
         }
     public static Closure suma_Entry( Closure ws6ou , Closure ws6ov ) {
-        var wws6ow = ws6ov ;
-        wws6ow = wws6ow.Eval();
+        var wws6ow = ws6ov.Eval() ;
         var wws6ow_IHash = wws6ow as GHC.Types.IHash;
         var wws6ox = wws6ow_IHash.x0 ;
         var wws6oy = wsumas6ok_Entry( ws6ou , wws6ox ) ;
         return new GHC.Types.IHash( wws6oy );
         }
     public static long wsumas6ok_Entry( Closure ws6ol , long wws6om ) {
-        var wilds6on = ws6ol ;
-        wilds6on = wilds6on.Eval();
+        var wilds6on = ws6ol.Eval() ;
         switch ( wilds6on ) {
             default: { throw new ImpossibleException(); }
             case GHC.Types.Nil wilds6on_Nil: { return wws6om ; }
             case GHC.Types.Cons wilds6on_Cons: {
                 var xs6oo = wilds6on_Cons.x0 ;
                 var xss6op = wilds6on_Cons.x1 ;
-                var wilds6oq = xs6oo ;
-                wilds6oq = wilds6oq.Eval();
+                var wilds6oq = xs6oo.Eval() ;
                 var wilds6oq_IHash = wilds6oq as GHC.Types.IHash;
                 var xs6or = wilds6oq_IHash.x0 ;
                 var sats6os = xs6or + wws6om ;
@@ -675,8 +624,7 @@ public unsafe static class Example {
             }
         }
     public static Closure facc2_Entry( Closure ws6og ) {
-        var wws6oh = ws6og ;
-        wws6oh = wws6oh.Eval();
+        var wws6oh = ws6og.Eval() ;
         var wws6oh_IHash = wws6oh as GHC.Types.IHash;
         var wws6oi = wws6oh_IHash.x0 ;
         var wws6oj = wfacc2s6o9_Entry( wws6oi ) ;
@@ -697,8 +645,7 @@ public unsafe static class Example {
         return foldl__Entry( GHC.Num.fNumInt_DollcPlusr2z , sumfolds6o7 , etaB1 );
         }
     public static Closure take__Entry( Closure ws6o3 , Closure ws6o4 ) {
-        var wws6o5 = ws6o3 ;
-        wws6o5 = wws6o5.Eval();
+        var wws6o5 = ws6o3.Eval() ;
         var wws6o5_IHash = wws6o5 as GHC.Types.IHash;
         var wws6o6 = wws6o5_IHash.x0 ;
         return wtake_s6nT_Entry( wws6o6 , ws6o4 );
@@ -707,8 +654,7 @@ public unsafe static class Example {
         var dss6nW = wws6nU ;
         switch ( dss6nW ) {
             default: {
-                var wilds6nX = ws6nV ;
-                wilds6nX = wilds6nX.Eval();
+                var wilds6nX = ws6nV.Eval() ;
                 switch ( wilds6nX ) {
                     default: { throw new ImpossibleException(); }
                     case GHC.Types.Nil wilds6nX_Nil: {
@@ -716,7 +662,7 @@ public unsafe static class Example {
                     case GHC.Types.Cons wilds6nX_Cons: {
                         var hs6nY = wilds6nX_Cons.x0 ;
                         var ts6nZ = wilds6nX_Cons.x1 ;
-                        var sats6o1 = new Updatable < long , Closure > ( CLR.LoadFunctionPointer< long , Closure , Closure >(sats6o1_Entry) , dss6nW , ts6nZ ) ;
+                        var sats6o1 = new Updatable < long , Closure > ( &sats6o1_Entry , dss6nW , ts6nZ ) ;
                         return new GHC.Types.Cons( hs6nY , sats6o1 );
                         }
                     }
@@ -733,8 +679,7 @@ public unsafe static class Example {
     public static Closure pps6nP_Entry( Closure dss6nQ , GHC.Prim.Void void0E ) {
         return croots6ka ; }
     public static Closure letterChar_Entry( Closure dss6mL ) {
-        var wilds6mM = dss6mL ;
-        wilds6mM = wilds6mM.Eval();
+        var wilds6mM = dss6mL.Eval() ;
         var  wilds6mMTags6mM = wilds6mM.Tag;
         switch ( wilds6mMTags6mM ) {
             default: { throw new ImpossibleException(); }
@@ -747,14 +692,13 @@ public unsafe static class Example {
             }
         }
     public static Closure wt_Entry( Closure dWs6mD , Closure dss6mE ) {
-        var wilds6mF = dss6mE ;
-        wilds6mF = wilds6mF.Eval();
+        var wilds6mF = dss6mE.Eval() ;
         var  wilds6mFTags6mF = wilds6mF.Tag;
         switch ( wilds6mFTags6mF ) {
             default: { throw new ImpossibleException(); }
             case 1 : {
                 var wilds6mF_Unit = wilds6mF as GHC.Tuple.Unit;
-                var sats6mG = new Updatable < Closure > ( CLR.LoadFunctionPointer< Closure , Closure >(sats6mG_Entry) , dWs6mD ) ;
+                var sats6mG = new Updatable < Closure > ( &sats6mG_Entry , dWs6mD ) ;
                 return Example.iden_Entry( dWs6mD ).Apply < Closure , Closure > ( sats6mG );
                 }
             }
@@ -765,13 +709,12 @@ public unsafe static class Example {
         return tests6mn_Entry( etaB5 , etaB4 , etaB3 , etaB2 , GHC.Prim.voidHash );
         }
     public static Closure tests6mn_Entry( Closure dShows6mo , Closure dShows6mp , Closure texts6mq , Closure ms6mr , GHC.Prim.Void void0E ) {
-        var sats6mt = new SingleEntry < Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure >(sats6mt_Entry) , dShows6mo , texts6mq ) ;
+        var sats6mt = new SingleEntry < Closure , Closure > ( &sats6mt_Entry , dShows6mo , texts6mq ) ;
         var ds1s6mu = GHC.IO.Handle.Text.hPutStr__Entry( GHC.IO.Handle.FD.stdout , sats6mt , GHC.Types.true_DataCon ).Apply < GHC.Prim.Void , Closure > ( GHC.Prim.voidHash ) ;
-        ds1s6mu = ds1s6mu.Eval();
         var ipv1s6mw = ds1s6mu ;
         var ds1s6mx = ms6mr.Apply< GHC.Prim.Void , Closure >( GHC.Prim.voidHash ) ;
         var ipv1s6mz = ds1s6mx ;
-        var sats6mA = new SingleEntry < Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure >(sats6mA_Entry) , dShows6mp , ipv1s6mz ) ;
+        var sats6mA = new SingleEntry < Closure , Closure > ( &sats6mA_Entry , dShows6mp , ipv1s6mz ) ;
         return GHC.IO.Handle.Text.hPutStr__Entry( GHC.IO.Handle.FD.stdout , sats6mA , GHC.Types.true_DataCon ).Apply < GHC.Prim.Void , Closure > ( GHC.Prim.voidHash );
         }
     public static Closure sats6mA_Entry( Closure dShows6mp , Closure ipv1s6mz ) {
@@ -781,8 +724,7 @@ public unsafe static class Example {
         return GHC.Show.show_Entry( dShows6mo ).Apply < Closure , Closure > ( texts6mq );
         }
     public static Closure tildDollQMark_Entry( Closure dNums6mk , Closure dss6ml ) {
-        var wilds6mm = dss6ml ;
-        wilds6mm = wilds6mm.Eval();
+        var wilds6mm = dss6ml.Eval() ;
         var  wilds6mmTags6mm = wilds6mm.Tag;
         switch ( wilds6mmTags6mm ) {
             default: { throw new ImpossibleException(); }
@@ -793,7 +735,7 @@ public unsafe static class Example {
             }
         }
     public static Closure o1_Entry( Closure dNums6mf , Closure prods6mg ) {
-        var sats6mh = new Updatable < Closure > ( CLR.LoadFunctionPointer< Closure , Closure >(sats6mh_Entry) , dNums6mf ) ;
+        var sats6mh = new Updatable < Closure > ( &sats6mh_Entry , dNums6mf ) ;
         return prods6mg.Apply< Closure , Closure >( sats6mh );
         }
     public static Closure sats6mh_Entry( Closure dNums6mf ) {
@@ -802,8 +744,7 @@ public unsafe static class Example {
     public static Closure wd_Entry( Closure etaB1 ) {
         return Data.OldList.words_Entry( etaB1 ); }
     public static Closure extractO_Entry( Closure os6m6 ) {
-        var wilds6m7 = os6m6 ;
-        wilds6m7 = wilds6m7.Eval();
+        var wilds6m7 = os6m6.Eval() ;
         var  wilds6m7Tags6m7 = wilds6m7.Tag;
         switch ( wilds6m7Tags6m7 ) {
             default: { throw new ImpossibleException(); }
@@ -830,15 +771,14 @@ public unsafe static class Example {
             }
         }
     public static Closure foldl__Entry( Closure fs6lY , Closure x0s6lZ , Closure dss6m0 ) {
-        var wilds6m1 = dss6m0 ;
-        wilds6m1 = wilds6m1.Eval();
+        var wilds6m1 = dss6m0.Eval() ;
         switch ( wilds6m1 ) {
             default: { throw new ImpossibleException(); }
             case GHC.Types.Nil wilds6m1_Nil: { return x0s6lZ.Eval(); }
             case GHC.Types.Cons wilds6m1_Cons: {
                 var xs6m2 = wilds6m1_Cons.x0 ;
                 var xss6m3 = wilds6m1_Cons.x1 ;
-                var sats6m4 = new Updatable < Closure , Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6m4_Entry) , fs6lY , x0s6lZ , xs6m2 ) ;
+                var sats6m4 = new Updatable < Closure , Closure , Closure > ( &sats6m4_Entry , fs6lY , x0s6lZ , xs6m2 ) ;
                 return foldl__Entry( fs6lY , sats6m4 , xss6m3 );
                 }
             }
@@ -847,8 +787,7 @@ public unsafe static class Example {
         return fs6lY.Apply< Closure , Closure , Closure >( x0s6lZ , xs6m2 );
         }
     public static Closure map__Entry( Closure fs6lM , Closure dss6lN ) {
-        var wilds6lO = dss6lN ;
-        wilds6lO = wilds6lO.Eval();
+        var wilds6lO = dss6lN.Eval() ;
         switch ( wilds6lO ) {
             default: { throw new ImpossibleException(); }
             case GHC.Types.Nil wilds6lO_Nil: {
@@ -856,8 +795,8 @@ public unsafe static class Example {
             case GHC.Types.Cons wilds6lO_Cons: {
                 var hs6lP = wilds6lO_Cons.x0 ;
                 var ts6lQ = wilds6lO_Cons.x1 ;
-                var sats6lS = new Updatable < Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure >(sats6lS_Entry) , fs6lM , ts6lQ ) ;
-                var sats6lR = new Updatable < Closure , Closure > ( CLR.LoadFunctionPointer< Closure , Closure , Closure >(sats6lR_Entry) , fs6lM , hs6lP ) ;
+                var sats6lS = new Updatable < Closure , Closure > ( &sats6lS_Entry , fs6lM , ts6lQ ) ;
+                var sats6lR = new Updatable < Closure , Closure > ( &sats6lR_Entry , fs6lM , hs6lP ) ;
                 return new GHC.Types.Cons( sats6lR , sats6lS );
                 }
             }
@@ -867,14 +806,14 @@ public unsafe static class Example {
     public static Closure sats6lS_Entry( Closure fs6lM , Closure ts6lQ ) {
         return map__Entry( fs6lM , ts6lQ ); }
     public static Closure fOrdH_Entry( Closure dOrds6lC ) {
-        var sats6lK = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6lK_Entry) , dOrds6lC ) ;
-        var sats6lJ = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6lJ_Entry) , dOrds6lC ) ;
-        var sats6lI = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6lI_Entry) , dOrds6lC ) ;
-        var sats6lH = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6lH_Entry) , dOrds6lC ) ;
-        var sats6lG = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6lG_Entry) , dOrds6lC ) ;
-        var sats6lF = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6lF_Entry) , dOrds6lC ) ;
-        var sats6lE = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6lE_Entry) , dOrds6lC ) ;
-        var sats6lD = new Updatable < Closure > ( CLR.LoadFunctionPointer< Closure , Closure >(sats6lD_Entry) , dOrds6lC ) ;
+        var sats6lK = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6lK_Entry , dOrds6lC ) ;
+        var sats6lJ = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6lJ_Entry , dOrds6lC ) ;
+        var sats6lI = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6lI_Entry , dOrds6lC ) ;
+        var sats6lH = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6lH_Entry , dOrds6lC ) ;
+        var sats6lG = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6lG_Entry , dOrds6lC ) ;
+        var sats6lF = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6lF_Entry , dOrds6lC ) ;
+        var sats6lE = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6lE_Entry , dOrds6lC ) ;
+        var sats6lD = new Updatable < Closure > ( &sats6lD_Entry , dOrds6lC ) ;
         return new GHC.Classes.CColOrd( sats6lD , sats6lE , sats6lF , sats6lG , sats6lH , sats6lI , sats6lJ , sats6lK );
         }
     public static Closure sats6lD_Entry( Closure dOrds6lC ) {
@@ -894,16 +833,13 @@ public unsafe static class Example {
     public static Closure sats6lK_Entry( Closure dOrds6lC , Closure etaB2 , Closure etaB1 ) {
         return cmins6ls_Entry( dOrds6lC , etaB2 , etaB1 ); }
     public static Closure cmins6ls_Entry( Closure dOrds6lt , Closure xs6lu , Closure ys6lv ) {
-        var wilds6lw = xs6lu ;
-        wilds6lw = wilds6lw.Eval();
+        var wilds6lw = xs6lu.Eval() ;
         var wilds6lw_H = wilds6lw as Example.H;
         var is6lx = wilds6lw_H.x0 ;
-        var wilds6ly = ys6lv ;
-        wilds6ly = wilds6ly.Eval();
+        var wilds6ly = ys6lv.Eval() ;
         var wilds6ly_H = wilds6ly as Example.H;
         var js6lz = wilds6ly_H.x0 ;
         var wilds6lA = GHC.Classes.compare_Entry( dOrds6lt ).Apply < Closure , Closure , Closure > ( is6lx , js6lz ) ;
-        wilds6lA = wilds6lA.Eval();
         var  wilds6lATags6lA = wilds6lA.Tag;
         switch ( wilds6lATags6lA ) {
             default: { return wilds6lw.Eval(); }
@@ -913,16 +849,13 @@ public unsafe static class Example {
             }
         }
     public static Closure cmaxs6lj_Entry( Closure dOrds6lk , Closure xs6ll , Closure ys6lm ) {
-        var wilds6ln = xs6ll ;
-        wilds6ln = wilds6ln.Eval();
+        var wilds6ln = xs6ll.Eval() ;
         var wilds6ln_H = wilds6ln as Example.H;
         var is6lo = wilds6ln_H.x0 ;
-        var wilds6lp = ys6lm ;
-        wilds6lp = wilds6lp.Eval();
+        var wilds6lp = ys6lm.Eval() ;
         var wilds6lp_H = wilds6lp as Example.H;
         var js6lq = wilds6lp_H.x0 ;
         var wilds6lr = GHC.Classes.compare_Entry( dOrds6lk ).Apply < Closure , Closure , Closure > ( is6lo , js6lq ) ;
-        wilds6lr = wilds6lr.Eval();
         var  wilds6lrTags6lr = wilds6lr.Tag;
         switch ( wilds6lrTags6lr ) {
             default: { return wilds6lp.Eval(); }
@@ -932,16 +865,13 @@ public unsafe static class Example {
             }
         }
     public static Closure cLtEqs6la_Entry( Closure dOrds6lb , Closure xs6lc , Closure ys6ld ) {
-        var wilds6le = xs6lc ;
-        wilds6le = wilds6le.Eval();
+        var wilds6le = xs6lc.Eval() ;
         var wilds6le_H = wilds6le as Example.H;
         var is6lf = wilds6le_H.x0 ;
-        var wilds6lg = ys6ld ;
-        wilds6lg = wilds6lg.Eval();
+        var wilds6lg = ys6ld.Eval() ;
         var wilds6lg_H = wilds6lg as Example.H;
         var js6lh = wilds6lg_H.x0 ;
         var wilds6li = GHC.Classes.compare_Entry( dOrds6lb ).Apply < Closure , Closure , Closure > ( is6lf , js6lh ) ;
-        wilds6li = wilds6li.Eval();
         var  wilds6liTags6li = wilds6li.Tag;
         switch ( wilds6liTags6li ) {
             default: { return GHC.Types.true_DataCon.Eval(); }
@@ -952,16 +882,13 @@ public unsafe static class Example {
             }
         }
     public static Closure cGts6l1_Entry( Closure dOrds6l2 , Closure xs6l3 , Closure ys6l4 ) {
-        var wilds6l5 = xs6l3 ;
-        wilds6l5 = wilds6l5.Eval();
+        var wilds6l5 = xs6l3.Eval() ;
         var wilds6l5_H = wilds6l5 as Example.H;
         var is6l6 = wilds6l5_H.x0 ;
-        var wilds6l7 = ys6l4 ;
-        wilds6l7 = wilds6l7.Eval();
+        var wilds6l7 = ys6l4.Eval() ;
         var wilds6l7_H = wilds6l7 as Example.H;
         var js6l8 = wilds6l7_H.x0 ;
         var wilds6l9 = GHC.Classes.compare_Entry( dOrds6l2 ).Apply < Closure , Closure , Closure > ( is6l6 , js6l8 ) ;
-        wilds6l9 = wilds6l9.Eval();
         var  wilds6l9Tags6l9 = wilds6l9.Tag;
         switch ( wilds6l9Tags6l9 ) {
             default: { return GHC.Types.false_DataCon.Eval(); }
@@ -972,16 +899,13 @@ public unsafe static class Example {
             }
         }
     public static Closure cGtEqs6kS_Entry( Closure dOrds6kT , Closure xs6kU , Closure ys6kV ) {
-        var wilds6kW = xs6kU ;
-        wilds6kW = wilds6kW.Eval();
+        var wilds6kW = xs6kU.Eval() ;
         var wilds6kW_H = wilds6kW as Example.H;
         var is6kX = wilds6kW_H.x0 ;
-        var wilds6kY = ys6kV ;
-        wilds6kY = wilds6kY.Eval();
+        var wilds6kY = ys6kV.Eval() ;
         var wilds6kY_H = wilds6kY as Example.H;
         var js6kZ = wilds6kY_H.x0 ;
         var wilds6l0 = GHC.Classes.compare_Entry( dOrds6kT ).Apply < Closure , Closure , Closure > ( is6kX , js6kZ ) ;
-        wilds6l0 = wilds6l0.Eval();
         var  wilds6l0Tags6l0 = wilds6l0.Tag;
         switch ( wilds6l0Tags6l0 ) {
             default: { return GHC.Types.true_DataCon.Eval(); }
@@ -992,16 +916,13 @@ public unsafe static class Example {
             }
         }
     public static Closure cLts6kJ_Entry( Closure dOrds6kK , Closure xs6kL , Closure ys6kM ) {
-        var wilds6kN = xs6kL ;
-        wilds6kN = wilds6kN.Eval();
+        var wilds6kN = xs6kL.Eval() ;
         var wilds6kN_H = wilds6kN as Example.H;
         var is6kO = wilds6kN_H.x0 ;
-        var wilds6kP = ys6kM ;
-        wilds6kP = wilds6kP.Eval();
+        var wilds6kP = ys6kM.Eval() ;
         var wilds6kP_H = wilds6kP as Example.H;
         var js6kQ = wilds6kP_H.x0 ;
         var wilds6kR = GHC.Classes.compare_Entry( dOrds6kK ).Apply < Closure , Closure , Closure > ( is6kO , js6kQ ) ;
-        wilds6kR = wilds6kR.Eval();
         var  wilds6kRTags6kR = wilds6kR.Tag;
         switch ( wilds6kRTags6kR ) {
             default: { return GHC.Types.false_DataCon.Eval(); }
@@ -1012,14 +933,14 @@ public unsafe static class Example {
             }
         }
     public static Closure cp1Ords6kG_Entry( Closure dOrds6kH ) {
-        var sats6kI = new Updatable < Closure > ( CLR.LoadFunctionPointer< Closure , Closure >(sats6kI_Entry) , dOrds6kH ) ;
+        var sats6kI = new Updatable < Closure > ( &sats6kI_Entry , dOrds6kH ) ;
         return fEqH_Entry( sats6kI );
         }
     public static Closure sats6kI_Entry( Closure dOrds6kH ) {
         return GHC.Classes.p1Ord_Entry( dOrds6kH ); }
     public static Closure fEqH_Entry( Closure dEqs6kD ) {
-        var sats6kF = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6kF_Entry) , dEqs6kD ) ;
-        var sats6kE = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats6kE_Entry) , dEqs6kD ) ;
+        var sats6kF = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6kF_Entry , dEqs6kD ) ;
+        var sats6kE = new Fun2 < Closure , Closure , Closure , Closure , Closure > ( &sats6kE_Entry , dEqs6kD ) ;
         return new GHC.Classes.CColEq( sats6kE , sats6kF );
         }
     public static Closure sats6kE_Entry( Closure dEqs6kD , Closure etaB2 , Closure etaB1 ) {
@@ -1027,16 +948,13 @@ public unsafe static class Example {
     public static Closure sats6kF_Entry( Closure dEqs6kD , Closure etaB2 , Closure etaB1 ) {
         return cSlshEqs6kt_Entry( dEqs6kD , etaB2 , etaB1 ); }
     public static Closure cSlshEqs6kt_Entry( Closure dEqs6ku , Closure etas6kv , Closure etas6kw ) {
-        var wilds6kx = etas6kv ;
-        wilds6kx = wilds6kx.Eval();
+        var wilds6kx = etas6kv.Eval() ;
         var wilds6kx_H = wilds6kx as Example.H;
         var a1s6ky = wilds6kx_H.x0 ;
-        var wilds6kz = etas6kw ;
-        wilds6kz = wilds6kz.Eval();
+        var wilds6kz = etas6kw.Eval() ;
         var wilds6kz_H = wilds6kz as Example.H;
         var b1s6kA = wilds6kz_H.x0 ;
         var wilds6kB = GHC.Classes.eqEq_Entry( dEqs6ku ).Apply < Closure , Closure , Closure > ( a1s6ky , b1s6kA ) ;
-        wilds6kB = wilds6kB.Eval();
         var  wilds6kBTags6kB = wilds6kB.Tag;
         switch ( wilds6kBTags6kB ) {
             default: { throw new ImpossibleException(); }
@@ -1051,23 +969,19 @@ public unsafe static class Example {
             }
         }
     public static Closure cEqEqs6kl_Entry( Closure dEqs6km , Closure dss6kn , Closure dss6ko ) {
-        var wilds6kp = dss6kn ;
-        wilds6kp = wilds6kp.Eval();
+        var wilds6kp = dss6kn.Eval() ;
         var wilds6kp_H = wilds6kp as Example.H;
         var a1s6kq = wilds6kp_H.x0 ;
-        var wilds6kr = dss6ko ;
-        wilds6kr = wilds6kr.Eval();
+        var wilds6kr = dss6ko.Eval() ;
         var wilds6kr_H = wilds6kr as Example.H;
         var b1s6ks = wilds6kr_H.x0 ;
         return GHC.Classes.eqEq_Entry( dEqs6km ).Apply < Closure , Closure , Closure > ( a1s6kq , b1s6ks );
         }
     public static Closure ccompares6kd_Entry( Closure dOrds6ke , Closure dss6kf , Closure dss6kg ) {
-        var wilds6kh = dss6kf ;
-        wilds6kh = wilds6kh.Eval();
+        var wilds6kh = dss6kf.Eval() ;
         var wilds6kh_H = wilds6kh as Example.H;
         var is6ki = wilds6kh_H.x0 ;
-        var wilds6kj = dss6kg ;
-        wilds6kj = wilds6kj.Eval();
+        var wilds6kj = dss6kg.Eval() ;
         var wilds6kj_H = wilds6kj as Example.H;
         var js6kk = wilds6kj_H.x0 ;
         return GHC.Classes.compare_Entry( dOrds6ke ).Apply < Closure , Closure , Closure > ( is6ki , js6kk );

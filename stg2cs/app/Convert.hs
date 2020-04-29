@@ -576,6 +576,7 @@ simplify (CSECase id alts) = CSECase id (map simplifyAlt alts)
 simplify (CSEEvalAnd id e) = CSEEvalAnd id (simplify e)
 simplify (CSELet id (CSEEval (CSEApp m args rt)) e) = CSELet id (CSEApp m args rt) (simplify e)
 simplify (CSELet id (CSEEval (CSECall m args mrt)) e) = CSELet id (CSECall m args mrt) (simplify e)
+simplify (CSELet id (CSEEval (CSEAppAfterCall m id' args1 args2 rt)) e) = CSELet id (CSEAppAfterCall m id' args1 args2 rt) (simplify e)
 simplify (CSELet id (CSEApp m args rt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSEApp m args rt) (simplify e)
 simplify (CSELet id (CSECall m args mrt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSECall m args mrt) (simplify e)
 simplify (CSELet id e1 ec) = CSELet id e1 (simplify ec) -- e1 is a simple expr
@@ -1186,6 +1187,10 @@ pprGenArgs args =
     let types = map valueType args in
     hsep [text "<", pprArgs types, text ">"]
 
+pprFunGenArgs (Method _ rt bndrs _) args =
+    let types = map valueType args ++ map (typeToCSType . idType) bndrs ++ [rt] in
+    hsep [text "<", pprArgs types, text ">"]
+
 pprGenIdsWithRet ret args =
     let types = map (typeToCSType . idType) args ++ [ret] in
     hsep [text "<", pprArgs types, text ">"]
@@ -1277,7 +1282,7 @@ pprLetExpr (CSEAppAfterCall name id cargs appargs rt) =
               callAppGenArgs rt cargs appargs, text "(", pprArgs appargs ,text ")"]
 pprLetExpr (CSEPrimOp op args) = pprOp op args
 pprLetExpr (CSECreateFun m arity args) = hsep [
-    text "new Fun", pprGenArgs args, text $"("++(show arity)++",", pprLdftn m,
+    text $"new Fun"++(show arity), pprFunGenArgs m args, text "(", pprLdftn m,
                             text (case args of [] -> ""; _ -> ","), pprArgs args, text ")"]
 pprLetExpr (CSECreateThunk m args) = hsep [
     text "new Updatable", pprGenArgs args, text "(", pprLdftn m,
@@ -1288,7 +1293,7 @@ pprLetExpr (CSECreateClosure m args) = hsep [
 pprLetExpr (CSEUnpack name idx) = text $ name++".x"++show idx
 pprLetExpr t = ppr t -- handle things like exceptions?
 
-pprLdftn (Method name retType args _) = hcat [text "CLR.LoadFunctionPointer", pprGenIdsWithRet retType args, text $"("++name++")"]
+pprLdftn (Method name retType args _) = text $ "&" ++ name
 
 pprOp IntAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
 pprOp IntSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
