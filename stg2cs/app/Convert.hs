@@ -17,6 +17,8 @@ import CoreSyn (AltCon(..))
 import StgSyn
 import TyCon
 import TyCoRep
+import TysWiredIn
+import BasicTypes (Boxity(..))
 import DataCon
 import ForeignCall
 import Unique
@@ -453,8 +455,8 @@ convertBndrs bndrs ec = do
         callableLocals = concat $ map findCallable bndrs
     st <- get
     (idexs,ts,ms) <- foldM (\(iexs,ts,ms') rhs -> do {
-          (id, ex, t, ms) <- convertRhs boundIdNames rhs
-        ; return ((id, ex):iexs, t:ts, ms++ms') }) ([],[],[]) bndrs
+          (id, pre, ex, t, ms) <- convertRhs boundIdNames rhs
+        ; return ((id, pre, ex):iexs, t:ts, ms++ms') }) ([],[],[]) bndrs
     mkAssignments ec callableLocals (reverse ts) ms idexs mappedBoundInOccs
     where
         findBound :: [GHC.Name] -> StgRhs -> [(Id, Index)]
@@ -477,40 +479,51 @@ convertBndrs bndrs ec = do
         findAssMode (StgRhsClosure _ _ occs _ _ _) = if length occs <= 1 then DirectAssign else IndirectAssign
         findAssMode (StgRhsCon _ _ _) = DirectAssign
 
-        mkAssignments :: StgExpr -> [(Id,Arity)] -> [CSType] -> [CSMethod] -> [(Id, CSExpr)] -> 
+        mkAssignments :: StgExpr -> [(Id,Arity)] -> [CSType] -> [CSMethod] -> [(Id, CSExpr -> CSExpr, CSExpr)] -> 
                         [(Id, AssignMode, [(Id, Index)])] -> CSST (CSExpr, [CSType], [CSMethod])
         mkAssignments ec callableLocals ts ms idexs mappedBoundInOccs = do
             (ecx, ms') <- foldr (\(id,ar) -> withCallable id ar ((safeVarName WithModule id)++"_Entry"))
                             (convertExpr ec) callableLocals
             let assExpr = foldr (\(id, mod, l) e -> foldr (\(id',i) -> CSEAssign id mod i id') e l) ecx mappedBoundInOccs
-            let letExpr = foldr (\(id,cse) -> CSELet id cse) assExpr idexs
+            let letExpr = foldr (\(id, pre,cse) -> pre . CSELet id cse) assExpr idexs
             return (letExpr, ts, ms'++ms)
 convertRhs boundIds (id, StgRhsCon _ dataCon args) = do
     let as = map convertArg args
         as' = map (\a -> case a of {CSRef x -> if elem (varName x) boundIds then CSNull else a; _ -> a}) as
     let name = safeConName WithModule dataCon
     let conExpr = CSECon name as'
-    return (id, conExpr, Class name [], [])
+    return (id, \e -> e, conExpr, Class name [], [])
 convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
-    --TODO never create 0 arity functions - they are actually calls?
+    --TODO never create 0 arity functions - they are actually calls? or maybe reentrant SingleEntry?
     let retType = funRetType id bndrs
     (e1x, ms2) <- withRetType retType $ convertExpr e1
         --TODO recursive application of the same function should be direct calls
     let name = safeVarName WithoutModule id
     let methodName = name++"_Entry"
-    let freeForm = NoFree --TODO
-    let method = Method methodName retType freeForm (occs++bndrs) e1x
+    let freeForm = if length occs == 0 then NoFree else FreeRef
+    let isTupleWrapped = length occs > 1
     let params = map (\i -> if elem (varName i) boundIds then CSNull else CSRef i) occs 
+    let (occs', preCreate, params', e1x') =
+            if isTupleWrapped then
+                let tupleType = mkTyConTy $ tupleTyCon Unboxed (length occs)
+                    tupleCon = tupleDataCon Unboxed (length occs)
+                    newVar = createNewTupleVar id (nameToStr (varName id) ++ "_Free") tupleType (map idType occs)
+                    conExpr = CSECon (safeConName WithModule tupleCon) params
+                    deconstrExpr = foldr (\(idx, occ) -> CSELet occ (CSEUnpack (safeVarName WithoutModule newVar) idx)) e1x (zip [0..] occs)
+                in ([newVar], \e -> CSELet newVar conExpr e, [CSRef newVar], deconstrExpr)
+            else (occs, \e -> e, params, e1x)
+    let method = Method methodName retType freeForm (occs'++bndrs) e1x'
     let assExpr = case flag of
-                    ReEntrant -> CSECreateFun method (length bndrs) params
-                    Updatable -> CSECreateThunk method params
-                    SingleEntry -> CSECreateClosure method params
+                    ReEntrant -> CSECreateFun method (length bndrs) params'
+                    Updatable -> CSECreateThunk method params'
+                    SingleEntry -> CSECreateClosure method params'
+    -- This is used in CSEntity and could be Closure for all non DataCon elements (no top-level rec)
     let typeFromFlag = let genPars = map (typeToCSType . idType) occs in
                         case flag of
-                            ReEntrant -> Class "Fun" genPars
-                            Updatable -> Class "Updatable" genPars
-                            SingleEntry -> Class "SingleEntry" genPars
-    return (id, assExpr, typeFromFlag, method : ms2)
+                            ReEntrant -> Class "Function" genPars
+                            Updatable -> Class "Thunk" genPars
+                            SingleEntry -> Class "Closure" genPars
+    return (id, preCreate, assExpr, typeFromFlag, method : ms2)
 
 withCallable :: Id -> Arity -> Name -> CSST a -> CSST a
 withCallable id arity name m = do
@@ -703,6 +716,16 @@ copyNameToNewVar id name =
         occName = mkVarOcc name
         ghcName = mkInternalName unique occName (nameSrcSpan prevname)
         newVar = mkLocalVar (idDetails id) ghcName (varType id) (idInfo id)
+    in newVar
+
+createNewTupleVar :: Id -> Name -> Type -> [Type] -> Id
+createNewTupleVar id name tupleT types =
+    let prevname = varName id
+        unique = nameUnique prevname
+        occName = mkVarOcc name
+        ghcName = mkInternalName unique occName (nameSrcSpan prevname)
+        t = mkAppTys tupleT $ map getRuntimeRep types ++ types
+        newVar = mkLocalVar (idDetails id) ghcName t (idInfo id)
     in newVar
 
 uniqueNameFromInteger i =
@@ -1022,6 +1045,12 @@ unliftedTypeToCSType t =
                         "(#,,#)" -> tup 3 tyArgs
                         "(#,,,#)" -> tup 4 tyArgs
                         "(#,,,,#)" -> tup 5 tyArgs
+                        "(#,,,,,#)" -> tup 6 tyArgs
+                        "(#,,,,,,#)" -> tup 7 tyArgs
+                        "(#,,,,,,,#)" -> tup 8 tyArgs
+                        "(#,,,,,,,,#)" -> tup 9 tyArgs
+                        "(#,,,,,,,,,#)" -> tup 10 tyArgs
+                        "(#,,,,,,,,,,#)" -> tup 11 tyArgs
                         "Void#" -> Class "GHC.Prim.Void" []
                         "State#" -> Class "GHC.Prim.StateHash" []
                         "Addr#" -> Class "System.IntPtr" []
@@ -1168,7 +1197,7 @@ instance Outputable CSMethod where
         where
             genericDecl = if typ == Generic then "<GenericR>" else ""
             ref = case freeForm of
-                    FreeRef -> "in "
+                    FreeRef -> "in"
                     NoFree -> ""
 
 pprArguments :: [Id] -> SDoc
@@ -1285,6 +1314,7 @@ instance Outputable CSExpr where
 
 pprLetExpr (CSEVar id) = pprSafeQualifiedName id
 pprLetExpr (CSEEval e) = hcat [pprLetExpr e, text ".Eval()"]
+pprLetExpr (CSECon "GHC.Prim.RawTuple" args) = hsep [text "(", pprArgs args, text ")"]
 pprLetExpr (CSECon name args) = hsep [text $ "new "++name++"(", pprArgs args, text ")"]
 pprLetExpr (CSEApp id' args rt) = hsep [hcat [pprSafeQualifiedName id', text ".Apply", appGenArgs rt args, text "("], pprArgs args, text ")"]
 pprLetExpr (CSECall name args Nothing) = hsep [text $ name++"(", pprArgs args, text ")"]
