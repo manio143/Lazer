@@ -7,30 +7,30 @@ namespace Lazer.Runtime.Test
 {
     public unsafe class Tester
     {
-        // private Closure InfList = Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(100_000), Module.inf);
+        private Closure InfList = Manual.take.Apply<long,Closure,Closure>(100_000, Manual.inf);
         // private Closure InfList2 = Module.takeOnStack.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(100_000), Module.inf);
-        // private Closure MakeList = Module.makeList.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(1), new GHC.Types.IHash(100_000));
+        private Closure MakeList = Manual.makelist.Apply<long,long,Closure>(1, 100_000);
 
-        // public Closure SumTakeInf()
-        //     => Module.sum.Apply<Closure,Closure>(InfList);
+        public Closure SumTakeInf()
+            => new GHC.Types.IHash(Manual.sum.Apply<Closure,long>(InfList));
         // public Closure Sum2TakeInf()
         //             => Module.sum2.Apply<Closure,Closure>(InfList);
         // public Closure SumTakeInf2()
         //     => Module.sum.Apply<Closure,Closure>(InfList2);
 
-        // public Closure SumMakeList()
-        //     => Module.sum.Apply<Closure,Closure>(MakeList);
+        public Closure SumMakeList()
+            => new GHC.Types.IHash(Manual.sum.Apply<Closure,long>(MakeList));
 
         // public Closure Sum2MakeList()
         //     => Module.sum2.Apply<Closure,Closure>(MakeList);
-        // public Closure SumATakeInf()
-        //     => Module.suma.Apply<Closure,Closure,Closure>(InfList, new GHC.Types.IHash(0));
+        public Closure SumATakeInf()
+            => Manual.suma.Apply<Closure,Closure,Closure>(InfList, new GHC.Types.IHash(0));
 
         // public Closure SumATakeInf2()
         //     => Module.suma.Apply<Closure,Closure,Closure>(InfList2, new GHC.Types.IHash(0));
 
-        // public Closure SumAMakeList()
-        //     => Module.suma.Apply<Closure,Closure,Closure>(MakeList, new GHC.Types.IHash(0));
+        public Closure SumAMakeList()
+            => Manual.suma.Apply<Closure,Closure,Closure>(MakeList, new GHC.Types.IHash(0));
 
         // public Closure Fibt()
         //     => Module.fibt.Apply<Closure,Closure>(new GHC.Types.IHash(800_000));
@@ -40,7 +40,10 @@ namespace Lazer.Runtime.Test
 
         // public Closure FoldTakeInf()
         //     => Module.sfoldl.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), InfList);
-
+        public Closure FoldMakeList()
+            => new GHC.Types.IHash(Manual.sumfold.Apply<long, Closure, long>(0, MakeList));
+        public Closure FoldTakeInf()
+            => new GHC.Types.IHash(Manual.sumfold.Apply<long, Closure, long>(0, InfList));
         // public Closure PiSum()
         //     => Module.suma.Apply<Closure,Closure,Closure>(Module.map.Apply<Closure,Closure,Closure>(Module.integerToInt, Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(6000), Module.pi_)), new GHC.Types.IHash(0));
 
@@ -188,34 +191,6 @@ namespace Lazer.Runtime.Test
 
         public void ExecTests()
         {
-            /*
-            ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
-            ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
-            ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
-            Console.WriteLine("----");
-            ExecTest("Sum(Take(100000,Inf))", SumTakeInf);
-            // GC.TryStartNoGCRegion(200_000_000, 10_000_000);
-            ExecTest("Sum(MakeList(1,100000))", SumMakeList);
-            // GC.EndNoGCRegion();
-            ExecTest("SumA(MakeList(1,100000))", SumAMakeList);
-            ExecTest("SumA(Take(100000,Inf))", SumATakeInf);
-            ExecTest("Fold(+,0, Take(100000,Inf))", FoldTakeInf);
-            ExecTest("Fold(+,0, MakeList(1,100000))", FoldMakeList);
-            ExecTest("SumFromTo", SumFromTo);
-            ExecTest("~LinqSumRange", LinqSumRange);
-            ExecTest("~LoopSum", LoopSum);
-            // ExecTest("SumA(Take2(100000,Inf))", SumATakeInf2);
-            ExecTest("Fibt(800000)", Fibt);
-            ExecTest("SumA(Take(6000,Pi), 0)", PiSum);
-            
-            ExecTest("appProcess (take 100000 (repeat 1))", AppProcess);
-            ExecTest("appProcessI (take 100000 (repeat 1))", AppProcessI);
-            ExecTest("appAppTest", Code.appAppTest);
-            ExecTest("appCallTest", Code.appCallTest); 
-            ExecTest("loopAppTest", Code.loopAppTest);
-            ExecTest("loopCallTest", Code.loopCallTest);*/
-            // Console.WriteLine(Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(15), Module.pi_));
-
             ExecTest("loop CALL call long INL", () => ApplyCall.loopCallLongInline(0, ApplyCall.EXEC_TIMES));
             ExecTest("loop CALL call long NO ", () => ApplyCall.loopCallLongNoInline(0, ApplyCall.EXEC_TIMES));
             ExecTest("loop CALL call lonW INL", () => ApplyCall.loopCallWLongInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
@@ -228,16 +203,46 @@ namespace Lazer.Runtime.Test
             ExecTest("loop APP  virt long    ", () => ApplyCall.loopAppLong(ApplyCall.add1L, 0, ApplyCall.EXEC_TIMES));
             ExecTest("loop APP  virt clos    ", () => ApplyCall.loopAppClosure(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
             ExecTest("loop APP  virt clos CA ", () => ApplyCall.loopAppClosureWithCache(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
+            Console.WriteLine("=====================");
+            Console.WriteLine("=====================");
+            
+            // ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
+            // ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
+            // ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
+            // Console.WriteLine("----");
+            ExecTest("Sum(Take(100000,Inf))", SumTakeInf);
+            // GC.TryStartNoGCRegion(200_000_000, 10_000_000);
+            ExecTest("Sum(MakeList(1,100000))", SumMakeList);
+            // GC.EndNoGCRegion();
+            ExecTest("SumA(MakeList(1,100000))", SumAMakeList);
+            ExecTest("SumA(Take(100000,Inf))", SumATakeInf);
+            ExecTest("Fold(+,0, Take(100000,Inf))", FoldTakeInf);
+            ExecTest("Fold(+,0, MakeList(1,100000))", FoldMakeList);
+            // ExecTest("SumFromTo", SumFromTo);
+            ExecTest("~LinqSumRange", LinqSumRange);
+            // ExecTest("~LoopSum", LoopSum);
+            // ExecTest("SumA(Take2(100000,Inf))", SumATakeInf2);
+            // ExecTest("Fibt(800000)", Fibt);
+            // ExecTest("SumA(Take(6000,Pi), 0)", PiSum);
+            /*
+            ExecTest("appProcess (take 100000 (repeat 1))", AppProcess);
+            ExecTest("appProcessI (take 100000 (repeat 1))", AppProcessI);
+            ExecTest("appAppTest", Code.appAppTest);
+            ExecTest("appCallTest", Code.appCallTest); 
+            ExecTest("loopAppTest", Code.loopAppTest);
+            ExecTest("loopCallTest", Code.loopCallTest);*/
+            // Console.WriteLine(Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(15), Module.pi_));
 
-            ExecTest("sum       (take 100000 inf)  ", ManualTest.sumTakeInf);
-            ExecTest("sumfold 0 (take 100000 inf)  ", ManualTest.sumfoldTakeInf);
-            ExecTest("sum       (makelist 1 100000)", ManualTest.sumMakelist);
-            ExecTest("sumfold 0 (makelist 1 100000)", ManualTest.sumfoldMakelist);
-            ExecTest("length    (take 100000 inf)  ", ManualTest.lengthTakeInf);
-            ExecTest("length    (makelist 1 100000)", ManualTest.lengthMakelist);
-            ExecTest("nth    (take 100000 inf)  ", ManualTest.nthTakeInf);
-            ExecTest("nth    (makelist 1 100000)", ManualTest.nthMakelist);
-            ExecTest("nth    inf                ", ManualTest.nthInf);
+
+            // ExecTest("sum       (take 100000 inf)  ", ManualTest.sumTakeInf);
+            // ExecTest("sumfold 0 (take 100000 inf)  ", ManualTest.sumfoldTakeInf);
+            // ExecTest("sum       (makelist 1 100000)", ManualTest.sumMakelist);
+            // ExecTest("sumfold 0 (makelist 1 100000)", ManualTest.sumfoldMakelist);
+            // ExecTest("length    (take 100000 inf)  ", ManualTest.lengthTakeInf);
+            // ExecTest("length    (makelist 1 100000)", ManualTest.lengthMakelist);
+            // ExecTest("nth    (take 100000 inf)  ", ManualTest.nthTakeInf);
+            // ExecTest("nth    (makelist 1 100000)", ManualTest.nthMakelist);
+            // ExecTest("nth    inf                ", ManualTest.nthInf);
 
             ExecTest("loop 100k (makelist 1 100000)", ManualTest.callMakeListInLoop);
             ExecTest("loop 100k [1]", ManualTest.callCreateSingleton);
