@@ -74,7 +74,7 @@ data CSEntity =
     Closures are parameterless instances of either Function or Thunk. <CSMethod> is the entry point.
 -}
 
-data CSMethod = Method Name CSType [Arg] CSExpr
+data CSMethod = Method Name CSType FreeRef [Arg] CSExpr
 data CSExpr =
     CSELit Literal -- unboxed literal
     | CSEVar Id    -- variable
@@ -92,7 +92,7 @@ data CSExpr =
     | CSELetByName Name CSExpr CSExpr  -- assign <Name> := <CSExpr> and continue to evaluate <CSExpr₂>
     | CSELetAssign Id CSExpr CSExpr  -- assign existing <Id> := <CSExpr> and continue to evaluate <CSExpr₂>
     | CSECase Id [CSAlt]  -- unpack an evaluated value
-    | CSEAssign Id Index Id CSExpr 
+    | CSEAssign Id AssignMode Index Id CSExpr 
         -- assign <Id₁>.x<Index> = <Id₂>; <CSExpr>
         -- used in conjecture with CSELet for recursive declarations
     | CSEPrimOp PrimOp [CSValue]  -- a primitive operation
@@ -132,6 +132,10 @@ data CSAlt =
 data SwitchType = Type | Tag -- case expressions with 5 or more alternatives
                              -- are converted to switches based on data constructor
                              -- integer tag value
+data FreeRef = FreeRef | NoFree
+    -- The first argument is passed in by reference if it represents a free variable
+
+data AssignMode = DirectAssign | IndirectAssign
 
 {-
 ######################################
@@ -192,13 +196,13 @@ stg2cs df modName stg tyCons = evalState (go >> prettyPrint) $ initState df
             mapM_ processTop stgSorted
             convertStaticLetExpressions
             simplifyExpressions
-        simplifyExpressions = modify (\s -> s { code = map (\(Method n t a e) -> Method n t a (simplify e)) (code s) })
+        simplifyExpressions = modify (\s -> s { code = map (\(Method n t f a e) -> Method n t f a (simplify e)) (code s) })
         convertStaticLetExpressions = modify (\s -> s { entities = map convLetToLetAssign (entities s) })
             where
                 convLetToLetAssign (CSTClosure ids expr) = CSTClosure ids $ convlla expr
                 convLetToLetAssign c = c
                 convlla (CSELet id e1 e2) = CSELetAssign id e1 (convlla e2)
-                convlla (CSEAssign id1 idx id2 e) = CSEAssign id1 idx id2 (convlla e)
+                convlla (CSEAssign id1 mod idx id2 e) = CSEAssign id1 mod idx id2 (convlla e)
                 convlla CSENop = CSENop
                 -- ^ there should not be anything else
         sortDeclarations stg =
@@ -322,7 +326,7 @@ processClass cls = do
                 expr   = CSECastAs "dict" did dictDataConName 
                             (CSELet fid (CSEUnpack "dict" idx)
                                 (CSEVar fid))
-                method = Method (name++"_Entry") (funRetType' 1 ty) [did] expr
+                method = Method (name++"_Entry") (funRetType' 1 ty) NoFree [did] expr
                 staticLet = CSELet id (CSECreateFun method arity []) CSENop
             in (CSTClosure [(id,Class "Function" [])] staticLet, method)
         [dictDataCon] = tyConDataCons $ classTyCon cls
@@ -413,7 +417,7 @@ convertExpr (StgCase e alias _ alts) = do
                                             _ -> True
                         in not (ext || exp || callable)
                 let occs = filter isLocal $ nub $ exprFreeVars e
-                let method = Method methodName (typeToCSType vt) occs ex
+                let method = Method methodName (typeToCSType vt) NoFree occs ex
                 return (CSECall methodName (map CSRef occs) Nothing, method : mxs)
     let actualType = if isUnitHash vt then innerUnitHashType vt else vt
     case isUnliftedTypeSafe actualType of
@@ -444,7 +448,8 @@ convertBndrs bndrs ec = do
     let boundIds = map fst bndrs
         boundIdNames = map varName boundIds
         boundInOccs = map (findBound boundIdNames . snd) bndrs
-        mappedBoundInOccs = zip boundIds boundInOccs
+        assignModes = map (findAssMode . snd) bndrs 
+        mappedBoundInOccs = zip3 boundIds assignModes boundInOccs
         callableLocals = concat $ map findCallable bndrs
     st <- get
     (idexs,ts,ms) <- foldM (\(iexs,ts,ms') rhs -> do {
@@ -469,12 +474,15 @@ convertBndrs bndrs ec = do
         findCallable (id, StgRhsClosure _ _ [] ReEntrant bndrs _) = [(id, length bndrs)]
         findCallable _ = []
 
+        findAssMode (StgRhsClosure _ _ occs _ _ _) = if length occs <= 1 then DirectAssign else IndirectAssign
+        findAssMode (StgRhsCon _ _ _) = DirectAssign
+
         mkAssignments :: StgExpr -> [(Id,Arity)] -> [CSType] -> [CSMethod] -> [(Id, CSExpr)] -> 
-                        [(Id, [(Id, Index)])] -> CSST (CSExpr, [CSType], [CSMethod])
+                        [(Id, AssignMode, [(Id, Index)])] -> CSST (CSExpr, [CSType], [CSMethod])
         mkAssignments ec callableLocals ts ms idexs mappedBoundInOccs = do
             (ecx, ms') <- foldr (\(id,ar) -> withCallable id ar ((safeVarName WithModule id)++"_Entry"))
                             (convertExpr ec) callableLocals
-            let assExpr = foldr (\(id, l) e -> foldr (\(id',i) -> CSEAssign id i id') e l) ecx mappedBoundInOccs
+            let assExpr = foldr (\(id, mod, l) e -> foldr (\(id',i) -> CSEAssign id mod i id') e l) ecx mappedBoundInOccs
             let letExpr = foldr (\(id,cse) -> CSELet id cse) assExpr idexs
             return (letExpr, ts, ms'++ms)
 convertRhs boundIds (id, StgRhsCon _ dataCon args) = do
@@ -490,7 +498,8 @@ convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
         --TODO recursive application of the same function should be direct calls
     let name = safeVarName WithoutModule id
     let methodName = name++"_Entry"
-    let method = Method methodName retType (occs++bndrs) e1x
+    let freeForm = NoFree --TODO
+    let method = Method methodName retType freeForm (occs++bndrs) e1x
     let params = map (\i -> if elem (varName i) boundIds then CSNull else CSRef i) occs 
     let assExpr = case flag of
                     ReEntrant -> CSECreateFun method (length bndrs) params
@@ -581,7 +590,7 @@ simplify (CSELet id (CSEApp m args rt) (CSEEvalAnd id' e)) | id == id' = CSELet 
 simplify (CSELet id (CSECall m args mrt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSECall m args mrt) (simplify e)
 simplify (CSELet id e1 ec) = CSELet id e1 (simplify ec) -- e1 is a simple expr
 simplify (CSELetByName name e1 ec) = CSELetByName name e1 (simplify ec) -- e1 is a simple expr
-simplify (CSEAssign id idx id' e) = CSEAssign id idx id' (simplify e)
+simplify (CSEAssign id mod idx id' e) = CSEAssign id mod idx id' (simplify e)
 simplify (CSECastAs name id name' e) = CSECastAs name id name' (simplify e)
 simplify (CSETag id id' e) = CSETag id id' (simplify e)
 simplify e = e 
@@ -1151,13 +1160,16 @@ pprLit (MachDouble r) = text $ show r
 pprLit (MachLabel l _ _) = error $ "Can't emit label: "++show l
 
 instance Outputable CSMethod where
-    ppr (Method name typ args ex) =
+    ppr (Method name typ freeForm args ex) =
         hsep [hang 
-                (hsep [text "public static", ppr typ, text $ name ++ genericDecl ++ "(", pprArguments args, text ") {"])
+                (hsep [text "public static", ppr typ, text $ name ++ genericDecl ++ "(" ++ ref, pprArguments args, text ") {"])
                 4
                 (sep [ppr ex, text "}"])]
         where
             genericDecl = if typ == Generic then "<GenericR>" else ""
+            ref = case freeForm of
+                    FreeRef -> "in "
+                    NoFree -> ""
 
 pprArguments :: [Id] -> SDoc
 pprArguments [] = text ""
@@ -1187,7 +1199,7 @@ pprGenArgs args =
     let types = map valueType args in
     hsep [text "<", pprArgs types, text ">"]
 
-pprFunGenArgs (Method _ rt bndrs _) args =
+pprFunGenArgs (Method _ rt _ bndrs _) args =
     let types = map valueType args ++ map (typeToCSType . idType) bndrs ++ [rt] in
     hsep [text "<", pprArgs types, text ">"]
 
@@ -1223,10 +1235,10 @@ instance Outputable CSExpr where
             hsep [pprSafeName id, text "=", hcat[pprSafeName id, text ".Eval();"]],
             ppr ex
         ]
-    ppr (CSEAssign id idx id' ex) =
+    ppr (CSEAssign id mod idx id' ex) =
         sep [
             hsep [
-                hcat [pprSafeName id, text $".x" ++ show idx],
+                hcat [pprSafeName id, text $ (case mod of {IndirectAssign -> ".free";_->""})++".x" ++ show idx],
                 text "=", pprSafeQualifiedName id', text ";"
             ],
             ppr ex
@@ -1293,7 +1305,7 @@ pprLetExpr (CSECreateClosure m args) = hsep [
 pprLetExpr (CSEUnpack name idx) = text $ name++".x"++show idx
 pprLetExpr t = ppr t -- handle things like exceptions?
 
-pprLdftn (Method name retType args _) = text $ "&" ++ name
+pprLdftn (Method name _ _ _ _) = text $ "&" ++ name
 
 pprOp IntAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
 pprOp IntSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
