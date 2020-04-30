@@ -34,6 +34,8 @@ namespace Lazer.Runtime
         public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
              => f.Apply<F0, A1, A2, A3, A4, A5, R>(x0, a1, a2, a3, a4, a5);
         public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+            => f.Apply<F0, A1, A2, A3, A4, A5, A6, R>(x0, a1, a2, a3, a4, a5, a6);
+        public override R Apply<A1, A2, A3, A4, A5, A6, A7, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
     }
 
@@ -57,6 +59,8 @@ namespace Lazer.Runtime
         public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
         public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, A5, A6, A7, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
     }
 
@@ -82,6 +86,8 @@ namespace Lazer.Runtime
         public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
         public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, A5, A6, A7, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
     }
 
@@ -109,6 +115,8 @@ namespace Lazer.Runtime
         public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
         public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, A5, A6, A7, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
     }
 
@@ -139,6 +147,8 @@ namespace Lazer.Runtime
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
         public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, A5, A6, A7, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
     }
 
     public unsafe class PAP<F0, F1, F2, F3, F4, F5> : PAP
@@ -159,6 +169,40 @@ namespace Lazer.Runtime
             this.x5 = x5;
         }
         public override R Apply<A1, R>(A1 a1)
+             => f.Apply<F0, F1, F2, F3, F4, F5, A1, R>(x0, x1, x2, x3, x4, x5, a1);
+        public override R Apply<A1, A2, R>(A1 a1, A2 a2)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, A5, A6, A7, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+    }
+    public unsafe class PAP<F0, F1, F2, F3, F4, F5, F6> : PAP
+    {
+        public F0 x0;
+        public F1 x1;
+        public F2 x2;
+        public F3 x3;
+        public F4 x4;
+        public F5 x5;
+        public F6 x6;
+        public PAP(Function f, F0 x0, F1 x1, F2 x2, F3 x3, F4 x4, F5 x5, F6 x6) : base(f)
+        {
+            this.x0 = x0;
+            this.x1 = x1;
+            this.x2 = x2;
+            this.x3 = x3;
+            this.x4 = x4;
+            this.x5 = x5;
+            this.x6 = x6;
+        }
+        public override R Apply<A1, R>(A1 a1)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
         public override R Apply<A1, A2, R>(A1 a1, A2 a2)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
@@ -169,6 +213,8 @@ namespace Lazer.Runtime
         public override R Apply<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
         public override R Apply<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
+             => throw new NotSupportedException("Application exceeds runtime argument limit.");
+        public override R Apply<A1, A2, A3, A4, A5, A6, A7, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7)
              => throw new NotSupportedException("Application exceeds runtime argument limit.");
     }
 
