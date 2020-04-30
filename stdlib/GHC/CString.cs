@@ -30,9 +30,11 @@ namespace GHC
         {
             if(idx == s.Length)
                 return Types.nil_DataCon;
-            var cont = new Updatable<string, int>(CLR.LoadFunctionPointer<string, int, Closure>(unpackCStringHash_), s, idx + 1);
+            var cont = new Updatable<(string, int)>(&unpackCStringHash__, (s, idx));
             return new Types.Cons(new Types.CHash(s[idx]), cont);
         }
+        private static Closure unpackCStringHash__(in (string s, int idx) f)
+            => unpackCStringHash_(f.s, f.idx+1);
         public static Closure unpackAppendCStringHash_Entry(string s, Closure rest)
         {
             return unpackAppendCStringHash_(rest, s, 0);
@@ -41,9 +43,11 @@ namespace GHC
         {
             if(idx == s.Length)
                 return rest;
-            var cont = new Updatable<Closure, string, int>(CLR.LoadFunctionPointer<Closure, string, int, Closure>(unpackAppendCStringHash_), rest, s, idx + 1);
+            var cont = new Updatable<(Closure, string, int)>(&unpackAppendCStringHash__, (rest, s, idx));
             return new Types.Cons(new Types.CHash(s[idx]), cont);
         }
+        private static Closure unpackAppendCStringHash__(in (Closure rest, string s, int idx) f)
+            => unpackAppendCStringHash_(f.rest, f.s, f.idx + 1);
 
         /*
             TODO: Implement (?)
