@@ -143,12 +143,12 @@ public static unsafe class Manual
     {
         if (from <= to)
         {
-            var t = new UpdatableRef<(long, long)>(&makelist_Go_thunk, (from, to));
+            var t = new Updatable<(long, long)>(&makelist_Go_thunk, (from, to));
             return new GHC.Types.Cons(new GHC.Types.IHash(from), t);
         }
         return GHC.Types.nil_DataCon;
     }
-    public static Closure makelist_Go_thunk(ref (long from, long to) free)
+    public static Closure makelist_Go_thunk(in (long from, long to) free)
         => makelist_Go(free.from + 1, free.to);
 
     public static long sumfold_Entry(long acc, Closure l)
@@ -174,10 +174,11 @@ public static unsafe class Manual
             case GHC.Types.Cons cons:
                 var h = cons.x0.Eval() as GHC.Types.IHash;
                 var nh = new GHC.Types.IHash(h.x0 + 1);
-                var nt = new Updatable<Closure>(&mapInc_Entry, cons.x1);
+                var nt = new Updatable<Closure>(&mapInc_Thunk, cons.x1);
                 return new GHC.Types.Cons(nh, nt);
         }
     }
+    private static Closure mapInc_Thunk(in Closure t) => mapInc_Entry(t);
 
     public static Closure inf_Entry() => mapInc_Entry(inf);
 
@@ -206,12 +207,12 @@ public static unsafe class Manual
             default: throw new ImpossibleException("[a]", al.GetType().ToString());
             case GHC.Types.Nil nil: return GHC.Types.nil_DataCon.Eval();
             case GHC.Types.Cons cons:
-                var t = new Updatable<long, Closure>(&take_Thunk, n, cons.x1);
+                var t = new Updatable<(long, Closure)>(&take_Thunk, (n, cons.x1));
                 return new GHC.Types.Cons(cons.x0, t);
         }
     }
-    public static Closure take_Thunk(long n, Closure t)
-        => take_Entry(n - 1, t);
+    public static Closure take_Thunk(in (long n, Closure t) free)
+        => take_Entry(free.n - 1, free.t);
 
     public static long length_Entry(Closure l) => length_loop_Entry(0, l);
     public static long length_loop_Entry(long acc, Closure l)

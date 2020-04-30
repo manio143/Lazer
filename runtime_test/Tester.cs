@@ -134,8 +134,8 @@ namespace Lazer.Runtime.Test
         // public Closure SumOsConst9Tag()
         //     => SumOs(new Data[] { new OFucked(1) }, Module.extractOtag);
 
-        // public Closure NoFib_Exp()
-        //     => new GHC.Types.IHash(Exp3.TestEntry(8));
+        public Closure NoFib_Exp()
+            => new GHC.Types.IHash(Exp3.TestEntry(8));
         // public Closure NoFib_DigitsE1()
         //     => DigitsE1.TestEntry();
         // public Closure NoFib_Primes()
@@ -252,7 +252,7 @@ namespace Lazer.Runtime.Test
             ExecTest("evaluate Thunk  ", ManualTest.evalThunk);
             ExecTest("eval SingleEntry", ManualTest.evalRepeatWork);
             ExecTest("initialize IHash", ManualTest.evalRepeatWorkInline);
-            //ExecTest("nofib: exp3_8(8)", NoFib_Exp);
+            // ExecTest("nofib: exp3_8(8)", NoFib_Exp);
             // ExecTest("nofib: digits_e1(150)", NoFib_DigitsE1);
             // ExecTest("nofib: primes(500)", NoFib_Primes);
             // ExecTest("nofib: primes2(500)", NoFib_Primes2);
