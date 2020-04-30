@@ -494,14 +494,14 @@ convertRhs boundIds (id, StgRhsCon _ dataCon args) = do
     let conExpr = CSECon name as'
     return (id, \e -> e, conExpr, Class name [], [])
 convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
-    --TODO never create 0 arity functions - they are actually calls? or maybe reentrant SingleEntry?
     let retType = funRetType id bndrs
     (e1x, ms2) <- withRetType retType $ convertExpr e1
         --TODO recursive application of the same function should be direct calls
     let name = safeVarName WithoutModule id
     let methodName = name++"_Entry"
-    let freeForm = if length occs == 0 then NoFree else FreeRef
-    let isTupleWrapped = length occs > 1
+    let is0ArityCall = (case flag of {ReEntrant -> True; _ -> False}) && length bndrs == 0
+    let isTupleWrapped = length occs > 1 && not is0ArityCall
+    let freeForm = if length occs == 0 || is0ArityCall then NoFree else FreeRef
     let params = map (\i -> if elem (varName i) boundIds then CSNull else CSRef i) occs 
     let (occs', preCreate, params', e1x') =
             if isTupleWrapped then
@@ -514,7 +514,10 @@ convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
             else (occs, \e -> e, params, e1x)
     let method = Method methodName retType freeForm (occs'++bndrs) e1x'
     let assExpr = case flag of
-                    ReEntrant -> CSECreateFun method (length bndrs) params'
+                    ReEntrant -> 
+                        let arity = length bndrs in
+                        if not is0ArityCall then CSECreateFun method arity params'
+                        else CSECall methodName params' Nothing
                     Updatable -> CSECreateThunk method params'
                     SingleEntry -> CSECreateClosure method params'
     -- This is used in CSEntity and could be Closure for all non DataCon elements (no top-level rec)
@@ -1200,8 +1203,8 @@ pprLit (LitNumber LitNumWord i _) = text $ show i ++ "UL"
 pprLit (LitNumber _ i _) = text $ show i
 pprLit (MachStr bs) = text $ show bs
 pprLit MachNullAddr = text "null"
-pprLit (MachFloat r) = text $ show r ++ "f"
-pprLit (MachDouble r) = text $ show r
+pprLit (MachFloat r) = text $ show (fromRational r::Float) ++ "f"
+pprLit (MachDouble r) = text $ show $ (fromRational r ::Double)
 pprLit (MachLabel l _ _) = error $ "Can't emit label: "++show l
 
 instance Outputable CSMethod where
@@ -1409,6 +1412,7 @@ pprOp DoubleNegOp [a1] = hsep [text "-", ppr a1]
 pprOp DoubleAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
 pprOp DoubleSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
 pprOp DoubleMulOp [a1, a2] = hsep [ppr a1, text "*", ppr a2]
+pprOp DoubleDivOp [a1, a2] = hsep [ppr a1, text "/", ppr a2]
 pprOp DoublePowerOp [a1, a2] = hsep [text "System.Math.Pow(", ppr a1, text ",", ppr a2, text ")"]
 pprOp DoubleLeOp [a1, a2] = hsep [text "(",ppr a1, text "<=", ppr a2, text ") ? 1 : 0"]
 pprOp DoubleLtOp [a1, a2] = hsep [text "(",ppr a1, text "<", ppr a2, text ") ? 1 : 0"]
