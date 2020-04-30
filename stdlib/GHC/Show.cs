@@ -427,6 +427,9 @@ namespace GHC
 
         public static Function showList;
 
+        public static Closure fShowWord_DollcshowsPrec => showsPrec_Entry(fShowWord);
+        public static Closure fShowWord_Dollcshow => show_Entry(fShowWord);
+
         static Show()
         {
             cColShow_DataCon = new Fun3<Closure, Closure, Closure, Closure>(&cColShow_DataCon_Entry);
@@ -1625,7 +1628,7 @@ namespace GHC
         public static Closure sats6Gq_Entry(in char dss6Go)
         {
             var sats6Gp = (int)dss6Go;
-            return GHC.List.wBangBangs8DW_Entry(GHC.Show.asciiTab, sats6Gp);
+            return GHC.List.wBangBang_Entry(GHC.Show.asciiTab, sats6Gp);
         }
         public static Closure sats6Gx_Entry(in Closure ws6Gk)
         {

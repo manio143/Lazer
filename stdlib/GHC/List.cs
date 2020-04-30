@@ -261,7 +261,7 @@ namespace GHC
 
         public static Function bangBang;
 
-        internal static Function wBangBangs8DW;
+        internal static Function wBangBang;
 
         internal static Function poly_Dollwgos8DO;
 
@@ -493,7 +493,7 @@ namespace GHC
             lvls8E6 = new Updatable(&lvls8E6_Entry);
             bangBang = new Fun2<Closure, Closure, Closure>(&bangBang_Entry);
 
-            wBangBangs8DW = new Fun2<Closure, long, Closure>(&wBangBangs8DW_Entry);
+            wBangBang = new Fun2<Closure, long, Closure>(&wBangBang_Entry);
 
             poly_Dollwgos8DO = new Fun2<Closure, long, Closure>(&poly_Dollwgos8DO_Entry);
 
@@ -2869,9 +2869,9 @@ namespace GHC
             var wws8E3 = ws8E2.Eval();
             var wws8E3_IHash = wws8E3 as GHC.Types.IHash;
             var wws8E4 = wws8E3_IHash.x0;
-            return wBangBangs8DW_Entry(ws8E1, wws8E4);
+            return wBangBang_Entry(ws8E1, wws8E4);
         }
-        public static Closure wBangBangs8DW_Entry(Closure ws8DX, long wws8DY)
+        public static Closure wBangBang_Entry(Closure ws8DX, long wws8DY)
         {
             var lwilds8DZ = (wws8DY < 0) ? 1 : 0;
             switch (lwilds8DZ)
