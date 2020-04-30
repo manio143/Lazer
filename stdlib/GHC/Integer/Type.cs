@@ -182,7 +182,7 @@ namespace GHC.Integer
 
             signumInteger = new Fun1<Closure, Closure>(&signumInteger_Entry);
 
-            wsignumIntegers4hO = new Fun1<Closure, long>(&wsignumIntegers4hO_Entry);
+            wsignumIntegers4hO = new Fun1<Closure, long>(&wsignumInteger_Entry);
 
             compareBigIntHash = new Fun2<BigInteger, BigInteger, long>(&compareBigIntHash_Entry);
 
@@ -388,8 +388,8 @@ namespace GHC.Integer
             var dss4j0_RawTuple = dss4j0;
             var ipvs4j1 = dss4j0_RawTuple.x0;
             var ipvs4j2 = dss4j0_RawTuple.x1;
-            var wws4j3 = wsignumIntegers4hO_Entry(ipvs4j2);
-            var wws4j4 = wsignumIntegers4hO_Entry(ds4iZ);
+            var wws4j3 = wsignumInteger_Entry(ipvs4j2);
+            var wws4j4 = wsignumInteger_Entry(ds4iZ);
             var sats4j6 = new GHC.Integer.Type.SHash(wws4j4);
             var sats4j7 = negateInteger_Entry(sats4j6);
             var sats4j5 = new GHC.Integer.Type.SHash(wws4j3);
@@ -534,10 +534,10 @@ namespace GHC.Integer
         }
         public static Closure signumInteger_Entry(Closure ws4i4)
         {
-            var wws4i5 = wsignumIntegers4hO_Entry(ws4i4);
+            var wws4i5 = wsignumInteger_Entry(ws4i4);
             return new GHC.Integer.Type.SHash(wws4i5);
         }
-        public static long wsignumIntegers4hO_Entry(Closure ws4hP)
+        public static long wsignumInteger_Entry(Closure ws4hP)
         {
             var wilds4hQ = ws4hP.Eval();
             switch (wilds4hQ)
@@ -1257,7 +1257,15 @@ namespace GHC.Integer
         {
             return x;
         }
-        
+        public static double doubleFromInteger_Entry(Closure i)
+        {
+            switch(i.Eval())
+            {
+                default: throw new ImpossibleException();
+                case SHash sHash: return (double)sHash.x0;
+                case BNHash bNHash: return (double)bNHash.x0;
+            }
+        }
         public static Closure shiftRInteger_Entry(Closure xs4fs, long is4ft)
         {
             switch(xs4fs.Eval())

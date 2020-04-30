@@ -514,7 +514,7 @@ namespace GHC
 
             showSignedInt = new Fun3<Closure, Closure, Closure, Closure>(&showSignedInt_Entry);
 
-            wshowSignedInts6EZ = new Fun3<long, long, Closure, (Closure x0, Closure x1)>(&wshowSignedInts6EZ_Entry);
+            wshowSignedInts6EZ = new Fun3<long, long, Closure, (Closure x0, Closure x1)>(&wshowSignedInt_Entry);
 
             witoss6EC = new Fun2<long, Closure, (Closure x0, Closure x1)>(&witoss6EC_Entry);
 
@@ -1714,7 +1714,7 @@ namespace GHC
             var wws6FY = ws6FW.Eval();
             var wws6FY_IHash = wws6FY as GHC.Types.IHash;
             var wws6FZ = wws6FY_IHash.x0;
-            var wws6G0 = wshowSignedInts6EZ_Entry(0, wws6FZ, ws6FX);
+            var wws6G0 = wshowSignedInt_Entry(0, wws6FZ, ws6FX);
             var wws6G0_RawTuple = wws6G0;
             var wws6G1 = wws6G0_RawTuple.x0;
             var wws6G2 = wws6G0_RawTuple.x1;
@@ -1725,7 +1725,7 @@ namespace GHC
             var wws6FQ = xs6FP.Eval();
             var wws6FQ_IHash = wws6FQ as GHC.Types.IHash;
             var wws6FR = wws6FQ_IHash.x0;
-            var wws6FS = wshowSignedInts6EZ_Entry(0, wws6FR, GHC.Types.nil_DataCon);
+            var wws6FS = wshowSignedInt_Entry(0, wws6FR, GHC.Types.nil_DataCon);
             var wws6FS_RawTuple = wws6FS;
             var wws6FT = wws6FS_RawTuple.x0;
             var wws6FU = wws6FS_RawTuple.x1;
@@ -1739,13 +1739,13 @@ namespace GHC
             var wws6Fg = ws6Fc.Eval();
             var wws6Fg_IHash = wws6Fg as GHC.Types.IHash;
             var wws6Fh = wws6Fg_IHash.x0;
-            var wws6Fi = wshowSignedInts6EZ_Entry(wws6Ff, wws6Fh, ws6Fd);
+            var wws6Fi = wshowSignedInt_Entry(wws6Ff, wws6Fh, ws6Fd);
             var wws6Fi_RawTuple = wws6Fi;
             var wws6Fj = wws6Fi_RawTuple.x0;
             var wws6Fk = wws6Fi_RawTuple.x1;
             return new GHC.Types.Cons(wws6Fj, wws6Fk);
         }
-        public static (Closure x0, Closure x1) wshowSignedInts6EZ_Entry(long wws6F0, long wws6F1, Closure ws6F2)
+        public static (Closure x0, Closure x1) wshowSignedInt_Entry(long wws6F0, long wws6F1, Closure ws6F2)
         {
             var lwilds6F3 = (wws6F1 < 0) ? 1 : 0;
             switch (lwilds6F3)
