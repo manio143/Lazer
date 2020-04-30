@@ -63,8 +63,8 @@ public unsafe static class DigitsE1
     }
     public static Closure TestEntry()
     {
-        // for (int i = 0; i < 99; i++)
-        //     main_Entry(GHC.Prim.voidHash);
+        for (int i = 0; i < 99; i++)
+            main_Entry(GHC.Prim.voidHash);
         return main_Entry(GHC.Prim.voidHash);
     }
     public static Closure main_Entry(GHC.Prim.Void void0E)
@@ -176,8 +176,10 @@ public unsafe static class DigitsE1
         var sats5xh = new GHC.Integer.Type.SHash(wws5xf);
         var sats5xg = new GHC.Integer.Type.SHash(wws5xe);
         var wilds5xi = GHC.Integer.Type.eqIntegerHash_Entry(sats5xg, sats5xh);
-        var js5xj = js5xj_Entry(wws5x9, wws5xa, wws5xb, wws5xc, ws5xd);
-        var js5xr = js5xr_Entry(wws5x9, wws5xa, wws5xb, wws5xc, ws5xd, js5xj);
+        var j_Frees5xj = (wws5x9, wws5xa, wws5xb, wws5xc, ws5xd);
+        var js5xj = new SingleEntry<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4)>(&js5xj_Entry, j_Frees5xj);
+        var j_Frees5xr = (wws5x9, wws5xa, wws5xb, wws5xc, ws5xd, js5xj);
+        var js5xr = new SingleEntry<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5)>(&js5xr_Entry, j_Frees5xr);
         var lwilds5xK = wilds5xi;
         switch (lwilds5xK)
         {
@@ -195,8 +197,14 @@ public unsafe static class DigitsE1
             case 1: { return js5xr.Eval(); }
         }
     }
-    public static Closure js5xr_Entry(Closure wws5x9, Closure wws5xa, Closure wws5xb, Closure wws5xc, Closure ws5xd, Closure js5xj)
+    public static Closure js5xr_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) j_Frees5xr)
     {
+        var wws5x9 = j_Frees5xr.x0;
+        var wws5xa = j_Frees5xr.x1;
+        var wws5xb = j_Frees5xr.x2;
+        var wws5xc = j_Frees5xr.x3;
+        var ws5xd = j_Frees5xr.x4;
+        var js5xj = j_Frees5xr.x5;
         var wilds5xs = GHC.Integer.Type.eqIntegerHash_Entry(wws5xc, lvls5x7);
         switch (wilds5xs)
         {
@@ -248,8 +256,13 @@ public unsafe static class DigitsE1
         var sats5xF = GHC.Integer.Type.minusInteger_Entry(wws5x9, sats5xE);
         return wratTranss5x8_Entry(wws5xb, wws5xc, sats5xF, sats5xH, ws5xd);
     }
-    public static Closure js5xj_Entry(Closure wws5x9, Closure wws5xa, Closure wws5xb, Closure wws5xc, Closure ws5xd)
+    public static Closure js5xj_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) j_Frees5xj)
     {
+        var wws5x9 = j_Frees5xj.x0;
+        var wws5xa = j_Frees5xj.x1;
+        var wws5xb = j_Frees5xj.x2;
+        var wws5xc = j_Frees5xj.x3;
+        var ws5xd = j_Frees5xj.x4;
         var wilds5xk = ws5xd.Eval();
         switch (wilds5xk)
         {

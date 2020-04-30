@@ -499,7 +499,9 @@ convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
         --TODO recursive application of the same function should be direct calls
     let name = safeVarName WithoutModule id
     let methodName = name++"_Entry"
-    let is0ArityCall = (case flag of {ReEntrant -> True; _ -> False}) && length bndrs == 0
+    let is0ArityCall = (case flag of {ReEntrant -> True; _ -> False}) &&
+                       length bndrs == 0 &&
+                       isUnliftedCSType retType 
     let isTupleWrapped = length occs > 1 && not is0ArityCall
     let freeForm = if length occs == 0 || is0ArityCall then NoFree else FreeRef
     let params = map (\i -> if elem (varName i) boundIds then CSNull else CSRef i) occs 
@@ -516,7 +518,10 @@ convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
     let assExpr = case flag of
                     ReEntrant -> 
                         let arity = length bndrs in
-                        if not is0ArityCall then CSECreateFun method arity params'
+                        if not is0ArityCall then 
+                            if arity == 0 then
+                                CSECreateClosure method params'
+                            else CSECreateFun method arity params'
                         else CSECall methodName params' Nothing
                     Updatable -> CSECreateThunk method params'
                     SingleEntry -> CSECreateClosure method params'
@@ -1034,6 +1039,11 @@ debugPrintType (LitTy (NumTyLit i)) = show i
 debugPrintType (LitTy (StrTyLit fs)) = show $ unpackFS fs
 debugPrintType (CastTy t _) = "(Cast "++debugPrintType t++")"
 debugPrintType _ = "τ" -- Coercion
+
+isUnliftedCSType Closure = False
+isUnliftedCSType (Class _ _) = False
+isUnliftedCSType Generic = False
+isUnliftedCSType _ = True
 
 data Levity = Lifted | Unlifted | LevityPolimorphic
 
