@@ -319,7 +319,7 @@ processClass cls = do
         makeMethodInfo :: Index -> Id -> (CSEntity, CSMethod)
         -- creates a selector function that retrieves a concrete function from a dict
         makeMethodInfo idx id =
-            let arity  = funArity id
+            let arity  = 1 -- all dictionary selectors take just one argument
                 name   = safeVarName WithoutModule id
                 ty     = idType id
                 did    = copyNameToNewVar id "a0"
@@ -845,22 +845,27 @@ safeName c w idName mId =
             else ""
         n = nameToStr idName
         isSpecialName = n /= "$" && head n == '$' && (isAlpha (head (tail n)) || head (tail n) == '_')
-        name = 
-            if justTrue (isDFunId <$> mId) || justTrue (isRecordSelector <$> mId) ||
-                (isJust $ isClassOpId_maybe =<< mId) then
-                if isSpecialName then tail n else n
-            else if isSpecialName then
-                tail n ++ (show $ varUnique $ fromJust mId)
-            else if not (isExternalName idName) then
-                n ++ (show $ varUnique $ fromJust mId)
-            else n
-        --TODO don't add unique to worker functions
+        nameWithUnique = 
+            if justTrue (isSpecialId <$> mId) then n
+            else if isExternalName idName || justTrue (isExportedId <$> mId) then n
+            -- don't add unique to worker functions -> actually not sure if possible
+            -- worker functions are just local nonexported functions
+            -- they don't even seem to have a consistent naming scheme
+            -- (either start with 'w', '$w' or 'w$')
+            else n ++ (show $ varUnique $ fromJust mId)
+        name = if isSpecialName then tail nameWithUnique else nameWithUnique
         safeOpName = 
             case name of
                 "(#,#)" -> "RawTuple"
                 "(#,,#)" -> "RawTuple"
                 "(#,,,#)" -> "RawTuple"
                 "(#,,,,#)" -> "RawTuple"
+                "(#,,,,,#)" -> "RawTuple"
+                "(#,,,,,,#)" -> "RawTuple"
+                "(#,,,,,,,#)" -> "RawTuple"
+                "(#,,,,,,,,#)" -> "RawTuple"
+                "(#,,,,,,,,,#)" -> "RawTuple"
+                "(#,,,,,,,,,,#)" -> "RawTuple"
                 "(,)" -> "Tuple2"
                 "(,,)" -> "Tuple3"
                 "(,,,)" -> "Tuple4"
@@ -889,6 +894,16 @@ safeName c w idName mId =
     in case w of
         WithModule -> modName ++ finalName
         WithoutModule -> finalName
+
+isSpecialId id =
+    isDFunId id ||
+    isRecordSelector id ||
+    isNaughtyRecordSelector id ||
+    isJust (isClassOpId_maybe id) ||
+    isDataConRecordSelector id ||
+    isDataConWorkId id ||
+    isFCallId id
+
 
 translateOpString n = (n >>= trOp)
     where
@@ -1174,10 +1189,11 @@ instance Outputable CSValue where
         hsep [text $ "new "++name++"(", pprArgs args, text ")"]
     ppr (CSRef id) = pprSafeQualifiedName id
     ppr (CSLit l) = pprLit l
-    ppr CSNull = text "null"
+    ppr CSNull = text "(Closure)null"
     ppr CSDefault = text "default"
 
-pprLit (MachChar c) = text $ "'" ++ showLitChar c "" ++ "'" --TODO escape '
+pprLit (MachChar '\'') = text "'\\''"
+pprLit (MachChar c) = text $ "'" ++ showLitChar c "" ++ "'"
 pprLit (LitNumber LitNumInt64 i _) = text $ show i ++ "L"
 pprLit (LitNumber LitNumWord64 i _) = text $ show i ++ "UL"
 pprLit (LitNumber LitNumWord i _) = text $ show i ++ "UL"
@@ -1228,8 +1244,8 @@ pprGenArgs args =
     let types = map valueType args in
     hsep [text "<", pprArgs types, text ">"]
 
-pprFunGenArgs (Method _ rt _ bndrs _) args =
-    let types = map valueType args ++ map (typeToCSType . idType) bndrs ++ [rt] in
+pprFunGenArgs (Method _ rt _ bndrs _) =
+    let types = map (typeToCSType . idType) bndrs ++ [rt] in
     hsep [text "<", pprArgs types, text ">"]
 
 pprGenIdsWithRet ret args =
@@ -1324,7 +1340,7 @@ pprLetExpr (CSEAppAfterCall name id cargs appargs rt) =
               callAppGenArgs rt cargs appargs, text "(", pprArgs appargs ,text ")"]
 pprLetExpr (CSEPrimOp op args) = pprOp op args
 pprLetExpr (CSECreateFun m arity args) = hsep [
-    text $"new Fun"++(show arity), pprFunGenArgs m args, text "(", pprLdftn m,
+    text $"new Fun"++(show arity), pprFunGenArgs m, text "(", pprLdftn m,
                             text (case args of [] -> ""; _ -> ","), pprArgs args, text ")"]
 pprLetExpr (CSECreateThunk m args) = hsep [
     text "new Updatable", pprGenArgs args, text "(", pprLdftn m,
