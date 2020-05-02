@@ -9,7 +9,8 @@ namespace Lazer.Runtime
     {
         public ImpossibleException() { }
         public ImpossibleException(string message) : base(message) { }
-        public ImpossibleException(string message, System.Exception inner) : base(message, inner) { }
+        public ImpossibleException(string expectedType, string actualType)
+            : base($"The impossible happend!\nExpected: {expectedType}\nActual  : {actualType}") { }
     }
 
     /**

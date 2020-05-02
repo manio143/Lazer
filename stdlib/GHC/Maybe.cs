@@ -7,87 +7,86 @@ namespace GHC {
         internal static string tcMaybes2xM = "Maybe" ;
         internal static string trModules2xI = "GHC.Maybe" ;
         internal static string trModules2xG = "main" ;
-        public static Fun just_DataCon ;
+        public static Function just_DataCon ;
         
-        public static Fun fOrdMaybe ;
+        public static Function fOrdMaybe ;
         
-        internal static Fun cmins2xk ;
+        internal static Function cmins2xk ;
         
-        internal static Fun cGtEqs2x9 ;
+        internal static Function cGtEqs2x9 ;
         
-        internal static Fun cmaxs2x0 ;
+        internal static Function cmaxs2x0 ;
         
-        internal static Fun cLtEqs2wP ;
+        internal static Function cLtEqs2wP ;
         
-        internal static Fun cp1Ords2wM ;
+        internal static Function cp1Ords2wM ;
         
-        public static Fun fEqMaybe ;
+        public static Function fEqMaybe ;
         
-        internal static Fun cSlshEqs2wx ;
+        internal static Function cSlshEqs2wx ;
         
-        internal static Fun cEqEqs2wn ;
+        internal static Function cEqEqs2wn ;
         
-        internal static Fun ccompares2wd ;
+        internal static Function ccompares2wd ;
         
-        internal static Fun cLts2w3 ;
+        internal static Function cLts2w3 ;
         
         public static GHC.Maybe.Nothing nothing_DataCon ;
         
         static Maybe() {
-            just_DataCon = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(just_DataCon_Entry)   ) ;
+            just_DataCon = new Fun1 < Closure , Closure > ( &just_DataCon_Entry   ) ;
             
-            fOrdMaybe = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(fOrdMaybe_Entry)   ) ;
+            fOrdMaybe = new Fun1 < Closure , Closure > ( &fOrdMaybe_Entry   ) ;
             
-            cmins2xk = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cmins2xk_Entry)   ) ;
+            cmins2xk = new Fun3 < Closure , Closure , Closure , Closure > ( &cmins2xk_Entry   ) ;
             
-            cGtEqs2x9 = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cGtEqs2x9_Entry)   ) ;
+            cGtEqs2x9 = new Fun3 < Closure , Closure , Closure , Closure > ( &cGtEqs2x9_Entry   ) ;
             
-            cmaxs2x0 = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cmaxs2x0_Entry)   ) ;
+            cmaxs2x0 = new Fun3 < Closure , Closure , Closure , Closure > ( &cmaxs2x0_Entry   ) ;
             
-            cLtEqs2wP = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cLtEqs2wP_Entry)   ) ;
+            cLtEqs2wP = new Fun3 < Closure , Closure , Closure , Closure > ( &cLtEqs2wP_Entry   ) ;
             
-            cp1Ords2wM = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(cp1Ords2wM_Entry)   ) ;
+            cp1Ords2wM = new Fun1 < Closure , Closure > ( &cp1Ords2wM_Entry   ) ;
             
-            fEqMaybe = new Fun  (1, CLR.LoadFunctionPointer< Closure , Closure >(fEqMaybe_Entry)   ) ;
+            fEqMaybe = new Fun1 < Closure , Closure > ( &fEqMaybe_Entry   ) ; 
+            cSlshEqs2wx = new Fun3 < Closure , Closure , Closure , Closure > ( &cSlshEqs2wx_Entry   ) ;
             
-            cSlshEqs2wx = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cSlshEqs2wx_Entry)   ) ;
+            cEqEqs2wn = new Fun3 < Closure , Closure , Closure , Closure > ( &cEqEqs2wn_Entry   ) ;
             
-            cEqEqs2wn = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cEqEqs2wn_Entry)   ) ;
+            ccompares2wd = new Fun3 < Closure , Closure , Closure , Closure > ( &ccompares2wd_Entry   ) ;
             
-            ccompares2wd = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(ccompares2wd_Entry)   ) ;
-            
-            cLts2w3 = new Fun  (3, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(cLts2w3_Entry)   ) ;
+            cLts2w3 = new Fun3 < Closure , Closure , Closure , Closure > ( &cLts2w3_Entry   ) ;
             
             nothing_DataCon = new GHC.Maybe.Nothing(  ) ; 
             }
         public static Closure just_DataCon_Entry( Closure etaB1 ) {
             return new GHC.Maybe.Just( etaB1 ); }
         public static Closure fOrdMaybe_Entry( Closure dOrds2xv ) {
-            var sats2xF = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2xF_Entry) , dOrds2xv ) ;
-            var sats2xE = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2xE_Entry) , dOrds2xv ) ;
-            var sats2xD = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2xD_Entry) , dOrds2xv ) ;
-            var sats2xC = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2xC_Entry) , dOrds2xv ) ;
-            var sats2xz = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2xz_Entry) , dOrds2xv ) ;
-            var sats2xy = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2xy_Entry) , dOrds2xv ) ;
-            var sats2xx = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2xx_Entry) , dOrds2xv ) ;
-            var sats2xw = new Updatable < Closure > ( CLR.LoadFunctionPointer< Closure , Closure >(sats2xw_Entry) , dOrds2xv ) ;
+            var sats2xF = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2xF_Entry , dOrds2xv ) ;
+            var sats2xE = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2xE_Entry , dOrds2xv ) ;
+            var sats2xD = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2xD_Entry , dOrds2xv ) ;
+            var sats2xC = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2xC_Entry , dOrds2xv ) ;
+            var sats2xz = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2xz_Entry , dOrds2xv ) ;
+            var sats2xy = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2xy_Entry , dOrds2xv ) ;
+            var sats2xx = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2xx_Entry , dOrds2xv ) ;
+            var sats2xw = new Updatable < Closure > ( &sats2xw_Entry , dOrds2xv ) ;
             return new GHC.Classes.CColOrd( sats2xw , sats2xx , sats2xy , sats2xz , sats2xC , sats2xD , sats2xE , sats2xF );
             }
-        public static Closure sats2xw_Entry( Closure dOrds2xv ) {
+        public static Closure sats2xw_Entry(in Closure dOrds2xv ) {
             return cp1Ords2wM_Entry( dOrds2xv ); }
-        public static Closure sats2xx_Entry( Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
+        public static Closure sats2xx_Entry(in Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
             return ccompares2wd_Entry( dOrds2xv , etaB2 , etaB1 ); }
-        public static Closure sats2xy_Entry( Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
+        public static Closure sats2xy_Entry(in Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
             return cLts2w3_Entry( dOrds2xv , etaB2 , etaB1 ); }
-        public static Closure sats2xz_Entry( Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
+        public static Closure sats2xz_Entry(in Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
             return cLtEqs2wP_Entry( dOrds2xv , etaB2 , etaB1 ); }
-        public static Closure sats2xC_Entry( Closure dOrds2xv , Closure as2xA , Closure bs2xB ) {
+        public static Closure sats2xC_Entry(in Closure dOrds2xv , Closure as2xA , Closure bs2xB ) {
             return cLts2w3_Entry( dOrds2xv , bs2xB , as2xA ); }
-        public static Closure sats2xD_Entry( Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
+        public static Closure sats2xD_Entry(in Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
             return cGtEqs2x9_Entry( dOrds2xv , etaB2 , etaB1 ); }
-        public static Closure sats2xE_Entry( Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
+        public static Closure sats2xE_Entry(in Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
             return cmaxs2x0_Entry( dOrds2xv , etaB2 , etaB1 ); }
-        public static Closure sats2xF_Entry( Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
+        public static Closure sats2xF_Entry(in Closure dOrds2xv , Closure etaB2 , Closure etaB1 ) {
             return cmins2xk_Entry( dOrds2xv , etaB2 , etaB1 ); }
         public static Closure cmins2xk_Entry( Closure dOrds2xl , Closure xs2xm , Closure ys2xn ) {
             var wilds2xo = ys2xn.Eval() ;
@@ -106,7 +105,7 @@ namespace GHC {
                             return GHC.Maybe.nothing_DataCon.Eval(); }
                         case GHC.Maybe.Just wilds2xr_Just: {
                             var b1s2xs = wilds2xr_Just.x0 ;
-                            var wilds2xt = GHC.Classes.lt_Entry( dOrds2xl ).Apply < Closure , Closure , Closure > ( a1s2xq , b1s2xs ).Eval() ;
+                            var wilds2xt = GHC.Classes.lt_Entry( dOrds2xl ).Apply < Closure , Closure , Closure > ( a1s2xq , b1s2xs ) ;
                             var  wilds2xtTags2xt = wilds2xt.Tag;
                             switch ( wilds2xtTags2xt ) {
                                 default: { throw new ImpossibleException(); }
@@ -149,7 +148,7 @@ namespace GHC {
                             return GHC.Types.true_DataCon.Eval(); }
                         case GHC.Maybe.Just wilds2xh_Just: {
                             var b1s2xi = wilds2xh_Just.x0 ;
-                            var wilds2xj = GHC.Classes.lt_Entry( dOrds2xa ).Apply < Closure , Closure , Closure > ( a1s2xg , b1s2xi ).Eval() ;
+                            var wilds2xj = GHC.Classes.lt_Entry( dOrds2xa ).Apply < Closure , Closure , Closure > ( a1s2xg , b1s2xi ) ;
                             var  wilds2xjTags2xj = wilds2xj.Tag;
                             switch ( wilds2xjTags2xj ) {
                                 default: { throw new ImpossibleException(); }
@@ -181,7 +180,7 @@ namespace GHC {
                             return wilds2x4.Eval(); }
                         case GHC.Maybe.Just wilds2x6_Just: {
                             var b1s2x7 = wilds2x6_Just.x0 ;
-                            var wilds2x8 = GHC.Classes.lt_Entry( dOrds2x1 ).Apply < Closure , Closure , Closure > ( a1s2x5 , b1s2x7 ).Eval() ;
+                            var wilds2x8 = GHC.Classes.lt_Entry( dOrds2x1 ).Apply < Closure , Closure , Closure > ( a1s2x5 , b1s2x7 ) ;
                             var  wilds2x8Tags2x8 = wilds2x8.Tag;
                             switch ( wilds2x8Tags2x8 ) {
                                 default: { throw new ImpossibleException(); }
@@ -224,7 +223,7 @@ namespace GHC {
                             return GHC.Types.true_DataCon.Eval(); }
                         case GHC.Maybe.Just wilds2wX_Just: {
                             var b1s2wY = wilds2wX_Just.x0 ;
-                            var wilds2wZ = GHC.Classes.lt_Entry( dOrds2wQ ).Apply < Closure , Closure , Closure > ( a1s2wW , b1s2wY ).Eval() ;
+                            var wilds2wZ = GHC.Classes.lt_Entry( dOrds2wQ ).Apply < Closure , Closure , Closure > ( a1s2wW , b1s2wY ) ;
                             var  wilds2wZTags2wZ = wilds2wZ.Tag;
                             switch ( wilds2wZTags2wZ ) {
                                 default: { throw new ImpossibleException(); }
@@ -243,19 +242,19 @@ namespace GHC {
                 }
             }
         public static Closure cp1Ords2wM_Entry( Closure dOrds2wN ) {
-            var sats2wO = new Updatable < Closure > ( CLR.LoadFunctionPointer< Closure , Closure >(sats2wO_Entry) , dOrds2wN ) ;
+            var sats2wO = new Updatable < Closure > ( &sats2wO_Entry , dOrds2wN ) ;
             return fEqMaybe_Entry( sats2wO );
             }
-        public static Closure sats2wO_Entry( Closure dOrds2wN ) {
+        public static Closure sats2wO_Entry(in Closure dOrds2wN ) {
             return GHC.Classes.p1Ord_Entry( dOrds2wN ); }
         public static Closure fEqMaybe_Entry( Closure dEqs2wJ ) {
-            var sats2wL = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2wL_Entry) , dEqs2wJ ) ;
-            var sats2wK = new Fun < Closure > (2, CLR.LoadFunctionPointer< Closure , Closure , Closure , Closure >(sats2wK_Entry) , dEqs2wJ ) ;
+            var sats2wL = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2wL_Entry , dEqs2wJ ) ;
+            var sats2wK = new Fun2 < Closure , Closure , Closure , Closure > ( &sats2wK_Entry , dEqs2wJ ) ;
             return new GHC.Classes.CColEq( sats2wK , sats2wL );
             }
-        public static Closure sats2wK_Entry( Closure dEqs2wJ , Closure etaB2 , Closure etaB1 ) {
+        public static Closure sats2wK_Entry(in Closure dEqs2wJ , Closure etaB2 , Closure etaB1 ) {
             return cEqEqs2wn_Entry( dEqs2wJ , etaB2 , etaB1 ); }
-        public static Closure sats2wL_Entry( Closure dEqs2wJ , Closure etaB2 , Closure etaB1 ) {
+        public static Closure sats2wL_Entry(in Closure dEqs2wJ , Closure etaB2 , Closure etaB1 ) {
             return cSlshEqs2wx_Entry( dEqs2wJ , etaB2 , etaB1 ); }
         public static Closure cSlshEqs2wx_Entry( Closure dEqs2wy , Closure etas2wz , Closure etas2wA ) {
             var wilds2wB = etas2wz.Eval() ;
@@ -282,7 +281,7 @@ namespace GHC {
                             return GHC.Types.true_DataCon.Eval(); }
                         case GHC.Maybe.Just wilds2wF_Just: {
                             var b1s2wG = wilds2wF_Just.x0 ;
-                            var wilds2wH = GHC.Classes.eqEq_Entry( dEqs2wy ).Apply < Closure , Closure , Closure > ( a1s2wE , b1s2wG ).Eval() ;
+                            var wilds2wH = GHC.Classes.eqEq_Entry( dEqs2wy ).Apply < Closure , Closure , Closure > ( a1s2wE , b1s2wG ) ;
                             var  wilds2wHTags2wH = wilds2wH.Tag;
                             switch ( wilds2wHTags2wH ) {
                                 default: { throw new ImpossibleException(); }

@@ -7,152 +7,157 @@ namespace Lazer.Runtime.Test
 {
     public unsafe class Tester
     {
-        private Closure InfList = Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(100_000), Module.inf);
-        private Closure InfList2 = Module.takeOnStack.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(100_000), Module.inf);
-        private Closure MakeList = Module.makeList.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(1), new GHC.Types.IHash(100_000));
+        private Closure InfList = Manual.take.Apply<long,Closure,Closure>(100_000, Manual.inf);
+        // private Closure InfList2 = Module.takeOnStack.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(100_000), Module.inf);
+        private Closure MakeList = Manual.makelist.Apply<long,long,Closure>(1, 100_000);
 
         public Closure SumTakeInf()
-            => Module.sum.Apply<Closure,Closure>(InfList);
-        public Closure Sum2TakeInf()
-                    => Module.sum2.Apply<Closure,Closure>(InfList);
-        public Closure SumTakeInf2()
-            => Module.sum.Apply<Closure,Closure>(InfList2);
+            => new GHC.Types.IHash(Manual.sum.Apply<Closure,long>(InfList));
+        // public Closure Sum2TakeInf()
+        //             => Module.sum2.Apply<Closure,Closure>(InfList);
+        // public Closure SumTakeInf2()
+        //     => Module.sum.Apply<Closure,Closure>(InfList2);
 
         public Closure SumMakeList()
-            => Module.sum.Apply<Closure,Closure>(MakeList);
+            => new GHC.Types.IHash(Manual.sum.Apply<Closure,long>(MakeList));
 
-        public Closure Sum2MakeList()
-            => Module.sum2.Apply<Closure,Closure>(MakeList);
+        // public Closure Sum2MakeList()
+        //     => Module.sum2.Apply<Closure,Closure>(MakeList);
         public Closure SumATakeInf()
-            => Module.suma.Apply<Closure,Closure,Closure>(InfList, new GHC.Types.IHash(0));
+            => Manual.suma.Apply<Closure,Closure,Closure>(InfList, new GHC.Types.IHash(0));
 
-        public Closure SumATakeInf2()
-            => Module.suma.Apply<Closure,Closure,Closure>(InfList2, new GHC.Types.IHash(0));
+        // public Closure SumATakeInf2()
+        //     => Module.suma.Apply<Closure,Closure,Closure>(InfList2, new GHC.Types.IHash(0));
 
         public Closure SumAMakeList()
-            => Module.suma.Apply<Closure,Closure,Closure>(MakeList, new GHC.Types.IHash(0));
+            => Manual.suma.Apply<Closure,Closure,Closure>(MakeList, new GHC.Types.IHash(0));
 
-        public Closure Fibt()
-            => Module.fibt.Apply<Closure,Closure>(new GHC.Types.IHash(800_000));
+        // public Closure Fibt()
+        //     => Module.fibt.Apply<Closure,Closure>(new GHC.Types.IHash(800_000));
 
+        // public Closure FoldMakeList()
+        //     => Module.sfoldl.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), MakeList);
+
+        // public Closure FoldTakeInf()
+        //     => Module.sfoldl.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), InfList);
         public Closure FoldMakeList()
-            => Module.sfoldl.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), MakeList);
-
+            => new GHC.Types.IHash(Manual.sumfold.Apply<long, Closure, long>(0, MakeList));
         public Closure FoldTakeInf()
-            => Module.sfoldl.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), InfList);
+            => new GHC.Types.IHash(Manual.sumfold.Apply<long, Closure, long>(0, InfList));
+        // public Closure PiSum()
+        //     => Module.suma.Apply<Closure,Closure,Closure>(Module.map.Apply<Closure,Closure,Closure>(Module.integerToInt, Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(6000), Module.pi_)), new GHC.Types.IHash(0));
 
-        public Closure PiSum()
-            => Module.suma.Apply<Closure,Closure,Closure>(Module.map.Apply<Closure,Closure,Closure>(Module.integerToInt, Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(6000), Module.pi_)), new GHC.Types.IHash(0));
-
-        public Closure AppProcess()
-            => Code.appProcessTest();
-        public Closure AppProcessI()
-            => Code.appProcessTestI();
+        // public Closure AppProcess()
+        //     => Code.appProcessTest();
+        // public Closure AppProcessI()
+        //     => Code.appProcessTestI();
 
         public Closure LinqSumRange()
             => new GHC.Types.IHash(Enumerable.Range(0, 100_000).Aggregate(0, (a, i) => unchecked(a + i)));
 
-        public Closure LoopSum()
-        {
-            int sum = 0;
-            for (int i = 0; i <= 100_000; i++)
-                sum += i;
-            return new GHC.Types.IHash(sum);
-        }
+        // public Closure LoopSum()
+        // {
+        //     int sum = 0;
+        //     for (int i = 0; i <= 100_000; i++)
+        //         sum += i;
+        //     return new GHC.Types.IHash(sum);
+        // }
 
-        public Closure SumFromTo()
-            => Module.sumFromTo.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), new GHC.Types.IHash(100_000));
+        // public Closure SumFromTo()
+        //     => Module.sumFromTo.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(0), new GHC.Types.IHash(100_000));
 
-        public Closure SumOs(Data[] arr, Function extract) {
-            var os = Code.loopArray(arr, 0);
-            var @is = Module.map.Apply<Closure, Closure, Closure>(extract, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
-        }
-        public Closure SumOs2TypeL()
-            => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtypeL);
-        public Closure SumOs2Type()
-            => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtype);
-        public Closure SumOs3Type()
-            => SumOs(new Data[] { new O0(1), new O1(1), new O2(1) }, Module.extractOtype);
-        public Closure SumOs4Type()
-            => SumOs(new Data[] { new O0(1), new O1(1), new O2(1), new O3(1) }, Module.extractOtype);
-        public Closure SumOs5Type()
-            => SumOs(new Data[] { new O0(1), new O1(1), new O2(1), new O3(1), new O4(1) }, Module.extractOtype);
-        public Closure SumOs2Tag()
-            => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtag);
-        public Closure SumOs2TagL()
-            => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtagL);
-        public Closure SumOs3Tag()
-            => SumOs(new Data[] { new O0(1), new O1(1), new O2(1) }, Module.extractOtag);
-        public Closure SumOs4Tag()
-            => SumOs(new Data[] { new O0(1), new O1(1), new O2(1), new O3(1) }, Module.extractOtag);
-        public Closure SumOs5Tag()
-            => SumOs(new Data[] { new O0(1), new O1(1), new O2(1), new O3(1), new O4(1) }, Module.extractOtag);
+        // public Closure SumOs(Data[] arr, Function extract) {
+        //     var os = Code.loopArray(arr, 0);
+        //     var @is = Module.map.Apply<Closure, Closure, Closure>(extract, os);
+        //     var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+        //     return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
+        // }
+        // public Closure SumOs2TypeL()
+        //     => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtypeL);
+        // public Closure SumOs2Type()
+        //     => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtype);
+        // public Closure SumOs3Type()
+        //     => SumOs(new Data[] { new O0(1), new O1(1), new O2(1) }, Module.extractOtype);
+        // public Closure SumOs4Type()
+        //     => SumOs(new Data[] { new O0(1), new O1(1), new O2(1), new O3(1) }, Module.extractOtype);
+        // public Closure SumOs5Type()
+        //     => SumOs(new Data[] { new O0(1), new O1(1), new O2(1), new O3(1), new O4(1) }, Module.extractOtype);
+        // public Closure SumOs2Tag()
+        //     => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtag);
+        // public Closure SumOs2TagL()
+        //     => SumOs(new Data[] { new O0(1), new O1(1) }, Module.extractOtagL);
+        // public Closure SumOs3Tag()
+        //     => SumOs(new Data[] { new O0(1), new O1(1), new O2(1) }, Module.extractOtag);
+        // public Closure SumOs4Tag()
+        //     => SumOs(new Data[] { new O0(1), new O1(1), new O2(1), new O3(1) }, Module.extractOtag);
+        // public Closure SumOs5Tag()
+        //     => SumOs(new Data[] { new O0(1), new O1(1), new O2(1), new O3(1), new O4(1) }, Module.extractOtag);
 
-        public Closure SumOsRandomType() {
-            var os = Code.RandomO();
-            var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
-        }
-        public Closure SumOsRandomTag() {
-            var os = Code.RandomO();
-            var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
-        }
-        public Closure SumOsRandomTypeL() {
-            var os = Code.RandomOL();
-            var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
-        }
-        public Closure SumOsRandomTagL() {
-            var os = Code.RandomOL();
-            var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
-            var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
-            return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
-        }
-        public Closure SumOsConst0Type()
-            => SumOs(new Data[] { new O0(1) }, Module.extractOtype);
-        public Closure SumOsConst4Type()
-            => SumOs(new Data[] { new O3(1) }, Module.extractOtype);
-        public Closure SumOsConst5Type()
-            => SumOs(new Data[] { new O4(1) }, Module.extractOtype);
-        public Closure SumOsConst9Type()
-            => SumOs(new Data[] { new OFucked(1) }, Module.extractOtype);
-        public Closure SumOsConst0Tag()
-            => SumOs(new Data[] { new O0(1) }, Module.extractOtag);
-        public Closure SumOsConst4Tag()
-            => SumOs(new Data[] { new O3(1) }, Module.extractOtag);
-        public Closure SumOsConst5Tag()
-            => SumOs(new Data[] { new O4(1) }, Module.extractOtag);
-        public Closure SumOsConst9Tag()
-            => SumOs(new Data[] { new OFucked(1) }, Module.extractOtag);
+        // public Closure SumOsRandomType() {
+        //     var os = Code.RandomO();
+        //     var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
+        //     var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+        //     return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
+        // }
+        // public Closure SumOsRandomTag() {
+        //     var os = Code.RandomO();
+        //     var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
+        //     var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+        //     return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
+        // }
+        // public Closure SumOsRandomTypeL() {
+        //     var os = Code.RandomOL();
+        //     var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
+        //     var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+        //     return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
+        // }
+        // public Closure SumOsRandomTagL() {
+        //     var os = Code.RandomOL();
+        //     var @is = Module.map.Apply<Closure, Closure, Closure>(Module.extractOtype, os);
+        //     var tk = Module.take.Apply<Closure, Closure, Closure>(new GHC.Types.IHash(500_000), @is);
+        //     return Module.suma.Apply<Closure, Closure, Closure>(tk, new GHC.Types.IHash(0));
+        // }
+        // public Closure SumOsConst0Type()
+        //     => SumOs(new Data[] { new O0(1) }, Module.extractOtype);
+        // public Closure SumOsConst4Type()
+        //     => SumOs(new Data[] { new O3(1) }, Module.extractOtype);
+        // public Closure SumOsConst5Type()
+        //     => SumOs(new Data[] { new O4(1) }, Module.extractOtype);
+        // public Closure SumOsConst9Type()
+        //     => SumOs(new Data[] { new OFucked(1) }, Module.extractOtype);
+        // public Closure SumOsConst0Tag()
+        //     => SumOs(new Data[] { new O0(1) }, Module.extractOtag);
+        // public Closure SumOsConst4Tag()
+        //     => SumOs(new Data[] { new O3(1) }, Module.extractOtag);
+        // public Closure SumOsConst5Tag()
+        //     => SumOs(new Data[] { new O4(1) }, Module.extractOtag);
+        // public Closure SumOsConst9Tag()
+        //     => SumOs(new Data[] { new OFucked(1) }, Module.extractOtag);
 
         public Closure NoFib_Exp()
-            => new GHC.Types.IHash(Exp3.TestEntry(8));
+            => new GHC.Types.IHash(Exp3.TestEntry(9));
         public Closure NoFib_DigitsE1()
             => DigitsE1.TestEntry();
         public Closure NoFib_Primes()
             => Primes.TestEntry();
-        public Closure NoFib_Primes2()
-            => Primes2.TestEntry();
-        public (double, Closure) RunTest(Func<Closure> testCase)
+        public (double, Closure) RunTest(Func<Closure> testCase, bool nogc = false)
         {
+            if (nogc)
+                GC.TryStartNoGCRegion(20_000_000);
             var sw = Stopwatch.StartNew();
             var res = testCase().Eval();
             sw.Stop();
+            if (nogc)
+                GC.EndNoGCRegion();
             return (sw.Elapsed.TotalMilliseconds, res);
         }
 
-        public (double, double, double, double) Run(Func<Closure> testCase, int times)
+        public (double, double, double, double) Run(Func<Closure> testCase, int times, bool nogc = false)
         {
             var ts = new double[times];
             for (int i = 0; i < times; i++)
             {
-                ts[i] = RunTest(testCase).Item1;
+                ts[i] = RunTest(testCase, nogc).Item1;
             }
             double avg, min = double.MaxValue, max = 0, sd = 0, sum = 0;
             for (int i = 0; i < times; i++)
@@ -174,21 +179,35 @@ namespace Lazer.Runtime.Test
             return (avg, min, max, sd);
         }
 
-        public void ExecTest(string label, Func<Closure> testCase)
+        public void ExecTest(string label, Func<Closure> testCase, bool nogc = false)
         {
-            var (_, res) = RunTest(testCase);
-            Console.WriteLine("{0}\t\t =>  {1}", label, res);
-            var (avg, min, max, sd) = Run(testCase, 100);
+            var (_, res) = RunTest(testCase, nogc);
+            Console.WriteLine("{0}\t\t =>  {1}\tGC0: {2}, GC1: {3}", label, res, GC.CollectionCount(0), GC.CollectionCount(1));
+            var (avg, min, max, sd) = Run(testCase, 100, nogc);
             Console.WriteLine("{0}\tAVG: {1:0.0000}, SD: {4:0.00} MIN: {2:0.0000}, MAX: {3:0.0000}", label, avg, min, max, sd);
         }
 
         public void ExecTests()
         {
-            /*
-            ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
-            ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
-            ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
-            Console.WriteLine("----");
+            ExecTest("loop CALL call long INL", () => ApplyCall.loopCallLongInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL call long NO ", () => ApplyCall.loopCallLongNoInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL call lonW INL", () => ApplyCall.loopCallWLongInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL call lonW NO ", () => ApplyCall.loopCallWLongNoInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL call cloN INL", () => ApplyCall.loopCallNClosureInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop CALL call cloN NO ", () => ApplyCall.loopCallNClosureNoInline(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long STD", () => ApplyCall.loopAppLongNonGenericDir(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long STI", () => ApplyCall.loopAppLongNonGenericInd(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long GEN", () => ApplyCall.loopAppLongGeneric(0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt long    ", () => ApplyCall.loopAppLong(ApplyCall.add1L, 0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt clos    ", () => ApplyCall.loopAppClosure(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
+            ExecTest("loop APP  virt clos CA ", () => ApplyCall.loopAppClosureWithCache(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
+            Console.WriteLine("=====================");
+            Console.WriteLine("=====================");
+            
+            // ExecTest("Sum2(Take(100000,Inf))", Sum2TakeInf);
+            // ExecTest("Sum2(MakeList(1,100000))", Sum2MakeList);
+            // ExecTest("Sum(Take2(100000,Inf))", SumTakeInf2);
+            // Console.WriteLine("----");
             ExecTest("Sum(Take(100000,Inf))", SumTakeInf);
             // GC.TryStartNoGCRegion(200_000_000, 10_000_000);
             ExecTest("Sum(MakeList(1,100000))", SumMakeList);
@@ -197,13 +216,13 @@ namespace Lazer.Runtime.Test
             ExecTest("SumA(Take(100000,Inf))", SumATakeInf);
             ExecTest("Fold(+,0, Take(100000,Inf))", FoldTakeInf);
             ExecTest("Fold(+,0, MakeList(1,100000))", FoldMakeList);
-            ExecTest("SumFromTo", SumFromTo);
+            // ExecTest("SumFromTo", SumFromTo);
             ExecTest("~LinqSumRange", LinqSumRange);
-            ExecTest("~LoopSum", LoopSum);
+            // ExecTest("~LoopSum", LoopSum);
             // ExecTest("SumA(Take2(100000,Inf))", SumATakeInf2);
-            ExecTest("Fibt(800000)", Fibt);
-            ExecTest("SumA(Take(6000,Pi), 0)", PiSum);
-            
+            // ExecTest("Fibt(800000)", Fibt);
+            // ExecTest("SumA(Take(6000,Pi), 0)", PiSum);
+            /*
             ExecTest("appProcess (take 100000 (repeat 1))", AppProcess);
             ExecTest("appProcessI (take 100000 (repeat 1))", AppProcessI);
             ExecTest("appAppTest", Code.appAppTest);
@@ -212,25 +231,28 @@ namespace Lazer.Runtime.Test
             ExecTest("loopCallTest", Code.loopCallTest);*/
             // Console.WriteLine(Module.take.Apply<Closure,Closure,Closure>(new GHC.Types.IHash(15), Module.pi_));
 
-            ExecTest("loop CALL call long INL", () => ApplyCall.loopCallLongInline(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop CALL call long NO ", () => ApplyCall.loopCallLongNoInline(0, ApplyCall.EXEC_TIMES));
-            //ExecTest("loop CALL call lonW INL", () => ApplyCall.loopCallWLongInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
-            //ExecTest("loop CALL call lonW NO ", () => ApplyCall.loopCallWLongNoInline(ApplyCall.zero, ApplyCall.EXEC_TIMES));
-            //ExecTest("loop CALL call cloN INL", () => ApplyCall.loopCallNClosureInline(0, ApplyCall.EXEC_TIMES));
-            //ExecTest("loop CALL call cloN NO ", () => ApplyCall.loopCallNClosureNoInline(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  virt long STI", () => ApplyCall.loopAppLongNonGenericInd(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  virt long STD", () => ApplyCall.loopAppLongNonGenericDir(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  virt long GEN", () => ApplyCall.loopAppLongGeneric(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  virt long GCL", () => ApplyCall.loopAppLongGenericClosure(0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  virt long    ", () => ApplyCall.loopAppLong(ApplyCall.add1L, 0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  virt clos    ", () => ApplyCall.loopAppClosure(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
-            ExecTest("loop APP  virt clos CA ", () => ApplyCall.loopAppClosureWithCache(ApplyCall.add1C, 0, ApplyCall.EXEC_TIMES));
 
+            // ExecTest("sum       (take 100000 inf)  ", ManualTest.sumTakeInf);
+            // ExecTest("sumfold 0 (take 100000 inf)  ", ManualTest.sumfoldTakeInf);
+            // ExecTest("sum       (makelist 1 100000)", ManualTest.sumMakelist);
+            // ExecTest("sumfold 0 (makelist 1 100000)", ManualTest.sumfoldMakelist);
+            // ExecTest("length    (take 100000 inf)  ", ManualTest.lengthTakeInf);
+            // ExecTest("length    (makelist 1 100000)", ManualTest.lengthMakelist);
+            // ExecTest("nth    (take 100000 inf)  ", ManualTest.nthTakeInf);
+            // ExecTest("nth    (makelist 1 100000)", ManualTest.nthMakelist);
+            // ExecTest("nth    inf                ", ManualTest.nthInf);
 
-            //ExecTest("nofib: exp3_8(8)", NoFib_Exp);
-            // ExecTest("nofib: digits_e1(150)", NoFib_DigitsE1);
-            // ExecTest("nofib: primes(500)", NoFib_Primes);
-            // ExecTest("nofib: primes2(500)", NoFib_Primes2);
+            ExecTest("loop 100k (makelist 1 100000)", ManualTest.callMakeListInLoop);
+            ExecTest("loop 100k [1]", ManualTest.callCreateSingleton);
+            ExecTest("loop 100k new object()", ManualTest.callNewObj);
+
+            ExecTest("evaluate Data   ", ManualTest.evalData);
+            ExecTest("evaluate Thunk  ", ManualTest.evalThunk);
+            ExecTest("eval SingleEntry", ManualTest.evalRepeatWork);
+            ExecTest("initialize IHash", ManualTest.evalRepeatWorkInline);
+            ExecTest("nofib: exp3_8(9)", NoFib_Exp);
+            ExecTest("nofib: digits_e1(150)", NoFib_DigitsE1);
+            ExecTest("nofib: primes(1500)", NoFib_Primes);
 
             // ExecTest("SumA(Take(500000,Map(extractOType, O1-2)), 0)", SumOs2Type);
             // ExecTest("SumA(Take(500000,Map(extractOTag, O1-2)), 0)", SumOs2Tag);

@@ -4,8 +4,8 @@ using Lazer.Runtime;
 public static unsafe class ApplyCall
 {
     public static Closure zero = new GHC.Types.IHash(0);
-    public static Function add1L = new Fun(1, CLR.LoadFunctionPointer<long, long>(add1_long));
-    public static Function add1C = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(add1_closure));
+    public static Function add1L = new Fun1<long,long>(&add1_long);
+    public static Function add1C = new Fun1<Closure,Closure>(&add1_closure);
     public const int EXEC_TIMES = 100_000;
 
     public static long add1_long_inlinable(long a) => a + 1;
@@ -75,7 +75,7 @@ public static unsafe class ApplyCall
     public static Closure loopAppLongNonGenericDir(long w, long n)
     {
         if (n == 0) return new GHC.Types.IHash(w);
-        var x = w + LongApper.Instance.ApplyIndirect(n);
+        var x = w + LongApper.Instance.ApplyDirect(n);
         return loopAppLongNonGenericDir(x, n - 1);
     }
     public static Closure loopAppLongGeneric(long w, long n)
@@ -84,13 +84,7 @@ public static unsafe class ApplyCall
         var x = w + LongApper.Instance.ApplyGen<long, long>(n);
         return loopAppLongGeneric(x, n - 1);
     }
-    private static Function funA = new FunA();
-    public static Closure loopAppLongGenericClosure(long w, long n)
-    {
-        if (n == 0) return new GHC.Types.IHash(w);
-        var x = w + funA.Apply<long, long>(n);
-        return loopAppLongGenericClosure(x, n - 1);
-    }
+
     public static Closure loopAppClosure(Closure f, long w, long n)
     {
         if (n == 0) return new GHC.Types.IHash(w);
@@ -118,35 +112,18 @@ public static unsafe class ApplyCall
         public abstract R ApplyGen<T, R>(T x);
     }
     public unsafe class LongApper : LongApperBase
-
     {
         public static LongApperBase Instance = new LongApper();
-        private void* f = CLR.LoadFunctionPointer<long, long>(add1_long);
+        private delegate*<long,long> f = &add1_long;
+        
         public override long ApplyIndirect(long x)
-            => CLR.TailCallIndirectGeneric<long, long>(x, f);
+            => this.f(x);
         public override long ApplyDirect(long x)
                 => add1_long(x);
         public override R ApplyGen<T, R>(T x)
-            => CLR.TailCallIndirectGeneric<T, R>(x, f);
-    }
-    public unsafe class FunA : Function
-    {
-        private void* f = CLR.LoadFunctionPointer<long, long>(add1_long);
-        public override int Arity => 1;
-        public override R ApplyImpl<A1, R>(A1 a1)
         {
-            var x = add1_long(Unsafe.As<A1, long>(ref a1));
-            return Unsafe.As<long, R>(ref x);
+            var g = (delegate*<T,R>)f;
+            return g(x);
         }
-        public override R ApplyImpl<A1, A2, R>(A1 a1, A2 a2)
-            => throw new System.Exception();
-        public override R ApplyImpl<A1, A2, A3, R>(A1 a1, A2 a2, A3 a3)
-            => throw new System.Exception();
-        public override R ApplyImpl<A1, A2, A3, A4, R>(A1 a1, A2 a2, A3 a3, A4 a4)
-            => throw new System.Exception();
-        public override R ApplyImpl<A1, A2, A3, A4, A5, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5)
-            => throw new System.Exception();
-        public override R ApplyImpl<A1, A2, A3, A4, A5, A6, R>(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6)
-            => throw new System.Exception();
     }
 }

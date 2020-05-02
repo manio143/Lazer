@@ -4,367 +4,373 @@ namespace GHC
 {
     public unsafe static class Show
     {
-        internal static string lvls6J8 = "Char.intToDigit: not a digit ";
-        internal static string lvls6I3 = "'\\''";
-        internal static string lvls6Hi = "\"";
-        internal static string lvls6Hg = "\\n\"";
-        internal static string lvls6He = "\\n\\";
-        internal static string lvls6GX = "\\\"";
-        internal static string lvls6Gn = "\\DEL";
-        internal static string lvls6Gm = "\\\\";
-        internal static string lvls6Gl = "\\SO";
-        internal static string lvls6Gk = "\\r";
-        internal static string lvls6Gj = "\\f";
-        internal static string lvls6Gi = "\\v";
-        internal static string lvls6Gh = "\\n";
-        internal static string lvls6Gg = "\\t";
-        internal static string lvls6Gf = "\\b";
-        internal static string lvls6Ge = "\\a";
-        internal static string tc_CColShows6FR = "'C:Show";
-        internal static string tcShows6FK = "Show";
-        internal static string trModules6Ft = "GHC.Show";
-        internal static string trModules6Fr = "main";
-        internal static string asciiTabs6DU = "SP";
-        internal static string asciiTabs6DS = "US";
-        internal static string asciiTabs6DQ = "RS";
-        internal static string asciiTabs6DO = "GS";
-        internal static string asciiTabs6DM = "FS";
-        internal static string asciiTabs6DK = "ESC";
-        internal static string asciiTabs6DI = "SUB";
-        internal static string asciiTabs6DG = "EM";
-        internal static string asciiTabs6DE = "CAN";
-        internal static string asciiTabs6DC = "ETB";
-        internal static string asciiTabs6DA = "SYN";
-        internal static string asciiTabs6Dy = "NAK";
-        internal static string asciiTabs6Dw = "DC4";
-        internal static string asciiTabs6Du = "DC3";
-        internal static string asciiTabs6Ds = "DC2";
-        internal static string asciiTabs6Dq = "DC1";
-        internal static string asciiTabs6Do = "DLE";
-        internal static string asciiTabs6Dm = "SI";
-        internal static string asciiTabs6Dk = "SO";
-        internal static string asciiTabs6Di = "CR";
-        internal static string asciiTabs6Dg = "FF";
-        internal static string asciiTabs6De = "VT";
-        internal static string asciiTabs6Dc = "LF";
-        internal static string asciiTabs6Da = "HT";
-        internal static string asciiTabs6D8 = "BS";
-        internal static string asciiTabs6D6 = "BEL";
-        internal static string asciiTabs6D4 = "ACK";
-        internal static string asciiTabs6D2 = "ENQ";
-        internal static string asciiTabs6D0 = "EOT";
-        internal static string asciiTabs6CY = "ETX";
-        internal static string asciiTabs6CW = "STX";
-        internal static string asciiTabs6CU = "SOH";
-        internal static string asciiTabs6CS = "NUL";
-        internal static string lvls6CI = "\\&";
-        internal static string showCommaSpaces6CC = ", ";
-        internal static string lvls6xQ = "foldr1";
-        internal static string lvls6vL = "[]";
-        internal static string lvls6vt = ")";
-        internal static string lvls6vs = "(Just ";
-        internal static string lvls6vq = "Nothing";
-        internal static string lvls6vl = "GT";
-        internal static string lvls6vj = "EQ";
-        internal static string lvls6vh = "LT";
-        internal static string lvls6vc = "True";
-        internal static string lvls6va = "False";
-        public static Fun cColShow_DataCon;
+        internal static string lvls6J2 = "Char.intToDigit: not a digit ";
+        internal static string lvls6HX = "'\\''";
+        internal static string lvls6Hc = "\"";
+        internal static string lvls6Ha = "\\n\"";
+        internal static string lvls6H8 = "\\n\\";
+        internal static string lvls6GR = "\\\"";
+        internal static string lvls6Gh = "\\DEL";
+        internal static string lvls6Gg = "\\\\";
+        internal static string lvls6Gf = "\\SO";
+        internal static string lvls6Ge = "\\r";
+        internal static string lvls6Gd = "\\f";
+        internal static string lvls6Gc = "\\v";
+        internal static string lvls6Gb = "\\n";
+        internal static string lvls6Ga = "\\t";
+        internal static string lvls6G9 = "\\b";
+        internal static string lvls6G8 = "\\a";
+        internal static string tc_CColShows6FL = "'C:Show";
+        internal static string tcShows6FE = "Show";
+        internal static string trModules6Fn = "GHC.Show";
+        internal static string trModules6Fl = "main";
+        internal static string asciiTabs6DO = "SP";
+        internal static string asciiTabs6DM = "US";
+        internal static string asciiTabs6DK = "RS";
+        internal static string asciiTabs6DI = "GS";
+        internal static string asciiTabs6DG = "FS";
+        internal static string asciiTabs6DE = "ESC";
+        internal static string asciiTabs6DC = "SUB";
+        internal static string asciiTabs6DA = "EM";
+        internal static string asciiTabs6Dy = "CAN";
+        internal static string asciiTabs6Dw = "ETB";
+        internal static string asciiTabs6Du = "SYN";
+        internal static string asciiTabs6Ds = "NAK";
+        internal static string asciiTabs6Dq = "DC4";
+        internal static string asciiTabs6Do = "DC3";
+        internal static string asciiTabs6Dm = "DC2";
+        internal static string asciiTabs6Dk = "DC1";
+        internal static string asciiTabs6Di = "DLE";
+        internal static string asciiTabs6Dg = "SI";
+        internal static string asciiTabs6De = "SO";
+        internal static string asciiTabs6Dc = "CR";
+        internal static string asciiTabs6Da = "FF";
+        internal static string asciiTabs6D8 = "VT";
+        internal static string asciiTabs6D6 = "LF";
+        internal static string asciiTabs6D4 = "HT";
+        internal static string asciiTabs6D2 = "BS";
+        internal static string asciiTabs6D0 = "BEL";
+        internal static string asciiTabs6CY = "ACK";
+        internal static string asciiTabs6CW = "ENQ";
+        internal static string asciiTabs6CU = "EOT";
+        internal static string asciiTabs6CS = "ETX";
+        internal static string asciiTabs6CQ = "STX";
+        internal static string asciiTabs6CO = "SOH";
+        internal static string asciiTabs6CM = "NUL";
+        internal static string lvls6CC = "\\&";
+        internal static string showCommaSpaces6Cw = ", ";
+        internal static string lvls6xK = "foldr1";
+        internal static string lvls6vF = "[]";
+        internal static string lvls6vn = ")";
+        internal static string lvls6vm = "(Just ";
+        internal static string lvls6vk = "Nothing";
+        internal static string lvls6vf = "GT";
+        internal static string lvls6vd = "EQ";
+        internal static string lvls6vb = "LT";
+        internal static string lvls6v6 = "True";
+        internal static string lvls6v4 = "False";
+        public static Function cColShow_DataCon;
 
-        internal static Fun cshowLists6Lz;
+        internal static Function cshowLists6Lt;
 
-        internal static Fun cshows6Lu;
+        internal static Function cshows6Lo;
 
-        internal static Fun cshowsPrecs6Ll;
+        internal static Function cshowsPrecs6Lf;
 
-        internal static Fun wDollcshowsPrecs6La;
+        internal static Function wDollcshowsPrecs6L4;
 
-        internal static Fun wintegerToStrings6L1;
+        internal static Function wintegerToStrings6KV;
 
-        internal static Fun wintegerToString_s6KG;
+        internal static Function wintegerToString_s6KA;
 
-        internal static Updatable lvls6Kx;
+        internal static Thunk lvls6Kr;
 
-        internal static Fun wjsplitfs6Ki;
+        internal static Function wjsplitfs6Kc;
 
-        internal static Fun jsplitbs6K6;
+        internal static Function jsplitbs6K0;
 
-        internal static Fun jprintbs6JN;
+        internal static Function jprintbs6JH;
 
-        internal static Fun wjblock_s6Jw;
+        internal static Function wjblock_s6Jq;
 
-        public static Fun intToDigit;
+        public static Function intToDigit;
 
-        internal static Fun wintToDigits6Jg;
+        internal static Function wintToDigits6Ja;
 
-        internal static Fun lvls6J9;
+        internal static Function lvls6J3;
 
-        public static Fun fShowBrOBrC;
+        public static Function fShowBrOBrC;
 
-        internal static Fun sDollfShowBrOBrCs6IW;
+        internal static Function sDollfShowBrOBrCs6IQ;
 
-        internal static Fun cshowLists6IR;
+        internal static Function cshowLists6IL;
 
-        internal static Fun sDollcshowLists6IN;
+        internal static Function sDollcshowLists6IH;
 
-        internal static Fun cshows6IK;
+        internal static Function cshows6IE;
 
-        internal static Fun sDollcshows6II;
+        internal static Function sDollcshows6IC;
 
-        internal static Fun sDollfShowBrOBrCs6IG;
+        internal static Function sDollfShowBrOBrCs6IA;
 
-        internal static Fun sDollfShowBrOBrCs6IB;
+        internal static Function sDollfShowBrOBrCs6Iv;
 
-        internal static Fun sDollcshows6Iy;
+        internal static Function sDollcshows6Is;
 
-        internal static Fun sDollcshows6Iv;
+        internal static Function sDollcshows6Ip;
 
-        internal static Fun sDollcshowLists6Is;
+        internal static Function sDollcshowLists6Im;
 
-        internal static Fun sDollcshowLists6Ip;
+        internal static Function sDollcshowLists6Ij;
 
-        internal static Fun cshows6Ii;
+        internal static Function cshows6Ic;
 
-        internal static Fun cshowsPrecs6Ib;
+        internal static Function cshowsPrecs6I5;
 
-        internal static Fun wDollcshowsPrecs6I5;
+        internal static Function wDollcshowsPrecs6HZ;
 
-        internal static Updatable lvls6I4;
+        internal static Thunk lvls6HY;
 
-        internal static Fun cshowLists6HX;
+        internal static Function cshowLists6HR;
 
-        public static Fun showMultiLineString;
+        public static Function showMultiLineString;
 
-        internal static Fun gos6HL;
+        internal static Function gos6HF;
 
-        internal static Fun wgos6Hk;
+        internal static Function wgos6He;
 
-        internal static Updatable lvls6Hj;
+        internal static Thunk lvls6Hd;
 
-        internal static Updatable lvls6Hh;
+        internal static Thunk lvls6Hb;
 
-        internal static Updatable lvls6Hf;
+        internal static Thunk lvls6H9;
 
-        internal static Fun lvls6H9;
+        internal static Function lvls6H3;
 
-        public static Fun showLitString;
+        public static Function showLitString;
 
-        public static Fun showLitChar;
+        public static Function showLitChar;
 
-        internal static Fun wshowLitChars6Go;
+        internal static Function wshowLitChars6Gi;
 
-        internal static Fun cshowLists6G9;
+        internal static Function cshowLists6G3;
 
-        internal static Fun lvls6G1;
+        internal static Function lvls6FV;
 
-        internal static Fun cshows6FU;
+        internal static Function cshows6FO;
 
-        public static Fun showSignedInt;
+        public static Function showSignedInt;
 
-        internal static Fun wshowSignedInts6F5;
+        internal static Function wshowSignedInts6EZ;
 
-        internal static Fun witoss6EI;
+        internal static Function witoss6EC;
 
-        internal static Fun witos_s6Et;
+        internal static Function witos_s6En;
 
-        internal static Updatable asciiTabs6DV;
+        internal static Thunk asciiTabs6DP;
 
-        internal static Updatable asciiTabs6DT;
+        internal static Thunk asciiTabs6DN;
 
-        internal static Updatable asciiTabs6DR;
+        internal static Thunk asciiTabs6DL;
 
-        internal static Updatable asciiTabs6DP;
+        internal static Thunk asciiTabs6DJ;
 
-        internal static Updatable asciiTabs6DN;
+        internal static Thunk asciiTabs6DH;
 
-        internal static Updatable asciiTabs6DL;
+        internal static Thunk asciiTabs6DF;
 
-        internal static Updatable asciiTabs6DJ;
+        internal static Thunk asciiTabs6DD;
 
-        internal static Updatable asciiTabs6DH;
+        internal static Thunk asciiTabs6DB;
 
-        internal static Updatable asciiTabs6DF;
+        internal static Thunk asciiTabs6Dz;
 
-        internal static Updatable asciiTabs6DD;
+        internal static Thunk asciiTabs6Dx;
 
-        internal static Updatable asciiTabs6DB;
+        internal static Thunk asciiTabs6Dv;
 
-        internal static Updatable asciiTabs6Dz;
+        internal static Thunk asciiTabs6Dt;
 
-        internal static Updatable asciiTabs6Dx;
+        internal static Thunk asciiTabs6Dr;
 
-        internal static Updatable asciiTabs6Dv;
+        internal static Thunk asciiTabs6Dp;
 
-        internal static Updatable asciiTabs6Dt;
+        internal static Thunk asciiTabs6Dn;
 
-        internal static Updatable asciiTabs6Dr;
+        internal static Thunk asciiTabs6Dl;
 
-        internal static Updatable asciiTabs6Dp;
+        internal static Thunk asciiTabs6Dj;
 
-        internal static Updatable asciiTabs6Dn;
+        internal static Thunk asciiTabs6Dh;
 
-        internal static Updatable asciiTabs6Dl;
+        internal static Thunk asciiTabs6Df;
 
-        internal static Updatable asciiTabs6Dj;
+        internal static Thunk asciiTabs6Dd;
 
-        internal static Updatable asciiTabs6Dh;
+        internal static Thunk asciiTabs6Db;
 
-        internal static Updatable asciiTabs6Df;
+        internal static Thunk asciiTabs6D9;
 
-        internal static Updatable asciiTabs6Dd;
+        internal static Thunk asciiTabs6D7;
 
-        internal static Updatable asciiTabs6Db;
+        internal static Thunk asciiTabs6D5;
 
-        internal static Updatable asciiTabs6D9;
+        internal static Thunk asciiTabs6D3;
 
-        internal static Updatable asciiTabs6D7;
+        internal static Thunk asciiTabs6D1;
 
-        internal static Updatable asciiTabs6D5;
+        internal static Thunk asciiTabs6CZ;
 
-        internal static Updatable asciiTabs6D3;
+        internal static Thunk asciiTabs6CX;
 
-        internal static Updatable asciiTabs6D1;
+        internal static Thunk asciiTabs6CV;
 
-        internal static Updatable asciiTabs6CZ;
+        internal static Thunk asciiTabs6CT;
 
-        internal static Updatable asciiTabs6CX;
+        internal static Thunk asciiTabs6CR;
 
-        internal static Updatable asciiTabs6CV;
+        internal static Thunk asciiTabs6CP;
 
-        internal static Updatable asciiTabs6CT;
+        internal static Thunk asciiTabs6CN;
 
-        public static Fun protectEsc;
+        public static Function protectEsc;
 
-        public static Fun showSpace;
+        public static Function showSpace;
 
-        public static Fun showCommaSpace;
+        public static Function showCommaSpace;
 
-        internal static Updatable showCommaSpaces6CD;
+        internal static Thunk showCommaSpaces6Cx;
 
-        public static Fun showString;
+        public static Function showString;
 
-        public static Fun fShowPrOComPrC;
+        public static Function fShowPrOComPrC;
 
-        internal static Fun cshowLists6Ce;
+        internal static Function cshowLists6C8;
 
-        internal static Fun cshows6C1;
+        internal static Function cshows6BV;
 
-        internal static Fun cshowsPrecs6BM;
+        internal static Function cshowsPrecs6BG;
 
-        internal static Fun go2s6BA;
+        internal static Function go2s6Bu;
 
-        public static Fun fShowPrOComComPrC;
+        public static Function fShowPrOComComPrC;
 
-        internal static Fun cshowLists6Bd;
+        internal static Function cshowLists6B7;
 
-        internal static Fun cshows6B1;
+        internal static Function cshows6AV;
 
-        internal static Fun cshowsPrecs6AN;
+        internal static Function cshowsPrecs6AH;
 
-        internal static Fun wDollcshowsPrecs6Ax;
+        internal static Function wDollcshowsPrecs6Ar;
 
-        internal static Fun go2s6Al;
+        internal static Function go2s6Af;
 
-        public static Fun fShowPrOComComComPrC;
+        public static Function fShowPrOComComComPrC;
 
-        internal static Fun cshowLists6zV;
+        internal static Function cshowLists6zP;
 
-        internal static Fun cshows6zH;
+        internal static Function cshows6zB;
 
-        internal static Fun cshowsPrecs6zr;
+        internal static Function cshowsPrecs6zl;
 
-        internal static Fun wDollcshowsPrecs6z7;
+        // internal static Function wDollcshowsPrecs6z1;
 
-        internal static Fun go2s6yV;
+        internal static Function go2s6yP;
 
-        public static Fun fShowPrOComComComComPrC;
+        public static Function fShowPrOComComComComPrC;
 
-        internal static Fun cshowLists6yD;
+        internal static Function cshowLists6yx;
 
-        internal static Fun cshows6yw;
+        internal static Function cshows6yq;
 
-        internal static Fun cshowsPrecs6y5;
+        // internal static Function cshowsPrecs6xZ;
 
-        internal static Fun go2s6xT;
+        internal static Function go2s6xN;
 
-        internal static Updatable lvls6xR;
+        internal static Thunk lvls6xL;
 
-        public static Fun showParen;
+        public static Function showParen;
 
-        public static Fun showChar;
+        public static Function showChar;
 
-        internal static Fun cshowLists6xB;
+        internal static Function cshowLists6xv;
 
-        internal static Fun lvls6xx;
+        internal static Function lvls6xr;
 
-        internal static Fun cshowsPrecs6xs;
+        internal static Function cshowsPrecs6xm;
 
-        internal static Fun cshowLists6xo;
+        internal static Function cshowLists6xi;
 
-        internal static Fun cshowsPrecs6xk;
+        internal static Function cshowsPrecs6xe;
 
-        internal static Fun wDollcshowsPrecs6xg;
+        internal static Function wDollcshowsPrecs6xa;
 
-        internal static Fun cshows6x8;
+        internal static Function cshows6x2;
 
-        internal static Fun cshowLists6x5;
+        internal static Function cshowLists6wZ;
 
-        internal static Fun lvls6x0;
+        internal static Function lvls6wU;
 
-        public static Fun fShowMaybe;
+        public static Function fShowMaybe;
 
-        internal static Fun cshowLists6wN;
+        internal static Function cshowLists6wH;
 
-        internal static Fun cshowsPrecs6wH;
+        internal static Function cshowsPrecs6wB;
 
-        public static Fun dmshowLists6wC;
+        public static Function dmshowList;
 
-        public static Fun dmshows6wz;
+        public static Function dmshow;
 
-        public static Fun shows;
+        public static Function shows;
 
-        internal static Fun cshowsPrecs6wq;
+        internal static Function cshowsPrecs6wk;
 
-        public static Fun showWord;
+        public static Function showWord;
 
-        internal static Fun wshowWords6w5;
+        internal static Function wshowWords6vZ;
 
-        public static Fun showList__;
+        public static Function showList__;
 
-        public static Fun dmshowsPrecs6vC;
+        public static Function dmshowsPrec;
 
-        internal static Fun cshows6vv;
+        internal static Function cshows6vp;
 
-        internal static Updatable lvls6vu;
+        internal static Thunk lvls6vo;
 
-        internal static Updatable lvls6vr;
+        internal static Thunk lvls6vl;
 
-        internal static Fun cshows6vn;
+        internal static Function cshows6vh;
 
-        internal static Updatable lvls6vm;
+        internal static Thunk lvls6vg;
 
-        internal static Updatable lvls6vk;
+        internal static Thunk lvls6ve;
 
-        internal static Updatable lvls6vi;
+        internal static Thunk lvls6vc;
 
-        internal static Fun cshows6ve;
+        internal static Function cshows6v8;
 
-        internal static Updatable lvls6vd;
+        internal static Thunk lvls6v7;
 
-        internal static Updatable lvls6vb;
+        internal static Thunk lvls6v5;
 
-        internal static GHC.Types.CHash lvls6vI;
-        internal static GHC.Types.CHash lvls6vJ;
-        internal static GHC.Types.CHash lvls6vK;
+        internal static GHC.Types.CHash lvls6vC;
+        internal static GHC.Types.CHash lvls6vD;
+        internal static GHC.Types.CHash lvls6vE;
         public static GHC.Types.IHash appPrec;
         public static GHC.Types.IHash appPrec1;
-        internal static GHC.Types.IHash lvls6ww;
+        internal static GHC.Types.IHash lvls6wq;
         public static GHC.Show.CColShow fShowWord;
         public static GHC.Show.CColShow fShowOrdering;
         public static GHC.Show.CColShow fShowBool;
-        internal static GHC.Types.CHash fs6xG;
-        internal static GHC.Types.CHash gs6xH;
-        internal static GHC.Types.CHash lvls6CF;
+        internal static GHC.Types.CHash fs6xA;
+        internal static GHC.Types.CHash gs6xB;
+        internal static GHC.Types.CHash lvls6Cz;
+        internal static GHC.Types.Cons asciiTabs6DQ;
+        internal static GHC.Types.Cons asciiTabs6DR;
+        internal static GHC.Types.Cons asciiTabs6DS;
+        internal static GHC.Types.Cons asciiTabs6DT;
+        internal static GHC.Types.Cons asciiTabs6DU;
+        internal static GHC.Types.Cons asciiTabs6DV;
         internal static GHC.Types.Cons asciiTabs6DW;
         internal static GHC.Types.Cons asciiTabs6DX;
         internal static GHC.Types.Cons asciiTabs6DY;
@@ -391,34 +397,28 @@ namespace GHC
         internal static GHC.Types.Cons asciiTabs6Ej;
         internal static GHC.Types.Cons asciiTabs6Ek;
         internal static GHC.Types.Cons asciiTabs6El;
-        internal static GHC.Types.Cons asciiTabs6Em;
-        internal static GHC.Types.Cons asciiTabs6En;
-        internal static GHC.Types.Cons asciiTabs6Eo;
-        internal static GHC.Types.Cons asciiTabs6Ep;
-        internal static GHC.Types.Cons asciiTabs6Eq;
-        internal static GHC.Types.Cons asciiTabs6Er;
         public static GHC.Types.Cons asciiTab;
-        internal static GHC.Types.CHash lvls6EH;
+        internal static GHC.Types.CHash lvls6EB;
         public static GHC.Show.CColShow fShowInt;
-        internal static GHC.Types.CHash lvls6Gd;
-        internal static GHC.Types.CHash lvls6HR;
-        internal static GHC.Types.CHash fs6I2;
-        internal static GHC.Types.Cons lvls6Ih;
+        internal static GHC.Types.CHash lvls6G7;
+        internal static GHC.Types.CHash lvls6HL;
+        internal static GHC.Types.CHash fs6HW;
+        internal static GHC.Types.Cons lvls6Ib;
         public static GHC.Show.CColShow fShowChar;
-        internal static GHC.Types.Cons lvls6Ix;
-        internal static GHC.Show.CColShow sDollfShowBrOBrCs6IF;
-        internal static GHC.Show.CColShow sDollfShowBrOBrCs6IQ;
-        internal static GHC.Show.CColShow sDollfShowBrOBrCs6J0;
-        internal static Data lvls6JM;
-        internal static Data lvls6Kh;
-        internal static GHC.Types.IHash sats6KB;
-        internal static GHC.Types.Cons sats6KC;
-        internal static GHC.Types.IHash sats6KA;
-        internal static GHC.Types.Cons sats6KD;
-        internal static GHC.Types.IHash sats6Kz;
-        internal static GHC.Types.Cons sats6KE;
-        internal static GHC.Types.IHash sats6Ky;
-        internal static GHC.Types.Cons sats6KF;
+        internal static GHC.Types.Cons lvls6Ir;
+        internal static GHC.Show.CColShow sDollfShowBrOBrCs6Iz;
+        internal static GHC.Show.CColShow sDollfShowBrOBrCs6IK;
+        internal static GHC.Show.CColShow sDollfShowBrOBrCs6IU;
+        internal static GHC.Integer.Type.SHash lvls6JG;
+        internal static GHC.Integer.Type.SHash lvls6Kb;
+        internal static GHC.Types.IHash sats6Kv;
+        internal static GHC.Types.Cons sats6Kw;
+        internal static GHC.Types.IHash sats6Ku;
+        internal static GHC.Types.Cons sats6Kx;
+        internal static GHC.Types.IHash sats6Kt;
+        internal static GHC.Types.Cons sats6Ky;
+        internal static GHC.Types.IHash sats6Ks;
+        internal static GHC.Types.Cons sats6Kz;
         public static GHC.Show.CColShow fShowInteger;
 
         public static Function showsPrec;
@@ -427,359 +427,319 @@ namespace GHC
 
         public static Function showList;
 
+        public static Closure fShowWord_DollcshowsPrec => showsPrec_Entry(fShowWord);
+        public static Closure fShowWord_Dollcshow => show_Entry(fShowWord);
+
         static Show()
         {
-            cColShow_DataCon = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cColShow_DataCon_Entry));
+            cColShow_DataCon = new Fun3<Closure, Closure, Closure, Closure>(&cColShow_DataCon_Entry);
 
-            cshowLists6Lz = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cshowLists6Lz_Entry));
+            cshowLists6Lt = new Fun2<Closure, Closure, Closure>(&cshowLists6Lt_Entry);
 
-            cshows6Lu = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cshows6Lu_Entry));
+            cshows6Lo = new Fun1<Closure, Closure>(&cshows6Lo_Entry);
 
-            cshowsPrecs6Ll = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cshowsPrecs6Ll_Entry));
+            cshowsPrecs6Lf = new Fun3<Closure, Closure, Closure, Closure>(&cshowsPrecs6Lf_Entry);
 
-            wDollcshowsPrecs6La = new Fun(3, CLR.LoadFunctionPointer<long, Closure, Closure, (Closure x0, Closure x1)>(wDollcshowsPrecs6La_Entry));
+            wDollcshowsPrecs6L4 = new Fun3<long, Closure, Closure, (Closure x0, Closure x1)>(&wDollcshowsPrecs6L4_Entry);
 
-            wintegerToStrings6L1 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(wintegerToStrings6L1_Entry));
+            wintegerToStrings6KV = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&wintegerToStrings6KV_Entry);
 
-            wintegerToString_s6KG = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(wintegerToString_s6KG_Entry));
+            wintegerToString_s6KA = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&wintegerToString_s6KA_Entry);
 
-            lvls6Kx = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6Kx_Entry));
+            lvls6Kr = new Updatable(&lvls6Kr_Entry);
+            wjsplitfs6Kc = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&wjsplitfs6Kc_Entry);
 
-            wjsplitfs6Ki = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(wjsplitfs6Ki_Entry));
+            jsplitbs6K0 = new Fun2<Closure, Closure, Closure>(&jsplitbs6K0_Entry);
 
-            jsplitbs6K6 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(jsplitbs6K6_Entry));
+            jprintbs6JH = new Fun2<Closure, Closure, Closure>(&jprintbs6JH_Entry);
 
-            jprintbs6JN = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(jprintbs6JN_Entry));
+            wjblock_s6Jq = new Fun3<long, long, Closure, (Closure x0, Closure x1)>(&wjblock_s6Jq_Entry);
 
-            wjblock_s6Jw = new Fun(3, CLR.LoadFunctionPointer<long, long, Closure, (Closure x0, Closure x1)>(wjblock_s6Jw_Entry));
+            intToDigit = new Fun1<Closure, Closure>(&intToDigit_Entry);
 
-            intToDigit = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(intToDigit_Entry));
+            wintToDigits6Ja = new Fun1<long, char>(&wintToDigits6Ja_Entry);
 
-            wintToDigits6Jg = new Fun(1, CLR.LoadFunctionPointer<long, char>(wintToDigits6Jg_Entry));
+            lvls6J3 = new Fun1<long, Closure>(&lvls6J3_Entry);
+            fShowBrOBrC = new Fun1<Closure, Closure>(&fShowBrOBrC_Entry);
 
-            lvls6J9 = new Fun(1, CLR.LoadFunctionPointer<long, Closure>(lvls6J9_Entry));
+            sDollfShowBrOBrCs6IQ = new Fun3<Closure, Closure, Closure, Closure>(&sDollfShowBrOBrCs6IQ_Entry);
 
-            fShowBrOBrC = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(fShowBrOBrC_Entry));
+            cshowLists6IL = new Fun3<Closure, Closure, Closure, Closure>(&cshowLists6IL_Entry);
 
-            sDollfShowBrOBrCs6IW = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sDollfShowBrOBrCs6IW_Entry));
+            sDollcshowLists6IH = new Fun2<Closure, Closure, Closure>(&sDollcshowLists6IH_Entry);
 
-            cshowLists6IR = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cshowLists6IR_Entry));
+            cshows6IE = new Fun2<Closure, Closure, Closure>(&cshows6IE_Entry);
 
-            sDollcshowLists6IN = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sDollcshowLists6IN_Entry));
+            sDollcshows6IC = new Fun1<Closure, Closure>(&sDollcshows6IC_Entry);
 
-            cshows6IK = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cshows6IK_Entry));
+            sDollfShowBrOBrCs6IA = new Fun3<Closure, Closure, Closure, Closure>(&sDollfShowBrOBrCs6IA_Entry);
 
-            sDollcshows6II = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(sDollcshows6II_Entry));
+            sDollfShowBrOBrCs6Iv = new Fun3<Closure, Closure, Closure, Closure>(&sDollfShowBrOBrCs6Iv_Entry);
 
-            sDollfShowBrOBrCs6IG = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sDollfShowBrOBrCs6IG_Entry));
+            sDollcshows6Is = new Fun1<Closure, Closure>(&sDollcshows6Is_Entry);
 
-            sDollfShowBrOBrCs6IB = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sDollfShowBrOBrCs6IB_Entry));
+            sDollcshows6Ip = new Fun1<Closure, Closure>(&sDollcshows6Ip_Entry);
 
-            sDollcshows6Iy = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(sDollcshows6Iy_Entry));
+            sDollcshowLists6Im = new Fun2<Closure, Closure, Closure>(&sDollcshowLists6Im_Entry);
 
-            sDollcshows6Iv = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(sDollcshows6Iv_Entry));
+            sDollcshowLists6Ij = new Fun2<Closure, Closure, Closure>(&sDollcshowLists6Ij_Entry);
 
-            sDollcshowLists6Is = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sDollcshowLists6Is_Entry));
+            cshows6Ic = new Fun1<Closure, Closure>(&cshows6Ic_Entry);
 
-            sDollcshowLists6Ip = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sDollcshowLists6Ip_Entry));
+            cshowsPrecs6I5 = new Fun3<Closure, Closure, Closure, Closure>(&cshowsPrecs6I5_Entry);
 
-            cshows6Ii = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cshows6Ii_Entry));
+            wDollcshowsPrecs6HZ = new Fun2<char, Closure, Closure>(&wDollcshowsPrecs6HZ_Entry);
 
-            cshowsPrecs6Ib = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cshowsPrecs6Ib_Entry));
+            lvls6HY = new Updatable(&lvls6HY_Entry);
+            cshowLists6HR = new Fun2<Closure, Closure, Closure>(&cshowLists6HR_Entry);
 
-            wDollcshowsPrecs6I5 = new Fun(2, CLR.LoadFunctionPointer<char, Closure, Closure>(wDollcshowsPrecs6I5_Entry));
+            showMultiLineString = new Fun1<Closure, Closure>(&showMultiLineString_Entry);
 
-            lvls6I4 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6I4_Entry));
+            gos6HF = new Fun2<Closure, Closure, Closure>(&gos6HF_Entry);
 
-            cshowLists6HX = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cshowLists6HX_Entry));
+            wgos6He = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&wgos6He_Entry);
 
-            showMultiLineString = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(showMultiLineString_Entry));
+            lvls6Hd = new Updatable(&lvls6Hd_Entry);
+            lvls6Hb = new Updatable(&lvls6Hb_Entry);
+            lvls6H9 = new Updatable(&lvls6H9_Entry);
+            lvls6H3 = new Fun1<Closure, Closure>(&lvls6H3_Entry);
+            showLitString = new Fun2<Closure, Closure, Closure>(&showLitString_Entry);
 
-            gos6HL = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(gos6HL_Entry));
+            showLitChar = new Fun2<Closure, Closure, Closure>(&showLitChar_Entry);
 
-            wgos6Hk = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(wgos6Hk_Entry));
+            wshowLitChars6Gi = new Fun2<char, Closure, Closure>(&wshowLitChars6Gi_Entry);
 
-            lvls6Hj = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6Hj_Entry));
+            cshowLists6G3 = new Fun2<Closure, Closure, Closure>(&cshowLists6G3_Entry);
 
-            lvls6Hh = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6Hh_Entry));
+            lvls6FV = new Fun2<Closure, Closure, Closure>(&lvls6FV_Entry);
 
-            lvls6Hf = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6Hf_Entry));
+            cshows6FO = new Fun1<Closure, Closure>(&cshows6FO_Entry);
 
-            lvls6H9 = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(lvls6H9_Entry));
+            showSignedInt = new Fun3<Closure, Closure, Closure, Closure>(&showSignedInt_Entry);
 
-            showLitString = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(showLitString_Entry));
+            wshowSignedInts6EZ = new Fun3<long, long, Closure, (Closure x0, Closure x1)>(&wshowSignedInt_Entry);
 
-            showLitChar = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(showLitChar_Entry));
+            witoss6EC = new Fun2<long, Closure, (Closure x0, Closure x1)>(&witoss6EC_Entry);
 
-            wshowLitChars6Go = new Fun(2, CLR.LoadFunctionPointer<char, Closure, Closure>(wshowLitChars6Go_Entry));
+            witos_s6En = new Fun2<long, Closure, (Closure x0, Closure x1)>(&witos_s6En_Entry);
 
-            cshowLists6G9 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cshowLists6G9_Entry));
+            asciiTabs6DP = new Updatable(&asciiTabs6DP_Entry);
+            asciiTabs6DN = new Updatable(&asciiTabs6DN_Entry);
+            asciiTabs6DL = new Updatable(&asciiTabs6DL_Entry);
+            asciiTabs6DJ = new Updatable(&asciiTabs6DJ_Entry);
+            asciiTabs6DH = new Updatable(&asciiTabs6DH_Entry);
+            asciiTabs6DF = new Updatable(&asciiTabs6DF_Entry);
+            asciiTabs6DD = new Updatable(&asciiTabs6DD_Entry);
+            asciiTabs6DB = new Updatable(&asciiTabs6DB_Entry);
+            asciiTabs6Dz = new Updatable(&asciiTabs6Dz_Entry);
+            asciiTabs6Dx = new Updatable(&asciiTabs6Dx_Entry);
+            asciiTabs6Dv = new Updatable(&asciiTabs6Dv_Entry);
+            asciiTabs6Dt = new Updatable(&asciiTabs6Dt_Entry);
+            asciiTabs6Dr = new Updatable(&asciiTabs6Dr_Entry);
+            asciiTabs6Dp = new Updatable(&asciiTabs6Dp_Entry);
+            asciiTabs6Dn = new Updatable(&asciiTabs6Dn_Entry);
+            asciiTabs6Dl = new Updatable(&asciiTabs6Dl_Entry);
+            asciiTabs6Dj = new Updatable(&asciiTabs6Dj_Entry);
+            asciiTabs6Dh = new Updatable(&asciiTabs6Dh_Entry);
+            asciiTabs6Df = new Updatable(&asciiTabs6Df_Entry);
+            asciiTabs6Dd = new Updatable(&asciiTabs6Dd_Entry);
+            asciiTabs6Db = new Updatable(&asciiTabs6Db_Entry);
+            asciiTabs6D9 = new Updatable(&asciiTabs6D9_Entry);
+            asciiTabs6D7 = new Updatable(&asciiTabs6D7_Entry);
+            asciiTabs6D5 = new Updatable(&asciiTabs6D5_Entry);
+            asciiTabs6D3 = new Updatable(&asciiTabs6D3_Entry);
+            asciiTabs6D1 = new Updatable(&asciiTabs6D1_Entry);
+            asciiTabs6CZ = new Updatable(&asciiTabs6CZ_Entry);
+            asciiTabs6CX = new Updatable(&asciiTabs6CX_Entry);
+            asciiTabs6CV = new Updatable(&asciiTabs6CV_Entry);
+            asciiTabs6CT = new Updatable(&asciiTabs6CT_Entry);
+            asciiTabs6CR = new Updatable(&asciiTabs6CR_Entry);
+            asciiTabs6CP = new Updatable(&asciiTabs6CP_Entry);
+            asciiTabs6CN = new Updatable(&asciiTabs6CN_Entry);
+            protectEsc = new Fun3<Closure, Closure, Closure, Closure>(&protectEsc_Entry);
 
-            lvls6G1 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(lvls6G1_Entry));
+            showSpace = new Fun1<Closure, Closure>(&showSpace_Entry);
 
-            cshows6FU = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cshows6FU_Entry));
+            showCommaSpace = new Fun1<Closure, Closure>(&showCommaSpace_Entry);
 
-            showSignedInt = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(showSignedInt_Entry));
+            showCommaSpaces6Cx = new Updatable(&showCommaSpaces6Cx_Entry);
 
-            wshowSignedInts6F5 = new Fun(3, CLR.LoadFunctionPointer<long, long, Closure, (Closure x0, Closure x1)>(wshowSignedInts6F5_Entry));
+            showString = new Fun2<Closure, Closure, Closure>(&showString_Entry);
 
-            witoss6EI = new Fun(2, CLR.LoadFunctionPointer<long, Closure, (Closure x0, Closure x1)>(witoss6EI_Entry));
+            fShowPrOComPrC = new Fun2<Closure, Closure, Closure>(&fShowPrOComPrC_Entry);
 
-            witos_s6Et = new Fun(2, CLR.LoadFunctionPointer<long, Closure, (Closure x0, Closure x1)>(witos_s6Et_Entry));
+            cshowLists6C8 = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cshowLists6C8_Entry);
 
-            asciiTabs6DV = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DV_Entry));
+            cshows6BV = new Fun3<Closure, Closure, Closure, Closure>(&cshows6BV_Entry);
 
-            asciiTabs6DT = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DT_Entry));
+            cshowsPrecs6BG = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cshowsPrecs6BG_Entry);
 
-            asciiTabs6DR = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DR_Entry));
+            go2s6Bu = new Fun2<Closure, Closure, Closure>(&go2s6Bu_Entry);
 
-            asciiTabs6DP = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DP_Entry));
+            fShowPrOComComPrC = new Fun3<Closure, Closure, Closure, Closure>(&fShowPrOComComPrC_Entry);
 
-            asciiTabs6DN = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DN_Entry));
+            cshowLists6B7 = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cshowLists6B7_Entry);
 
-            asciiTabs6DL = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DL_Entry));
+            cshows6AV = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cshows6AV_Entry);
 
-            asciiTabs6DJ = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DJ_Entry));
+            cshowsPrecs6AH = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cshowsPrecs6AH_Entry);
 
-            asciiTabs6DH = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DH_Entry));
+            wDollcshowsPrecs6Ar = new Fun7<Closure, Closure, Closure, Closure, Closure, Closure, Closure, (Closure x0, Closure x1)>(&wDollcshowsPrecs6Ar_Entry);
 
-            asciiTabs6DF = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DF_Entry));
+            go2s6Af = new Fun2<Closure, Closure, Closure>(&go2s6Af_Entry);
 
-            asciiTabs6DD = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DD_Entry));
+            fShowPrOComComComPrC = new Fun4<Closure, Closure, Closure, Closure, Closure>(&fShowPrOComComComPrC_Entry);
 
-            asciiTabs6DB = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6DB_Entry));
+            cshowLists6zP = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cshowLists6zP_Entry);
 
-            asciiTabs6Dz = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dz_Entry));
+            cshows6zB = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cshows6zB_Entry);
 
-            asciiTabs6Dx = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dx_Entry));
+            cshowsPrecs6zl = new Fun7<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cshowsPrecs6zl_Entry);
 
-            asciiTabs6Dv = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dv_Entry));
+            // wDollcshowsPrecs6z1 = new Fun9<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, (Closure x0, Closure x1)>(&wDollcshowsPrecs6z1_Entry);
 
-            asciiTabs6Dt = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dt_Entry));
+            go2s6yP = new Fun2<Closure, Closure, Closure>(&go2s6yP_Entry);
 
-            asciiTabs6Dr = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dr_Entry));
+            fShowPrOComComComComPrC = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&fShowPrOComComComComPrC_Entry);
 
-            asciiTabs6Dp = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dp_Entry));
+            cshowLists6yx = new Fun7<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cshowLists6yx_Entry);
 
-            asciiTabs6Dn = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dn_Entry));
+            cshows6yq = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cshows6yq_Entry);
 
-            asciiTabs6Dl = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dl_Entry));
+            // cshowsPrecs6xZ = new Fun8<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cshowsPrecs6xZ_Entry);
 
-            asciiTabs6Dj = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dj_Entry));
+            go2s6xN = new Fun2<Closure, Closure, Closure>(&go2s6xN_Entry);
 
-            asciiTabs6Dh = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dh_Entry));
+            lvls6xL = new Updatable(&lvls6xL_Entry);
+            showParen = new Fun2<Closure, Closure, Closure>(&showParen_Entry);
 
-            asciiTabs6Df = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Df_Entry));
+            showChar = new Fun2<Closure, Closure, Closure>(&showChar_Entry);
 
-            asciiTabs6Dd = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Dd_Entry));
+            cshowLists6xv = new Fun2<Closure, Closure, Closure>(&cshowLists6xv_Entry);
 
-            asciiTabs6Db = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6Db_Entry));
+            lvls6xr = new Fun2<Closure, Closure, Closure>(&lvls6xr_Entry);
 
-            asciiTabs6D9 = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6D9_Entry));
+            cshowsPrecs6xm = new Fun3<Closure, Closure, Closure, Closure>(&cshowsPrecs6xm_Entry);
 
-            asciiTabs6D7 = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6D7_Entry));
+            cshowLists6xi = new Fun2<Closure, Closure, Closure>(&cshowLists6xi_Entry);
 
-            asciiTabs6D5 = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6D5_Entry));
+            cshowsPrecs6xe = new Fun3<Closure, Closure, Closure, Closure>(&cshowsPrecs6xe_Entry);
 
-            asciiTabs6D3 = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6D3_Entry));
+            wDollcshowsPrecs6xa = new Fun2<Closure, Closure, Closure>(&wDollcshowsPrecs6xa_Entry);
 
-            asciiTabs6D1 = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6D1_Entry));
+            cshows6x2 = new Fun1<Closure, Closure>(&cshows6x2_Entry);
 
-            asciiTabs6CZ = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6CZ_Entry));
+            cshowLists6wZ = new Fun2<Closure, Closure, Closure>(&cshowLists6wZ_Entry);
 
-            asciiTabs6CX = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6CX_Entry));
+            lvls6wU = new Fun2<Closure, Closure, Closure>(&lvls6wU_Entry);
 
-            asciiTabs6CV = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6CV_Entry));
+            fShowMaybe = new Fun1<Closure, Closure>(&fShowMaybe_Entry);
 
-            asciiTabs6CT = new Updatable(CLR.LoadFunctionPointer<Closure>(asciiTabs6CT_Entry));
+            cshowLists6wH = new Fun3<Closure, Closure, Closure, Closure>(&cshowLists6wH_Entry);
 
-            protectEsc = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(protectEsc_Entry));
+            cshowsPrecs6wB = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cshowsPrecs6wB_Entry);
 
-            showSpace = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(showSpace_Entry));
+            dmshowList = new Fun3<Closure, Closure, Closure, Closure>(&dmshowList_Entry);
 
-            showCommaSpace = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(showCommaSpace_Entry));
+            dmshow = new Fun2<Closure, Closure, Closure>(&dmshow_Entry);
 
-            showCommaSpaces6CD = new Updatable(CLR.LoadFunctionPointer<Closure>(showCommaSpaces6CD_Entry));
+            shows = new Fun1<Closure, Closure>(&shows_Entry);
+            cshowsPrecs6wk = new Fun3<Closure, Closure, Closure, Closure>(&cshowsPrecs6wk_Entry);
 
-            showString = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(showString_Entry));
+            showWord = new Fun2<ulong, Closure, Closure>(&showWord_Entry);
 
-            fShowPrOComPrC = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(fShowPrOComPrC_Entry));
+            wshowWords6vZ = new Fun2<ulong, Closure, (Closure x0, Closure x1)>(&wshowWords6vZ_Entry);
 
-            cshowLists6Ce = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cshowLists6Ce_Entry));
+            showList__ = new Fun3<Closure, Closure, Closure, Closure>(&showList___Entry);
 
-            cshows6C1 = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cshows6C1_Entry));
+            dmshowsPrec = new Fun4<Closure, Closure, Closure, Closure, Closure>(&dmshowsPrec_Entry);
 
-            cshowsPrecs6BM = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cshowsPrecs6BM_Entry));
+            cshows6vp = new Fun2<Closure, Closure, Closure>(&cshows6vp_Entry);
 
-            go2s6BA = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(go2s6BA_Entry));
+            lvls6vo = new Updatable(&lvls6vo_Entry);
+            lvls6vl = new Updatable(&lvls6vl_Entry);
+            cshows6vh = new Fun1<Closure, Closure>(&cshows6vh_Entry);
 
-            fShowPrOComComPrC = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(fShowPrOComComPrC_Entry));
+            lvls6vg = new Updatable(&lvls6vg_Entry);
+            lvls6ve = new Updatable(&lvls6ve_Entry);
+            lvls6vc = new Updatable(&lvls6vc_Entry);
+            cshows6v8 = new Fun1<Closure, Closure>(&cshows6v8_Entry);
 
-            cshowLists6Bd = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cshowLists6Bd_Entry));
-
-            cshows6B1 = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cshows6B1_Entry));
-
-            cshowsPrecs6AN = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cshowsPrecs6AN_Entry));
-
-            wDollcshowsPrecs6Ax = new Fun(7, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, (Closure x0, Closure x1)>(wDollcshowsPrecs6Ax_Entry));
-
-            go2s6Al = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(go2s6Al_Entry));
-
-            fShowPrOComComComPrC = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(fShowPrOComComComPrC_Entry));
-
-            cshowLists6zV = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cshowLists6zV_Entry));
-
-            cshows6zH = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cshows6zH_Entry));
-
-            cshowsPrecs6zr = new Fun(7, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cshowsPrecs6zr_Entry));
-
-            wDollcshowsPrecs6z7 = new Fun(9, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, (Closure x0, Closure x1)>(wDollcshowsPrecs6z7_Entry));
-
-            go2s6yV = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(go2s6yV_Entry));
-
-            fShowPrOComComComComPrC = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(fShowPrOComComComComPrC_Entry));
-
-            cshowLists6yD = new Fun(7, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cshowLists6yD_Entry));
-
-            cshows6yw = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cshows6yw_Entry));
-
-            cshowsPrecs6y5 = new Fun(8, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cshowsPrecs6y5_Entry));
-
-            go2s6xT = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(go2s6xT_Entry));
-
-            lvls6xR = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6xR_Entry));
-
-            showParen = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(showParen_Entry));
-
-            showChar = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(showChar_Entry));
-
-            cshowLists6xB = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cshowLists6xB_Entry));
-
-            lvls6xx = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(lvls6xx_Entry));
-
-            cshowsPrecs6xs = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cshowsPrecs6xs_Entry));
-
-            cshowLists6xo = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cshowLists6xo_Entry));
-
-            cshowsPrecs6xk = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cshowsPrecs6xk_Entry));
-
-            wDollcshowsPrecs6xg = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(wDollcshowsPrecs6xg_Entry));
-
-            cshows6x8 = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cshows6x8_Entry));
-
-            cshowLists6x5 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cshowLists6x5_Entry));
-
-            lvls6x0 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(lvls6x0_Entry));
-
-            fShowMaybe = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(fShowMaybe_Entry));
-
-            cshowLists6wN = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cshowLists6wN_Entry));
-
-            cshowsPrecs6wH = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cshowsPrecs6wH_Entry));
-
-            dmshowLists6wC = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(dmshowLists6wC_Entry));
-
-            dmshows6wz = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(dmshows6wz_Entry));
-
-            shows = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(shows_Entry));
-
-            cshowsPrecs6wq = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cshowsPrecs6wq_Entry));
-
-            showWord = new Fun(2, CLR.LoadFunctionPointer<ulong, Closure, Closure>(showWord_Entry));
-
-            wshowWords6w5 = new Fun(2, CLR.LoadFunctionPointer<ulong, Closure, (Closure x0, Closure x1)>(wshowWords6w5_Entry));
-
-            showList__ = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(showList___Entry));
-
-            dmshowsPrecs6vC = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(dmshowsPrecs6vC_Entry));
-
-            cshows6vv = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cshows6vv_Entry));
-
-            lvls6vu = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6vu_Entry));
-
-            lvls6vr = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6vr_Entry));
-
-            cshows6vn = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cshows6vn_Entry));
-
-            lvls6vm = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6vm_Entry));
-
-            lvls6vk = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6vk_Entry));
-
-            lvls6vi = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6vi_Entry));
-
-            cshows6ve = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cshows6ve_Entry));
-
-            lvls6vd = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6vd_Entry));
-
-            lvls6vb = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls6vb_Entry));
-
-            fShowInteger = new GHC.Show.CColShow(cshowsPrecs6Ll, cshows6Lu, cshowLists6Lz);
-            sats6KF = new GHC.Types.Cons(null, null);
-            sats6Ky = new GHC.Types.IHash(0);
-            sats6KE = new GHC.Types.Cons(null, null);
-            sats6Kz = new GHC.Types.IHash(1721187872);
-            sats6KD = new GHC.Types.Cons(null, null);
-            sats6KA = new GHC.Types.IHash(1864637526);
-            sats6KC = new GHC.Types.Cons(null, GHC.Types.nil_DataCon);
-            sats6KB = new GHC.Types.IHash(100974195);
-            lvls6Kh = GHC.Integer.Type.smallInteger_Entry(0) as Data;
-            lvls6JM = GHC.Integer.Type.smallInteger_Entry(1000000000000000000) as Data;
-            sDollfShowBrOBrCs6J0 = new GHC.Show.CColShow(sDollfShowBrOBrCs6IW, sDollcshows6Iv, sDollcshowLists6Is);
-            sDollfShowBrOBrCs6IQ = new GHC.Show.CColShow(sDollfShowBrOBrCs6IG, sDollcshows6II, sDollcshowLists6IN);
-            sDollfShowBrOBrCs6IF = new GHC.Show.CColShow(sDollfShowBrOBrCs6IB, sDollcshows6Iy, sDollcshowLists6Ip);
-            lvls6Ix = new GHC.Types.Cons(null, GHC.Types.nil_DataCon);
-            fShowChar = new GHC.Show.CColShow(cshowsPrecs6Ib, cshows6Ii, cshowLists6HX);
-            lvls6Ih = new GHC.Types.Cons(null, GHC.Types.nil_DataCon);
-            fs6I2 = new GHC.Types.CHash('\'') ;
-            lvls6HR = new GHC.Types.CHash('"') ;
-            lvls6Gd = new GHC.Types.CHash('\\');
-            fShowInt = new GHC.Show.CColShow(GHC.Show.showSignedInt, cshows6FU, cshowLists6G9);
-            lvls6EH = new GHC.Types.CHash('-');
-            asciiTab = new GHC.Types.Cons(asciiTabs6CT, null);
-            asciiTabs6Er = new GHC.Types.Cons(asciiTabs6CV, null);
-            asciiTabs6Eq = new GHC.Types.Cons(asciiTabs6CX, null);
-            asciiTabs6Ep = new GHC.Types.Cons(asciiTabs6CZ, null);
-            asciiTabs6Eo = new GHC.Types.Cons(asciiTabs6D1, null);
-            asciiTabs6En = new GHC.Types.Cons(asciiTabs6D3, null);
-            asciiTabs6Em = new GHC.Types.Cons(asciiTabs6D5, null);
-            asciiTabs6El = new GHC.Types.Cons(asciiTabs6D7, null);
-            asciiTabs6Ek = new GHC.Types.Cons(asciiTabs6D9, null);
-            asciiTabs6Ej = new GHC.Types.Cons(asciiTabs6Db, null);
-            asciiTabs6Ei = new GHC.Types.Cons(asciiTabs6Dd, null);
-            asciiTabs6Eh = new GHC.Types.Cons(asciiTabs6Df, null);
-            asciiTabs6Eg = new GHC.Types.Cons(asciiTabs6Dh, null);
-            asciiTabs6Ef = new GHC.Types.Cons(asciiTabs6Dj, null);
-            asciiTabs6Ee = new GHC.Types.Cons(asciiTabs6Dl, null);
-            asciiTabs6Ed = new GHC.Types.Cons(asciiTabs6Dn, null);
-            asciiTabs6Ec = new GHC.Types.Cons(asciiTabs6Dp, null);
-            asciiTabs6Eb = new GHC.Types.Cons(asciiTabs6Dr, null);
-            asciiTabs6Ea = new GHC.Types.Cons(asciiTabs6Dt, null);
-            asciiTabs6E9 = new GHC.Types.Cons(asciiTabs6Dv, null);
-            asciiTabs6E8 = new GHC.Types.Cons(asciiTabs6Dx, null);
-            asciiTabs6E7 = new GHC.Types.Cons(asciiTabs6Dz, null);
-            asciiTabs6E6 = new GHC.Types.Cons(asciiTabs6DB, null);
-            asciiTabs6E5 = new GHC.Types.Cons(asciiTabs6DD, null);
-            asciiTabs6E4 = new GHC.Types.Cons(asciiTabs6DF, null);
-            asciiTabs6E3 = new GHC.Types.Cons(asciiTabs6DH, null);
-            asciiTabs6E2 = new GHC.Types.Cons(asciiTabs6DJ, null);
-            asciiTabs6E1 = new GHC.Types.Cons(asciiTabs6DL, null);
-            asciiTabs6E0 = new GHC.Types.Cons(asciiTabs6DN, null);
-            asciiTabs6DZ = new GHC.Types.Cons(asciiTabs6DP, null);
-            asciiTabs6DY = new GHC.Types.Cons(asciiTabs6DR, null);
-            asciiTabs6DX = new GHC.Types.Cons(asciiTabs6DT, null);
-            asciiTabs6DW = new GHC.Types.Cons(asciiTabs6DV, GHC.Types.nil_DataCon);
-            lvls6CF = new GHC.Types.CHash(' ');
-            gs6xH = new GHC.Types.CHash(')');
-            fs6xG = new GHC.Types.CHash('(');
-            fShowBool = new GHC.Show.CColShow(cshowsPrecs6xs, cshows6ve, cshowLists6xB);
-            fShowOrdering = new GHC.Show.CColShow(cshowsPrecs6xk, cshows6vn, cshowLists6xo);
-            fShowWord = new GHC.Show.CColShow(cshowsPrecs6wq, cshows6x8, cshowLists6x5);
-            lvls6ww = new GHC.Types.IHash(0);
+            lvls6v7 = new Updatable(&lvls6v7_Entry);
+            lvls6v5 = new Updatable(&lvls6v5_Entry);
+            fShowInteger = new GHC.Show.CColShow(cshowsPrecs6Lf, cshows6Lo, cshowLists6Lt);
+            sats6Kz = new GHC.Types.Cons((Closure)null, (Closure)null);
+            sats6Ks = new GHC.Types.IHash(0);
+            sats6Ky = new GHC.Types.Cons((Closure)null, (Closure)null);
+            sats6Kt = new GHC.Types.IHash(1721187872);
+            sats6Kx = new GHC.Types.Cons((Closure)null, (Closure)null);
+            sats6Ku = new GHC.Types.IHash(1864637526);
+            sats6Kw = new GHC.Types.Cons((Closure)null, GHC.Types.nil_DataCon);
+            sats6Kv = new GHC.Types.IHash(100974195);
+            lvls6Kb = new GHC.Integer.Type.SHash(0);
+            lvls6JG = new GHC.Integer.Type.SHash(1000000000000000000);
+            sDollfShowBrOBrCs6IU = new GHC.Show.CColShow(sDollfShowBrOBrCs6IQ, sDollcshows6Ip, sDollcshowLists6Im);
+            sDollfShowBrOBrCs6IK = new GHC.Show.CColShow(sDollfShowBrOBrCs6IA, sDollcshows6IC, sDollcshowLists6IH);
+            sDollfShowBrOBrCs6Iz = new GHC.Show.CColShow(sDollfShowBrOBrCs6Iv, sDollcshows6Is, sDollcshowLists6Ij);
+            lvls6Ir = new GHC.Types.Cons((Closure)null, GHC.Types.nil_DataCon);
+            fShowChar = new GHC.Show.CColShow(cshowsPrecs6I5, cshows6Ic, cshowLists6HR);
+            lvls6Ib = new GHC.Types.Cons((Closure)null, GHC.Types.nil_DataCon);
+            fs6HW = new GHC.Types.CHash('\'');
+            lvls6HL = new GHC.Types.CHash('"');
+            lvls6G7 = new GHC.Types.CHash('\\');
+            fShowInt = new GHC.Show.CColShow(GHC.Show.showSignedInt, cshows6FO, cshowLists6G3);
+            lvls6EB = new GHC.Types.CHash('-');
+            asciiTab = new GHC.Types.Cons(asciiTabs6CN, (Closure)null);
+            asciiTabs6El = new GHC.Types.Cons(asciiTabs6CP, (Closure)null);
+            asciiTabs6Ek = new GHC.Types.Cons(asciiTabs6CR, (Closure)null);
+            asciiTabs6Ej = new GHC.Types.Cons(asciiTabs6CT, (Closure)null);
+            asciiTabs6Ei = new GHC.Types.Cons(asciiTabs6CV, (Closure)null);
+            asciiTabs6Eh = new GHC.Types.Cons(asciiTabs6CX, (Closure)null);
+            asciiTabs6Eg = new GHC.Types.Cons(asciiTabs6CZ, (Closure)null);
+            asciiTabs6Ef = new GHC.Types.Cons(asciiTabs6D1, (Closure)null);
+            asciiTabs6Ee = new GHC.Types.Cons(asciiTabs6D3, (Closure)null);
+            asciiTabs6Ed = new GHC.Types.Cons(asciiTabs6D5, (Closure)null);
+            asciiTabs6Ec = new GHC.Types.Cons(asciiTabs6D7, (Closure)null);
+            asciiTabs6Eb = new GHC.Types.Cons(asciiTabs6D9, (Closure)null);
+            asciiTabs6Ea = new GHC.Types.Cons(asciiTabs6Db, (Closure)null);
+            asciiTabs6E9 = new GHC.Types.Cons(asciiTabs6Dd, (Closure)null);
+            asciiTabs6E8 = new GHC.Types.Cons(asciiTabs6Df, (Closure)null);
+            asciiTabs6E7 = new GHC.Types.Cons(asciiTabs6Dh, (Closure)null);
+            asciiTabs6E6 = new GHC.Types.Cons(asciiTabs6Dj, (Closure)null);
+            asciiTabs6E5 = new GHC.Types.Cons(asciiTabs6Dl, (Closure)null);
+            asciiTabs6E4 = new GHC.Types.Cons(asciiTabs6Dn, (Closure)null);
+            asciiTabs6E3 = new GHC.Types.Cons(asciiTabs6Dp, (Closure)null);
+            asciiTabs6E2 = new GHC.Types.Cons(asciiTabs6Dr, (Closure)null);
+            asciiTabs6E1 = new GHC.Types.Cons(asciiTabs6Dt, (Closure)null);
+            asciiTabs6E0 = new GHC.Types.Cons(asciiTabs6Dv, (Closure)null);
+            asciiTabs6DZ = new GHC.Types.Cons(asciiTabs6Dx, (Closure)null);
+            asciiTabs6DY = new GHC.Types.Cons(asciiTabs6Dz, (Closure)null);
+            asciiTabs6DX = new GHC.Types.Cons(asciiTabs6DB, (Closure)null);
+            asciiTabs6DW = new GHC.Types.Cons(asciiTabs6DD, (Closure)null);
+            asciiTabs6DV = new GHC.Types.Cons(asciiTabs6DF, (Closure)null);
+            asciiTabs6DU = new GHC.Types.Cons(asciiTabs6DH, (Closure)null);
+            asciiTabs6DT = new GHC.Types.Cons(asciiTabs6DJ, (Closure)null);
+            asciiTabs6DS = new GHC.Types.Cons(asciiTabs6DL, (Closure)null);
+            asciiTabs6DR = new GHC.Types.Cons(asciiTabs6DN, (Closure)null);
+            asciiTabs6DQ = new GHC.Types.Cons(asciiTabs6DP, GHC.Types.nil_DataCon);
+            lvls6Cz = new GHC.Types.CHash(' ');
+            gs6xB = new GHC.Types.CHash(')');
+            fs6xA = new GHC.Types.CHash('(');
+            fShowBool = new GHC.Show.CColShow(cshowsPrecs6xm, cshows6v8, cshowLists6xv);
+            fShowOrdering = new GHC.Show.CColShow(cshowsPrecs6xe, cshows6vh, cshowLists6xi);
+            fShowWord = new GHC.Show.CColShow(cshowsPrecs6wk, cshows6x2, cshowLists6wZ);
+            lvls6wq = new GHC.Types.IHash(0);
             appPrec1 = new GHC.Types.IHash(11);
             appPrec = new GHC.Types.IHash(10);
-            lvls6vK = new GHC.Types.CHash(',');
-            lvls6vJ = new GHC.Types.CHash(']');
-            lvls6vI = new GHC.Types.CHash('[');
+            lvls6vE = new GHC.Types.CHash(',');
+            lvls6vD = new GHC.Types.CHash(']');
+            lvls6vC = new GHC.Types.CHash('[');
+            asciiTabs6DR.x1 = asciiTabs6DQ;
+            asciiTabs6DS.x1 = asciiTabs6DR;
+            asciiTabs6DT.x1 = asciiTabs6DS;
+            asciiTabs6DU.x1 = asciiTabs6DT;
+            asciiTabs6DV.x1 = asciiTabs6DU;
+            asciiTabs6DW.x1 = asciiTabs6DV;
             asciiTabs6DX.x1 = asciiTabs6DW;
             asciiTabs6DY.x1 = asciiTabs6DX;
             asciiTabs6DZ.x1 = asciiTabs6DY;
@@ -805,886 +765,942 @@ namespace GHC
             asciiTabs6Ej.x1 = asciiTabs6Ei;
             asciiTabs6Ek.x1 = asciiTabs6Ej;
             asciiTabs6El.x1 = asciiTabs6Ek;
-            asciiTabs6Em.x1 = asciiTabs6El;
-            asciiTabs6En.x1 = asciiTabs6Em;
-            asciiTabs6Eo.x1 = asciiTabs6En;
-            asciiTabs6Ep.x1 = asciiTabs6Eo;
-            asciiTabs6Eq.x1 = asciiTabs6Ep;
-            asciiTabs6Er.x1 = asciiTabs6Eq;
-            asciiTab.x1 = asciiTabs6Er;
-            lvls6Ih.x0 = fs6I2;
-            lvls6Ix.x0 = lvls6HR;
-            sats6KC.x0 = sats6KB;
-            sats6KD.x0 = sats6KA;
-            sats6KD.x1 = sats6KC;
-            sats6KE.x0 = sats6Kz;
-            sats6KE.x1 = sats6KD;
-            sats6KF.x0 = sats6Ky; sats6KF.x1 = sats6KE;
-            showsPrec = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(showsPrec_Entry));
+            asciiTab.x1 = asciiTabs6El;
+            lvls6Ib.x0 = fs6HW;
+            lvls6Ir.x0 = lvls6HL;
+            sats6Kw.x0 = sats6Kv;
+            sats6Kx.x0 = sats6Ku;
+            sats6Kx.x1 = sats6Kw;
+            sats6Ky.x0 = sats6Kt;
+            sats6Ky.x1 = sats6Kx;
+            sats6Kz.x0 = sats6Ks; sats6Kz.x1 = sats6Ky;
+            showsPrec = new Fun1<Closure, Closure>(&showsPrec_Entry);
 
-            show = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure>(show_Entry));
-
-            showList = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure>(showList_Entry));
-
+            show = new Fun1<Closure, Closure>(&show_Entry);
+            showList = new Fun1<Closure, Closure>(&showList_Entry);
         }
         public static Closure cColShow_DataCon_Entry(Closure etaB3, Closure etaB2, Closure etaB1)
         {
             return new GHC.Show.CColShow(etaB3, etaB2, etaB1);
         }
-        public static Closure cshowLists6Lz_Entry(Closure dss6LA, Closure ss6LB)
+        public static Closure cshowLists6Lt_Entry(Closure dss6Lu, Closure ss6Lv)
         {
-            var wilds6LC = dss6LA.Eval();
+            var wilds6Lw = dss6Lu.Eval();
+            switch (wilds6Lw)
+            {
+                default: { throw new ImpossibleException(); }
+                case GHC.Types.Nil wilds6Lw_Nil:
+                    {
+                        return GHC.CString.unpackAppendCStringHash_Entry(lvls6vF, ss6Lv);
+                    }
+                case GHC.Types.Cons wilds6Lw_Cons:
+                    {
+                        var xs6Lx = wilds6Lw_Cons.x0;
+                        var xss6Ly = wilds6Lw_Cons.x1;
+                        var sat_Frees6LO = (ss6Lv, xs6Lx, xss6Ly);
+                        var sats6LO = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats6LO_Entry, sat_Frees6LO);
+                        return new GHC.Types.Cons(lvls6vC, sats6LO);
+                    }
+            }
+        }
+        public static Closure sats6LO_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6LO)
+        {
+            var ss6Lv = sat_Frees6LO.x0;
+            var xs6Lx = sat_Frees6LO.x1;
+            var xss6Ly = sat_Frees6LO.x2;
+            var sat_Frees6LK = (ss6Lv, xss6Ly);
+            var sats6LK = new Updatable<(Closure x0, Closure x1)>(&sats6LK_Entry, sat_Frees6LK);
+            var wws6LL = wDollcshowsPrecs6L4_Entry(0, xs6Lx, sats6LK);
+            var wws6LL_RawTuple = wws6LL;
+            var wws6LM = wws6LL_RawTuple.x0;
+            var wws6LN = wws6LL_RawTuple.x1;
+            return new GHC.Types.Cons(wws6LM, wws6LN);
+        }
+        public static Closure sats6LK_Entry(in (Closure x0, Closure x1) sat_Frees6LK)
+        {
+            var ss6Lv = sat_Frees6LK.x0;
+            var xss6Ly = sat_Frees6LK.x1;
+            var lvls6Lz = new GHC.Types.Cons(lvls6vD, ss6Lv);
+            var showl_Frees6LA = (lvls6Lz, (Closure)null);
+            var showls6LA = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&showls6LA_Entry, showl_Frees6LA);
+            showls6LA.free.x1 = showls6LA;
+            return showls6LA.Apply<Closure, Closure>(xss6Ly);
+        }
+        public static Closure showls6LA_Entry(in (Closure x0, Closure x1) showl_Frees6LA, Closure dss6LB)
+        {
+            var lvls6Lz = showl_Frees6LA.x0;
+            var showls6LA = showl_Frees6LA.x1;
+            var wilds6LC = dss6LB.Eval();
             switch (wilds6LC)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6LC_Nil:
-                    {
-                        return GHC.CString.unpackAppendCStringHash_Entry(lvls6vL, ss6LB);
-                    }
+                case GHC.Types.Nil wilds6LC_Nil: { return lvls6Lz.Eval(); }
                 case GHC.Types.Cons wilds6LC_Cons:
                     {
-                        var xs6LD = wilds6LC_Cons.x0;
-                        var xss6LE = wilds6LC_Cons.x1;
-                        var sats6LU = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6LU_Entry), ss6LB, xs6LD, xss6LE);
-                        return new GHC.Types.Cons(lvls6vI, sats6LU);
+                        var ys6LD = wilds6LC_Cons.x0;
+                        var yss6LE = wilds6LC_Cons.x1;
+                        var sat_Frees6LJ = (showls6LA, ys6LD, yss6LE);
+                        var sats6LJ = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats6LJ_Entry, sat_Frees6LJ);
+                        return new GHC.Types.Cons(lvls6vE, sats6LJ);
                     }
             }
         }
-        public static Closure sats6LU_Entry(Closure ss6LB, Closure xs6LD, Closure xss6LE)
+        public static Closure sats6LJ_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6LJ)
         {
-            var sats6LQ = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6LQ_Entry), ss6LB, xss6LE);
-            var wws6LR = wDollcshowsPrecs6La_Entry(0, xs6LD, sats6LQ);
-            var wws6LR_RawTuple = wws6LR;
-            var wws6LS = wws6LR_RawTuple.x0;
-            var wws6LT = wws6LR_RawTuple.x1;
-            return new GHC.Types.Cons(wws6LS, wws6LT);
+            var showls6LA = sat_Frees6LJ.x0;
+            var ys6LD = sat_Frees6LJ.x1;
+            var yss6LE = sat_Frees6LJ.x2;
+            var sat_Frees6LF = (showls6LA, yss6LE);
+            var sats6LF = new Updatable<(Closure x0, Closure x1)>(&sats6LF_Entry, sat_Frees6LF);
+            var wws6LG = wDollcshowsPrecs6L4_Entry(0, ys6LD, sats6LF);
+            var wws6LG_RawTuple = wws6LG;
+            var wws6LH = wws6LG_RawTuple.x0;
+            var wws6LI = wws6LG_RawTuple.x1;
+            return new GHC.Types.Cons(wws6LH, wws6LI);
         }
-        public static Closure sats6LQ_Entry(Closure ss6LB, Closure xss6LE)
+        public static Closure sats6LF_Entry(in (Closure x0, Closure x1) sat_Frees6LF)
         {
-            var lvls6LF = new GHC.Types.Cons(lvls6vJ, ss6LB);
-            var showls6LG = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(showls6LG_Entry), lvls6LF, null);
-            showls6LG.x1 = showls6LG;
-            return showls6LG.Apply<Closure, Closure>(xss6LE);
+            var showls6LA = sat_Frees6LF.x0;
+            var yss6LE = sat_Frees6LF.x1;
+            return showls6LA.Apply<Closure, Closure>(yss6LE);
         }
-        public static Closure showls6LG_Entry(Closure lvls6LF, Closure showls6LG, Closure dss6LH)
+        public static Closure cshows6Lo_Entry(Closure xs6Lp)
         {
-            var wilds6LI = dss6LH.Eval();
-            switch (wilds6LI)
+            var wws6Lq = wDollcshowsPrecs6L4_Entry(0, xs6Lp, GHC.Types.nil_DataCon);
+            var wws6Lq_RawTuple = wws6Lq;
+            var wws6Lr = wws6Lq_RawTuple.x0;
+            var wws6Ls = wws6Lq_RawTuple.x1;
+            return new GHC.Types.Cons(wws6Lr, wws6Ls);
+        }
+        public static Closure cshowsPrecs6Lf_Entry(Closure ws6Lg, Closure ws6Lh, Closure ws6Li)
+        {
+            var wws6Lj = ws6Lg.Eval();
+            var wws6Lj_IHash = wws6Lj as GHC.Types.IHash;
+            var wws6Lk = wws6Lj_IHash.x0;
+            var wws6Ll = wDollcshowsPrecs6L4_Entry(wws6Lk, ws6Lh, ws6Li);
+            var wws6Ll_RawTuple = wws6Ll;
+            var wws6Lm = wws6Ll_RawTuple.x0;
+            var wws6Ln = wws6Ll_RawTuple.x1;
+            return new GHC.Types.Cons(wws6Lm, wws6Ln);
+        }
+        public static (Closure x0, Closure x1) wDollcshowsPrecs6L4_Entry(long wws6L5, Closure ws6L6, Closure ws6L7)
+        {
+            var lwilds6L8 = (wws6L5 > 6) ? 1 : 0;
+            switch (lwilds6L8)
             {
-                default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6LI_Nil: { return lvls6LF.Eval(); }
-                case GHC.Types.Cons wilds6LI_Cons:
-                    {
-                        var ys6LJ = wilds6LI_Cons.x0;
-                        var yss6LK = wilds6LI_Cons.x1;
-                        var sats6LP = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6LP_Entry), showls6LG, ys6LJ, yss6LK);
-                        return new GHC.Types.Cons(lvls6vK, sats6LP);
-                    }
-            }
-        }
-        public static Closure sats6LP_Entry(Closure showls6LG, Closure ys6LJ, Closure yss6LK)
-        {
-            var sats6LL = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6LL_Entry), showls6LG, yss6LK);
-            var wws6LM = wDollcshowsPrecs6La_Entry(0, ys6LJ, sats6LL);
-            var wws6LM_RawTuple = wws6LM;
-            var wws6LN = wws6LM_RawTuple.x0;
-            var wws6LO = wws6LM_RawTuple.x1;
-            return new GHC.Types.Cons(wws6LN, wws6LO);
-        }
-        public static Closure sats6LL_Entry(Closure showls6LG, Closure yss6LK)
-        {
-            return showls6LG.Apply<Closure, Closure>(yss6LK);
-        }
-        public static Closure cshows6Lu_Entry(Closure xs6Lv)
-        {
-            var wws6Lw = wDollcshowsPrecs6La_Entry(0, xs6Lv, GHC.Types.nil_DataCon);
-            var wws6Lw_RawTuple = wws6Lw;
-            var wws6Lx = wws6Lw_RawTuple.x0;
-            var wws6Ly = wws6Lw_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Lx, wws6Ly);
-        }
-        public static Closure cshowsPrecs6Ll_Entry(Closure ws6Lm, Closure ws6Ln, Closure ws6Lo)
-        {
-            var wws6Lp = ws6Lm.Eval();
-            var wws6Lp_IHash = wws6Lp as GHC.Types.IHash;
-            var wws6Lq = wws6Lp_IHash.x0;
-            var wws6Lr = wDollcshowsPrecs6La_Entry(wws6Lq, ws6Ln, ws6Lo);
-            var wws6Lr_RawTuple = wws6Lr;
-            var wws6Ls = wws6Lr_RawTuple.x0;
-            var wws6Lt = wws6Lr_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Ls, wws6Lt);
-        }
-        public static (Closure x0, Closure x1) wDollcshowsPrecs6La_Entry(long wws6Lb, Closure ws6Lc, Closure ws6Ld)
-        {
-            var lwilds6Le = (wws6Lb > 6) ? 1 : 0;
-            switch (lwilds6Le)
-            {
-                default: { return wintegerToStrings6L1_Entry(ws6Lc, ws6Ld); }
+                default: { return wintegerToStrings6KV_Entry(ws6L6, ws6L7); }
                 case 1:
                     {
-                        var wilds6Lf = GHC.Integer.Type.ltIntegerHash_Entry(ws6Lc, lvls6Kh);
-                        switch (wilds6Lf)
+                        var wilds6L9 = GHC.Integer.Type.ltIntegerHash_Entry(ws6L6, lvls6Kb);
+                        switch (wilds6L9)
                         {
-                            default: { return wintegerToStrings6L1_Entry(ws6Lc, ws6Ld); }
+                            default: { return wintegerToStrings6KV_Entry(ws6L6, ws6L7); }
                             case 1:
                                 {
-                                    var sats6Lk = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6Lk_Entry), ws6Lc, ws6Ld);
-                                    return (fs6xG, sats6Lk);
+                                    var sat_Frees6Le = (ws6L6, ws6L7);
+                                    var sats6Le = new Updatable<(Closure x0, Closure x1)>(&sats6Le_Entry, sat_Frees6Le);
+                                    return (fs6xA, sats6Le);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6Lk_Entry(Closure ws6Lc, Closure ws6Ld)
+        public static Closure sats6Le_Entry(in (Closure x0, Closure x1) sat_Frees6Le)
         {
-            var sats6Lg = new GHC.Types.Cons(gs6xH, ws6Ld);
-            var wws6Lh = wintegerToStrings6L1_Entry(ws6Lc, sats6Lg);
-            var wws6Lh_RawTuple = wws6Lh;
-            var wws6Li = wws6Lh_RawTuple.x0;
-            var wws6Lj = wws6Lh_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Li, wws6Lj);
+            var ws6L6 = sat_Frees6Le.x0;
+            var ws6L7 = sat_Frees6Le.x1;
+            var sats6La = new GHC.Types.Cons(gs6xB, ws6L7);
+            var wws6Lb = wintegerToStrings6KV_Entry(ws6L6, sats6La);
+            var wws6Lb_RawTuple = wws6Lb;
+            var wws6Lc = wws6Lb_RawTuple.x0;
+            var wws6Ld = wws6Lb_RawTuple.x1;
+            return new GHC.Types.Cons(wws6Lc, wws6Ld);
         }
-        public static (Closure x0, Closure x1) wintegerToStrings6L1_Entry(Closure ws6L2, Closure ws6L3)
+        public static (Closure x0, Closure x1) wintegerToStrings6KV_Entry(Closure ws6KW, Closure ws6KX)
         {
-            var wilds6L4 = GHC.Integer.Type.ltIntegerHash_Entry(ws6L2, lvls6Kh);
-            switch (wilds6L4)
+            var wilds6KY = GHC.Integer.Type.ltIntegerHash_Entry(ws6KW, lvls6Kb);
+            switch (wilds6KY)
             {
-                default: { return wintegerToString_s6KG_Entry(ws6L2, ws6L3); }
+                default: { return wintegerToString_s6KA_Entry(ws6KW, ws6KX); }
                 case 1:
                     {
-                        var sats6L9 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6L9_Entry), ws6L2, ws6L3);
-                        return (lvls6EH, sats6L9);
+                        var sat_Frees6L3 = (ws6KW, ws6KX);
+                        var sats6L3 = new Updatable<(Closure x0, Closure x1)>(&sats6L3_Entry, sat_Frees6L3);
+                        return (lvls6EB, sats6L3);
                     }
             }
         }
-        public static Closure sats6L9_Entry(Closure ws6L2, Closure ws6L3)
+        public static Closure sats6L3_Entry(in (Closure x0, Closure x1) sat_Frees6L3)
         {
-            var sats6L5 = GHC.Integer.Type.negateInteger_Entry(ws6L2).Eval();
-            var wws6L6 = wintegerToString_s6KG_Entry(sats6L5, ws6L3);
-            var wws6L6_RawTuple = wws6L6;
-            var wws6L7 = wws6L6_RawTuple.x0;
-            var wws6L8 = wws6L6_RawTuple.x1;
-            return new GHC.Types.Cons(wws6L7, wws6L8);
+            var ws6KW = sat_Frees6L3.x0;
+            var ws6KX = sat_Frees6L3.x1;
+            var sats6KZ = GHC.Integer.Type.negateInteger_Entry(ws6KW);
+            var wws6L0 = wintegerToString_s6KA_Entry(sats6KZ, ws6KX);
+            var wws6L0_RawTuple = wws6L0;
+            var wws6L1 = wws6L0_RawTuple.x0;
+            var wws6L2 = wws6L0_RawTuple.x1;
+            return new GHC.Types.Cons(wws6L1, wws6L2);
         }
-        public static (Closure x0, Closure x1) wintegerToString_s6KG_Entry(Closure ws6KH, Closure ws6KI)
+        public static (Closure x0, Closure x1) wintegerToString_s6KA_Entry(Closure ws6KB, Closure ws6KC)
         {
-            var wilds6KJ = GHC.Integer.Type.ltIntegerHash_Entry(ws6KH, lvls6JM);
-            switch (wilds6KJ)
+            var wilds6KD = GHC.Integer.Type.ltIntegerHash_Entry(ws6KB, lvls6JG);
+            switch (wilds6KD)
             {
                 default:
                     {
-                        var wws6KK = wjsplitfs6Ki_Entry(lvls6Kx, ws6KH);
-                        var wws6KK_RawTuple = wws6KK;
-                        var wws6KL = wws6KK_RawTuple.x0;
-                        var wws6KM = wws6KK_RawTuple.x1;
-                        var dss6KN = GHC.Integer.Type.quotRemInteger_Entry(wws6KL, lvls6JM);
-                        var dss6KN_RawTuple = dss6KN;
-                        var ipvs6KO = dss6KN_RawTuple.x0;
-                        var ipvs6KP = dss6KN_RawTuple.x1;
-                        var wilds6KQ = GHC.Integer.Type.integerToInt_Entry(ipvs6KO);
-                        var lwilds6KR = (wilds6KQ > 0) ? 1 : 0;
-                        switch (lwilds6KR)
+                        var wws6KE = wjsplitfs6Kc_Entry(lvls6Kr, ws6KB);
+                        var wws6KE_RawTuple = wws6KE;
+                        var wws6KF = wws6KE_RawTuple.x0;
+                        var wws6KG = wws6KE_RawTuple.x1;
+                        var dss6KH = GHC.Integer.Type.quotRemInteger_Entry(wws6KF, lvls6JG);
+                        var dss6KH_RawTuple = dss6KH;
+                        var ipvs6KI = dss6KH_RawTuple.x0;
+                        var ipvs6KJ = dss6KH_RawTuple.x1;
+                        var wilds6KK = GHC.Integer.Type.integerToInt_Entry(ipvs6KI);
+                        var lwilds6KL = (wilds6KK > 0) ? 1 : 0;
+                        switch (lwilds6KL)
                         {
                             default:
                                 {
-                                    var wilds6KS = GHC.Integer.Type.integerToInt_Entry(ipvs6KP);
-                                    var sats6KT = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6KT_Entry), ws6KI, wws6KM);
-                                    return witos_s6Et_Entry(wilds6KS, sats6KT);
+                                    var wilds6KM = GHC.Integer.Type.integerToInt_Entry(ipvs6KJ);
+                                    var sat_Frees6KN = (ws6KC, wws6KG);
+                                    var sats6KN = new Updatable<(Closure x0, Closure x1)>(&sats6KN_Entry, sat_Frees6KN);
+                                    return witos_s6En_Entry(wilds6KM, sats6KN);
                                 }
                             case 1:
                                 {
-                                    var sats6KZ = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6KZ_Entry), ws6KI, wws6KM, ipvs6KP);
-                                    return witos_s6Et_Entry(wilds6KQ, sats6KZ);
+                                    var sat_Frees6KT = (ws6KC, wws6KG, ipvs6KJ);
+                                    var sats6KT = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats6KT_Entry, sat_Frees6KT);
+                                    return witos_s6En_Entry(wilds6KK, sats6KT);
                                 }
                         }
                     }
                 case 1:
                     {
-                        var wilds6L0 = GHC.Integer.Type.integerToInt_Entry(ws6KH);
-                        return witos_s6Et_Entry(wilds6L0, ws6KI);
+                        var wilds6KU = GHC.Integer.Type.integerToInt_Entry(ws6KB);
+                        return witos_s6En_Entry(wilds6KU, ws6KC);
                     }
             }
         }
-        public static Closure sats6KT_Entry(Closure ws6KI, Closure wws6KM)
+        public static Closure sats6KN_Entry(in (Closure x0, Closure x1) sat_Frees6KN)
         {
-            return jprintbs6JN_Entry(wws6KM, ws6KI);
+            var ws6KC = sat_Frees6KN.x0;
+            var wws6KG = sat_Frees6KN.x1;
+            return jprintbs6JH_Entry(wws6KG, ws6KC);
         }
-        public static Closure sats6KZ_Entry(Closure ws6KI, Closure wws6KM, Closure ipvs6KP)
+        public static Closure sats6KT_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6KT)
         {
-            var wilds6KU = GHC.Integer.Type.integerToInt_Entry(ipvs6KP);
-            var sats6KV = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6KV_Entry), ws6KI, wws6KM);
-            var wws6KW = wjblock_s6Jw_Entry(18, wilds6KU, sats6KV);
-            var wws6KW_RawTuple = wws6KW;
-            var wws6KX = wws6KW_RawTuple.x0;
-            var wws6KY = wws6KW_RawTuple.x1;
-            return new GHC.Types.Cons(wws6KX, wws6KY);
+            var ws6KC = sat_Frees6KT.x0;
+            var wws6KG = sat_Frees6KT.x1;
+            var ipvs6KJ = sat_Frees6KT.x2;
+            var wilds6KO = GHC.Integer.Type.integerToInt_Entry(ipvs6KJ);
+            var sat_Frees6KP = (ws6KC, wws6KG);
+            var sats6KP = new Updatable<(Closure x0, Closure x1)>(&sats6KP_Entry, sat_Frees6KP);
+            var wws6KQ = wjblock_s6Jq_Entry(18, wilds6KO, sats6KP);
+            var wws6KQ_RawTuple = wws6KQ;
+            var wws6KR = wws6KQ_RawTuple.x0;
+            var wws6KS = wws6KQ_RawTuple.x1;
+            return new GHC.Types.Cons(wws6KR, wws6KS);
         }
-        public static Closure sats6KV_Entry(Closure ws6KI, Closure wws6KM)
+        public static Closure sats6KP_Entry(in (Closure x0, Closure x1) sat_Frees6KP)
         {
-            return jprintbs6JN_Entry(wws6KM, ws6KI);
+            var ws6KC = sat_Frees6KP.x0;
+            var wws6KG = sat_Frees6KP.x1;
+            return jprintbs6JH_Entry(wws6KG, ws6KC);
         }
-        public static Closure lvls6Kx_Entry()
+        public static Closure lvls6Kr_Entry()
         {
-            return GHC.Integer.Type.mkInteger_Entry(GHC.Types.true_DataCon, sats6KF);
+            return GHC.Integer.Type.mkInteger_Entry(GHC.Types.true_DataCon, sats6Kz);
         }
-        public static (Closure x0, Closure x1) wjsplitfs6Ki_Entry(Closure ws6Kj, Closure ws6Kk)
+        public static (Closure x0, Closure x1) wjsplitfs6Kc_Entry(Closure ws6Kd, Closure ws6Ke)
         {
-            var wilds6Kl = GHC.Integer.Type.gtIntegerHash_Entry(ws6Kj, ws6Kk);
-            switch (wilds6Kl)
+            var wilds6Kf = GHC.Integer.Type.gtIntegerHash_Entry(ws6Kd, ws6Ke);
+            switch (wilds6Kf)
             {
                 default:
                     {
-                        var sats6Km = GHC.Integer.Type.timesInteger_Entry(ws6Kj, ws6Kj).Eval();
-                        var wws6Kn = wjsplitfs6Ki_Entry(sats6Km, ws6Kk);
-                        var wws6Kn_RawTuple = wws6Kn;
-                        var wws6Ko = wws6Kn_RawTuple.x0;
-                        var wws6Kp = wws6Kn_RawTuple.x1;
-                        var dss6Kq = GHC.Integer.Type.quotRemInteger_Entry(wws6Ko, ws6Kj);
-                        var dss6Kq_RawTuple = dss6Kq;
-                        var ipvs6Kr = dss6Kq_RawTuple.x0;
-                        var ipvs6Ks = dss6Kq_RawTuple.x1;
-                        var wilds6Kt = GHC.Integer.Type.gtIntegerHash_Entry(ipvs6Kr, lvls6Kh);
-                        switch (wilds6Kt)
+                        var sats6Kg = GHC.Integer.Type.timesInteger_Entry(ws6Kd, ws6Kd);
+                        var wws6Kh = wjsplitfs6Kc_Entry(sats6Kg, ws6Ke);
+                        var wws6Kh_RawTuple = wws6Kh;
+                        var wws6Ki = wws6Kh_RawTuple.x0;
+                        var wws6Kj = wws6Kh_RawTuple.x1;
+                        var dss6Kk = GHC.Integer.Type.quotRemInteger_Entry(wws6Ki, ws6Kd);
+                        var dss6Kk_RawTuple = dss6Kk;
+                        var ipvs6Kl = dss6Kk_RawTuple.x0;
+                        var ipvs6Km = dss6Kk_RawTuple.x1;
+                        var wilds6Kn = GHC.Integer.Type.gtIntegerHash_Entry(ipvs6Kl, lvls6Kb);
+                        switch (wilds6Kn)
                         {
                             default:
                                 {
-                                    var sats6Ku = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6Ku_Entry), ws6Kj, wws6Kp);
-                                    return (ipvs6Ks, sats6Ku);
+                                    var sat_Frees6Ko = (ws6Kd, wws6Kj);
+                                    var sats6Ko = new Updatable<(Closure x0, Closure x1)>(&sats6Ko_Entry, sat_Frees6Ko);
+                                    return (ipvs6Km, sats6Ko);
                                 }
                             case 1:
                                 {
-                                    var sats6Kv = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6Kv_Entry), ws6Kj, wws6Kp);
-                                    var sats6Kw = new GHC.Types.Cons(ipvs6Ks, sats6Kv);
-                                    return (ipvs6Kr, sats6Kw);
+                                    var sat_Frees6Kp = (ws6Kd, wws6Kj);
+                                    var sats6Kp = new Updatable<(Closure x0, Closure x1)>(&sats6Kp_Entry, sat_Frees6Kp);
+                                    var sats6Kq = new GHC.Types.Cons(ipvs6Km, sats6Kp);
+                                    return (ipvs6Kl, sats6Kq);
                                 }
                         }
                     }
-                case 1: { return (ws6Kk, GHC.Types.nil_DataCon); }
+                case 1: { return (ws6Ke, GHC.Types.nil_DataCon); }
             }
         }
-        public static Closure sats6Ku_Entry(Closure ws6Kj, Closure wws6Kp)
+        public static Closure sats6Ko_Entry(in (Closure x0, Closure x1) sat_Frees6Ko)
         {
-            return jsplitbs6K6_Entry(ws6Kj, wws6Kp);
+            var ws6Kd = sat_Frees6Ko.x0;
+            var wws6Kj = sat_Frees6Ko.x1;
+            return jsplitbs6K0_Entry(ws6Kd, wws6Kj);
         }
-        public static Closure sats6Kv_Entry(Closure ws6Kj, Closure wws6Kp)
+        public static Closure sats6Kp_Entry(in (Closure x0, Closure x1) sat_Frees6Kp)
         {
-            return jsplitbs6K6_Entry(ws6Kj, wws6Kp);
+            var ws6Kd = sat_Frees6Kp.x0;
+            var wws6Kj = sat_Frees6Kp.x1;
+            return jsplitbs6K0_Entry(ws6Kd, wws6Kj);
         }
-        public static Closure jsplitbs6K6_Entry(Closure dss6K7, Closure dss6K8)
+        public static Closure jsplitbs6K0_Entry(Closure dss6K1, Closure dss6K2)
         {
-            var wilds6K9 = dss6K8.Eval();
-            switch (wilds6K9)
+            var wilds6K3 = dss6K2.Eval();
+            switch (wilds6K3)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6K9_Nil:
+                case GHC.Types.Nil wilds6K3_Nil:
                     {
                         return GHC.Types.nil_DataCon.Eval();
                     }
-                case GHC.Types.Cons wilds6K9_Cons:
+                case GHC.Types.Cons wilds6K3_Cons:
                     {
-                        var ns6Ka = wilds6K9_Cons.x0;
-                        var nss6Kb = wilds6K9_Cons.x1;
-                        var dss6Kc = GHC.Integer.Type.quotRemInteger_Entry(ns6Ka, dss6K7);
-                        var dss6Kc_RawTuple = dss6Kc;
-                        var ipvs6Kd = dss6Kc_RawTuple.x0;
-                        var ipvs6Ke = dss6Kc_RawTuple.x1;
-                        var sats6Kf = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6Kf_Entry), dss6K7, nss6Kb);
-                        var sats6Kg = new GHC.Types.Cons(ipvs6Ke, sats6Kf);
-                        return new GHC.Types.Cons(ipvs6Kd, sats6Kg);
+                        var ns6K4 = wilds6K3_Cons.x0;
+                        var nss6K5 = wilds6K3_Cons.x1;
+                        var dss6K6 = GHC.Integer.Type.quotRemInteger_Entry(ns6K4, dss6K1);
+                        var dss6K6_RawTuple = dss6K6;
+                        var ipvs6K7 = dss6K6_RawTuple.x0;
+                        var ipvs6K8 = dss6K6_RawTuple.x1;
+                        var sat_Frees6K9 = (dss6K1, nss6K5);
+                        var sats6K9 = new Updatable<(Closure x0, Closure x1)>(&sats6K9_Entry, sat_Frees6K9);
+                        var sats6Ka = new GHC.Types.Cons(ipvs6K8, sats6K9);
+                        return new GHC.Types.Cons(ipvs6K7, sats6Ka);
                     }
             }
         }
-        public static Closure sats6Kf_Entry(Closure dss6K7, Closure nss6Kb)
+        public static Closure sats6K9_Entry(in (Closure x0, Closure x1) sat_Frees6K9)
         {
-            return jsplitbs6K6_Entry(dss6K7, nss6Kb);
+            var dss6K1 = sat_Frees6K9.x0;
+            var nss6K5 = sat_Frees6K9.x1;
+            return jsplitbs6K0_Entry(dss6K1, nss6K5);
         }
-        public static Closure jprintbs6JN_Entry(Closure dss6JO, Closure css6JP)
+        public static Closure jprintbs6JH_Entry(Closure dss6JI, Closure css6JJ)
         {
-            var wilds6JQ = dss6JO.Eval();
-            switch (wilds6JQ)
+            var wilds6JK = dss6JI.Eval();
+            switch (wilds6JK)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6JQ_Nil: { return css6JP.Eval(); }
-                case GHC.Types.Cons wilds6JQ_Cons:
+                case GHC.Types.Nil wilds6JK_Nil: { return css6JJ.Eval(); }
+                case GHC.Types.Cons wilds6JK_Cons:
                     {
-                        var ns6JR = wilds6JQ_Cons.x0;
-                        var nss6JS = wilds6JQ_Cons.x1;
-                        var dss6JT = GHC.Integer.Type.quotRemInteger_Entry(ns6JR, lvls6JM);
-                        var dss6JT_RawTuple = dss6JT;
-                        var ipvs6JU = dss6JT_RawTuple.x0;
-                        var ipvs6JV = dss6JT_RawTuple.x1;
-                        var wilds6JW = GHC.Integer.Type.integerToInt_Entry(ipvs6JU);
-                        var sats6K2 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6K2_Entry), css6JP, nss6JS, ipvs6JV);
-                        var wws6K3 = wjblock_s6Jw_Entry(18, wilds6JW, sats6K2);
-                        var wws6K3_RawTuple = wws6K3;
-                        var wws6K4 = wws6K3_RawTuple.x0;
-                        var wws6K5 = wws6K3_RawTuple.x1;
-                        return new GHC.Types.Cons(wws6K4, wws6K5);
+                        var ns6JL = wilds6JK_Cons.x0;
+                        var nss6JM = wilds6JK_Cons.x1;
+                        var dss6JN = GHC.Integer.Type.quotRemInteger_Entry(ns6JL, lvls6JG);
+                        var dss6JN_RawTuple = dss6JN;
+                        var ipvs6JO = dss6JN_RawTuple.x0;
+                        var ipvs6JP = dss6JN_RawTuple.x1;
+                        var wilds6JQ = GHC.Integer.Type.integerToInt_Entry(ipvs6JO);
+                        var sat_Frees6JW = (css6JJ, nss6JM, ipvs6JP);
+                        var sats6JW = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats6JW_Entry, sat_Frees6JW);
+                        var wws6JX = wjblock_s6Jq_Entry(18, wilds6JQ, sats6JW);
+                        var wws6JX_RawTuple = wws6JX;
+                        var wws6JY = wws6JX_RawTuple.x0;
+                        var wws6JZ = wws6JX_RawTuple.x1;
+                        return new GHC.Types.Cons(wws6JY, wws6JZ);
                     }
             }
         }
-        public static Closure sats6K2_Entry(Closure css6JP, Closure nss6JS, Closure ipvs6JV)
+        public static Closure sats6JW_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6JW)
         {
-            var wilds6JX = GHC.Integer.Type.integerToInt_Entry(ipvs6JV);
-            var sats6JY = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6JY_Entry), css6JP, nss6JS);
-            var wws6JZ = wjblock_s6Jw_Entry(18, wilds6JX, sats6JY);
-            var wws6JZ_RawTuple = wws6JZ;
-            var wws6K0 = wws6JZ_RawTuple.x0;
-            var wws6K1 = wws6JZ_RawTuple.x1;
-            return new GHC.Types.Cons(wws6K0, wws6K1);
+            var css6JJ = sat_Frees6JW.x0;
+            var nss6JM = sat_Frees6JW.x1;
+            var ipvs6JP = sat_Frees6JW.x2;
+            var wilds6JR = GHC.Integer.Type.integerToInt_Entry(ipvs6JP);
+            var sat_Frees6JS = (css6JJ, nss6JM);
+            var sats6JS = new Updatable<(Closure x0, Closure x1)>(&sats6JS_Entry, sat_Frees6JS);
+            var wws6JT = wjblock_s6Jq_Entry(18, wilds6JR, sats6JS);
+            var wws6JT_RawTuple = wws6JT;
+            var wws6JU = wws6JT_RawTuple.x0;
+            var wws6JV = wws6JT_RawTuple.x1;
+            return new GHC.Types.Cons(wws6JU, wws6JV);
         }
-        public static Closure sats6JY_Entry(Closure css6JP, Closure nss6JS)
+        public static Closure sats6JS_Entry(in (Closure x0, Closure x1) sat_Frees6JS)
         {
-            return jprintbs6JN_Entry(nss6JS, css6JP);
+            var css6JJ = sat_Frees6JS.x0;
+            var nss6JM = sat_Frees6JS.x1;
+            return jprintbs6JH_Entry(nss6JM, css6JJ);
         }
-        public static (Closure x0, Closure x1) wjblock_s6Jw_Entry(long wws6Jx, long wws6Jy, Closure ws6Jz)
+        public static (Closure x0, Closure x1) wjblock_s6Jq_Entry(long wws6Jr, long wws6Js, Closure ws6Jt)
         {
-            var wilds6JA = wws6Jx;
-            switch (wilds6JA)
+            var wilds6Ju = wws6Jr;
+            switch (wilds6Ju)
             {
                 default:
                     {
-                        var ds2s6JB = (x0: wws6Jy / 10, x1: wws6Jy % 10);
-                        var ds2s6JB_RawTuple = ds2s6JB;
-                        var ipvs6JC = ds2s6JB_RawTuple.x0;
-                        var ipv1s6JD = ds2s6JB_RawTuple.x1;
-                        var sats6JF = 48 + ipv1s6JD;
-                        var sats6JG = (char)sats6JF;
-                        var sats6JH = new GHC.Types.CHash(sats6JG);
-                        var sats6JI = new GHC.Types.Cons(sats6JH, ws6Jz);
-                        var sats6JE = wilds6JA - 1;
-                        return wjblock_s6Jw_Entry(sats6JE, ipvs6JC, sats6JI);
+                        var ds2s6Jv = (x0: wws6Js / 10, x1: wws6Js % 10);
+                        var ds2s6Jv_RawTuple = ds2s6Jv;
+                        var ipvs6Jw = ds2s6Jv_RawTuple.x0;
+                        var ipv1s6Jx = ds2s6Jv_RawTuple.x1;
+                        var sats6Jz = 48 + ipv1s6Jx;
+                        var sats6JA = (char)sats6Jz;
+                        var sats6JB = new GHC.Types.CHash(sats6JA);
+                        var sats6JC = new GHC.Types.Cons(sats6JB, ws6Jt);
+                        var sats6Jy = wilds6Ju - 1;
+                        return wjblock_s6Jq_Entry(sats6Jy, ipvs6Jw, sats6JC);
                     }
                 case 1:
                     {
-                        var sats6JJ = 48 + wws6Jy;
-                        var sats6JK = (char)sats6JJ;
-                        var sats6JL = new GHC.Types.CHash(sats6JK);
-                        return (sats6JL, ws6Jz);
+                        var sats6JD = 48 + wws6Js;
+                        var sats6JE = (char)sats6JD;
+                        var sats6JF = new GHC.Types.CHash(sats6JE);
+                        return (sats6JF, ws6Jt);
                     }
             }
         }
-        public static Closure intToDigit_Entry(Closure ws6Js)
+        public static Closure intToDigit_Entry(Closure ws6Jm)
         {
-            var wws6Jt = ws6Js.Eval();
-            var wws6Jt_IHash = wws6Jt as GHC.Types.IHash;
-            var wws6Ju = wws6Jt_IHash.x0;
-            var wws6Jv = wintToDigits6Jg_Entry(wws6Ju);
-            return new GHC.Types.CHash(wws6Jv);
+            var wws6Jn = ws6Jm.Eval();
+            var wws6Jn_IHash = wws6Jn as GHC.Types.IHash;
+            var wws6Jo = wws6Jn_IHash.x0;
+            var wws6Jp = wintToDigits6Ja_Entry(wws6Jo);
+            return new GHC.Types.CHash(wws6Jp);
         }
-        public static char wintToDigits6Jg_Entry(long wws6Jh)
+        public static char wintToDigits6Ja_Entry(long wws6Jb)
         {
-            var js6Ji = js6Ji_Entry(wws6Jh);
-            var lwilds6Jo = (wws6Jh >= 0) ? 1 : 0;
-            switch (lwilds6Jo)
+            var js6Jc = js6Jc_Entry(wws6Jb);
+            var lwilds6Ji = (wws6Jb >= 0) ? 1 : 0;
+            switch (lwilds6Ji)
             {
-                default: { return js6Ji; }
+                default: { return js6Jc; }
                 case 1:
                     {
-                        var lwilds6Jp = (wws6Jh <= 9) ? 1 : 0;
-                        switch (lwilds6Jp)
+                        var lwilds6Jj = (wws6Jb <= 9) ? 1 : 0;
+                        switch (lwilds6Jj)
                         {
-                            default: { return js6Ji; }
-                            case 1: { var sats6Jq = 48 + wws6Jh; return (char)sats6Jq; }
+                            default: { return js6Jc; }
+                            case 1: { var sats6Jk = 48 + wws6Jb; return (char)sats6Jk; }
                         }
                     }
             }
         }
-        public static char js6Ji_Entry(long wws6Jh)
+        public static char js6Jc_Entry(in long wws6Jb)
         {
-            var lwilds6Jj = (wws6Jh >= 10) ? 1 : 0;
-            switch (lwilds6Jj)
+            var lwilds6Jd = (wws6Jb >= 10) ? 1 : 0;
+            switch (lwilds6Jd)
             {
-                default: { return (char)(object)lvls6J9_Entry(wws6Jh); }
+                default: { return (char)(object)lvls6J3_Entry(wws6Jb); }
                 case 1:
                     {
-                        var lwilds6Jl = (wws6Jh <= 15) ? 1 : 0;
-                        switch (lwilds6Jl)
+                        var lwilds6Jf = (wws6Jb <= 15) ? 1 : 0;
+                        switch (lwilds6Jf)
                         {
-                            default: { return (char)(object)lvls6J9_Entry(wws6Jh); }
-                            case 1: { var sats6Jn = 87 + wws6Jh; return (char)sats6Jn; }
+                            default: { return (char)(object)lvls6J3_Entry(wws6Jb); }
+                            case 1: { var sats6Jh = 87 + wws6Jb; return (char)sats6Jh; }
                         }
                     }
             }
         }
-        public static Closure lvls6J9_Entry(long is6Ja)
+        public static Closure lvls6J3_Entry(long is6J4)
         {
-            var sats6Je = new Updatable<long>(CLR.LoadFunctionPointer<long, Closure>(sats6Je_Entry), is6Ja);
-            var sats6Jf = GHC.CString.unpackAppendCStringHash_Entry(lvls6J8, sats6Je).Eval();
-            return GHC.Err.errorWithoutStackTrace_Entry<Closure>(sats6Jf);
+            var sats6J8 = new Updatable<long>(&sats6J8_Entry, is6J4);
+            var sats6J9 = GHC.CString.unpackAppendCStringHash_Entry(lvls6J2, sats6J8);
+            return GHC.Err.errorWithoutStackTrace_Entry<Closure>(sats6J9);
         }
-        public static Closure sats6Je_Entry(long is6Ja)
+        public static Closure sats6J8_Entry(in long is6J4)
         {
-            var wws6Jb = witoss6EI_Entry(is6Ja, GHC.Types.nil_DataCon);
-            var wws6Jb_RawTuple = wws6Jb;
-            var wws6Jc = wws6Jb_RawTuple.x0;
-            var wws6Jd = wws6Jb_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Jc, wws6Jd);
+            var wws6J5 = witoss6EC_Entry(is6J4, GHC.Types.nil_DataCon);
+            var wws6J5_RawTuple = wws6J5;
+            var wws6J6 = wws6J5_RawTuple.x0;
+            var wws6J7 = wws6J5_RawTuple.x1;
+            return new GHC.Types.Cons(wws6J6, wws6J7);
         }
-        public static Closure fShowBrOBrC_Entry(Closure dShows6J2)
+        public static Closure fShowBrOBrC_Entry(Closure dShows6IW)
         {
-            var lvls6J3 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(lvls6J3_Entry), dShows6J2);
-            var sats6J7 = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6J7_Entry), dShows6J2);
-            var sats6J6 = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6J6_Entry), dShows6J2);
-            var sats6J5 = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6J5_Entry), lvls6J3);
-            return new GHC.Show.CColShow(sats6J5, sats6J6, sats6J7);
+            var lvls6IX = new Updatable<Closure>(&lvls6IX_Entry, dShows6IW);
+            var sats6J1 = new Fun2<Closure, Closure, Closure, Closure>(&sats6J1_Entry, dShows6IW);
+            var sats6J0 = new Fun1<Closure, Closure, Closure>(&sats6J0_Entry, dShows6IW);
+            var sats6IZ = new Fun1<Closure, Closure, Closure>(&sats6IZ_Entry, lvls6IX);
+            return new GHC.Show.CColShow(sats6IZ, sats6J0, sats6J1);
         }
-        public static Closure sats6J5_Entry(Closure lvls6J3, Closure dss6J4)
+        public static Closure sats6IZ_Entry(in Closure lvls6IX, Closure dss6IY)
         {
-            return lvls6J3.Eval();
+            return lvls6IX.Eval();
         }
-        public static Closure sats6J6_Entry(Closure dShows6J2, Closure etaB1)
+        public static Closure sats6J0_Entry(in Closure dShows6IW, Closure etaB1)
         {
-            return cshows6IK_Entry(dShows6J2, etaB1);
+            return cshows6IE_Entry(dShows6IW, etaB1);
         }
-        public static Closure sats6J7_Entry(Closure dShows6J2, Closure etaB2, Closure etaB1)
+        public static Closure sats6J1_Entry(in Closure dShows6IW, Closure etaB2, Closure etaB1)
         {
-            return cshowLists6IR_Entry(dShows6J2, etaB2, etaB1);
+            return cshowLists6IL_Entry(dShows6IW, etaB2, etaB1);
         }
-        public static Closure lvls6J3_Entry(Closure dShows6J2)
+        public static Closure lvls6IX_Entry(in Closure dShows6IW)
         {
-            return GHC.Show.showList_Entry(dShows6J2);
+            return GHC.Show.showList_Entry(dShows6IW);
         }
-        public static Closure sDollfShowBrOBrCs6IW_Entry(Closure dss6IX, Closure etas6IY, Closure etas6IZ)
+        public static Closure sDollfShowBrOBrCs6IQ_Entry(Closure dss6IR, Closure etas6IS, Closure etas6IT)
         {
-            return cshowLists6G9_Entry(etas6IY, etas6IZ);
+            return cshowLists6G3_Entry(etas6IS, etas6IT);
         }
-        public static Closure cshowLists6IR_Entry(Closure dShows6IS, Closure lss6IT, Closure ss6IU)
+        public static Closure cshowLists6IL_Entry(Closure dShows6IM, Closure lss6IN, Closure ss6IO)
         {
-            var sats6IV = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6IV_Entry), dShows6IS);
-            return showList___Entry(sats6IV, lss6IT, ss6IU);
+            var sats6IP = new Updatable<Closure>(&sats6IP_Entry, dShows6IM);
+            return showList___Entry(sats6IP, lss6IN, ss6IO);
         }
-        public static Closure sats6IV_Entry(Closure dShows6IS)
+        public static Closure sats6IP_Entry(in Closure dShows6IM)
         {
-            return GHC.Show.showList_Entry(dShows6IS);
+            return GHC.Show.showList_Entry(dShows6IM);
         }
-        public static Closure sDollcshowLists6IN_Entry(Closure lss6IO, Closure ss6IP)
+        public static Closure sDollcshowLists6IH_Entry(Closure lss6II, Closure ss6IJ)
         {
-            return showList___Entry(sDollcshowLists6Ip, lss6IO, ss6IP);
+            return showList___Entry(sDollcshowLists6Ij, lss6II, ss6IJ);
         }
-        public static Closure cshows6IK_Entry(Closure dShows6IL, Closure xs6IM)
+        public static Closure cshows6IE_Entry(Closure dShows6IF, Closure xs6IG)
         {
-            return GHC.Show.showList_Entry(dShows6IL).Apply<Closure, Closure, Closure>(xs6IM, GHC.Types.nil_DataCon);
+            return GHC.Show.showList_Entry(dShows6IF).Apply<Closure, Closure, Closure>(xs6IG, GHC.Types.nil_DataCon);
         }
-        public static Closure sDollcshows6II_Entry(Closure xs6IJ)
+        public static Closure sDollcshows6IC_Entry(Closure xs6ID)
         {
-            return showList___Entry(cshowLists6HX, xs6IJ, GHC.Types.nil_DataCon);
+            return showList___Entry(cshowLists6HR, xs6ID, GHC.Types.nil_DataCon);
         }
-        public static Closure sDollfShowBrOBrCs6IG_Entry(Closure dss6IH, Closure etaB2, Closure etaB1)
+        public static Closure sDollfShowBrOBrCs6IA_Entry(Closure dss6IB, Closure etaB2, Closure etaB1)
         {
-            return sDollcshowLists6Ip_Entry(etaB2, etaB1);
+            return sDollcshowLists6Ij_Entry(etaB2, etaB1);
         }
-        public static Closure sDollfShowBrOBrCs6IB_Entry(Closure dss6IC, Closure etas6ID, Closure etas6IE)
+        public static Closure sDollfShowBrOBrCs6Iv_Entry(Closure dss6Iw, Closure etas6Ix, Closure etas6Iy)
         {
-            return cshowLists6HX_Entry(etas6ID, etas6IE);
+            return cshowLists6HR_Entry(etas6Ix, etas6Iy);
         }
-        public static Closure sDollcshows6Iy_Entry(Closure xs6Iz)
+        public static Closure sDollcshows6Is_Entry(Closure xs6It)
         {
-            var sats6IA = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6IA_Entry), xs6Iz);
-            return new GHC.Types.Cons(lvls6HR, sats6IA);
+            var sats6Iu = new Updatable<Closure>(&sats6Iu_Entry, xs6It);
+            return new GHC.Types.Cons(lvls6HL, sats6Iu);
         }
-        public static Closure sats6IA_Entry(Closure xs6Iz)
+        public static Closure sats6Iu_Entry(in Closure xs6It)
         {
-            return showLitString_Entry(xs6Iz, lvls6Ix);
+            return showLitString_Entry(xs6It, lvls6Ir);
         }
-        public static Closure sDollcshows6Iv_Entry(Closure xs6Iw)
+        public static Closure sDollcshows6Ip_Entry(Closure xs6Iq)
         {
-            return showList___Entry(lvls6G1, xs6Iw, GHC.Types.nil_DataCon);
+            return showList___Entry(lvls6FV, xs6Iq, GHC.Types.nil_DataCon);
         }
-        public static Closure sDollcshowLists6Is_Entry(Closure lss6It, Closure ss6Iu)
+        public static Closure sDollcshowLists6Im_Entry(Closure lss6In, Closure ss6Io)
         {
-            return showList___Entry(cshowLists6G9, lss6It, ss6Iu);
+            return showList___Entry(cshowLists6G3, lss6In, ss6Io);
         }
-        public static Closure sDollcshowLists6Ip_Entry(Closure lss6Iq, Closure ss6Ir)
+        public static Closure sDollcshowLists6Ij_Entry(Closure lss6Ik, Closure ss6Il)
         {
-            return showList___Entry(cshowLists6HX, lss6Iq, ss6Ir);
+            return showList___Entry(cshowLists6HR, lss6Ik, ss6Il);
         }
-        public static Closure cshows6Ii_Entry(Closure xs6Ij)
+        public static Closure cshows6Ic_Entry(Closure xs6Id)
         {
-            var wilds6Ik = xs6Ij.Eval();
-            var wilds6Ik_CHash = wilds6Ik as GHC.Types.CHash;
-            var dss6Il = wilds6Ik_CHash.x0;
-            var dss6Im = dss6Il;
-            switch (dss6Im)
+            var wilds6Ie = xs6Id.Eval();
+            var wilds6Ie_CHash = wilds6Ie as GHC.Types.CHash;
+            var dss6If = wilds6Ie_CHash.x0;
+            var dss6Ig = dss6If;
+            switch (dss6Ig)
             {
                 default:
                     {
-                        var sats6In = new Updatable<char>(CLR.LoadFunctionPointer<char, Closure>(sats6In_Entry), dss6Im);
-                        return new GHC.Types.Cons(fs6I2, sats6In);
+                        var sats6Ih = new Updatable<char>(&sats6Ih_Entry, dss6Ig);
+                        return new GHC.Types.Cons(fs6HW, sats6Ih);
                     }
-                case '\'' : { return lvls6I4.Eval(); }
-                }
+                case '\'': { return lvls6HY.Eval(); }
+            }
         }
-        public static Closure sats6In_Entry(char dss6Im)
+        public static Closure sats6Ih_Entry(in char dss6Ig)
         {
-            return wshowLitChars6Go_Entry(dss6Im, lvls6Ih);
+            return wshowLitChars6Gi_Entry(dss6Ig, lvls6Ib);
         }
-        public static Closure cshowsPrecs6Ib_Entry(Closure ws6Ic, Closure ws6Id, Closure ws6Ie)
+        public static Closure cshowsPrecs6I5_Entry(Closure ws6I6, Closure ws6I7, Closure ws6I8)
         {
-            var wws6If = ws6Id.Eval();
-            var wws6If_CHash = wws6If as GHC.Types.CHash;
-            var wws6Ig = wws6If_CHash.x0;
-            return wDollcshowsPrecs6I5_Entry(wws6Ig, ws6Ie);
+            var wws6I9 = ws6I7.Eval();
+            var wws6I9_CHash = wws6I9 as GHC.Types.CHash;
+            var wws6Ia = wws6I9_CHash.x0;
+            return wDollcshowsPrecs6HZ_Entry(wws6Ia, ws6I8);
         }
-        public static Closure wDollcshowsPrecs6I5_Entry(char wws6I6, Closure ws6I7)
+        public static Closure wDollcshowsPrecs6HZ_Entry(char wws6I0, Closure ws6I1)
         {
-            var dss6I8 = wws6I6;
-            switch (dss6I8)
+            var dss6I2 = wws6I0;
+            switch (dss6I2)
             {
                 default:
                     {
-                        var sats6Ia = new Updatable<Closure, char>(CLR.LoadFunctionPointer<Closure, char, Closure>(sats6Ia_Entry), ws6I7, dss6I8);
-                        return new GHC.Types.Cons(fs6I2, sats6Ia);
+                        var sat_Frees6I4 = (ws6I1, dss6I2);
+                        var sats6I4 = new Updatable<(Closure x0, char x1)>(&sats6I4_Entry, sat_Frees6I4);
+                        return new GHC.Types.Cons(fs6HW, sats6I4);
                     }
-                case '\'' : { return GHC.Base.plusPlus_Entry( lvls6I4 , ws6I7 ); }
-                }
+                case '\'': { return GHC.Base.plusPlus_Entry(lvls6HY, ws6I1); }
+            }
         }
-        public static Closure sats6Ia_Entry(Closure ws6I7, char dss6I8)
+        public static Closure sats6I4_Entry(in (Closure x0, char x1) sat_Frees6I4)
         {
-            var sats6I9 = new GHC.Types.Cons(fs6I2, ws6I7);
-            return wshowLitChars6Go_Entry(dss6I8, sats6I9);
+            var ws6I1 = sat_Frees6I4.x0;
+            var dss6I2 = sat_Frees6I4.x1;
+            var sats6I3 = new GHC.Types.Cons(fs6HW, ws6I1);
+            return wshowLitChars6Gi_Entry(dss6I2, sats6I3);
         }
-        public static Closure lvls6I4_Entry()
+        public static Closure lvls6HY_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6I3);
+            return GHC.CString.unpackCStringHash_Entry(lvls6HX);
         }
-        public static Closure cshowLists6HX_Entry(Closure css6HY, Closure etas6HZ)
+        public static Closure cshowLists6HR_Entry(Closure css6HS, Closure etas6HT)
         {
-            var sats6I1 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6I1_Entry), css6HY, etas6HZ);
-            return new GHC.Types.Cons(lvls6HR, sats6I1);
+            var sat_Frees6HV = (css6HS, etas6HT);
+            var sats6HV = new Updatable<(Closure x0, Closure x1)>(&sats6HV_Entry, sat_Frees6HV);
+            return new GHC.Types.Cons(lvls6HL, sats6HV);
         }
-        public static Closure sats6I1_Entry(Closure css6HY, Closure etas6HZ)
+        public static Closure sats6HV_Entry(in (Closure x0, Closure x1) sat_Frees6HV)
         {
-            var sats6I0 = new GHC.Types.Cons(lvls6HR, etas6HZ);
-            return showLitString_Entry(css6HY, sats6I0);
+            var css6HS = sat_Frees6HV.x0;
+            var etas6HT = sat_Frees6HV.x1;
+            var sats6HU = new GHC.Types.Cons(lvls6HL, etas6HT);
+            return showLitString_Entry(css6HS, sats6HU);
         }
-        public static Closure showMultiLineString_Entry(Closure strs6HT)
+        public static Closure showMultiLineString_Entry(Closure strs6HN)
         {
-            var wws6HU = wgos6Hk_Entry(lvls6HR, strs6HT);
-            var wws6HU_RawTuple = wws6HU;
-            var wws6HV = wws6HU_RawTuple.x0;
-            var wws6HW = wws6HU_RawTuple.x1;
-            return new GHC.Types.Cons(wws6HV, wws6HW);
-        }
-        public static Closure gos6HL_Entry(Closure ws6HM, Closure ws6HN)
-        {
-            var wws6HO = wgos6Hk_Entry(ws6HM, ws6HN);
+            var wws6HO = wgos6He_Entry(lvls6HL, strs6HN);
             var wws6HO_RawTuple = wws6HO;
             var wws6HP = wws6HO_RawTuple.x0;
             var wws6HQ = wws6HO_RawTuple.x1;
             return new GHC.Types.Cons(wws6HP, wws6HQ);
         }
-        public static (Closure x0, Closure x1) wgos6Hk_Entry(Closure ws6Hl, Closure ws6Hm)
+        public static Closure gos6HF_Entry(Closure ws6HG, Closure ws6HH)
         {
-            var wws6Hn = GHC.List.wbreaks8KB_Entry(lvls6H9, ws6Hm);
-            var wws6Hn_RawTuple = wws6Hn;
-            var ww1s6Ho = wws6Hn_RawTuple.x0;
-            var ww2s6Hp = wws6Hn_RawTuple.x1;
-            var wilds6Hq = ww2s6Hp.Eval();
-            switch (wilds6Hq)
+            var wws6HI = wgos6He_Entry(ws6HG, ws6HH);
+            var wws6HI_RawTuple = wws6HI;
+            var wws6HJ = wws6HI_RawTuple.x0;
+            var wws6HK = wws6HI_RawTuple.x1;
+            return new GHC.Types.Cons(wws6HJ, wws6HK);
+        }
+        public static (Closure x0, Closure x1) wgos6He_Entry(Closure ws6Hf, Closure ws6Hg)
+        {
+            var wws6Hh = GHC.List.wbreaks8KB_Entry(lvls6H3, ws6Hg);
+            var wws6Hh_RawTuple = wws6Hh;
+            var ww1s6Hi = wws6Hh_RawTuple.x0;
+            var ww2s6Hj = wws6Hh_RawTuple.x1;
+            var wilds6Hk = ww2s6Hj.Eval();
+            switch (wilds6Hk)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6Hq_Nil:
+                case GHC.Types.Nil wilds6Hk_Nil:
                     {
-                        var sats6Hr = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6Hr_Entry), ww1s6Ho);
-                        var sats6Hs = new GHC.Types.Cons(ws6Hl, sats6Hr);
-                        return (sats6Hs, GHC.Types.nil_DataCon);
+                        var sats6Hl = new Updatable<Closure>(&sats6Hl_Entry, ww1s6Hi);
+                        var sats6Hm = new GHC.Types.Cons(ws6Hf, sats6Hl);
+                        return (sats6Hm, GHC.Types.nil_DataCon);
                     }
-                case GHC.Types.Cons wilds6Hq_Cons:
+                case GHC.Types.Cons wilds6Hk_Cons:
                     {
-                        var dss6Ht = wilds6Hq_Cons.x0;
-                        var s_s6Hu = wilds6Hq_Cons.x1;
-                        var wilds6Hv = s_s6Hu.Eval();
-                        switch (wilds6Hv)
+                        var dss6Hn = wilds6Hk_Cons.x0;
+                        var s_s6Ho = wilds6Hk_Cons.x1;
+                        var wilds6Hp = s_s6Ho.Eval();
+                        switch (wilds6Hp)
                         {
                             default: { throw new ImpossibleException(); }
-                            case GHC.Types.Nil wilds6Hv_Nil:
+                            case GHC.Types.Nil wilds6Hp_Nil:
                                 {
-                                    var wilds6Hw = dss6Ht.Eval();
-                                    var wilds6Hw_CHash = wilds6Hw as GHC.Types.CHash;
-                                    var dss6Hx = wilds6Hw_CHash.x0;
-                                    var dss6Hy = dss6Hx;
-                                    switch (dss6Hy)
+                                    var wilds6Hq = dss6Hn.Eval();
+                                    var wilds6Hq_CHash = wilds6Hq as GHC.Types.CHash;
+                                    var dss6Hr = wilds6Hq_CHash.x0;
+                                    var dss6Hs = dss6Hr;
+                                    switch (dss6Hs)
                                     {
                                         default:
                                             {
-                                                var sats6Hz = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6Hz_Entry), ww1s6Ho);
-                                                var sats6HA = new GHC.Types.Cons(ws6Hl, sats6Hz);
-                                                return (sats6HA, GHC.Types.nil_DataCon);
+                                                var sats6Ht = new Updatable<Closure>(&sats6Ht_Entry, ww1s6Hi);
+                                                var sats6Hu = new GHC.Types.Cons(ws6Hf, sats6Ht);
+                                                return (sats6Hu, GHC.Types.nil_DataCon);
                                             }
                                         case '\n':
                                             {
-                                                var sats6HB = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6HB_Entry), ww1s6Ho);
-                                                var sats6HC = new GHC.Types.Cons(ws6Hl, sats6HB);
-                                                return (sats6HC, GHC.Types.nil_DataCon);
+                                                var sats6Hv = new Updatable<Closure>(&sats6Hv_Entry, ww1s6Hi);
+                                                var sats6Hw = new GHC.Types.Cons(ws6Hf, sats6Hv);
+                                                return (sats6Hw, GHC.Types.nil_DataCon);
                                             }
                                     }
                                 }
-                            case GHC.Types.Cons wilds6Hv_Cons:
+                            case GHC.Types.Cons wilds6Hp_Cons:
                                 {
-                                    var dss6HD = wilds6Hv_Cons.x0;
-                                    var dss6HE = wilds6Hv_Cons.x1;
-                                    var sats6HK = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6HK_Entry), wilds6Hv);
-                                    var sats6HF = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6HF_Entry), ww1s6Ho);
-                                    var sats6HG = new GHC.Types.Cons(ws6Hl, sats6HF);
-                                    return (sats6HG, sats6HK);
+                                    var dss6Hx = wilds6Hp_Cons.x0;
+                                    var dss6Hy = wilds6Hp_Cons.x1;
+                                    var sats6HE = new Updatable<Closure>(&sats6HE_Entry, wilds6Hp);
+                                    var sats6Hz = new Updatable<Closure>(&sats6Hz_Entry, ww1s6Hi);
+                                    var sats6HA = new GHC.Types.Cons(ws6Hf, sats6Hz);
+                                    return (sats6HA, sats6HE);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6Hr_Entry(Closure ww1s6Ho)
+        public static Closure sats6Hl_Entry(in Closure ww1s6Hi)
         {
-            return showLitString_Entry(ww1s6Ho, lvls6Hj);
+            return showLitString_Entry(ww1s6Hi, lvls6Hd);
         }
-        public static Closure sats6Hz_Entry(Closure ww1s6Ho)
+        public static Closure sats6Ht_Entry(in Closure ww1s6Hi)
         {
-            return showLitString_Entry(ww1s6Ho, lvls6Hj);
+            return showLitString_Entry(ww1s6Hi, lvls6Hd);
         }
-        public static Closure sats6HB_Entry(Closure ww1s6Ho)
+        public static Closure sats6Hv_Entry(in Closure ww1s6Hi)
         {
-            return showLitString_Entry(ww1s6Ho, lvls6Hh);
+            return showLitString_Entry(ww1s6Hi, lvls6Hb);
         }
-        public static Closure sats6HF_Entry(Closure ww1s6Ho)
+        public static Closure sats6Hz_Entry(in Closure ww1s6Hi)
         {
-            return showLitString_Entry(ww1s6Ho, lvls6Hf);
+            return showLitString_Entry(ww1s6Hi, lvls6H9);
         }
-        public static Closure sats6HK_Entry(Closure wilds6Hv)
+        public static Closure sats6HE_Entry(in Closure wilds6Hp)
         {
-            var wws6HH = wgos6Hk_Entry(lvls6Gd, wilds6Hv);
-            var wws6HH_RawTuple = wws6HH;
-            var wws6HI = wws6HH_RawTuple.x0;
-            var wws6HJ = wws6HH_RawTuple.x1;
-            return new GHC.Types.Cons(wws6HI, wws6HJ);
+            var wws6HB = wgos6He_Entry(lvls6G7, wilds6Hp);
+            var wws6HB_RawTuple = wws6HB;
+            var wws6HC = wws6HB_RawTuple.x0;
+            var wws6HD = wws6HB_RawTuple.x1;
+            return new GHC.Types.Cons(wws6HC, wws6HD);
         }
-        public static Closure lvls6Hj_Entry()
+        public static Closure lvls6Hd_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6Hi);
+            return GHC.CString.unpackCStringHash_Entry(lvls6Hc);
         }
-        public static Closure lvls6Hh_Entry()
+        public static Closure lvls6Hb_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6Hg);
+            return GHC.CString.unpackCStringHash_Entry(lvls6Ha);
         }
-        public static Closure lvls6Hf_Entry()
+        public static Closure lvls6H9_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6He);
+            return GHC.CString.unpackCStringHash_Entry(lvls6H8);
         }
-        public static Closure lvls6H9_Entry(Closure dss6Ha)
+        public static Closure lvls6H3_Entry(Closure dss6H4)
         {
-            var wilds6Hb = dss6Ha.Eval();
-            var wilds6Hb_CHash = wilds6Hb as GHC.Types.CHash;
-            var xs6Hc = wilds6Hb_CHash.x0;
-            var wilds6Hd = xs6Hc;
-            switch (wilds6Hd)
+            var wilds6H5 = dss6H4.Eval();
+            var wilds6H5_CHash = wilds6H5 as GHC.Types.CHash;
+            var xs6H6 = wilds6H5_CHash.x0;
+            var wilds6H7 = xs6H6;
+            switch (wilds6H7)
             {
                 default: { return GHC.Types.false_DataCon.Eval(); }
                 case '\n': { return GHC.Types.true_DataCon.Eval(); }
             }
         }
-        public static Closure showLitString_Entry(Closure dss6GZ, Closure ss6H0)
+        public static Closure showLitString_Entry(Closure dss6GT, Closure ss6GU)
         {
-            var wilds6H1 = dss6GZ.Eval();
-            switch (wilds6H1)
+            var wilds6GV = dss6GT.Eval();
+            switch (wilds6GV)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6H1_Nil: { return ss6H0.Eval(); }
-                case GHC.Types.Cons wilds6H1_Cons:
+                case GHC.Types.Nil wilds6GV_Nil: { return ss6GU.Eval(); }
+                case GHC.Types.Cons wilds6GV_Cons:
                     {
-                        var dss6H2 = wilds6H1_Cons.x0;
-                        var css6H3 = wilds6H1_Cons.x1;
-                        var wilds6H4 = dss6H2.Eval();
-                        var wilds6H4_CHash = wilds6H4 as GHC.Types.CHash;
-                        var dss6H5 = wilds6H4_CHash.x0;
-                        var dss6H6 = dss6H5;
-                        switch (dss6H6)
+                        var dss6GW = wilds6GV_Cons.x0;
+                        var css6GX = wilds6GV_Cons.x1;
+                        var wilds6GY = dss6GW.Eval();
+                        var wilds6GY_CHash = wilds6GY as GHC.Types.CHash;
+                        var dss6GZ = wilds6GY_CHash.x0;
+                        var dss6H0 = dss6GZ;
+                        switch (dss6H0)
                         {
                             default:
                                 {
-                                    var sats6H7 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6H7_Entry), ss6H0, css6H3);
-                                    return wshowLitChars6Go_Entry(dss6H6, sats6H7);
+                                    var sat_Frees6H1 = (ss6GU, css6GX);
+                                    var sats6H1 = new Updatable<(Closure x0, Closure x1)>(&sats6H1_Entry, sat_Frees6H1);
+                                    return wshowLitChars6Gi_Entry(dss6H0, sats6H1);
                                 }
                             case '"':
                                 {
-                                    var sats6H8 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6H8_Entry), ss6H0, css6H3);
-                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6GX, sats6H8);
+                                    var sat_Frees6H2 = (ss6GU, css6GX);
+                                    var sats6H2 = new Updatable<(Closure x0, Closure x1)>(&sats6H2_Entry, sat_Frees6H2);
+                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6GR, sats6H2);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6H7_Entry(Closure ss6H0, Closure css6H3)
+        public static Closure sats6H1_Entry(in (Closure x0, Closure x1) sat_Frees6H1)
         {
-            return showLitString_Entry(css6H3, ss6H0);
+            var ss6GU = sat_Frees6H1.x0;
+            var css6GX = sat_Frees6H1.x1;
+            return showLitString_Entry(css6GX, ss6GU);
         }
-        public static Closure sats6H8_Entry(Closure ss6H0, Closure css6H3)
+        public static Closure sats6H2_Entry(in (Closure x0, Closure x1) sat_Frees6H2)
         {
-            return showLitString_Entry(css6H3, ss6H0);
+            var ss6GU = sat_Frees6H2.x0;
+            var css6GX = sat_Frees6H2.x1;
+            return showLitString_Entry(css6GX, ss6GU);
         }
-        public static Closure showLitChar_Entry(Closure ws6GT, Closure ws6GU)
+        public static Closure showLitChar_Entry(Closure ws6GN, Closure ws6GO)
         {
-            var wws6GV = ws6GT.Eval();
-            var wws6GV_CHash = wws6GV as GHC.Types.CHash;
-            var wws6GW = wws6GV_CHash.x0;
-            return wshowLitChars6Go_Entry(wws6GW, ws6GU);
+            var wws6GP = ws6GN.Eval();
+            var wws6GP_CHash = wws6GP as GHC.Types.CHash;
+            var wws6GQ = wws6GP_CHash.x0;
+            return wshowLitChars6Gi_Entry(wws6GQ, ws6GO);
         }
-        public static Closure wshowLitChars6Go_Entry(char wws6Gp, Closure ws6Gq)
+        public static Closure wshowLitChars6Gi_Entry(char wws6Gj, Closure ws6Gk)
         {
-            var lwilds6Gr = (wws6Gp > '\x7f') ? 1 : 0;
-            switch (lwilds6Gr)
+            var lwilds6Gl = (wws6Gj > '\x7f') ? 1 : 0;
+            switch (lwilds6Gl)
             {
                 default:
                     {
-                        var dss6Gs = wws6Gp;
-                        switch (dss6Gs)
+                        var dss6Gm = wws6Gj;
+                        switch (dss6Gm)
                         {
                             default:
                                 {
-                                    var lwilds6Gt = (dss6Gs >= ' ') ? 1 : 0;
-                                    switch (lwilds6Gt)
+                                    var lwilds6Gn = (dss6Gm >= ' ') ? 1 : 0;
+                                    switch (lwilds6Gn)
                                     {
                                         default:
                                             {
-                                                var dss6Gu = dss6Gs;
-                                                switch (dss6Gu)
+                                                var dss6Go = dss6Gm;
+                                                switch (dss6Go)
                                                 {
                                                     default:
                                                         {
-                                                            var sats6Gw = new SingleEntry<char>(CLR.LoadFunctionPointer<char, Closure>(sats6Gw_Entry), dss6Gu);
-                                                            return GHC.Base.plusPlus_DollsPlusPlus_Entry(ws6Gq, lvls6Gd, sats6Gw);
+                                                            var sats6Gq = new SingleEntry<char>(&sats6Gq_Entry, dss6Go);
+                                                            return GHC.Base.plusPlus_DollsPlusPlus_Entry(ws6Gk, lvls6G7, sats6Gq);
                                                         }
                                                     case '\a':
                                                         {
-                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Ge, ws6Gq);
+                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6G8, ws6Gk);
                                                         }
                                                     case '\b':
                                                         {
-                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gf, ws6Gq);
+                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6G9, ws6Gk);
                                                         }
                                                     case '\t':
                                                         {
-                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gg, ws6Gq);
+                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Ga, ws6Gk);
                                                         }
                                                     case '\n':
                                                         {
-                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gh, ws6Gq);
+                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gb, ws6Gk);
                                                         }
                                                     case '\v':
                                                         {
-                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gi, ws6Gq);
+                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gc, ws6Gk);
                                                         }
                                                     case '\f':
                                                         {
-                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gj, ws6Gq);
+                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gd, ws6Gk);
                                                         }
                                                     case '\r':
                                                         {
-                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gk, ws6Gq);
+                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Ge, ws6Gk);
                                                         }
                                                     case '\x0e':
                                                         {
-                                                            var sats6GD = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6GD_Entry), ws6Gq);
-                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gl, sats6GD);
+                                                            var sats6Gx = new Updatable<Closure>(&sats6Gx_Entry, ws6Gk);
+                                                            return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gf, sats6Gx);
                                                         }
                                                 }
                                             }
                                         case 1:
                                             {
-                                                var sats6GE = new GHC.Types.CHash(dss6Gs);
-                                                return new GHC.Types.Cons(sats6GE, ws6Gq);
+                                                var sats6Gy = new GHC.Types.CHash(dss6Gm);
+                                                return new GHC.Types.Cons(sats6Gy, ws6Gk);
                                             }
                                     }
                                 }
                             case '\\':
                                 {
-                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gm, ws6Gq);
+                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gg, ws6Gk);
                                 }
                             case '\x7f':
                                 {
-                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gn, ws6Gq);
+                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6Gh, ws6Gk);
                                 }
                         }
                     }
                 case 1:
                     {
-                        var sats6GR = new Updatable<char, Closure>(CLR.LoadFunctionPointer<char, Closure, Closure>(sats6GR_Entry), wws6Gp, ws6Gq);
-                        return new GHC.Types.Cons(lvls6Gd, sats6GR);
+                        var sat_Frees6GL = (wws6Gj, ws6Gk);
+                        var sats6GL = new Updatable<(char x0, Closure x1)>(&sats6GL_Entry, sat_Frees6GL);
+                        return new GHC.Types.Cons(lvls6G7, sats6GL);
                     }
             }
         }
-        public static Closure sats6Gw_Entry(char dss6Gu)
+        public static Closure sats6Gq_Entry(in char dss6Go)
         {
-            var sats6Gv = (int)dss6Gu;
-            return GHC.List.wBangBangs8DW_Entry(GHC.Show.asciiTab, sats6Gv);
+            var sats6Gp = (int)dss6Go;
+            return GHC.List.wBangBang_Entry(GHC.Show.asciiTab, sats6Gp);
         }
-        public static Closure sats6GD_Entry(Closure ws6Gq)
+        public static Closure sats6Gx_Entry(in Closure ws6Gk)
         {
-            var wilds6Gx = ws6Gq.Eval();
-            switch (wilds6Gx)
+            var wilds6Gr = ws6Gk.Eval();
+            switch (wilds6Gr)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6Gx_Nil:
+                case GHC.Types.Nil wilds6Gr_Nil:
                     {
                         return GHC.Types.nil_DataCon.Eval();
                     }
-                case GHC.Types.Cons wilds6Gx_Cons:
+                case GHC.Types.Cons wilds6Gr_Cons:
                     {
-                        var cs6Gy = wilds6Gx_Cons.x0;
-                        var dss6Gz = wilds6Gx_Cons.x1;
-                        var wilds6GA = cs6Gy.Eval();
-                        var wilds6GA_CHash = wilds6GA as GHC.Types.CHash;
-                        var xs6GB = wilds6GA_CHash.x0;
-                        var wilds6GC = xs6GB;
-                        switch (wilds6GC)
+                        var cs6Gs = wilds6Gr_Cons.x0;
+                        var dss6Gt = wilds6Gr_Cons.x1;
+                        var wilds6Gu = cs6Gs.Eval();
+                        var wilds6Gu_CHash = wilds6Gu as GHC.Types.CHash;
+                        var xs6Gv = wilds6Gu_CHash.x0;
+                        var wilds6Gw = xs6Gv;
+                        switch (wilds6Gw)
                         {
-                            default: { return wilds6Gx.Eval(); }
+                            default: { return wilds6Gr.Eval(); }
                             case 'H':
                                 {
-                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6CI, wilds6Gx);
+                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6CC, wilds6Gr);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6GR_Entry(char wws6Gp, Closure ws6Gq)
+        public static Closure sats6GL_Entry(in (char x0, Closure x1) sat_Frees6GL)
         {
-            var sats6GN = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6GN_Entry), ws6Gq);
-            var sats6GF = (int)wws6Gp;
-            var wws6GO = witoss6EI_Entry(sats6GF, sats6GN);
-            var wws6GO_RawTuple = wws6GO;
-            var wws6GP = wws6GO_RawTuple.x0;
-            var wws6GQ = wws6GO_RawTuple.x1;
-            return new GHC.Types.Cons(wws6GP, wws6GQ);
+            var wws6Gj = sat_Frees6GL.x0;
+            var ws6Gk = sat_Frees6GL.x1;
+            var sats6GH = new Updatable<Closure>(&sats6GH_Entry, ws6Gk);
+            var sats6Gz = (int)wws6Gj;
+            var wws6GI = witoss6EC_Entry(sats6Gz, sats6GH);
+            var wws6GI_RawTuple = wws6GI;
+            var wws6GJ = wws6GI_RawTuple.x0;
+            var wws6GK = wws6GI_RawTuple.x1;
+            return new GHC.Types.Cons(wws6GJ, wws6GK);
         }
-        public static Closure sats6GN_Entry(Closure ws6Gq)
+        public static Closure sats6GH_Entry(in Closure ws6Gk)
         {
-            var wilds6GG = ws6Gq.Eval();
-            switch (wilds6GG)
+            var wilds6GA = ws6Gk.Eval();
+            switch (wilds6GA)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6GG_Nil:
+                case GHC.Types.Nil wilds6GA_Nil:
                     {
                         return GHC.Types.nil_DataCon.Eval();
                     }
-                case GHC.Types.Cons wilds6GG_Cons:
+                case GHC.Types.Cons wilds6GA_Cons:
                     {
-                        var cs6GH = wilds6GG_Cons.x0;
-                        var dss6GI = wilds6GG_Cons.x1;
-                        var wilds6GJ = cs6GH.Eval();
-                        var wilds6GJ_CHash = wilds6GJ as GHC.Types.CHash;
-                        var c1s6GK = wilds6GJ_CHash.x0;
-                        var lwilds6GL = (c1s6GK >= '0') ? 1 : 0;
-                        switch (lwilds6GL)
+                        var cs6GB = wilds6GA_Cons.x0;
+                        var dss6GC = wilds6GA_Cons.x1;
+                        var wilds6GD = cs6GB.Eval();
+                        var wilds6GD_CHash = wilds6GD as GHC.Types.CHash;
+                        var c1s6GE = wilds6GD_CHash.x0;
+                        var lwilds6GF = (c1s6GE >= '0') ? 1 : 0;
+                        switch (lwilds6GF)
                         {
-                            default: { return wilds6GG.Eval(); }
+                            default: { return wilds6GA.Eval(); }
                             case 1:
                                 {
-                                    var lwilds6GM = (c1s6GK <= '9') ? 1 : 0;
-                                    switch (lwilds6GM)
+                                    var lwilds6GG = (c1s6GE <= '9') ? 1 : 0;
+                                    switch (lwilds6GG)
                                     {
-                                        default: { return wilds6GG.Eval(); }
+                                        default: { return wilds6GA.Eval(); }
                                         case 1:
                                             {
-                                                return GHC.CString.unpackAppendCStringHash_Entry(lvls6CI, wilds6GG);
+                                                return GHC.CString.unpackAppendCStringHash_Entry(lvls6CC, wilds6GA);
                                             }
                                     }
                                 }
@@ -1692,170 +1708,167 @@ namespace GHC
                     }
             }
         }
-        public static Closure cshowLists6G9_Entry(Closure lss6Ga, Closure ss6Gb)
+        public static Closure cshowLists6G3_Entry(Closure lss6G4, Closure ss6G5)
         {
-            return showList___Entry(lvls6G1, lss6Ga, ss6Gb);
+            return showList___Entry(lvls6FV, lss6G4, ss6G5);
         }
-        public static Closure lvls6G1_Entry(Closure ws6G2, Closure ws6G3)
+        public static Closure lvls6FV_Entry(Closure ws6FW, Closure ws6FX)
         {
-            var wws6G4 = ws6G2.Eval();
-            var wws6G4_IHash = wws6G4 as GHC.Types.IHash;
-            var wws6G5 = wws6G4_IHash.x0;
-            var wws6G6 = wshowSignedInts6F5_Entry(0, wws6G5, ws6G3);
-            var wws6G6_RawTuple = wws6G6;
-            var wws6G7 = wws6G6_RawTuple.x0;
-            var wws6G8 = wws6G6_RawTuple.x1;
-            return new GHC.Types.Cons(wws6G7, wws6G8);
+            var wws6FY = ws6FW.Eval();
+            var wws6FY_IHash = wws6FY as GHC.Types.IHash;
+            var wws6FZ = wws6FY_IHash.x0;
+            var wws6G0 = wshowSignedInt_Entry(0, wws6FZ, ws6FX);
+            var wws6G0_RawTuple = wws6G0;
+            var wws6G1 = wws6G0_RawTuple.x0;
+            var wws6G2 = wws6G0_RawTuple.x1;
+            return new GHC.Types.Cons(wws6G1, wws6G2);
         }
-        public static Closure cshows6FU_Entry(Closure xs6FV)
+        public static Closure cshows6FO_Entry(Closure xs6FP)
         {
-            var wws6FW = xs6FV.Eval();
-            var wws6FW_IHash = wws6FW as GHC.Types.IHash;
-            var wws6FX = wws6FW_IHash.x0;
-            var wws6FY = wshowSignedInts6F5_Entry(0, wws6FX, GHC.Types.nil_DataCon);
-            var wws6FY_RawTuple = wws6FY;
-            var wws6FZ = wws6FY_RawTuple.x0;
-            var wws6G0 = wws6FY_RawTuple.x1;
-            return new GHC.Types.Cons(wws6FZ, wws6G0);
+            var wws6FQ = xs6FP.Eval();
+            var wws6FQ_IHash = wws6FQ as GHC.Types.IHash;
+            var wws6FR = wws6FQ_IHash.x0;
+            var wws6FS = wshowSignedInt_Entry(0, wws6FR, GHC.Types.nil_DataCon);
+            var wws6FS_RawTuple = wws6FS;
+            var wws6FT = wws6FS_RawTuple.x0;
+            var wws6FU = wws6FS_RawTuple.x1;
+            return new GHC.Types.Cons(wws6FT, wws6FU);
         }
-        public static Closure showSignedInt_Entry(Closure ws6Fh, Closure ws6Fi, Closure ws6Fj)
+        public static Closure showSignedInt_Entry(Closure ws6Fb, Closure ws6Fc, Closure ws6Fd)
         {
-            var wws6Fk = ws6Fh.Eval();
-            var wws6Fk_IHash = wws6Fk as GHC.Types.IHash;
-            var wws6Fl = wws6Fk_IHash.x0;
-            var wws6Fm = ws6Fi.Eval();
-            var wws6Fm_IHash = wws6Fm as GHC.Types.IHash;
-            var wws6Fn = wws6Fm_IHash.x0;
-            var wws6Fo = wshowSignedInts6F5_Entry(wws6Fl, wws6Fn, ws6Fj);
-            var wws6Fo_RawTuple = wws6Fo;
-            var wws6Fp = wws6Fo_RawTuple.x0;
-            var wws6Fq = wws6Fo_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Fp, wws6Fq);
+            var wws6Fe = ws6Fb.Eval();
+            var wws6Fe_IHash = wws6Fe as GHC.Types.IHash;
+            var wws6Ff = wws6Fe_IHash.x0;
+            var wws6Fg = ws6Fc.Eval();
+            var wws6Fg_IHash = wws6Fg as GHC.Types.IHash;
+            var wws6Fh = wws6Fg_IHash.x0;
+            var wws6Fi = wshowSignedInt_Entry(wws6Ff, wws6Fh, ws6Fd);
+            var wws6Fi_RawTuple = wws6Fi;
+            var wws6Fj = wws6Fi_RawTuple.x0;
+            var wws6Fk = wws6Fi_RawTuple.x1;
+            return new GHC.Types.Cons(wws6Fj, wws6Fk);
         }
-        public static (Closure x0, Closure x1) wshowSignedInts6F5_Entry(long wws6F6, long wws6F7, Closure ws6F8)
+        public static (Closure x0, Closure x1) wshowSignedInt_Entry(long wws6F0, long wws6F1, Closure ws6F2)
         {
-            var lwilds6F9 = (wws6F7 < 0) ? 1 : 0;
-            switch (lwilds6F9)
+            var lwilds6F3 = (wws6F1 < 0) ? 1 : 0;
+            switch (lwilds6F3)
             {
-                default: { return witoss6EI_Entry(wws6F7, ws6F8); }
+                default: { return witoss6EC_Entry(wws6F1, ws6F2); }
                 case 1:
                     {
-                        var lwilds6Fa = (wws6F6 > 6) ? 1 : 0;
-                        switch (lwilds6Fa)
+                        var lwilds6F4 = (wws6F0 > 6) ? 1 : 0;
+                        switch (lwilds6F4)
                         {
-                            default: { return witoss6EI_Entry(wws6F7, ws6F8); }
+                            default: { return witoss6EC_Entry(wws6F1, ws6F2); }
                             case 1:
                                 {
-                                    var sats6Ff = new Updatable<long, Closure>(CLR.LoadFunctionPointer<long, Closure, Closure>(sats6Ff_Entry), wws6F7, ws6F8);
-                                    return (fs6xG, sats6Ff);
+                                    var sat_Frees6F9 = (wws6F1, ws6F2);
+                                    var sats6F9 = new Updatable<(long x0, Closure x1)>(&sats6F9_Entry, sat_Frees6F9);
+                                    return (fs6xA, sats6F9);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6Ff_Entry(long wws6F7, Closure ws6F8)
+        public static Closure sats6F9_Entry(in (long x0, Closure x1) sat_Frees6F9)
         {
-            var sats6Fb = new GHC.Types.Cons(gs6xH, ws6F8);
-            var wws6Fc = witoss6EI_Entry(wws6F7, sats6Fb);
-            var wws6Fc_RawTuple = wws6Fc;
-            var wws6Fd = wws6Fc_RawTuple.x0;
-            var wws6Fe = wws6Fc_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Fd, wws6Fe);
+            var wws6F1 = sat_Frees6F9.x0;
+            var ws6F2 = sat_Frees6F9.x1;
+            var sats6F5 = new GHC.Types.Cons(gs6xB, ws6F2);
+            var wws6F6 = witoss6EC_Entry(wws6F1, sats6F5);
+            var wws6F6_RawTuple = wws6F6;
+            var wws6F7 = wws6F6_RawTuple.x0;
+            var wws6F8 = wws6F6_RawTuple.x1;
+            return new GHC.Types.Cons(wws6F7, wws6F8);
         }
-        public static (Closure x0, Closure x1) witoss6EI_Entry(long ws6EJ, Closure ws6EK)
+        public static (Closure x0, Closure x1) witoss6EC_Entry(long ws6ED, Closure ws6EE)
         {
-            var lwilds6EL = (ws6EJ < 0) ? 1 : 0;
-            switch (lwilds6EL)
+            var lwilds6EF = (ws6ED < 0) ? 1 : 0;
+            switch (lwilds6EF)
             {
-                default: { return witos_s6Et_Entry(ws6EJ, ws6EK); }
+                default: { return witos_s6En_Entry(ws6ED, ws6EE); }
                 case 1:
                     {
-                        var wilds6EM = ws6EJ;
-                        switch (wilds6EM)
+                        var wilds6EG = ws6ED;
+                        switch (wilds6EG)
                         {
                             default:
                                 {
-                                    var sats6ER = new Updatable<Closure, long>(CLR.LoadFunctionPointer<Closure, long, Closure>(sats6ER_Entry), ws6EK, wilds6EM);
-                                    return (lvls6EH, sats6ER);
+                                    var sat_Frees6EL = (ws6EE, wilds6EG);
+                                    var sats6EL = new Updatable<(Closure x0, long x1)>(&sats6EL_Entry, sat_Frees6EL);
+                                    return (lvls6EB, sats6EL);
                                 }
                             case -9223372036854775808:
                                 {
-                                    var sats6F4 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6F4_Entry), ws6EK);
-                                    return (lvls6EH, sats6F4);
+                                    var sats6EY = new Updatable<Closure>(&sats6EY_Entry, ws6EE);
+                                    return (lvls6EB, sats6EY);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6ER_Entry(Closure ws6EK, long wilds6EM)
+        public static Closure sats6EL_Entry(in (Closure x0, long x1) sat_Frees6EL)
         {
-            var sats6EN = -wilds6EM;
-            var wws6EO = witos_s6Et_Entry(sats6EN, ws6EK);
-            var wws6EO_RawTuple = wws6EO;
-            var wws6EP = wws6EO_RawTuple.x0;
-            var wws6EQ = wws6EO_RawTuple.x1;
-            return new GHC.Types.Cons(wws6EP, wws6EQ);
+            var ws6EE = sat_Frees6EL.x0;
+            var wilds6EG = sat_Frees6EL.x1;
+            var sats6EH = -wilds6EG;
+            var wws6EI = witos_s6En_Entry(sats6EH, ws6EE);
+            var wws6EI_RawTuple = wws6EI;
+            var wws6EJ = wws6EI_RawTuple.x0;
+            var wws6EK = wws6EI_RawTuple.x1;
+            return new GHC.Types.Cons(wws6EJ, wws6EK);
         }
-        public static Closure sats6F4_Entry(Closure ws6EK)
+        public static Closure sats6EY_Entry(in Closure ws6EE)
         {
-            var dss6ES = (x0: -9223372036854775808 / 10, x1: -9223372036854775808 % 10);
-            var dss6ES_RawTuple = dss6ES;
-            var ipvs6ET = dss6ES_RawTuple.x0;
-            var ipvs6EU = dss6ES_RawTuple.x1;
-            var sats6F0 = new Updatable<Closure, long>(CLR.LoadFunctionPointer<Closure, long, Closure>(sats6F0_Entry), ws6EK, ipvs6EU);
-            var sats6EV = -ipvs6ET;
-            var wws6F1 = witos_s6Et_Entry(sats6EV, sats6F0);
-            var wws6F1_RawTuple = wws6F1;
-            var wws6F2 = wws6F1_RawTuple.x0;
-            var wws6F3 = wws6F1_RawTuple.x1;
-            return new GHC.Types.Cons(wws6F2, wws6F3);
+            var dss6EM = (x0: -9223372036854775808 / 10, x1: -9223372036854775808 % 10);
+            var dss6EM_RawTuple = dss6EM;
+            var ipvs6EN = dss6EM_RawTuple.x0;
+            var ipvs6EO = dss6EM_RawTuple.x1;
+            var sat_Frees6EU = (ws6EE, ipvs6EO);
+            var sats6EU = new Updatable<(Closure x0, long x1)>(&sats6EU_Entry, sat_Frees6EU);
+            var sats6EP = -ipvs6EN;
+            var wws6EV = witos_s6En_Entry(sats6EP, sats6EU);
+            var wws6EV_RawTuple = wws6EV;
+            var wws6EW = wws6EV_RawTuple.x0;
+            var wws6EX = wws6EV_RawTuple.x1;
+            return new GHC.Types.Cons(wws6EW, wws6EX);
         }
-        public static Closure sats6F0_Entry(Closure ws6EK, long ipvs6EU)
+        public static Closure sats6EU_Entry(in (Closure x0, long x1) sat_Frees6EU)
         {
-            var sats6EW = -ipvs6EU;
-            var wws6EX = witos_s6Et_Entry(sats6EW, ws6EK);
-            var wws6EX_RawTuple = wws6EX;
-            var wws6EY = wws6EX_RawTuple.x0;
-            var wws6EZ = wws6EX_RawTuple.x1;
-            return new GHC.Types.Cons(wws6EY, wws6EZ);
+            var ws6EE = sat_Frees6EU.x0;
+            var ipvs6EO = sat_Frees6EU.x1;
+            var sats6EQ = -ipvs6EO;
+            var wws6ER = witos_s6En_Entry(sats6EQ, ws6EE);
+            var wws6ER_RawTuple = wws6ER;
+            var wws6ES = wws6ER_RawTuple.x0;
+            var wws6ET = wws6ER_RawTuple.x1;
+            return new GHC.Types.Cons(wws6ES, wws6ET);
         }
-        public static (Closure x0, Closure x1) witos_s6Et_Entry(long ws6Eu, Closure ws6Ev)
+        public static (Closure x0, Closure x1) witos_s6En_Entry(long ws6Eo, Closure ws6Ep)
         {
-            var lwilds6Ew = (ws6Eu < 10) ? 1 : 0;
-            switch (lwilds6Ew)
+            var lwilds6Eq = (ws6Eo < 10) ? 1 : 0;
+            switch (lwilds6Eq)
             {
                 default:
                     {
-                        var dss6Ex = (x0: ws6Eu / 10, x1: ws6Eu % 10);
-                        var dss6Ex_RawTuple = dss6Ex;
-                        var ipvs6Ey = dss6Ex_RawTuple.x0;
-                        var ipvs6Ez = dss6Ex_RawTuple.x1;
-                        var sats6EA = 48 + ipvs6Ez;
-                        var sats6EB = (char)sats6EA;
-                        var sats6EC = new GHC.Types.CHash(sats6EB);
-                        var sats6ED = new GHC.Types.Cons(sats6EC, ws6Ev);
-                        return witos_s6Et_Entry(ipvs6Ey, sats6ED);
+                        var dss6Er = (x0: ws6Eo / 10, x1: ws6Eo % 10);
+                        var dss6Er_RawTuple = dss6Er;
+                        var ipvs6Es = dss6Er_RawTuple.x0;
+                        var ipvs6Et = dss6Er_RawTuple.x1;
+                        var sats6Eu = 48 + ipvs6Et;
+                        var sats6Ev = (char)sats6Eu;
+                        var sats6Ew = new GHC.Types.CHash(sats6Ev);
+                        var sats6Ex = new GHC.Types.Cons(sats6Ew, ws6Ep);
+                        return witos_s6En_Entry(ipvs6Es, sats6Ex);
                     }
                 case 1:
                     {
-                        var sats6EE = 48 + ws6Eu;
-                        var sats6EF = (char)sats6EE;
-                        var sats6EG = new GHC.Types.CHash(sats6EF);
-                        return (sats6EG, ws6Ev);
+                        var sats6Ey = 48 + ws6Eo;
+                        var sats6Ez = (char)sats6Ey;
+                        var sats6EA = new GHC.Types.CHash(sats6Ez);
+                        return (sats6EA, ws6Ep);
                     }
             }
-        }
-        public static Closure asciiTabs6DV_Entry()
-        {
-            return GHC.CString.unpackCStringHash_Entry(asciiTabs6DU);
-        }
-        public static Closure asciiTabs6DT_Entry()
-        {
-            return GHC.CString.unpackCStringHash_Entry(asciiTabs6DS);
-        }
-        public static Closure asciiTabs6DR_Entry()
-        {
-            return GHC.CString.unpackCStringHash_Entry(asciiTabs6DQ);
         }
         public static Closure asciiTabs6DP_Entry()
         {
@@ -1977,947 +1990,1174 @@ namespace GHC
         {
             return GHC.CString.unpackCStringHash_Entry(asciiTabs6CS);
         }
-        public static Closure protectEsc_Entry(Closure ps6CK, Closure fs6CL, Closure xs6CM)
+        public static Closure asciiTabs6CR_Entry()
         {
-            var sats6CR = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6CR_Entry), ps6CK, xs6CM);
-            return fs6CL.Apply<Closure, Closure>(sats6CR);
+            return GHC.CString.unpackCStringHash_Entry(asciiTabs6CQ);
         }
-        public static Closure sats6CR_Entry(Closure ps6CK, Closure xs6CM)
+        public static Closure asciiTabs6CP_Entry()
         {
-            var wilds6CN = xs6CM.Eval();
-            switch (wilds6CN)
+            return GHC.CString.unpackCStringHash_Entry(asciiTabs6CO);
+        }
+        public static Closure asciiTabs6CN_Entry()
+        {
+            return GHC.CString.unpackCStringHash_Entry(asciiTabs6CM);
+        }
+        public static Closure protectEsc_Entry(Closure ps6CE, Closure fs6CF, Closure xs6CG)
+        {
+            var sat_Frees6CL = (ps6CE, xs6CG);
+            var sats6CL = new Updatable<(Closure x0, Closure x1)>(&sats6CL_Entry, sat_Frees6CL);
+            return fs6CF.Apply<Closure, Closure>(sats6CL);
+        }
+        public static Closure sats6CL_Entry(in (Closure x0, Closure x1) sat_Frees6CL)
+        {
+            var ps6CE = sat_Frees6CL.x0;
+            var xs6CG = sat_Frees6CL.x1;
+            var wilds6CH = xs6CG.Eval();
+            switch (wilds6CH)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6CN_Nil:
+                case GHC.Types.Nil wilds6CH_Nil:
                     {
                         return GHC.Types.nil_DataCon.Eval();
                     }
-                case GHC.Types.Cons wilds6CN_Cons:
+                case GHC.Types.Cons wilds6CH_Cons:
                     {
-                        var cs6CO = wilds6CN_Cons.x0;
-                        var dss6CP = wilds6CN_Cons.x1;
-                        var wilds6CQ = ps6CK.Apply<Closure, Closure>(cs6CO).Eval();
-                        var wilds6CQTags6CQ = wilds6CQ.Tag;
-                        switch (wilds6CQTags6CQ)
+                        var cs6CI = wilds6CH_Cons.x0;
+                        var dss6CJ = wilds6CH_Cons.x1;
+                        var wilds6CK = ps6CE.Apply<Closure, Closure>(cs6CI);
+                        var wilds6CKTags6CK = wilds6CK.Tag;
+                        switch (wilds6CKTags6CK)
                         {
                             default: { throw new ImpossibleException(); }
                             case 1:
                                 {
-                                    var wilds6CQ_False = wilds6CQ as GHC.Types.False;
-                                    return wilds6CN.Eval();
+                                    var wilds6CK_False = wilds6CK as GHC.Types.False;
+                                    return wilds6CH.Eval();
                                 }
                             case 2:
                                 {
-                                    var wilds6CQ_True = wilds6CQ as GHC.Types.True;
-                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6CI, wilds6CN);
+                                    var wilds6CK_True = wilds6CK as GHC.Types.True;
+                                    return GHC.CString.unpackAppendCStringHash_Entry(lvls6CC, wilds6CH);
                                 }
                         }
                     }
             }
         }
-        public static Closure showSpace_Entry(Closure xss6CH)
+        public static Closure showSpace_Entry(Closure xss6CB)
         {
-            return new GHC.Types.Cons(lvls6CF, xss6CH);
+            return new GHC.Types.Cons(lvls6Cz, xss6CB);
         }
         public static Closure showCommaSpace_Entry(Closure etaB1)
         {
-            return GHC.Base.plusPlus_Entry(showCommaSpaces6CD, etaB1);
+            return GHC.Base.plusPlus_Entry(showCommaSpaces6Cx, etaB1);
         }
-        public static Closure showCommaSpaces6CD_Entry()
+        public static Closure showCommaSpaces6Cx_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(showCommaSpaces6CC);
+            return GHC.CString.unpackCStringHash_Entry(showCommaSpaces6Cw);
         }
         public static Closure showString_Entry(Closure etaB2, Closure etaB1)
         {
             return GHC.Base.plusPlus_Entry(etaB2, etaB1);
         }
-        public static Closure fShowPrOComPrC_Entry(Closure dShows6Cw, Closure dShows6Cx)
+        public static Closure fShowPrOComPrC_Entry(Closure dShows6Cq, Closure dShows6Cr)
         {
-            var sats6CA = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats6CA_Entry), dShows6Cw, dShows6Cx);
-            var sats6Cz = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6Cz_Entry), dShows6Cw, dShows6Cx);
-            var sats6Cy = new Fun<Closure, Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats6Cy_Entry), dShows6Cw, dShows6Cx);
-            return new GHC.Show.CColShow(sats6Cy, sats6Cz, sats6CA);
+            var sat_Frees6Cu = (dShows6Cq, dShows6Cr);
+            var sats6Cu = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&sats6Cu_Entry, sat_Frees6Cu);
+            var sat_Frees6Ct = (dShows6Cq, dShows6Cr);
+            var sats6Ct = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&sats6Ct_Entry, sat_Frees6Ct);
+            var sat_Frees6Cs = (dShows6Cq, dShows6Cr);
+            var sats6Cs = new Fun3<(Closure x0, Closure x1), Closure, Closure, Closure, Closure>(&sats6Cs_Entry, sat_Frees6Cs);
+            return new GHC.Show.CColShow(sats6Cs, sats6Ct, sats6Cu);
         }
-        public static Closure sats6Cy_Entry(Closure dShows6Cw, Closure dShows6Cx, Closure etaB3, Closure etaB2, Closure etaB1)
+        public static Closure sats6Cs_Entry(in (Closure x0, Closure x1) sat_Frees6Cs, Closure etaB3, Closure etaB2, Closure etaB1)
         {
-            return cshowsPrecs6BM_Entry(dShows6Cw, dShows6Cx, etaB3, etaB2, etaB1);
+            var dShows6Cq = sat_Frees6Cs.x0;
+            var dShows6Cr = sat_Frees6Cs.x1;
+            return cshowsPrecs6BG_Entry(dShows6Cq, dShows6Cr, etaB3, etaB2, etaB1);
         }
-        public static Closure sats6Cz_Entry(Closure dShows6Cw, Closure dShows6Cx, Closure etaB1)
+        public static Closure sats6Ct_Entry(in (Closure x0, Closure x1) sat_Frees6Ct, Closure etaB1)
         {
-            return cshows6C1_Entry(dShows6Cw, dShows6Cx, etaB1);
+            var dShows6Cq = sat_Frees6Ct.x0;
+            var dShows6Cr = sat_Frees6Ct.x1;
+            return cshows6BV_Entry(dShows6Cq, dShows6Cr, etaB1);
         }
-        public static Closure sats6CA_Entry(Closure dShows6Cw, Closure dShows6Cx, Closure etaB2, Closure etaB1)
+        public static Closure sats6Cu_Entry(in (Closure x0, Closure x1) sat_Frees6Cu, Closure etaB2, Closure etaB1)
         {
-            return cshowLists6Ce_Entry(dShows6Cw, dShows6Cx, etaB2, etaB1);
+            var dShows6Cq = sat_Frees6Cu.x0;
+            var dShows6Cr = sat_Frees6Cu.x1;
+            return cshowLists6C8_Entry(dShows6Cq, dShows6Cr, etaB2, etaB1);
         }
-        public static Closure cshowLists6Ce_Entry(Closure dShows6Cf, Closure dShows6Cg, Closure lss6Ch, Closure ss6Ci)
+        public static Closure cshowLists6C8_Entry(Closure dShows6C9, Closure dShows6Ca, Closure lss6Cb, Closure ss6Cc)
         {
-            var sats6Cu = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats6Cu_Entry), dShows6Cf, dShows6Cg);
-            return showList___Entry(sats6Cu, lss6Ch, ss6Ci);
+            var sat_Frees6Co = (dShows6C9, dShows6Ca);
+            var sats6Co = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&sats6Co_Entry, sat_Frees6Co);
+            return showList___Entry(sats6Co, lss6Cb, ss6Cc);
         }
-        public static Closure sats6Cu_Entry(Closure dShows6Cf, Closure dShows6Cg, Closure ws6Cj, Closure ws6Ck)
+        public static Closure sats6Co_Entry(in (Closure x0, Closure x1) sat_Frees6Co, Closure ws6Cd, Closure ws6Ce)
         {
-            var wws6Cl = ws6Cj.Eval();
-            var wws6Cl_Tuple2 = wws6Cl as GHC.Tuple.Tuple2;
-            var wws6Cm = wws6Cl_Tuple2.x0;
-            var wws6Cn = wws6Cl_Tuple2.x1;
-            var sats6Ct = new Updatable<Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats6Ct_Entry), dShows6Cf, dShows6Cg, ws6Ck, wws6Cm, wws6Cn);
-            return new GHC.Types.Cons(fs6xG, sats6Ct);
+            var dShows6C9 = sat_Frees6Co.x0;
+            var dShows6Ca = sat_Frees6Co.x1;
+            var wws6Cf = ws6Cd.Eval();
+            var wws6Cf_Tuple2 = wws6Cf as GHC.Tuple.Tuple2;
+            var wws6Cg = wws6Cf_Tuple2.x0;
+            var wws6Ch = wws6Cf_Tuple2.x1;
+            var sat_Frees6Cn = (dShows6C9, dShows6Ca, ws6Ce, wws6Cg, wws6Ch);
+            var sats6Cn = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4)>(&sats6Cn_Entry, sat_Frees6Cn);
+            return new GHC.Types.Cons(fs6xA, sats6Cn);
         }
-        public static Closure sats6Ct_Entry(Closure dShows6Cf, Closure dShows6Cg, Closure ws6Ck, Closure wws6Cm, Closure wws6Cn)
+        public static Closure sats6Cn_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees6Cn)
         {
-            var sats6Cs = new GHC.Types.Cons(gs6xH, ws6Ck);
-            var sats6Cp = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6Cp_Entry), dShows6Cg, wws6Cn);
-            var sats6Cq = new GHC.Types.Cons(sats6Cp, GHC.Types.nil_DataCon);
-            var sats6Co = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6Co_Entry), dShows6Cf, wws6Cm);
-            var sats6Cr = new GHC.Types.Cons(sats6Co, sats6Cq);
-            return go2s6BA_Entry(sats6Cr, sats6Cs);
+            var dShows6C9 = sat_Frees6Cn.x0;
+            var dShows6Ca = sat_Frees6Cn.x1;
+            var ws6Ce = sat_Frees6Cn.x2;
+            var wws6Cg = sat_Frees6Cn.x3;
+            var wws6Ch = sat_Frees6Cn.x4;
+            var sats6Cm = new GHC.Types.Cons(gs6xB, ws6Ce);
+            var sat_Frees6Cj = (dShows6Ca, wws6Ch);
+            var sats6Cj = new Updatable<(Closure x0, Closure x1)>(&sats6Cj_Entry, sat_Frees6Cj);
+            var sats6Ck = new GHC.Types.Cons(sats6Cj, GHC.Types.nil_DataCon);
+            var sat_Frees6Ci = (dShows6C9, wws6Cg);
+            var sats6Ci = new Updatable<(Closure x0, Closure x1)>(&sats6Ci_Entry, sat_Frees6Ci);
+            var sats6Cl = new GHC.Types.Cons(sats6Ci, sats6Ck);
+            return go2s6Bu_Entry(sats6Cl, sats6Cm);
         }
-        public static Closure sats6Co_Entry(Closure dShows6Cf, Closure wws6Cm)
+        public static Closure sats6Ci_Entry(in (Closure x0, Closure x1) sat_Frees6Ci)
         {
-            return GHC.Show.showsPrec_Entry(dShows6Cf).Apply<Closure, Closure, Closure>(lvls6ww, wws6Cm);
+            var dShows6C9 = sat_Frees6Ci.x0;
+            var wws6Cg = sat_Frees6Ci.x1;
+            return GHC.Show.showsPrec_Entry(dShows6C9).Apply<Closure, Closure, Closure>(lvls6wq, wws6Cg);
         }
-        public static Closure sats6Cp_Entry(Closure dShows6Cg, Closure wws6Cn)
+        public static Closure sats6Cj_Entry(in (Closure x0, Closure x1) sat_Frees6Cj)
         {
-            return GHC.Show.showsPrec_Entry(dShows6Cg).Apply<Closure, Closure, Closure>(lvls6ww, wws6Cn);
+            var dShows6Ca = sat_Frees6Cj.x0;
+            var wws6Ch = sat_Frees6Cj.x1;
+            return GHC.Show.showsPrec_Entry(dShows6Ca).Apply<Closure, Closure, Closure>(lvls6wq, wws6Ch);
         }
-        public static Closure cshows6C1_Entry(Closure dShows6C2, Closure dShows6C3, Closure xs6C4)
+        public static Closure cshows6BV_Entry(Closure dShows6BW, Closure dShows6BX, Closure xs6BY)
         {
-            var wws6C5 = xs6C4.Eval();
-            var wws6C5_Tuple2 = wws6C5 as GHC.Tuple.Tuple2;
-            var wws6C6 = wws6C5_Tuple2.x0;
-            var wws6C7 = wws6C5_Tuple2.x1;
-            var sats6Cd = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats6Cd_Entry), dShows6C2, dShows6C3, wws6C6, wws6C7);
-            return new GHC.Types.Cons(fs6xG, sats6Cd);
+            var wws6BZ = xs6BY.Eval();
+            var wws6BZ_Tuple2 = wws6BZ as GHC.Tuple.Tuple2;
+            var wws6C0 = wws6BZ_Tuple2.x0;
+            var wws6C1 = wws6BZ_Tuple2.x1;
+            var sat_Frees6C7 = (dShows6BW, dShows6BX, wws6C0, wws6C1);
+            var sats6C7 = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats6C7_Entry, sat_Frees6C7);
+            return new GHC.Types.Cons(fs6xA, sats6C7);
         }
-        public static Closure sats6Cd_Entry(Closure dShows6C2, Closure dShows6C3, Closure wws6C6, Closure wws6C7)
+        public static Closure sats6C7_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees6C7)
         {
-            var sats6Cc = new GHC.Types.Cons(gs6xH, GHC.Types.nil_DataCon);
-            var sats6C9 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6C9_Entry), dShows6C3, wws6C7);
-            var sats6Ca = new GHC.Types.Cons(sats6C9, GHC.Types.nil_DataCon);
-            var sats6C8 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6C8_Entry), dShows6C2, wws6C6);
-            var sats6Cb = new GHC.Types.Cons(sats6C8, sats6Ca);
-            return go2s6BA_Entry(sats6Cb, sats6Cc);
+            var dShows6BW = sat_Frees6C7.x0;
+            var dShows6BX = sat_Frees6C7.x1;
+            var wws6C0 = sat_Frees6C7.x2;
+            var wws6C1 = sat_Frees6C7.x3;
+            var sats6C6 = new GHC.Types.Cons(gs6xB, GHC.Types.nil_DataCon);
+            var sat_Frees6C3 = (dShows6BX, wws6C1);
+            var sats6C3 = new Updatable<(Closure x0, Closure x1)>(&sats6C3_Entry, sat_Frees6C3);
+            var sats6C4 = new GHC.Types.Cons(sats6C3, GHC.Types.nil_DataCon);
+            var sat_Frees6C2 = (dShows6BW, wws6C0);
+            var sats6C2 = new Updatable<(Closure x0, Closure x1)>(&sats6C2_Entry, sat_Frees6C2);
+            var sats6C5 = new GHC.Types.Cons(sats6C2, sats6C4);
+            return go2s6Bu_Entry(sats6C5, sats6C6);
         }
-        public static Closure sats6C8_Entry(Closure dShows6C2, Closure wws6C6)
+        public static Closure sats6C2_Entry(in (Closure x0, Closure x1) sat_Frees6C2)
         {
-            return GHC.Show.showsPrec_Entry(dShows6C2).Apply<Closure, Closure, Closure>(lvls6ww, wws6C6);
+            var dShows6BW = sat_Frees6C2.x0;
+            var wws6C0 = sat_Frees6C2.x1;
+            return GHC.Show.showsPrec_Entry(dShows6BW).Apply<Closure, Closure, Closure>(lvls6wq, wws6C0);
         }
-        public static Closure sats6C9_Entry(Closure dShows6C3, Closure wws6C7)
+        public static Closure sats6C3_Entry(in (Closure x0, Closure x1) sat_Frees6C3)
         {
-            return GHC.Show.showsPrec_Entry(dShows6C3).Apply<Closure, Closure, Closure>(lvls6ww, wws6C7);
+            var dShows6BX = sat_Frees6C3.x0;
+            var wws6C1 = sat_Frees6C3.x1;
+            return GHC.Show.showsPrec_Entry(dShows6BX).Apply<Closure, Closure, Closure>(lvls6wq, wws6C1);
         }
-        public static Closure cshowsPrecs6BM_Entry(Closure ws6BN, Closure ws6BO, Closure ws6BP, Closure ws6BQ, Closure ws6BR)
+        public static Closure cshowsPrecs6BG_Entry(Closure ws6BH, Closure ws6BI, Closure ws6BJ, Closure ws6BK, Closure ws6BL)
         {
-            var wws6BS = ws6BQ.Eval();
-            var wws6BS_Tuple2 = wws6BS as GHC.Tuple.Tuple2;
-            var wws6BT = wws6BS_Tuple2.x0;
-            var wws6BU = wws6BS_Tuple2.x1;
-            var sats6C0 = new Updatable<Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats6C0_Entry), ws6BN, ws6BO, ws6BR, wws6BT, wws6BU);
-            return new GHC.Types.Cons(fs6xG, sats6C0);
+            var wws6BM = ws6BK.Eval();
+            var wws6BM_Tuple2 = wws6BM as GHC.Tuple.Tuple2;
+            var wws6BN = wws6BM_Tuple2.x0;
+            var wws6BO = wws6BM_Tuple2.x1;
+            var sat_Frees6BU = (ws6BH, ws6BI, ws6BL, wws6BN, wws6BO);
+            var sats6BU = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4)>(&sats6BU_Entry, sat_Frees6BU);
+            return new GHC.Types.Cons(fs6xA, sats6BU);
         }
-        public static Closure sats6C0_Entry(Closure ws6BN, Closure ws6BO, Closure ws6BR, Closure wws6BT, Closure wws6BU)
+        public static Closure sats6BU_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees6BU)
         {
-            var sats6BZ = new GHC.Types.Cons(gs6xH, ws6BR);
-            var sats6BW = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6BW_Entry), ws6BO, wws6BU);
-            var sats6BX = new GHC.Types.Cons(sats6BW, GHC.Types.nil_DataCon);
-            var sats6BV = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6BV_Entry), ws6BN, wws6BT);
-            var sats6BY = new GHC.Types.Cons(sats6BV, sats6BX);
-            return go2s6BA_Entry(sats6BY, sats6BZ);
+            var ws6BH = sat_Frees6BU.x0;
+            var ws6BI = sat_Frees6BU.x1;
+            var ws6BL = sat_Frees6BU.x2;
+            var wws6BN = sat_Frees6BU.x3;
+            var wws6BO = sat_Frees6BU.x4;
+            var sats6BT = new GHC.Types.Cons(gs6xB, ws6BL);
+            var sat_Frees6BQ = (ws6BI, wws6BO);
+            var sats6BQ = new Updatable<(Closure x0, Closure x1)>(&sats6BQ_Entry, sat_Frees6BQ);
+            var sats6BR = new GHC.Types.Cons(sats6BQ, GHC.Types.nil_DataCon);
+            var sat_Frees6BP = (ws6BH, wws6BN);
+            var sats6BP = new Updatable<(Closure x0, Closure x1)>(&sats6BP_Entry, sat_Frees6BP);
+            var sats6BS = new GHC.Types.Cons(sats6BP, sats6BR);
+            return go2s6Bu_Entry(sats6BS, sats6BT);
         }
-        public static Closure sats6BV_Entry(Closure ws6BN, Closure wws6BT)
+        public static Closure sats6BP_Entry(in (Closure x0, Closure x1) sat_Frees6BP)
         {
-            return GHC.Show.showsPrec_Entry(ws6BN).Apply<Closure, Closure, Closure>(lvls6ww, wws6BT);
+            var ws6BH = sat_Frees6BP.x0;
+            var wws6BN = sat_Frees6BP.x1;
+            return GHC.Show.showsPrec_Entry(ws6BH).Apply<Closure, Closure, Closure>(lvls6wq, wws6BN);
         }
-        public static Closure sats6BW_Entry(Closure ws6BO, Closure wws6BU)
+        public static Closure sats6BQ_Entry(in (Closure x0, Closure x1) sat_Frees6BQ)
         {
-            return GHC.Show.showsPrec_Entry(ws6BO).Apply<Closure, Closure, Closure>(lvls6ww, wws6BU);
+            var ws6BI = sat_Frees6BQ.x0;
+            var wws6BO = sat_Frees6BQ.x1;
+            return GHC.Show.showsPrec_Entry(ws6BI).Apply<Closure, Closure, Closure>(lvls6wq, wws6BO);
         }
-        public static Closure go2s6BA_Entry(Closure dss6BB, Closure etas6BC)
+        public static Closure go2s6Bu_Entry(Closure dss6Bv, Closure etas6Bw)
         {
-            var wilds6BD = dss6BB.Eval();
-            switch (wilds6BD)
+            var wilds6Bx = dss6Bv.Eval();
+            switch (wilds6Bx)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6BD_Nil: { return lvls6xR.Eval(); }
-                case GHC.Types.Cons wilds6BD_Cons:
+                case GHC.Types.Nil wilds6Bx_Nil: { return lvls6xL.Eval(); }
+                case GHC.Types.Cons wilds6Bx_Cons:
                     {
-                        var xs6BF = wilds6BD_Cons.x0;
-                        var ds1s6BG = wilds6BD_Cons.x1;
-                        var wild1s6BH = ds1s6BG.Eval();
-                        switch (wild1s6BH)
+                        var xs6Bz = wilds6Bx_Cons.x0;
+                        var ds1s6BA = wilds6Bx_Cons.x1;
+                        var wild1s6BB = ds1s6BA.Eval();
+                        switch (wild1s6BB)
                         {
                             default: { throw new ImpossibleException(); }
-                            case GHC.Types.Nil wild1s6BH_Nil:
+                            case GHC.Types.Nil wild1s6BB_Nil:
                                 {
-                                    return xs6BF.Apply<Closure, Closure>(etas6BC);
+                                    return xs6Bz.Apply<Closure, Closure>(etas6Bw);
                                 }
-                            case GHC.Types.Cons wild1s6BH_Cons:
+                            case GHC.Types.Cons wild1s6BB_Cons:
                                 {
-                                    var ipvs6BI = wild1s6BH_Cons.x0;
-                                    var ipv1s6BJ = wild1s6BH_Cons.x1;
-                                    var sats6BK = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6BK_Entry), etas6BC, wild1s6BH);
-                                    var sats6BL = new GHC.Types.Cons(lvls6vK, sats6BK);
-                                    return xs6BF.Apply<Closure, Closure>(sats6BL);
+                                    var ipvs6BC = wild1s6BB_Cons.x0;
+                                    var ipv1s6BD = wild1s6BB_Cons.x1;
+                                    var sat_Frees6BE = (etas6Bw, wild1s6BB);
+                                    var sats6BE = new Updatable<(Closure x0, Closure x1)>(&sats6BE_Entry, sat_Frees6BE);
+                                    var sats6BF = new GHC.Types.Cons(lvls6vE, sats6BE);
+                                    return xs6Bz.Apply<Closure, Closure>(sats6BF);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6BK_Entry(Closure etas6BC, Closure wild1s6BH)
+        public static Closure sats6BE_Entry(in (Closure x0, Closure x1) sat_Frees6BE)
         {
-            return go2s6BA_Entry(wild1s6BH, etas6BC);
+            var etas6Bw = sat_Frees6BE.x0;
+            var wild1s6BB = sat_Frees6BE.x1;
+            return go2s6Bu_Entry(wild1s6BB, etas6Bw);
         }
-        public static Closure fShowPrOComComPrC_Entry(Closure dShows6Bu, Closure dShows6Bv, Closure dShows6Bw)
+        public static Closure fShowPrOComComPrC_Entry(Closure dShows6Bo, Closure dShows6Bp, Closure dShows6Bq)
         {
-            var sats6Bz = new Fun<Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats6Bz_Entry), dShows6Bu, dShows6Bv, dShows6Bw);
-            var sats6By = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats6By_Entry), dShows6Bu, dShows6Bv, dShows6Bw);
-            var sats6Bx = new Fun<Closure, Closure, Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6Bx_Entry), dShows6Bu, dShows6Bv, dShows6Bw);
-            return new GHC.Show.CColShow(sats6Bx, sats6By, sats6Bz);
+            var sat_Frees6Bt = (dShows6Bo, dShows6Bp, dShows6Bq);
+            var sats6Bt = new Fun2<(Closure x0, Closure x1, Closure x2), Closure, Closure, Closure>(&sats6Bt_Entry, sat_Frees6Bt);
+            var sat_Frees6Bs = (dShows6Bo, dShows6Bp, dShows6Bq);
+            var sats6Bs = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&sats6Bs_Entry, sat_Frees6Bs);
+            var sat_Frees6Br = (dShows6Bo, dShows6Bp, dShows6Bq);
+            var sats6Br = new Fun3<(Closure x0, Closure x1, Closure x2), Closure, Closure, Closure, Closure>(&sats6Br_Entry, sat_Frees6Br);
+            return new GHC.Show.CColShow(sats6Br, sats6Bs, sats6Bt);
         }
-        public static Closure sats6Bx_Entry(Closure dShows6Bu, Closure dShows6Bv, Closure dShows6Bw, Closure etaB3, Closure etaB2, Closure etaB1)
+        public static Closure sats6Br_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6Br, Closure etaB3, Closure etaB2, Closure etaB1)
         {
-            return cshowsPrecs6AN_Entry(dShows6Bu, dShows6Bv, dShows6Bw, etaB3, etaB2, etaB1);
+            var dShows6Bo = sat_Frees6Br.x0;
+            var dShows6Bp = sat_Frees6Br.x1;
+            var dShows6Bq = sat_Frees6Br.x2;
+            return cshowsPrecs6AH_Entry(dShows6Bo, dShows6Bp, dShows6Bq, etaB3, etaB2, etaB1);
         }
-        public static Closure sats6By_Entry(Closure dShows6Bu, Closure dShows6Bv, Closure dShows6Bw, Closure etaB1)
+        public static Closure sats6Bs_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6Bs, Closure etaB1)
         {
-            return cshows6B1_Entry(dShows6Bu, dShows6Bv, dShows6Bw, etaB1);
+            var dShows6Bo = sat_Frees6Bs.x0;
+            var dShows6Bp = sat_Frees6Bs.x1;
+            var dShows6Bq = sat_Frees6Bs.x2;
+            return cshows6AV_Entry(dShows6Bo, dShows6Bp, dShows6Bq, etaB1);
         }
-        public static Closure sats6Bz_Entry(Closure dShows6Bu, Closure dShows6Bv, Closure dShows6Bw, Closure etaB2, Closure etaB1)
+        public static Closure sats6Bt_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6Bt, Closure etaB2, Closure etaB1)
         {
-            return cshowLists6Bd_Entry(dShows6Bu, dShows6Bv, dShows6Bw, etaB2, etaB1);
+            var dShows6Bo = sat_Frees6Bt.x0;
+            var dShows6Bp = sat_Frees6Bt.x1;
+            var dShows6Bq = sat_Frees6Bt.x2;
+            return cshowLists6B7_Entry(dShows6Bo, dShows6Bp, dShows6Bq, etaB2, etaB1);
         }
-        public static Closure cshowLists6Bd_Entry(Closure dShows6Be, Closure dShows6Bf, Closure dShows6Bg, Closure lss6Bh, Closure ss6Bi)
+        public static Closure cshowLists6B7_Entry(Closure dShows6B8, Closure dShows6B9, Closure dShows6Ba, Closure lss6Bb, Closure ss6Bc)
         {
-            var sats6Bs = new Fun<Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats6Bs_Entry), dShows6Be, dShows6Bf, dShows6Bg);
-            return showList___Entry(sats6Bs, lss6Bh, ss6Bi);
+            var sat_Frees6Bm = (dShows6B8, dShows6B9, dShows6Ba);
+            var sats6Bm = new Fun2<(Closure x0, Closure x1, Closure x2), Closure, Closure, Closure>(&sats6Bm_Entry, sat_Frees6Bm);
+            return showList___Entry(sats6Bm, lss6Bb, ss6Bc);
         }
-        public static Closure sats6Bs_Entry(Closure dShows6Be, Closure dShows6Bf, Closure dShows6Bg, Closure ws6Bj, Closure ws6Bk)
+        public static Closure sats6Bm_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6Bm, Closure ws6Bd, Closure ws6Be)
         {
-            var wws6Bl = ws6Bj.Eval();
-            var wws6Bl_Tuple3 = wws6Bl as GHC.Tuple.Tuple3;
-            var wws6Bm = wws6Bl_Tuple3.x0;
-            var wws6Bn = wws6Bl_Tuple3.x1;
-            var wws6Bo = wws6Bl_Tuple3.x2;
-            var wws6Bp = wDollcshowsPrecs6Ax_Entry(dShows6Be, dShows6Bf, dShows6Bg, wws6Bm, wws6Bn, wws6Bo, ws6Bk);
-            var wws6Bp_RawTuple = wws6Bp;
-            var wws6Bq = wws6Bp_RawTuple.x0;
-            var wws6Br = wws6Bp_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Bq, wws6Br);
+            var dShows6B8 = sat_Frees6Bm.x0;
+            var dShows6B9 = sat_Frees6Bm.x1;
+            var dShows6Ba = sat_Frees6Bm.x2;
+            var wws6Bf = ws6Bd.Eval();
+            var wws6Bf_Tuple3 = wws6Bf as GHC.Tuple.Tuple3;
+            var wws6Bg = wws6Bf_Tuple3.x0;
+            var wws6Bh = wws6Bf_Tuple3.x1;
+            var wws6Bi = wws6Bf_Tuple3.x2;
+            var wws6Bj = wDollcshowsPrecs6Ar_Entry(dShows6B8, dShows6B9, dShows6Ba, wws6Bg, wws6Bh, wws6Bi, ws6Be);
+            var wws6Bj_RawTuple = wws6Bj;
+            var wws6Bk = wws6Bj_RawTuple.x0;
+            var wws6Bl = wws6Bj_RawTuple.x1;
+            return new GHC.Types.Cons(wws6Bk, wws6Bl);
         }
-        public static Closure cshows6B1_Entry(Closure dShows6B2, Closure dShows6B3, Closure dShows6B4, Closure xs6B5)
+        public static Closure cshows6AV_Entry(Closure dShows6AW, Closure dShows6AX, Closure dShows6AY, Closure xs6AZ)
         {
-            var wws6B6 = xs6B5.Eval();
-            var wws6B6_Tuple3 = wws6B6 as GHC.Tuple.Tuple3;
-            var wws6B7 = wws6B6_Tuple3.x0;
-            var wws6B8 = wws6B6_Tuple3.x1;
-            var wws6B9 = wws6B6_Tuple3.x2;
-            var wws6Ba = wDollcshowsPrecs6Ax_Entry(dShows6B2, dShows6B3, dShows6B4, wws6B7, wws6B8, wws6B9, GHC.Types.nil_DataCon);
-            var wws6Ba_RawTuple = wws6Ba;
-            var wws6Bb = wws6Ba_RawTuple.x0;
-            var wws6Bc = wws6Ba_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Bb, wws6Bc);
+            var wws6B0 = xs6AZ.Eval();
+            var wws6B0_Tuple3 = wws6B0 as GHC.Tuple.Tuple3;
+            var wws6B1 = wws6B0_Tuple3.x0;
+            var wws6B2 = wws6B0_Tuple3.x1;
+            var wws6B3 = wws6B0_Tuple3.x2;
+            var wws6B4 = wDollcshowsPrecs6Ar_Entry(dShows6AW, dShows6AX, dShows6AY, wws6B1, wws6B2, wws6B3, GHC.Types.nil_DataCon);
+            var wws6B4_RawTuple = wws6B4;
+            var wws6B5 = wws6B4_RawTuple.x0;
+            var wws6B6 = wws6B4_RawTuple.x1;
+            return new GHC.Types.Cons(wws6B5, wws6B6);
         }
-        public static Closure cshowsPrecs6AN_Entry(Closure ws6AO, Closure ws6AP, Closure ws6AQ, Closure ws6AR, Closure ws6AS, Closure ws6AT)
+        public static Closure cshowsPrecs6AH_Entry(Closure ws6AI, Closure ws6AJ, Closure ws6AK, Closure ws6AL, Closure ws6AM, Closure ws6AN)
         {
-            var wws6AU = ws6AS.Eval();
-            var wws6AU_Tuple3 = wws6AU as GHC.Tuple.Tuple3;
-            var wws6AV = wws6AU_Tuple3.x0;
-            var wws6AW = wws6AU_Tuple3.x1;
-            var wws6AX = wws6AU_Tuple3.x2;
-            var wws6AY = wDollcshowsPrecs6Ax_Entry(ws6AO, ws6AP, ws6AQ, wws6AV, wws6AW, wws6AX, ws6AT);
-            var wws6AY_RawTuple = wws6AY;
-            var wws6AZ = wws6AY_RawTuple.x0;
-            var wws6B0 = wws6AY_RawTuple.x1;
-            return new GHC.Types.Cons(wws6AZ, wws6B0);
+            var wws6AO = ws6AM.Eval();
+            var wws6AO_Tuple3 = wws6AO as GHC.Tuple.Tuple3;
+            var wws6AP = wws6AO_Tuple3.x0;
+            var wws6AQ = wws6AO_Tuple3.x1;
+            var wws6AR = wws6AO_Tuple3.x2;
+            var wws6AS = wDollcshowsPrecs6Ar_Entry(ws6AI, ws6AJ, ws6AK, wws6AP, wws6AQ, wws6AR, ws6AN);
+            var wws6AS_RawTuple = wws6AS;
+            var wws6AT = wws6AS_RawTuple.x0;
+            var wws6AU = wws6AS_RawTuple.x1;
+            return new GHC.Types.Cons(wws6AT, wws6AU);
         }
-        public static (Closure x0, Closure x1) wDollcshowsPrecs6Ax_Entry(Closure ws6Ay, Closure ws6Az, Closure ws6AA, Closure wws6AB, Closure wws6AC, Closure wws6AD, Closure ws6AE)
+        public static (Closure x0, Closure x1) wDollcshowsPrecs6Ar_Entry(Closure ws6As, Closure ws6At, Closure ws6Au, Closure wws6Av, Closure wws6Aw, Closure wws6Ax, Closure ws6Ay)
         {
-            var sats6AM = new Updatable<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6AM_Entry), ws6Ay, ws6Az, ws6AA, wws6AB, wws6AC, wws6AD, ws6AE);
-            return (fs6xG, sats6AM);
+            var sat_Frees6AG = (ws6As, ws6At, ws6Au, wws6Av, wws6Aw, wws6Ax, ws6Ay);
+            var sats6AG = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5, Closure x6)>(&sats6AG_Entry, sat_Frees6AG);
+            return (fs6xA, sats6AG);
         }
-        public static Closure sats6AM_Entry(Closure ws6Ay, Closure ws6Az, Closure ws6AA, Closure wws6AB, Closure wws6AC, Closure wws6AD, Closure ws6AE)
+        public static Closure sats6AG_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5, Closure x6) sat_Frees6AG)
         {
-            var sats6AL = new GHC.Types.Cons(gs6xH, ws6AE);
-            var sats6AH = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6AH_Entry), ws6AA, wws6AD);
-            var sats6AI = new GHC.Types.Cons(sats6AH, GHC.Types.nil_DataCon);
-            var sats6AG = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6AG_Entry), ws6Az, wws6AC);
-            var sats6AJ = new GHC.Types.Cons(sats6AG, sats6AI);
-            var sats6AF = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6AF_Entry), ws6Ay, wws6AB);
-            var sats6AK = new GHC.Types.Cons(sats6AF, sats6AJ);
-            return go2s6Al_Entry(sats6AK, sats6AL);
+            var ws6As = sat_Frees6AG.x0;
+            var ws6At = sat_Frees6AG.x1;
+            var ws6Au = sat_Frees6AG.x2;
+            var wws6Av = sat_Frees6AG.x3;
+            var wws6Aw = sat_Frees6AG.x4;
+            var wws6Ax = sat_Frees6AG.x5;
+            var ws6Ay = sat_Frees6AG.x6;
+            var sats6AF = new GHC.Types.Cons(gs6xB, ws6Ay);
+            var sat_Frees6AB = (ws6Au, wws6Ax);
+            var sats6AB = new Updatable<(Closure x0, Closure x1)>(&sats6AB_Entry, sat_Frees6AB);
+            var sats6AC = new GHC.Types.Cons(sats6AB, GHC.Types.nil_DataCon);
+            var sat_Frees6AA = (ws6At, wws6Aw);
+            var sats6AA = new Updatable<(Closure x0, Closure x1)>(&sats6AA_Entry, sat_Frees6AA);
+            var sats6AD = new GHC.Types.Cons(sats6AA, sats6AC);
+            var sat_Frees6Az = (ws6As, wws6Av);
+            var sats6Az = new Updatable<(Closure x0, Closure x1)>(&sats6Az_Entry, sat_Frees6Az);
+            var sats6AE = new GHC.Types.Cons(sats6Az, sats6AD);
+            return go2s6Af_Entry(sats6AE, sats6AF);
         }
-        public static Closure sats6AF_Entry(Closure ws6Ay, Closure wws6AB)
+        public static Closure sats6Az_Entry(in (Closure x0, Closure x1) sat_Frees6Az)
         {
-            return GHC.Show.showsPrec_Entry(ws6Ay).Apply<Closure, Closure, Closure>(lvls6ww, wws6AB);
+            var ws6As = sat_Frees6Az.x0;
+            var wws6Av = sat_Frees6Az.x1;
+            return GHC.Show.showsPrec_Entry(ws6As).Apply<Closure, Closure, Closure>(lvls6wq, wws6Av);
         }
-        public static Closure sats6AG_Entry(Closure ws6Az, Closure wws6AC)
+        public static Closure sats6AA_Entry(in (Closure x0, Closure x1) sat_Frees6AA)
         {
-            return GHC.Show.showsPrec_Entry(ws6Az).Apply<Closure, Closure, Closure>(lvls6ww, wws6AC);
+            var ws6At = sat_Frees6AA.x0;
+            var wws6Aw = sat_Frees6AA.x1;
+            return GHC.Show.showsPrec_Entry(ws6At).Apply<Closure, Closure, Closure>(lvls6wq, wws6Aw);
         }
-        public static Closure sats6AH_Entry(Closure ws6AA, Closure wws6AD)
+        public static Closure sats6AB_Entry(in (Closure x0, Closure x1) sat_Frees6AB)
         {
-            return GHC.Show.showsPrec_Entry(ws6AA).Apply<Closure, Closure, Closure>(lvls6ww, wws6AD);
+            var ws6Au = sat_Frees6AB.x0;
+            var wws6Ax = sat_Frees6AB.x1;
+            return GHC.Show.showsPrec_Entry(ws6Au).Apply<Closure, Closure, Closure>(lvls6wq, wws6Ax);
         }
-        public static Closure go2s6Al_Entry(Closure dss6Am, Closure etas6An)
+        public static Closure go2s6Af_Entry(Closure dss6Ag, Closure etas6Ah)
         {
-            var wilds6Ao = dss6Am.Eval();
-            switch (wilds6Ao)
+            var wilds6Ai = dss6Ag.Eval();
+            switch (wilds6Ai)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6Ao_Nil: { return lvls6xR.Eval(); }
-                case GHC.Types.Cons wilds6Ao_Cons:
+                case GHC.Types.Nil wilds6Ai_Nil: { return lvls6xL.Eval(); }
+                case GHC.Types.Cons wilds6Ai_Cons:
                     {
-                        var xs6Aq = wilds6Ao_Cons.x0;
-                        var ds1s6Ar = wilds6Ao_Cons.x1;
-                        var wild1s6As = ds1s6Ar.Eval();
-                        switch (wild1s6As)
+                        var xs6Ak = wilds6Ai_Cons.x0;
+                        var ds1s6Al = wilds6Ai_Cons.x1;
+                        var wild1s6Am = ds1s6Al.Eval();
+                        switch (wild1s6Am)
                         {
                             default: { throw new ImpossibleException(); }
-                            case GHC.Types.Nil wild1s6As_Nil:
+                            case GHC.Types.Nil wild1s6Am_Nil:
                                 {
-                                    return xs6Aq.Apply<Closure, Closure>(etas6An);
+                                    return xs6Ak.Apply<Closure, Closure>(etas6Ah);
                                 }
-                            case GHC.Types.Cons wild1s6As_Cons:
+                            case GHC.Types.Cons wild1s6Am_Cons:
                                 {
-                                    var ipvs6At = wild1s6As_Cons.x0;
-                                    var ipv1s6Au = wild1s6As_Cons.x1;
-                                    var sats6Av = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6Av_Entry), etas6An, wild1s6As);
-                                    var sats6Aw = new GHC.Types.Cons(lvls6vK, sats6Av);
-                                    return xs6Aq.Apply<Closure, Closure>(sats6Aw);
+                                    var ipvs6An = wild1s6Am_Cons.x0;
+                                    var ipv1s6Ao = wild1s6Am_Cons.x1;
+                                    var sat_Frees6Ap = (etas6Ah, wild1s6Am);
+                                    var sats6Ap = new Updatable<(Closure x0, Closure x1)>(&sats6Ap_Entry, sat_Frees6Ap);
+                                    var sats6Aq = new GHC.Types.Cons(lvls6vE, sats6Ap);
+                                    return xs6Ak.Apply<Closure, Closure>(sats6Aq);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6Av_Entry(Closure etas6An, Closure wild1s6As)
+        public static Closure sats6Ap_Entry(in (Closure x0, Closure x1) sat_Frees6Ap)
         {
-            return go2s6Al_Entry(wild1s6As, etas6An);
+            var etas6Ah = sat_Frees6Ap.x0;
+            var wild1s6Am = sat_Frees6Ap.x1;
+            return go2s6Af_Entry(wild1s6Am, etas6Ah);
         }
-        public static Closure fShowPrOComComComPrC_Entry(Closure dShows6Ae, Closure dShows6Af, Closure dShows6Ag, Closure dShows6Ah)
+        public static Closure fShowPrOComComComPrC_Entry(Closure dShows6A8, Closure dShows6A9, Closure dShows6Aa, Closure dShows6Ab)
         {
-            var sats6Ak = new Fun<Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6Ak_Entry), dShows6Ae, dShows6Af, dShows6Ag, dShows6Ah);
-            var sats6Aj = new Fun<Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats6Aj_Entry), dShows6Ae, dShows6Af, dShows6Ag, dShows6Ah);
-            var sats6Ai = new Fun<Closure, Closure, Closure, Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6Ai_Entry), dShows6Ae, dShows6Af, dShows6Ag, dShows6Ah);
-            return new GHC.Show.CColShow(sats6Ai, sats6Aj, sats6Ak);
+            var sat_Frees6Ae = (dShows6A8, dShows6A9, dShows6Aa, dShows6Ab);
+            var sats6Ae = new Fun2<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure, Closure>(&sats6Ae_Entry, sat_Frees6Ae);
+            var sat_Frees6Ad = (dShows6A8, dShows6A9, dShows6Aa, dShows6Ab);
+            var sats6Ad = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure>(&sats6Ad_Entry, sat_Frees6Ad);
+            var sat_Frees6Ac = (dShows6A8, dShows6A9, dShows6Aa, dShows6Ab);
+            var sats6Ac = new Fun3<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure, Closure, Closure>(&sats6Ac_Entry, sat_Frees6Ac);
+            return new GHC.Show.CColShow(sats6Ac, sats6Ad, sats6Ae);
         }
-        public static Closure sats6Ai_Entry(Closure dShows6Ae, Closure dShows6Af, Closure dShows6Ag, Closure dShows6Ah, Closure etaB3, Closure etaB2, Closure etaB1)
+        public static Closure sats6Ac_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees6Ac, Closure etaB3, Closure etaB2, Closure etaB1)
         {
-            return cshowsPrecs6zr_Entry(dShows6Ae, dShows6Af, dShows6Ag, dShows6Ah, etaB3, etaB2, etaB1);
+            var dShows6A8 = sat_Frees6Ac.x0;
+            var dShows6A9 = sat_Frees6Ac.x1;
+            var dShows6Aa = sat_Frees6Ac.x2;
+            var dShows6Ab = sat_Frees6Ac.x3;
+            return cshowsPrecs6zl_Entry(dShows6A8, dShows6A9, dShows6Aa, dShows6Ab, etaB3, etaB2, etaB1);
         }
-        public static Closure sats6Aj_Entry(Closure dShows6Ae, Closure dShows6Af, Closure dShows6Ag, Closure dShows6Ah, Closure etaB1)
+        public static Closure sats6Ad_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees6Ad, Closure etaB1)
         {
-            return cshows6zH_Entry(dShows6Ae, dShows6Af, dShows6Ag, dShows6Ah, etaB1);
+            var dShows6A8 = sat_Frees6Ad.x0;
+            var dShows6A9 = sat_Frees6Ad.x1;
+            var dShows6Aa = sat_Frees6Ad.x2;
+            var dShows6Ab = sat_Frees6Ad.x3;
+            return cshows6zB_Entry(dShows6A8, dShows6A9, dShows6Aa, dShows6Ab, etaB1);
         }
-        public static Closure sats6Ak_Entry(Closure dShows6Ae, Closure dShows6Af, Closure dShows6Ag, Closure dShows6Ah, Closure etaB2, Closure etaB1)
+        public static Closure sats6Ae_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees6Ae, Closure etaB2, Closure etaB1)
         {
-            return cshowLists6zV_Entry(dShows6Ae, dShows6Af, dShows6Ag, dShows6Ah, etaB2, etaB1);
+            var dShows6A8 = sat_Frees6Ae.x0;
+            var dShows6A9 = sat_Frees6Ae.x1;
+            var dShows6Aa = sat_Frees6Ae.x2;
+            var dShows6Ab = sat_Frees6Ae.x3;
+            return cshowLists6zP_Entry(dShows6A8, dShows6A9, dShows6Aa, dShows6Ab, etaB2, etaB1);
         }
-        public static Closure cshowLists6zV_Entry(Closure dShows6zW, Closure dShows6zX, Closure dShows6zY, Closure dShows6zZ, Closure lss6A0, Closure ss6A1)
+        public static Closure cshowLists6zP_Entry(Closure dShows6zQ, Closure dShows6zR, Closure dShows6zS, Closure dShows6zT, Closure lss6zU, Closure ss6zV)
         {
-            var sats6Ac = new Fun<Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6Ac_Entry), dShows6zW, dShows6zX, dShows6zY, dShows6zZ);
-            return showList___Entry(sats6Ac, lss6A0, ss6A1);
+            var sat_Frees6A6 = (dShows6zQ, dShows6zR, dShows6zS, dShows6zT);
+            var sats6A6 = new Fun2<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure, Closure>(&sats6A6_Entry, sat_Frees6A6);
+            return showList___Entry(sats6A6, lss6zU, ss6zV);
         }
-        public static Closure sats6Ac_Entry(Closure dShows6zW, Closure dShows6zX, Closure dShows6zY, Closure dShows6zZ, Closure ws6A2, Closure ws6A3)
+        public static Closure sats6A6_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees6A6, Closure ws6zW, Closure ws6zX)
         {
-            var wws6A4 = ws6A2.Eval();
-            var wws6A4_Tuple4 = wws6A4 as GHC.Tuple.Tuple4;
-            var wws6A5 = wws6A4_Tuple4.x0;
-            var wws6A6 = wws6A4_Tuple4.x1;
-            var wws6A7 = wws6A4_Tuple4.x2;
-            var wws6A8 = wws6A4_Tuple4.x3;
-            var wws6A9 = wDollcshowsPrecs6z7_Entry(dShows6zW, dShows6zX, dShows6zY, dShows6zZ, wws6A5, wws6A6, wws6A7, wws6A8, ws6A3);
-            var wws6A9_RawTuple = wws6A9;
-            var wws6Aa = wws6A9_RawTuple.x0;
-            var wws6Ab = wws6A9_RawTuple.x1;
-            return new GHC.Types.Cons(wws6Aa, wws6Ab);
+            var dShows6zQ = sat_Frees6A6.x0;
+            var dShows6zR = sat_Frees6A6.x1;
+            var dShows6zS = sat_Frees6A6.x2;
+            var dShows6zT = sat_Frees6A6.x3;
+            var wws6zY = ws6zW.Eval();
+            var wws6zY_Tuple4 = wws6zY as GHC.Tuple.Tuple4;
+            var wws6zZ = wws6zY_Tuple4.x0;
+            var wws6A0 = wws6zY_Tuple4.x1;
+            var wws6A1 = wws6zY_Tuple4.x2;
+            var wws6A2 = wws6zY_Tuple4.x3;
+            var wws6A3 = wDollcshowsPrecs6z1_Entry(dShows6zQ, dShows6zR, dShows6zS, dShows6zT, wws6zZ, wws6A0, wws6A1, wws6A2, ws6zX);
+            var wws6A3_RawTuple = wws6A3;
+            var wws6A4 = wws6A3_RawTuple.x0;
+            var wws6A5 = wws6A3_RawTuple.x1;
+            return new GHC.Types.Cons(wws6A4, wws6A5);
         }
-        public static Closure cshows6zH_Entry(Closure dShows6zI, Closure dShows6zJ, Closure dShows6zK, Closure dShows6zL, Closure xs6zM)
+        public static Closure cshows6zB_Entry(Closure dShows6zC, Closure dShows6zD, Closure dShows6zE, Closure dShows6zF, Closure xs6zG)
         {
-            var wws6zN = xs6zM.Eval();
-            var wws6zN_Tuple4 = wws6zN as GHC.Tuple.Tuple4;
-            var wws6zO = wws6zN_Tuple4.x0;
-            var wws6zP = wws6zN_Tuple4.x1;
-            var wws6zQ = wws6zN_Tuple4.x2;
-            var wws6zR = wws6zN_Tuple4.x3;
-            var wws6zS = wDollcshowsPrecs6z7_Entry(dShows6zI, dShows6zJ, dShows6zK, dShows6zL, wws6zO, wws6zP, wws6zQ, wws6zR, GHC.Types.nil_DataCon);
-            var wws6zS_RawTuple = wws6zS;
-            var wws6zT = wws6zS_RawTuple.x0;
-            var wws6zU = wws6zS_RawTuple.x1;
-            return new GHC.Types.Cons(wws6zT, wws6zU);
+            var wws6zH = xs6zG.Eval();
+            var wws6zH_Tuple4 = wws6zH as GHC.Tuple.Tuple4;
+            var wws6zI = wws6zH_Tuple4.x0;
+            var wws6zJ = wws6zH_Tuple4.x1;
+            var wws6zK = wws6zH_Tuple4.x2;
+            var wws6zL = wws6zH_Tuple4.x3;
+            var wws6zM = wDollcshowsPrecs6z1_Entry(dShows6zC, dShows6zD, dShows6zE, dShows6zF, wws6zI, wws6zJ, wws6zK, wws6zL, GHC.Types.nil_DataCon);
+            var wws6zM_RawTuple = wws6zM;
+            var wws6zN = wws6zM_RawTuple.x0;
+            var wws6zO = wws6zM_RawTuple.x1;
+            return new GHC.Types.Cons(wws6zN, wws6zO);
         }
-        public static Closure cshowsPrecs6zr_Entry(Closure ws6zs, Closure ws6zt, Closure ws6zu, Closure ws6zv, Closure ws6zw, Closure ws6zx, Closure ws6zy)
+        public static Closure cshowsPrecs6zl_Entry(Closure ws6zm, Closure ws6zn, Closure ws6zo, Closure ws6zp, Closure ws6zq, Closure ws6zr, Closure ws6zs)
         {
-            var wws6zz = ws6zx.Eval();
-            var wws6zz_Tuple4 = wws6zz as GHC.Tuple.Tuple4;
-            var wws6zA = wws6zz_Tuple4.x0;
-            var wws6zB = wws6zz_Tuple4.x1;
-            var wws6zC = wws6zz_Tuple4.x2;
-            var wws6zD = wws6zz_Tuple4.x3;
-            var wws6zE = wDollcshowsPrecs6z7_Entry(ws6zs, ws6zt, ws6zu, ws6zv, wws6zA, wws6zB, wws6zC, wws6zD, ws6zy);
-            var wws6zE_RawTuple = wws6zE;
-            var wws6zF = wws6zE_RawTuple.x0;
-            var wws6zG = wws6zE_RawTuple.x1;
-            return new GHC.Types.Cons(wws6zF, wws6zG);
+            var wws6zt = ws6zr.Eval();
+            var wws6zt_Tuple4 = wws6zt as GHC.Tuple.Tuple4;
+            var wws6zu = wws6zt_Tuple4.x0;
+            var wws6zv = wws6zt_Tuple4.x1;
+            var wws6zw = wws6zt_Tuple4.x2;
+            var wws6zx = wws6zt_Tuple4.x3;
+            var wws6zy = wDollcshowsPrecs6z1_Entry(ws6zm, ws6zn, ws6zo, ws6zp, wws6zu, wws6zv, wws6zw, wws6zx, ws6zs);
+            var wws6zy_RawTuple = wws6zy;
+            var wws6zz = wws6zy_RawTuple.x0;
+            var wws6zA = wws6zy_RawTuple.x1;
+            return new GHC.Types.Cons(wws6zz, wws6zA);
         }
-        public static (Closure x0, Closure x1) wDollcshowsPrecs6z7_Entry(Closure ws6z8, Closure ws6z9, Closure ws6za, Closure ws6zb, Closure wws6zc, Closure wws6zd, Closure wws6ze, Closure wws6zf, Closure ws6zg)
+        public static (Closure x0, Closure x1) wDollcshowsPrecs6z1_Entry(Closure ws6z2, Closure ws6z3, Closure ws6z4, Closure ws6z5, Closure wws6z6, Closure wws6z7, Closure wws6z8, Closure wws6z9, Closure ws6za)
         {
-            var sats6zq = new Updatable<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6zq_Entry), ws6z8, ws6z9, ws6za, ws6zb, wws6zc, wws6zd, wws6ze, wws6zf, ws6zg);
-            return (fs6xG, sats6zq);
+            var sat_Frees6zk = (ws6z2, ws6z3, ws6z4, ws6z5, wws6z6, wws6z7, wws6z8, wws6z9, ws6za);
+            var sats6zk = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5, Closure x6, Closure x7, Closure x8)>(&sats6zk_Entry, sat_Frees6zk);
+            return (fs6xA, sats6zk);
         }
-        public static Closure sats6zq_Entry(Closure ws6z8, Closure ws6z9, Closure ws6za, Closure ws6zb, Closure wws6zc, Closure wws6zd, Closure wws6ze, Closure wws6zf, Closure ws6zg)
+        public static Closure sats6zk_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5, Closure x6, Closure x7, Closure x8) sat_Frees6zk)
         {
-            var sats6zp = new GHC.Types.Cons(gs6xH, ws6zg);
-            var sats6zk = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6zk_Entry), ws6zb, wws6zf);
-            var sats6zl = new GHC.Types.Cons(sats6zk, GHC.Types.nil_DataCon);
-            var sats6zj = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6zj_Entry), ws6za, wws6ze);
-            var sats6zm = new GHC.Types.Cons(sats6zj, sats6zl);
-            var sats6zi = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6zi_Entry), ws6z9, wws6zd);
-            var sats6zn = new GHC.Types.Cons(sats6zi, sats6zm);
-            var sats6zh = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6zh_Entry), ws6z8, wws6zc);
-            var sats6zo = new GHC.Types.Cons(sats6zh, sats6zn);
-            return go2s6yV_Entry(sats6zo, sats6zp);
+            var ws6z2 = sat_Frees6zk.x0;
+            var ws6z3 = sat_Frees6zk.x1;
+            var ws6z4 = sat_Frees6zk.x2;
+            var ws6z5 = sat_Frees6zk.x3;
+            var wws6z6 = sat_Frees6zk.x4;
+            var wws6z7 = sat_Frees6zk.x5;
+            var wws6z8 = sat_Frees6zk.x6;
+            var wws6z9 = sat_Frees6zk.x7;
+            var ws6za = sat_Frees6zk.x8;
+            var sats6zj = new GHC.Types.Cons(gs6xB, ws6za);
+            var sat_Frees6ze = (ws6z5, wws6z9);
+            var sats6ze = new Updatable<(Closure x0, Closure x1)>(&sats6ze_Entry, sat_Frees6ze);
+            var sats6zf = new GHC.Types.Cons(sats6ze, GHC.Types.nil_DataCon);
+            var sat_Frees6zd = (ws6z4, wws6z8);
+            var sats6zd = new Updatable<(Closure x0, Closure x1)>(&sats6zd_Entry, sat_Frees6zd);
+            var sats6zg = new GHC.Types.Cons(sats6zd, sats6zf);
+            var sat_Frees6zc = (ws6z3, wws6z7);
+            var sats6zc = new Updatable<(Closure x0, Closure x1)>(&sats6zc_Entry, sat_Frees6zc);
+            var sats6zh = new GHC.Types.Cons(sats6zc, sats6zg);
+            var sat_Frees6zb = (ws6z2, wws6z6);
+            var sats6zb = new Updatable<(Closure x0, Closure x1)>(&sats6zb_Entry, sat_Frees6zb);
+            var sats6zi = new GHC.Types.Cons(sats6zb, sats6zh);
+            return go2s6yP_Entry(sats6zi, sats6zj);
         }
-        public static Closure sats6zh_Entry(Closure ws6z8, Closure wws6zc)
+        public static Closure sats6zb_Entry(in (Closure x0, Closure x1) sat_Frees6zb)
         {
-            return GHC.Show.showsPrec_Entry(ws6z8).Apply<Closure, Closure, Closure>(lvls6ww, wws6zc);
+            var ws6z2 = sat_Frees6zb.x0;
+            var wws6z6 = sat_Frees6zb.x1;
+            return GHC.Show.showsPrec_Entry(ws6z2).Apply<Closure, Closure, Closure>(lvls6wq, wws6z6);
         }
-        public static Closure sats6zi_Entry(Closure ws6z9, Closure wws6zd)
+        public static Closure sats6zc_Entry(in (Closure x0, Closure x1) sat_Frees6zc)
         {
-            return GHC.Show.showsPrec_Entry(ws6z9).Apply<Closure, Closure, Closure>(lvls6ww, wws6zd);
+            var ws6z3 = sat_Frees6zc.x0;
+            var wws6z7 = sat_Frees6zc.x1;
+            return GHC.Show.showsPrec_Entry(ws6z3).Apply<Closure, Closure, Closure>(lvls6wq, wws6z7);
         }
-        public static Closure sats6zj_Entry(Closure ws6za, Closure wws6ze)
+        public static Closure sats6zd_Entry(in (Closure x0, Closure x1) sat_Frees6zd)
         {
-            return GHC.Show.showsPrec_Entry(ws6za).Apply<Closure, Closure, Closure>(lvls6ww, wws6ze);
+            var ws6z4 = sat_Frees6zd.x0;
+            var wws6z8 = sat_Frees6zd.x1;
+            return GHC.Show.showsPrec_Entry(ws6z4).Apply<Closure, Closure, Closure>(lvls6wq, wws6z8);
         }
-        public static Closure sats6zk_Entry(Closure ws6zb, Closure wws6zf)
+        public static Closure sats6ze_Entry(in (Closure x0, Closure x1) sat_Frees6ze)
         {
-            return GHC.Show.showsPrec_Entry(ws6zb).Apply<Closure, Closure, Closure>(lvls6ww, wws6zf);
+            var ws6z5 = sat_Frees6ze.x0;
+            var wws6z9 = sat_Frees6ze.x1;
+            return GHC.Show.showsPrec_Entry(ws6z5).Apply<Closure, Closure, Closure>(lvls6wq, wws6z9);
         }
-        public static Closure go2s6yV_Entry(Closure dss6yW, Closure etas6yX)
+        public static Closure go2s6yP_Entry(Closure dss6yQ, Closure etas6yR)
         {
-            var wilds6yY = dss6yW.Eval();
-            switch (wilds6yY)
+            var wilds6yS = dss6yQ.Eval();
+            switch (wilds6yS)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6yY_Nil: { return lvls6xR.Eval(); }
-                case GHC.Types.Cons wilds6yY_Cons:
+                case GHC.Types.Nil wilds6yS_Nil: { return lvls6xL.Eval(); }
+                case GHC.Types.Cons wilds6yS_Cons:
                     {
-                        var xs6z0 = wilds6yY_Cons.x0;
-                        var ds1s6z1 = wilds6yY_Cons.x1;
-                        var wild1s6z2 = ds1s6z1.Eval();
-                        switch (wild1s6z2)
+                        var xs6yU = wilds6yS_Cons.x0;
+                        var ds1s6yV = wilds6yS_Cons.x1;
+                        var wild1s6yW = ds1s6yV.Eval();
+                        switch (wild1s6yW)
                         {
                             default: { throw new ImpossibleException(); }
-                            case GHC.Types.Nil wild1s6z2_Nil:
+                            case GHC.Types.Nil wild1s6yW_Nil:
                                 {
-                                    return xs6z0.Apply<Closure, Closure>(etas6yX);
+                                    return xs6yU.Apply<Closure, Closure>(etas6yR);
                                 }
-                            case GHC.Types.Cons wild1s6z2_Cons:
+                            case GHC.Types.Cons wild1s6yW_Cons:
                                 {
-                                    var ipvs6z3 = wild1s6z2_Cons.x0;
-                                    var ipv1s6z4 = wild1s6z2_Cons.x1;
-                                    var sats6z5 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6z5_Entry), etas6yX, wild1s6z2);
-                                    var sats6z6 = new GHC.Types.Cons(lvls6vK, sats6z5);
-                                    return xs6z0.Apply<Closure, Closure>(sats6z6);
+                                    var ipvs6yX = wild1s6yW_Cons.x0;
+                                    var ipv1s6yY = wild1s6yW_Cons.x1;
+                                    var sat_Frees6yZ = (etas6yR, wild1s6yW);
+                                    var sats6yZ = new Updatable<(Closure x0, Closure x1)>(&sats6yZ_Entry, sat_Frees6yZ);
+                                    var sats6z0 = new GHC.Types.Cons(lvls6vE, sats6yZ);
+                                    return xs6yU.Apply<Closure, Closure>(sats6z0);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6z5_Entry(Closure etas6yX, Closure wild1s6z2)
+        public static Closure sats6yZ_Entry(in (Closure x0, Closure x1) sat_Frees6yZ)
         {
-            return go2s6yV_Entry(wild1s6z2, etas6yX);
+            var etas6yR = sat_Frees6yZ.x0;
+            var wild1s6yW = sat_Frees6yZ.x1;
+            return go2s6yP_Entry(wild1s6yW, etas6yR);
         }
-        public static Closure fShowPrOComComComComPrC_Entry(Closure dShows6yN, Closure dShows6yO, Closure dShows6yP, Closure dShows6yQ, Closure dShows6yR)
+        public static Closure fShowPrOComComComComPrC_Entry(Closure dShows6yH, Closure dShows6yI, Closure dShows6yJ, Closure dShows6yK, Closure dShows6yL)
         {
-            var sats6yU = new Fun<Closure, Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6yU_Entry), dShows6yN, dShows6yO, dShows6yP, dShows6yQ, dShows6yR);
-            var sats6yT = new Fun<Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6yT_Entry), dShows6yN, dShows6yO, dShows6yP, dShows6yQ, dShows6yR);
-            var sats6yS = new Fun<Closure, Closure, Closure, Closure, Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6yS_Entry), dShows6yN, dShows6yO, dShows6yP, dShows6yQ, dShows6yR);
-            return new GHC.Show.CColShow(sats6yS, sats6yT, sats6yU);
+            var sat_Frees6yO = (dShows6yH, dShows6yI, dShows6yJ, dShows6yK, dShows6yL);
+            var sats6yO = new Fun2<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure, Closure>(&sats6yO_Entry, sat_Frees6yO);
+            var sat_Frees6yN = (dShows6yH, dShows6yI, dShows6yJ, dShows6yK, dShows6yL);
+            var sats6yN = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure>(&sats6yN_Entry, sat_Frees6yN);
+            var sat_Frees6yM = (dShows6yH, dShows6yI, dShows6yJ, dShows6yK, dShows6yL);
+            var sats6yM = new Fun3<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure, Closure, Closure>(&sats6yM_Entry, sat_Frees6yM);
+            return new GHC.Show.CColShow(sats6yM, sats6yN, sats6yO);
         }
-        public static Closure sats6yS_Entry(Closure dShows6yN, Closure dShows6yO, Closure dShows6yP, Closure dShows6yQ, Closure dShows6yR, Closure etaB3, Closure etaB2, Closure etaB1)
+        public static Closure sats6yM_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees6yM, Closure etaB3, Closure etaB2, Closure etaB1)
         {
-            return cshowsPrecs6y5_Entry(dShows6yN, dShows6yO, dShows6yP, dShows6yQ, dShows6yR, etaB3, etaB2, etaB1);
+            var dShows6yH = sat_Frees6yM.x0;
+            var dShows6yI = sat_Frees6yM.x1;
+            var dShows6yJ = sat_Frees6yM.x2;
+            var dShows6yK = sat_Frees6yM.x3;
+            var dShows6yL = sat_Frees6yM.x4;
+            return cshowsPrecs6xZ_Entry(dShows6yH, dShows6yI, dShows6yJ, dShows6yK, dShows6yL, etaB3, etaB2, etaB1);
         }
-        public static Closure sats6yT_Entry(Closure dShows6yN, Closure dShows6yO, Closure dShows6yP, Closure dShows6yQ, Closure dShows6yR, Closure etaB1)
+        public static Closure sats6yN_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees6yN, Closure etaB1)
         {
-            return cshows6yw_Entry(dShows6yN, dShows6yO, dShows6yP, dShows6yQ, dShows6yR, etaB1);
+            var dShows6yH = sat_Frees6yN.x0;
+            var dShows6yI = sat_Frees6yN.x1;
+            var dShows6yJ = sat_Frees6yN.x2;
+            var dShows6yK = sat_Frees6yN.x3;
+            var dShows6yL = sat_Frees6yN.x4;
+            return cshows6yq_Entry(dShows6yH, dShows6yI, dShows6yJ, dShows6yK, dShows6yL, etaB1);
         }
-        public static Closure sats6yU_Entry(Closure dShows6yN, Closure dShows6yO, Closure dShows6yP, Closure dShows6yQ, Closure dShows6yR, Closure etaB2, Closure etaB1)
+        public static Closure sats6yO_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees6yO, Closure etaB2, Closure etaB1)
         {
-            return cshowLists6yD_Entry(dShows6yN, dShows6yO, dShows6yP, dShows6yQ, dShows6yR, etaB2, etaB1);
+            var dShows6yH = sat_Frees6yO.x0;
+            var dShows6yI = sat_Frees6yO.x1;
+            var dShows6yJ = sat_Frees6yO.x2;
+            var dShows6yK = sat_Frees6yO.x3;
+            var dShows6yL = sat_Frees6yO.x4;
+            return cshowLists6yx_Entry(dShows6yH, dShows6yI, dShows6yJ, dShows6yK, dShows6yL, etaB2, etaB1);
         }
-        public static Closure cshowLists6yD_Entry(Closure dShows6yE, Closure dShows6yF, Closure dShows6yG, Closure dShows6yH, Closure dShows6yI, Closure lss6yJ, Closure ss6yK)
+        public static Closure cshowLists6yx_Entry(Closure dShows6yy, Closure dShows6yz, Closure dShows6yA, Closure dShows6yB, Closure dShows6yC, Closure lss6yD, Closure ss6yE)
         {
-            var sats6yL = new Fun<Closure, Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6yL_Entry), dShows6yE, dShows6yF, dShows6yG, dShows6yH, dShows6yI);
-            return showList___Entry(sats6yL, lss6yJ, ss6yK);
+            var sat_Frees6yF = (dShows6yy, dShows6yz, dShows6yA, dShows6yB, dShows6yC);
+            var sats6yF = new Fun2<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure, Closure>(&sats6yF_Entry, sat_Frees6yF);
+            return showList___Entry(sats6yF, lss6yD, ss6yE);
         }
-        public static Closure sats6yL_Entry(Closure dShows6yE, Closure dShows6yF, Closure dShows6yG, Closure dShows6yH, Closure dShows6yI, Closure etaB2, Closure etaB1)
+        public static Closure sats6yF_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees6yF, Closure etaB2, Closure etaB1)
         {
-            return cshowsPrecs6y5_Entry(dShows6yE, dShows6yF, dShows6yG, dShows6yH, dShows6yI, lvls6ww, etaB2, etaB1);
+            var dShows6yy = sat_Frees6yF.x0;
+            var dShows6yz = sat_Frees6yF.x1;
+            var dShows6yA = sat_Frees6yF.x2;
+            var dShows6yB = sat_Frees6yF.x3;
+            var dShows6yC = sat_Frees6yF.x4;
+            return cshowsPrecs6xZ_Entry(dShows6yy, dShows6yz, dShows6yA, dShows6yB, dShows6yC, lvls6wq, etaB2, etaB1);
         }
-        public static Closure cshows6yw_Entry(Closure dShows6yx, Closure dShows6yy, Closure dShows6yz, Closure dShows6yA, Closure dShows6yB, Closure xs6yC)
+        public static Closure cshows6yq_Entry(Closure dShows6yr, Closure dShows6ys, Closure dShows6yt, Closure dShows6yu, Closure dShows6yv, Closure xs6yw)
         {
-            return cshowsPrecs6y5_Entry(dShows6yx, dShows6yy, dShows6yz, dShows6yA, dShows6yB, lvls6ww, xs6yC, GHC.Types.nil_DataCon);
+            return cshowsPrecs6xZ_Entry(dShows6yr, dShows6ys, dShows6yt, dShows6yu, dShows6yv, lvls6wq, xs6yw, GHC.Types.nil_DataCon);
         }
-        public static Closure cshowsPrecs6y5_Entry(Closure dShows6y6, Closure dShows6y7, Closure dShows6y8, Closure dShows6y9, Closure dShows6ya, Closure dss6yb, Closure dss6yc, Closure ss6yd)
+        public static Closure cshowsPrecs6xZ_Entry(Closure dShows6y0, Closure dShows6y1, Closure dShows6y2, Closure dShows6y3, Closure dShows6y4, Closure dss6y5, Closure dss6y6, Closure ss6y7)
         {
-            var wilds6ye = dss6yc.Eval();
-            var wilds6ye_Tuple5 = wilds6ye as GHC.Tuple.Tuple5;
-            var as6yf = wilds6ye_Tuple5.x0;
-            var bs6yg = wilds6ye_Tuple5.x1;
-            var cs6yh = wilds6ye_Tuple5.x2;
-            var ds6yi = wilds6ye_Tuple5.x3;
-            var es6yj = wilds6ye_Tuple5.x4;
-            var sats6yv = new Updatable<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats6yv_Entry), dShows6y6, dShows6y7, dShows6y8, dShows6y9, dShows6ya, ss6yd, as6yf, bs6yg, cs6yh, ds6yi, es6yj);
-            return new GHC.Types.Cons(fs6xG, sats6yv);
+            var wilds6y8 = dss6y6.Eval();
+            var wilds6y8_Tuple5 = wilds6y8 as GHC.Tuple.Tuple5;
+            var as6y9 = wilds6y8_Tuple5.x0;
+            var bs6ya = wilds6y8_Tuple5.x1;
+            var cs6yb = wilds6y8_Tuple5.x2;
+            var ds6yc = wilds6y8_Tuple5.x3;
+            var es6yd = wilds6y8_Tuple5.x4;
+            var sat_Frees6yp = (dShows6y0, dShows6y1, dShows6y2, dShows6y3, dShows6y4, ss6y7, as6y9, bs6ya, cs6yb, ds6yc, es6yd);
+            var sats6yp = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5, Closure x6, Closure x7, Closure x8, Closure x9, Closure x10)>(&sats6yp_Entry, sat_Frees6yp);
+            return new GHC.Types.Cons(fs6xA, sats6yp);
         }
-        public static Closure sats6yv_Entry(Closure dShows6y6, Closure dShows6y7, Closure dShows6y8, Closure dShows6y9, Closure dShows6ya, Closure ss6yd, Closure as6yf, Closure bs6yg, Closure cs6yh, Closure ds6yi, Closure es6yj)
+        public static Closure sats6yp_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5, Closure x6, Closure x7, Closure x8, Closure x9, Closure x10) sat_Frees6yp)
         {
-            var sats6yu = new GHC.Types.Cons(gs6xH, ss6yd);
-            var sats6yo = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6yo_Entry), dShows6ya, es6yj);
-            var sats6yp = new GHC.Types.Cons(sats6yo, GHC.Types.nil_DataCon);
-            var sats6yn = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6yn_Entry), dShows6y9, ds6yi);
-            var sats6yq = new GHC.Types.Cons(sats6yn, sats6yp);
-            var sats6ym = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6ym_Entry), dShows6y8, cs6yh);
-            var sats6yr = new GHC.Types.Cons(sats6ym, sats6yq);
-            var sats6yl = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6yl_Entry), dShows6y7, bs6yg);
-            var sats6ys = new GHC.Types.Cons(sats6yl, sats6yr);
-            var sats6yk = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6yk_Entry), dShows6y6, as6yf);
-            var sats6yt = new GHC.Types.Cons(sats6yk, sats6ys);
-            return go2s6xT_Entry(sats6yt, sats6yu);
+            var dShows6y0 = sat_Frees6yp.x0;
+            var dShows6y1 = sat_Frees6yp.x1;
+            var dShows6y2 = sat_Frees6yp.x2;
+            var dShows6y3 = sat_Frees6yp.x3;
+            var dShows6y4 = sat_Frees6yp.x4;
+            var ss6y7 = sat_Frees6yp.x5;
+            var as6y9 = sat_Frees6yp.x6;
+            var bs6ya = sat_Frees6yp.x7;
+            var cs6yb = sat_Frees6yp.x8;
+            var ds6yc = sat_Frees6yp.x9;
+            var es6yd = sat_Frees6yp.x10;
+            var sats6yo = new GHC.Types.Cons(gs6xB, ss6y7);
+            var sat_Frees6yi = (dShows6y4, es6yd);
+            var sats6yi = new Updatable<(Closure x0, Closure x1)>(&sats6yi_Entry, sat_Frees6yi);
+            var sats6yj = new GHC.Types.Cons(sats6yi, GHC.Types.nil_DataCon);
+            var sat_Frees6yh = (dShows6y3, ds6yc);
+            var sats6yh = new Updatable<(Closure x0, Closure x1)>(&sats6yh_Entry, sat_Frees6yh);
+            var sats6yk = new GHC.Types.Cons(sats6yh, sats6yj);
+            var sat_Frees6yg = (dShows6y2, cs6yb);
+            var sats6yg = new Updatable<(Closure x0, Closure x1)>(&sats6yg_Entry, sat_Frees6yg);
+            var sats6yl = new GHC.Types.Cons(sats6yg, sats6yk);
+            var sat_Frees6yf = (dShows6y1, bs6ya);
+            var sats6yf = new Updatable<(Closure x0, Closure x1)>(&sats6yf_Entry, sat_Frees6yf);
+            var sats6ym = new GHC.Types.Cons(sats6yf, sats6yl);
+            var sat_Frees6ye = (dShows6y0, as6y9);
+            var sats6ye = new Updatable<(Closure x0, Closure x1)>(&sats6ye_Entry, sat_Frees6ye);
+            var sats6yn = new GHC.Types.Cons(sats6ye, sats6ym);
+            return go2s6xN_Entry(sats6yn, sats6yo);
         }
-        public static Closure sats6yk_Entry(Closure dShows6y6, Closure as6yf)
+        public static Closure sats6ye_Entry(in (Closure x0, Closure x1) sat_Frees6ye)
         {
-            return GHC.Show.showsPrec_Entry(dShows6y6).Apply<Closure, Closure, Closure>(lvls6ww, as6yf);
+            var dShows6y0 = sat_Frees6ye.x0;
+            var as6y9 = sat_Frees6ye.x1;
+            return GHC.Show.showsPrec_Entry(dShows6y0).Apply<Closure, Closure, Closure>(lvls6wq, as6y9);
         }
-        public static Closure sats6yl_Entry(Closure dShows6y7, Closure bs6yg)
+        public static Closure sats6yf_Entry(in (Closure x0, Closure x1) sat_Frees6yf)
         {
-            return GHC.Show.showsPrec_Entry(dShows6y7).Apply<Closure, Closure, Closure>(lvls6ww, bs6yg);
+            var dShows6y1 = sat_Frees6yf.x0;
+            var bs6ya = sat_Frees6yf.x1;
+            return GHC.Show.showsPrec_Entry(dShows6y1).Apply<Closure, Closure, Closure>(lvls6wq, bs6ya);
         }
-        public static Closure sats6ym_Entry(Closure dShows6y8, Closure cs6yh)
+        public static Closure sats6yg_Entry(in (Closure x0, Closure x1) sat_Frees6yg)
         {
-            return GHC.Show.showsPrec_Entry(dShows6y8).Apply<Closure, Closure, Closure>(lvls6ww, cs6yh);
+            var dShows6y2 = sat_Frees6yg.x0;
+            var cs6yb = sat_Frees6yg.x1;
+            return GHC.Show.showsPrec_Entry(dShows6y2).Apply<Closure, Closure, Closure>(lvls6wq, cs6yb);
         }
-        public static Closure sats6yn_Entry(Closure dShows6y9, Closure ds6yi)
+        public static Closure sats6yh_Entry(in (Closure x0, Closure x1) sat_Frees6yh)
         {
-            return GHC.Show.showsPrec_Entry(dShows6y9).Apply<Closure, Closure, Closure>(lvls6ww, ds6yi);
+            var dShows6y3 = sat_Frees6yh.x0;
+            var ds6yc = sat_Frees6yh.x1;
+            return GHC.Show.showsPrec_Entry(dShows6y3).Apply<Closure, Closure, Closure>(lvls6wq, ds6yc);
         }
-        public static Closure sats6yo_Entry(Closure dShows6ya, Closure es6yj)
+        public static Closure sats6yi_Entry(in (Closure x0, Closure x1) sat_Frees6yi)
         {
-            return GHC.Show.showsPrec_Entry(dShows6ya).Apply<Closure, Closure, Closure>(lvls6ww, es6yj);
+            var dShows6y4 = sat_Frees6yi.x0;
+            var es6yd = sat_Frees6yi.x1;
+            return GHC.Show.showsPrec_Entry(dShows6y4).Apply<Closure, Closure, Closure>(lvls6wq, es6yd);
         }
-        public static Closure go2s6xT_Entry(Closure dss6xU, Closure etas6xV)
+        public static Closure go2s6xN_Entry(Closure dss6xO, Closure etas6xP)
         {
-            var wilds6xW = dss6xU.Eval();
-            switch (wilds6xW)
+            var wilds6xQ = dss6xO.Eval();
+            switch (wilds6xQ)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6xW_Nil: { return lvls6xR.Eval(); }
-                case GHC.Types.Cons wilds6xW_Cons:
+                case GHC.Types.Nil wilds6xQ_Nil: { return lvls6xL.Eval(); }
+                case GHC.Types.Cons wilds6xQ_Cons:
                     {
-                        var xs6xY = wilds6xW_Cons.x0;
-                        var ds1s6xZ = wilds6xW_Cons.x1;
-                        var wild1s6y0 = ds1s6xZ.Eval();
-                        switch (wild1s6y0)
+                        var xs6xS = wilds6xQ_Cons.x0;
+                        var ds1s6xT = wilds6xQ_Cons.x1;
+                        var wild1s6xU = ds1s6xT.Eval();
+                        switch (wild1s6xU)
                         {
                             default: { throw new ImpossibleException(); }
-                            case GHC.Types.Nil wild1s6y0_Nil:
+                            case GHC.Types.Nil wild1s6xU_Nil:
                                 {
-                                    return xs6xY.Apply<Closure, Closure>(etas6xV);
+                                    return xs6xS.Apply<Closure, Closure>(etas6xP);
                                 }
-                            case GHC.Types.Cons wild1s6y0_Cons:
+                            case GHC.Types.Cons wild1s6xU_Cons:
                                 {
-                                    var ipvs6y1 = wild1s6y0_Cons.x0;
-                                    var ipv1s6y2 = wild1s6y0_Cons.x1;
-                                    var sats6y3 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6y3_Entry), etas6xV, wild1s6y0);
-                                    var sats6y4 = new GHC.Types.Cons(lvls6vK, sats6y3);
-                                    return xs6xY.Apply<Closure, Closure>(sats6y4);
+                                    var ipvs6xV = wild1s6xU_Cons.x0;
+                                    var ipv1s6xW = wild1s6xU_Cons.x1;
+                                    var sat_Frees6xX = (etas6xP, wild1s6xU);
+                                    var sats6xX = new Updatable<(Closure x0, Closure x1)>(&sats6xX_Entry, sat_Frees6xX);
+                                    var sats6xY = new GHC.Types.Cons(lvls6vE, sats6xX);
+                                    return xs6xS.Apply<Closure, Closure>(sats6xY);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats6y3_Entry(Closure etas6xV, Closure wild1s6y0)
+        public static Closure sats6xX_Entry(in (Closure x0, Closure x1) sat_Frees6xX)
         {
-            return go2s6xT_Entry(wild1s6y0, etas6xV);
+            var etas6xP = sat_Frees6xX.x0;
+            var wild1s6xU = sat_Frees6xX.x1;
+            return go2s6xN_Entry(wild1s6xU, etas6xP);
         }
-        public static Closure lvls6xR_Entry()
+        public static Closure lvls6xL_Entry()
         {
-            var sats6xS = GHC.CString.unpackCStringHash_Entry(lvls6xQ).Eval();
-            return GHC.List.errorEmptyList_Entry(sats6xS);
+            var sats6xM = GHC.CString.unpackCStringHash_Entry(lvls6xK);
+            return GHC.List.errorEmptyList_Entry(sats6xM);
         }
-        public static Closure showParen_Entry(Closure bs6xJ, Closure ps6xK)
+        public static Closure showParen_Entry(Closure bs6xD, Closure ps6xE)
         {
-            var wilds6xL = bs6xJ.Eval();
-            var wilds6xLTags6xL = wilds6xL.Tag;
-            switch (wilds6xLTags6xL)
+            var wilds6xF = bs6xD.Eval();
+            var wilds6xFTags6xF = wilds6xF.Tag;
+            switch (wilds6xFTags6xF)
             {
                 default: { throw new ImpossibleException(); }
                 case 1:
                     {
-                        var wilds6xL_False = wilds6xL as GHC.Types.False;
-                        return ps6xK.Eval();
+                        var wilds6xF_False = wilds6xF as GHC.Types.False;
+                        return ps6xE.Eval();
                     }
                 case 2:
                     {
-                        var wilds6xL_True = wilds6xL as GHC.Types.True;
-                        var sats6xP = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6xP_Entry), ps6xK);
-                        return sats6xP.Eval();
+                        var wilds6xF_True = wilds6xF as GHC.Types.True;
+                        var sats6xJ = new Fun1<Closure, Closure, Closure>(&sats6xJ_Entry, ps6xE);
+                        return sats6xJ.Eval();
                     }
             }
         }
-        public static Closure sats6xP_Entry(Closure ps6xK, Closure xs6xM)
+        public static Closure sats6xJ_Entry(in Closure ps6xE, Closure xs6xG)
         {
-            var sats6xO = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6xO_Entry), ps6xK, xs6xM);
-            return new GHC.Types.Cons(fs6xG, sats6xO);
+            var sat_Frees6xI = (ps6xE, xs6xG);
+            var sats6xI = new Updatable<(Closure x0, Closure x1)>(&sats6xI_Entry, sat_Frees6xI);
+            return new GHC.Types.Cons(fs6xA, sats6xI);
         }
-        public static Closure sats6xO_Entry(Closure ps6xK, Closure xs6xM)
+        public static Closure sats6xI_Entry(in (Closure x0, Closure x1) sat_Frees6xI)
         {
-            var sats6xN = new GHC.Types.Cons(gs6xH, xs6xM);
-            return ps6xK.Apply<Closure, Closure>(sats6xN);
+            var ps6xE = sat_Frees6xI.x0;
+            var xs6xG = sat_Frees6xI.x1;
+            var sats6xH = new GHC.Types.Cons(gs6xB, xs6xG);
+            return ps6xE.Apply<Closure, Closure>(sats6xH);
         }
         public static Closure showChar_Entry(Closure etaB2, Closure etaB1)
         {
             return new GHC.Types.Cons(etaB2, etaB1);
         }
-        public static Closure cshowLists6xB_Entry(Closure lss6xC, Closure ss6xD)
+        public static Closure cshowLists6xv_Entry(Closure lss6xw, Closure ss6xx)
         {
-            return showList___Entry(lvls6xx, lss6xC, ss6xD);
+            return showList___Entry(lvls6xr, lss6xw, ss6xx);
         }
-        public static Closure lvls6xx_Entry(Closure xs6xy, Closure ss6xz)
+        public static Closure lvls6xr_Entry(Closure xs6xs, Closure ss6xt)
         {
-            var wilds6xA = xs6xy.Eval();
-            var wilds6xATags6xA = wilds6xA.Tag;
-            switch (wilds6xATags6xA)
+            var wilds6xu = xs6xs.Eval();
+            var wilds6xuTags6xu = wilds6xu.Tag;
+            switch (wilds6xuTags6xu)
             {
                 default: { throw new ImpossibleException(); }
                 case 1:
                     {
-                        var wilds6xA_False = wilds6xA as GHC.Types.False;
-                        return GHC.Base.plusPlus_Entry(lvls6vb, ss6xz);
+                        var wilds6xu_False = wilds6xu as GHC.Types.False;
+                        return GHC.Base.plusPlus_Entry(lvls6v5, ss6xt);
                     }
                 case 2:
                     {
-                        var wilds6xA_True = wilds6xA as GHC.Types.True;
-                        return GHC.Base.plusPlus_Entry(lvls6vd, ss6xz);
+                        var wilds6xu_True = wilds6xu as GHC.Types.True;
+                        return GHC.Base.plusPlus_Entry(lvls6v7, ss6xt);
                     }
             }
         }
-        public static Closure cshowsPrecs6xs_Entry(Closure dss6xt, Closure xs6xu, Closure ss6xv)
+        public static Closure cshowsPrecs6xm_Entry(Closure dss6xn, Closure xs6xo, Closure ss6xp)
         {
-            var wilds6xw = xs6xu.Eval();
-            var wilds6xwTags6xw = wilds6xw.Tag;
-            switch (wilds6xwTags6xw)
+            var wilds6xq = xs6xo.Eval();
+            var wilds6xqTags6xq = wilds6xq.Tag;
+            switch (wilds6xqTags6xq)
             {
                 default: { throw new ImpossibleException(); }
                 case 1:
                     {
-                        var wilds6xw_False = wilds6xw as GHC.Types.False;
-                        return GHC.Base.plusPlus_Entry(lvls6vb, ss6xv);
+                        var wilds6xq_False = wilds6xq as GHC.Types.False;
+                        return GHC.Base.plusPlus_Entry(lvls6v5, ss6xp);
                     }
                 case 2:
                     {
-                        var wilds6xw_True = wilds6xw as GHC.Types.True;
-                        return GHC.Base.plusPlus_Entry(lvls6vd, ss6xv);
+                        var wilds6xq_True = wilds6xq as GHC.Types.True;
+                        return GHC.Base.plusPlus_Entry(lvls6v7, ss6xp);
                     }
             }
         }
-        public static Closure cshowLists6xo_Entry(Closure lss6xp, Closure ss6xq)
+        public static Closure cshowLists6xi_Entry(Closure lss6xj, Closure ss6xk)
         {
-            return showList___Entry(wDollcshowsPrecs6xg, lss6xp, ss6xq);
+            return showList___Entry(wDollcshowsPrecs6xa, lss6xj, ss6xk);
         }
-        public static Closure cshowsPrecs6xk_Entry(Closure ws6xl, Closure ws6xm, Closure ws6xn)
+        public static Closure cshowsPrecs6xe_Entry(Closure ws6xf, Closure ws6xg, Closure ws6xh)
         {
-            return wDollcshowsPrecs6xg_Entry(ws6xm, ws6xn);
+            return wDollcshowsPrecs6xa_Entry(ws6xg, ws6xh);
         }
-        public static Closure wDollcshowsPrecs6xg_Entry(Closure ws6xh, Closure ws6xi)
+        public static Closure wDollcshowsPrecs6xa_Entry(Closure ws6xb, Closure ws6xc)
         {
-            var wilds6xj = ws6xh.Eval();
-            var wilds6xjTags6xj = wilds6xj.Tag;
-            switch (wilds6xjTags6xj)
+            var wilds6xd = ws6xb.Eval();
+            var wilds6xdTags6xd = wilds6xd.Tag;
+            switch (wilds6xdTags6xd)
             {
                 default: { throw new ImpossibleException(); }
                 case 1:
                     {
-                        var wilds6xj_LT = wilds6xj as GHC.Types.LT;
-                        return GHC.Base.plusPlus_Entry(lvls6vi, ws6xi);
+                        var wilds6xd_LT = wilds6xd as GHC.Types.LT;
+                        return GHC.Base.plusPlus_Entry(lvls6vc, ws6xc);
                     }
                 case 2:
                     {
-                        var wilds6xj_EQ = wilds6xj as GHC.Types.EQ;
-                        return GHC.Base.plusPlus_Entry(lvls6vk, ws6xi);
+                        var wilds6xd_EQ = wilds6xd as GHC.Types.EQ;
+                        return GHC.Base.plusPlus_Entry(lvls6ve, ws6xc);
                     }
                 case 3:
                     {
-                        var wilds6xj_GT = wilds6xj as GHC.Types.GT;
-                        return GHC.Base.plusPlus_Entry(lvls6vm, ws6xi);
+                        var wilds6xd_GT = wilds6xd as GHC.Types.GT;
+                        return GHC.Base.plusPlus_Entry(lvls6vg, ws6xc);
                     }
             }
         }
-        public static Closure cshows6x8_Entry(Closure xs6x9)
+        public static Closure cshows6x2_Entry(Closure xs6x3)
         {
-            var wilds6xa = xs6x9.Eval();
-            var wilds6xa_WHash = wilds6xa as GHC.Types.WHash;
-            var ws6xb = wilds6xa_WHash.x0;
-            var wws6xc = wshowWords6w5_Entry(ws6xb, GHC.Types.nil_DataCon);
-            var wws6xc_RawTuple = wws6xc;
-            var wws6xd = wws6xc_RawTuple.x0;
-            var wws6xe = wws6xc_RawTuple.x1;
-            return new GHC.Types.Cons(wws6xd, wws6xe);
+            var wilds6x4 = xs6x3.Eval();
+            var wilds6x4_WHash = wilds6x4 as GHC.Types.WHash;
+            var ws6x5 = wilds6x4_WHash.x0;
+            var wws6x6 = wshowWords6vZ_Entry(ws6x5, GHC.Types.nil_DataCon);
+            var wws6x6_RawTuple = wws6x6;
+            var wws6x7 = wws6x6_RawTuple.x0;
+            var wws6x8 = wws6x6_RawTuple.x1;
+            return new GHC.Types.Cons(wws6x7, wws6x8);
         }
-        public static Closure cshowLists6x5_Entry(Closure lss6x6, Closure ss6x7)
+        public static Closure cshowLists6wZ_Entry(Closure lss6x0, Closure ss6x1)
         {
-            return showList___Entry(lvls6x0, lss6x6, ss6x7);
+            return showList___Entry(lvls6wU, lss6x0, ss6x1);
         }
-        public static Closure lvls6x0_Entry(Closure dss6x1, Closure etas6x2)
+        public static Closure lvls6wU_Entry(Closure dss6wV, Closure etas6wW)
         {
-            var wilds6x3 = dss6x1.Eval();
-            var wilds6x3_WHash = wilds6x3 as GHC.Types.WHash;
-            var ws6x4 = wilds6x3_WHash.x0;
-            return showWord_Entry(ws6x4, etas6x2);
+            var wilds6wX = dss6wV.Eval();
+            var wilds6wX_WHash = wilds6wX as GHC.Types.WHash;
+            var ws6wY = wilds6wX_WHash.x0;
+            return showWord_Entry(ws6wY, etas6wW);
         }
-        public static Closure fShowMaybe_Entry(Closure dShows6wW)
+        public static Closure fShowMaybe_Entry(Closure dShows6wQ)
         {
-            var sats6wZ = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6wZ_Entry), dShows6wW);
-            var sats6wY = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6wY_Entry), dShows6wW);
-            var sats6wX = new Fun<Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats6wX_Entry), dShows6wW);
-            return new GHC.Show.CColShow(sats6wX, sats6wY, sats6wZ);
+            var sats6wT = new Fun2<Closure, Closure, Closure, Closure>(&sats6wT_Entry, dShows6wQ);
+            var sats6wS = new Fun1<Closure, Closure, Closure>(&sats6wS_Entry, dShows6wQ);
+            var sats6wR = new Fun3<Closure, Closure, Closure, Closure, Closure>(&sats6wR_Entry, dShows6wQ);
+            return new GHC.Show.CColShow(sats6wR, sats6wS, sats6wT);
         }
-        public static Closure sats6wX_Entry(Closure dShows6wW, Closure etaB3, Closure etaB2, Closure etaB1)
+        public static Closure sats6wR_Entry(in Closure dShows6wQ, Closure etaB3, Closure etaB2, Closure etaB1)
         {
-            return cshowsPrecs6wH_Entry(dShows6wW, etaB3, etaB2, etaB1);
+            return cshowsPrecs6wB_Entry(dShows6wQ, etaB3, etaB2, etaB1);
         }
-        public static Closure sats6wY_Entry(Closure dShows6wW, Closure etaB1)
+        public static Closure sats6wS_Entry(in Closure dShows6wQ, Closure etaB1)
         {
-            return cshows6vv_Entry(dShows6wW, etaB1);
+            return cshows6vp_Entry(dShows6wQ, etaB1);
         }
-        public static Closure sats6wZ_Entry(Closure dShows6wW, Closure etaB2, Closure etaB1)
+        public static Closure sats6wT_Entry(in Closure dShows6wQ, Closure etaB2, Closure etaB1)
         {
-            return cshowLists6wN_Entry(dShows6wW, etaB2, etaB1);
+            return cshowLists6wH_Entry(dShows6wQ, etaB2, etaB1);
         }
-        public static Closure cshowLists6wN_Entry(Closure dShows6wO, Closure lss6wP, Closure ss6wQ)
+        public static Closure cshowLists6wH_Entry(Closure dShows6wI, Closure lss6wJ, Closure ss6wK)
         {
-            var sats6wU = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6wU_Entry), dShows6wO);
-            return showList___Entry(sats6wU, lss6wP, ss6wQ);
+            var sats6wO = new Fun2<Closure, Closure, Closure, Closure>(&sats6wO_Entry, dShows6wI);
+            return showList___Entry(sats6wO, lss6wJ, ss6wK);
         }
-        public static Closure sats6wU_Entry(Closure dShows6wO, Closure xs6wR, Closure ss6wS)
+        public static Closure sats6wO_Entry(in Closure dShows6wI, Closure xs6wL, Closure ss6wM)
         {
-            var sats6wT = cshows6vv_Entry(dShows6wO, xs6wR).Eval();
-            return GHC.Base.plusPlus_Entry(sats6wT, ss6wS);
+            var sats6wN = cshows6vp_Entry(dShows6wI, xs6wL);
+            return GHC.Base.plusPlus_Entry(sats6wN, ss6wM);
         }
-        public static Closure cshowsPrecs6wH_Entry(Closure dShows6wI, Closure dss6wJ, Closure xs6wK, Closure ss6wL)
+        public static Closure cshowsPrecs6wB_Entry(Closure dShows6wC, Closure dss6wD, Closure xs6wE, Closure ss6wF)
         {
-            var sats6wM = cshows6vv_Entry(dShows6wI, xs6wK).Eval();
-            return GHC.Base.plusPlus_Entry(sats6wM, ss6wL);
+            var sats6wG = cshows6vp_Entry(dShows6wC, xs6wE);
+            return GHC.Base.plusPlus_Entry(sats6wG, ss6wF);
         }
-        public static Closure dmshowLists6wC_Entry(Closure dShows6wD, Closure lss6wE, Closure ss6wF)
+        public static Closure dmshowList_Entry(Closure dShows6wx, Closure lss6wy, Closure ss6wz)
         {
-            var sats6wG = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats6wG_Entry), dShows6wD);
-            return showList___Entry(sats6wG, lss6wE, ss6wF);
+            var sats6wA = new Updatable<Closure>(&sats6wA_Entry, dShows6wx);
+            return showList___Entry(sats6wA, lss6wy, ss6wz);
         }
-        public static Closure sats6wG_Entry(Closure dShows6wD)
+        public static Closure sats6wA_Entry(in Closure dShows6wx)
         {
-            return GHC.Show.showsPrec_Entry(dShows6wD).Apply<Closure, Closure>(lvls6ww);
+            return GHC.Show.showsPrec_Entry(dShows6wx).Apply<Closure, Closure>(lvls6wq);
         }
-        public static Closure dmshows6wz_Entry(Closure dShows6wA, Closure xs6wB)
+        public static Closure dmshow_Entry(Closure dShows6wu, Closure xs6wv)
         {
-            return GHC.Show.showsPrec_Entry(dShows6wA).Apply<Closure, Closure, Closure, Closure>(lvls6ww, xs6wB, GHC.Types.nil_DataCon);
+            return GHC.Show.showsPrec_Entry(dShows6wu).Apply<Closure, Closure, Closure, Closure>(lvls6wq, xs6wv, GHC.Types.nil_DataCon);
         }
-        public static Closure shows_Entry(Closure dShows6wy)
+        public static Closure shows_Entry(Closure dShows6ws)
         {
-            return GHC.Show.showsPrec_Entry(dShows6wy).Apply<Closure, Closure>(lvls6ww);
+            return GHC.Show.showsPrec_Entry(dShows6ws).Apply<Closure, Closure>(lvls6wq);
         }
-        public static Closure cshowsPrecs6wq_Entry(Closure dss6wr, Closure dss6ws, Closure etas6wt)
+        public static Closure cshowsPrecs6wk_Entry(Closure dss6wl, Closure dss6wm, Closure etas6wn)
         {
-            var wilds6wu = dss6ws.Eval();
-            var wilds6wu_WHash = wilds6wu as GHC.Types.WHash;
-            var ws6wv = wilds6wu_WHash.x0;
-            return showWord_Entry(ws6wv, etas6wt);
+            var wilds6wo = dss6wm.Eval();
+            var wilds6wo_WHash = wilds6wo as GHC.Types.WHash;
+            var ws6wp = wilds6wo_WHash.x0;
+            return showWord_Entry(ws6wp, etas6wn);
         }
-        public static Closure showWord_Entry(ulong ws6wl, Closure ws6wm)
+        public static Closure showWord_Entry(ulong ws6wf, Closure ws6wg)
         {
-            var wws6wn = wshowWords6w5_Entry(ws6wl, ws6wm);
-            var wws6wn_RawTuple = wws6wn;
-            var wws6wo = wws6wn_RawTuple.x0;
-            var wws6wp = wws6wn_RawTuple.x1;
-            return new GHC.Types.Cons(wws6wo, wws6wp);
+            var wws6wh = wshowWords6vZ_Entry(ws6wf, ws6wg);
+            var wws6wh_RawTuple = wws6wh;
+            var wws6wi = wws6wh_RawTuple.x0;
+            var wws6wj = wws6wh_RawTuple.x1;
+            return new GHC.Types.Cons(wws6wi, wws6wj);
         }
-        public static (Closure x0, Closure x1) wshowWords6w5_Entry(ulong ws6w6, Closure ws6w7)
+        public static (Closure x0, Closure x1) wshowWords6vZ_Entry(ulong ws6w0, Closure ws6w1)
         {
-            var lwilds6w8 = (ws6w6 < 10UL) ? 1 : 0;
-            switch (lwilds6w8)
+            var lwilds6w2 = (ws6w0 < 10UL) ? 1 : 0;
+            switch (lwilds6w2)
             {
                 default:
                     {
-                        var sats6wa = ( ws6w6 % 10UL ) ;
-                        var sats6wb = (long)sats6wa;
-                        var sats6wc = 48 + sats6wb;
-                        var sats6wd = (char)sats6wc;
-                        var sats6we = new GHC.Types.CHash(sats6wd);
-                        var sats6wf = new GHC.Types.Cons(sats6we, ws6w7);
-                        var sats6w9 = ( ws6w6 / 10UL ) ;
-                        return wshowWords6w5_Entry(sats6w9, sats6wf);
+                        var sats6w4 = ws6w0 % 10UL;
+                        var sats6w5 = (long)sats6w4;
+                        var sats6w6 = 48 + sats6w5;
+                        var sats6w7 = (char)sats6w6;
+                        var sats6w8 = new GHC.Types.CHash(sats6w7);
+                        var sats6w9 = new GHC.Types.Cons(sats6w8, ws6w1);
+                        var sats6w3 = ws6w0 / 10UL;
+                        return wshowWords6vZ_Entry(sats6w3, sats6w9);
                     }
                 case 1:
                     {
-                        var sats6wg = (long)ws6w6;
-                        var sats6wh = 48 + sats6wg;
-                        var sats6wi = (char)sats6wh;
-                        var sats6wj = new GHC.Types.CHash(sats6wi);
-                        return (sats6wj, ws6w7);
+                        var sats6wa = (long)ws6w0;
+                        var sats6wb = 48 + sats6wa;
+                        var sats6wc = (char)sats6wb;
+                        var sats6wd = new GHC.Types.CHash(sats6wc);
+                        return (sats6wd, ws6w1);
                     }
             }
         }
-        public static Closure showList___Entry(Closure dss6vN, Closure dss6vO, Closure ss6vP)
+        public static Closure showList___Entry(Closure dss6vH, Closure dss6vI, Closure ss6vJ)
         {
-            var wilds6vQ = dss6vO.Eval();
+            var wilds6vK = dss6vI.Eval();
+            switch (wilds6vK)
+            {
+                default: { throw new ImpossibleException(); }
+                case GHC.Types.Nil wilds6vK_Nil:
+                    {
+                        return GHC.CString.unpackAppendCStringHash_Entry(lvls6vF, ss6vJ);
+                    }
+                case GHC.Types.Cons wilds6vK_Cons:
+                    {
+                        var xs6vL = wilds6vK_Cons.x0;
+                        var xss6vM = wilds6vK_Cons.x1;
+                        var sat_Frees6vW = (dss6vH, ss6vJ, xs6vL, xss6vM);
+                        var sats6vW = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats6vW_Entry, sat_Frees6vW);
+                        return new GHC.Types.Cons(lvls6vC, sats6vW);
+                    }
+            }
+        }
+        public static Closure sats6vW_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees6vW)
+        {
+            var dss6vH = sat_Frees6vW.x0;
+            var ss6vJ = sat_Frees6vW.x1;
+            var xs6vL = sat_Frees6vW.x2;
+            var xss6vM = sat_Frees6vW.x3;
+            var sat_Frees6vV = (dss6vH, ss6vJ, xss6vM);
+            var sats6vV = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats6vV_Entry, sat_Frees6vV);
+            return dss6vH.Apply<Closure, Closure, Closure>(xs6vL, sats6vV);
+        }
+        public static Closure sats6vV_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees6vV)
+        {
+            var dss6vH = sat_Frees6vV.x0;
+            var ss6vJ = sat_Frees6vV.x1;
+            var xss6vM = sat_Frees6vV.x2;
+            var lvls6vN = new GHC.Types.Cons(lvls6vD, ss6vJ);
+            var showl_Frees6vO = (dss6vH, lvls6vN, (Closure)null);
+            var showls6vO = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&showls6vO_Entry, showl_Frees6vO);
+            showls6vO.free.x2 = showls6vO;
+            return showls6vO.Apply<Closure, Closure>(xss6vM);
+        }
+        public static Closure showls6vO_Entry(in (Closure x0, Closure x1, Closure x2) showl_Frees6vO, Closure dss6vP)
+        {
+            var dss6vH = showl_Frees6vO.x0;
+            var lvls6vN = showl_Frees6vO.x1;
+            var showls6vO = showl_Frees6vO.x2;
+            var wilds6vQ = dss6vP.Eval();
             switch (wilds6vQ)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6vQ_Nil:
-                    {
-                        return GHC.CString.unpackAppendCStringHash_Entry(lvls6vL, ss6vP);
-                    }
+                case GHC.Types.Nil wilds6vQ_Nil: { return lvls6vN.Eval(); }
                 case GHC.Types.Cons wilds6vQ_Cons:
                     {
-                        var xs6vR = wilds6vQ_Cons.x0;
-                        var xss6vS = wilds6vQ_Cons.x1;
-                        var sats6w2 = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats6w2_Entry), dss6vN, ss6vP, xs6vR, xss6vS);
-                        return new GHC.Types.Cons(lvls6vI, sats6w2);
+                        var ys6vR = wilds6vQ_Cons.x0;
+                        var yss6vS = wilds6vQ_Cons.x1;
+                        var sat_Frees6vU = (dss6vH, showls6vO, ys6vR, yss6vS);
+                        var sats6vU = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats6vU_Entry, sat_Frees6vU);
+                        return new GHC.Types.Cons(lvls6vE, sats6vU);
                     }
             }
         }
-        public static Closure sats6w2_Entry(Closure dss6vN, Closure ss6vP, Closure xs6vR, Closure xss6vS)
+        public static Closure sats6vU_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees6vU)
         {
-            var sats6w1 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats6w1_Entry), dss6vN, ss6vP, xss6vS);
-            return dss6vN.Apply<Closure, Closure, Closure>(xs6vR, sats6w1);
+            var dss6vH = sat_Frees6vU.x0;
+            var showls6vO = sat_Frees6vU.x1;
+            var ys6vR = sat_Frees6vU.x2;
+            var yss6vS = sat_Frees6vU.x3;
+            var sat_Frees6vT = (showls6vO, yss6vS);
+            var sats6vT = new Updatable<(Closure x0, Closure x1)>(&sats6vT_Entry, sat_Frees6vT);
+            return dss6vH.Apply<Closure, Closure, Closure>(ys6vR, sats6vT);
         }
-        public static Closure sats6w1_Entry(Closure dss6vN, Closure ss6vP, Closure xss6vS)
+        public static Closure sats6vT_Entry(in (Closure x0, Closure x1) sat_Frees6vT)
         {
-            var lvls6vT = new GHC.Types.Cons(lvls6vJ, ss6vP);
-            var showls6vU = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(showls6vU_Entry), dss6vN, lvls6vT, null);
-            showls6vU.x2 = showls6vU;
-            return showls6vU.Apply<Closure, Closure>(xss6vS);
+            var showls6vO = sat_Frees6vT.x0;
+            var yss6vS = sat_Frees6vT.x1;
+            return showls6vO.Apply<Closure, Closure>(yss6vS);
         }
-        public static Closure showls6vU_Entry(Closure dss6vN, Closure lvls6vT, Closure showls6vU, Closure dss6vV)
+        public static Closure dmshowsPrec_Entry(Closure dShows6vx, Closure dss6vy, Closure xs6vz, Closure ss6vA)
         {
-            var wilds6vW = dss6vV.Eval();
-            switch (wilds6vW)
+            var sats6vB = GHC.Show.show_Entry(dShows6vx).Apply<Closure, Closure>(xs6vz);
+            return GHC.Base.plusPlus_Entry(sats6vB, ss6vA);
+        }
+        public static Closure cshows6vp_Entry(Closure dShows6vq, Closure dss6vr)
+        {
+            var wilds6vs = dss6vr.Eval();
+            switch (wilds6vs)
             {
                 default: { throw new ImpossibleException(); }
-                case GHC.Types.Nil wilds6vW_Nil: { return lvls6vT.Eval(); }
-                case GHC.Types.Cons wilds6vW_Cons:
+                case GHC.Maybe.Nothing wilds6vs_Nothing: { return lvls6vl.Eval(); }
+                case GHC.Maybe.Just wilds6vs_Just:
                     {
-                        var ys6vX = wilds6vW_Cons.x0;
-                        var yss6vY = wilds6vW_Cons.x1;
-                        var sats6w0 = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats6w0_Entry), dss6vN, showls6vU, ys6vX, yss6vY);
-                        return new GHC.Types.Cons(lvls6vK, sats6w0);
+                        var xs6vt = wilds6vs_Just.x0;
+                        var sat_Frees6vv = (dShows6vq, xs6vt);
+                        var sats6vv = new Updatable<(Closure x0, Closure x1)>(&sats6vv_Entry, sat_Frees6vv);
+                        return GHC.CString.unpackAppendCStringHash_Entry(lvls6vm, sats6vv);
                     }
             }
         }
-        public static Closure sats6w0_Entry(Closure dss6vN, Closure showls6vU, Closure ys6vX, Closure yss6vY)
+        public static Closure sats6vv_Entry(in (Closure x0, Closure x1) sat_Frees6vv)
         {
-            var sats6vZ = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6vZ_Entry), showls6vU, yss6vY);
-            return dss6vN.Apply<Closure, Closure, Closure>(ys6vX, sats6vZ);
+            var dShows6vq = sat_Frees6vv.x0;
+            var xs6vt = sat_Frees6vv.x1;
+            var sats6vu = GHC.Show.show_Entry(dShows6vq).Apply<Closure, Closure>(xs6vt);
+            return GHC.Base.plusPlus_Entry(sats6vu, lvls6vo);
         }
-        public static Closure sats6vZ_Entry(Closure showls6vU, Closure yss6vY)
+        public static Closure lvls6vo_Entry()
         {
-            return showls6vU.Apply<Closure, Closure>(yss6vY);
+            return GHC.CString.unpackCStringHash_Entry(lvls6vn);
         }
-        public static Closure dmshowsPrecs6vC_Entry(Closure dShows6vD, Closure dss6vE, Closure xs6vF, Closure ss6vG)
+        public static Closure lvls6vl_Entry()
         {
-            var sats6vH = GHC.Show.show_Entry(dShows6vD).Apply<Closure, Closure>(xs6vF).Eval();
-            return GHC.Base.plusPlus_Entry(sats6vH, ss6vG);
+            return GHC.CString.unpackCStringHash_Entry(lvls6vk);
         }
-        public static Closure cshows6vv_Entry(Closure dShows6vw, Closure dss6vx)
+        public static Closure cshows6vh_Entry(Closure dss6vi)
         {
-            var wilds6vy = dss6vx.Eval();
-            switch (wilds6vy)
-            {
-                default: { throw new ImpossibleException(); }
-                case GHC.Maybe.Nothing wilds6vy_Nothing: { return lvls6vr.Eval(); }
-                case GHC.Maybe.Just wilds6vy_Just:
-                    {
-                        var xs6vz = wilds6vy_Just.x0;
-                        var sats6vB = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats6vB_Entry), dShows6vw, xs6vz);
-                        return GHC.CString.unpackAppendCStringHash_Entry(lvls6vs, sats6vB);
-                    }
-            }
-        }
-        public static Closure sats6vB_Entry(Closure dShows6vw, Closure xs6vz)
-        {
-            var sats6vA = GHC.Show.show_Entry(dShows6vw).Apply<Closure, Closure>(xs6vz).Eval();
-            return GHC.Base.plusPlus_Entry(sats6vA, lvls6vu);
-        }
-        public static Closure lvls6vu_Entry()
-        {
-            return GHC.CString.unpackCStringHash_Entry(lvls6vt);
-        }
-        public static Closure lvls6vr_Entry()
-        {
-            return GHC.CString.unpackCStringHash_Entry(lvls6vq);
-        }
-        public static Closure cshows6vn_Entry(Closure dss6vo)
-        {
-            var wilds6vp = dss6vo.Eval();
-            var wilds6vpTags6vp = wilds6vp.Tag;
-            switch (wilds6vpTags6vp)
+            var wilds6vj = dss6vi.Eval();
+            var wilds6vjTags6vj = wilds6vj.Tag;
+            switch (wilds6vjTags6vj)
             {
                 default: { throw new ImpossibleException(); }
                 case 1:
                     {
-                        var wilds6vp_LT = wilds6vp as GHC.Types.LT; return lvls6vi.Eval();
+                        var wilds6vj_LT = wilds6vj as GHC.Types.LT; return lvls6vc.Eval();
                     }
                 case 2:
                     {
-                        var wilds6vp_EQ = wilds6vp as GHC.Types.EQ; return lvls6vk.Eval();
+                        var wilds6vj_EQ = wilds6vj as GHC.Types.EQ; return lvls6ve.Eval();
                     }
                 case 3:
                     {
-                        var wilds6vp_GT = wilds6vp as GHC.Types.GT; return lvls6vm.Eval();
+                        var wilds6vj_GT = wilds6vj as GHC.Types.GT; return lvls6vg.Eval();
                     }
             }
         }
-        public static Closure lvls6vm_Entry()
+        public static Closure lvls6vg_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6vl);
+            return GHC.CString.unpackCStringHash_Entry(lvls6vf);
         }
-        public static Closure lvls6vk_Entry()
+        public static Closure lvls6ve_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6vj);
+            return GHC.CString.unpackCStringHash_Entry(lvls6vd);
         }
-        public static Closure lvls6vi_Entry()
+        public static Closure lvls6vc_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6vh);
+            return GHC.CString.unpackCStringHash_Entry(lvls6vb);
         }
-        public static Closure cshows6ve_Entry(Closure dss6vf)
+        public static Closure cshows6v8_Entry(Closure dss6v9)
         {
-            var wilds6vg = dss6vf.Eval();
-            var wilds6vgTags6vg = wilds6vg.Tag;
-            switch (wilds6vgTags6vg)
+            var wilds6va = dss6v9.Eval();
+            var wilds6vaTags6va = wilds6va.Tag;
+            switch (wilds6vaTags6va)
             {
                 default: { throw new ImpossibleException(); }
                 case 1:
                     {
-                        var wilds6vg_False = wilds6vg as GHC.Types.False;
-                        return lvls6vb.Eval();
+                        var wilds6va_False = wilds6va as GHC.Types.False;
+                        return lvls6v5.Eval();
                     }
                 case 2:
                     {
-                        var wilds6vg_True = wilds6vg as GHC.Types.True;
-                        return lvls6vd.Eval();
+                        var wilds6va_True = wilds6va as GHC.Types.True;
+                        return lvls6v7.Eval();
                     }
             }
         }
-        public static Closure lvls6vd_Entry()
+        public static Closure lvls6v7_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6vc);
+            return GHC.CString.unpackCStringHash_Entry(lvls6v6);
         }
-        public static Closure lvls6vb_Entry()
+        public static Closure lvls6v5_Entry()
         {
-            return GHC.CString.unpackCStringHash_Entry(lvls6va);
+            return GHC.CString.unpackCStringHash_Entry(lvls6v4);
         }
         public static Closure showsPrec_Entry(Closure a0)
         {

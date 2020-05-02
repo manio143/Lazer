@@ -4,327 +4,327 @@ namespace GHC
 {
     public unsafe static class Base
     {
-        public static Fun cColMonoid_DataCon;
+        public static Function cColMonoid_DataCon;
 
-        public static Fun cColFunctor_DataCon;
+        public static Function cColFunctor_DataCon;
 
-        public static Fun cColApplicative_DataCon;
+        public static Function cColApplicative_DataCon;
 
-        public static Fun cColAlternative_DataCon;
+        public static Function cColAlternative_DataCon;
 
-        public static Fun cColMonad_DataCon;
+        public static Function cColMonad_DataCon;
 
-        public static Fun cColMonadPlus_DataCon;
+        public static Function cColMonadPlus_DataCon;
 
-        public static Fun cColSemigroup_DataCon;
+        public static Function cColSemigroup_DataCon;
 
-        public static Fun eqString;
+        public static Function eqString;
 
-        internal static Fun cmanys9BH;
+        internal static Function cmanys9BH;
 
-        internal static Fun csomes9Bx;
+        internal static Function csomes9Bx;
 
-        public static Fun liftM;
+        public static Function liftM;
 
-        internal static Fun sliftMs9Bp;
+        internal static Function sliftMs9Bp;
 
-        public static Fun liftM2;
+        public static Function liftM2;
 
-        internal static Fun sliftM2s9Be;
+        internal static Function sliftM2s9Be;
 
-        public static Fun liftM3;
+        public static Function liftM3;
 
-        internal static Fun sliftM3s9AP;
+        internal static Function sliftM3s9AP;
 
-        public static Fun liftM4;
+        public static Function liftM4;
 
-        internal static Fun sliftM4s9Ak;
+        internal static Function sliftM4s9Ak;
 
-        public static Fun liftM5;
+        public static Function liftM5;
 
-        internal static Fun sliftM5s9zJ;
+        internal static Function sliftM5s9zJ;
 
-        public static Fun ap;
+        public static Function ap;
 
-        internal static Fun saps9zs;
+        internal static Function saps9zs;
 
-        public static Fun when;
+        public static Function when;
 
-        internal static Fun swhens9zi;
+        internal static Function swhens9zi;
 
-        public static Fun liftA;
+        public static Function liftA;
 
-        internal static Fun sliftAs9zb;
+        internal static Function sliftAs9zb;
 
-        public static Fun liftA3;
+        public static Function liftA3;
 
-        internal static Fun sliftA3s9yS;
+        internal static Function sliftA3s9yS;
 
-        internal static Fun cLtAstrs9yK;
+        internal static Function cLtAstrs9yK;
 
-        public static Fun modInt;
+        public static Function modInt;
 
-        public static Fun divInt;
+        public static Function divInt;
 
-        public static Fun quotRemInt;
+        public static Function quotRemInt;
 
-        public static Fun remInt;
+        public static Function remInt;
 
-        public static Fun quotInt;
+        public static Function quotInt;
 
-        public static Fun getTag;
+        public static Function getTag;
 
-        public static Fun flip;
+        public static Function flip;
 
-        internal static Fun lvls9x0;
+        internal static Function lvls9x0;
 
-        internal static Fun cGtGts9wZ;
+        internal static Function cGtGts9wZ;
 
-        internal static Fun cLtAstrs9wU;
+        internal static Function cLtAstrs9wU;
 
-        internal static Fun cAstrGts9wQ;
+        internal static Function cAstrGts9wQ;
 
-        internal static Fun cLtDolls9wL;
+        internal static Function cLtDolls9wL;
 
-        public static Fun fMonadPrOComPrC;
+        public static Function fMonadPrOComPrC;
 
-        internal static Fun lvls9wB;
+        internal static Function lvls9wB;
 
-        internal static Fun cGtGts9wA;
+        internal static Function cGtGts9wA;
 
-        public static Fun fApplicativePrOComPrC;
+        public static Function fApplicativePrOComPrC;
 
-        internal static Fun cLtAstrs9wg;
+        internal static Function cLtAstrs9wg;
 
-        internal static Fun cAstrGts9w5;
+        internal static Function cAstrGts9w5;
 
-        internal static Fun cLtDolls9vY;
+        internal static Function cLtDolls9vY;
 
-        internal static Fun cLtAstrGts9vT;
+        internal static Function cLtAstrGts9vT;
 
-        internal static Fun cLtDolls9vN;
+        internal static Function cLtDolls9vN;
 
-        internal static Fun cmanys9vu;
+        internal static Function cmanys9vu;
 
-        internal static Fun csomes9vd;
+        internal static Function csomes9vd;
 
-        internal static Fun poly_gos9v7;
+        internal static Function poly_gos9v7;
 
-        public static Fun eqLtLt;
+        public static Function eqLtLt;
 
-        internal static Fun sEqLtLts9uZ;
+        internal static Function sEqLtLts9uZ;
 
-        internal static Fun cLtAstrs9uW;
+        internal static Function cLtAstrs9uW;
 
-        internal static Fun cLtDolls9uQ;
+        internal static Function cLtDolls9uQ;
 
-        public static Fun dmLtDolls9uL;
+        public static Function dmLtDoll;
 
-        public static Fun fMonoidDashGt;
+        public static Function fMonoidDashGt;
 
-        internal static Fun cmconcats9uq;
+        internal static Function cmconcats9uq;
 
-        public static Fun fMonoidPrOComPrC;
+        public static Function fMonoidPrOComPrC;
 
-        internal static Fun cmconcats9tZ;
+        internal static Function cmconcats9tZ;
 
-        public static Fun fMonoidPrOComComPrC;
+        public static Function fMonoidPrOComComPrC;
 
-        internal static Fun cmconcats9ts;
+        internal static Function cmconcats9ts;
 
-        public static Fun fMonoidPrOComComComPrC;
+        public static Function fMonoidPrOComComComPrC;
 
-        internal static Fun cmconcats9t2;
+        internal static Function cmconcats9t2;
 
-        public static Fun fMonoidPrOComComComComPrC;
+        public static Function fMonoidPrOComComComComPrC;
 
-        internal static Fun cmconcats9sz;
+        internal static Function cmconcats9sz;
 
-        internal static Fun gos9ss;
+        internal static Function gos9ss;
 
-        public static Fun fMonoidMaybe;
+        public static Function fMonoidMaybe;
 
-        internal static Fun cmconcats9sa;
+        internal static Function cmconcats9sa;
 
-        public static Fun dmmconcats9s0;
+        public static Function dmmconcat;
 
-        public static Fun sequence;
+        public static Function sequence;
 
-        public static Fun mapM;
+        public static Function mapM;
 
-        public static Fun fSemigroupBrOBrC;
+        public static Function fSemigroupBrOBrC;
 
-        public static Fun plusPlus;
+        public static Function plusPlus;
 
-        public static Fun map;
+        public static Function map;
 
-        public static Fun foldr;
+        public static Function foldr;
 
-        public static Fun mapFB;
+        public static Function mapFB;
 
-        public static Fun dot;
+        public static Function dot;
 
-        public static Fun dmLtAstrs9qX;
+        public static Function dmLtAstr;
 
-        public static Fun asTypeOf;
+        public static Function asTypeOf;
 
-        public static Fun @const;
+        public static Function @const;
 
-        public static Fun breakpointCond;
+        public static Function breakpointCond;
 
-        public static Fun breakpoint;
+        public static Function breakpoint;
 
-        public static Fun assert;
+        public static Function assert;
 
-        public static Fun dmAstrGts9qI;
+        public static Function dmAstrGt;
 
-        public static Fun dmLtAstrGts9qG;
+        public static Function dmLtAstrGt;
 
-        public static Fun join;
+        public static Function join;
 
-        public static Fun id;
+        public static Function id;
 
-        public static Fun ord;
+        public static Function ord;
 
-        public static Fun unsafeChr;
+        public static Function unsafeChr;
 
-        public static Fun iShiftRLHash;
+        public static Function iShiftRLHash;
 
-        public static Fun iShiftRAHash;
+        public static Function iShiftRAHash;
 
-        public static Fun iShiftLHash;
+        public static Function iShiftLHash;
 
-        public static Fun shiftRLHash;
+        public static Function shiftRLHash;
 
-        public static Fun shiftLHash;
+        public static Function shiftLHash;
 
-        public static Fun divModInt;
+        public static Function divModInt;
 
-        public static Fun divModIntHash;
+        public static Function divModIntHash;
 
-        public static Fun until;
+        public static Function until;
 
-        public static Fun augment;
+        public static Function augment;
 
-        public static Fun build;
+        public static Function build;
 
-        public static Fun ltAstrAstrGt;
+        public static Function ltAstrAstrGt;
 
-        internal static Fun lvls9on;
+        internal static Function lvls9on;
 
-        public static Fun ifThenElse;
+        public static Function ifThenElse;
 
-        public static Fun dmmappends9og;
+        public static Function dmmappend;
 
-        public static Fun dmliftA2s9oa;
+        public static Function dmliftA2;
 
-        public static Fun dmsomes9nX;
+        public static Function dmsome;
 
-        public static Fun dmmanys9nQ;
+        public static Function dmmany;
 
-        public static Fun dmGtGts9nK;
+        public static Function dmGtGt;
 
-        public static Fun dmreturns9nH;
+        public static Function dmreturn;
 
-        public static Fun dmfails9nE;
+        public static Function dmfail;
 
-        public static Fun dmmzeros9nB;
+        public static Function dmmzero;
 
-        public static Fun dmmpluss9ny;
+        public static Function dmmplus;
 
-        internal static Fun cGtGtEqs9no;
+        internal static Function cGtGtEqs9no;
 
-        internal static Fun cfails9nm;
+        internal static Function cfails9nm;
 
-        internal static Fun cGtGtEqs9nh;
+        internal static Function cGtGtEqs9nh;
 
-        internal static Fun cfails9nf;
+        internal static Function cfails9nf;
 
-        internal static Fun cGtGtEqs9na;
+        internal static Function cGtGtEqs9na;
 
-        internal static Fun cGtGtEqs9mZ;
+        internal static Function cGtGtEqs9mZ;
 
-        internal static Fun cLtPipeGts9mU;
+        internal static Function cLtPipeGts9mU;
 
-        internal static Fun cpures9mS;
+        internal static Function cpures9mS;
 
-        internal static Fun cLtAstrGts9mC;
+        internal static Function cLtAstrGts9mC;
 
-        internal static Fun cliftA2s9ml;
+        internal static Function cliftA2s9ml;
 
-        internal static Fun cAstrGts9mc;
+        internal static Function cAstrGts9mc;
 
-        internal static Fun cliftA2s9m3;
+        internal static Function cliftA2s9m3;
 
-        internal static Fun cAstrGts9lY;
+        internal static Function cAstrGts9lY;
 
-        internal static Fun cLtAstrGts9lT;
+        internal static Function cLtAstrGts9lT;
 
-        internal static Fun cliftA2s9lM;
+        internal static Function cliftA2s9lM;
 
-        internal static Fun cLtAstrGts9lA;
+        internal static Function cLtAstrGts9lA;
 
-        internal static Fun cliftA2s9ln;
+        internal static Function cliftA2s9ln;
 
-        internal static Fun cfmaps9lh;
+        internal static Function cfmaps9lh;
 
-        internal static Fun cfmaps9la;
+        internal static Function cfmaps9la;
 
-        internal static Fun cp1Monoids9kL;
+        internal static Function cp1Monoids9kL;
 
-        internal static Fun cmemptys9kA;
+        internal static Function cmemptys9kA;
 
-        internal static Fun cp1Monoids9kf;
+        internal static Function cp1Monoids9kf;
 
-        internal static Fun cmemptys9k6;
+        internal static Function cmemptys9k6;
 
-        internal static Fun cp1Monoids9jP;
+        internal static Function cp1Monoids9jP;
 
-        internal static Fun cmemptys9jI;
+        internal static Function cmemptys9jI;
 
-        internal static Fun cp1Monoids9jv;
+        internal static Function cp1Monoids9jv;
 
-        internal static Fun cmemptys9jq;
+        internal static Function cmemptys9jq;
 
-        internal static Fun cmconcats9jo;
+        internal static Function cmconcats9jo;
 
-        internal static Fun cp1Monoids9jh;
+        internal static Function cp1Monoids9jh;
 
-        internal static Fun cmconcats9jf;
+        internal static Function cmconcats9jf;
 
-        internal static Fun poly_gos9j9;
+        internal static Function poly_gos9j9;
 
-        public static Fun fSemigroupMaybe;
+        public static Function fSemigroupMaybe;
 
-        internal static Fun cLtGts9iZ;
+        internal static Function cLtGts9iZ;
 
-        public static Fun fSemigroupOrdering;
+        public static Function fSemigroupOrdering;
 
-        internal static Fun cLtGts9iU;
+        internal static Function cLtGts9iU;
 
-        public static Fun fSemigroupPrOComComComComPrC;
+        public static Function fSemigroupPrOComComComComPrC;
 
-        internal static Fun cLtGts9iu;
+        internal static Function cLtGts9iu;
 
-        public static Fun fSemigroupPrOComComComPrC;
+        public static Function fSemigroupPrOComComComPrC;
 
-        internal static Fun cLtGts9i8;
+        internal static Function cLtGts9i8;
 
-        public static Fun fSemigroupPrOComComPrC;
+        public static Function fSemigroupPrOComComPrC;
 
-        internal static Fun cLtGts9hQ;
+        internal static Function cLtGts9hQ;
 
-        public static Fun fSemigroupPrOComPrC;
+        public static Function fSemigroupPrOComPrC;
 
-        internal static Fun cLtGts9hC;
+        internal static Function cLtGts9hC;
 
-        public static Fun fSemigroupPrOPrC;
+        public static Function fSemigroupPrOPrC;
 
-        internal static Fun cLtGts9hy;
+        internal static Function cLtGts9hy;
 
-        public static Fun fSemigroupDashGt;
+        public static Function fSemigroupDashGt;
 
-        internal static Fun cLtGts9hq;
+        internal static Function cLtGts9hq;
 
         public static GHC.Base.CColMonoid fMonoidPrOPrC;
         public static GHC.Types.True otherwise;
@@ -406,344 +406,332 @@ namespace GHC
 
         static Base()
         {
-            cColMonoid_DataCon = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cColMonoid_DataCon_Entry));
+            cColMonoid_DataCon = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cColMonoid_DataCon_Entry);
 
-            cColFunctor_DataCon = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cColFunctor_DataCon_Entry));
+            cColFunctor_DataCon = new Fun2<Closure, Closure, Closure>(&cColFunctor_DataCon_Entry);
 
-            cColApplicative_DataCon = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cColApplicative_DataCon_Entry));
+            cColApplicative_DataCon = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cColApplicative_DataCon_Entry);
 
-            cColAlternative_DataCon = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cColAlternative_DataCon_Entry));
+            cColAlternative_DataCon = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cColAlternative_DataCon_Entry);
 
-            cColMonad_DataCon = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cColMonad_DataCon_Entry));
+            cColMonad_DataCon = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cColMonad_DataCon_Entry);
 
-            cColMonadPlus_DataCon = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cColMonadPlus_DataCon_Entry));
+            cColMonadPlus_DataCon = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cColMonadPlus_DataCon_Entry);
 
-            cColSemigroup_DataCon = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cColSemigroup_DataCon_Entry));
+            cColSemigroup_DataCon = new Fun1<Closure, Closure>(&cColSemigroup_DataCon_Entry);
 
-            eqString = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(eqString_Entry));
+            eqString = new Fun2<Closure, Closure, Closure>(&eqString_Entry);
 
-            cmanys9BH = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cmanys9BH_Entry));
+            cmanys9BH = new Fun1<Closure, Closure>(&cmanys9BH_Entry);
 
-            csomes9Bx = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(csomes9Bx_Entry));
+            csomes9Bx = new Fun1<Closure, Closure>(&csomes9Bx_Entry);
 
-            liftM = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(liftM_Entry));
+            liftM = new Fun3<Closure, Closure, Closure, Closure>(&liftM_Entry);
 
-            sliftMs9Bp = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sliftMs9Bp_Entry));
+            sliftMs9Bp = new Fun2<Closure, Closure, Closure>(&sliftMs9Bp_Entry);
 
-            liftM2 = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(liftM2_Entry));
+            liftM2 = new Fun4<Closure, Closure, Closure, Closure, Closure>(&liftM2_Entry);
 
-            sliftM2s9Be = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sliftM2s9Be_Entry));
+            sliftM2s9Be = new Fun3<Closure, Closure, Closure, Closure>(&sliftM2s9Be_Entry);
 
-            liftM3 = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(liftM3_Entry));
+            liftM3 = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&liftM3_Entry);
 
-            sliftM3s9AP = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sliftM3s9AP_Entry));
+            sliftM3s9AP = new Fun4<Closure, Closure, Closure, Closure, Closure>(&sliftM3s9AP_Entry);
 
-            liftM4 = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(liftM4_Entry));
+            liftM4 = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&liftM4_Entry);
 
-            sliftM4s9Ak = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sliftM4s9Ak_Entry));
+            sliftM4s9Ak = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&sliftM4s9Ak_Entry);
 
-            liftM5 = new Fun(7, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(liftM5_Entry));
+            liftM5 = new Fun7<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&liftM5_Entry);
 
-            sliftM5s9zJ = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sliftM5s9zJ_Entry));
+            sliftM5s9zJ = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&sliftM5s9zJ_Entry);
 
-            ap = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(ap_Entry));
+            ap = new Fun3<Closure, Closure, Closure, Closure>(&ap_Entry);
 
-            saps9zs = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(saps9zs_Entry));
+            saps9zs = new Fun2<Closure, Closure, Closure>(&saps9zs_Entry);
 
-            when = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(when_Entry));
+            when = new Fun3<Closure, Closure, Closure, Closure>(&when_Entry);
 
-            swhens9zi = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(swhens9zi_Entry));
+            swhens9zi = new Fun2<Closure, Closure, Closure>(&swhens9zi_Entry);
 
-            liftA = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(liftA_Entry));
+            liftA = new Fun3<Closure, Closure, Closure, Closure>(&liftA_Entry);
 
-            sliftAs9zb = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sliftAs9zb_Entry));
+            sliftAs9zb = new Fun2<Closure, Closure, Closure>(&sliftAs9zb_Entry);
 
-            liftA3 = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(liftA3_Entry));
+            liftA3 = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&liftA3_Entry);
 
-            sliftA3s9yS = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sliftA3s9yS_Entry));
+            sliftA3s9yS = new Fun4<Closure, Closure, Closure, Closure, Closure>(&sliftA3s9yS_Entry);
 
-            cLtAstrs9yK = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtAstrs9yK_Entry));
+            cLtAstrs9yK = new Fun2<Closure, Closure, Closure>(&cLtAstrs9yK_Entry);
 
-            modInt = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(modInt_Entry));
+            modInt = new Fun2<Closure, Closure, Closure>(&modInt_Entry);
 
-            divInt = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(divInt_Entry));
+            divInt = new Fun2<Closure, Closure, Closure>(&divInt_Entry);
 
-            quotRemInt = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(quotRemInt_Entry));
+            quotRemInt = new Fun2<Closure, Closure, Closure>(&quotRemInt_Entry);
 
-            remInt = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(remInt_Entry));
+            remInt = new Fun2<Closure, Closure, Closure>(&remInt_Entry);
 
-            quotInt = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(quotInt_Entry));
+            quotInt = new Fun2<Closure, Closure, Closure>(&quotInt_Entry);
 
-            getTag = new Fun(1, CLR.LoadFunctionPointer<Closure, long>(getTag_Entry));
+            getTag = new Fun1<Closure, long>(&getTag_Entry);
+            flip = new Fun3<Closure, Closure, Closure, Closure>(&flip_Entry);
 
-            flip = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(flip_Entry));
+            lvls9x0 = new Fun1<Closure, Closure>(&lvls9x0_Entry);
+            cGtGts9wZ = new Fun3<Closure, Closure, Closure, Closure>(&cGtGts9wZ_Entry);
 
-            lvls9x0 = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(lvls9x0_Entry));
+            cLtAstrs9wU = new Fun3<Closure, Closure, Closure, Closure>(&cLtAstrs9wU_Entry);
 
-            cGtGts9wZ = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cGtGts9wZ_Entry));
+            cAstrGts9wQ = new Fun3<Closure, Closure, Closure, Closure>(&cAstrGts9wQ_Entry);
 
-            cLtAstrs9wU = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cLtAstrs9wU_Entry));
+            cLtDolls9wL = new Fun3<Closure, Closure, Closure, Closure>(&cLtDolls9wL_Entry);
 
-            cAstrGts9wQ = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cAstrGts9wQ_Entry));
+            fMonadPrOComPrC = new Fun1<Closure, Closure>(&fMonadPrOComPrC_Entry);
 
-            cLtDolls9wL = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cLtDolls9wL_Entry));
+            lvls9wB = new Fun1<Closure, Closure>(&lvls9wB_Entry);
+            cGtGts9wA = new Fun3<Closure, Closure, Closure, Closure>(&cGtGts9wA_Entry);
 
-            fMonadPrOComPrC = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(fMonadPrOComPrC_Entry));
+            fApplicativePrOComPrC = new Fun1<Closure, Closure>(&fApplicativePrOComPrC_Entry);
 
-            lvls9wB = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(lvls9wB_Entry));
+            cLtAstrs9wg = new Fun3<Closure, Closure, Closure, Closure>(&cLtAstrs9wg_Entry);
 
-            cGtGts9wA = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cGtGts9wA_Entry));
+            cAstrGts9w5 = new Fun3<Closure, Closure, Closure, Closure>(&cAstrGts9w5_Entry);
 
-            fApplicativePrOComPrC = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(fApplicativePrOComPrC_Entry));
+            cLtDolls9vY = new Fun2<Closure, Closure, Closure>(&cLtDolls9vY_Entry);
 
-            cLtAstrs9wg = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cLtAstrs9wg_Entry));
+            cLtAstrGts9vT = new Fun2<Closure, Closure, Closure>(&cLtAstrGts9vT_Entry);
 
-            cAstrGts9w5 = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cAstrGts9w5_Entry));
+            cLtDolls9vN = new Fun2<Closure, Closure, Closure>(&cLtDolls9vN_Entry);
 
-            cLtDolls9vY = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtDolls9vY_Entry));
+            cmanys9vu = new Fun1<Closure, Closure>(&cmanys9vu_Entry);
 
-            cLtAstrGts9vT = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtAstrGts9vT_Entry));
+            csomes9vd = new Fun1<Closure, Closure>(&csomes9vd_Entry);
 
-            cLtDolls9vN = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtDolls9vN_Entry));
+            poly_gos9v7 = new Fun1<Closure, Closure>(&poly_gos9v7_Entry);
 
-            cmanys9vu = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cmanys9vu_Entry));
+            eqLtLt = new Fun3<Closure, Closure, Closure, Closure>(&eqLtLt_Entry);
 
-            csomes9vd = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(csomes9vd_Entry));
+            sEqLtLts9uZ = new Fun2<Closure, Closure, Closure>(&sEqLtLts9uZ_Entry);
 
-            poly_gos9v7 = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(poly_gos9v7_Entry));
+            cLtAstrs9uW = new Fun2<Closure, Closure, Closure>(&cLtAstrs9uW_Entry);
 
-            eqLtLt = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(eqLtLt_Entry));
+            cLtDolls9uQ = new Fun2<Closure, Closure, Closure>(&cLtDolls9uQ_Entry);
 
-            sEqLtLts9uZ = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sEqLtLts9uZ_Entry));
+            dmLtDoll = new Fun2<Closure, Closure, Closure>(&dmLtDoll_Entry);
 
-            cLtAstrs9uW = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtAstrs9uW_Entry));
+            fMonoidDashGt = new Fun1<Closure, Closure>(&fMonoidDashGt_Entry);
 
-            cLtDolls9uQ = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtDolls9uQ_Entry));
+            cmconcats9uq = new Fun3<Closure, Closure, Closure, Closure>(&cmconcats9uq_Entry);
 
-            dmLtDolls9uL = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(dmLtDolls9uL_Entry));
+            fMonoidPrOComPrC = new Fun2<Closure, Closure, Closure>(&fMonoidPrOComPrC_Entry);
 
-            fMonoidDashGt = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(fMonoidDashGt_Entry));
+            cmconcats9tZ = new Fun3<Closure, Closure, Closure, Closure>(&cmconcats9tZ_Entry);
 
-            cmconcats9uq = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cmconcats9uq_Entry));
+            fMonoidPrOComComPrC = new Fun3<Closure, Closure, Closure, Closure>(&fMonoidPrOComComPrC_Entry);
 
-            fMonoidPrOComPrC = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(fMonoidPrOComPrC_Entry));
+            cmconcats9ts = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cmconcats9ts_Entry);
 
-            cmconcats9tZ = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cmconcats9tZ_Entry));
+            fMonoidPrOComComComPrC = new Fun4<Closure, Closure, Closure, Closure, Closure>(&fMonoidPrOComComComPrC_Entry);
 
-            fMonoidPrOComComPrC = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(fMonoidPrOComComPrC_Entry));
+            cmconcats9t2 = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cmconcats9t2_Entry);
 
-            cmconcats9ts = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cmconcats9ts_Entry));
+            fMonoidPrOComComComComPrC = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&fMonoidPrOComComComComPrC_Entry);
 
-            fMonoidPrOComComComPrC = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(fMonoidPrOComComComPrC_Entry));
+            cmconcats9sz = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cmconcats9sz_Entry);
 
-            cmconcats9t2 = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cmconcats9t2_Entry));
+            gos9ss = new Fun1<Closure, Closure>(&gos9ss_Entry);
+            fMonoidMaybe = new Fun1<Closure, Closure>(&fMonoidMaybe_Entry);
 
-            fMonoidPrOComComComComPrC = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(fMonoidPrOComComComComPrC_Entry));
+            cmconcats9sa = new Fun2<Closure, Closure, Closure>(&cmconcats9sa_Entry);
 
-            cmconcats9sz = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cmconcats9sz_Entry));
+            dmmconcat = new Fun2<Closure, Closure, Closure>(&dmmconcat_Entry);
 
-            gos9ss = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(gos9ss_Entry));
+            sequence = new Fun2<Closure, Closure, Closure>(&sequence_Entry);
 
-            fMonoidMaybe = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(fMonoidMaybe_Entry));
+            mapM = new Fun3<Closure, Closure, Closure, Closure>(&mapM_Entry);
 
-            cmconcats9sa = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cmconcats9sa_Entry));
+            fSemigroupBrOBrC = new Fun2<Closure, Closure, Closure>(&fSemigroupBrOBrC_Entry);
 
-            dmmconcats9s0 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(dmmconcats9s0_Entry));
+            plusPlus = new Fun2<Closure, Closure, Closure>(&plusPlus_Entry);
 
-            sequence = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sequence_Entry));
+            map = new Fun2<Closure, Closure, Closure>(&map_Entry);
+            foldr = new Fun3<Closure, Closure, Closure, Closure>(&foldr_Entry);
 
-            mapM = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(mapM_Entry));
+            mapFB = new Fun4<Closure, Closure, Closure, Closure, Closure>(&mapFB_Entry);
 
-            fSemigroupBrOBrC = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(fSemigroupBrOBrC_Entry));
+            dot = new Fun3<Closure, Closure, Closure, Closure>(&dot_Entry);
 
-            plusPlus = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(plusPlus_Entry));
+            dmLtAstr = new Fun1<Closure, Closure>(&dmLtAstr_Entry);
+            asTypeOf = new Fun2<Closure, Closure, Closure>(&asTypeOf_Entry);
 
-            map = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(map_Entry));
+            @const = new Fun2<Closure, Closure, Closure>(&@const_Entry);
 
-            foldr = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(foldr_Entry));
+            breakpointCond = new Fun2<Closure, Closure, Closure>(&breakpointCond_Entry);
 
-            mapFB = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(mapFB_Entry));
+            breakpoint = new Fun1<Closure, Closure>(&breakpoint_Entry);
 
-            dot = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(dot_Entry));
+            assert = new Fun2<Closure, Closure, Closure>(&assert_Entry);
 
-            dmLtAstrs9qX = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(dmLtAstrs9qX_Entry));
+            dmAstrGt = new Fun3<Closure, Closure, Closure, Closure>(&dmAstrGt_Entry);
 
-            asTypeOf = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(asTypeOf_Entry));
+            dmLtAstrGt = new Fun1<Closure, Closure>(&dmLtAstrGt_Entry);
 
-            @const = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(@const_Entry));
+            join = new Fun2<Closure, Closure, Closure>(&join_Entry);
 
-            breakpointCond = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(breakpointCond_Entry));
+            id = new Fun1<Closure, Closure>(&id_Entry);
+            ord = new Fun1<Closure, Closure>(&ord_Entry);
+            unsafeChr = new Fun1<Closure, Closure>(&unsafeChr_Entry);
 
-            breakpoint = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(breakpoint_Entry));
+            iShiftRLHash = new Fun2<long, long, long>(&iShiftRLHash_Entry);
 
-            assert = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(assert_Entry));
+            iShiftRAHash = new Fun2<long, long, long>(&iShiftRAHash_Entry);
 
-            dmAstrGts9qI = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(dmAstrGts9qI_Entry));
+            iShiftLHash = new Fun2<long, long, long>(&iShiftLHash_Entry);
 
-            dmLtAstrGts9qG = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(dmLtAstrGts9qG_Entry));
+            shiftRLHash = new Fun2<ulong, long, ulong>(&shiftRLHash_Entry);
 
-            join = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(join_Entry));
+            shiftLHash = new Fun2<ulong, long, ulong>(&shiftLHash_Entry);
 
-            id = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(id_Entry));
+            divModInt = new Fun2<Closure, Closure, Closure>(&divModInt_Entry);
 
-            ord = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(ord_Entry));
+            divModIntHash = new Fun2<long, long, (long x0, long x1)>(&divModIntHash_Entry);
 
-            unsafeChr = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(unsafeChr_Entry));
+            until = new Fun3<Closure, Closure, Closure, Closure>(&until_Entry);
 
-            iShiftRLHash = new Fun(2, CLR.LoadFunctionPointer<long, long, long>(iShiftRLHash_Entry));
+            augment = new Fun2<Closure, Closure, Closure>(&augment_Entry);
 
-            iShiftRAHash = new Fun(2, CLR.LoadFunctionPointer<long, long, long>(iShiftRAHash_Entry));
+            build = new Fun1<Closure, Closure>(&build_Entry);
+            ltAstrAstrGt = new Fun1<Closure, Closure>(&ltAstrAstrGt_Entry);
 
-            iShiftLHash = new Fun(2, CLR.LoadFunctionPointer<long, long, long>(iShiftLHash_Entry));
+            lvls9on = new Fun2<Closure, Closure, Closure>(&lvls9on_Entry);
 
-            shiftRLHash = new Fun(2, CLR.LoadFunctionPointer<ulong, long, ulong>(shiftRLHash_Entry));
+            ifThenElse = new Fun3<Closure, Closure, Closure, Closure>(&ifThenElse_Entry);
 
-            shiftLHash = new Fun(2, CLR.LoadFunctionPointer<ulong, long, ulong>(shiftLHash_Entry));
+            dmmappend = new Fun1<Closure, Closure>(&dmmappend_Entry);
 
-            divModInt = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(divModInt_Entry));
+            dmliftA2 = new Fun3<Closure, Closure, Closure, Closure>(&dmliftA2_Entry);
 
-            divModIntHash = new Fun(2, CLR.LoadFunctionPointer<long, long, (long x0, long x1)>(divModIntHash_Entry));
+            dmsome = new Fun2<Closure, Closure, Closure>(&dmsome_Entry);
 
-            until = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(until_Entry));
+            dmmany = new Fun2<Closure, Closure, Closure>(&dmmany_Entry);
 
-            augment = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(augment_Entry));
+            dmGtGt = new Fun3<Closure, Closure, Closure, Closure>(&dmGtGt_Entry);
 
-            build = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(build_Entry));
+            dmreturn = new Fun1<Closure, Closure>(&dmreturn_Entry);
+            dmfail = new Fun2<Closure, Closure, Closure>(&dmfail_Entry);
 
-            ltAstrAstrGt = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(ltAstrAstrGt_Entry));
+            dmmzero = new Fun1<Closure, Closure>(&dmmzero_Entry);
+            dmmplus = new Fun1<Closure, Closure>(&dmmplus_Entry);
+            cGtGtEqs9no = new Fun2<Closure, Closure, Closure>(&cGtGtEqs9no_Entry);
 
-            lvls9on = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(lvls9on_Entry));
+            cfails9nm = new Fun1<Closure, Closure>(&cfails9nm_Entry);
 
-            ifThenElse = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(ifThenElse_Entry));
+            cGtGtEqs9nh = new Fun2<Closure, Closure, Closure>(&cGtGtEqs9nh_Entry);
 
-            dmmappends9og = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(dmmappends9og_Entry));
+            cfails9nf = new Fun1<Closure, Closure>(&cfails9nf_Entry);
 
-            dmliftA2s9oa = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(dmliftA2s9oa_Entry));
+            cGtGtEqs9na = new Fun3<Closure, Closure, Closure, Closure>(&cGtGtEqs9na_Entry);
 
-            dmsomes9nX = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(dmsomes9nX_Entry));
+            cGtGtEqs9mZ = new Fun3<Closure, Closure, Closure, Closure>(&cGtGtEqs9mZ_Entry);
 
-            dmmanys9nQ = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(dmmanys9nQ_Entry));
+            cLtPipeGts9mU = new Fun2<Closure, Closure, Closure>(&cLtPipeGts9mU_Entry);
 
-            dmGtGts9nK = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(dmGtGts9nK_Entry));
+            cpures9mS = new Fun1<Closure, Closure>(&cpures9mS_Entry);
 
-            dmreturns9nH = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(dmreturns9nH_Entry));
+            cLtAstrGts9mC = new Fun2<Closure, Closure, Closure>(&cLtAstrGts9mC_Entry);
 
-            dmfails9nE = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(dmfails9nE_Entry));
+            cliftA2s9ml = new Fun3<Closure, Closure, Closure, Closure>(&cliftA2s9ml_Entry);
 
-            dmmzeros9nB = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(dmmzeros9nB_Entry));
+            cAstrGts9mc = new Fun2<Closure, Closure, Closure>(&cAstrGts9mc_Entry);
 
-            dmmpluss9ny = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(dmmpluss9ny_Entry));
+            cliftA2s9m3 = new Fun3<Closure, Closure, Closure, Closure>(&cliftA2s9m3_Entry);
 
-            cGtGtEqs9no = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cGtGtEqs9no_Entry));
+            cAstrGts9lY = new Fun2<Closure, Closure, Closure>(&cAstrGts9lY_Entry);
 
-            cfails9nm = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cfails9nm_Entry));
+            cLtAstrGts9lT = new Fun3<Closure, Closure, Closure, Closure>(&cLtAstrGts9lT_Entry);
 
-            cGtGtEqs9nh = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cGtGtEqs9nh_Entry));
+            cliftA2s9lM = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cliftA2s9lM_Entry);
 
-            cfails9nf = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cfails9nf_Entry));
+            cLtAstrGts9lA = new Fun3<Closure, Closure, Closure, Closure>(&cLtAstrGts9lA_Entry);
 
-            cGtGtEqs9na = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cGtGtEqs9na_Entry));
+            cliftA2s9ln = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cliftA2s9ln_Entry);
 
-            cGtGtEqs9mZ = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cGtGtEqs9mZ_Entry));
+            cfmaps9lh = new Fun2<Closure, Closure, Closure>(&cfmaps9lh_Entry);
 
-            cLtPipeGts9mU = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtPipeGts9mU_Entry));
+            cfmaps9la = new Fun2<Closure, Closure, Closure>(&cfmaps9la_Entry);
 
-            cpures9mS = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cpures9mS_Entry));
+            cp1Monoids9kL = new Fun7<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cp1Monoids9kL_Entry);
 
-            cLtAstrGts9mC = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtAstrGts9mC_Entry));
+            cmemptys9kA = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cmemptys9kA_Entry);
 
-            cliftA2s9ml = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cliftA2s9ml_Entry));
+            cp1Monoids9kf = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cp1Monoids9kf_Entry);
 
-            cAstrGts9mc = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cAstrGts9mc_Entry));
+            cmemptys9k6 = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cmemptys9k6_Entry);
 
-            cliftA2s9m3 = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cliftA2s9m3_Entry));
+            cp1Monoids9jP = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cp1Monoids9jP_Entry);
 
-            cAstrGts9lY = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cAstrGts9lY_Entry));
+            cmemptys9jI = new Fun3<Closure, Closure, Closure, Closure>(&cmemptys9jI_Entry);
 
-            cLtAstrGts9lT = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cLtAstrGts9lT_Entry));
+            cp1Monoids9jv = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cp1Monoids9jv_Entry);
 
-            cliftA2s9lM = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cliftA2s9lM_Entry));
+            cmemptys9jq = new Fun2<Closure, Closure, Closure>(&cmemptys9jq_Entry);
 
-            cLtAstrGts9lA = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cLtAstrGts9lA_Entry));
+            cmconcats9jo = new Fun1<Closure, Closure>(&cmconcats9jo_Entry);
 
-            cliftA2s9ln = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cliftA2s9ln_Entry));
+            cp1Monoids9jh = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cp1Monoids9jh_Entry);
 
-            cfmaps9lh = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cfmaps9lh_Entry));
+            cmconcats9jf = new Fun1<Closure, Closure>(&cmconcats9jf_Entry);
 
-            cfmaps9la = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cfmaps9la_Entry));
+            poly_gos9j9 = new Fun1<Closure, Closure>(&poly_gos9j9_Entry);
 
-            cp1Monoids9kL = new Fun(7, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cp1Monoids9kL_Entry));
+            fSemigroupMaybe = new Fun3<Closure, Closure, Closure, Closure>(&fSemigroupMaybe_Entry);
 
-            cmemptys9kA = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cmemptys9kA_Entry));
+            cLtGts9iZ = new Fun3<Closure, Closure, Closure, Closure>(&cLtGts9iZ_Entry);
 
-            cp1Monoids9kf = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cp1Monoids9kf_Entry));
+            fSemigroupOrdering = new Fun2<Closure, Closure, Closure>(&fSemigroupOrdering_Entry);
 
-            cmemptys9k6 = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cmemptys9k6_Entry));
+            cLtGts9iU = new Fun2<Closure, Closure, Closure>(&cLtGts9iU_Entry);
 
-            cp1Monoids9jP = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cp1Monoids9jP_Entry));
+            fSemigroupPrOComComComComPrC = new Fun7<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&fSemigroupPrOComComComComPrC_Entry);
 
-            cmemptys9jI = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cmemptys9jI_Entry));
+            cLtGts9iu = new Fun7<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cLtGts9iu_Entry);
 
-            cp1Monoids9jv = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cp1Monoids9jv_Entry));
+            fSemigroupPrOComComComPrC = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&fSemigroupPrOComComComPrC_Entry);
 
-            cmemptys9jq = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cmemptys9jq_Entry));
+            cLtGts9i8 = new Fun6<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(&cLtGts9i8_Entry);
 
-            cmconcats9jo = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cmconcats9jo_Entry));
+            fSemigroupPrOComComPrC = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&fSemigroupPrOComComPrC_Entry);
 
-            cp1Monoids9jh = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cp1Monoids9jh_Entry));
+            cLtGts9hQ = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&cLtGts9hQ_Entry);
 
-            cmconcats9jf = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cmconcats9jf_Entry));
+            fSemigroupPrOComPrC = new Fun4<Closure, Closure, Closure, Closure, Closure>(&fSemigroupPrOComPrC_Entry);
 
-            poly_gos9j9 = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(poly_gos9j9_Entry));
+            cLtGts9hC = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cLtGts9hC_Entry);
 
-            fSemigroupMaybe = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(fSemigroupMaybe_Entry));
+            fSemigroupPrOPrC = new Fun2<Closure, Closure, Closure>(&fSemigroupPrOPrC_Entry);
 
-            cLtGts9iZ = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(cLtGts9iZ_Entry));
+            cLtGts9hy = new Fun2<Closure, Closure, Closure>(&cLtGts9hy_Entry);
 
-            fSemigroupOrdering = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(fSemigroupOrdering_Entry));
+            fSemigroupDashGt = new Fun4<Closure, Closure, Closure, Closure, Closure>(&fSemigroupDashGt_Entry);
 
-            cLtGts9iU = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtGts9iU_Entry));
+            cLtGts9hq = new Fun4<Closure, Closure, Closure, Closure, Closure>(&cLtGts9hq_Entry);
 
-            fSemigroupPrOComComComComPrC = new Fun(7, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(fSemigroupPrOComComComComPrC_Entry));
-
-            cLtGts9iu = new Fun(7, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cLtGts9iu_Entry));
-
-            fSemigroupPrOComComComPrC = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(fSemigroupPrOComComComPrC_Entry));
-
-            cLtGts9i8 = new Fun(6, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(cLtGts9i8_Entry));
-
-            fSemigroupPrOComComPrC = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(fSemigroupPrOComComPrC_Entry));
-
-            cLtGts9hQ = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(cLtGts9hQ_Entry));
-
-            fSemigroupPrOComPrC = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(fSemigroupPrOComPrC_Entry));
-
-            cLtGts9hC = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cLtGts9hC_Entry));
-
-            fSemigroupPrOPrC = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(fSemigroupPrOPrC_Entry));
-
-            cLtGts9hy = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(cLtGts9hy_Entry));
-
-            fSemigroupDashGt = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(fSemigroupDashGt_Entry));
-
-            cLtGts9hq = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(cLtGts9hq_Entry));
-
-            fMonadPlusMaybe = new GHC.Base.CColMonadPlus(null, null, GHC.Maybe.nothing_DataCon, cLtPipeGts9mU);
-            fAlternativeMaybe = new GHC.Base.CColAlternative(null, GHC.Maybe.nothing_DataCon, cLtPipeGts9mU, csomes9Bx, cmanys9BH);
+            fMonadPlusMaybe = new GHC.Base.CColMonadPlus((Closure)null, (Closure)null, GHC.Maybe.nothing_DataCon, cLtPipeGts9mU);
+            fAlternativeMaybe = new GHC.Base.CColAlternative((Closure)null, GHC.Maybe.nothing_DataCon, cLtPipeGts9mU, csomes9Bx, cmanys9BH);
             lvls9BG = new GHC.Maybe.Just(GHC.Types.nil_DataCon);
-            fMonadMaybe = new GHC.Base.CColMonad(null, cGtGtEqs9nh, cAstrGts9lY, GHC.Maybe.just_DataCon, cfails9nf);
+            fMonadMaybe = new GHC.Base.CColMonad((Closure)null, cGtGtEqs9nh, cAstrGts9lY, GHC.Maybe.just_DataCon, cfails9nf);
             lvls9zh = new GHC.Maybe.Just(GHC.Tuple.unit_DataCon);
-            fApplicativeMaybe = new GHC.Base.CColApplicative(null, GHC.Maybe.just_DataCon, cLtAstrGts9vT, cliftA2s9m3, cAstrGts9lY, cLtAstrs9yK);
-            fMonadDashGt = new GHC.Base.CColMonad(null, cGtGtEqs9na, cGtGts9wZ, GHC.Base.@const, lvls9x0);
-            fApplicativeDashGt = new GHC.Base.CColApplicative(null, GHC.Base.@const, cLtAstrGts9lT, cliftA2s9lM, cAstrGts9wQ, cLtAstrs9wU);
+            fApplicativeMaybe = new GHC.Base.CColApplicative((Closure)null, GHC.Maybe.just_DataCon, cLtAstrGts9vT, cliftA2s9m3, cAstrGts9lY, cLtAstrs9yK);
+            fMonadDashGt = new GHC.Base.CColMonad((Closure)null, cGtGtEqs9na, cGtGts9wZ, GHC.Base.@const, lvls9x0);
+            fApplicativeDashGt = new GHC.Base.CColApplicative((Closure)null, GHC.Base.@const, cLtAstrGts9lT, cliftA2s9lM, cAstrGts9wQ, cLtAstrs9wU);
             fFunctorDashGt = new GHC.Base.CColFunctor(GHC.Base.dot, cLtDolls9wL);
             fFunctorPrOComPrC = new GHC.Base.CColFunctor(cfmaps9la, cLtDolls9vY);
             fFunctorMaybe = new GHC.Base.CColFunctor(cfmaps9lh, cLtDolls9vN);
-            fMonadPlusBrOBrC = new GHC.Base.CColMonadPlus(null, null, GHC.Types.nil_DataCon, GHC.Base.plusPlus);
-            fAlternativeBrOBrC = new GHC.Base.CColAlternative(null, GHC.Types.nil_DataCon, GHC.Base.plusPlus, csomes9vd, cmanys9vu);
+            fMonadPlusBrOBrC = new GHC.Base.CColMonadPlus((Closure)null, (Closure)null, GHC.Types.nil_DataCon, GHC.Base.plusPlus);
+            fAlternativeBrOBrC = new GHC.Base.CColAlternative((Closure)null, GHC.Types.nil_DataCon, GHC.Base.plusPlus, csomes9vd, cmanys9vu);
             lvls9v6 = new GHC.Types.Cons(GHC.Types.nil_DataCon, GHC.Types.nil_DataCon);
-            fMonadBrOBrC = new GHC.Base.CColMonad(null, cGtGtEqs9no, cAstrGts9mc, cpures9mS, cfails9nm);
-            fApplicativeBrOBrC = new GHC.Base.CColApplicative(null, cpures9mS, cLtAstrGts9mC, cliftA2s9ml, cAstrGts9mc, cLtAstrs9uW);
+            fMonadBrOBrC = new GHC.Base.CColMonad((Closure)null, cGtGtEqs9no, cAstrGts9mc, cpures9mS, cfails9nm);
+            fApplicativeBrOBrC = new GHC.Base.CColApplicative((Closure)null, cpures9mS, cLtAstrGts9mC, cliftA2s9ml, cAstrGts9mc, cLtAstrs9uW);
             fFunctorBrOBrC = new GHC.Base.CColFunctor(GHC.Base.map, cLtDolls9uQ);
             fMonoidOrdering = new GHC.Base.CColMonoid(cLtGts9iU, GHC.Types.eQ_DataCon, cLtGts9iU, gos9ss);
             fMonoidBrOBrC = new GHC.Base.CColMonoid(GHC.Base.plusPlus, GHC.Types.nil_DataCon, GHC.Base.plusPlus, cmconcats9jf);
@@ -763,60 +751,37 @@ namespace GHC
             fAlternativeMaybe.x0 = GHC.Base.fApplicativeMaybe;
             fMonadPlusMaybe.x0 = GHC.Base.fAlternativeMaybe;
             fMonadPlusMaybe.x1 = GHC.Base.fMonadMaybe;
-            ltGt = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(ltGt_Entry));
+            ltGt = new Fun1<Closure, Closure>(&ltGt_Entry);
+            p1Monoid = new Fun1<Closure, Closure>(&p1Monoid_Entry);
+            mempty = new Fun1<Closure, Closure>(&mempty_Entry);
+            mappend = new Fun1<Closure, Closure>(&mappend_Entry);
+            mconcat = new Fun1<Closure, Closure>(&mconcat_Entry);
+            fmap = new Fun1<Closure, Closure>(&fmap_Entry);
+            ltDoll = new Fun1<Closure, Closure>(&ltDoll_Entry);
+            p1Applicative = new Fun1<Closure, Closure>(&p1Applicative_Entry);
 
-            p1Monoid = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(p1Monoid_Entry));
+            pure = new Fun1<Closure, Closure>(&pure_Entry);
+            ltAstrGt = new Fun1<Closure, Closure>(&ltAstrGt_Entry);
+            liftA2 = new Fun1<Closure, Closure>(&liftA2_Entry);
+            astrGt = new Fun1<Closure, Closure>(&astrGt_Entry);
+            ltAstr = new Fun1<Closure, Closure>(&ltAstr_Entry);
+            p1Alternative = new Fun1<Closure, Closure>(&p1Alternative_Entry);
 
-            mempty = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(mempty_Entry));
+            empty = new Fun1<Closure, Closure>(&empty_Entry);
+            ltPipeGt = new Fun1<Closure, Closure>(&ltPipeGt_Entry);
+            some = new Fun1<Closure, Closure>(&some_Entry);
+            many = new Fun1<Closure, Closure>(&many_Entry);
+            p1Monad = new Fun1<Closure, Closure>(&p1Monad_Entry);
+            gtGtEq = new Fun1<Closure, Closure>(&gtGtEq_Entry);
+            gtGt = new Fun1<Closure, Closure>(&gtGt_Entry);
+            @return = new Fun1<Closure, Closure>(&@return_Entry);
+            fail = new Fun1<Closure, Closure>(&fail_Entry);
+            p1MonadPlus = new Fun1<Closure, Closure>(&p1MonadPlus_Entry);
 
-            mappend = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(mappend_Entry));
+            p2MonadPlus = new Fun1<Closure, Closure>(&p2MonadPlus_Entry);
 
-            mconcat = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure>(mconcat_Entry));
-
-            fmap = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(fmap_Entry));
-
-            ltDoll = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(ltDoll_Entry));
-
-            p1Applicative = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(p1Applicative_Entry));
-
-            pure = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure>(pure_Entry));
-
-            ltAstrGt = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(ltAstrGt_Entry));
-
-            liftA2 = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure>(liftA2_Entry));
-
-            astrGt = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(astrGt_Entry));
-
-            ltAstr = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(ltAstr_Entry));
-
-            p1Alternative = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(p1Alternative_Entry));
-
-            empty = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(empty_Entry));
-
-            ltPipeGt = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(ltPipeGt_Entry));
-
-            some = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure>(some_Entry));
-
-            many = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure>(many_Entry));
-
-            p1Monad = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(p1Monad_Entry));
-
-            gtGtEq = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(gtGtEq_Entry));
-
-            gtGt = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(gtGt_Entry));
-
-            @return = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure>(@return_Entry));
-
-            fail = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure>(fail_Entry));
-
-            p1MonadPlus = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(p1MonadPlus_Entry));
-
-            p2MonadPlus = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(p2MonadPlus_Entry));
-
-            mzero = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(mzero_Entry));
-
-            mplus = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure>(mplus_Entry));
-
+            mzero = new Fun1<Closure, Closure>(&mzero_Entry);
+            mplus = new Fun1<Closure, Closure>(&mplus_Entry);
         }
         public static Closure cColMonoid_DataCon_Entry(Closure etaB4, Closure etaB3, Closure etaB2, Closure etaB1)
         {
@@ -905,11 +870,14 @@ namespace GHC
         }
         public static Closure cmanys9BH_Entry(Closure vs9BI)
         {
-            var many_vs9BJ = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(many_vs9BJ_Entry), vs9BI, null);
-            many_vs9BJ.x1 = many_vs9BJ; return many_vs9BJ.Eval();
+            var many_v_Frees9BJ = (vs9BI, (Closure)null);
+            var many_vs9BJ = new Updatable<(Closure x0, Closure x1)>(&many_vs9BJ_Entry, many_v_Frees9BJ);
+            many_vs9BJ.free.x1 = many_vs9BJ; return many_vs9BJ.Eval();
         }
-        public static Closure many_vs9BJ_Entry(Closure vs9BI, Closure many_vs9BJ)
+        public static Closure many_vs9BJ_Entry(in (Closure x0, Closure x1) many_v_Frees9BJ)
         {
+            var vs9BI = many_v_Frees9BJ.x0;
+            var many_vs9BJ = many_v_Frees9BJ.x1;
             var wilds9BK = vs9BI.Eval();
             switch (wilds9BK)
             {
@@ -935,11 +903,14 @@ namespace GHC
         }
         public static Closure csomes9Bx_Entry(Closure vs9By)
         {
-            var some_vs9Bz = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(some_vs9Bz_Entry), vs9By, null);
-            some_vs9Bz.x1 = some_vs9Bz; return some_vs9Bz.Eval();
+            var some_v_Frees9Bz = (vs9By, (Closure)null);
+            var some_vs9Bz = new Updatable<(Closure x0, Closure x1)>(&some_vs9Bz_Entry, some_v_Frees9Bz);
+            some_vs9Bz.free.x1 = some_vs9Bz; return some_vs9Bz.Eval();
         }
-        public static Closure some_vs9Bz_Entry(Closure vs9By, Closure some_vs9Bz)
+        public static Closure some_vs9Bz_Entry(in (Closure x0, Closure x1) some_v_Frees9Bz)
         {
+            var vs9By = some_v_Frees9Bz.x0;
+            var some_vs9Bz = some_v_Frees9Bz.x1;
             var wilds9BA = vs9By.Eval();
             switch (wilds9BA)
             {
@@ -972,16 +943,22 @@ namespace GHC
         }
         public static Closure liftM_Entry(Closure dMonads9Br, Closure fs9Bs, Closure m1s9Bt)
         {
-            var sats9Bw = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9Bw_Entry), dMonads9Br, fs9Bs);
+            var sat_Frees9Bw = (dMonads9Br, fs9Bs);
+            var sats9Bw = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&sats9Bw_Entry, sat_Frees9Bw);
             return GHC.Base.gtGtEq_Entry(dMonads9Br).Apply<Closure, Closure, Closure>(m1s9Bt, sats9Bw);
         }
-        public static Closure sats9Bw_Entry(Closure dMonads9Br, Closure fs9Bs, Closure x1s9Bu)
+        public static Closure sats9Bw_Entry(in (Closure x0, Closure x1) sat_Frees9Bw, Closure x1s9Bu)
         {
-            var sats9Bv = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9Bv_Entry), fs9Bs, x1s9Bu);
+            var dMonads9Br = sat_Frees9Bw.x0;
+            var fs9Bs = sat_Frees9Bw.x1;
+            var sat_Frees9Bv = (fs9Bs, x1s9Bu);
+            var sats9Bv = new Updatable<(Closure x0, Closure x1)>(&sats9Bv_Entry, sat_Frees9Bv);
             return GHC.Base.@return_Entry(dMonads9Br).Apply<Closure, Closure>(sats9Bv);
         }
-        public static Closure sats9Bv_Entry(Closure fs9Bs, Closure x1s9Bu)
+        public static Closure sats9Bv_Entry(in (Closure x0, Closure x1) sat_Frees9Bv)
         {
+            var fs9Bs = sat_Frees9Bv.x0;
+            var x1s9Bu = sat_Frees9Bv.x1;
             return fs9Bs.Apply<Closure, Closure>(x1s9Bu);
         }
         public static Closure sliftMs9Bp_Entry(Closure etaB2, Closure etaB1)
@@ -990,21 +967,33 @@ namespace GHC
         }
         public static Closure liftM2_Entry(Closure dMonads9Bg, Closure fs9Bh, Closure m1s9Bi, Closure m2s9Bj)
         {
-            var sats9Bo = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9Bo_Entry), dMonads9Bg, fs9Bh, m2s9Bj);
+            var sat_Frees9Bo = (dMonads9Bg, fs9Bh, m2s9Bj);
+            var sats9Bo = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&sats9Bo_Entry, sat_Frees9Bo);
             return GHC.Base.gtGtEq_Entry(dMonads9Bg).Apply<Closure, Closure, Closure>(m1s9Bi, sats9Bo);
         }
-        public static Closure sats9Bo_Entry(Closure dMonads9Bg, Closure fs9Bh, Closure m2s9Bj, Closure x1s9Bk)
+        public static Closure sats9Bo_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9Bo, Closure x1s9Bk)
         {
-            var sats9Bn = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9Bn_Entry), dMonads9Bg, fs9Bh, x1s9Bk);
+            var dMonads9Bg = sat_Frees9Bo.x0;
+            var fs9Bh = sat_Frees9Bo.x1;
+            var m2s9Bj = sat_Frees9Bo.x2;
+            var sat_Frees9Bn = (dMonads9Bg, fs9Bh, x1s9Bk);
+            var sats9Bn = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&sats9Bn_Entry, sat_Frees9Bn);
             return GHC.Base.gtGtEq_Entry(dMonads9Bg).Apply<Closure, Closure, Closure>(m2s9Bj, sats9Bn);
         }
-        public static Closure sats9Bn_Entry(Closure dMonads9Bg, Closure fs9Bh, Closure x1s9Bk, Closure x2s9Bl)
+        public static Closure sats9Bn_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9Bn, Closure x2s9Bl)
         {
-            var sats9Bm = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9Bm_Entry), fs9Bh, x1s9Bk, x2s9Bl);
+            var dMonads9Bg = sat_Frees9Bn.x0;
+            var fs9Bh = sat_Frees9Bn.x1;
+            var x1s9Bk = sat_Frees9Bn.x2;
+            var sat_Frees9Bm = (fs9Bh, x1s9Bk, x2s9Bl);
+            var sats9Bm = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9Bm_Entry, sat_Frees9Bm);
             return GHC.Base.@return_Entry(dMonads9Bg).Apply<Closure, Closure>(sats9Bm);
         }
-        public static Closure sats9Bm_Entry(Closure fs9Bh, Closure x1s9Bk, Closure x2s9Bl)
+        public static Closure sats9Bm_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9Bm)
         {
+            var fs9Bh = sat_Frees9Bm.x0;
+            var x1s9Bk = sat_Frees9Bm.x1;
+            var x2s9Bl = sat_Frees9Bm.x2;
             return fs9Bh.Apply<Closure, Closure, Closure>(x1s9Bk, x2s9Bl);
         }
         public static Closure sliftM2s9Be_Entry(Closure etaB3, Closure etaB2, Closure etaB1)
@@ -1013,26 +1002,46 @@ namespace GHC
         }
         public static Closure liftM3_Entry(Closure dMonads9B2, Closure fs9B3, Closure m1s9B4, Closure m2s9B5, Closure m3s9B6)
         {
-            var sats9Bd = new Fun<Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9Bd_Entry), dMonads9B2, fs9B3, m2s9B5, m3s9B6);
+            var sat_Frees9Bd = (dMonads9B2, fs9B3, m2s9B5, m3s9B6);
+            var sats9Bd = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure>(&sats9Bd_Entry, sat_Frees9Bd);
             return GHC.Base.gtGtEq_Entry(dMonads9B2).Apply<Closure, Closure, Closure>(m1s9B4, sats9Bd);
         }
-        public static Closure sats9Bd_Entry(Closure dMonads9B2, Closure fs9B3, Closure m2s9B5, Closure m3s9B6, Closure x1s9B7)
+        public static Closure sats9Bd_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9Bd, Closure x1s9B7)
         {
-            var sats9Bc = new Fun<Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9Bc_Entry), dMonads9B2, fs9B3, m3s9B6, x1s9B7);
+            var dMonads9B2 = sat_Frees9Bd.x0;
+            var fs9B3 = sat_Frees9Bd.x1;
+            var m2s9B5 = sat_Frees9Bd.x2;
+            var m3s9B6 = sat_Frees9Bd.x3;
+            var sat_Frees9Bc = (dMonads9B2, fs9B3, m3s9B6, x1s9B7);
+            var sats9Bc = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure>(&sats9Bc_Entry, sat_Frees9Bc);
             return GHC.Base.gtGtEq_Entry(dMonads9B2).Apply<Closure, Closure, Closure>(m2s9B5, sats9Bc);
         }
-        public static Closure sats9Bc_Entry(Closure dMonads9B2, Closure fs9B3, Closure m3s9B6, Closure x1s9B7, Closure x2s9B8)
+        public static Closure sats9Bc_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9Bc, Closure x2s9B8)
         {
-            var sats9Bb = new Fun<Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9Bb_Entry), dMonads9B2, fs9B3, x1s9B7, x2s9B8);
+            var dMonads9B2 = sat_Frees9Bc.x0;
+            var fs9B3 = sat_Frees9Bc.x1;
+            var m3s9B6 = sat_Frees9Bc.x2;
+            var x1s9B7 = sat_Frees9Bc.x3;
+            var sat_Frees9Bb = (dMonads9B2, fs9B3, x1s9B7, x2s9B8);
+            var sats9Bb = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure>(&sats9Bb_Entry, sat_Frees9Bb);
             return GHC.Base.gtGtEq_Entry(dMonads9B2).Apply<Closure, Closure, Closure>(m3s9B6, sats9Bb);
         }
-        public static Closure sats9Bb_Entry(Closure dMonads9B2, Closure fs9B3, Closure x1s9B7, Closure x2s9B8, Closure x3s9B9)
+        public static Closure sats9Bb_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9Bb, Closure x3s9B9)
         {
-            var sats9Ba = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9Ba_Entry), fs9B3, x1s9B7, x2s9B8, x3s9B9);
+            var dMonads9B2 = sat_Frees9Bb.x0;
+            var fs9B3 = sat_Frees9Bb.x1;
+            var x1s9B7 = sat_Frees9Bb.x2;
+            var x2s9B8 = sat_Frees9Bb.x3;
+            var sat_Frees9Ba = (fs9B3, x1s9B7, x2s9B8, x3s9B9);
+            var sats9Ba = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats9Ba_Entry, sat_Frees9Ba);
             return GHC.Base.@return_Entry(dMonads9B2).Apply<Closure, Closure>(sats9Ba);
         }
-        public static Closure sats9Ba_Entry(Closure fs9B3, Closure x1s9B7, Closure x2s9B8, Closure x3s9B9)
+        public static Closure sats9Ba_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9Ba)
         {
+            var fs9B3 = sat_Frees9Ba.x0;
+            var x1s9B7 = sat_Frees9Ba.x1;
+            var x2s9B8 = sat_Frees9Ba.x2;
+            var x3s9B9 = sat_Frees9Ba.x3;
             return fs9B3.Apply<Closure, Closure, Closure, Closure>(x1s9B7, x2s9B8, x3s9B9);
         }
         public static Closure sliftM3s9AP_Entry(Closure fs9AQ, Closure m1s9AR, Closure m2s9AS, Closure m3s9AT)
@@ -1070,7 +1079,8 @@ namespace GHC
                                         case GHC.Maybe.Just wilds9AY_Just:
                                             {
                                                 var xs9AZ = wilds9AY_Just.x0;
-                                                var sats9B0 = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9B0_Entry), fs9AQ, xs9AV, xs9AX, xs9AZ);
+                                                var sat_Frees9B0 = (fs9AQ, xs9AV, xs9AX, xs9AZ);
+                                                var sats9B0 = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats9B0_Entry, sat_Frees9B0);
                                                 return new GHC.Maybe.Just(sats9B0);
                                             }
                                     }
@@ -1079,37 +1089,71 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats9B0_Entry(Closure fs9AQ, Closure xs9AV, Closure xs9AX, Closure xs9AZ)
+        public static Closure sats9B0_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9B0)
         {
+            var fs9AQ = sat_Frees9B0.x0;
+            var xs9AV = sat_Frees9B0.x1;
+            var xs9AX = sat_Frees9B0.x2;
+            var xs9AZ = sat_Frees9B0.x3;
             return fs9AQ.Apply<Closure, Closure, Closure, Closure>(xs9AV, xs9AX, xs9AZ);
         }
         public static Closure liftM4_Entry(Closure dMonads9AA, Closure fs9AB, Closure m1s9AC, Closure m2s9AD, Closure m3s9AE, Closure m4s9AF)
         {
-            var sats9AO = new Fun<Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9AO_Entry), dMonads9AA, fs9AB, m2s9AD, m3s9AE, m4s9AF);
+            var sat_Frees9AO = (dMonads9AA, fs9AB, m2s9AD, m3s9AE, m4s9AF);
+            var sats9AO = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure>(&sats9AO_Entry, sat_Frees9AO);
             return GHC.Base.gtGtEq_Entry(dMonads9AA).Apply<Closure, Closure, Closure>(m1s9AC, sats9AO);
         }
-        public static Closure sats9AO_Entry(Closure dMonads9AA, Closure fs9AB, Closure m2s9AD, Closure m3s9AE, Closure m4s9AF, Closure x1s9AG)
+        public static Closure sats9AO_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9AO, Closure x1s9AG)
         {
-            var sats9AN = new Fun<Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9AN_Entry), dMonads9AA, fs9AB, m3s9AE, m4s9AF, x1s9AG);
+            var dMonads9AA = sat_Frees9AO.x0;
+            var fs9AB = sat_Frees9AO.x1;
+            var m2s9AD = sat_Frees9AO.x2;
+            var m3s9AE = sat_Frees9AO.x3;
+            var m4s9AF = sat_Frees9AO.x4;
+            var sat_Frees9AN = (dMonads9AA, fs9AB, m3s9AE, m4s9AF, x1s9AG);
+            var sats9AN = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure>(&sats9AN_Entry, sat_Frees9AN);
             return GHC.Base.gtGtEq_Entry(dMonads9AA).Apply<Closure, Closure, Closure>(m2s9AD, sats9AN);
         }
-        public static Closure sats9AN_Entry(Closure dMonads9AA, Closure fs9AB, Closure m3s9AE, Closure m4s9AF, Closure x1s9AG, Closure x2s9AH)
+        public static Closure sats9AN_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9AN, Closure x2s9AH)
         {
-            var sats9AM = new Fun<Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9AM_Entry), dMonads9AA, fs9AB, m4s9AF, x1s9AG, x2s9AH);
+            var dMonads9AA = sat_Frees9AN.x0;
+            var fs9AB = sat_Frees9AN.x1;
+            var m3s9AE = sat_Frees9AN.x2;
+            var m4s9AF = sat_Frees9AN.x3;
+            var x1s9AG = sat_Frees9AN.x4;
+            var sat_Frees9AM = (dMonads9AA, fs9AB, m4s9AF, x1s9AG, x2s9AH);
+            var sats9AM = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure>(&sats9AM_Entry, sat_Frees9AM);
             return GHC.Base.gtGtEq_Entry(dMonads9AA).Apply<Closure, Closure, Closure>(m3s9AE, sats9AM);
         }
-        public static Closure sats9AM_Entry(Closure dMonads9AA, Closure fs9AB, Closure m4s9AF, Closure x1s9AG, Closure x2s9AH, Closure x3s9AI)
+        public static Closure sats9AM_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9AM, Closure x3s9AI)
         {
-            var sats9AL = new Fun<Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9AL_Entry), dMonads9AA, fs9AB, x1s9AG, x2s9AH, x3s9AI);
+            var dMonads9AA = sat_Frees9AM.x0;
+            var fs9AB = sat_Frees9AM.x1;
+            var m4s9AF = sat_Frees9AM.x2;
+            var x1s9AG = sat_Frees9AM.x3;
+            var x2s9AH = sat_Frees9AM.x4;
+            var sat_Frees9AL = (dMonads9AA, fs9AB, x1s9AG, x2s9AH, x3s9AI);
+            var sats9AL = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure>(&sats9AL_Entry, sat_Frees9AL);
             return GHC.Base.gtGtEq_Entry(dMonads9AA).Apply<Closure, Closure, Closure>(m4s9AF, sats9AL);
         }
-        public static Closure sats9AL_Entry(Closure dMonads9AA, Closure fs9AB, Closure x1s9AG, Closure x2s9AH, Closure x3s9AI, Closure x4s9AJ)
+        public static Closure sats9AL_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9AL, Closure x4s9AJ)
         {
-            var sats9AK = new Updatable<Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9AK_Entry), fs9AB, x1s9AG, x2s9AH, x3s9AI, x4s9AJ);
+            var dMonads9AA = sat_Frees9AL.x0;
+            var fs9AB = sat_Frees9AL.x1;
+            var x1s9AG = sat_Frees9AL.x2;
+            var x2s9AH = sat_Frees9AL.x3;
+            var x3s9AI = sat_Frees9AL.x4;
+            var sat_Frees9AK = (fs9AB, x1s9AG, x2s9AH, x3s9AI, x4s9AJ);
+            var sats9AK = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4)>(&sats9AK_Entry, sat_Frees9AK);
             return GHC.Base.@return_Entry(dMonads9AA).Apply<Closure, Closure>(sats9AK);
         }
-        public static Closure sats9AK_Entry(Closure fs9AB, Closure x1s9AG, Closure x2s9AH, Closure x3s9AI, Closure x4s9AJ)
+        public static Closure sats9AK_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9AK)
         {
+            var fs9AB = sat_Frees9AK.x0;
+            var x1s9AG = sat_Frees9AK.x1;
+            var x2s9AH = sat_Frees9AK.x2;
+            var x3s9AI = sat_Frees9AK.x3;
+            var x4s9AJ = sat_Frees9AK.x4;
             return fs9AB.Apply<Closure, Closure, Closure, Closure, Closure>(x1s9AG, x2s9AH, x3s9AI, x4s9AJ);
         }
         public static Closure sliftM4s9Ak_Entry(Closure fs9Al, Closure m1s9Am, Closure m2s9An, Closure m3s9Ao, Closure m4s9Ap)
@@ -1158,7 +1202,8 @@ namespace GHC
                                                     case GHC.Maybe.Just wilds9Aw_Just:
                                                         {
                                                             var xs9Ax = wilds9Aw_Just.x0;
-                                                            var sats9Ay = new Updatable<Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9Ay_Entry), fs9Al, xs9Ar, xs9At, xs9Av, xs9Ax);
+                                                            var sat_Frees9Ay = (fs9Al, xs9Ar, xs9At, xs9Av, xs9Ax);
+                                                            var sats9Ay = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4)>(&sats9Ay_Entry, sat_Frees9Ay);
                                                             return new GHC.Maybe.Just(sats9Ay);
                                                         }
                                                 }
@@ -1169,42 +1214,89 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats9Ay_Entry(Closure fs9Al, Closure xs9Ar, Closure xs9At, Closure xs9Av, Closure xs9Ax)
+        public static Closure sats9Ay_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9Ay)
         {
+            var fs9Al = sat_Frees9Ay.x0;
+            var xs9Ar = sat_Frees9Ay.x1;
+            var xs9At = sat_Frees9Ay.x2;
+            var xs9Av = sat_Frees9Ay.x3;
+            var xs9Ax = sat_Frees9Ay.x4;
             return fs9Al.Apply<Closure, Closure, Closure, Closure, Closure>(xs9Ar, xs9At, xs9Av, xs9Ax);
         }
         public static Closure liftM5_Entry(Closure dMonads9A2, Closure fs9A3, Closure m1s9A4, Closure m2s9A5, Closure m3s9A6, Closure m4s9A7, Closure m5s9A8)
         {
-            var sats9Aj = new Fun<Closure, Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9Aj_Entry), dMonads9A2, fs9A3, m2s9A5, m3s9A6, m4s9A7, m5s9A8);
+            var sat_Frees9Aj = (dMonads9A2, fs9A3, m2s9A5, m3s9A6, m4s9A7, m5s9A8);
+            var sats9Aj = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5), Closure, Closure>(&sats9Aj_Entry, sat_Frees9Aj);
             return GHC.Base.gtGtEq_Entry(dMonads9A2).Apply<Closure, Closure, Closure>(m1s9A4, sats9Aj);
         }
-        public static Closure sats9Aj_Entry(Closure dMonads9A2, Closure fs9A3, Closure m2s9A5, Closure m3s9A6, Closure m4s9A7, Closure m5s9A8, Closure x1s9A9)
+        public static Closure sats9Aj_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) sat_Frees9Aj, Closure x1s9A9)
         {
-            var sats9Ai = new Fun<Closure, Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9Ai_Entry), dMonads9A2, fs9A3, m3s9A6, m4s9A7, m5s9A8, x1s9A9);
+            var dMonads9A2 = sat_Frees9Aj.x0;
+            var fs9A3 = sat_Frees9Aj.x1;
+            var m2s9A5 = sat_Frees9Aj.x2;
+            var m3s9A6 = sat_Frees9Aj.x3;
+            var m4s9A7 = sat_Frees9Aj.x4;
+            var m5s9A8 = sat_Frees9Aj.x5;
+            var sat_Frees9Ai = (dMonads9A2, fs9A3, m3s9A6, m4s9A7, m5s9A8, x1s9A9);
+            var sats9Ai = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5), Closure, Closure>(&sats9Ai_Entry, sat_Frees9Ai);
             return GHC.Base.gtGtEq_Entry(dMonads9A2).Apply<Closure, Closure, Closure>(m2s9A5, sats9Ai);
         }
-        public static Closure sats9Ai_Entry(Closure dMonads9A2, Closure fs9A3, Closure m3s9A6, Closure m4s9A7, Closure m5s9A8, Closure x1s9A9, Closure x2s9Aa)
+        public static Closure sats9Ai_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) sat_Frees9Ai, Closure x2s9Aa)
         {
-            var sats9Ah = new Fun<Closure, Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9Ah_Entry), dMonads9A2, fs9A3, m4s9A7, m5s9A8, x1s9A9, x2s9Aa);
+            var dMonads9A2 = sat_Frees9Ai.x0;
+            var fs9A3 = sat_Frees9Ai.x1;
+            var m3s9A6 = sat_Frees9Ai.x2;
+            var m4s9A7 = sat_Frees9Ai.x3;
+            var m5s9A8 = sat_Frees9Ai.x4;
+            var x1s9A9 = sat_Frees9Ai.x5;
+            var sat_Frees9Ah = (dMonads9A2, fs9A3, m4s9A7, m5s9A8, x1s9A9, x2s9Aa);
+            var sats9Ah = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5), Closure, Closure>(&sats9Ah_Entry, sat_Frees9Ah);
             return GHC.Base.gtGtEq_Entry(dMonads9A2).Apply<Closure, Closure, Closure>(m3s9A6, sats9Ah);
         }
-        public static Closure sats9Ah_Entry(Closure dMonads9A2, Closure fs9A3, Closure m4s9A7, Closure m5s9A8, Closure x1s9A9, Closure x2s9Aa, Closure x3s9Ab)
+        public static Closure sats9Ah_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) sat_Frees9Ah, Closure x3s9Ab)
         {
-            var sats9Ag = new Fun<Closure, Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9Ag_Entry), dMonads9A2, fs9A3, m5s9A8, x1s9A9, x2s9Aa, x3s9Ab);
+            var dMonads9A2 = sat_Frees9Ah.x0;
+            var fs9A3 = sat_Frees9Ah.x1;
+            var m4s9A7 = sat_Frees9Ah.x2;
+            var m5s9A8 = sat_Frees9Ah.x3;
+            var x1s9A9 = sat_Frees9Ah.x4;
+            var x2s9Aa = sat_Frees9Ah.x5;
+            var sat_Frees9Ag = (dMonads9A2, fs9A3, m5s9A8, x1s9A9, x2s9Aa, x3s9Ab);
+            var sats9Ag = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5), Closure, Closure>(&sats9Ag_Entry, sat_Frees9Ag);
             return GHC.Base.gtGtEq_Entry(dMonads9A2).Apply<Closure, Closure, Closure>(m4s9A7, sats9Ag);
         }
-        public static Closure sats9Ag_Entry(Closure dMonads9A2, Closure fs9A3, Closure m5s9A8, Closure x1s9A9, Closure x2s9Aa, Closure x3s9Ab, Closure x4s9Ac)
+        public static Closure sats9Ag_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) sat_Frees9Ag, Closure x4s9Ac)
         {
-            var sats9Af = new Fun<Closure, Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9Af_Entry), dMonads9A2, fs9A3, x1s9A9, x2s9Aa, x3s9Ab, x4s9Ac);
+            var dMonads9A2 = sat_Frees9Ag.x0;
+            var fs9A3 = sat_Frees9Ag.x1;
+            var m5s9A8 = sat_Frees9Ag.x2;
+            var x1s9A9 = sat_Frees9Ag.x3;
+            var x2s9Aa = sat_Frees9Ag.x4;
+            var x3s9Ab = sat_Frees9Ag.x5;
+            var sat_Frees9Af = (dMonads9A2, fs9A3, x1s9A9, x2s9Aa, x3s9Ab, x4s9Ac);
+            var sats9Af = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5), Closure, Closure>(&sats9Af_Entry, sat_Frees9Af);
             return GHC.Base.gtGtEq_Entry(dMonads9A2).Apply<Closure, Closure, Closure>(m5s9A8, sats9Af);
         }
-        public static Closure sats9Af_Entry(Closure dMonads9A2, Closure fs9A3, Closure x1s9A9, Closure x2s9Aa, Closure x3s9Ab, Closure x4s9Ac, Closure x5s9Ad)
+        public static Closure sats9Af_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) sat_Frees9Af, Closure x5s9Ad)
         {
-            var sats9Ae = new Updatable<Closure, Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9Ae_Entry), fs9A3, x1s9A9, x2s9Aa, x3s9Ab, x4s9Ac, x5s9Ad);
+            var dMonads9A2 = sat_Frees9Af.x0;
+            var fs9A3 = sat_Frees9Af.x1;
+            var x1s9A9 = sat_Frees9Af.x2;
+            var x2s9Aa = sat_Frees9Af.x3;
+            var x3s9Ab = sat_Frees9Af.x4;
+            var x4s9Ac = sat_Frees9Af.x5;
+            var sat_Frees9Ae = (fs9A3, x1s9A9, x2s9Aa, x3s9Ab, x4s9Ac, x5s9Ad);
+            var sats9Ae = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5)>(&sats9Ae_Entry, sat_Frees9Ae);
             return GHC.Base.@return_Entry(dMonads9A2).Apply<Closure, Closure>(sats9Ae);
         }
-        public static Closure sats9Ae_Entry(Closure fs9A3, Closure x1s9A9, Closure x2s9Aa, Closure x3s9Ab, Closure x4s9Ac, Closure x5s9Ad)
+        public static Closure sats9Ae_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) sat_Frees9Ae)
         {
+            var fs9A3 = sat_Frees9Ae.x0;
+            var x1s9A9 = sat_Frees9Ae.x1;
+            var x2s9Aa = sat_Frees9Ae.x2;
+            var x3s9Ab = sat_Frees9Ae.x3;
+            var x4s9Ac = sat_Frees9Ae.x4;
+            var x5s9Ad = sat_Frees9Ae.x5;
             return fs9A3.Apply<Closure, Closure, Closure, Closure, Closure, Closure>(x1s9A9, x2s9Aa, x3s9Ab, x4s9Ac, x5s9Ad);
         }
         public static Closure sliftM5s9zJ_Entry(Closure fs9zK, Closure m1s9zL, Closure m2s9zM, Closure m3s9zN, Closure m4s9zO, Closure m5s9zP)
@@ -1264,7 +1356,8 @@ namespace GHC
                                                                 case GHC.Maybe.Just wilds9zY_Just:
                                                                     {
                                                                         var xs9zZ = wilds9zY_Just.x0;
-                                                                        var sats9A0 = new Updatable<Closure, Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9A0_Entry), fs9zK, xs9zR, xs9zT, xs9zV, xs9zX, xs9zZ);
+                                                                        var sat_Frees9A0 = (fs9zK, xs9zR, xs9zT, xs9zV, xs9zX, xs9zZ);
+                                                                        var sats9A0 = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5)>(&sats9A0_Entry, sat_Frees9A0);
                                                                         return new GHC.Maybe.Just(sats9A0);
                                                                     }
                                                             }
@@ -1277,27 +1370,42 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats9A0_Entry(Closure fs9zK, Closure xs9zR, Closure xs9zT, Closure xs9zV, Closure xs9zX, Closure xs9zZ)
+        public static Closure sats9A0_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) sat_Frees9A0)
         {
+            var fs9zK = sat_Frees9A0.x0;
+            var xs9zR = sat_Frees9A0.x1;
+            var xs9zT = sat_Frees9A0.x2;
+            var xs9zV = sat_Frees9A0.x3;
+            var xs9zX = sat_Frees9A0.x4;
+            var xs9zZ = sat_Frees9A0.x5;
             return fs9zK.Apply<Closure, Closure, Closure, Closure, Closure, Closure>(xs9zR, xs9zT, xs9zV, xs9zX, xs9zZ);
         }
         public static Closure ap_Entry(Closure dMonads9zB, Closure m1s9zC, Closure m2s9zD)
         {
-            var sats9zI = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9zI_Entry), dMonads9zB, m2s9zD);
+            var sat_Frees9zI = (dMonads9zB, m2s9zD);
+            var sats9zI = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&sats9zI_Entry, sat_Frees9zI);
             return GHC.Base.gtGtEq_Entry(dMonads9zB).Apply<Closure, Closure, Closure>(m1s9zC, sats9zI);
         }
-        public static Closure sats9zI_Entry(Closure dMonads9zB, Closure m2s9zD, Closure x1s9zE)
+        public static Closure sats9zI_Entry(in (Closure x0, Closure x1) sat_Frees9zI, Closure x1s9zE)
         {
-            var sats9zH = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9zH_Entry), dMonads9zB, x1s9zE);
+            var dMonads9zB = sat_Frees9zI.x0;
+            var m2s9zD = sat_Frees9zI.x1;
+            var sat_Frees9zH = (dMonads9zB, x1s9zE);
+            var sats9zH = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&sats9zH_Entry, sat_Frees9zH);
             return GHC.Base.gtGtEq_Entry(dMonads9zB).Apply<Closure, Closure, Closure>(m2s9zD, sats9zH);
         }
-        public static Closure sats9zH_Entry(Closure dMonads9zB, Closure x1s9zE, Closure x2s9zF)
+        public static Closure sats9zH_Entry(in (Closure x0, Closure x1) sat_Frees9zH, Closure x2s9zF)
         {
-            var sats9zG = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9zG_Entry), x1s9zE, x2s9zF);
+            var dMonads9zB = sat_Frees9zH.x0;
+            var x1s9zE = sat_Frees9zH.x1;
+            var sat_Frees9zG = (x1s9zE, x2s9zF);
+            var sats9zG = new Updatable<(Closure x0, Closure x1)>(&sats9zG_Entry, sat_Frees9zG);
             return GHC.Base.@return_Entry(dMonads9zB).Apply<Closure, Closure>(sats9zG);
         }
-        public static Closure sats9zG_Entry(Closure x1s9zE, Closure x2s9zF)
+        public static Closure sats9zG_Entry(in (Closure x0, Closure x1) sat_Frees9zG)
         {
+            var x1s9zE = sat_Frees9zG.x0;
+            var x2s9zF = sat_Frees9zG.x1;
             return x1s9zE.Apply<Closure, Closure>(x2s9zF);
         }
         public static Closure saps9zs_Entry(Closure m1s9zt, Closure m2s9zu)
@@ -1324,15 +1432,18 @@ namespace GHC
                             case GHC.Maybe.Just wilds9zx_Just:
                                 {
                                     var xs9zy = wilds9zx_Just.x0;
-                                    var sats9zz = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9zz_Entry), xs9zw, xs9zy);
+                                    var sat_Frees9zz = (xs9zw, xs9zy);
+                                    var sats9zz = new Updatable<(Closure x0, Closure x1)>(&sats9zz_Entry, sat_Frees9zz);
                                     return new GHC.Maybe.Just(sats9zz);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats9zz_Entry(Closure xs9zw, Closure xs9zy)
+        public static Closure sats9zz_Entry(in (Closure x0, Closure x1) sat_Frees9zz)
         {
+            var xs9zw = sat_Frees9zz.x0;
+            var xs9zy = sat_Frees9zz.x1;
             return xs9zw.Apply<Closure, Closure>(xs9zy);
         }
         public static Closure when_Entry(Closure dApplicatives9zn, Closure ps9zo, Closure ss9zp)
@@ -1375,11 +1486,14 @@ namespace GHC
         }
         public static Closure liftA_Entry(Closure dApplicatives9zd, Closure fs9ze, Closure as9zf)
         {
-            var sats9zg = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9zg_Entry), dApplicatives9zd, fs9ze);
+            var sat_Frees9zg = (dApplicatives9zd, fs9ze);
+            var sats9zg = new Updatable<(Closure x0, Closure x1)>(&sats9zg_Entry, sat_Frees9zg);
             return GHC.Base.ltAstrGt_Entry(dApplicatives9zd).Apply<Closure, Closure, Closure>(sats9zg, as9zf);
         }
-        public static Closure sats9zg_Entry(Closure dApplicatives9zd, Closure fs9ze)
+        public static Closure sats9zg_Entry(in (Closure x0, Closure x1) sat_Frees9zg)
         {
+            var dApplicatives9zd = sat_Frees9zg.x0;
+            var fs9ze = sat_Frees9zg.x1;
             return GHC.Base.pure_Entry(dApplicatives9zd).Apply<Closure, Closure>(fs9ze);
         }
         public static Closure sliftAs9zb_Entry(Closure etaB2, Closure etaB1)
@@ -1388,11 +1502,16 @@ namespace GHC
         }
         public static Closure liftA3_Entry(Closure dApplicatives9z5, Closure fs9z6, Closure as9z7, Closure bs9z8, Closure cs9z9)
         {
-            var sats9za = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9za_Entry), dApplicatives9z5, fs9z6, as9z7, bs9z8);
+            var sat_Frees9za = (dApplicatives9z5, fs9z6, as9z7, bs9z8);
+            var sats9za = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats9za_Entry, sat_Frees9za);
             return GHC.Base.ltAstrGt_Entry(dApplicatives9z5).Apply<Closure, Closure, Closure>(sats9za, cs9z9);
         }
-        public static Closure sats9za_Entry(Closure dApplicatives9z5, Closure fs9z6, Closure as9z7, Closure bs9z8)
+        public static Closure sats9za_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9za)
         {
+            var dApplicatives9z5 = sat_Frees9za.x0;
+            var fs9z6 = sat_Frees9za.x1;
+            var as9z7 = sat_Frees9za.x2;
+            var bs9z8 = sat_Frees9za.x3;
             return GHC.Base.liftA2_Entry(dApplicatives9z5).Apply<Closure, Closure, Closure, Closure>(fs9z6, as9z7, bs9z8);
         }
         public static Closure sliftA3s9yS_Entry(Closure fs9yT, Closure as9yU, Closure bs9yV, Closure cs9yW)
@@ -1430,7 +1549,8 @@ namespace GHC
                                         case GHC.Maybe.Just wilds9z1_Just:
                                             {
                                                 var as9z2 = wilds9z1_Just.x0;
-                                                var sats9z3 = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9z3_Entry), fs9yT, xs9yY, ys9z0, as9z2);
+                                                var sat_Frees9z3 = (fs9yT, xs9yY, ys9z0, as9z2);
+                                                var sats9z3 = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats9z3_Entry, sat_Frees9z3);
                                                 return new GHC.Maybe.Just(sats9z3);
                                             }
                                     }
@@ -1439,8 +1559,12 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats9z3_Entry(Closure fs9yT, Closure xs9yY, Closure ys9z0, Closure as9z2)
+        public static Closure sats9z3_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9z3)
         {
+            var fs9yT = sat_Frees9z3.x0;
+            var xs9yY = sat_Frees9z3.x1;
+            var ys9z0 = sat_Frees9z3.x2;
+            var as9z2 = sat_Frees9z3.x3;
             return fs9yT.Apply<Closure, Closure, Closure, Closure>(xs9yY, ys9z0, as9z2);
         }
         public static Closure cLtAstrs9yK_Entry(Closure dss9yL, Closure dss9yM)
@@ -1496,17 +1620,22 @@ namespace GHC
         }
         public static Closure quotRemInt_Entry(Closure xs9xw, Closure ys9xx)
         {
-            var sats9xz = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9xz_Entry), xs9xw, ys9xx);
-            var sats9xy = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9xy_Entry), xs9xw, ys9xx);
+            var sat_Frees9xz = (xs9xw, ys9xx);
+            var sats9xz = new Updatable<(Closure x0, Closure x1)>(&sats9xz_Entry, sat_Frees9xz);
+            var sat_Frees9xy = (xs9xw, ys9xx);
+            var sats9xy = new Updatable<(Closure x0, Closure x1)>(&sats9xy_Entry, sat_Frees9xy);
             return new GHC.Tuple.Tuple2(sats9xy, sats9xz);
         }
-        public static Closure sats9xy_Entry(Closure xs9xw, Closure ys9xx)
+        public static Closure sats9xy_Entry(in (Closure x0, Closure x1) sat_Frees9xy)
         {
+            var xs9xw = sat_Frees9xy.x0;
+            var ys9xx = sat_Frees9xy.x1;
             return quotInt_Entry(xs9xw, ys9xx);
         }
-        public static Closure sats9xz_Entry(Closure xs9xw, Closure ys9xx)
+        public static Closure sats9xz_Entry(in (Closure x0, Closure x1) sat_Frees9xz)
         {
-            return remInt_Entry(xs9xw, ys9xx);
+            var xs9xw = sat_Frees9xz.x0;
+            var ys9xx = sat_Frees9xz.x1; return remInt_Entry(xs9xw, ys9xx);
         }
         public static Closure remInt_Entry(Closure dss9xo, Closure dss9xp)
         {
@@ -1569,30 +1698,30 @@ namespace GHC
         }
         public static Closure fMonadPrOComPrC_Entry(Closure dMonoids9wE)
         {
-            var lvls9wF = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(lvls9wF_Entry), dMonoids9wE);
-            var sats9wK = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9wK_Entry), lvls9wF);
-            var sats9wI = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9wI_Entry), dMonoids9wE);
-            var sats9wH = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9wH_Entry), dMonoids9wE);
-            var sats9wG = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9wG_Entry), dMonoids9wE);
+            var lvls9wF = new Updatable<Closure>(&lvls9wF_Entry, dMonoids9wE);
+            var sats9wK = new Fun1<Closure, Closure, Closure>(&sats9wK_Entry, lvls9wF);
+            var sats9wI = new Fun2<Closure, Closure, Closure, Closure>(&sats9wI_Entry, dMonoids9wE);
+            var sats9wH = new Fun2<Closure, Closure, Closure, Closure>(&sats9wH_Entry, dMonoids9wE);
+            var sats9wG = new Updatable<Closure>(&sats9wG_Entry, dMonoids9wE);
             return new GHC.Base.CColMonad(sats9wG, sats9wH, sats9wI, sats9wK, lvls9wB);
         }
-        public static Closure sats9wG_Entry(Closure dMonoids9wE)
+        public static Closure sats9wG_Entry(in Closure dMonoids9wE)
         {
             return fApplicativePrOComPrC_Entry(dMonoids9wE);
         }
-        public static Closure sats9wH_Entry(Closure dMonoids9wE, Closure etaB2, Closure etaB1)
+        public static Closure sats9wH_Entry(in Closure dMonoids9wE, Closure etaB2, Closure etaB1)
         {
             return cGtGtEqs9mZ_Entry(dMonoids9wE, etaB2, etaB1);
         }
-        public static Closure sats9wI_Entry(Closure dMonoids9wE, Closure etaB2, Closure etaB1)
+        public static Closure sats9wI_Entry(in Closure dMonoids9wE, Closure etaB2, Closure etaB1)
         {
             return cGtGts9wA_Entry(dMonoids9wE, etaB2, etaB1);
         }
-        public static Closure sats9wK_Entry(Closure lvls9wF, Closure xs9wJ)
+        public static Closure sats9wK_Entry(in Closure lvls9wF, Closure xs9wJ)
         {
             return new GHC.Tuple.Tuple2(lvls9wF, xs9wJ);
         }
-        public static Closure lvls9wF_Entry(Closure dMonoids9wE)
+        public static Closure lvls9wF_Entry(in Closure dMonoids9wE)
         {
             return GHC.Base.mempty_Entry(dMonoids9wE);
         }
@@ -1606,35 +1735,35 @@ namespace GHC
         }
         public static Closure fApplicativePrOComPrC_Entry(Closure dMonoids9ws)
         {
-            var lvls9wt = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(lvls9wt_Entry), dMonoids9ws);
-            var sats9wz = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9wz_Entry), dMonoids9ws);
-            var sats9wy = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9wy_Entry), dMonoids9ws);
-            var sats9wx = new Fun<Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9wx_Entry), dMonoids9ws);
-            var sats9ww = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9ww_Entry), dMonoids9ws);
-            var sats9wv = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9wv_Entry), lvls9wt);
+            var lvls9wt = new Updatable<Closure>(&lvls9wt_Entry, dMonoids9ws);
+            var sats9wz = new Fun2<Closure, Closure, Closure, Closure>(&sats9wz_Entry, dMonoids9ws);
+            var sats9wy = new Fun2<Closure, Closure, Closure, Closure>(&sats9wy_Entry, dMonoids9ws);
+            var sats9wx = new Fun3<Closure, Closure, Closure, Closure, Closure>(&sats9wx_Entry, dMonoids9ws);
+            var sats9ww = new Fun2<Closure, Closure, Closure, Closure>(&sats9ww_Entry, dMonoids9ws);
+            var sats9wv = new Fun1<Closure, Closure, Closure>(&sats9wv_Entry, lvls9wt);
             return new GHC.Base.CColApplicative(GHC.Base.fFunctorPrOComPrC, sats9wv, sats9ww, sats9wx, sats9wy, sats9wz);
         }
-        public static Closure sats9wv_Entry(Closure lvls9wt, Closure xs9wu)
+        public static Closure sats9wv_Entry(in Closure lvls9wt, Closure xs9wu)
         {
             return new GHC.Tuple.Tuple2(lvls9wt, xs9wu);
         }
-        public static Closure sats9ww_Entry(Closure dMonoids9ws, Closure etaB2, Closure etaB1)
+        public static Closure sats9ww_Entry(in Closure dMonoids9ws, Closure etaB2, Closure etaB1)
         {
             return cLtAstrGts9lA_Entry(dMonoids9ws, etaB2, etaB1);
         }
-        public static Closure sats9wx_Entry(Closure dMonoids9ws, Closure etaB3, Closure etaB2, Closure etaB1)
+        public static Closure sats9wx_Entry(in Closure dMonoids9ws, Closure etaB3, Closure etaB2, Closure etaB1)
         {
             return cliftA2s9ln_Entry(dMonoids9ws, etaB3, etaB2, etaB1);
         }
-        public static Closure sats9wy_Entry(Closure dMonoids9ws, Closure etaB2, Closure etaB1)
+        public static Closure sats9wy_Entry(in Closure dMonoids9ws, Closure etaB2, Closure etaB1)
         {
             return cAstrGts9w5_Entry(dMonoids9ws, etaB2, etaB1);
         }
-        public static Closure sats9wz_Entry(Closure dMonoids9ws, Closure etaB2, Closure etaB1)
+        public static Closure sats9wz_Entry(in Closure dMonoids9ws, Closure etaB2, Closure etaB1)
         {
             return cLtAstrs9wg_Entry(dMonoids9ws, etaB2, etaB1);
         }
-        public static Closure lvls9wt_Entry(Closure dMonoids9ws)
+        public static Closure lvls9wt_Entry(in Closure dMonoids9ws)
         {
             return GHC.Base.mempty_Entry(dMonoids9ws);
         }
@@ -1648,11 +1777,15 @@ namespace GHC
             var wilds9wn_Tuple2 = wilds9wn as GHC.Tuple.Tuple2;
             var vs9wo = wilds9wn_Tuple2.x0;
             var ys9wp = wilds9wn_Tuple2.x1;
-            var sats9wq = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9wq_Entry), dMonoids9wh, us9wl, vs9wo);
+            var sat_Frees9wq = (dMonoids9wh, us9wl, vs9wo);
+            var sats9wq = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9wq_Entry, sat_Frees9wq);
             return new GHC.Tuple.Tuple2(sats9wq, xs9wm);
         }
-        public static Closure sats9wq_Entry(Closure dMonoids9wh, Closure us9wl, Closure vs9wo)
+        public static Closure sats9wq_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9wq)
         {
+            var dMonoids9wh = sat_Frees9wq.x0;
+            var us9wl = sat_Frees9wq.x1;
+            var vs9wo = sat_Frees9wq.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9wh).Apply<Closure, Closure, Closure>(us9wl, vs9wo);
         }
         public static Closure cAstrGts9w5_Entry(Closure dMonoids9w6, Closure a1s9w7, Closure a2s9w8)
@@ -1665,11 +1798,15 @@ namespace GHC
             var wilds9wc_Tuple2 = wilds9wc as GHC.Tuple.Tuple2;
             var vs9wd = wilds9wc_Tuple2.x0;
             var xs9we = wilds9wc_Tuple2.x1;
-            var sats9wf = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9wf_Entry), dMonoids9w6, xs9wa, vs9wd);
+            var sat_Frees9wf = (dMonoids9w6, xs9wa, vs9wd);
+            var sats9wf = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9wf_Entry, sat_Frees9wf);
             return new GHC.Tuple.Tuple2(sats9wf, xs9we);
         }
-        public static Closure sats9wf_Entry(Closure dMonoids9w6, Closure xs9wa, Closure vs9wd)
+        public static Closure sats9wf_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9wf)
         {
+            var dMonoids9w6 = sat_Frees9wf.x0;
+            var xs9wa = sat_Frees9wf.x1;
+            var vs9wd = sat_Frees9wf.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9w6).Apply<Closure, Closure, Closure>(xs9wa, vs9wd);
         }
         public static Closure cLtDolls9vY_Entry(Closure xs9vZ, Closure dss9w0)
@@ -1715,18 +1852,24 @@ namespace GHC
         }
         public static Closure cmanys9vu_Entry(Closure vs9vv)
         {
-            var many_vs9vw = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(many_vs9vw_Entry), vs9vv, null);
-            many_vs9vw.x1 = many_vs9vw; return many_vs9vw.Eval();
+            var many_v_Frees9vw = (vs9vv, (Closure)null);
+            var many_vs9vw = new Updatable<(Closure x0, Closure x1)>(&many_vs9vw_Entry, many_v_Frees9vw);
+            many_vs9vw.free.x1 = many_vs9vw; return many_vs9vw.Eval();
         }
-        public static Closure many_vs9vw_Entry(Closure vs9vv, Closure many_vs9vw)
+        public static Closure many_vs9vw_Entry(in (Closure x0, Closure x1) many_v_Frees9vw)
         {
-            var gos9vx = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos9vx_Entry), many_vs9vw, null);
-            gos9vx.x1 = gos9vx;
-            var sats9vK = gos9vx.Apply<Closure, Closure>(vs9vv).Eval();
+            var vs9vv = many_v_Frees9vw.x0;
+            var many_vs9vw = many_v_Frees9vw.x1;
+            var go_Frees9vx = (many_vs9vw, (Closure)null);
+            var gos9vx = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos9vx_Entry, go_Frees9vx);
+            gos9vx.free.x1 = gos9vx;
+            var sats9vK = gos9vx.Apply<Closure, Closure>(vs9vv);
             return poly_gos9v7_Entry(sats9vK);
         }
-        public static Closure gos9vx_Entry(Closure many_vs9vw, Closure gos9vx, Closure dss9vy)
+        public static Closure gos9vx_Entry(in (Closure x0, Closure x1) go_Frees9vx, Closure dss9vy)
         {
+            var many_vs9vw = go_Frees9vx.x0;
+            var gos9vx = go_Frees9vx.x1;
             var wilds9vz = dss9vy.Eval();
             switch (wilds9vz)
             {
@@ -1739,15 +1882,20 @@ namespace GHC
                     {
                         var ys9vA = wilds9vz_Cons.x0;
                         var yss9vB = wilds9vz_Cons.x1;
-                        var zs9vC = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(zs9vC_Entry), gos9vx, yss9vB);
-                        var gos9vD = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos9vD_Entry), ys9vA, zs9vC, null);
-                        gos9vD.x2 = gos9vD;
+                        var z_Frees9vC = (gos9vx, yss9vB);
+                        var zs9vC = new Updatable<(Closure x0, Closure x1)>(&zs9vC_Entry, z_Frees9vC);
+                        var go_Frees9vD = (ys9vA, zs9vC, (Closure)null);
+                        var gos9vD = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos9vD_Entry, go_Frees9vD);
+                        gos9vD.free.x2 = gos9vD;
                         return gos9vD.Apply<Closure, Closure>(many_vs9vw);
                     }
             }
         }
-        public static Closure gos9vD_Entry(Closure ys9vA, Closure zs9vC, Closure gos9vD, Closure dss9vE)
+        public static Closure gos9vD_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees9vD, Closure dss9vE)
         {
+            var ys9vA = go_Frees9vD.x0;
+            var zs9vC = go_Frees9vD.x1;
+            var gos9vD = go_Frees9vD.x2;
             var wilds9vF = dss9vE.Eval();
             switch (wilds9vF)
             {
@@ -1757,34 +1905,45 @@ namespace GHC
                     {
                         var ys9vG = wilds9vF_Cons.x0;
                         var yss9vH = wilds9vF_Cons.x1;
-                        var sats9vJ = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9vJ_Entry), gos9vD, yss9vH);
+                        var sat_Frees9vJ = (gos9vD, yss9vH);
+                        var sats9vJ = new Updatable<(Closure x0, Closure x1)>(&sats9vJ_Entry, sat_Frees9vJ);
                         var sats9vI = new GHC.Types.Cons(ys9vA, ys9vG);
                         return new GHC.Types.Cons(sats9vI, sats9vJ);
                     }
             }
         }
-        public static Closure sats9vJ_Entry(Closure gos9vD, Closure yss9vH)
+        public static Closure sats9vJ_Entry(in (Closure x0, Closure x1) sat_Frees9vJ)
         {
+            var gos9vD = sat_Frees9vJ.x0;
+            var yss9vH = sat_Frees9vJ.x1;
             return gos9vD.Apply<Closure, Closure>(yss9vH);
         }
-        public static Closure zs9vC_Entry(Closure gos9vx, Closure yss9vB)
+        public static Closure zs9vC_Entry(in (Closure x0, Closure x1) z_Frees9vC)
         {
+            var gos9vx = z_Frees9vC.x0;
+            var yss9vB = z_Frees9vC.x1;
             return gos9vx.Apply<Closure, Closure>(yss9vB);
         }
         public static Closure csomes9vd_Entry(Closure vs9ve)
         {
-            var some_vs9vf = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(some_vs9vf_Entry), vs9ve, null);
-            some_vs9vf.x1 = some_vs9vf; return some_vs9vf.Eval();
+            var some_v_Frees9vf = (vs9ve, (Closure)null);
+            var some_vs9vf = new Updatable<(Closure x0, Closure x1)>(&some_vs9vf_Entry, some_v_Frees9vf);
+            some_vs9vf.free.x1 = some_vs9vf; return some_vs9vf.Eval();
         }
-        public static Closure some_vs9vf_Entry(Closure vs9ve, Closure some_vs9vf)
+        public static Closure some_vs9vf_Entry(in (Closure x0, Closure x1) some_v_Frees9vf)
         {
-            var yss9vg = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(yss9vg_Entry), some_vs9vf);
-            var gos9vh = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos9vh_Entry), yss9vg, null);
-            gos9vh.x1 = gos9vh;
+            var vs9ve = some_v_Frees9vf.x0;
+            var some_vs9vf = some_v_Frees9vf.x1;
+            var yss9vg = new Updatable<Closure>(&yss9vg_Entry, some_vs9vf);
+            var go_Frees9vh = (yss9vg, (Closure)null);
+            var gos9vh = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos9vh_Entry, go_Frees9vh);
+            gos9vh.free.x1 = gos9vh;
             return gos9vh.Apply<Closure, Closure>(vs9ve);
         }
-        public static Closure gos9vh_Entry(Closure yss9vg, Closure gos9vh, Closure dss9vi)
+        public static Closure gos9vh_Entry(in (Closure x0, Closure x1) go_Frees9vh, Closure dss9vi)
         {
+            var yss9vg = go_Frees9vh.x0;
+            var gos9vh = go_Frees9vh.x1;
             var wilds9vj = dss9vi.Eval();
             switch (wilds9vj)
             {
@@ -1797,15 +1956,20 @@ namespace GHC
                     {
                         var ys9vk = wilds9vj_Cons.x0;
                         var yss9vl = wilds9vj_Cons.x1;
-                        var zs9vm = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(zs9vm_Entry), gos9vh, yss9vl);
-                        var gos9vn = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos9vn_Entry), ys9vk, zs9vm, null);
-                        gos9vn.x2 = gos9vn;
+                        var z_Frees9vm = (gos9vh, yss9vl);
+                        var zs9vm = new Updatable<(Closure x0, Closure x1)>(&zs9vm_Entry, z_Frees9vm);
+                        var go_Frees9vn = (ys9vk, zs9vm, (Closure)null);
+                        var gos9vn = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos9vn_Entry, go_Frees9vn);
+                        gos9vn.free.x2 = gos9vn;
                         return gos9vn.Apply<Closure, Closure>(yss9vg);
                     }
             }
         }
-        public static Closure gos9vn_Entry(Closure ys9vk, Closure zs9vm, Closure gos9vn, Closure dss9vo)
+        public static Closure gos9vn_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees9vn, Closure dss9vo)
         {
+            var ys9vk = go_Frees9vn.x0;
+            var zs9vm = go_Frees9vn.x1;
+            var gos9vn = go_Frees9vn.x2;
             var wilds9vp = dss9vo.Eval();
             switch (wilds9vp)
             {
@@ -1815,21 +1979,26 @@ namespace GHC
                     {
                         var ys9vq = wilds9vp_Cons.x0;
                         var yss9vr = wilds9vp_Cons.x1;
-                        var sats9vt = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9vt_Entry), gos9vn, yss9vr);
+                        var sat_Frees9vt = (gos9vn, yss9vr);
+                        var sats9vt = new Updatable<(Closure x0, Closure x1)>(&sats9vt_Entry, sat_Frees9vt);
                         var sats9vs = new GHC.Types.Cons(ys9vk, ys9vq);
                         return new GHC.Types.Cons(sats9vs, sats9vt);
                     }
             }
         }
-        public static Closure sats9vt_Entry(Closure gos9vn, Closure yss9vr)
+        public static Closure sats9vt_Entry(in (Closure x0, Closure x1) sat_Frees9vt)
         {
+            var gos9vn = sat_Frees9vt.x0;
+            var yss9vr = sat_Frees9vt.x1;
             return gos9vn.Apply<Closure, Closure>(yss9vr);
         }
-        public static Closure zs9vm_Entry(Closure gos9vh, Closure yss9vl)
+        public static Closure zs9vm_Entry(in (Closure x0, Closure x1) z_Frees9vm)
         {
+            var gos9vh = z_Frees9vm.x0;
+            var yss9vl = z_Frees9vm.x1;
             return gos9vh.Apply<Closure, Closure>(yss9vl);
         }
-        public static Closure yss9vg_Entry(Closure some_vs9vf)
+        public static Closure yss9vg_Entry(in Closure some_vs9vf)
         {
             return poly_gos9v7_Entry(some_vs9vf);
         }
@@ -1844,12 +2013,12 @@ namespace GHC
                     {
                         var ys9va = wilds9v9_Cons.x0;
                         var yss9vb = wilds9v9_Cons.x1;
-                        var sats9vc = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9vc_Entry), yss9vb);
+                        var sats9vc = new Updatable<Closure>(&sats9vc_Entry, yss9vb);
                         return new GHC.Types.Cons(ys9va, sats9vc);
                     }
             }
         }
-        public static Closure sats9vc_Entry(Closure yss9vb)
+        public static Closure sats9vc_Entry(in Closure yss9vb)
         {
             return poly_gos9v7_Entry(yss9vb);
         }
@@ -1867,60 +2036,64 @@ namespace GHC
         }
         public static Closure cLtDolls9uQ_Entry(Closure xs9uR, Closure etas9uS)
         {
-            var sats9uU = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9uU_Entry), xs9uR);
+            var sats9uU = new Fun1<Closure, Closure, Closure>(&sats9uU_Entry, xs9uR);
             return map_Entry(sats9uU, etas9uS);
         }
-        public static Closure sats9uU_Entry(Closure xs9uR, Closure dss9uT)
+        public static Closure sats9uU_Entry(in Closure xs9uR, Closure dss9uT)
         {
             return xs9uR.Eval();
         }
-        public static Closure dmLtDolls9uL_Entry(Closure dFunctors9uM, Closure etas9uN)
+        public static Closure dmLtDoll_Entry(Closure dFunctors9uM, Closure etas9uN)
         {
-            var sats9uP = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9uP_Entry), etas9uN);
+            var sats9uP = new Fun1<Closure, Closure, Closure>(&sats9uP_Entry, etas9uN);
             return GHC.Base.fmap_Entry(dFunctors9uM).Apply<Closure, Closure>(sats9uP);
         }
-        public static Closure sats9uP_Entry(Closure etas9uN, Closure dss9uO)
+        public static Closure sats9uP_Entry(in Closure etas9uN, Closure dss9uO)
         {
             return etas9uN.Eval();
         }
         public static Closure fMonoidDashGt_Entry(Closure dMonoids9uE)
         {
-            var lvls9uF = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(lvls9uF_Entry), dMonoids9uE);
-            var sats9uK = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9uK_Entry), dMonoids9uE);
-            var sats9uJ = new Fun<Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9uJ_Entry), dMonoids9uE);
-            var sats9uI = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9uI_Entry), lvls9uF);
-            var sats9uG = new Fun<Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9uG_Entry), dMonoids9uE);
+            var lvls9uF = new Updatable<Closure>(&lvls9uF_Entry, dMonoids9uE);
+            var sats9uK = new Fun2<Closure, Closure, Closure, Closure>(&sats9uK_Entry, dMonoids9uE);
+            var sats9uJ = new Fun3<Closure, Closure, Closure, Closure, Closure>(&sats9uJ_Entry, dMonoids9uE);
+            var sats9uI = new Fun1<Closure, Closure, Closure>(&sats9uI_Entry, lvls9uF);
+            var sats9uG = new Fun3<Closure, Closure, Closure, Closure, Closure>(&sats9uG_Entry, dMonoids9uE);
             return new GHC.Base.CColMonoid(sats9uG, sats9uI, sats9uJ, sats9uK);
         }
-        public static Closure sats9uG_Entry(Closure dMonoids9uE, Closure etaB3, Closure etaB2, Closure etaB1)
+        public static Closure sats9uG_Entry(in Closure dMonoids9uE, Closure etaB3, Closure etaB2, Closure etaB1)
         {
             return cp1Monoids9jh_Entry(dMonoids9uE, etaB3, etaB2, etaB1);
         }
-        public static Closure sats9uI_Entry(Closure lvls9uF, Closure dss9uH)
+        public static Closure sats9uI_Entry(in Closure lvls9uF, Closure dss9uH)
         {
             return lvls9uF.Eval();
         }
-        public static Closure sats9uJ_Entry(Closure dMonoids9uE, Closure etaB3, Closure etaB2, Closure etaB1)
+        public static Closure sats9uJ_Entry(in Closure dMonoids9uE, Closure etaB3, Closure etaB2, Closure etaB1)
         {
             return cp1Monoids9jh_Entry(dMonoids9uE, etaB3, etaB2, etaB1);
         }
-        public static Closure sats9uK_Entry(Closure dMonoids9uE, Closure etaB2, Closure etaB1)
+        public static Closure sats9uK_Entry(in Closure dMonoids9uE, Closure etaB2, Closure etaB1)
         {
             return cmconcats9uq_Entry(dMonoids9uE, etaB2, etaB1);
         }
-        public static Closure lvls9uF_Entry(Closure dMonoids9uE)
+        public static Closure lvls9uF_Entry(in Closure dMonoids9uE)
         {
             return GHC.Base.mempty_Entry(dMonoids9uE);
         }
         public static Closure cmconcats9uq_Entry(Closure dMonoids9ur, Closure etas9us, Closure etas9ut)
         {
-            var lvls9uu = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(lvls9uu_Entry), dMonoids9ur);
-            var gos9uv = new Fun<Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(gos9uv_Entry), dMonoids9ur, lvls9uu, null);
-            gos9uv.x2 = gos9uv;
+            var lvls9uu = new Updatable<Closure>(&lvls9uu_Entry, dMonoids9ur);
+            var go_Frees9uv = (dMonoids9ur, lvls9uu, (Closure)null);
+            var gos9uv = new Fun2<(Closure x0, Closure x1, Closure x2), Closure, Closure, Closure>(&gos9uv_Entry, go_Frees9uv);
+            gos9uv.free.x2 = gos9uv;
             return gos9uv.Apply<Closure, Closure, Closure>(etas9us, etas9ut);
         }
-        public static Closure gos9uv_Entry(Closure dMonoids9ur, Closure lvls9uu, Closure gos9uv, Closure dss9uw, Closure etas9ux)
+        public static Closure gos9uv_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees9uv, Closure dss9uw, Closure etas9ux)
         {
+            var dMonoids9ur = go_Frees9uv.x0;
+            var lvls9uu = go_Frees9uv.x1;
+            var gos9uv = go_Frees9uv.x2;
             var wilds9uy = dss9uw.Eval();
             switch (wilds9uy)
             {
@@ -1930,59 +2103,83 @@ namespace GHC
                     {
                         var ys9uz = wilds9uy_Cons.x0;
                         var yss9uA = wilds9uy_Cons.x1;
-                        var sats9uC = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9uC_Entry), gos9uv, etas9ux, yss9uA);
-                        var sats9uB = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9uB_Entry), etas9ux, ys9uz);
+                        var sat_Frees9uC = (gos9uv, etas9ux, yss9uA);
+                        var sats9uC = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9uC_Entry, sat_Frees9uC);
+                        var sat_Frees9uB = (etas9ux, ys9uz);
+                        var sats9uB = new Updatable<(Closure x0, Closure x1)>(&sats9uB_Entry, sat_Frees9uB);
                         return GHC.Base.p1Monoid_Entry(dMonoids9ur).Apply<Closure, Closure, Closure>(sats9uB, sats9uC);
                     }
             }
         }
-        public static Closure sats9uB_Entry(Closure etas9ux, Closure ys9uz)
+        public static Closure sats9uB_Entry(in (Closure x0, Closure x1) sat_Frees9uB)
         {
+            var etas9ux = sat_Frees9uB.x0;
+            var ys9uz = sat_Frees9uB.x1;
             return ys9uz.Apply<Closure, Closure>(etas9ux);
         }
-        public static Closure sats9uC_Entry(Closure gos9uv, Closure etas9ux, Closure yss9uA)
+        public static Closure sats9uC_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9uC)
         {
+            var gos9uv = sat_Frees9uC.x0;
+            var etas9ux = sat_Frees9uC.x1;
+            var yss9uA = sat_Frees9uC.x2;
             return gos9uv.Apply<Closure, Closure, Closure>(yss9uA, etas9ux);
         }
-        public static Closure lvls9uu_Entry(Closure dMonoids9ur)
+        public static Closure lvls9uu_Entry(in Closure dMonoids9ur)
         {
             return GHC.Base.mempty_Entry(dMonoids9ur);
         }
         public static Closure fMonoidPrOComPrC_Entry(Closure dMonoids9uk, Closure dMonoids9ul)
         {
-            var sats9up = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9up_Entry), dMonoids9uk, dMonoids9ul);
-            var sats9uo = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9uo_Entry), dMonoids9uk, dMonoids9ul);
-            var sats9un = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9un_Entry), dMonoids9uk, dMonoids9ul);
-            var sats9um = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9um_Entry), dMonoids9uk, dMonoids9ul);
+            var sat_Frees9up = (dMonoids9uk, dMonoids9ul);
+            var sats9up = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&sats9up_Entry, sat_Frees9up);
+            var sat_Frees9uo = (dMonoids9uk, dMonoids9ul);
+            var sats9uo = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&sats9uo_Entry, sat_Frees9uo);
+            var sat_Frees9un = (dMonoids9uk, dMonoids9ul);
+            var sats9un = new Updatable<(Closure x0, Closure x1)>(&sats9un_Entry, sat_Frees9un);
+            var sat_Frees9um = (dMonoids9uk, dMonoids9ul);
+            var sats9um = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&sats9um_Entry, sat_Frees9um);
             return new GHC.Base.CColMonoid(sats9um, sats9un, sats9uo, sats9up);
         }
-        public static Closure sats9um_Entry(Closure dMonoids9uk, Closure dMonoids9ul, Closure etaB2, Closure etaB1)
+        public static Closure sats9um_Entry(in (Closure x0, Closure x1) sat_Frees9um, Closure etaB2, Closure etaB1)
         {
+            var dMonoids9uk = sat_Frees9um.x0;
+            var dMonoids9ul = sat_Frees9um.x1;
             return cp1Monoids9jv_Entry(dMonoids9uk, dMonoids9ul, etaB2, etaB1);
         }
-        public static Closure sats9un_Entry(Closure dMonoids9uk, Closure dMonoids9ul)
+        public static Closure sats9un_Entry(in (Closure x0, Closure x1) sat_Frees9un)
         {
+            var dMonoids9uk = sat_Frees9un.x0;
+            var dMonoids9ul = sat_Frees9un.x1;
             return cmemptys9jq_Entry(dMonoids9uk, dMonoids9ul);
         }
-        public static Closure sats9uo_Entry(Closure dMonoids9uk, Closure dMonoids9ul, Closure etaB2, Closure etaB1)
+        public static Closure sats9uo_Entry(in (Closure x0, Closure x1) sat_Frees9uo, Closure etaB2, Closure etaB1)
         {
+            var dMonoids9uk = sat_Frees9uo.x0;
+            var dMonoids9ul = sat_Frees9uo.x1;
             return cp1Monoids9jv_Entry(dMonoids9uk, dMonoids9ul, etaB2, etaB1);
         }
-        public static Closure sats9up_Entry(Closure dMonoids9uk, Closure dMonoids9ul, Closure etaB1)
+        public static Closure sats9up_Entry(in (Closure x0, Closure x1) sat_Frees9up, Closure etaB1)
         {
+            var dMonoids9uk = sat_Frees9up.x0;
+            var dMonoids9ul = sat_Frees9up.x1;
             return cmconcats9tZ_Entry(dMonoids9uk, dMonoids9ul, etaB1);
         }
         public static Closure cmconcats9tZ_Entry(Closure dMonoids9u0, Closure dMonoids9u1, Closure etas9u2)
         {
-            var zs9u3 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9u3_Entry), dMonoids9u0);
-            var zs9u4 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9u4_Entry), dMonoids9u1);
+            var zs9u3 = new Updatable<Closure>(&zs9u3_Entry, dMonoids9u0);
+            var zs9u4 = new Updatable<Closure>(&zs9u4_Entry, dMonoids9u1);
             var zs9u5 = new GHC.Tuple.Tuple2(zs9u3, zs9u4);
-            var gos9u6 = new Fun<Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(gos9u6_Entry), dMonoids9u0, dMonoids9u1, zs9u5, null);
-            gos9u6.x3 = gos9u6;
+            var go_Frees9u6 = (dMonoids9u0, dMonoids9u1, zs9u5, (Closure)null);
+            var gos9u6 = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure>(&gos9u6_Entry, go_Frees9u6);
+            gos9u6.free.x3 = gos9u6;
             return gos9u6.Apply<Closure, Closure>(etas9u2);
         }
-        public static Closure gos9u6_Entry(Closure dMonoids9u0, Closure dMonoids9u1, Closure zs9u5, Closure gos9u6, Closure dss9u7)
+        public static Closure gos9u6_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) go_Frees9u6, Closure dss9u7)
         {
+            var dMonoids9u0 = go_Frees9u6.x0;
+            var dMonoids9u1 = go_Frees9u6.x1;
+            var zs9u5 = go_Frees9u6.x2;
+            var gos9u6 = go_Frees9u6.x3;
             var wilds9u8 = dss9u7.Eval();
             switch (wilds9u8)
             {
@@ -1996,68 +2193,98 @@ namespace GHC
                         var wilds9ub_Tuple2 = wilds9ub as GHC.Tuple.Tuple2;
                         var as9uc = wilds9ub_Tuple2.x0;
                         var bs9ud = wilds9ub_Tuple2.x1;
-                        var wilds9ue = gos9u6.Apply<Closure, Closure>(yss9ua).Eval();
+                        var wilds9ue = gos9u6.Apply<Closure, Closure>(yss9ua);
                         var wilds9ue_Tuple2 = wilds9ue as GHC.Tuple.Tuple2;
                         var a_s9uf = wilds9ue_Tuple2.x0;
                         var b_s9ug = wilds9ue_Tuple2.x1;
-                        var sats9ui = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9ui_Entry), dMonoids9u1, bs9ud, b_s9ug);
-                        var sats9uh = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9uh_Entry), dMonoids9u0, as9uc, a_s9uf);
+                        var sat_Frees9ui = (dMonoids9u1, bs9ud, b_s9ug);
+                        var sats9ui = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9ui_Entry, sat_Frees9ui);
+                        var sat_Frees9uh = (dMonoids9u0, as9uc, a_s9uf);
+                        var sats9uh = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9uh_Entry, sat_Frees9uh);
                         return new GHC.Tuple.Tuple2(sats9uh, sats9ui);
                     }
             }
         }
-        public static Closure sats9uh_Entry(Closure dMonoids9u0, Closure as9uc, Closure a_s9uf)
+        public static Closure sats9uh_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9uh)
         {
+            var dMonoids9u0 = sat_Frees9uh.x0;
+            var as9uc = sat_Frees9uh.x1;
+            var a_s9uf = sat_Frees9uh.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9u0).Apply<Closure, Closure, Closure>(as9uc, a_s9uf);
         }
-        public static Closure sats9ui_Entry(Closure dMonoids9u1, Closure bs9ud, Closure b_s9ug)
+        public static Closure sats9ui_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9ui)
         {
+            var dMonoids9u1 = sat_Frees9ui.x0;
+            var bs9ud = sat_Frees9ui.x1;
+            var b_s9ug = sat_Frees9ui.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9u1).Apply<Closure, Closure, Closure>(bs9ud, b_s9ug);
         }
-        public static Closure zs9u4_Entry(Closure dMonoids9u1)
+        public static Closure zs9u4_Entry(in Closure dMonoids9u1)
         {
             return GHC.Base.mempty_Entry(dMonoids9u1);
         }
-        public static Closure zs9u3_Entry(Closure dMonoids9u0)
+        public static Closure zs9u3_Entry(in Closure dMonoids9u0)
         {
             return GHC.Base.mempty_Entry(dMonoids9u0);
         }
         public static Closure fMonoidPrOComComPrC_Entry(Closure dMonoids9tS, Closure dMonoids9tT, Closure dMonoids9tU)
         {
-            var sats9tY = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9tY_Entry), dMonoids9tS, dMonoids9tT, dMonoids9tU);
-            var sats9tX = new Fun<Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9tX_Entry), dMonoids9tS, dMonoids9tT, dMonoids9tU);
-            var sats9tW = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9tW_Entry), dMonoids9tS, dMonoids9tT, dMonoids9tU);
-            var sats9tV = new Fun<Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9tV_Entry), dMonoids9tS, dMonoids9tT, dMonoids9tU);
+            var sat_Frees9tY = (dMonoids9tS, dMonoids9tT, dMonoids9tU);
+            var sats9tY = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&sats9tY_Entry, sat_Frees9tY);
+            var sat_Frees9tX = (dMonoids9tS, dMonoids9tT, dMonoids9tU);
+            var sats9tX = new Fun2<(Closure x0, Closure x1, Closure x2), Closure, Closure, Closure>(&sats9tX_Entry, sat_Frees9tX);
+            var sat_Frees9tW = (dMonoids9tS, dMonoids9tT, dMonoids9tU);
+            var sats9tW = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9tW_Entry, sat_Frees9tW);
+            var sat_Frees9tV = (dMonoids9tS, dMonoids9tT, dMonoids9tU);
+            var sats9tV = new Fun2<(Closure x0, Closure x1, Closure x2), Closure, Closure, Closure>(&sats9tV_Entry, sat_Frees9tV);
             return new GHC.Base.CColMonoid(sats9tV, sats9tW, sats9tX, sats9tY);
         }
-        public static Closure sats9tV_Entry(Closure dMonoids9tS, Closure dMonoids9tT, Closure dMonoids9tU, Closure etaB2, Closure etaB1)
+        public static Closure sats9tV_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9tV, Closure etaB2, Closure etaB1)
         {
+            var dMonoids9tS = sat_Frees9tV.x0;
+            var dMonoids9tT = sat_Frees9tV.x1;
+            var dMonoids9tU = sat_Frees9tV.x2;
             return cp1Monoids9jP_Entry(dMonoids9tS, dMonoids9tT, dMonoids9tU, etaB2, etaB1);
         }
-        public static Closure sats9tW_Entry(Closure dMonoids9tS, Closure dMonoids9tT, Closure dMonoids9tU)
+        public static Closure sats9tW_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9tW)
         {
+            var dMonoids9tS = sat_Frees9tW.x0;
+            var dMonoids9tT = sat_Frees9tW.x1;
+            var dMonoids9tU = sat_Frees9tW.x2;
             return cmemptys9jI_Entry(dMonoids9tS, dMonoids9tT, dMonoids9tU);
         }
-        public static Closure sats9tX_Entry(Closure dMonoids9tS, Closure dMonoids9tT, Closure dMonoids9tU, Closure etaB2, Closure etaB1)
+        public static Closure sats9tX_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9tX, Closure etaB2, Closure etaB1)
         {
+            var dMonoids9tS = sat_Frees9tX.x0;
+            var dMonoids9tT = sat_Frees9tX.x1;
+            var dMonoids9tU = sat_Frees9tX.x2;
             return cp1Monoids9jP_Entry(dMonoids9tS, dMonoids9tT, dMonoids9tU, etaB2, etaB1);
         }
-        public static Closure sats9tY_Entry(Closure dMonoids9tS, Closure dMonoids9tT, Closure dMonoids9tU, Closure etaB1)
+        public static Closure sats9tY_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9tY, Closure etaB1)
         {
+            var dMonoids9tS = sat_Frees9tY.x0;
+            var dMonoids9tT = sat_Frees9tY.x1;
+            var dMonoids9tU = sat_Frees9tY.x2;
             return cmconcats9ts_Entry(dMonoids9tS, dMonoids9tT, dMonoids9tU, etaB1);
         }
         public static Closure cmconcats9ts_Entry(Closure dMonoids9tt, Closure dMonoids9tu, Closure dMonoids9tv, Closure etas9tw)
         {
-            var zs9tx = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9tx_Entry), dMonoids9tt);
-            var zs9ty = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9ty_Entry), dMonoids9tu);
-            var zs9tz = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9tz_Entry), dMonoids9tv);
+            var zs9tx = new Updatable<Closure>(&zs9tx_Entry, dMonoids9tt);
+            var zs9ty = new Updatable<Closure>(&zs9ty_Entry, dMonoids9tu);
+            var zs9tz = new Updatable<Closure>(&zs9tz_Entry, dMonoids9tv);
             var zs9tA = new GHC.Tuple.Tuple3(zs9tx, zs9ty, zs9tz);
-            var gos9tB = new Fun<Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(gos9tB_Entry), dMonoids9tt, dMonoids9tu, dMonoids9tv, zs9tA, null);
-            gos9tB.x4 = gos9tB;
+            var go_Frees9tB = (dMonoids9tt, dMonoids9tu, dMonoids9tv, zs9tA, (Closure)null);
+            var gos9tB = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure>(&gos9tB_Entry, go_Frees9tB);
+            gos9tB.free.x4 = gos9tB;
             return gos9tB.Apply<Closure, Closure>(etas9tw);
         }
-        public static Closure gos9tB_Entry(Closure dMonoids9tt, Closure dMonoids9tu, Closure dMonoids9tv, Closure zs9tA, Closure gos9tB, Closure dss9tC)
+        public static Closure gos9tB_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) go_Frees9tB, Closure dss9tC)
         {
+            var dMonoids9tt = go_Frees9tB.x0;
+            var dMonoids9tu = go_Frees9tB.x1;
+            var dMonoids9tv = go_Frees9tB.x2;
+            var zs9tA = go_Frees9tB.x3;
+            var gos9tB = go_Frees9tB.x4;
             var wilds9tD = dss9tC.Eval();
             switch (wilds9tD)
             {
@@ -2072,79 +2299,118 @@ namespace GHC
                         var wws9tH = wws9tG_Tuple3.x0;
                         var wws9tI = wws9tG_Tuple3.x1;
                         var wws9tJ = wws9tG_Tuple3.x2;
-                        var wws9tK = gos9tB.Apply<Closure, Closure>(yss9tF).Eval();
+                        var wws9tK = gos9tB.Apply<Closure, Closure>(yss9tF);
                         var wws9tK_Tuple3 = wws9tK as GHC.Tuple.Tuple3;
                         var wws9tL = wws9tK_Tuple3.x0;
                         var wws9tM = wws9tK_Tuple3.x1;
                         var wws9tN = wws9tK_Tuple3.x2;
-                        var sats9tQ = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9tQ_Entry), dMonoids9tv, wws9tJ, wws9tN);
-                        var sats9tP = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9tP_Entry), dMonoids9tu, wws9tI, wws9tM);
-                        var sats9tO = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9tO_Entry), dMonoids9tt, wws9tH, wws9tL);
+                        var sat_Frees9tQ = (dMonoids9tv, wws9tJ, wws9tN);
+                        var sats9tQ = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9tQ_Entry, sat_Frees9tQ);
+                        var sat_Frees9tP = (dMonoids9tu, wws9tI, wws9tM);
+                        var sats9tP = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9tP_Entry, sat_Frees9tP);
+                        var sat_Frees9tO = (dMonoids9tt, wws9tH, wws9tL);
+                        var sats9tO = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9tO_Entry, sat_Frees9tO);
                         return new GHC.Tuple.Tuple3(sats9tO, sats9tP, sats9tQ);
                     }
             }
         }
-        public static Closure sats9tO_Entry(Closure dMonoids9tt, Closure wws9tH, Closure wws9tL)
+        public static Closure sats9tO_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9tO)
         {
+            var dMonoids9tt = sat_Frees9tO.x0;
+            var wws9tH = sat_Frees9tO.x1;
+            var wws9tL = sat_Frees9tO.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9tt).Apply<Closure, Closure, Closure>(wws9tH, wws9tL);
         }
-        public static Closure sats9tP_Entry(Closure dMonoids9tu, Closure wws9tI, Closure wws9tM)
+        public static Closure sats9tP_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9tP)
         {
+            var dMonoids9tu = sat_Frees9tP.x0;
+            var wws9tI = sat_Frees9tP.x1;
+            var wws9tM = sat_Frees9tP.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9tu).Apply<Closure, Closure, Closure>(wws9tI, wws9tM);
         }
-        public static Closure sats9tQ_Entry(Closure dMonoids9tv, Closure wws9tJ, Closure wws9tN)
+        public static Closure sats9tQ_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9tQ)
         {
+            var dMonoids9tv = sat_Frees9tQ.x0;
+            var wws9tJ = sat_Frees9tQ.x1;
+            var wws9tN = sat_Frees9tQ.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9tv).Apply<Closure, Closure, Closure>(wws9tJ, wws9tN);
         }
-        public static Closure zs9tz_Entry(Closure dMonoids9tv)
+        public static Closure zs9tz_Entry(in Closure dMonoids9tv)
         {
             return GHC.Base.mempty_Entry(dMonoids9tv);
         }
-        public static Closure zs9ty_Entry(Closure dMonoids9tu)
+        public static Closure zs9ty_Entry(in Closure dMonoids9tu)
         {
             return GHC.Base.mempty_Entry(dMonoids9tu);
         }
-        public static Closure zs9tx_Entry(Closure dMonoids9tt)
+        public static Closure zs9tx_Entry(in Closure dMonoids9tt)
         {
             return GHC.Base.mempty_Entry(dMonoids9tt);
         }
         public static Closure fMonoidPrOComComComPrC_Entry(Closure dMonoids9tk, Closure dMonoids9tl, Closure dMonoids9tm, Closure dMonoids9tn)
         {
-            var sats9tr = new Fun<Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9tr_Entry), dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
-            var sats9tq = new Fun<Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9tq_Entry), dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
-            var sats9tp = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats9tp_Entry), dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
-            var sats9to = new Fun<Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9to_Entry), dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
+            var sat_Frees9tr = (dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
+            var sats9tr = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure>(&sats9tr_Entry, sat_Frees9tr);
+            var sat_Frees9tq = (dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
+            var sats9tq = new Fun2<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure, Closure>(&sats9tq_Entry, sat_Frees9tq);
+            var sat_Frees9tp = (dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
+            var sats9tp = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats9tp_Entry, sat_Frees9tp);
+            var sat_Frees9to = (dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
+            var sats9to = new Fun2<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure, Closure>(&sats9to_Entry, sat_Frees9to);
             return new GHC.Base.CColMonoid(sats9to, sats9tp, sats9tq, sats9tr);
         }
-        public static Closure sats9to_Entry(Closure dMonoids9tk, Closure dMonoids9tl, Closure dMonoids9tm, Closure dMonoids9tn, Closure etaB2, Closure etaB1)
+        public static Closure sats9to_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9to, Closure etaB2, Closure etaB1)
         {
+            var dMonoids9tk = sat_Frees9to.x0;
+            var dMonoids9tl = sat_Frees9to.x1;
+            var dMonoids9tm = sat_Frees9to.x2;
+            var dMonoids9tn = sat_Frees9to.x3;
             return cp1Monoids9kf_Entry(dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn, etaB2, etaB1);
         }
-        public static Closure sats9tp_Entry(Closure dMonoids9tk, Closure dMonoids9tl, Closure dMonoids9tm, Closure dMonoids9tn)
+        public static Closure sats9tp_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9tp)
         {
+            var dMonoids9tk = sat_Frees9tp.x0;
+            var dMonoids9tl = sat_Frees9tp.x1;
+            var dMonoids9tm = sat_Frees9tp.x2;
+            var dMonoids9tn = sat_Frees9tp.x3;
             return cmemptys9k6_Entry(dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn);
         }
-        public static Closure sats9tq_Entry(Closure dMonoids9tk, Closure dMonoids9tl, Closure dMonoids9tm, Closure dMonoids9tn, Closure etaB2, Closure etaB1)
+        public static Closure sats9tq_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9tq, Closure etaB2, Closure etaB1)
         {
+            var dMonoids9tk = sat_Frees9tq.x0;
+            var dMonoids9tl = sat_Frees9tq.x1;
+            var dMonoids9tm = sat_Frees9tq.x2;
+            var dMonoids9tn = sat_Frees9tq.x3;
             return cp1Monoids9kf_Entry(dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn, etaB2, etaB1);
         }
-        public static Closure sats9tr_Entry(Closure dMonoids9tk, Closure dMonoids9tl, Closure dMonoids9tm, Closure dMonoids9tn, Closure etaB1)
+        public static Closure sats9tr_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees9tr, Closure etaB1)
         {
+            var dMonoids9tk = sat_Frees9tr.x0;
+            var dMonoids9tl = sat_Frees9tr.x1;
+            var dMonoids9tm = sat_Frees9tr.x2;
+            var dMonoids9tn = sat_Frees9tr.x3;
             return cmconcats9t2_Entry(dMonoids9tk, dMonoids9tl, dMonoids9tm, dMonoids9tn, etaB1);
         }
         public static Closure cmconcats9t2_Entry(Closure dMonoids9t3, Closure dMonoids9t4, Closure dMonoids9t5, Closure dMonoids9t6, Closure etas9t7)
         {
-            var zs9t8 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9t8_Entry), dMonoids9t3);
-            var zs9t9 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9t9_Entry), dMonoids9t4);
-            var zs9ta = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9ta_Entry), dMonoids9t5);
-            var zs9tb = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9tb_Entry), dMonoids9t6);
+            var zs9t8 = new Updatable<Closure>(&zs9t8_Entry, dMonoids9t3);
+            var zs9t9 = new Updatable<Closure>(&zs9t9_Entry, dMonoids9t4);
+            var zs9ta = new Updatable<Closure>(&zs9ta_Entry, dMonoids9t5);
+            var zs9tb = new Updatable<Closure>(&zs9tb_Entry, dMonoids9t6);
             var zs9tc = new GHC.Tuple.Tuple4(zs9t8, zs9t9, zs9ta, zs9tb);
-            var gos9td = new Fun<Closure, Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(gos9td_Entry), dMonoids9t3, dMonoids9t4, dMonoids9t5, dMonoids9t6, zs9tc, null);
-            gos9td.x5 = gos9td;
+            var go_Frees9td = (dMonoids9t3, dMonoids9t4, dMonoids9t5, dMonoids9t6, zs9tc, (Closure)null);
+            var gos9td = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5), Closure, Closure>(&gos9td_Entry, go_Frees9td);
+            gos9td.free.x5 = gos9td;
             return gos9td.Apply<Closure, Closure>(etas9t7);
         }
-        public static Closure gos9td_Entry(Closure dMonoids9t3, Closure dMonoids9t4, Closure dMonoids9t5, Closure dMonoids9t6, Closure zs9tc, Closure gos9td, Closure dss9te)
+        public static Closure gos9td_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) go_Frees9td, Closure dss9te)
         {
+            var dMonoids9t3 = go_Frees9td.x0;
+            var dMonoids9t4 = go_Frees9td.x1;
+            var dMonoids9t5 = go_Frees9td.x2;
+            var dMonoids9t6 = go_Frees9td.x3;
+            var zs9tc = go_Frees9td.x4;
+            var gos9td = go_Frees9td.x5;
             var wilds9tf = dss9te.Eval();
             switch (wilds9tf)
             {
@@ -2154,65 +2420,97 @@ namespace GHC
                     {
                         var ys9tg = wilds9tf_Cons.x0;
                         var yss9th = wilds9tf_Cons.x1;
-                        var sats9ti = gos9td.Apply<Closure, Closure>(yss9th).Eval();
+                        var sats9ti = gos9td.Apply<Closure, Closure>(yss9th);
                         return cp1Monoids9kf_Entry(dMonoids9t3, dMonoids9t4, dMonoids9t5, dMonoids9t6, ys9tg, sats9ti);
                     }
             }
         }
-        public static Closure zs9tb_Entry(Closure dMonoids9t6)
+        public static Closure zs9tb_Entry(in Closure dMonoids9t6)
         {
             return GHC.Base.mempty_Entry(dMonoids9t6);
         }
-        public static Closure zs9ta_Entry(Closure dMonoids9t5)
+        public static Closure zs9ta_Entry(in Closure dMonoids9t5)
         {
             return GHC.Base.mempty_Entry(dMonoids9t5);
         }
-        public static Closure zs9t9_Entry(Closure dMonoids9t4)
+        public static Closure zs9t9_Entry(in Closure dMonoids9t4)
         {
             return GHC.Base.mempty_Entry(dMonoids9t4);
         }
-        public static Closure zs9t8_Entry(Closure dMonoids9t3)
+        public static Closure zs9t8_Entry(in Closure dMonoids9t3)
         {
             return GHC.Base.mempty_Entry(dMonoids9t3);
         }
         public static Closure fMonoidPrOComComComComPrC_Entry(Closure dMonoids9sT, Closure dMonoids9sU, Closure dMonoids9sV, Closure dMonoids9sW, Closure dMonoids9sX)
         {
-            var sats9t1 = new Fun<Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9t1_Entry), dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
-            var sats9t0 = new Fun<Closure, Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9t0_Entry), dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
-            var sats9sZ = new Updatable<Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(sats9sZ_Entry), dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
-            var sats9sY = new Fun<Closure, Closure, Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats9sY_Entry), dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
+            var sat_Frees9t1 = (dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
+            var sats9t1 = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure>(&sats9t1_Entry, sat_Frees9t1);
+            var sat_Frees9t0 = (dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
+            var sats9t0 = new Fun2<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure, Closure>(&sats9t0_Entry, sat_Frees9t0);
+            var sat_Frees9sZ = (dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
+            var sats9sZ = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4)>(&sats9sZ_Entry, sat_Frees9sZ);
+            var sat_Frees9sY = (dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
+            var sats9sY = new Fun2<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4), Closure, Closure, Closure>(&sats9sY_Entry, sat_Frees9sY);
             return new GHC.Base.CColMonoid(sats9sY, sats9sZ, sats9t0, sats9t1);
         }
-        public static Closure sats9sY_Entry(Closure dMonoids9sT, Closure dMonoids9sU, Closure dMonoids9sV, Closure dMonoids9sW, Closure dMonoids9sX, Closure etaB2, Closure etaB1)
+        public static Closure sats9sY_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9sY, Closure etaB2, Closure etaB1)
         {
+            var dMonoids9sT = sat_Frees9sY.x0;
+            var dMonoids9sU = sat_Frees9sY.x1;
+            var dMonoids9sV = sat_Frees9sY.x2;
+            var dMonoids9sW = sat_Frees9sY.x3;
+            var dMonoids9sX = sat_Frees9sY.x4;
             return cp1Monoids9kL_Entry(dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX, etaB2, etaB1);
         }
-        public static Closure sats9sZ_Entry(Closure dMonoids9sT, Closure dMonoids9sU, Closure dMonoids9sV, Closure dMonoids9sW, Closure dMonoids9sX)
+        public static Closure sats9sZ_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9sZ)
         {
+            var dMonoids9sT = sat_Frees9sZ.x0;
+            var dMonoids9sU = sat_Frees9sZ.x1;
+            var dMonoids9sV = sat_Frees9sZ.x2;
+            var dMonoids9sW = sat_Frees9sZ.x3;
+            var dMonoids9sX = sat_Frees9sZ.x4;
             return cmemptys9kA_Entry(dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX);
         }
-        public static Closure sats9t0_Entry(Closure dMonoids9sT, Closure dMonoids9sU, Closure dMonoids9sV, Closure dMonoids9sW, Closure dMonoids9sX, Closure etaB2, Closure etaB1)
+        public static Closure sats9t0_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9t0, Closure etaB2, Closure etaB1)
         {
+            var dMonoids9sT = sat_Frees9t0.x0;
+            var dMonoids9sU = sat_Frees9t0.x1;
+            var dMonoids9sV = sat_Frees9t0.x2;
+            var dMonoids9sW = sat_Frees9t0.x3;
+            var dMonoids9sX = sat_Frees9t0.x4;
             return cp1Monoids9kL_Entry(dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX, etaB2, etaB1);
         }
-        public static Closure sats9t1_Entry(Closure dMonoids9sT, Closure dMonoids9sU, Closure dMonoids9sV, Closure dMonoids9sW, Closure dMonoids9sX, Closure etaB1)
+        public static Closure sats9t1_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) sat_Frees9t1, Closure etaB1)
         {
+            var dMonoids9sT = sat_Frees9t1.x0;
+            var dMonoids9sU = sat_Frees9t1.x1;
+            var dMonoids9sV = sat_Frees9t1.x2;
+            var dMonoids9sW = sat_Frees9t1.x3;
+            var dMonoids9sX = sat_Frees9t1.x4;
             return cmconcats9sz_Entry(dMonoids9sT, dMonoids9sU, dMonoids9sV, dMonoids9sW, dMonoids9sX, etaB1);
         }
         public static Closure cmconcats9sz_Entry(Closure dMonoids9sA, Closure dMonoids9sB, Closure dMonoids9sC, Closure dMonoids9sD, Closure dMonoids9sE, Closure etas9sF)
         {
-            var zs9sG = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9sG_Entry), dMonoids9sA);
-            var zs9sH = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9sH_Entry), dMonoids9sB);
-            var zs9sI = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9sI_Entry), dMonoids9sC);
-            var zs9sJ = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9sJ_Entry), dMonoids9sD);
-            var zs9sK = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9sK_Entry), dMonoids9sE);
+            var zs9sG = new Updatable<Closure>(&zs9sG_Entry, dMonoids9sA);
+            var zs9sH = new Updatable<Closure>(&zs9sH_Entry, dMonoids9sB);
+            var zs9sI = new Updatable<Closure>(&zs9sI_Entry, dMonoids9sC);
+            var zs9sJ = new Updatable<Closure>(&zs9sJ_Entry, dMonoids9sD);
+            var zs9sK = new Updatable<Closure>(&zs9sK_Entry, dMonoids9sE);
             var zs9sL = new GHC.Tuple.Tuple5(zs9sG, zs9sH, zs9sI, zs9sJ, zs9sK);
-            var gos9sM = new Fun<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure, Closure>(gos9sM_Entry), dMonoids9sA, dMonoids9sB, dMonoids9sC, dMonoids9sD, dMonoids9sE, zs9sL, null);
-            gos9sM.x6 = gos9sM;
+            var go_Frees9sM = (dMonoids9sA, dMonoids9sB, dMonoids9sC, dMonoids9sD, dMonoids9sE, zs9sL, (Closure)null);
+            var gos9sM = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5, Closure x6), Closure, Closure>(&gos9sM_Entry, go_Frees9sM);
+            gos9sM.free.x6 = gos9sM;
             return gos9sM.Apply<Closure, Closure>(etas9sF);
         }
-        public static Closure gos9sM_Entry(Closure dMonoids9sA, Closure dMonoids9sB, Closure dMonoids9sC, Closure dMonoids9sD, Closure dMonoids9sE, Closure zs9sL, Closure gos9sM, Closure dss9sN)
+        public static Closure gos9sM_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5, Closure x6) go_Frees9sM, Closure dss9sN)
         {
+            var dMonoids9sA = go_Frees9sM.x0;
+            var dMonoids9sB = go_Frees9sM.x1;
+            var dMonoids9sC = go_Frees9sM.x2;
+            var dMonoids9sD = go_Frees9sM.x3;
+            var dMonoids9sE = go_Frees9sM.x4;
+            var zs9sL = go_Frees9sM.x5;
+            var gos9sM = go_Frees9sM.x6;
             var wilds9sO = dss9sN.Eval();
             switch (wilds9sO)
             {
@@ -2222,28 +2520,28 @@ namespace GHC
                     {
                         var ys9sP = wilds9sO_Cons.x0;
                         var yss9sQ = wilds9sO_Cons.x1;
-                        var sats9sR = gos9sM.Apply<Closure, Closure>(yss9sQ).Eval();
+                        var sats9sR = gos9sM.Apply<Closure, Closure>(yss9sQ);
                         return cp1Monoids9kL_Entry(dMonoids9sA, dMonoids9sB, dMonoids9sC, dMonoids9sD, dMonoids9sE, ys9sP, sats9sR);
                     }
             }
         }
-        public static Closure zs9sK_Entry(Closure dMonoids9sE)
+        public static Closure zs9sK_Entry(in Closure dMonoids9sE)
         {
             return GHC.Base.mempty_Entry(dMonoids9sE);
         }
-        public static Closure zs9sJ_Entry(Closure dMonoids9sD)
+        public static Closure zs9sJ_Entry(in Closure dMonoids9sD)
         {
             return GHC.Base.mempty_Entry(dMonoids9sD);
         }
-        public static Closure zs9sI_Entry(Closure dMonoids9sC)
+        public static Closure zs9sI_Entry(in Closure dMonoids9sC)
         {
             return GHC.Base.mempty_Entry(dMonoids9sC);
         }
-        public static Closure zs9sH_Entry(Closure dMonoids9sB)
+        public static Closure zs9sH_Entry(in Closure dMonoids9sB)
         {
             return GHC.Base.mempty_Entry(dMonoids9sB);
         }
-        public static Closure zs9sG_Entry(Closure dMonoids9sA)
+        public static Closure zs9sG_Entry(in Closure dMonoids9sA)
         {
             return GHC.Base.mempty_Entry(dMonoids9sA);
         }
@@ -2287,31 +2585,34 @@ namespace GHC
         }
         public static Closure fMonoidMaybe_Entry(Closure dSemigroups9so)
         {
-            var sats9sr = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9sr_Entry), dSemigroups9so);
-            var sats9sq = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9sq_Entry), dSemigroups9so);
-            var sats9sp = new Fun<Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9sp_Entry), dSemigroups9so);
+            var sats9sr = new Fun1<Closure, Closure, Closure>(&sats9sr_Entry, dSemigroups9so);
+            var sats9sq = new Fun2<Closure, Closure, Closure, Closure>(&sats9sq_Entry, dSemigroups9so);
+            var sats9sp = new Fun2<Closure, Closure, Closure, Closure>(&sats9sp_Entry, dSemigroups9so);
             return new GHC.Base.CColMonoid(sats9sp, GHC.Maybe.nothing_DataCon, sats9sq, sats9sr);
         }
-        public static Closure sats9sp_Entry(Closure dSemigroups9so, Closure etaB2, Closure etaB1)
+        public static Closure sats9sp_Entry(in Closure dSemigroups9so, Closure etaB2, Closure etaB1)
         {
             return cLtGts9iZ_Entry(dSemigroups9so, etaB2, etaB1);
         }
-        public static Closure sats9sq_Entry(Closure dSemigroups9so, Closure etaB2, Closure etaB1)
+        public static Closure sats9sq_Entry(in Closure dSemigroups9so, Closure etaB2, Closure etaB1)
         {
             return cLtGts9iZ_Entry(dSemigroups9so, etaB2, etaB1);
         }
-        public static Closure sats9sr_Entry(Closure dSemigroups9so, Closure etaB1)
+        public static Closure sats9sr_Entry(in Closure dSemigroups9so, Closure etaB1)
         {
             return cmconcats9sa_Entry(dSemigroups9so, etaB1);
         }
         public static Closure cmconcats9sa_Entry(Closure dSemigroups9sb, Closure etas9sc)
         {
-            var gos9sd = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos9sd_Entry), dSemigroups9sb, null);
-            gos9sd.x1 = gos9sd;
+            var go_Frees9sd = (dSemigroups9sb, (Closure)null);
+            var gos9sd = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos9sd_Entry, go_Frees9sd);
+            gos9sd.free.x1 = gos9sd;
             return gos9sd.Apply<Closure, Closure>(etas9sc);
         }
-        public static Closure gos9sd_Entry(Closure dSemigroups9sb, Closure gos9sd, Closure dss9se)
+        public static Closure gos9sd_Entry(in (Closure x0, Closure x1) go_Frees9sd, Closure dss9se)
         {
+            var dSemigroups9sb = go_Frees9sd.x0;
+            var gos9sd = go_Frees9sd.x1;
             var wilds9sf = dss9se.Eval();
             switch (wilds9sf)
             {
@@ -2335,7 +2636,7 @@ namespace GHC
                             case GHC.Maybe.Just wilds9si_Just:
                                 {
                                     var ipvs9sj = wilds9si_Just.x0;
-                                    var wilds9sk = gos9sd.Apply<Closure, Closure>(yss9sh).Eval();
+                                    var wilds9sk = gos9sd.Apply<Closure, Closure>(yss9sh);
                                     switch (wilds9sk)
                                     {
                                         default: { throw new ImpossibleException(); }
@@ -2346,7 +2647,8 @@ namespace GHC
                                         case GHC.Maybe.Just wilds9sk_Just:
                                             {
                                                 var ipvs9sl = wilds9sk_Just.x0;
-                                                var sats9sm = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9sm_Entry), dSemigroups9sb, ipvs9sj, ipvs9sl);
+                                                var sat_Frees9sm = (dSemigroups9sb, ipvs9sj, ipvs9sl);
+                                                var sats9sm = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9sm_Entry, sat_Frees9sm);
                                                 return new GHC.Maybe.Just(sats9sm);
                                             }
                                     }
@@ -2355,19 +2657,26 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats9sm_Entry(Closure dSemigroups9sb, Closure ipvs9sj, Closure ipvs9sl)
+        public static Closure sats9sm_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9sm)
         {
+            var dSemigroups9sb = sat_Frees9sm.x0;
+            var ipvs9sj = sat_Frees9sm.x1;
+            var ipvs9sl = sat_Frees9sm.x2;
             return dSemigroups9sb.Apply<Closure, Closure, Closure>(ipvs9sj, ipvs9sl);
         }
-        public static Closure dmmconcats9s0_Entry(Closure dMonoids9s1, Closure etas9s2)
+        public static Closure dmmconcat_Entry(Closure dMonoids9s1, Closure etas9s2)
         {
-            var zs9s3 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9s3_Entry), dMonoids9s1);
-            var gos9s4 = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos9s4_Entry), dMonoids9s1, zs9s3, null);
-            gos9s4.x2 = gos9s4;
+            var zs9s3 = new Updatable<Closure>(&zs9s3_Entry, dMonoids9s1);
+            var go_Frees9s4 = (dMonoids9s1, zs9s3, (Closure)null);
+            var gos9s4 = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos9s4_Entry, go_Frees9s4);
+            gos9s4.free.x2 = gos9s4;
             return gos9s4.Apply<Closure, Closure>(etas9s2);
         }
-        public static Closure gos9s4_Entry(Closure dMonoids9s1, Closure zs9s3, Closure gos9s4, Closure dss9s5)
+        public static Closure gos9s4_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees9s4, Closure dss9s5)
         {
+            var dMonoids9s1 = go_Frees9s4.x0;
+            var zs9s3 = go_Frees9s4.x1;
+            var gos9s4 = go_Frees9s4.x2;
             var wilds9s6 = dss9s5.Eval();
             switch (wilds9s6)
             {
@@ -2377,16 +2686,19 @@ namespace GHC
                     {
                         var ys9s7 = wilds9s6_Cons.x0;
                         var yss9s8 = wilds9s6_Cons.x1;
-                        var sats9s9 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9s9_Entry), gos9s4, yss9s8);
+                        var sat_Frees9s9 = (gos9s4, yss9s8);
+                        var sats9s9 = new Updatable<(Closure x0, Closure x1)>(&sats9s9_Entry, sat_Frees9s9);
                         return GHC.Base.mappend_Entry(dMonoids9s1).Apply<Closure, Closure, Closure>(ys9s7, sats9s9);
                     }
             }
         }
-        public static Closure sats9s9_Entry(Closure gos9s4, Closure yss9s8)
+        public static Closure sats9s9_Entry(in (Closure x0, Closure x1) sat_Frees9s9)
         {
+            var gos9s4 = sat_Frees9s9.x0;
+            var yss9s8 = sat_Frees9s9.x1;
             return gos9s4.Apply<Closure, Closure>(yss9s8);
         }
-        public static Closure zs9s3_Entry(Closure dMonoids9s1)
+        public static Closure zs9s3_Entry(in Closure dMonoids9s1)
         {
             return GHC.Base.mempty_Entry(dMonoids9s1);
         }
@@ -2396,13 +2708,18 @@ namespace GHC
         }
         public static Closure mapM_Entry(Closure dMonads9rI, Closure etas9rJ, Closure etas9rK)
         {
-            var zs9rL = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(zs9rL_Entry), dMonads9rI);
-            var gos9rM = new Fun<Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(gos9rM_Entry), dMonads9rI, etas9rJ, zs9rL, null);
-            gos9rM.x3 = gos9rM;
+            var zs9rL = new Updatable<Closure>(&zs9rL_Entry, dMonads9rI);
+            var go_Frees9rM = (dMonads9rI, etas9rJ, zs9rL, (Closure)null);
+            var gos9rM = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure>(&gos9rM_Entry, go_Frees9rM);
+            gos9rM.free.x3 = gos9rM;
             return gos9rM.Apply<Closure, Closure>(etas9rK);
         }
-        public static Closure gos9rM_Entry(Closure dMonads9rI, Closure etas9rJ, Closure zs9rL, Closure gos9rM, Closure dss9rN)
+        public static Closure gos9rM_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) go_Frees9rM, Closure dss9rN)
         {
+            var dMonads9rI = go_Frees9rM.x0;
+            var etas9rJ = go_Frees9rM.x1;
+            var zs9rL = go_Frees9rM.x2;
+            var gos9rM = go_Frees9rM.x3;
             var wilds9rO = dss9rN.Eval();
             switch (wilds9rO)
             {
@@ -2412,32 +2729,44 @@ namespace GHC
                     {
                         var ys9rP = wilds9rO_Cons.x0;
                         var yss9rQ = wilds9rO_Cons.x1;
-                        var rs9rR = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(rs9rR_Entry), gos9rM, yss9rQ);
-                        var sats9rX = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9rX_Entry), dMonads9rI, rs9rR);
-                        var sats9rS = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9rS_Entry), etas9rJ, ys9rP);
+                        var r_Frees9rR = (gos9rM, yss9rQ);
+                        var rs9rR = new Updatable<(Closure x0, Closure x1)>(&rs9rR_Entry, r_Frees9rR);
+                        var sat_Frees9rX = (dMonads9rI, rs9rR);
+                        var sats9rX = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&sats9rX_Entry, sat_Frees9rX);
+                        var sat_Frees9rS = (etas9rJ, ys9rP);
+                        var sats9rS = new Updatable<(Closure x0, Closure x1)>(&sats9rS_Entry, sat_Frees9rS);
                         return GHC.Base.gtGtEq_Entry(dMonads9rI).Apply<Closure, Closure, Closure>(sats9rS, sats9rX);
                     }
             }
         }
-        public static Closure sats9rS_Entry(Closure etas9rJ, Closure ys9rP)
+        public static Closure sats9rS_Entry(in (Closure x0, Closure x1) sat_Frees9rS)
         {
+            var etas9rJ = sat_Frees9rS.x0;
+            var ys9rP = sat_Frees9rS.x1;
             return etas9rJ.Apply<Closure, Closure>(ys9rP);
         }
-        public static Closure sats9rX_Entry(Closure dMonads9rI, Closure rs9rR, Closure xs9rT)
+        public static Closure sats9rX_Entry(in (Closure x0, Closure x1) sat_Frees9rX, Closure xs9rT)
         {
-            var sats9rW = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9rW_Entry), dMonads9rI, xs9rT);
+            var dMonads9rI = sat_Frees9rX.x0;
+            var rs9rR = sat_Frees9rX.x1;
+            var sat_Frees9rW = (dMonads9rI, xs9rT);
+            var sats9rW = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&sats9rW_Entry, sat_Frees9rW);
             return GHC.Base.gtGtEq_Entry(dMonads9rI).Apply<Closure, Closure, Closure>(rs9rR, sats9rW);
         }
-        public static Closure sats9rW_Entry(Closure dMonads9rI, Closure xs9rT, Closure xss9rU)
+        public static Closure sats9rW_Entry(in (Closure x0, Closure x1) sat_Frees9rW, Closure xss9rU)
         {
+            var dMonads9rI = sat_Frees9rW.x0;
+            var xs9rT = sat_Frees9rW.x1;
             var sats9rV = new GHC.Types.Cons(xs9rT, xss9rU);
             return GHC.Base.@return_Entry(dMonads9rI).Apply<Closure, Closure>(sats9rV);
         }
-        public static Closure rs9rR_Entry(Closure gos9rM, Closure yss9rQ)
+        public static Closure rs9rR_Entry(in (Closure x0, Closure x1) r_Frees9rR)
         {
+            var gos9rM = r_Frees9rR.x0;
+            var yss9rQ = r_Frees9rR.x1;
             return gos9rM.Apply<Closure, Closure>(yss9rQ);
         }
-        public static Closure zs9rL_Entry(Closure dMonads9rI)
+        public static Closure zs9rL_Entry(in Closure dMonads9rI)
         {
             return GHC.Base.@return_Entry(dMonads9rI).Apply<Closure, Closure>(GHC.Types.nil_DataCon);
         }
@@ -2456,7 +2785,8 @@ namespace GHC
                     {
                         var xs9rw = wilds9rv_Cons.x0;
                         var xss9rx = wilds9rv_Cons.x1;
-                        var sats9rE = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9rE_Entry), yss9ru, xss9rx);
+                        var sat_Frees9rE = (yss9ru, xss9rx);
+                        var sats9rE = new Updatable<(Closure x0, Closure x1)>(&sats9rE_Entry, sat_Frees9rE);
                         return new GHC.Types.Cons(xs9rw, sats9rE);
                     }
             }
@@ -2465,14 +2795,19 @@ namespace GHC
         {
             return plusPlus_Entry(new GHC.Types.Cons(h, t), xs); //TODO check if this works
         }
-        public static Closure sats9rE_Entry(Closure yss9ru, Closure xss9rx)
+        public static Closure sats9rE_Entry(in (Closure x0, Closure x1) sat_Frees9rE)
         {
-            var gos9ry = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos9ry_Entry), yss9ru, null);
-            gos9ry.x1 = gos9ry;
+            var yss9ru = sat_Frees9rE.x0;
+            var xss9rx = sat_Frees9rE.x1;
+            var go_Frees9ry = (yss9ru, (Closure)null);
+            var gos9ry = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos9ry_Entry, go_Frees9ry);
+            gos9ry.free.x1 = gos9ry;
             return gos9ry.Apply<Closure, Closure>(xss9rx);
         }
-        public static Closure gos9ry_Entry(Closure yss9ru, Closure gos9ry, Closure dss9rz)
+        public static Closure gos9ry_Entry(in (Closure x0, Closure x1) go_Frees9ry, Closure dss9rz)
         {
+            var yss9ru = go_Frees9ry.x0;
+            var gos9ry = go_Frees9ry.x1;
             var wilds9rA = dss9rz.Eval();
             switch (wilds9rA)
             {
@@ -2482,13 +2817,16 @@ namespace GHC
                     {
                         var ys9rB = wilds9rA_Cons.x0;
                         var yss9rC = wilds9rA_Cons.x1;
-                        var sats9rD = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9rD_Entry), gos9ry, yss9rC);
+                        var sat_Frees9rD = (gos9ry, yss9rC);
+                        var sats9rD = new Updatable<(Closure x0, Closure x1)>(&sats9rD_Entry, sat_Frees9rD);
                         return new GHC.Types.Cons(ys9rB, sats9rD);
                     }
             }
         }
-        public static Closure sats9rD_Entry(Closure gos9ry, Closure yss9rC)
+        public static Closure sats9rD_Entry(in (Closure x0, Closure x1) sat_Frees9rD)
         {
+            var gos9ry = sat_Frees9rD.x0;
+            var yss9rC = sat_Frees9rD.x1;
             return gos9ry.Apply<Closure, Closure>(yss9rC);
         }
         public static Closure map_Entry(Closure dss9rl, Closure dss9rm)
@@ -2505,28 +2843,37 @@ namespace GHC
                     {
                         var xs9ro = wilds9rn_Cons.x0;
                         var xss9rp = wilds9rn_Cons.x1;
-                        var sats9rr = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9rr_Entry), dss9rl, xss9rp);
-                        var sats9rq = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9rq_Entry), dss9rl, xs9ro);
+                        var sat_Frees9rr = (dss9rl, xss9rp);
+                        var sats9rr = new Updatable<(Closure x0, Closure x1)>(&sats9rr_Entry, sat_Frees9rr);
+                        var sat_Frees9rq = (dss9rl, xs9ro);
+                        var sats9rq = new Updatable<(Closure x0, Closure x1)>(&sats9rq_Entry, sat_Frees9rq);
                         return new GHC.Types.Cons(sats9rq, sats9rr);
                     }
             }
         }
-        public static Closure sats9rq_Entry(Closure dss9rl, Closure xs9ro)
+        public static Closure sats9rq_Entry(in (Closure x0, Closure x1) sat_Frees9rq)
         {
+            var dss9rl = sat_Frees9rq.x0;
+            var xs9ro = sat_Frees9rq.x1;
             return dss9rl.Apply<Closure, Closure>(xs9ro);
         }
-        public static Closure sats9rr_Entry(Closure dss9rl, Closure xss9rp)
+        public static Closure sats9rr_Entry(in (Closure x0, Closure x1) sat_Frees9rr)
         {
-            return map_Entry(dss9rl, xss9rp);
+            var dss9rl = sat_Frees9rr.x0;
+            var xss9rp = sat_Frees9rr.x1; return map_Entry(dss9rl, xss9rp);
         }
         public static Closure foldr_Entry(Closure ks9rc, Closure zs9rd, Closure etas9re)
         {
-            var gos9rf = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos9rf_Entry), ks9rc, zs9rd, null);
-            gos9rf.x2 = gos9rf;
+            var go_Frees9rf = (ks9rc, zs9rd, (Closure)null);
+            var gos9rf = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos9rf_Entry, go_Frees9rf);
+            gos9rf.free.x2 = gos9rf;
             return gos9rf.Apply<Closure, Closure>(etas9re);
         }
-        public static Closure gos9rf_Entry(Closure ks9rc, Closure zs9rd, Closure gos9rf, Closure dss9rg)
+        public static Closure gos9rf_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees9rf, Closure dss9rg)
         {
+            var ks9rc = go_Frees9rf.x0;
+            var zs9rd = go_Frees9rf.x1;
+            var gos9rf = go_Frees9rf.x2;
             var wilds9rh = dss9rg.Eval();
             switch (wilds9rh)
             {
@@ -2536,34 +2883,43 @@ namespace GHC
                     {
                         var ys9ri = wilds9rh_Cons.x0;
                         var yss9rj = wilds9rh_Cons.x1;
-                        var sats9rk = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9rk_Entry), gos9rf, yss9rj);
+                        var sat_Frees9rk = (gos9rf, yss9rj);
+                        var sats9rk = new Updatable<(Closure x0, Closure x1)>(&sats9rk_Entry, sat_Frees9rk);
                         return ks9rc.Apply<Closure, Closure, Closure>(ys9ri, sats9rk);
                     }
             }
         }
-        public static Closure sats9rk_Entry(Closure gos9rf, Closure yss9rj)
+        public static Closure sats9rk_Entry(in (Closure x0, Closure x1) sat_Frees9rk)
         {
+            var gos9rf = sat_Frees9rk.x0;
+            var yss9rj = sat_Frees9rk.x1;
             return gos9rf.Apply<Closure, Closure>(yss9rj);
         }
         public static Closure mapFB_Entry(Closure cs9r5, Closure fs9r6, Closure xs9r7, Closure yss9r8)
         {
-            var sats9r9 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9r9_Entry), fs9r6, xs9r7);
+            var sat_Frees9r9 = (fs9r6, xs9r7);
+            var sats9r9 = new Updatable<(Closure x0, Closure x1)>(&sats9r9_Entry, sat_Frees9r9);
             return cs9r5.Apply<Closure, Closure, Closure>(sats9r9, yss9r8);
         }
-        public static Closure sats9r9_Entry(Closure fs9r6, Closure xs9r7)
+        public static Closure sats9r9_Entry(in (Closure x0, Closure x1) sat_Frees9r9)
         {
+            var fs9r6 = sat_Frees9r9.x0;
+            var xs9r7 = sat_Frees9r9.x1;
             return fs9r6.Apply<Closure, Closure>(xs9r7);
         }
         public static Closure dot_Entry(Closure fs9r0, Closure gs9r1, Closure xs9r2)
         {
-            var sats9r3 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9r3_Entry), gs9r1, xs9r2);
+            var sat_Frees9r3 = (gs9r1, xs9r2);
+            var sats9r3 = new Updatable<(Closure x0, Closure x1)>(&sats9r3_Entry, sat_Frees9r3);
             return fs9r0.Apply<Closure, Closure>(sats9r3);
         }
-        public static Closure sats9r3_Entry(Closure gs9r1, Closure xs9r2)
+        public static Closure sats9r3_Entry(in (Closure x0, Closure x1) sat_Frees9r3)
         {
+            var gs9r1 = sat_Frees9r3.x0;
+            var xs9r2 = sat_Frees9r3.x1;
             return gs9r1.Apply<Closure, Closure>(xs9r2);
         }
-        public static Closure dmLtAstrs9qX_Entry(Closure dApplicatives9qY)
+        public static Closure dmLtAstr_Entry(Closure dApplicatives9qY)
         {
             return GHC.Base.liftA2_Entry(dApplicatives9qY).Apply<Closure, Closure>(GHC.Base.@const);
         }
@@ -2587,17 +2943,20 @@ namespace GHC
         {
             return rs9qQ.Eval();
         }
-        public static Closure dmAstrGts9qI_Entry(Closure dApplicatives9qJ, Closure etas9qK, Closure etas9qL)
+        public static Closure dmAstrGt_Entry(Closure dApplicatives9qJ, Closure etas9qK, Closure etas9qL)
         {
-            var sats9qN = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9qN_Entry), dApplicatives9qJ, etas9qK);
+            var sat_Frees9qN = (dApplicatives9qJ, etas9qK);
+            var sats9qN = new Updatable<(Closure x0, Closure x1)>(&sats9qN_Entry, sat_Frees9qN);
             return GHC.Base.ltAstrGt_Entry(dApplicatives9qJ).Apply<Closure, Closure, Closure>(sats9qN, etas9qL);
         }
-        public static Closure sats9qN_Entry(Closure dApplicatives9qJ, Closure etas9qK)
+        public static Closure sats9qN_Entry(in (Closure x0, Closure x1) sat_Frees9qN)
         {
-            var sats9qM = GHC.Base.p1Applicative_Entry(dApplicatives9qJ).Eval();
+            var dApplicatives9qJ = sat_Frees9qN.x0;
+            var etas9qK = sat_Frees9qN.x1;
+            var sats9qM = GHC.Base.p1Applicative_Entry(dApplicatives9qJ);
             return GHC.Base.ltDoll_Entry(sats9qM).Apply<Closure, Closure, Closure>(GHC.Base.id, etas9qK);
         }
-        public static Closure dmLtAstrGts9qG_Entry(Closure dApplicatives9qH)
+        public static Closure dmLtAstrGt_Entry(Closure dApplicatives9qH)
         {
             return GHC.Base.liftA2_Entry(dApplicatives9qH).Apply<Closure, Closure>(GHC.Base.id);
         }
@@ -2889,13 +3248,17 @@ namespace GHC
         }
         public static Closure until_Entry(Closure ps9oz, Closure fs9oA, Closure etas9oB)
         {
-            var gos9oC = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos9oC_Entry), ps9oz, fs9oA, null);
-            gos9oC.x2 = gos9oC;
+            var go_Frees9oC = (ps9oz, fs9oA, (Closure)null);
+            var gos9oC = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos9oC_Entry, go_Frees9oC);
+            gos9oC.free.x2 = gos9oC;
             return gos9oC.Apply<Closure, Closure>(etas9oB);
         }
-        public static Closure gos9oC_Entry(Closure ps9oz, Closure fs9oA, Closure gos9oC, Closure xs9oD)
+        public static Closure gos9oC_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees9oC, Closure xs9oD)
         {
-            var wilds9oE = ps9oz.Apply<Closure, Closure>(xs9oD).Eval();
+            var ps9oz = go_Frees9oC.x0;
+            var fs9oA = go_Frees9oC.x1;
+            var gos9oC = go_Frees9oC.x2;
+            var wilds9oE = ps9oz.Apply<Closure, Closure>(xs9oD);
             var wilds9oETags9oE = wilds9oE.Tag;
             switch (wilds9oETags9oE)
             {
@@ -2903,7 +3266,8 @@ namespace GHC
                 case 1:
                     {
                         var wilds9oE_False = wilds9oE as GHC.Types.False;
-                        var sats9oF = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9oF_Entry), fs9oA, xs9oD);
+                        var sat_Frees9oF = (fs9oA, xs9oD);
+                        var sats9oF = new Updatable<(Closure x0, Closure x1)>(&sats9oF_Entry, sat_Frees9oF);
                         return gos9oC.Apply<Closure, Closure>(sats9oF);
                     }
                 case 2:
@@ -2913,8 +3277,10 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats9oF_Entry(Closure fs9oA, Closure xs9oD)
+        public static Closure sats9oF_Entry(in (Closure x0, Closure x1) sat_Frees9oF)
         {
+            var fs9oA = sat_Frees9oF.x0;
+            var xs9oD = sat_Frees9oF.x1;
             return fs9oA.Apply<Closure, Closure>(xs9oD);
         }
         public static Closure augment_Entry(Closure gs9ov, Closure xss9ow)
@@ -2952,28 +3318,36 @@ namespace GHC
                     }
             }
         }
-        public static Closure dmmappends9og_Entry(Closure etaB1)
+        public static Closure dmmappend_Entry(Closure etaB1)
         {
             return GHC.Base.p1Monoid_Entry(etaB1);
         }
-        public static Closure dmliftA2s9oa_Entry(Closure dApplicatives9ob, Closure etas9oc, Closure etas9od)
+        public static Closure dmliftA2_Entry(Closure dApplicatives9ob, Closure etas9oc, Closure etas9od)
         {
-            var sats9of = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9of_Entry), dApplicatives9ob, etas9oc, etas9od);
+            var sat_Frees9of = (dApplicatives9ob, etas9oc, etas9od);
+            var sats9of = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9of_Entry, sat_Frees9of);
             return GHC.Base.ltAstrGt_Entry(dApplicatives9ob).Apply<Closure, Closure>(sats9of);
         }
-        public static Closure sats9of_Entry(Closure dApplicatives9ob, Closure etas9oc, Closure etas9od)
+        public static Closure sats9of_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9of)
         {
-            var sats9oe = GHC.Base.p1Applicative_Entry(dApplicatives9ob).Eval();
+            var dApplicatives9ob = sat_Frees9of.x0;
+            var etas9oc = sat_Frees9of.x1;
+            var etas9od = sat_Frees9of.x2;
+            var sats9oe = GHC.Base.p1Applicative_Entry(dApplicatives9ob);
             return GHC.Base.fmap_Entry(sats9oe).Apply<Closure, Closure, Closure>(etas9oc, etas9od);
         }
-        public static Closure dmsomes9nX_Entry(Closure dAlternatives9nY, Closure etas9nZ)
+        public static Closure dmsome_Entry(Closure dAlternatives9nY, Closure etas9nZ)
         {
-            var some_vs9o0 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(some_vs9o0_Entry), dAlternatives9nY, etas9nZ, null);
-            some_vs9o0.x2 = some_vs9o0; return some_vs9o0.Eval();
+            var some_v_Frees9o0 = (dAlternatives9nY, etas9nZ, (Closure)null);
+            var some_vs9o0 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&some_vs9o0_Entry, some_v_Frees9o0);
+            some_vs9o0.free.x2 = some_vs9o0; return some_vs9o0.Eval();
         }
-        public static Closure some_vs9o0_Entry(Closure dAlternatives9nY, Closure etas9nZ, Closure some_vs9o0)
+        public static Closure some_vs9o0_Entry(in (Closure x0, Closure x1, Closure x2) some_v_Frees9o0)
         {
-            var wws9o1 = GHC.Base.p1Alternative_Entry(dAlternatives9nY).Eval();
+            var dAlternatives9nY = some_v_Frees9o0.x0;
+            var etas9nZ = some_v_Frees9o0.x1;
+            var some_vs9o0 = some_v_Frees9o0.x2;
+            var wws9o1 = GHC.Base.p1Alternative_Entry(dAlternatives9nY);
             var wws9o1_CColApplicative = wws9o1 as GHC.Base.CColApplicative;
             var wws9o2 = wws9o1_CColApplicative.x0;
             var wws9o3 = wws9o1_CColApplicative.x1;
@@ -2981,78 +3355,93 @@ namespace GHC
             var wws9o5 = wws9o1_CColApplicative.x3;
             var wws9o6 = wws9o1_CColApplicative.x4;
             var wws9o7 = wws9o1_CColApplicative.x5;
-            var sats9o9 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9o9_Entry), dAlternatives9nY, some_vs9o0, wws9o3);
+            var sat_Frees9o9 = (dAlternatives9nY, some_vs9o0, wws9o3);
+            var sats9o9 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9o9_Entry, sat_Frees9o9);
             return wws9o5.Apply<Closure, Closure, Closure, Closure>(GHC.Types.cons_DataCon, etas9nZ, sats9o9);
         }
-        public static Closure sats9o9_Entry(Closure dAlternatives9nY, Closure some_vs9o0, Closure wws9o3)
+        public static Closure sats9o9_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9o9)
         {
-            var sats9o8 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9o8_Entry), wws9o3);
+            var dAlternatives9nY = sat_Frees9o9.x0;
+            var some_vs9o0 = sat_Frees9o9.x1;
+            var wws9o3 = sat_Frees9o9.x2;
+            var sats9o8 = new Updatable<Closure>(&sats9o8_Entry, wws9o3);
             return GHC.Base.ltPipeGt_Entry(dAlternatives9nY).Apply<Closure, Closure, Closure>(some_vs9o0, sats9o8);
         }
-        public static Closure sats9o8_Entry(Closure wws9o3)
+        public static Closure sats9o8_Entry(in Closure wws9o3)
         {
             return wws9o3.Apply<Closure, Closure>(GHC.Types.nil_DataCon);
         }
-        public static Closure dmmanys9nQ_Entry(Closure dAlternatives9nR, Closure etas9nS)
+        public static Closure dmmany_Entry(Closure dAlternatives9nR, Closure etas9nS)
         {
-            var many_vs9nT = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(many_vs9nT_Entry), dAlternatives9nR, etas9nS, null);
-            many_vs9nT.x2 = many_vs9nT; return many_vs9nT.Eval();
+            var many_v_Frees9nT = (dAlternatives9nR, etas9nS, (Closure)null);
+            var many_vs9nT = new Updatable<(Closure x0, Closure x1, Closure x2)>(&many_vs9nT_Entry, many_v_Frees9nT);
+            many_vs9nT.free.x2 = many_vs9nT; return many_vs9nT.Eval();
         }
-        public static Closure many_vs9nT_Entry(Closure dAlternatives9nR, Closure etas9nS, Closure many_vs9nT)
+        public static Closure many_vs9nT_Entry(in (Closure x0, Closure x1, Closure x2) many_v_Frees9nT)
         {
-            var dApplicatives9nU = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(dApplicatives9nU_Entry), dAlternatives9nR);
-            var sats9nW = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9nW_Entry), dApplicatives9nU);
-            var sats9nV = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9nV_Entry), etas9nS, many_vs9nT, dApplicatives9nU);
+            var dAlternatives9nR = many_v_Frees9nT.x0;
+            var etas9nS = many_v_Frees9nT.x1;
+            var many_vs9nT = many_v_Frees9nT.x2;
+            var dApplicatives9nU = new Updatable<Closure>(&dApplicatives9nU_Entry, dAlternatives9nR);
+            var sats9nW = new Updatable<Closure>(&sats9nW_Entry, dApplicatives9nU);
+            var sat_Frees9nV = (etas9nS, many_vs9nT, dApplicatives9nU);
+            var sats9nV = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9nV_Entry, sat_Frees9nV);
             return GHC.Base.ltPipeGt_Entry(dAlternatives9nR).Apply<Closure, Closure, Closure>(sats9nV, sats9nW);
         }
-        public static Closure sats9nV_Entry(Closure etas9nS, Closure many_vs9nT, Closure dApplicatives9nU)
+        public static Closure sats9nV_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9nV)
         {
+            var etas9nS = sat_Frees9nV.x0;
+            var many_vs9nT = sat_Frees9nV.x1;
+            var dApplicatives9nU = sat_Frees9nV.x2;
             return GHC.Base.liftA2_Entry(dApplicatives9nU).Apply<Closure, Closure, Closure, Closure>(GHC.Types.cons_DataCon, etas9nS, many_vs9nT);
         }
-        public static Closure sats9nW_Entry(Closure dApplicatives9nU)
+        public static Closure sats9nW_Entry(in Closure dApplicatives9nU)
         {
             return GHC.Base.pure_Entry(dApplicatives9nU).Apply<Closure, Closure>(GHC.Types.nil_DataCon);
         }
-        public static Closure dApplicatives9nU_Entry(Closure dAlternatives9nR)
+        public static Closure dApplicatives9nU_Entry(in Closure dAlternatives9nR)
         {
             return GHC.Base.p1Alternative_Entry(dAlternatives9nR);
         }
-        public static Closure dmGtGts9nK_Entry(Closure dMonads9nL, Closure ms9nM, Closure ks9nN)
+        public static Closure dmGtGt_Entry(Closure dMonads9nL, Closure ms9nM, Closure ks9nN)
         {
-            var sats9nP = new Fun<Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9nP_Entry), ks9nN);
+            var sats9nP = new Fun1<Closure, Closure, Closure>(&sats9nP_Entry, ks9nN);
             return GHC.Base.gtGtEq_Entry(dMonads9nL).Apply<Closure, Closure, Closure>(ms9nM, sats9nP);
         }
-        public static Closure sats9nP_Entry(Closure ks9nN, Closure dss9nO)
+        public static Closure sats9nP_Entry(in Closure ks9nN, Closure dss9nO)
         {
             return ks9nN.Eval();
         }
-        public static Closure dmreturns9nH_Entry(Closure dMonads9nI)
+        public static Closure dmreturn_Entry(Closure dMonads9nI)
         {
-            var sats9nJ = GHC.Base.p1Monad_Entry(dMonads9nI).Eval();
+            var sats9nJ = GHC.Base.p1Monad_Entry(dMonads9nI);
             return GHC.Base.pure_Entry(sats9nJ);
         }
-        public static Closure dmfails9nE_Entry(Closure dMonads9nF, Closure ss9nG)
+        public static Closure dmfail_Entry(Closure dMonads9nF, Closure ss9nG)
         {
             return GHC.Err.errorWithoutStackTrace_Entry<Closure>(ss9nG);
         }
-        public static Closure dmmzeros9nB_Entry(Closure dMonadPluss9nC)
+        public static Closure dmmzero_Entry(Closure dMonadPluss9nC)
         {
-            var sats9nD = GHC.Base.p1MonadPlus_Entry(dMonadPluss9nC).Eval();
+            var sats9nD = GHC.Base.p1MonadPlus_Entry(dMonadPluss9nC);
             return GHC.Base.empty_Entry(sats9nD);
         }
-        public static Closure dmmpluss9ny_Entry(Closure dMonadPluss9nz)
+        public static Closure dmmplus_Entry(Closure dMonadPluss9nz)
         {
-            var sats9nA = GHC.Base.p1MonadPlus_Entry(dMonadPluss9nz).Eval();
+            var sats9nA = GHC.Base.p1MonadPlus_Entry(dMonadPluss9nz);
             return GHC.Base.ltPipeGt_Entry(sats9nA);
         }
         public static Closure cGtGtEqs9no_Entry(Closure xss9np, Closure fs9nq)
         {
-            var gos9nr = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos9nr_Entry), fs9nq, null);
-            gos9nr.x1 = gos9nr;
+            var go_Frees9nr = (fs9nq, (Closure)null);
+            var gos9nr = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos9nr_Entry, go_Frees9nr);
+            gos9nr.free.x1 = gos9nr;
             return gos9nr.Apply<Closure, Closure>(xss9np);
         }
-        public static Closure gos9nr_Entry(Closure fs9nq, Closure gos9nr, Closure dss9ns)
+        public static Closure gos9nr_Entry(in (Closure x0, Closure x1) go_Frees9nr, Closure dss9ns)
         {
+            var fs9nq = go_Frees9nr.x0;
+            var gos9nr = go_Frees9nr.x1;
             var wilds9nt = dss9ns.Eval();
             switch (wilds9nt)
             {
@@ -3065,14 +3454,17 @@ namespace GHC
                     {
                         var ys9nu = wilds9nt_Cons.x0;
                         var yss9nv = wilds9nt_Cons.x1;
-                        var sats9nx = new SingleEntry<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9nx_Entry), gos9nr, yss9nv);
-                        var sats9nw = fs9nq.Apply<Closure, Closure>(ys9nu).Eval();
+                        var sat_Frees9nx = (gos9nr, yss9nv);
+                        var sats9nx = new SingleEntry<(Closure x0, Closure x1)>(&sats9nx_Entry, sat_Frees9nx);
+                        var sats9nw = fs9nq.Apply<Closure, Closure>(ys9nu);
                         return plusPlus_Entry(sats9nw, sats9nx);
                     }
             }
         }
-        public static Closure sats9nx_Entry(Closure gos9nr, Closure yss9nv)
+        public static Closure sats9nx_Entry(in (Closure x0, Closure x1) sat_Frees9nx)
         {
+            var gos9nr = sat_Frees9nx.x0;
+            var yss9nv = sat_Frees9nx.x1;
             return gos9nr.Apply<Closure, Closure>(yss9nv);
         }
         public static Closure cfails9nm_Entry(Closure dss9nn)
@@ -3102,11 +3494,14 @@ namespace GHC
         }
         public static Closure cGtGtEqs9na_Entry(Closure fs9nb, Closure ks9nc, Closure rs9nd)
         {
-            var sats9ne = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9ne_Entry), fs9nb, rs9nd);
+            var sat_Frees9ne = (fs9nb, rs9nd);
+            var sats9ne = new Updatable<(Closure x0, Closure x1)>(&sats9ne_Entry, sat_Frees9ne);
             return ks9nc.Apply<Closure, Closure, Closure>(sats9ne, rs9nd);
         }
-        public static Closure sats9ne_Entry(Closure fs9nb, Closure rs9nd)
+        public static Closure sats9ne_Entry(in (Closure x0, Closure x1) sat_Frees9ne)
         {
+            var fs9nb = sat_Frees9ne.x0;
+            var rs9nd = sat_Frees9ne.x1;
             return fs9nb.Apply<Closure, Closure>(rs9nd);
         }
         public static Closure cGtGtEqs9mZ_Entry(Closure dMonoids9n0, Closure etas9n1, Closure etas9n2)
@@ -3115,15 +3510,19 @@ namespace GHC
             var wilds9n3_Tuple2 = wilds9n3 as GHC.Tuple.Tuple2;
             var us9n4 = wilds9n3_Tuple2.x0;
             var as9n5 = wilds9n3_Tuple2.x1;
-            var wilds9n6 = etas9n2.Apply<Closure, Closure>(as9n5).Eval();
+            var wilds9n6 = etas9n2.Apply<Closure, Closure>(as9n5);
             var wilds9n6_Tuple2 = wilds9n6 as GHC.Tuple.Tuple2;
             var vs9n7 = wilds9n6_Tuple2.x0;
             var bs9n8 = wilds9n6_Tuple2.x1;
-            var sats9n9 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9n9_Entry), dMonoids9n0, us9n4, vs9n7);
+            var sat_Frees9n9 = (dMonoids9n0, us9n4, vs9n7);
+            var sats9n9 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9n9_Entry, sat_Frees9n9);
             return new GHC.Tuple.Tuple2(sats9n9, bs9n8);
         }
-        public static Closure sats9n9_Entry(Closure dMonoids9n0, Closure us9n4, Closure vs9n7)
+        public static Closure sats9n9_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9n9)
         {
+            var dMonoids9n0 = sat_Frees9n9.x0;
+            var us9n4 = sat_Frees9n9.x1;
+            var vs9n7 = sat_Frees9n9.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9n0).Apply<Closure, Closure, Closure>(us9n4, vs9n7);
         }
         public static Closure cLtPipeGts9mU_Entry(Closure dss9mV, Closure rs9mW)
@@ -3145,12 +3544,15 @@ namespace GHC
         }
         public static Closure cLtAstrGts9mC_Entry(Closure fss9mD, Closure xss9mE)
         {
-            var gos9mF = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos9mF_Entry), xss9mE, null);
-            gos9mF.x1 = gos9mF;
+            var go_Frees9mF = (xss9mE, (Closure)null);
+            var gos9mF = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos9mF_Entry, go_Frees9mF);
+            gos9mF.free.x1 = gos9mF;
             return gos9mF.Apply<Closure, Closure>(fss9mD);
         }
-        public static Closure gos9mF_Entry(Closure xss9mE, Closure gos9mF, Closure dss9mG)
+        public static Closure gos9mF_Entry(in (Closure x0, Closure x1) go_Frees9mF, Closure dss9mG)
         {
+            var xss9mE = go_Frees9mF.x0;
+            var gos9mF = go_Frees9mF.x1;
             var wilds9mH = dss9mG.Eval();
             switch (wilds9mH)
             {
@@ -3163,15 +3565,20 @@ namespace GHC
                     {
                         var ys9mI = wilds9mH_Cons.x0;
                         var yss9mJ = wilds9mH_Cons.x1;
-                        var zs9mK = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(zs9mK_Entry), gos9mF, yss9mJ);
-                        var gos9mL = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos9mL_Entry), ys9mI, zs9mK, null);
-                        gos9mL.x2 = gos9mL;
+                        var z_Frees9mK = (gos9mF, yss9mJ);
+                        var zs9mK = new Updatable<(Closure x0, Closure x1)>(&zs9mK_Entry, z_Frees9mK);
+                        var go_Frees9mL = (ys9mI, zs9mK, (Closure)null);
+                        var gos9mL = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos9mL_Entry, go_Frees9mL);
+                        gos9mL.free.x2 = gos9mL;
                         return gos9mL.Apply<Closure, Closure>(xss9mE);
                     }
             }
         }
-        public static Closure gos9mL_Entry(Closure ys9mI, Closure zs9mK, Closure gos9mL, Closure dss9mM)
+        public static Closure gos9mL_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees9mL, Closure dss9mM)
         {
+            var ys9mI = go_Frees9mL.x0;
+            var zs9mK = go_Frees9mL.x1;
+            var gos9mL = go_Frees9mL.x2;
             var wilds9mN = dss9mM.Eval();
             switch (wilds9mN)
             {
@@ -3181,32 +3588,44 @@ namespace GHC
                     {
                         var ys9mO = wilds9mN_Cons.x0;
                         var yss9mP = wilds9mN_Cons.x1;
-                        var sats9mR = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9mR_Entry), gos9mL, yss9mP);
-                        var sats9mQ = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9mQ_Entry), ys9mI, ys9mO);
+                        var sat_Frees9mR = (gos9mL, yss9mP);
+                        var sats9mR = new Updatable<(Closure x0, Closure x1)>(&sats9mR_Entry, sat_Frees9mR);
+                        var sat_Frees9mQ = (ys9mI, ys9mO);
+                        var sats9mQ = new Updatable<(Closure x0, Closure x1)>(&sats9mQ_Entry, sat_Frees9mQ);
                         return new GHC.Types.Cons(sats9mQ, sats9mR);
                     }
             }
         }
-        public static Closure sats9mQ_Entry(Closure ys9mI, Closure ys9mO)
+        public static Closure sats9mQ_Entry(in (Closure x0, Closure x1) sat_Frees9mQ)
         {
+            var ys9mI = sat_Frees9mQ.x0;
+            var ys9mO = sat_Frees9mQ.x1;
             return ys9mI.Apply<Closure, Closure>(ys9mO);
         }
-        public static Closure sats9mR_Entry(Closure gos9mL, Closure yss9mP)
+        public static Closure sats9mR_Entry(in (Closure x0, Closure x1) sat_Frees9mR)
         {
+            var gos9mL = sat_Frees9mR.x0;
+            var yss9mP = sat_Frees9mR.x1;
             return gos9mL.Apply<Closure, Closure>(yss9mP);
         }
-        public static Closure zs9mK_Entry(Closure gos9mF, Closure yss9mJ)
+        public static Closure zs9mK_Entry(in (Closure x0, Closure x1) z_Frees9mK)
         {
+            var gos9mF = z_Frees9mK.x0;
+            var yss9mJ = z_Frees9mK.x1;
             return gos9mF.Apply<Closure, Closure>(yss9mJ);
         }
         public static Closure cliftA2s9ml_Entry(Closure fs9mm, Closure xss9mn, Closure yss9mo)
         {
-            var gos9mp = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos9mp_Entry), fs9mm, yss9mo, null);
-            gos9mp.x2 = gos9mp;
+            var go_Frees9mp = (fs9mm, yss9mo, (Closure)null);
+            var gos9mp = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos9mp_Entry, go_Frees9mp);
+            gos9mp.free.x2 = gos9mp;
             return gos9mp.Apply<Closure, Closure>(xss9mn);
         }
-        public static Closure gos9mp_Entry(Closure fs9mm, Closure yss9mo, Closure gos9mp, Closure dss9mq)
+        public static Closure gos9mp_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees9mp, Closure dss9mq)
         {
+            var fs9mm = go_Frees9mp.x0;
+            var yss9mo = go_Frees9mp.x1;
+            var gos9mp = go_Frees9mp.x2;
             var wilds9mr = dss9mq.Eval();
             switch (wilds9mr)
             {
@@ -3219,15 +3638,21 @@ namespace GHC
                     {
                         var ys9ms = wilds9mr_Cons.x0;
                         var yss9mt = wilds9mr_Cons.x1;
-                        var zs9mu = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(zs9mu_Entry), gos9mp, yss9mt);
-                        var gos9mv = new Fun<Closure, Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(gos9mv_Entry), fs9mm, ys9ms, zs9mu, null);
-                        gos9mv.x3 = gos9mv;
+                        var z_Frees9mu = (gos9mp, yss9mt);
+                        var zs9mu = new Updatable<(Closure x0, Closure x1)>(&zs9mu_Entry, z_Frees9mu);
+                        var go_Frees9mv = (fs9mm, ys9ms, zs9mu, (Closure)null);
+                        var gos9mv = new Fun1<(Closure x0, Closure x1, Closure x2, Closure x3), Closure, Closure>(&gos9mv_Entry, go_Frees9mv);
+                        gos9mv.free.x3 = gos9mv;
                         return gos9mv.Apply<Closure, Closure>(yss9mo);
                     }
             }
         }
-        public static Closure gos9mv_Entry(Closure fs9mm, Closure ys9ms, Closure zs9mu, Closure gos9mv, Closure dss9mw)
+        public static Closure gos9mv_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) go_Frees9mv, Closure dss9mw)
         {
+            var fs9mm = go_Frees9mv.x0;
+            var ys9ms = go_Frees9mv.x1;
+            var zs9mu = go_Frees9mv.x2;
+            var gos9mv = go_Frees9mv.x3;
             var wilds9mx = dss9mw.Eval();
             switch (wilds9mx)
             {
@@ -3237,32 +3662,44 @@ namespace GHC
                     {
                         var ys9my = wilds9mx_Cons.x0;
                         var yss9mz = wilds9mx_Cons.x1;
-                        var sats9mB = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9mB_Entry), gos9mv, yss9mz);
-                        var sats9mA = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9mA_Entry), fs9mm, ys9ms, ys9my);
+                        var sat_Frees9mB = (gos9mv, yss9mz);
+                        var sats9mB = new Updatable<(Closure x0, Closure x1)>(&sats9mB_Entry, sat_Frees9mB);
+                        var sat_Frees9mA = (fs9mm, ys9ms, ys9my);
+                        var sats9mA = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9mA_Entry, sat_Frees9mA);
                         return new GHC.Types.Cons(sats9mA, sats9mB);
                     }
             }
         }
-        public static Closure sats9mA_Entry(Closure fs9mm, Closure ys9ms, Closure ys9my)
+        public static Closure sats9mA_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9mA)
         {
+            var fs9mm = sat_Frees9mA.x0;
+            var ys9ms = sat_Frees9mA.x1;
+            var ys9my = sat_Frees9mA.x2;
             return fs9mm.Apply<Closure, Closure, Closure>(ys9ms, ys9my);
         }
-        public static Closure sats9mB_Entry(Closure gos9mv, Closure yss9mz)
+        public static Closure sats9mB_Entry(in (Closure x0, Closure x1) sat_Frees9mB)
         {
+            var gos9mv = sat_Frees9mB.x0;
+            var yss9mz = sat_Frees9mB.x1;
             return gos9mv.Apply<Closure, Closure>(yss9mz);
         }
-        public static Closure zs9mu_Entry(Closure gos9mp, Closure yss9mt)
+        public static Closure zs9mu_Entry(in (Closure x0, Closure x1) z_Frees9mu)
         {
+            var gos9mp = z_Frees9mu.x0;
+            var yss9mt = z_Frees9mu.x1;
             return gos9mp.Apply<Closure, Closure>(yss9mt);
         }
         public static Closure cAstrGts9mc_Entry(Closure xss9md, Closure yss9me)
         {
-            var gos9mf = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos9mf_Entry), yss9me, null);
-            gos9mf.x1 = gos9mf;
+            var go_Frees9mf = (yss9me, (Closure)null);
+            var gos9mf = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos9mf_Entry, go_Frees9mf);
+            gos9mf.free.x1 = gos9mf;
             return gos9mf.Apply<Closure, Closure>(xss9md);
         }
-        public static Closure gos9mf_Entry(Closure yss9me, Closure gos9mf, Closure dss9mg)
+        public static Closure gos9mf_Entry(in (Closure x0, Closure x1) go_Frees9mf, Closure dss9mg)
         {
+            var yss9me = go_Frees9mf.x0;
+            var gos9mf = go_Frees9mf.x1;
             var wilds9mh = dss9mg.Eval();
             switch (wilds9mh)
             {
@@ -3275,13 +3712,16 @@ namespace GHC
                     {
                         var ys9mi = wilds9mh_Cons.x0;
                         var yss9mj = wilds9mh_Cons.x1;
-                        var sats9mk = new SingleEntry<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9mk_Entry), gos9mf, yss9mj);
+                        var sat_Frees9mk = (gos9mf, yss9mj);
+                        var sats9mk = new SingleEntry<(Closure x0, Closure x1)>(&sats9mk_Entry, sat_Frees9mk);
                         return plusPlus_Entry(yss9me, sats9mk);
                     }
             }
         }
-        public static Closure sats9mk_Entry(Closure gos9mf, Closure yss9mj)
+        public static Closure sats9mk_Entry(in (Closure x0, Closure x1) sat_Frees9mk)
         {
+            var gos9mf = sat_Frees9mk.x0;
+            var yss9mj = sat_Frees9mk.x1;
             return gos9mf.Apply<Closure, Closure>(yss9mj);
         }
         public static Closure cliftA2s9m3_Entry(Closure fs9m4, Closure dss9m5, Closure dss9m6)
@@ -3308,15 +3748,19 @@ namespace GHC
                             case GHC.Maybe.Just wilds9m9_Just:
                                 {
                                     var ys9ma = wilds9m9_Just.x0;
-                                    var sats9mb = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9mb_Entry), fs9m4, xs9m8, ys9ma);
+                                    var sat_Frees9mb = (fs9m4, xs9m8, ys9ma);
+                                    var sats9mb = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9mb_Entry, sat_Frees9mb);
                                     return new GHC.Maybe.Just(sats9mb);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats9mb_Entry(Closure fs9m4, Closure xs9m8, Closure ys9ma)
+        public static Closure sats9mb_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9mb)
         {
+            var fs9m4 = sat_Frees9mb.x0;
+            var xs9m8 = sat_Frees9mb.x1;
+            var ys9ma = sat_Frees9mb.x2;
             return fs9m4.Apply<Closure, Closure, Closure>(xs9m8, ys9ma);
         }
         public static Closure cAstrGts9lY_Entry(Closure dss9lZ, Closure m2s9m0)
@@ -3337,25 +3781,34 @@ namespace GHC
         }
         public static Closure cLtAstrGts9lT_Entry(Closure fs9lU, Closure gs9lV, Closure xs9lW)
         {
-            var sats9lX = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9lX_Entry), gs9lV, xs9lW);
+            var sat_Frees9lX = (gs9lV, xs9lW);
+            var sats9lX = new Updatable<(Closure x0, Closure x1)>(&sats9lX_Entry, sat_Frees9lX);
             return fs9lU.Apply<Closure, Closure, Closure>(xs9lW, sats9lX);
         }
-        public static Closure sats9lX_Entry(Closure gs9lV, Closure xs9lW)
+        public static Closure sats9lX_Entry(in (Closure x0, Closure x1) sat_Frees9lX)
         {
+            var gs9lV = sat_Frees9lX.x0;
+            var xs9lW = sat_Frees9lX.x1;
             return gs9lV.Apply<Closure, Closure>(xs9lW);
         }
         public static Closure cliftA2s9lM_Entry(Closure qs9lN, Closure fs9lO, Closure gs9lP, Closure xs9lQ)
         {
-            var sats9lS = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9lS_Entry), gs9lP, xs9lQ);
-            var sats9lR = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9lR_Entry), fs9lO, xs9lQ);
+            var sat_Frees9lS = (gs9lP, xs9lQ);
+            var sats9lS = new Updatable<(Closure x0, Closure x1)>(&sats9lS_Entry, sat_Frees9lS);
+            var sat_Frees9lR = (fs9lO, xs9lQ);
+            var sats9lR = new Updatable<(Closure x0, Closure x1)>(&sats9lR_Entry, sat_Frees9lR);
             return qs9lN.Apply<Closure, Closure, Closure>(sats9lR, sats9lS);
         }
-        public static Closure sats9lR_Entry(Closure fs9lO, Closure xs9lQ)
+        public static Closure sats9lR_Entry(in (Closure x0, Closure x1) sat_Frees9lR)
         {
+            var fs9lO = sat_Frees9lR.x0;
+            var xs9lQ = sat_Frees9lR.x1;
             return fs9lO.Apply<Closure, Closure>(xs9lQ);
         }
-        public static Closure sats9lS_Entry(Closure gs9lP, Closure xs9lQ)
+        public static Closure sats9lS_Entry(in (Closure x0, Closure x1) sat_Frees9lS)
         {
+            var gs9lP = sat_Frees9lS.x0;
+            var xs9lQ = sat_Frees9lS.x1;
             return gs9lP.Apply<Closure, Closure>(xs9lQ);
         }
         public static Closure cLtAstrGts9lA_Entry(Closure dMonoids9lB, Closure etas9lC, Closure etas9lD)
@@ -3368,16 +3821,23 @@ namespace GHC
             var wilds9lH_Tuple2 = wilds9lH as GHC.Tuple.Tuple2;
             var vs9lI = wilds9lH_Tuple2.x0;
             var xs9lJ = wilds9lH_Tuple2.x1;
-            var sats9lL = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9lL_Entry), fs9lG, xs9lJ);
-            var sats9lK = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9lK_Entry), dMonoids9lB, us9lF, vs9lI);
+            var sat_Frees9lL = (fs9lG, xs9lJ);
+            var sats9lL = new Updatable<(Closure x0, Closure x1)>(&sats9lL_Entry, sat_Frees9lL);
+            var sat_Frees9lK = (dMonoids9lB, us9lF, vs9lI);
+            var sats9lK = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9lK_Entry, sat_Frees9lK);
             return new GHC.Tuple.Tuple2(sats9lK, sats9lL);
         }
-        public static Closure sats9lK_Entry(Closure dMonoids9lB, Closure us9lF, Closure vs9lI)
+        public static Closure sats9lK_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9lK)
         {
+            var dMonoids9lB = sat_Frees9lK.x0;
+            var us9lF = sat_Frees9lK.x1;
+            var vs9lI = sat_Frees9lK.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9lB).Apply<Closure, Closure, Closure>(us9lF, vs9lI);
         }
-        public static Closure sats9lL_Entry(Closure fs9lG, Closure xs9lJ)
+        public static Closure sats9lL_Entry(in (Closure x0, Closure x1) sat_Frees9lL)
         {
+            var fs9lG = sat_Frees9lL.x0;
+            var xs9lJ = sat_Frees9lL.x1;
             return fs9lG.Apply<Closure, Closure>(xs9lJ);
         }
         public static Closure cliftA2s9ln_Entry(Closure dMonoids9lo, Closure etas9lp, Closure etas9lq, Closure etas9lr)
@@ -3390,16 +3850,24 @@ namespace GHC
             var wilds9lv_Tuple2 = wilds9lv as GHC.Tuple.Tuple2;
             var vs9lw = wilds9lv_Tuple2.x0;
             var ys9lx = wilds9lv_Tuple2.x1;
-            var sats9lz = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9lz_Entry), etas9lp, xs9lu, ys9lx);
-            var sats9ly = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9ly_Entry), dMonoids9lo, us9lt, vs9lw);
+            var sat_Frees9lz = (etas9lp, xs9lu, ys9lx);
+            var sats9lz = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9lz_Entry, sat_Frees9lz);
+            var sat_Frees9ly = (dMonoids9lo, us9lt, vs9lw);
+            var sats9ly = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9ly_Entry, sat_Frees9ly);
             return new GHC.Tuple.Tuple2(sats9ly, sats9lz);
         }
-        public static Closure sats9ly_Entry(Closure dMonoids9lo, Closure us9lt, Closure vs9lw)
+        public static Closure sats9ly_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9ly)
         {
+            var dMonoids9lo = sat_Frees9ly.x0;
+            var us9lt = sat_Frees9ly.x1;
+            var vs9lw = sat_Frees9ly.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9lo).Apply<Closure, Closure, Closure>(us9lt, vs9lw);
         }
-        public static Closure sats9lz_Entry(Closure etas9lp, Closure xs9lu, Closure ys9lx)
+        public static Closure sats9lz_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9lz)
         {
+            var etas9lp = sat_Frees9lz.x0;
+            var xs9lu = sat_Frees9lz.x1;
+            var ys9lx = sat_Frees9lz.x2;
             return etas9lp.Apply<Closure, Closure, Closure>(xs9lu, ys9lx);
         }
         public static Closure cfmaps9lh_Entry(Closure dss9li, Closure dss9lj)
@@ -3415,13 +3883,16 @@ namespace GHC
                 case GHC.Maybe.Just wilds9lk_Just:
                     {
                         var as9ll = wilds9lk_Just.x0;
-                        var sats9lm = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9lm_Entry), dss9li, as9ll);
+                        var sat_Frees9lm = (dss9li, as9ll);
+                        var sats9lm = new Updatable<(Closure x0, Closure x1)>(&sats9lm_Entry, sat_Frees9lm);
                         return new GHC.Maybe.Just(sats9lm);
                     }
             }
         }
-        public static Closure sats9lm_Entry(Closure dss9li, Closure as9ll)
+        public static Closure sats9lm_Entry(in (Closure x0, Closure x1) sat_Frees9lm)
         {
+            var dss9li = sat_Frees9lm.x0;
+            var as9ll = sat_Frees9lm.x1;
             return dss9li.Apply<Closure, Closure>(as9ll);
         }
         public static Closure cfmaps9la_Entry(Closure fs9lb, Closure dss9lc)
@@ -3430,11 +3901,14 @@ namespace GHC
             var wilds9ld_Tuple2 = wilds9ld as GHC.Tuple.Tuple2;
             var xs9le = wilds9ld_Tuple2.x0;
             var ys9lf = wilds9ld_Tuple2.x1;
-            var sats9lg = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9lg_Entry), fs9lb, ys9lf);
+            var sat_Frees9lg = (fs9lb, ys9lf);
+            var sats9lg = new Updatable<(Closure x0, Closure x1)>(&sats9lg_Entry, sat_Frees9lg);
             return new GHC.Tuple.Tuple2(xs9le, sats9lg);
         }
-        public static Closure sats9lg_Entry(Closure fs9lb, Closure ys9lf)
+        public static Closure sats9lg_Entry(in (Closure x0, Closure x1) sat_Frees9lg)
         {
+            var fs9lb = sat_Frees9lg.x0;
+            var ys9lf = sat_Frees9lg.x1;
             return fs9lb.Apply<Closure, Closure>(ys9lf);
         }
         public static Closure cp1Monoids9kL_Entry(Closure dMonoids9kM, Closure dMonoids9kN, Closure dMonoids9kO, Closure dMonoids9kP, Closure dMonoids9kQ, Closure etas9kR, Closure etas9kS)
@@ -3453,59 +3927,79 @@ namespace GHC
             var c_s9l2 = wilds9kZ_Tuple5.x2;
             var d_s9l3 = wilds9kZ_Tuple5.x3;
             var e_s9l4 = wilds9kZ_Tuple5.x4;
-            var sats9l9 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9l9_Entry), dMonoids9kQ, es9kY, e_s9l4);
-            var sats9l8 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9l8_Entry), dMonoids9kP, ds9kX, d_s9l3);
-            var sats9l7 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9l7_Entry), dMonoids9kO, cs9kW, c_s9l2);
-            var sats9l6 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9l6_Entry), dMonoids9kN, bs9kV, b_s9l1);
-            var sats9l5 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9l5_Entry), dMonoids9kM, as9kU, a_s9l0);
+            var sat_Frees9l9 = (dMonoids9kQ, es9kY, e_s9l4);
+            var sats9l9 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9l9_Entry, sat_Frees9l9);
+            var sat_Frees9l8 = (dMonoids9kP, ds9kX, d_s9l3);
+            var sats9l8 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9l8_Entry, sat_Frees9l8);
+            var sat_Frees9l7 = (dMonoids9kO, cs9kW, c_s9l2);
+            var sats9l7 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9l7_Entry, sat_Frees9l7);
+            var sat_Frees9l6 = (dMonoids9kN, bs9kV, b_s9l1);
+            var sats9l6 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9l6_Entry, sat_Frees9l6);
+            var sat_Frees9l5 = (dMonoids9kM, as9kU, a_s9l0);
+            var sats9l5 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9l5_Entry, sat_Frees9l5);
             return new GHC.Tuple.Tuple5(sats9l5, sats9l6, sats9l7, sats9l8, sats9l9);
         }
-        public static Closure sats9l5_Entry(Closure dMonoids9kM, Closure as9kU, Closure a_s9l0)
+        public static Closure sats9l5_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9l5)
         {
+            var dMonoids9kM = sat_Frees9l5.x0;
+            var as9kU = sat_Frees9l5.x1;
+            var a_s9l0 = sat_Frees9l5.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9kM).Apply<Closure, Closure, Closure>(as9kU, a_s9l0);
         }
-        public static Closure sats9l6_Entry(Closure dMonoids9kN, Closure bs9kV, Closure b_s9l1)
+        public static Closure sats9l6_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9l6)
         {
+            var dMonoids9kN = sat_Frees9l6.x0;
+            var bs9kV = sat_Frees9l6.x1;
+            var b_s9l1 = sat_Frees9l6.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9kN).Apply<Closure, Closure, Closure>(bs9kV, b_s9l1);
         }
-        public static Closure sats9l7_Entry(Closure dMonoids9kO, Closure cs9kW, Closure c_s9l2)
+        public static Closure sats9l7_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9l7)
         {
+            var dMonoids9kO = sat_Frees9l7.x0;
+            var cs9kW = sat_Frees9l7.x1;
+            var c_s9l2 = sat_Frees9l7.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9kO).Apply<Closure, Closure, Closure>(cs9kW, c_s9l2);
         }
-        public static Closure sats9l8_Entry(Closure dMonoids9kP, Closure ds9kX, Closure d_s9l3)
+        public static Closure sats9l8_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9l8)
         {
+            var dMonoids9kP = sat_Frees9l8.x0;
+            var ds9kX = sat_Frees9l8.x1;
+            var d_s9l3 = sat_Frees9l8.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9kP).Apply<Closure, Closure, Closure>(ds9kX, d_s9l3);
         }
-        public static Closure sats9l9_Entry(Closure dMonoids9kQ, Closure es9kY, Closure e_s9l4)
+        public static Closure sats9l9_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9l9)
         {
+            var dMonoids9kQ = sat_Frees9l9.x0;
+            var es9kY = sat_Frees9l9.x1;
+            var e_s9l4 = sat_Frees9l9.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9kQ).Apply<Closure, Closure, Closure>(es9kY, e_s9l4);
         }
         public static Closure cmemptys9kA_Entry(Closure dMonoids9kB, Closure dMonoids9kC, Closure dMonoids9kD, Closure dMonoids9kE, Closure dMonoids9kF)
         {
-            var sats9kK = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9kK_Entry), dMonoids9kF);
-            var sats9kJ = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9kJ_Entry), dMonoids9kE);
-            var sats9kI = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9kI_Entry), dMonoids9kD);
-            var sats9kH = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9kH_Entry), dMonoids9kC);
-            var sats9kG = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9kG_Entry), dMonoids9kB);
+            var sats9kK = new Updatable<Closure>(&sats9kK_Entry, dMonoids9kF);
+            var sats9kJ = new Updatable<Closure>(&sats9kJ_Entry, dMonoids9kE);
+            var sats9kI = new Updatable<Closure>(&sats9kI_Entry, dMonoids9kD);
+            var sats9kH = new Updatable<Closure>(&sats9kH_Entry, dMonoids9kC);
+            var sats9kG = new Updatable<Closure>(&sats9kG_Entry, dMonoids9kB);
             return new GHC.Tuple.Tuple5(sats9kG, sats9kH, sats9kI, sats9kJ, sats9kK);
         }
-        public static Closure sats9kG_Entry(Closure dMonoids9kB)
+        public static Closure sats9kG_Entry(in Closure dMonoids9kB)
         {
             return GHC.Base.mempty_Entry(dMonoids9kB);
         }
-        public static Closure sats9kH_Entry(Closure dMonoids9kC)
+        public static Closure sats9kH_Entry(in Closure dMonoids9kC)
         {
             return GHC.Base.mempty_Entry(dMonoids9kC);
         }
-        public static Closure sats9kI_Entry(Closure dMonoids9kD)
+        public static Closure sats9kI_Entry(in Closure dMonoids9kD)
         {
             return GHC.Base.mempty_Entry(dMonoids9kD);
         }
-        public static Closure sats9kJ_Entry(Closure dMonoids9kE)
+        public static Closure sats9kJ_Entry(in Closure dMonoids9kE)
         {
             return GHC.Base.mempty_Entry(dMonoids9kE);
         }
-        public static Closure sats9kK_Entry(Closure dMonoids9kF)
+        public static Closure sats9kK_Entry(in Closure dMonoids9kF)
         {
             return GHC.Base.mempty_Entry(dMonoids9kF);
         }
@@ -3523,49 +4017,65 @@ namespace GHC
             var b_s9kt = wilds9kr_Tuple4.x1;
             var c_s9ku = wilds9kr_Tuple4.x2;
             var d_s9kv = wilds9kr_Tuple4.x3;
-            var sats9kz = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9kz_Entry), dMonoids9kj, ds9kq, d_s9kv);
-            var sats9ky = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9ky_Entry), dMonoids9ki, cs9kp, c_s9ku);
-            var sats9kx = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9kx_Entry), dMonoids9kh, bs9ko, b_s9kt);
-            var sats9kw = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9kw_Entry), dMonoids9kg, as9kn, a_s9ks);
+            var sat_Frees9kz = (dMonoids9kj, ds9kq, d_s9kv);
+            var sats9kz = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9kz_Entry, sat_Frees9kz);
+            var sat_Frees9ky = (dMonoids9ki, cs9kp, c_s9ku);
+            var sats9ky = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9ky_Entry, sat_Frees9ky);
+            var sat_Frees9kx = (dMonoids9kh, bs9ko, b_s9kt);
+            var sats9kx = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9kx_Entry, sat_Frees9kx);
+            var sat_Frees9kw = (dMonoids9kg, as9kn, a_s9ks);
+            var sats9kw = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9kw_Entry, sat_Frees9kw);
             return new GHC.Tuple.Tuple4(sats9kw, sats9kx, sats9ky, sats9kz);
         }
-        public static Closure sats9kw_Entry(Closure dMonoids9kg, Closure as9kn, Closure a_s9ks)
+        public static Closure sats9kw_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9kw)
         {
+            var dMonoids9kg = sat_Frees9kw.x0;
+            var as9kn = sat_Frees9kw.x1;
+            var a_s9ks = sat_Frees9kw.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9kg).Apply<Closure, Closure, Closure>(as9kn, a_s9ks);
         }
-        public static Closure sats9kx_Entry(Closure dMonoids9kh, Closure bs9ko, Closure b_s9kt)
+        public static Closure sats9kx_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9kx)
         {
+            var dMonoids9kh = sat_Frees9kx.x0;
+            var bs9ko = sat_Frees9kx.x1;
+            var b_s9kt = sat_Frees9kx.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9kh).Apply<Closure, Closure, Closure>(bs9ko, b_s9kt);
         }
-        public static Closure sats9ky_Entry(Closure dMonoids9ki, Closure cs9kp, Closure c_s9ku)
+        public static Closure sats9ky_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9ky)
         {
+            var dMonoids9ki = sat_Frees9ky.x0;
+            var cs9kp = sat_Frees9ky.x1;
+            var c_s9ku = sat_Frees9ky.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9ki).Apply<Closure, Closure, Closure>(cs9kp, c_s9ku);
         }
-        public static Closure sats9kz_Entry(Closure dMonoids9kj, Closure ds9kq, Closure d_s9kv)
+        public static Closure sats9kz_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9kz)
         {
+            var dMonoids9kj = sat_Frees9kz.x0;
+            var ds9kq = sat_Frees9kz.x1;
+            var d_s9kv = sat_Frees9kz.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9kj).Apply<Closure, Closure, Closure>(ds9kq, d_s9kv);
         }
         public static Closure cmemptys9k6_Entry(Closure dMonoids9k7, Closure dMonoids9k8, Closure dMonoids9k9, Closure dMonoids9ka)
         {
-            var sats9ke = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9ke_Entry), dMonoids9ka);
-            var sats9kd = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9kd_Entry), dMonoids9k9);
-            var sats9kc = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9kc_Entry), dMonoids9k8);
-            var sats9kb = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9kb_Entry), dMonoids9k7);
+            var sats9ke = new Updatable<Closure>(&sats9ke_Entry, dMonoids9ka);
+            var sats9kd = new Updatable<Closure>(&sats9kd_Entry, dMonoids9k9);
+            var sats9kc = new Updatable<Closure>(&sats9kc_Entry, dMonoids9k8);
+            var sats9kb = new Updatable<Closure>(&sats9kb_Entry, dMonoids9k7);
             return new GHC.Tuple.Tuple4(sats9kb, sats9kc, sats9kd, sats9ke);
         }
-        public static Closure sats9kb_Entry(Closure dMonoids9k7)
+        public static Closure sats9kb_Entry(in Closure dMonoids9k7)
         {
             return GHC.Base.mempty_Entry(dMonoids9k7);
         }
-        public static Closure sats9kc_Entry(Closure dMonoids9k8)
+        public static Closure sats9kc_Entry(in Closure dMonoids9k8)
         {
             return GHC.Base.mempty_Entry(dMonoids9k8);
         }
-        public static Closure sats9kd_Entry(Closure dMonoids9k9)
+        public static Closure sats9kd_Entry(in Closure dMonoids9k9)
         {
             return GHC.Base.mempty_Entry(dMonoids9k9);
         }
-        public static Closure sats9ke_Entry(Closure dMonoids9ka)
+        public static Closure sats9ke_Entry(in Closure dMonoids9ka)
         {
             return GHC.Base.mempty_Entry(dMonoids9ka);
         }
@@ -3581,39 +4091,51 @@ namespace GHC
             var wws9k0 = wws9jZ_Tuple3.x0;
             var wws9k1 = wws9jZ_Tuple3.x1;
             var wws9k2 = wws9jZ_Tuple3.x2;
-            var sats9k5 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9k5_Entry), ws9jS, wws9jY, wws9k2);
-            var sats9k4 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9k4_Entry), ws9jR, wws9jX, wws9k1);
-            var sats9k3 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9k3_Entry), ws9jQ, wws9jW, wws9k0);
+            var sat_Frees9k5 = (ws9jS, wws9jY, wws9k2);
+            var sats9k5 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9k5_Entry, sat_Frees9k5);
+            var sat_Frees9k4 = (ws9jR, wws9jX, wws9k1);
+            var sats9k4 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9k4_Entry, sat_Frees9k4);
+            var sat_Frees9k3 = (ws9jQ, wws9jW, wws9k0);
+            var sats9k3 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9k3_Entry, sat_Frees9k3);
             return new GHC.Tuple.Tuple3(sats9k3, sats9k4, sats9k5);
         }
-        public static Closure sats9k3_Entry(Closure ws9jQ, Closure wws9jW, Closure wws9k0)
+        public static Closure sats9k3_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9k3)
         {
+            var ws9jQ = sat_Frees9k3.x0;
+            var wws9jW = sat_Frees9k3.x1;
+            var wws9k0 = sat_Frees9k3.x2;
             return GHC.Base.p1Monoid_Entry(ws9jQ).Apply<Closure, Closure, Closure>(wws9jW, wws9k0);
         }
-        public static Closure sats9k4_Entry(Closure ws9jR, Closure wws9jX, Closure wws9k1)
+        public static Closure sats9k4_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9k4)
         {
+            var ws9jR = sat_Frees9k4.x0;
+            var wws9jX = sat_Frees9k4.x1;
+            var wws9k1 = sat_Frees9k4.x2;
             return GHC.Base.p1Monoid_Entry(ws9jR).Apply<Closure, Closure, Closure>(wws9jX, wws9k1);
         }
-        public static Closure sats9k5_Entry(Closure ws9jS, Closure wws9jY, Closure wws9k2)
+        public static Closure sats9k5_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9k5)
         {
+            var ws9jS = sat_Frees9k5.x0;
+            var wws9jY = sat_Frees9k5.x1;
+            var wws9k2 = sat_Frees9k5.x2;
             return GHC.Base.p1Monoid_Entry(ws9jS).Apply<Closure, Closure, Closure>(wws9jY, wws9k2);
         }
         public static Closure cmemptys9jI_Entry(Closure dMonoids9jJ, Closure dMonoids9jK, Closure dMonoids9jL)
         {
-            var sats9jO = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9jO_Entry), dMonoids9jL);
-            var sats9jN = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9jN_Entry), dMonoids9jK);
-            var sats9jM = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9jM_Entry), dMonoids9jJ);
+            var sats9jO = new Updatable<Closure>(&sats9jO_Entry, dMonoids9jL);
+            var sats9jN = new Updatable<Closure>(&sats9jN_Entry, dMonoids9jK);
+            var sats9jM = new Updatable<Closure>(&sats9jM_Entry, dMonoids9jJ);
             return new GHC.Tuple.Tuple3(sats9jM, sats9jN, sats9jO);
         }
-        public static Closure sats9jM_Entry(Closure dMonoids9jJ)
+        public static Closure sats9jM_Entry(in Closure dMonoids9jJ)
         {
             return GHC.Base.mempty_Entry(dMonoids9jJ);
         }
-        public static Closure sats9jN_Entry(Closure dMonoids9jK)
+        public static Closure sats9jN_Entry(in Closure dMonoids9jK)
         {
             return GHC.Base.mempty_Entry(dMonoids9jK);
         }
-        public static Closure sats9jO_Entry(Closure dMonoids9jL)
+        public static Closure sats9jO_Entry(in Closure dMonoids9jL)
         {
             return GHC.Base.mempty_Entry(dMonoids9jL);
         }
@@ -3627,29 +4149,37 @@ namespace GHC
             var wilds9jD_Tuple2 = wilds9jD as GHC.Tuple.Tuple2;
             var a_s9jE = wilds9jD_Tuple2.x0;
             var b_s9jF = wilds9jD_Tuple2.x1;
-            var sats9jH = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9jH_Entry), dMonoids9jx, bs9jC, b_s9jF);
-            var sats9jG = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9jG_Entry), dMonoids9jw, as9jB, a_s9jE);
+            var sat_Frees9jH = (dMonoids9jx, bs9jC, b_s9jF);
+            var sats9jH = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9jH_Entry, sat_Frees9jH);
+            var sat_Frees9jG = (dMonoids9jw, as9jB, a_s9jE);
+            var sats9jG = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9jG_Entry, sat_Frees9jG);
             return new GHC.Tuple.Tuple2(sats9jG, sats9jH);
         }
-        public static Closure sats9jG_Entry(Closure dMonoids9jw, Closure as9jB, Closure a_s9jE)
+        public static Closure sats9jG_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9jG)
         {
+            var dMonoids9jw = sat_Frees9jG.x0;
+            var as9jB = sat_Frees9jG.x1;
+            var a_s9jE = sat_Frees9jG.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9jw).Apply<Closure, Closure, Closure>(as9jB, a_s9jE);
         }
-        public static Closure sats9jH_Entry(Closure dMonoids9jx, Closure bs9jC, Closure b_s9jF)
+        public static Closure sats9jH_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9jH)
         {
+            var dMonoids9jx = sat_Frees9jH.x0;
+            var bs9jC = sat_Frees9jH.x1;
+            var b_s9jF = sat_Frees9jH.x2;
             return GHC.Base.p1Monoid_Entry(dMonoids9jx).Apply<Closure, Closure, Closure>(bs9jC, b_s9jF);
         }
         public static Closure cmemptys9jq_Entry(Closure dMonoids9jr, Closure dMonoids9js)
         {
-            var sats9ju = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9ju_Entry), dMonoids9js);
-            var sats9jt = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9jt_Entry), dMonoids9jr);
+            var sats9ju = new Updatable<Closure>(&sats9ju_Entry, dMonoids9js);
+            var sats9jt = new Updatable<Closure>(&sats9jt_Entry, dMonoids9jr);
             return new GHC.Tuple.Tuple2(sats9jt, sats9ju);
         }
-        public static Closure sats9jt_Entry(Closure dMonoids9jr)
+        public static Closure sats9jt_Entry(in Closure dMonoids9jr)
         {
             return GHC.Base.mempty_Entry(dMonoids9jr);
         }
-        public static Closure sats9ju_Entry(Closure dMonoids9js)
+        public static Closure sats9ju_Entry(in Closure dMonoids9js)
         {
             return GHC.Base.mempty_Entry(dMonoids9js);
         }
@@ -3659,16 +4189,22 @@ namespace GHC
         }
         public static Closure cp1Monoids9jh_Entry(Closure dMonoids9ji, Closure etas9jj, Closure etas9jk, Closure etas9jl)
         {
-            var sats9jn = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9jn_Entry), etas9jk, etas9jl);
-            var sats9jm = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9jm_Entry), etas9jj, etas9jl);
+            var sat_Frees9jn = (etas9jk, etas9jl);
+            var sats9jn = new Updatable<(Closure x0, Closure x1)>(&sats9jn_Entry, sat_Frees9jn);
+            var sat_Frees9jm = (etas9jj, etas9jl);
+            var sats9jm = new Updatable<(Closure x0, Closure x1)>(&sats9jm_Entry, sat_Frees9jm);
             return GHC.Base.p1Monoid_Entry(dMonoids9ji).Apply<Closure, Closure, Closure>(sats9jm, sats9jn);
         }
-        public static Closure sats9jm_Entry(Closure etas9jj, Closure etas9jl)
+        public static Closure sats9jm_Entry(in (Closure x0, Closure x1) sat_Frees9jm)
         {
+            var etas9jj = sat_Frees9jm.x0;
+            var etas9jl = sat_Frees9jm.x1;
             return etas9jj.Apply<Closure, Closure>(etas9jl);
         }
-        public static Closure sats9jn_Entry(Closure etas9jk, Closure etas9jl)
+        public static Closure sats9jn_Entry(in (Closure x0, Closure x1) sat_Frees9jn)
         {
+            var etas9jk = sat_Frees9jn.x0;
+            var etas9jl = sat_Frees9jn.x1;
             return etas9jk.Apply<Closure, Closure>(etas9jl);
         }
         public static Closure cmconcats9jf_Entry(Closure xsss9jg)
@@ -3689,12 +4225,12 @@ namespace GHC
                     {
                         var ys9jc = wilds9jb_Cons.x0;
                         var yss9jd = wilds9jb_Cons.x1;
-                        var sats9je = new SingleEntry<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats9je_Entry), yss9jd);
+                        var sats9je = new SingleEntry<Closure>(&sats9je_Entry, yss9jd);
                         return plusPlus_Entry(ys9jc, sats9je);
                     }
             }
         }
-        public static Closure sats9je_Entry(Closure yss9jd)
+        public static Closure sats9je_Entry(in Closure yss9jd)
         {
             return poly_gos9j9_Entry(yss9jd);
         }
@@ -3723,15 +4259,19 @@ namespace GHC
                             case GHC.Maybe.Just wilds9j5_Just:
                                 {
                                     var ipvs9j6 = wilds9j5_Just.x0;
-                                    var sats9j7 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9j7_Entry), dSemigroups9j0, ipvs9j4, ipvs9j6);
+                                    var sat_Frees9j7 = (dSemigroups9j0, ipvs9j4, ipvs9j6);
+                                    var sats9j7 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9j7_Entry, sat_Frees9j7);
                                     return new GHC.Maybe.Just(sats9j7);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats9j7_Entry(Closure dSemigroups9j0, Closure ipvs9j4, Closure ipvs9j6)
+        public static Closure sats9j7_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9j7)
         {
+            var dSemigroups9j0 = sat_Frees9j7.x0;
+            var ipvs9j4 = sat_Frees9j7.x1;
+            var ipvs9j6 = sat_Frees9j7.x2;
             return dSemigroups9j0.Apply<Closure, Closure, Closure>(ipvs9j4, ipvs9j6);
         }
         public static Closure fSemigroupOrdering_Entry(Closure etaB2, Closure etaB1)
@@ -3781,31 +4321,51 @@ namespace GHC
             var c_s9iL = wilds9iI_Tuple5.x2;
             var d_s9iM = wilds9iI_Tuple5.x3;
             var e_s9iN = wilds9iI_Tuple5.x4;
-            var sats9iS = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9iS_Entry), dSemigroups9iz, es9iH, e_s9iN);
-            var sats9iR = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9iR_Entry), dSemigroups9iy, ds9iG, d_s9iM);
-            var sats9iQ = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9iQ_Entry), dSemigroups9ix, cs9iF, c_s9iL);
-            var sats9iP = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9iP_Entry), dSemigroups9iw, bs9iE, b_s9iK);
-            var sats9iO = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9iO_Entry), dSemigroups9iv, as9iD, a_s9iJ);
+            var sat_Frees9iS = (dSemigroups9iz, es9iH, e_s9iN);
+            var sats9iS = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9iS_Entry, sat_Frees9iS);
+            var sat_Frees9iR = (dSemigroups9iy, ds9iG, d_s9iM);
+            var sats9iR = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9iR_Entry, sat_Frees9iR);
+            var sat_Frees9iQ = (dSemigroups9ix, cs9iF, c_s9iL);
+            var sats9iQ = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9iQ_Entry, sat_Frees9iQ);
+            var sat_Frees9iP = (dSemigroups9iw, bs9iE, b_s9iK);
+            var sats9iP = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9iP_Entry, sat_Frees9iP);
+            var sat_Frees9iO = (dSemigroups9iv, as9iD, a_s9iJ);
+            var sats9iO = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9iO_Entry, sat_Frees9iO);
             return new GHC.Tuple.Tuple5(sats9iO, sats9iP, sats9iQ, sats9iR, sats9iS);
         }
-        public static Closure sats9iO_Entry(Closure dSemigroups9iv, Closure as9iD, Closure a_s9iJ)
+        public static Closure sats9iO_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9iO)
         {
+            var dSemigroups9iv = sat_Frees9iO.x0;
+            var as9iD = sat_Frees9iO.x1;
+            var a_s9iJ = sat_Frees9iO.x2;
             return dSemigroups9iv.Apply<Closure, Closure, Closure>(as9iD, a_s9iJ);
         }
-        public static Closure sats9iP_Entry(Closure dSemigroups9iw, Closure bs9iE, Closure b_s9iK)
+        public static Closure sats9iP_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9iP)
         {
+            var dSemigroups9iw = sat_Frees9iP.x0;
+            var bs9iE = sat_Frees9iP.x1;
+            var b_s9iK = sat_Frees9iP.x2;
             return dSemigroups9iw.Apply<Closure, Closure, Closure>(bs9iE, b_s9iK);
         }
-        public static Closure sats9iQ_Entry(Closure dSemigroups9ix, Closure cs9iF, Closure c_s9iL)
+        public static Closure sats9iQ_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9iQ)
         {
+            var dSemigroups9ix = sat_Frees9iQ.x0;
+            var cs9iF = sat_Frees9iQ.x1;
+            var c_s9iL = sat_Frees9iQ.x2;
             return dSemigroups9ix.Apply<Closure, Closure, Closure>(cs9iF, c_s9iL);
         }
-        public static Closure sats9iR_Entry(Closure dSemigroups9iy, Closure ds9iG, Closure d_s9iM)
+        public static Closure sats9iR_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9iR)
         {
+            var dSemigroups9iy = sat_Frees9iR.x0;
+            var ds9iG = sat_Frees9iR.x1;
+            var d_s9iM = sat_Frees9iR.x2;
             return dSemigroups9iy.Apply<Closure, Closure, Closure>(ds9iG, d_s9iM);
         }
-        public static Closure sats9iS_Entry(Closure dSemigroups9iz, Closure es9iH, Closure e_s9iN)
+        public static Closure sats9iS_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9iS)
         {
+            var dSemigroups9iz = sat_Frees9iS.x0;
+            var es9iH = sat_Frees9iS.x1;
+            var e_s9iN = sat_Frees9iS.x2;
             return dSemigroups9iz.Apply<Closure, Closure, Closure>(es9iH, e_s9iN);
         }
         public static Closure fSemigroupPrOComComComPrC_Entry(Closure etaB6, Closure etaB5, Closure etaB4, Closure etaB3, Closure etaB2, Closure etaB1)
@@ -3826,26 +4386,42 @@ namespace GHC
             var b_s9im = wilds9ik_Tuple4.x1;
             var c_s9in = wilds9ik_Tuple4.x2;
             var d_s9io = wilds9ik_Tuple4.x3;
-            var sats9is = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9is_Entry), dSemigroups9ic, ds9ij, d_s9io);
-            var sats9ir = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9ir_Entry), dSemigroups9ib, cs9ii, c_s9in);
-            var sats9iq = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9iq_Entry), dSemigroups9ia, bs9ih, b_s9im);
-            var sats9ip = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9ip_Entry), dSemigroups9i9, as9ig, a_s9il);
+            var sat_Frees9is = (dSemigroups9ic, ds9ij, d_s9io);
+            var sats9is = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9is_Entry, sat_Frees9is);
+            var sat_Frees9ir = (dSemigroups9ib, cs9ii, c_s9in);
+            var sats9ir = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9ir_Entry, sat_Frees9ir);
+            var sat_Frees9iq = (dSemigroups9ia, bs9ih, b_s9im);
+            var sats9iq = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9iq_Entry, sat_Frees9iq);
+            var sat_Frees9ip = (dSemigroups9i9, as9ig, a_s9il);
+            var sats9ip = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9ip_Entry, sat_Frees9ip);
             return new GHC.Tuple.Tuple4(sats9ip, sats9iq, sats9ir, sats9is);
         }
-        public static Closure sats9ip_Entry(Closure dSemigroups9i9, Closure as9ig, Closure a_s9il)
+        public static Closure sats9ip_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9ip)
         {
+            var dSemigroups9i9 = sat_Frees9ip.x0;
+            var as9ig = sat_Frees9ip.x1;
+            var a_s9il = sat_Frees9ip.x2;
             return dSemigroups9i9.Apply<Closure, Closure, Closure>(as9ig, a_s9il);
         }
-        public static Closure sats9iq_Entry(Closure dSemigroups9ia, Closure bs9ih, Closure b_s9im)
+        public static Closure sats9iq_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9iq)
         {
+            var dSemigroups9ia = sat_Frees9iq.x0;
+            var bs9ih = sat_Frees9iq.x1;
+            var b_s9im = sat_Frees9iq.x2;
             return dSemigroups9ia.Apply<Closure, Closure, Closure>(bs9ih, b_s9im);
         }
-        public static Closure sats9ir_Entry(Closure dSemigroups9ib, Closure cs9ii, Closure c_s9in)
+        public static Closure sats9ir_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9ir)
         {
+            var dSemigroups9ib = sat_Frees9ir.x0;
+            var cs9ii = sat_Frees9ir.x1;
+            var c_s9in = sat_Frees9ir.x2;
             return dSemigroups9ib.Apply<Closure, Closure, Closure>(cs9ii, c_s9in);
         }
-        public static Closure sats9is_Entry(Closure dSemigroups9ic, Closure ds9ij, Closure d_s9io)
+        public static Closure sats9is_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9is)
         {
+            var dSemigroups9ic = sat_Frees9is.x0;
+            var ds9ij = sat_Frees9is.x1;
+            var d_s9io = sat_Frees9is.x2;
             return dSemigroups9ic.Apply<Closure, Closure, Closure>(ds9ij, d_s9io);
         }
         public static Closure fSemigroupPrOComComPrC_Entry(Closure etaB5, Closure etaB4, Closure etaB3, Closure etaB2, Closure etaB1)
@@ -3864,21 +4440,33 @@ namespace GHC
             var a_s9i1 = wilds9i0_Tuple3.x0;
             var b_s9i2 = wilds9i0_Tuple3.x1;
             var c_s9i3 = wilds9i0_Tuple3.x2;
-            var sats9i6 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9i6_Entry), dSemigroups9hT, cs9hZ, c_s9i3);
-            var sats9i5 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9i5_Entry), dSemigroups9hS, bs9hY, b_s9i2);
-            var sats9i4 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9i4_Entry), dSemigroups9hR, as9hX, a_s9i1);
+            var sat_Frees9i6 = (dSemigroups9hT, cs9hZ, c_s9i3);
+            var sats9i6 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9i6_Entry, sat_Frees9i6);
+            var sat_Frees9i5 = (dSemigroups9hS, bs9hY, b_s9i2);
+            var sats9i5 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9i5_Entry, sat_Frees9i5);
+            var sat_Frees9i4 = (dSemigroups9hR, as9hX, a_s9i1);
+            var sats9i4 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9i4_Entry, sat_Frees9i4);
             return new GHC.Tuple.Tuple3(sats9i4, sats9i5, sats9i6);
         }
-        public static Closure sats9i4_Entry(Closure dSemigroups9hR, Closure as9hX, Closure a_s9i1)
+        public static Closure sats9i4_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9i4)
         {
+            var dSemigroups9hR = sat_Frees9i4.x0;
+            var as9hX = sat_Frees9i4.x1;
+            var a_s9i1 = sat_Frees9i4.x2;
             return dSemigroups9hR.Apply<Closure, Closure, Closure>(as9hX, a_s9i1);
         }
-        public static Closure sats9i5_Entry(Closure dSemigroups9hS, Closure bs9hY, Closure b_s9i2)
+        public static Closure sats9i5_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9i5)
         {
+            var dSemigroups9hS = sat_Frees9i5.x0;
+            var bs9hY = sat_Frees9i5.x1;
+            var b_s9i2 = sat_Frees9i5.x2;
             return dSemigroups9hS.Apply<Closure, Closure, Closure>(bs9hY, b_s9i2);
         }
-        public static Closure sats9i6_Entry(Closure dSemigroups9hT, Closure cs9hZ, Closure c_s9i3)
+        public static Closure sats9i6_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9i6)
         {
+            var dSemigroups9hT = sat_Frees9i6.x0;
+            var cs9hZ = sat_Frees9i6.x1;
+            var c_s9i3 = sat_Frees9i6.x2;
             return dSemigroups9hT.Apply<Closure, Closure, Closure>(cs9hZ, c_s9i3);
         }
         public static Closure fSemigroupPrOComPrC_Entry(Closure etaB4, Closure etaB3, Closure etaB2, Closure etaB1)
@@ -3895,16 +4483,24 @@ namespace GHC
             var wilds9hK_Tuple2 = wilds9hK as GHC.Tuple.Tuple2;
             var a_s9hL = wilds9hK_Tuple2.x0;
             var b_s9hM = wilds9hK_Tuple2.x1;
-            var sats9hO = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9hO_Entry), dSemigroups9hE, bs9hJ, b_s9hM);
-            var sats9hN = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats9hN_Entry), dSemigroups9hD, as9hI, a_s9hL);
+            var sat_Frees9hO = (dSemigroups9hE, bs9hJ, b_s9hM);
+            var sats9hO = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9hO_Entry, sat_Frees9hO);
+            var sat_Frees9hN = (dSemigroups9hD, as9hI, a_s9hL);
+            var sats9hN = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats9hN_Entry, sat_Frees9hN);
             return new GHC.Tuple.Tuple2(sats9hN, sats9hO);
         }
-        public static Closure sats9hN_Entry(Closure dSemigroups9hD, Closure as9hI, Closure a_s9hL)
+        public static Closure sats9hN_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9hN)
         {
+            var dSemigroups9hD = sat_Frees9hN.x0;
+            var as9hI = sat_Frees9hN.x1;
+            var a_s9hL = sat_Frees9hN.x2;
             return dSemigroups9hD.Apply<Closure, Closure, Closure>(as9hI, a_s9hL);
         }
-        public static Closure sats9hO_Entry(Closure dSemigroups9hE, Closure bs9hJ, Closure b_s9hM)
+        public static Closure sats9hO_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees9hO)
         {
+            var dSemigroups9hE = sat_Frees9hO.x0;
+            var bs9hJ = sat_Frees9hO.x1;
+            var b_s9hM = sat_Frees9hO.x2;
             return dSemigroups9hE.Apply<Closure, Closure, Closure>(bs9hJ, b_s9hM);
         }
         public static Closure fSemigroupPrOPrC_Entry(Closure etaB2, Closure etaB1)
@@ -3921,16 +4517,22 @@ namespace GHC
         }
         public static Closure cLtGts9hq_Entry(Closure dSemigroups9hr, Closure fs9hs, Closure gs9ht, Closure xs9hu)
         {
-            var sats9hw = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9hw_Entry), gs9ht, xs9hu);
-            var sats9hv = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats9hv_Entry), fs9hs, xs9hu);
+            var sat_Frees9hw = (gs9ht, xs9hu);
+            var sats9hw = new Updatable<(Closure x0, Closure x1)>(&sats9hw_Entry, sat_Frees9hw);
+            var sat_Frees9hv = (fs9hs, xs9hu);
+            var sats9hv = new Updatable<(Closure x0, Closure x1)>(&sats9hv_Entry, sat_Frees9hv);
             return dSemigroups9hr.Apply<Closure, Closure, Closure>(sats9hv, sats9hw);
         }
-        public static Closure sats9hv_Entry(Closure fs9hs, Closure xs9hu)
+        public static Closure sats9hv_Entry(in (Closure x0, Closure x1) sat_Frees9hv)
         {
+            var fs9hs = sat_Frees9hv.x0;
+            var xs9hu = sat_Frees9hv.x1;
             return fs9hs.Apply<Closure, Closure>(xs9hu);
         }
-        public static Closure sats9hw_Entry(Closure gs9ht, Closure xs9hu)
+        public static Closure sats9hw_Entry(in (Closure x0, Closure x1) sat_Frees9hw)
         {
+            var gs9ht = sat_Frees9hw.x0;
+            var xs9hu = sat_Frees9hw.x1;
             return gs9ht.Apply<Closure, Closure>(xs9hu);
         }
         public static Closure ltGt_Entry(Closure a0)

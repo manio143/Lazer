@@ -5,7 +5,7 @@ namespace GHC
 {
     public unsafe static class Err
     {
-        public static Function error = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(error_Entry));
+        public static Function error = new Fun1<Closure,Closure>(&error_Entry);
         public static Closure error_Entry(Closure s)
         {
             string errorMessage = CString.packCStringHash(s);

@@ -2,70 +2,64 @@ using Lazer.Runtime;
 
 public unsafe static class DigitsE1
 {
-    internal static string lvls5xZ = "Main.lhs:(40,3)-(41,67)|function takeDigits";
-    internal static string lvls5x7 = "Main.lhs:(30,3)-(35,59)|function ratTrans";
-    public static Fun main;
+    internal static string lvls5xX = "Main.lhs:(40,3)-(41,67)|function takeDigits";
+    internal static string lvls5x5 = "Main.lhs:(30,3)-(35,59)|function ratTrans";
+    public static Function main;
 
-    internal static Fun mains5yq;
+    internal static Function mains5yo;
 
-    internal static Fun gos5yk;
+    internal static Function gos5yi;
 
-    public static Fun e;
+    public static Function e;
 
-    public static Fun takeDigits;
+    public static Function takeDigits;
 
-    internal static Fun wtakeDigitss5y1;
+    internal static Function wtakeDigitss5xZ;
 
-    internal static Updatable lvls5y0;
+    internal static Thunk lvls5xY;
 
-    public static Fun ratTrans;
+    public static Function ratTrans;
 
-    internal static Fun wratTranss5xa;
+    internal static Function wratTranss5x8;
 
-    internal static Updatable lvls5x8;
+    internal static Thunk lvls5x6;
 
-    internal static Updatable eContFracs5x2;
+    internal static Thunk eContFracs5x0;
 
-    internal static Fun wauxs5wT;
+    internal static Function wauxs5wR;
 
-    internal static Data eContFracs5wR;
-    internal static Data lvls5wS;
+    internal static GHC.Integer.Type.SHash eContFracs5wP;
+    internal static GHC.Integer.Type.SHash lvls5wQ;
     public static GHC.Types.Cons eContFrac;
-    internal static Data lvls5x9;
-    internal static Data lvls5xY;
+    internal static GHC.Integer.Type.SHash lvls5x7;
+    internal static GHC.Integer.Type.SHash lvls5xW;
 
     static DigitsE1()
     {
-        main = new Fun(1, CLR.LoadFunctionPointer<GHC.Prim.Void, Closure>(main_Entry));
+        main = new Fun1<GHC.Prim.Void, Closure>(&main_Entry);
+        mains5yo = new Fun1<GHC.Prim.Void, Closure>(&mains5yo_Entry);
 
-        mains5yq = new Fun(1, CLR.LoadFunctionPointer<GHC.Prim.Void, Closure>(mains5yq_Entry));
+        gos5yi = new Fun1<Closure, Closure>(&gos5yi_Entry);
+        e = new Fun1<Closure, Closure>(&e_Entry);
+        takeDigits = new Fun2<Closure, Closure, Closure>(&takeDigits_Entry);
 
-        gos5yk = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(gos5yk_Entry));
+        wtakeDigitss5xZ = new Fun2<long, Closure, Closure>(&wtakeDigitss5xZ_Entry);
 
-        e = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(e_Entry));
+        lvls5xY = new Updatable(&lvls5xY_Entry);
+        ratTrans = new Fun2<Closure, Closure, Closure>(&ratTrans_Entry);
 
-        takeDigits = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(takeDigits_Entry));
+        wratTranss5x8 = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&wratTranss5x8_Entry);
 
-        wtakeDigitss5y1 = new Fun(2, CLR.LoadFunctionPointer<long, Closure, Closure>(wtakeDigitss5y1_Entry));
+        lvls5x6 = new Updatable(&lvls5x6_Entry);
+        eContFracs5x0 = new Updatable(&eContFracs5x0_Entry);
+        wauxs5wR = new Fun1<Closure, (Closure x0, Closure x1)>(&wauxs5wR_Entry);
 
-        lvls5y0 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls5y0_Entry));
-
-        ratTrans = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(ratTrans_Entry));
-
-        wratTranss5xa = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(wratTranss5xa_Entry));
-
-        lvls5x8 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls5x8_Entry));
-
-        eContFracs5x2 = new Updatable(CLR.LoadFunctionPointer<Closure>(eContFracs5x2_Entry));
-
-        wauxs5wT = new Fun(1, CLR.LoadFunctionPointer<Closure, (Closure x0, Closure x1)>(wauxs5wT_Entry));
-
-        lvls5xY = GHC.Integer.Type.smallInteger_Entry(10) as Data;
-        lvls5x9 = GHC.Integer.Type.smallInteger_Entry(0) as Data;
-        eContFrac = new GHC.Types.Cons(null, eContFracs5x2);
-        lvls5wS = GHC.Integer.Type.smallInteger_Entry(1) as Data;
-        eContFracs5wR = GHC.Integer.Type.smallInteger_Entry(2) as Data;
-        eContFrac.x0 = eContFracs5wR;
+        lvls5xW = new GHC.Integer.Type.SHash(10);
+        lvls5x7 = new GHC.Integer.Type.SHash(0);
+        eContFrac = new GHC.Types.Cons((Closure)null, eContFracs5x0);
+        lvls5wQ = new GHC.Integer.Type.SHash(1);
+        eContFracs5wP = new GHC.Integer.Type.SHash(2);
+        eContFrac.x0 = eContFracs5wP;
     }
     public static Closure TestEntry()
     {
@@ -75,159 +69,171 @@ public unsafe static class DigitsE1
     }
     public static Closure main_Entry(GHC.Prim.Void void0E)
     {
-        return mains5yq_Entry(GHC.Prim.voidHash);
+        return mains5yo_Entry(GHC.Prim.voidHash);
     }
-    public static Closure mains5yq_Entry(GHC.Prim.Void void0E)
+    public static Closure mains5yo_Entry(GHC.Prim.Void void0E)
     {
-        var sats5ys = wtakeDigitss5y1_Entry(50, DigitsE1.eContFrac).Eval();
-        var wilds5yt = gos5yk_Entry(sats5ys).Eval();
-        var wilds5ytTags5yt = wilds5yt.Tag;
-        switch (wilds5ytTags5yt)
+        var sats5yq = wtakeDigitss5xZ_Entry(150, DigitsE1.eContFrac);
+        var wilds5yr = gos5yi_Entry(sats5yq);
+        var wilds5yrTags5yr = wilds5yr.Tag;
+        switch (wilds5yrTags5yr)
         {
             default: { throw new ImpossibleException(); }
             case 1:
                 {
-                    var wilds5yt_Unit = wilds5yt as GHC.Tuple.Unit;
+                    var wilds5yr_Unit = wilds5yr as GHC.Tuple.Unit;
                     return GHC.Tuple.unit_DataCon;
                 }
         }
     }
-    public static Closure gos5yk_Entry(Closure dss5yl)
+    public static Closure gos5yi_Entry(Closure dss5yj)
     {
-        var wilds5ym = dss5yl.Eval();
-        switch (wilds5ym)
+        var wilds5yk = dss5yj.Eval();
+        switch (wilds5yk)
         {
             default: { throw new ImpossibleException(); }
-            case GHC.Types.Nil wilds5ym_Nil:
+            case GHC.Types.Nil wilds5yk_Nil:
                 {
                     return GHC.Tuple.unit_DataCon.Eval();
                 }
-            case GHC.Types.Cons wilds5ym_Cons:
+            case GHC.Types.Cons wilds5yk_Cons:
                 {
-                    var xs5yn = wilds5ym_Cons.x0;
-                    var xss5yo = wilds5ym_Cons.x1;
-                    var ds1s5yp = xs5yn.Eval(); return gos5yk_Entry(xss5yo);
+                    var xs5yl = wilds5yk_Cons.x0;
+                    var xss5ym = wilds5yk_Cons.x1;
+                    var ds1s5yn = xs5yl.Eval(); return gos5yi_Entry(xss5ym);
                 }
         }
     }
-    public static Closure e_Entry(Closure ns5yh)
+    public static Closure e_Entry(Closure ns5yf)
     {
-        var wws5yi = ns5yh.Eval();
-        var wws5yi_IHash = wws5yi as GHC.Types.IHash;
-        var wws5yj = wws5yi_IHash.x0;
-        return wtakeDigitss5y1_Entry(wws5yj, DigitsE1.eContFrac);
+        var wws5yg = ns5yf.Eval();
+        var wws5yg_IHash = wws5yg as GHC.Types.IHash;
+        var wws5yh = wws5yg_IHash.x0;
+        return wtakeDigitss5xZ_Entry(wws5yh, DigitsE1.eContFrac);
     }
-    public static Closure takeDigits_Entry(Closure ws5yc, Closure ws5yd)
+    public static Closure takeDigits_Entry(Closure ws5ya, Closure ws5yb)
     {
-        var wws5ye = ws5yc.Eval();
-        var wws5ye_IHash = wws5ye as GHC.Types.IHash;
-        var wws5yf = wws5ye_IHash.x0;
-        return wtakeDigitss5y1_Entry(wws5yf, ws5yd);
+        var wws5yc = ws5ya.Eval();
+        var wws5yc_IHash = wws5yc as GHC.Types.IHash;
+        var wws5yd = wws5yc_IHash.x0;
+        return wtakeDigitss5xZ_Entry(wws5yd, ws5yb);
     }
-    public static Closure wtakeDigitss5y1_Entry(long wws5y2, Closure ws5y3)
+    public static Closure wtakeDigitss5xZ_Entry(long wws5y0, Closure ws5y1)
     {
-        var dss5y4 = wws5y2;
-        switch (dss5y4)
+        var dss5y2 = wws5y0;
+        switch (dss5y2)
         {
             default:
                 {
-                    var wilds5y5 = ws5y3.Eval();
-                    switch (wilds5y5)
+                    var wilds5y3 = ws5y1.Eval();
+                    switch (wilds5y3)
                     {
-                        default: { throw new ImpossibleException($"{wilds5y5.GetType()}"); }
-                        case GHC.Types.Nil wilds5y5_Nil: { return lvls5y0.Eval(); }
-                        case GHC.Types.Cons wilds5y5_Cons:
+                        default: { throw new ImpossibleException(); }
+                        case GHC.Types.Nil wilds5y3_Nil: { return lvls5xY.Eval(); }
+                        case GHC.Types.Cons wilds5y3_Cons:
                             {
-                                var xs5y6 = wilds5y5_Cons.x0;
-                                var xss5y7 = wilds5y5_Cons.x1;
-                                var sats5ya = new Updatable<long, Closure>(CLR.LoadFunctionPointer<long, Closure, Closure>(sats5ya_Entry), dss5y4, xss5y7);
-                                return new GHC.Types.Cons(xs5y6, sats5ya);
+                                var xs5y4 = wilds5y3_Cons.x0;
+                                var xss5y5 = wilds5y3_Cons.x1;
+                                var sat_Frees5y8 = (dss5y2, xss5y5);
+                                var sats5y8 = new Updatable<(long x0, Closure x1)>(&sats5y8_Entry, sat_Frees5y8);
+                                return new GHC.Types.Cons(xs5y4, sats5y8);
                             }
                     }
                 }
             case 0: { return GHC.Types.nil_DataCon.Eval(); }
         }
     }
-    public static Closure sats5ya_Entry(long dss5y4, Closure xss5y7)
+    public static Closure sats5y8_Entry(in (long x0, Closure x1) sat_Frees5y8)
     {
-        var sats5y9 = new SingleEntry<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats5y9_Entry), xss5y7);
-        var sats5y8 = dss5y4 - 1;
-        return wtakeDigitss5y1_Entry(sats5y8, sats5y9);
+        var dss5y2 = sat_Frees5y8.x0;
+        var xss5y5 = sat_Frees5y8.x1;
+        var sats5y7 = new SingleEntry<Closure>(&sats5y7_Entry, xss5y5);
+        var sats5y6 = dss5y2 - 1;
+        return wtakeDigitss5xZ_Entry(sats5y6, sats5y7);
     }
-    public static Closure sats5y9_Entry(Closure xss5y7)
+    public static Closure sats5y7_Entry(in Closure xss5y5)
     {
-        return wratTranss5xa_Entry(lvls5xY, lvls5x9, lvls5x9, lvls5wS, xss5y7);
+        return wratTranss5x8_Entry(lvls5xW, lvls5x7, lvls5x7, lvls5wQ, xss5y5);
     }
-    public static Closure lvls5y0_Entry()
+    public static Closure lvls5xY_Entry()
     {
-        throw new System.Exception(lvls5xZ);
+        throw new System.Exception(lvls5xX);
     }
-    public static Closure ratTrans_Entry(Closure ws5xR, Closure ws5xS)
+    public static Closure ratTrans_Entry(Closure ws5xP, Closure ws5xQ)
     {
-        var wws5xT = ws5xR.Eval();
-        var wws5xT_Tuple4 = wws5xT as GHC.Tuple.Tuple4;
-        var wws5xU = wws5xT_Tuple4.x0;
-        var wws5xV = wws5xT_Tuple4.x1;
-        var wws5xW = wws5xT_Tuple4.x2;
-        var wws5xX = wws5xT_Tuple4.x3;
-        return wratTranss5xa_Entry(wws5xU, wws5xV, wws5xW, wws5xX, ws5xS);
+        var wws5xR = ws5xP.Eval();
+        var wws5xR_Tuple4 = wws5xR as GHC.Tuple.Tuple4;
+        var wws5xS = wws5xR_Tuple4.x0;
+        var wws5xT = wws5xR_Tuple4.x1;
+        var wws5xU = wws5xR_Tuple4.x2;
+        var wws5xV = wws5xR_Tuple4.x3;
+        return wratTranss5x8_Entry(wws5xS, wws5xT, wws5xU, wws5xV, ws5xQ);
     }
-    public static Closure wratTranss5xa_Entry(Closure wws5xb, Closure wws5xc, Closure wws5xd, Closure wws5xe, Closure ws5xf)
+    public static Closure wratTranss5x8_Entry(Closure wws5x9, Closure wws5xa, Closure wws5xb, Closure wws5xc, Closure ws5xd)
     {
-        var wws5xg = GHC.Integer.Type.signumInteger_Entry(wws5xd);
-        var wws5xh = GHC.Integer.Type.signumInteger_Entry(wws5xe);
-        var sats5xj = wws5xh;
-        var sats5xi = wws5xg;
-        var wilds5xk = GHC.Integer.Type.eqIntegerHash_Entry(sats5xi, sats5xj);
-        var js5xl = new Updatable<Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(js5xl_Entry), wws5xb, wws5xc, wws5xd, wws5xe, ws5xf);
-        var js5xt = new Updatable<Closure, Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(js5xt_Entry), wws5xb, wws5xc, wws5xd, wws5xe, ws5xf, js5xl);
-        var lwilds5xM = wilds5xk;
-        switch (lwilds5xM)
+        var wws5xe = GHC.Integer.Type.wsignumInteger_Entry(wws5xb);
+        var wws5xf = GHC.Integer.Type.wsignumInteger_Entry(wws5xc);
+        var sats5xh = new GHC.Integer.Type.SHash(wws5xf);
+        var sats5xg = new GHC.Integer.Type.SHash(wws5xe);
+        var wilds5xi = GHC.Integer.Type.eqIntegerHash_Entry(sats5xg, sats5xh);
+        var j_Frees5xj = (wws5x9, wws5xa, wws5xb, wws5xc, ws5xd);
+        var js5xj = new SingleEntry<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4)>(&js5xj_Entry, j_Frees5xj);
+        var j_Frees5xr = (wws5x9, wws5xa, wws5xb, wws5xc, ws5xd, js5xj);
+        var js5xr = new SingleEntry<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5)>(&js5xr_Entry, j_Frees5xr);
+        var lwilds5xK = wilds5xi;
+        switch (lwilds5xK)
         {
             default:
                 {
-                    var sats5xO = GHC.Integer.Type.absInteger_Entry(wws5xe).Eval();
-                    var sats5xN = GHC.Integer.Type.absInteger_Entry(wws5xd).Eval();
-                    var wilds5xP = GHC.Integer.Type.ltIntegerHash_Entry(sats5xN, sats5xO);
-                    switch (wilds5xP)
+                    var sats5xM = GHC.Integer.Type.absInteger_Entry(wws5xc);
+                    var sats5xL = GHC.Integer.Type.absInteger_Entry(wws5xb);
+                    var wilds5xN = GHC.Integer.Type.ltIntegerHash_Entry(sats5xL, sats5xM);
+                    switch (wilds5xN)
                     {
-                        default: { return js5xl.Eval(); }
-                        case 1: { return js5xt.Eval(); }
+                        default: { return js5xj.Eval(); }
+                        case 1: { return js5xr.Eval(); }
                     }
                 }
-            case 1: { return js5xt.Eval(); }
+            case 1: { return js5xr.Eval(); }
         }
     }
-    public static Closure js5xt_Entry(Closure wws5xb, Closure wws5xc, Closure wws5xd, Closure wws5xe, Closure ws5xf, Closure js5xl)
+    public static Closure js5xr_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) j_Frees5xr)
     {
-        var wilds5xu = GHC.Integer.Type.eqIntegerHash_Entry(wws5xe, lvls5x9);
-        switch (wilds5xu)
+        var wws5x9 = j_Frees5xr.x0;
+        var wws5xa = j_Frees5xr.x1;
+        var wws5xb = j_Frees5xr.x2;
+        var wws5xc = j_Frees5xr.x3;
+        var ws5xd = j_Frees5xr.x4;
+        var js5xj = j_Frees5xr.x5;
+        var wilds5xs = GHC.Integer.Type.eqIntegerHash_Entry(wws5xc, lvls5x7);
+        switch (wilds5xs)
         {
             default:
                 {
-                    var qs5xv = GHC.Integer.Type.divInteger_Entry(wws5xc, wws5xe).Eval();
-                    var sats5xy = GHC.Integer.Type.plusInteger_Entry(wws5xb, wws5xc).Eval();
-                    var sats5xw = GHC.Integer.Type.plusInteger_Entry(wws5xd, wws5xe).Eval();
-                    var sats5xx = GHC.Integer.Type.timesInteger_Entry(sats5xw, qs5xv).Eval();
-                    var wilds5xz = GHC.Integer.Type.leIntegerHash_Entry(sats5xx, sats5xy);
-                    switch (wilds5xz)
+                    var qs5xt = GHC.Integer.Type.divInteger_Entry(wws5xa, wws5xc);
+                    var sats5xw = GHC.Integer.Type.plusInteger_Entry(wws5x9, wws5xa);
+                    var sats5xu = GHC.Integer.Type.plusInteger_Entry(wws5xb, wws5xc);
+                    var sats5xv = GHC.Integer.Type.timesInteger_Entry(sats5xu, qs5xt);
+                    var wilds5xx = GHC.Integer.Type.leIntegerHash_Entry(sats5xv, sats5xw);
+                    switch (wilds5xx)
                     {
-                        default: { return js5xl.Eval(); }
+                        default: { return js5xj.Eval(); }
                         case 1:
                             {
-                                var sats5xE = GHC.Integer.Type.plusInteger_Entry(wws5xb, wws5xc).Eval();
-                                var sats5xC = GHC.Integer.Type.plusInteger_Entry(wws5xd, wws5xe).Eval();
-                                var sats5xA = GHC.Integer.Type.plusInteger_Entry(wws5xd, wws5xe).Eval();
-                                var sats5xB = GHC.Integer.Type.timesInteger_Entry(sats5xA, qs5xv).Eval();
-                                var sats5xD = GHC.Integer.Type.plusInteger_Entry(sats5xB, sats5xC).Eval();
-                                var wilds5xF = GHC.Integer.Type.gtIntegerHash_Entry(sats5xD, sats5xE);
-                                switch (wilds5xF)
+                                var sats5xC = GHC.Integer.Type.plusInteger_Entry(wws5x9, wws5xa);
+                                var sats5xA = GHC.Integer.Type.plusInteger_Entry(wws5xb, wws5xc);
+                                var sats5xy = GHC.Integer.Type.plusInteger_Entry(wws5xb, wws5xc);
+                                var sats5xz = GHC.Integer.Type.timesInteger_Entry(sats5xy, qs5xt);
+                                var sats5xB = GHC.Integer.Type.plusInteger_Entry(sats5xz, sats5xA);
+                                var wilds5xD = GHC.Integer.Type.gtIntegerHash_Entry(sats5xB, sats5xC);
+                                switch (wilds5xD)
                                 {
-                                    default: { return js5xl.Eval(); }
+                                    default: { return js5xj.Eval(); }
                                     case 1:
                                         {
-                                            var sats5xK = new Updatable<Closure, Closure, Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure, Closure>(sats5xK_Entry), wws5xb, wws5xc, wws5xd, wws5xe, ws5xf, qs5xv);
-                                            return new GHC.Types.Cons(qs5xv, sats5xK);
+                                            var sat_Frees5xI = (wws5x9, wws5xa, wws5xb, wws5xc, ws5xd, qs5xt);
+                                            var sats5xI = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5)>(&sats5xI_Entry, sat_Frees5xI);
+                                            return new GHC.Types.Cons(qs5xt, sats5xI);
                                         }
                                 }
                             }
@@ -236,64 +242,75 @@ public unsafe static class DigitsE1
             case 1: { throw new System.Exception("Division by zero"); }
         }
     }
-    public static Closure sats5xK_Entry(Closure wws5xb, Closure wws5xc, Closure wws5xd, Closure wws5xe, Closure ws5xf, Closure qs5xv)
+    public static Closure sats5xI_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4, Closure x5) sat_Frees5xI)
     {
-        var sats5xI = GHC.Integer.Type.timesInteger_Entry(qs5xv, wws5xe).Eval();
-        var sats5xJ = GHC.Integer.Type.minusInteger_Entry(wws5xc, sats5xI).Eval();
-        var sats5xG = GHC.Integer.Type.timesInteger_Entry(qs5xv, wws5xd).Eval();
-        var sats5xH = GHC.Integer.Type.minusInteger_Entry(wws5xb, sats5xG).Eval();
-        return wratTranss5xa_Entry(wws5xd, wws5xe, sats5xH, sats5xJ, ws5xf);
+        var wws5x9 = sat_Frees5xI.x0;
+        var wws5xa = sat_Frees5xI.x1;
+        var wws5xb = sat_Frees5xI.x2;
+        var wws5xc = sat_Frees5xI.x3;
+        var ws5xd = sat_Frees5xI.x4;
+        var qs5xt = sat_Frees5xI.x5;
+        var sats5xG = GHC.Integer.Type.timesInteger_Entry(qs5xt, wws5xc);
+        var sats5xH = GHC.Integer.Type.minusInteger_Entry(wws5xa, sats5xG);
+        var sats5xE = GHC.Integer.Type.timesInteger_Entry(qs5xt, wws5xb);
+        var sats5xF = GHC.Integer.Type.minusInteger_Entry(wws5x9, sats5xE);
+        return wratTranss5x8_Entry(wws5xb, wws5xc, sats5xF, sats5xH, ws5xd);
     }
-    public static Closure js5xl_Entry(Closure wws5xb, Closure wws5xc, Closure wws5xd, Closure wws5xe, Closure ws5xf)
+    public static Closure js5xj_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3, Closure x4) j_Frees5xj)
     {
-        var wilds5xm = ws5xf.Eval();
-        switch (wilds5xm)
+        var wws5x9 = j_Frees5xj.x0;
+        var wws5xa = j_Frees5xj.x1;
+        var wws5xb = j_Frees5xj.x2;
+        var wws5xc = j_Frees5xj.x3;
+        var ws5xd = j_Frees5xj.x4;
+        var wilds5xk = ws5xd.Eval();
+        switch (wilds5xk)
         {
             default: { throw new ImpossibleException(); }
-            case GHC.Types.Nil wilds5xm_Nil: { return lvls5x8.Eval(); }
-            case GHC.Types.Cons wilds5xm_Cons:
+            case GHC.Types.Nil wilds5xk_Nil: { return lvls5x6.Eval(); }
+            case GHC.Types.Cons wilds5xk_Cons:
                 {
-                    var xs5xn = wilds5xm_Cons.x0;
-                    var xss5xo = wilds5xm_Cons.x1;
-                    var sats5xr = GHC.Integer.Type.timesInteger_Entry(xs5xn, wws5xe).Eval();
-                    var sats5xs = GHC.Integer.Type.plusInteger_Entry(wws5xd, sats5xr).Eval();
-                    var sats5xp = GHC.Integer.Type.timesInteger_Entry(xs5xn, wws5xc).Eval();
-                    var sats5xq = GHC.Integer.Type.plusInteger_Entry(wws5xb, sats5xp).Eval();
-                    return wratTranss5xa_Entry(wws5xc, sats5xq, wws5xe, sats5xs, xss5xo);
+                    var xs5xl = wilds5xk_Cons.x0;
+                    var xss5xm = wilds5xk_Cons.x1;
+                    var sats5xp = GHC.Integer.Type.timesInteger_Entry(xs5xl, wws5xc);
+                    var sats5xq = GHC.Integer.Type.plusInteger_Entry(wws5xb, sats5xp);
+                    var sats5xn = GHC.Integer.Type.timesInteger_Entry(xs5xl, wws5xa);
+                    var sats5xo = GHC.Integer.Type.plusInteger_Entry(wws5x9, sats5xn);
+                    return wratTranss5x8_Entry(wws5xa, sats5xo, wws5xc, sats5xq, xss5xm);
                 }
         }
     }
-    public static Closure lvls5x8_Entry()
+    public static Closure lvls5x6_Entry()
     {
-        throw new System.Exception(lvls5x7);
+        throw new System.Exception(lvls5x5);
     }
-    public static Closure eContFracs5x2_Entry()
+    public static Closure eContFracs5x0_Entry()
     {
-        var wws5x3 = wauxs5wT_Entry(eContFracs5wR);
-        var wws5x3_RawTuple = wws5x3;
-        var wws5x4 = wws5x3_RawTuple.x0;
-        var wws5x5 = wws5x3_RawTuple.x1;
-        return new GHC.Types.Cons(wws5x4, wws5x5);
+        var wws5x1 = wauxs5wR_Entry(eContFracs5wP);
+        var wws5x1_RawTuple = wws5x1;
+        var wws5x2 = wws5x1_RawTuple.x0;
+        var wws5x3 = wws5x1_RawTuple.x1;
+        return new GHC.Types.Cons(wws5x2, wws5x3);
     }
-    public static (Closure x0, Closure x1) wauxs5wT_Entry(Closure ws5wU)
+    public static (Closure x0, Closure x1) wauxs5wR_Entry(Closure ws5wS)
     {
-        var sats5wZ = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats5wZ_Entry), ws5wU);
-        var sats5x0 = new GHC.Types.Cons(lvls5wS, sats5wZ);
-        var sats5x1 = new GHC.Types.Cons(ws5wU, sats5x0);
-        return (lvls5wS, sats5x1);
+        var sats5wX = new Updatable<Closure>(&sats5wX_Entry, ws5wS);
+        var sats5wY = new GHC.Types.Cons(lvls5wQ, sats5wX);
+        var sats5wZ = new GHC.Types.Cons(ws5wS, sats5wY);
+        return (lvls5wQ, sats5wZ);
     }
-    public static Closure sats5wZ_Entry(Closure ws5wU)
+    public static Closure sats5wX_Entry(in Closure ws5wS)
     {
-        var sats5wV = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats5wV_Entry), ws5wU);
-        var wws5wW = wauxs5wT_Entry(sats5wV);
-        var wws5wW_RawTuple = wws5wW;
-        var wws5wX = wws5wW_RawTuple.x0;
-        var wws5wY = wws5wW_RawTuple.x1;
-        return new GHC.Types.Cons(wws5wX, wws5wY);
+        var sats5wT = new Updatable<Closure>(&sats5wT_Entry, ws5wS);
+        var wws5wU = wauxs5wR_Entry(sats5wT);
+        var wws5wU_RawTuple = wws5wU;
+        var wws5wV = wws5wU_RawTuple.x0;
+        var wws5wW = wws5wU_RawTuple.x1;
+        return new GHC.Types.Cons(wws5wV, wws5wW);
     }
-    public static Closure sats5wV_Entry(Closure ws5wU)
+    public static Closure sats5wT_Entry(in Closure ws5wS)
     {
-        return GHC.Integer.Type.plusInteger_Entry(ws5wU, eContFracs5wR);
+        return GHC.Integer.Type.plusInteger_Entry(ws5wS, eContFracs5wP);
     }
 
 }

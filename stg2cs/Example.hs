@@ -47,6 +47,11 @@ suma :: [Int] -> Int -> Int
 suma [] !a = a
 suma (x:xs) !a = suma xs (x+a)
 
+suma' :: [Int] -> (Int -> Int) -> Int
+suma' l fk = let suma_wrk [] !a = fk a
+                 suma_wrk (x:xs) !a = suma_wrk xs (x+a)
+             in suma_wrk l 0
+
 facc2 :: Int -> Int
 facc2 n = facc + 1
     where facc = if n <= 1 then 1 else n * facc2 (n-1)

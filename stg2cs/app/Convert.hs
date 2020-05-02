@@ -17,6 +17,8 @@ import CoreSyn (AltCon(..))
 import StgSyn
 import TyCon
 import TyCoRep
+import TysWiredIn
+import BasicTypes (Boxity(..))
 import DataCon
 import ForeignCall
 import Unique
@@ -74,7 +76,7 @@ data CSEntity =
     Closures are parameterless instances of either Function or Thunk. <CSMethod> is the entry point.
 -}
 
-data CSMethod = Method Name CSType [Arg] CSExpr
+data CSMethod = Method Name CSType FreeRef [Arg] CSExpr
 data CSExpr =
     CSELit Literal -- unboxed literal
     | CSEVar Id    -- variable
@@ -92,7 +94,7 @@ data CSExpr =
     | CSELetByName Name CSExpr CSExpr  -- assign <Name> := <CSExpr> and continue to evaluate <CSExpr₂>
     | CSELetAssign Id CSExpr CSExpr  -- assign existing <Id> := <CSExpr> and continue to evaluate <CSExpr₂>
     | CSECase Id [CSAlt]  -- unpack an evaluated value
-    | CSEAssign Id Index Id CSExpr 
+    | CSEAssign Id AssignMode Index Id CSExpr 
         -- assign <Id₁>.x<Index> = <Id₂>; <CSExpr>
         -- used in conjecture with CSELet for recursive declarations
     | CSEPrimOp PrimOp [CSValue]  -- a primitive operation
@@ -132,6 +134,10 @@ data CSAlt =
 data SwitchType = Type | Tag -- case expressions with 5 or more alternatives
                              -- are converted to switches based on data constructor
                              -- integer tag value
+data FreeRef = FreeRef | NoFree
+    -- The first argument is passed in by reference if it represents a free variable
+
+data AssignMode = DirectAssign | IndirectAssign
 
 {-
 ######################################
@@ -192,13 +198,13 @@ stg2cs df modName stg tyCons = evalState (go >> prettyPrint) $ initState df
             mapM_ processTop stgSorted
             convertStaticLetExpressions
             simplifyExpressions
-        simplifyExpressions = modify (\s -> s { code = map (\(Method n t a e) -> Method n t a (simplify e)) (code s) })
+        simplifyExpressions = modify (\s -> s { code = map (\(Method n t f a e) -> Method n t f a (simplify e)) (code s) })
         convertStaticLetExpressions = modify (\s -> s { entities = map convLetToLetAssign (entities s) })
             where
                 convLetToLetAssign (CSTClosure ids expr) = CSTClosure ids $ convlla expr
                 convLetToLetAssign c = c
                 convlla (CSELet id e1 e2) = CSELetAssign id e1 (convlla e2)
-                convlla (CSEAssign id1 idx id2 e) = CSEAssign id1 idx id2 (convlla e)
+                convlla (CSEAssign id1 mod idx id2 e) = CSEAssign id1 mod idx id2 (convlla e)
                 convlla CSENop = CSENop
                 -- ^ there should not be anything else
         sortDeclarations stg =
@@ -313,7 +319,7 @@ processClass cls = do
         makeMethodInfo :: Index -> Id -> (CSEntity, CSMethod)
         -- creates a selector function that retrieves a concrete function from a dict
         makeMethodInfo idx id =
-            let arity  = funArity id
+            let arity  = 1 -- all dictionary selectors take just one argument
                 name   = safeVarName WithoutModule id
                 ty     = idType id
                 did    = copyNameToNewVar id "a0"
@@ -322,7 +328,7 @@ processClass cls = do
                 expr   = CSECastAs "dict" did dictDataConName 
                             (CSELet fid (CSEUnpack "dict" idx)
                                 (CSEVar fid))
-                method = Method (name++"_Entry") (funRetType' 1 ty) [did] expr
+                method = Method (name++"_Entry") (funRetType' 1 ty) NoFree [did] expr
                 staticLet = CSELet id (CSECreateFun method arity []) CSENop
             in (CSTClosure [(id,Class "Function" [])] staticLet, method)
         [dictDataCon] = tyConDataCons $ classTyCon cls
@@ -413,7 +419,7 @@ convertExpr (StgCase e alias _ alts) = do
                                             _ -> True
                         in not (ext || exp || callable)
                 let occs = filter isLocal $ nub $ exprFreeVars e
-                let method = Method methodName (typeToCSType vt) occs ex
+                let method = Method methodName (typeToCSType vt) NoFree occs ex
                 return (CSECall methodName (map CSRef occs) Nothing, method : mxs)
     let actualType = if isUnitHash vt then innerUnitHashType vt else vt
     case isUnliftedTypeSafe actualType of
@@ -444,12 +450,13 @@ convertBndrs bndrs ec = do
     let boundIds = map fst bndrs
         boundIdNames = map varName boundIds
         boundInOccs = map (findBound boundIdNames . snd) bndrs
-        mappedBoundInOccs = zip boundIds boundInOccs
+        assignModes = map (findAssMode . snd) bndrs 
+        mappedBoundInOccs = zip3 boundIds assignModes boundInOccs
         callableLocals = concat $ map findCallable bndrs
     st <- get
     (idexs,ts,ms) <- foldM (\(iexs,ts,ms') rhs -> do {
-          (id, ex, t, ms) <- convertRhs boundIdNames rhs
-        ; return ((id, ex):iexs, t:ts, ms++ms') }) ([],[],[]) bndrs
+          (id, pre, ex, t, ms) <- convertRhs boundIdNames rhs
+        ; return ((id, pre, ex):iexs, t:ts, ms++ms') }) ([],[],[]) bndrs
     mkAssignments ec callableLocals (reverse ts) ms idexs mappedBoundInOccs
     where
         findBound :: [GHC.Name] -> StgRhs -> [(Id, Index)]
@@ -469,39 +476,62 @@ convertBndrs bndrs ec = do
         findCallable (id, StgRhsClosure _ _ [] ReEntrant bndrs _) = [(id, length bndrs)]
         findCallable _ = []
 
-        mkAssignments :: StgExpr -> [(Id,Arity)] -> [CSType] -> [CSMethod] -> [(Id, CSExpr)] -> 
-                        [(Id, [(Id, Index)])] -> CSST (CSExpr, [CSType], [CSMethod])
+        findAssMode (StgRhsClosure _ _ occs _ _ _) = if length occs <= 1 then DirectAssign else IndirectAssign
+        findAssMode (StgRhsCon _ _ _) = DirectAssign
+
+        mkAssignments :: StgExpr -> [(Id,Arity)] -> [CSType] -> [CSMethod] -> [(Id, CSExpr -> CSExpr, CSExpr)] -> 
+                        [(Id, AssignMode, [(Id, Index)])] -> CSST (CSExpr, [CSType], [CSMethod])
         mkAssignments ec callableLocals ts ms idexs mappedBoundInOccs = do
             (ecx, ms') <- foldr (\(id,ar) -> withCallable id ar ((safeVarName WithModule id)++"_Entry"))
                             (convertExpr ec) callableLocals
-            let assExpr = foldr (\(id, l) e -> foldr (\(id',i) -> CSEAssign id i id') e l) ecx mappedBoundInOccs
-            let letExpr = foldr (\(id,cse) -> CSELet id cse) assExpr idexs
+            let assExpr = foldr (\(id, mod, l) e -> foldr (\(id',i) -> CSEAssign id mod i id') e l) ecx mappedBoundInOccs
+            let letExpr = foldr (\(id, pre,cse) -> pre . CSELet id cse) assExpr idexs
             return (letExpr, ts, ms'++ms)
 convertRhs boundIds (id, StgRhsCon _ dataCon args) = do
     let as = map convertArg args
         as' = map (\a -> case a of {CSRef x -> if elem (varName x) boundIds then CSNull else a; _ -> a}) as
     let name = safeConName WithModule dataCon
     let conExpr = CSECon name as'
-    return (id, conExpr, Class name [], [])
+    return (id, \e -> e, conExpr, Class name [], [])
 convertRhs boundIds (id, StgRhsClosure _ _ occs flag bndrs e1) = do
-    --TODO never create 0 arity functions - they are actually calls?
     let retType = funRetType id bndrs
     (e1x, ms2) <- withRetType retType $ convertExpr e1
         --TODO recursive application of the same function should be direct calls
     let name = safeVarName WithoutModule id
     let methodName = name++"_Entry"
-    let method = Method methodName retType (occs++bndrs) e1x
+    let is0ArityCall = (case flag of {ReEntrant -> True; _ -> False}) &&
+                       length bndrs == 0 &&
+                       isUnliftedCSType retType 
+    let isTupleWrapped = length occs > 1 && not is0ArityCall
+    let freeForm = if length occs == 0 || is0ArityCall then NoFree else FreeRef
     let params = map (\i -> if elem (varName i) boundIds then CSNull else CSRef i) occs 
+    let (occs', preCreate, params', e1x') =
+            if isTupleWrapped then
+                let tupleType = mkTyConTy $ tupleTyCon Unboxed (length occs)
+                    tupleCon = tupleDataCon Unboxed (length occs)
+                    newVar = createNewTupleVar id (nameToStr (varName id) ++ "_Free") tupleType (map idType occs)
+                    conExpr = CSECon (safeConName WithModule tupleCon) params
+                    deconstrExpr = foldr (\(idx, occ) -> CSELet occ (CSEUnpack (safeVarName WithoutModule newVar) idx)) e1x (zip [0..] occs)
+                in ([newVar], \e -> CSELet newVar conExpr e, [CSRef newVar], deconstrExpr)
+            else (occs, \e -> e, params, e1x)
+    let method = Method methodName retType freeForm (occs'++bndrs) e1x'
     let assExpr = case flag of
-                    ReEntrant -> CSECreateFun method (length bndrs) params
-                    Updatable -> CSECreateThunk method params
-                    SingleEntry -> CSECreateClosure method params
+                    ReEntrant -> 
+                        let arity = length bndrs in
+                        if not is0ArityCall then 
+                            if arity == 0 then
+                                CSECreateClosure method params'
+                            else CSECreateFun method arity params'
+                        else CSECall methodName params' Nothing
+                    Updatable -> CSECreateThunk method params'
+                    SingleEntry -> CSECreateClosure method params'
+    -- This is used in CSEntity and could be Closure for all non DataCon elements (no top-level rec)
     let typeFromFlag = let genPars = map (typeToCSType . idType) occs in
                         case flag of
-                            ReEntrant -> Class "Fun" genPars
-                            Updatable -> Class "Updatable" genPars
-                            SingleEntry -> Class "SingleEntry" genPars
-    return (id, assExpr, typeFromFlag, method : ms2)
+                            ReEntrant -> Class "Function" genPars
+                            Updatable -> Class "Thunk" genPars
+                            SingleEntry -> Class "Closure" genPars
+    return (id, preCreate, assExpr, typeFromFlag, method : ms2)
 
 withCallable :: Id -> Arity -> Name -> CSST a -> CSST a
 withCallable id arity name m = do
@@ -576,11 +606,12 @@ simplify (CSECase id alts) = CSECase id (map simplifyAlt alts)
 simplify (CSEEvalAnd id e) = CSEEvalAnd id (simplify e)
 simplify (CSELet id (CSEEval (CSEApp m args rt)) e) = CSELet id (CSEApp m args rt) (simplify e)
 simplify (CSELet id (CSEEval (CSECall m args mrt)) e) = CSELet id (CSECall m args mrt) (simplify e)
+simplify (CSELet id (CSEEval (CSEAppAfterCall m id' args1 args2 rt)) e) = CSELet id (CSEAppAfterCall m id' args1 args2 rt) (simplify e)
 simplify (CSELet id (CSEApp m args rt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSEApp m args rt) (simplify e)
 simplify (CSELet id (CSECall m args mrt) (CSEEvalAnd id' e)) | id == id' = CSELet id (CSECall m args mrt) (simplify e)
 simplify (CSELet id e1 ec) = CSELet id e1 (simplify ec) -- e1 is a simple expr
 simplify (CSELetByName name e1 ec) = CSELetByName name e1 (simplify ec) -- e1 is a simple expr
-simplify (CSEAssign id idx id' e) = CSEAssign id idx id' (simplify e)
+simplify (CSEAssign id mod idx id' e) = CSEAssign id mod idx id' (simplify e)
 simplify (CSECastAs name id name' e) = CSECastAs name id name' (simplify e)
 simplify (CSETag id id' e) = CSETag id id' (simplify e)
 simplify e = e 
@@ -693,6 +724,16 @@ copyNameToNewVar id name =
         occName = mkVarOcc name
         ghcName = mkInternalName unique occName (nameSrcSpan prevname)
         newVar = mkLocalVar (idDetails id) ghcName (varType id) (idInfo id)
+    in newVar
+
+createNewTupleVar :: Id -> Name -> Type -> [Type] -> Id
+createNewTupleVar id name tupleT types =
+    let prevname = varName id
+        unique = nameUnique prevname
+        occName = mkVarOcc name
+        ghcName = mkInternalName unique occName (nameSrcSpan prevname)
+        t = mkAppTys tupleT $ map getRuntimeRep types ++ types
+        newVar = mkLocalVar (idDetails id) ghcName t (idInfo id)
     in newVar
 
 uniqueNameFromInteger i =
@@ -812,22 +853,27 @@ safeName c w idName mId =
             else ""
         n = nameToStr idName
         isSpecialName = n /= "$" && head n == '$' && (isAlpha (head (tail n)) || head (tail n) == '_')
-        name = 
-            if justTrue (isDFunId <$> mId) || justTrue (isRecordSelector <$> mId) ||
-                (isJust $ isClassOpId_maybe =<< mId) then
-                if isSpecialName then tail n else n
-            else if isSpecialName then
-                tail n ++ (show $ varUnique $ fromJust mId)
-            else if not (isExternalName idName) then
-                n ++ (show $ varUnique $ fromJust mId)
-            else n
-        --TODO don't add unique to worker functions
+        nameWithUnique = 
+            if justTrue (isSpecialId <$> mId) then n
+            else if isExternalName idName || justTrue (isExportedId <$> mId) then n
+            -- don't add unique to worker functions -> actually not sure if possible
+            -- worker functions are just local nonexported functions
+            -- they don't even seem to have a consistent naming scheme
+            -- (either start with 'w', '$w' or 'w$')
+            else n ++ (show $ varUnique $ fromJust mId)
+        name = if isSpecialName then tail nameWithUnique else nameWithUnique
         safeOpName = 
             case name of
                 "(#,#)" -> "RawTuple"
                 "(#,,#)" -> "RawTuple"
                 "(#,,,#)" -> "RawTuple"
                 "(#,,,,#)" -> "RawTuple"
+                "(#,,,,,#)" -> "RawTuple"
+                "(#,,,,,,#)" -> "RawTuple"
+                "(#,,,,,,,#)" -> "RawTuple"
+                "(#,,,,,,,,#)" -> "RawTuple"
+                "(#,,,,,,,,,#)" -> "RawTuple"
+                "(#,,,,,,,,,,#)" -> "RawTuple"
                 "(,)" -> "Tuple2"
                 "(,,)" -> "Tuple3"
                 "(,,,)" -> "Tuple4"
@@ -856,6 +902,16 @@ safeName c w idName mId =
     in case w of
         WithModule -> modName ++ finalName
         WithoutModule -> finalName
+
+isSpecialId id =
+    isDFunId id ||
+    isRecordSelector id ||
+    isNaughtyRecordSelector id ||
+    isJust (isClassOpId_maybe id) ||
+    isDataConRecordSelector id ||
+    isDataConWorkId id ||
+    isFCallId id
+
 
 translateOpString n = (n >>= trOp)
     where
@@ -984,6 +1040,11 @@ debugPrintType (LitTy (StrTyLit fs)) = show $ unpackFS fs
 debugPrintType (CastTy t _) = "(Cast "++debugPrintType t++")"
 debugPrintType _ = "τ" -- Coercion
 
+isUnliftedCSType Closure = False
+isUnliftedCSType (Class _ _) = False
+isUnliftedCSType Generic = False
+isUnliftedCSType _ = True
+
 data Levity = Lifted | Unlifted | LevityPolimorphic
 
 isUnliftedTypeSafe t =
@@ -1012,6 +1073,12 @@ unliftedTypeToCSType t =
                         "(#,,#)" -> tup 3 tyArgs
                         "(#,,,#)" -> tup 4 tyArgs
                         "(#,,,,#)" -> tup 5 tyArgs
+                        "(#,,,,,#)" -> tup 6 tyArgs
+                        "(#,,,,,,#)" -> tup 7 tyArgs
+                        "(#,,,,,,,#)" -> tup 8 tyArgs
+                        "(#,,,,,,,,#)" -> tup 9 tyArgs
+                        "(#,,,,,,,,,#)" -> tup 10 tyArgs
+                        "(#,,,,,,,,,,#)" -> tup 11 tyArgs
                         "Void#" -> Class "GHC.Prim.Void" []
                         "State#" -> Class "GHC.Prim.StateHash" []
                         "Addr#" -> Class "System.IntPtr" []
@@ -1135,28 +1202,32 @@ instance Outputable CSValue where
         hsep [text $ "new "++name++"(", pprArgs args, text ")"]
     ppr (CSRef id) = pprSafeQualifiedName id
     ppr (CSLit l) = pprLit l
-    ppr CSNull = text "null"
+    ppr CSNull = text "(Closure)null"
     ppr CSDefault = text "default"
 
-pprLit (MachChar c) = text $ "'" ++ showLitChar c "" ++ "'" --TODO escape '
+pprLit (MachChar '\'') = text "'\\''"
+pprLit (MachChar c) = text $ "'" ++ showLitChar c "" ++ "'"
 pprLit (LitNumber LitNumInt64 i _) = text $ show i ++ "L"
 pprLit (LitNumber LitNumWord64 i _) = text $ show i ++ "UL"
 pprLit (LitNumber LitNumWord i _) = text $ show i ++ "UL"
 pprLit (LitNumber _ i _) = text $ show i
 pprLit (MachStr bs) = text $ show bs
 pprLit MachNullAddr = text "null"
-pprLit (MachFloat r) = text $ show r ++ "f"
-pprLit (MachDouble r) = text $ show r
+pprLit (MachFloat r) = text $ show (fromRational r::Float) ++ "f"
+pprLit (MachDouble r) = text $ show $ (fromRational r ::Double)
 pprLit (MachLabel l _ _) = error $ "Can't emit label: "++show l
 
 instance Outputable CSMethod where
-    ppr (Method name typ args ex) =
+    ppr (Method name typ freeForm args ex) =
         hsep [hang 
-                (hsep [text "public static", ppr typ, text $ name ++ genericDecl ++ "(", pprArguments args, text ") {"])
+                (hsep [text "public static", ppr typ, text $ name ++ genericDecl ++ "(" ++ ref, pprArguments args, text ") {"])
                 4
                 (sep [ppr ex, text "}"])]
         where
             genericDecl = if typ == Generic then "<GenericR>" else ""
+            ref = case freeForm of
+                    FreeRef -> "in"
+                    NoFree -> ""
 
 pprArguments :: [Id] -> SDoc
 pprArguments [] = text ""
@@ -1184,6 +1255,10 @@ callAppGenArgs rt cargs appargs =
 pprGenArgs []   = text ""
 pprGenArgs args =
     let types = map valueType args in
+    hsep [text "<", pprArgs types, text ">"]
+
+pprFunGenArgs (Method _ rt _ bndrs _) =
+    let types = map (typeToCSType . idType) bndrs ++ [rt] in
     hsep [text "<", pprArgs types, text ">"]
 
 pprGenIdsWithRet ret args =
@@ -1218,10 +1293,10 @@ instance Outputable CSExpr where
             hsep [pprSafeName id, text "=", hcat[pprSafeName id, text ".Eval();"]],
             ppr ex
         ]
-    ppr (CSEAssign id idx id' ex) =
+    ppr (CSEAssign id mod idx id' ex) =
         sep [
             hsep [
-                hcat [pprSafeName id, text $".x" ++ show idx],
+                hcat [pprSafeName id, text $ (case mod of {IndirectAssign -> ".free";_->""})++".x" ++ show idx],
                 text "=", pprSafeQualifiedName id', text ";"
             ],
             ppr ex
@@ -1268,6 +1343,7 @@ instance Outputable CSExpr where
 
 pprLetExpr (CSEVar id) = pprSafeQualifiedName id
 pprLetExpr (CSEEval e) = hcat [pprLetExpr e, text ".Eval()"]
+pprLetExpr (CSECon "GHC.Prim.RawTuple" args) = hsep [text "(", pprArgs args, text ")"]
 pprLetExpr (CSECon name args) = hsep [text $ "new "++name++"(", pprArgs args, text ")"]
 pprLetExpr (CSEApp id' args rt) = hsep [hcat [pprSafeQualifiedName id', text ".Apply", appGenArgs rt args, text "("], pprArgs args, text ")"]
 pprLetExpr (CSECall name args Nothing) = hsep [text $ name++"(", pprArgs args, text ")"]
@@ -1277,7 +1353,7 @@ pprLetExpr (CSEAppAfterCall name id cargs appargs rt) =
               callAppGenArgs rt cargs appargs, text "(", pprArgs appargs ,text ")"]
 pprLetExpr (CSEPrimOp op args) = pprOp op args
 pprLetExpr (CSECreateFun m arity args) = hsep [
-    text "new Fun", pprGenArgs args, text $"("++(show arity)++",", pprLdftn m,
+    text $"new Fun"++(show arity), pprFunGenArgs m, text "(", pprLdftn m,
                             text (case args of [] -> ""; _ -> ","), pprArgs args, text ")"]
 pprLetExpr (CSECreateThunk m args) = hsep [
     text "new Updatable", pprGenArgs args, text "(", pprLdftn m,
@@ -1288,7 +1364,7 @@ pprLetExpr (CSECreateClosure m args) = hsep [
 pprLetExpr (CSEUnpack name idx) = text $ name++".x"++show idx
 pprLetExpr t = ppr t -- handle things like exceptions?
 
-pprLdftn (Method name retType args _) = hcat [text "CLR.LoadFunctionPointer", pprGenIdsWithRet retType args, text $"("++name++")"]
+pprLdftn (Method name _ _ _ _) = text $ "&" ++ name
 
 pprOp IntAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
 pprOp IntSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
@@ -1346,6 +1422,7 @@ pprOp DoubleNegOp [a1] = hsep [text "-", ppr a1]
 pprOp DoubleAddOp [a1, a2] = hsep [ppr a1, text "+", ppr a2]
 pprOp DoubleSubOp [a1, a2] = hsep [ppr a1, text "-", ppr a2]
 pprOp DoubleMulOp [a1, a2] = hsep [ppr a1, text "*", ppr a2]
+pprOp DoubleDivOp [a1, a2] = hsep [ppr a1, text "/", ppr a2]
 pprOp DoublePowerOp [a1, a2] = hsep [text "System.Math.Pow(", ppr a1, text ",", ppr a2, text ")"]
 pprOp DoubleLeOp [a1, a2] = hsep [text "(",ppr a1, text "<=", ppr a2, text ") ? 1 : 0"]
 pprOp DoubleLtOp [a1, a2] = hsep [text "(",ppr a1, text "<", ppr a2, text ") ? 1 : 0"]

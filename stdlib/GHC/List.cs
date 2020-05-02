@@ -19,565 +19,508 @@ namespace GHC
         internal static string lvls8DE = "!!: negative index";
         internal static string prel_list_strs8Dy = "Prelude.";
         internal static string lvls8Dw = ": empty list";
-        public static Fun uncons;
+        public static Function uncons;
 
-        public static Fun @null;
+        public static Function @null;
 
-        public static Fun length;
+        public static Function length;
 
-        public static Fun lenAcc;
+        public static Function lenAcc;
 
-        internal static Fun wlenAccs8QL;
+        internal static Function wlenAccs8QL;
 
-        public static Fun lengthFB;
+        public static Function lengthFB;
 
-        public static Fun idLength;
+        public static Function idLength;
 
-        public static Fun filter;
+        public static Function filter;
 
-        public static Fun filterFB;
+        public static Function filterFB;
 
-        public static Fun foldl1;
+        public static Function foldl1;
 
-        public static Fun product;
+        public static Function product;
 
-        public static Fun sum;
+        public static Function sum;
 
-        public static Fun foldl;
+        public static Function foldl;
 
-        public static Fun foldl1_;
+        public static Function foldl1_;
 
-        public static Fun foldl_;
+        public static Function foldl_;
 
-        public static Fun scanl1;
+        public static Function scanl1;
 
-        public static Fun scanl;
+        public static Function scanl;
 
-        internal static Fun scanlGos8Pn;
+        internal static Function scanlGos8Pn;
 
-        internal static Fun wscanlGos8Pb;
+        internal static Function wscanlGos8Pb;
 
-        public static Fun scanlFB;
+        public static Function scanlFB;
 
-        public static Fun constScanl;
+        public static Function constScanl;
 
-        public static Fun scanl_;
+        public static Function scanl_;
 
-        internal static Fun scanlGo_s8OU;
+        internal static Function scanlGo_s8OU;
 
-        internal static Fun wscanlGo_s8OH;
+        internal static Function wscanlGo_s8OH;
 
-        public static Fun scanlFB_;
+        public static Function scanlFB_;
 
-        public static Fun flipSeqScanl_;
+        public static Function flipSeqScanl_;
 
-        public static Fun scanr;
+        public static Function scanr;
 
-        public static Fun strictUncurryScanr;
+        public static Function strictUncurryScanr;
 
-        internal static Fun wscanrs8NX;
+        internal static Function wscanrs8NX;
 
-        public static Fun scanrFB;
+        public static Function scanrFB;
 
-        public static Fun scanr1;
+        public static Function scanr1;
 
-        internal static Updatable lvls8Nq;
+        internal static Thunk lvls8Nq;
 
-        public static Fun iterate;
+        public static Function iterate;
 
-        public static Fun iterateFB;
+        public static Function iterateFB;
 
-        internal static Fun witerates8N3;
+        internal static Function witerates8N3;
 
-        public static Fun iterate_;
+        public static Function iterate_;
 
-        public static Fun iterate_FB;
+        public static Function iterate_FB;
 
-        internal static Fun witerate_s8MH;
+        internal static Function witerate_s8MH;
 
-        public static Fun replicate;
+        public static Function replicate;
 
-        public static Fun repeatFB;
+        public static Function repeatFB;
 
-        public static Fun repeat;
+        public static Function repeat;
 
-        public static Fun takeWhile;
+        public static Function takeWhile;
 
-        public static Fun takeWhileFB;
+        public static Function takeWhileFB;
 
-        public static Fun dropWhile;
+        public static Function dropWhile;
 
-        public static Fun take;
+        public static Function take;
 
-        public static Fun unsafeTake;
+        public static Function unsafeTake;
 
-        internal static Fun wunsafeTakes8LI;
+        internal static Function wunsafeTakes8LI;
 
-        public static Fun flipSeqTake;
+        public static Function flipSeqTake;
 
-        public static Fun takeFB;
+        public static Function takeFB;
 
-        public static Fun span;
+        public static Function span;
 
-        internal static Fun wspans8L1;
+        internal static Function wspans8L1;
 
-        public static Fun @break;
+        public static Function @break;
 
-        internal static Fun wbreaks8KB;
+        internal static Function wbreaks8KB;
 
-        public static Fun reverse;
+        public static Function reverse;
 
-        internal static Fun poly_revs8Ks;
+        internal static Function poly_revs8Ks;
 
-        public static Fun and;
+        public static Function and;
 
-        public static Fun or;
+        public static Function or;
 
-        public static Fun any;
+        public static Function any;
 
-        public static Fun all;
+        public static Function all;
 
-        public static Fun elem;
+        public static Function elem;
 
-        public static Fun notElem;
+        public static Function notElem;
 
-        public static Fun lookup;
+        public static Function lookup;
 
-        public static Fun concatMap;
+        public static Function concatMap;
 
-        public static Fun concat;
+        public static Function concat;
 
-        internal static Fun gos8Jk;
+        internal static Function gos8Jk;
 
-        public static Fun foldr2;
+        public static Function foldr2;
 
-        public static Fun zipWith;
+        public static Function zipWith;
 
-        public static Fun zip;
+        public static Function zip;
 
-        public static Fun foldr2_left;
+        public static Function foldr2_left;
 
-        public static Fun zipFB;
+        public static Function zipFB;
 
-        public static Fun zip3;
+        public static Function zip3;
 
-        public static Fun zipWithFB;
+        public static Function zipWithFB;
 
-        public static Fun zipWith3;
+        public static Function zipWith3;
 
-        public static Fun unzip;
+        public static Function unzip;
 
-        internal static Fun gos8HD;
+        internal static Function gos8HD;
 
-        internal static Fun wgos8Hh;
+        internal static Function wgos8Hh;
 
-        public static Fun unzip3;
+        public static Function unzip3;
 
-        internal static Fun gos8Ha;
+        internal static Function gos8Ha;
 
-        internal static Fun wgos8GE;
+        internal static Function wgos8GE;
 
-        internal static Updatable lvls8GD;
+        internal static Thunk lvls8GD;
 
-        internal static Updatable lvls8GC;
+        internal static Thunk lvls8GC;
 
-        internal static Updatable lvls8GA;
+        internal static Thunk lvls8GA;
 
-        internal static Updatable lvls8Gz;
+        internal static Thunk lvls8Gz;
 
-        public static Fun minimum;
+        public static Function minimum;
 
-        internal static Fun sminimums8Gd;
+        internal static Function sminimums8Gd;
 
-        internal static Fun wgos8G4;
+        internal static Function wgos8G4;
 
-        public static Fun maximum;
+        public static Function maximum;
 
-        internal static Fun smaximums8FJ;
+        internal static Function smaximums8FJ;
 
-        internal static Fun wgos8FA;
+        internal static Function wgos8FA;
 
-        internal static Fun sminimums8Fv;
+        internal static Function sminimums8Fv;
 
-        internal static Fun gos8Fo;
+        internal static Function gos8Fo;
 
-        internal static Updatable lvls8Fn;
+        internal static Thunk lvls8Fn;
 
-        internal static Updatable lvls8Fm;
+        internal static Thunk lvls8Fm;
 
-        internal static Updatable lvls8Fl;
+        internal static Thunk lvls8Fl;
 
-        internal static Updatable lvls8Fk;
+        internal static Thunk lvls8Fk;
 
-        internal static Fun smaximums8Fe;
+        internal static Function smaximums8Fe;
 
-        internal static Fun gos8F7;
+        internal static Function gos8F7;
 
-        internal static Updatable lvls8F6;
+        internal static Thunk lvls8F6;
 
-        internal static Updatable lvls8F5;
+        internal static Thunk lvls8F5;
 
-        internal static Updatable lvls8F4;
+        internal static Thunk lvls8F4;
 
-        internal static Updatable lvls8F3;
+        internal static Thunk lvls8F3;
 
-        public static Fun head;
+        public static Function head;
 
-        public static Updatable badHead;
+        public static Thunk badHead;
 
-        internal static Updatable lvls8EV;
+        internal static Thunk lvls8EV;
 
-        public static Fun tail;
+        public static Function tail;
 
-        internal static Updatable lvls8EO;
+        internal static Thunk lvls8EO;
 
-        internal static Updatable lvls8EN;
+        internal static Thunk lvls8EN;
 
-        public static Fun last;
+        public static Function last;
 
-        internal static Fun poly_gos8EE;
+        internal static Function poly_gos8EE;
 
-        public static Updatable lastError;
+        public static Thunk lastError;
 
-        internal static Updatable lvls8EC;
+        internal static Thunk lvls8EC;
 
-        public static Fun init;
+        public static Function init;
 
-        internal static Updatable lvls8Ev;
+        internal static Thunk lvls8Ev;
 
-        internal static Updatable lvls8Eu;
+        internal static Thunk lvls8Eu;
 
-        public static Fun foldr1;
+        public static Function foldr1;
 
-        internal static Updatable lvls8Eg;
+        internal static Thunk lvls8Eg;
 
-        internal static Updatable lvls8Ef;
+        internal static Thunk lvls8Ef;
 
-        public static Fun cycle;
+        public static Function cycle;
 
-        internal static Updatable lvls8E7;
+        internal static Thunk lvls8E7;
 
-        internal static Updatable lvls8E6;
+        internal static Thunk lvls8E6;
 
-        public static Fun bangBang;
+        public static Function bangBang;
 
-        internal static Fun wBangBangs8DW;
+        internal static Function wBangBang;
 
-        internal static Fun poly_Dollwgos8DO;
+        internal static Function poly_Dollwgos8DO;
 
-        internal static Updatable poly_exits8DN;
+        internal static Thunk poly_exits8DN;
 
-        public static Fun tooLarge;
+        public static Function tooLarge;
 
-        internal static Updatable lvls8DK;
+        internal static Thunk lvls8DK;
 
-        internal static Updatable lvls8DJ;
+        internal static Thunk lvls8DJ;
 
-        public static Updatable negIndex;
+        public static Thunk negIndex;
 
-        internal static Updatable lvls8DF;
+        internal static Thunk lvls8DF;
 
-        public static Fun errorEmptyList;
+        public static Function errorEmptyList;
 
-        public static Updatable prel_list_str;
+        public static Thunk prel_list_str;
 
-        internal static Updatable lvls8Dx;
+        internal static Thunk lvls8Dx;
 
-        internal static Fun poly_init_s8Dp;
+        internal static Function poly_init_s8Dp;
 
-        public static Fun splitAt;
+        public static Function splitAt;
 
-        internal static Fun splitAt_s8D5;
+        internal static Function splitAt_s8D5;
 
-        internal static Fun wsplitAt_s8CG;
+        internal static Function wsplitAt_s8CG;
 
-        public static Fun drop;
+        public static Function drop;
 
-        internal static Fun wunsafeDrops8Cs;
+        internal static Function wunsafeDrops8Cs;
 
-        internal static Data lvls8PX;
-        internal static Data lvls8PY;
+        internal static GHC.Integer.Type.SHash lvls8PX;
+        internal static GHC.Integer.Type.SHash lvls8PY;
 
         static List()
         {
-            uncons = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(uncons_Entry));
+            uncons = new Fun1<Closure, Closure>(&uncons_Entry);
+            @null = new Fun1<Closure, Closure>(&@null_Entry);
+            length = new Fun1<Closure, Closure>(&length_Entry);
+            lenAcc = new Fun2<Closure, Closure, Closure>(&lenAcc_Entry);
 
-            @null = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(@null_Entry));
+            wlenAccs8QL = new Fun2<Closure, long, long>(&wlenAccs8QL_Entry);
 
-            length = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(length_Entry));
+            lengthFB = new Fun3<Closure, Closure, Closure, Closure>(&lengthFB_Entry);
 
-            lenAcc = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(lenAcc_Entry));
+            idLength = new Fun1<Closure, Closure>(&idLength_Entry);
+            filter = new Fun2<Closure, Closure, Closure>(&filter_Entry);
 
-            wlenAccs8QL = new Fun(2, CLR.LoadFunctionPointer<Closure, long, long>(wlenAccs8QL_Entry));
+            filterFB = new Fun4<Closure, Closure, Closure, Closure, Closure>(&filterFB_Entry);
 
-            lengthFB = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(lengthFB_Entry));
+            foldl1 = new Fun2<Closure, Closure, Closure>(&foldl1_Entry);
 
-            idLength = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(idLength_Entry));
+            product = new Fun1<Closure, Closure>(&product_Entry);
+            sum = new Fun1<Closure, Closure>(&sum_Entry);
+            foldl = new Fun3<Closure, Closure, Closure, Closure>(&foldl_Entry);
 
-            filter = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(filter_Entry));
+            foldl1_ = new Fun2<Closure, Closure, Closure>(&foldl1__Entry);
 
-            filterFB = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(filterFB_Entry));
+            foldl_ = new Fun3<Closure, Closure, Closure, Closure>(&foldl__Entry);
 
-            foldl1 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(foldl1_Entry));
+            scanl1 = new Fun2<Closure, Closure, Closure>(&scanl1_Entry);
 
-            product = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(product_Entry));
+            scanl = new Fun3<Closure, Closure, Closure, Closure>(&scanl_Entry);
 
-            sum = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(sum_Entry));
+            scanlGos8Pn = new Fun3<Closure, Closure, Closure, Closure>(&scanlGos8Pn_Entry);
 
-            foldl = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(foldl_Entry));
+            wscanlGos8Pb = new Fun3<Closure, Closure, Closure, (Closure x0, Closure x1)>(&wscanlGos8Pb_Entry);
 
-            foldl1_ = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(foldl1__Entry));
+            scanlFB = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&scanlFB_Entry);
 
-            foldl_ = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(foldl__Entry));
+            constScanl = new Fun2<Closure, Closure, Closure>(&constScanl_Entry);
 
-            scanl1 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(scanl1_Entry));
+            scanl_ = new Fun3<Closure, Closure, Closure, Closure>(&scanl__Entry);
 
-            scanl = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(scanl_Entry));
+            scanlGo_s8OU = new Fun3<Closure, Closure, Closure, Closure>(&scanlGo_s8OU_Entry);
 
-            scanlGos8Pn = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(scanlGos8Pn_Entry));
+            wscanlGo_s8OH = new Fun3<Closure, Closure, Closure, (Closure x0, Closure x1)>(&wscanlGo_s8OH_Entry);
 
-            wscanlGos8Pb = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, (Closure x0, Closure x1)>(wscanlGos8Pb_Entry));
+            scanlFB_ = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&scanlFB__Entry);
 
-            scanlFB = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(scanlFB_Entry));
+            flipSeqScanl_ = new Fun2<Closure, Closure, Closure>(&flipSeqScanl__Entry);
 
-            constScanl = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(constScanl_Entry));
+            scanr = new Fun3<Closure, Closure, Closure, Closure>(&scanr_Entry);
 
-            scanl_ = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(scanl__Entry));
+            strictUncurryScanr = new Fun2<Closure, Closure, Closure>(&strictUncurryScanr_Entry);
 
-            scanlGo_s8OU = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(scanlGo_s8OU_Entry));
+            wscanrs8NX = new Fun3<Closure, Closure, Closure, (Closure x0, Closure x1)>(&wscanrs8NX_Entry);
 
-            wscanlGo_s8OH = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, (Closure x0, Closure x1)>(wscanlGo_s8OH_Entry));
+            scanrFB = new Fun4<Closure, Closure, Closure, Closure, Closure>(&scanrFB_Entry);
 
-            scanlFB_ = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(scanlFB__Entry));
+            scanr1 = new Fun2<Closure, Closure, Closure>(&scanr1_Entry);
 
-            flipSeqScanl_ = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(flipSeqScanl__Entry));
+            lvls8Nq = new Updatable(&lvls8Nq_Entry);
+            iterate = new Fun2<Closure, Closure, Closure>(&iterate_Entry);
 
-            scanr = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(scanr_Entry));
+            iterateFB = new Fun3<Closure, Closure, Closure, Closure>(&iterateFB_Entry);
 
-            strictUncurryScanr = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(strictUncurryScanr_Entry));
+            witerates8N3 = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&witerates8N3_Entry);
 
-            wscanrs8NX = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, (Closure x0, Closure x1)>(wscanrs8NX_Entry));
+            iterate_ = new Fun2<Closure, Closure, Closure>(&iterate__Entry);
 
-            scanrFB = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(scanrFB_Entry));
+            iterate_FB = new Fun3<Closure, Closure, Closure, Closure>(&iterate_FB_Entry);
 
-            scanr1 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(scanr1_Entry));
+            witerate_s8MH = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&witerate_s8MH_Entry);
 
-            lvls8Nq = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Nq_Entry));
+            replicate = new Fun2<Closure, Closure, Closure>(&replicate_Entry);
 
-            iterate = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(iterate_Entry));
+            repeatFB = new Fun2<Closure, Closure, Closure>(&repeatFB_Entry);
 
-            iterateFB = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(iterateFB_Entry));
+            repeat = new Fun1<Closure, Closure>(&repeat_Entry);
+            takeWhile = new Fun2<Closure, Closure, Closure>(&takeWhile_Entry);
 
-            witerates8N3 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(witerates8N3_Entry));
+            takeWhileFB = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&takeWhileFB_Entry);
 
-            iterate_ = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(iterate__Entry));
+            dropWhile = new Fun2<Closure, Closure, Closure>(&dropWhile_Entry);
 
-            iterate_FB = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(iterate_FB_Entry));
+            take = new Fun2<Closure, Closure, Closure>(&take_Entry);
 
-            witerate_s8MH = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(witerate_s8MH_Entry));
+            unsafeTake = new Fun2<Closure, Closure, Closure>(&unsafeTake_Entry);
 
-            replicate = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(replicate_Entry));
+            wunsafeTakes8LI = new Fun2<long, Closure, Closure>(&wunsafeTakes8LI_Entry);
 
-            repeatFB = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(repeatFB_Entry));
+            flipSeqTake = new Fun2<Closure, Closure, Closure>(&flipSeqTake_Entry);
 
-            repeat = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(repeat_Entry));
+            takeFB = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&takeFB_Entry);
 
-            takeWhile = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(takeWhile_Entry));
+            span = new Fun2<Closure, Closure, Closure>(&span_Entry);
 
-            takeWhileFB = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(takeWhileFB_Entry));
+            wspans8L1 = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&wspans8L1_Entry);
 
-            dropWhile = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(dropWhile_Entry));
+            @break = new Fun2<Closure, Closure, Closure>(&@break_Entry);
 
-            take = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(take_Entry));
+            wbreaks8KB = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&wbreaks8KB_Entry);
 
-            unsafeTake = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(unsafeTake_Entry));
+            reverse = new Fun1<Closure, Closure>(&reverse_Entry);
+            poly_revs8Ks = new Fun2<Closure, Closure, Closure>(&poly_revs8Ks_Entry);
 
-            wunsafeTakes8LI = new Fun(2, CLR.LoadFunctionPointer<long, Closure, Closure>(wunsafeTakes8LI_Entry));
+            and = new Fun1<Closure, Closure>(&and_Entry);
+            or = new Fun1<Closure, Closure>(&or_Entry);
+            any = new Fun2<Closure, Closure, Closure>(&any_Entry);
+            all = new Fun2<Closure, Closure, Closure>(&all_Entry);
+            elem = new Fun3<Closure, Closure, Closure, Closure>(&elem_Entry);
 
-            flipSeqTake = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(flipSeqTake_Entry));
+            notElem = new Fun3<Closure, Closure, Closure, Closure>(&notElem_Entry);
 
-            takeFB = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(takeFB_Entry));
+            lookup = new Fun3<Closure, Closure, Closure, Closure>(&lookup_Entry);
 
-            span = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(span_Entry));
+            concatMap = new Fun2<Closure, Closure, Closure>(&concatMap_Entry);
 
-            wspans8L1 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(wspans8L1_Entry));
+            concat = new Fun1<Closure, Closure>(&concat_Entry);
+            gos8Jk = new Fun1<Closure, Closure>(&gos8Jk_Entry);
+            foldr2 = new Fun4<Closure, Closure, Closure, Closure, Closure>(&foldr2_Entry);
 
-            @break = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(@break_Entry));
+            zipWith = new Fun3<Closure, Closure, Closure, Closure>(&zipWith_Entry);
 
-            wbreaks8KB = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(wbreaks8KB_Entry));
+            zip = new Fun2<Closure, Closure, Closure>(&zip_Entry);
+            foldr2_left = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&foldr2_left_Entry);
 
-            reverse = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(reverse_Entry));
+            zipFB = new Fun4<Closure, Closure, Closure, Closure, Closure>(&zipFB_Entry);
 
-            poly_revs8Ks = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(poly_revs8Ks_Entry));
+            zip3 = new Fun3<Closure, Closure, Closure, Closure>(&zip3_Entry);
 
-            and = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(and_Entry));
+            zipWithFB = new Fun5<Closure, Closure, Closure, Closure, Closure, Closure>(&zipWithFB_Entry);
 
-            or = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(or_Entry));
+            zipWith3 = new Fun4<Closure, Closure, Closure, Closure, Closure>(&zipWith3_Entry);
 
-            any = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(any_Entry));
+            unzip = new Fun1<Closure, Closure>(&unzip_Entry);
+            gos8HD = new Fun1<Closure, Closure>(&gos8HD_Entry);
+            wgos8Hh = new Fun1<Closure, (Closure x0, Closure x1)>(&wgos8Hh_Entry);
 
-            all = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(all_Entry));
+            unzip3 = new Fun1<Closure, Closure>(&unzip3_Entry);
+            gos8Ha = new Fun1<Closure, Closure>(&gos8Ha_Entry);
+            wgos8GE = new Fun1<Closure, (Closure x0, Closure x1, Closure x2)>(&wgos8GE_Entry);
 
-            elem = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(elem_Entry));
+            lvls8GD = new Updatable(&lvls8GD_Entry);
+            lvls8GC = new Updatable(&lvls8GC_Entry);
+            lvls8GA = new Updatable(&lvls8GA_Entry);
+            lvls8Gz = new Updatable(&lvls8Gz_Entry);
+            minimum = new Fun2<Closure, Closure, Closure>(&minimum_Entry);
 
-            notElem = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(notElem_Entry));
+            sminimums8Gd = new Fun1<Closure, Closure>(&sminimums8Gd_Entry);
 
-            lookup = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(lookup_Entry));
+            wgos8G4 = new Fun2<Closure, long, long>(&wgos8G4_Entry);
 
-            concatMap = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(concatMap_Entry));
+            maximum = new Fun2<Closure, Closure, Closure>(&maximum_Entry);
 
-            concat = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(concat_Entry));
+            smaximums8FJ = new Fun1<Closure, Closure>(&smaximums8FJ_Entry);
 
-            gos8Jk = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(gos8Jk_Entry));
+            wgos8FA = new Fun2<Closure, long, long>(&wgos8FA_Entry);
 
-            foldr2 = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(foldr2_Entry));
+            sminimums8Fv = new Fun1<Closure, Closure>(&sminimums8Fv_Entry);
 
-            zipWith = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(zipWith_Entry));
+            gos8Fo = new Fun2<Closure, Closure, Closure>(&gos8Fo_Entry);
 
-            zip = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(zip_Entry));
+            lvls8Fn = new Updatable(&lvls8Fn_Entry);
+            lvls8Fm = new Updatable(&lvls8Fm_Entry);
+            lvls8Fl = new Updatable(&lvls8Fl_Entry);
+            lvls8Fk = new Updatable(&lvls8Fk_Entry);
+            smaximums8Fe = new Fun1<Closure, Closure>(&smaximums8Fe_Entry);
 
-            foldr2_left = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(foldr2_left_Entry));
+            gos8F7 = new Fun2<Closure, Closure, Closure>(&gos8F7_Entry);
 
-            zipFB = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(zipFB_Entry));
+            lvls8F6 = new Updatable(&lvls8F6_Entry);
+            lvls8F5 = new Updatable(&lvls8F5_Entry);
+            lvls8F4 = new Updatable(&lvls8F4_Entry);
+            lvls8F3 = new Updatable(&lvls8F3_Entry);
+            head = new Fun1<Closure, Closure>(&head_Entry);
+            badHead = new Updatable(&badHead_Entry);
+            lvls8EV = new Updatable(&lvls8EV_Entry);
+            tail = new Fun1<Closure, Closure>(&tail_Entry);
+            lvls8EO = new Updatable(&lvls8EO_Entry);
+            lvls8EN = new Updatable(&lvls8EN_Entry);
+            last = new Fun1<Closure, Closure>(&last_Entry);
+            poly_gos8EE = new Fun2<Closure, Closure, Closure>(&poly_gos8EE_Entry);
 
-            zip3 = new Fun(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(zip3_Entry));
+            lastError = new Updatable(&lastError_Entry);
+            lvls8EC = new Updatable(&lvls8EC_Entry);
+            init = new Fun1<Closure, Closure>(&init_Entry);
+            lvls8Ev = new Updatable(&lvls8Ev_Entry);
+            lvls8Eu = new Updatable(&lvls8Eu_Entry);
+            foldr1 = new Fun2<Closure, Closure, Closure>(&foldr1_Entry);
 
-            zipWithFB = new Fun(5, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(zipWithFB_Entry));
+            lvls8Eg = new Updatable(&lvls8Eg_Entry);
+            lvls8Ef = new Updatable(&lvls8Ef_Entry);
+            cycle = new Fun1<Closure, Closure>(&cycle_Entry);
+            lvls8E7 = new Updatable(&lvls8E7_Entry);
+            lvls8E6 = new Updatable(&lvls8E6_Entry);
+            bangBang = new Fun2<Closure, Closure, Closure>(&bangBang_Entry);
 
-            zipWith3 = new Fun(4, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(zipWith3_Entry));
+            wBangBang = new Fun2<Closure, long, Closure>(&wBangBang_Entry);
 
-            unzip = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(unzip_Entry));
+            poly_Dollwgos8DO = new Fun2<Closure, long, Closure>(&poly_Dollwgos8DO_Entry);
 
-            gos8HD = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(gos8HD_Entry));
+            poly_exits8DN = new Updatable(&poly_exits8DN_Entry);
+            tooLarge = new Fun1<Closure, Closure>(&tooLarge_Entry);
+            lvls8DK = new Updatable(&lvls8DK_Entry);
+            lvls8DJ = new Updatable(&lvls8DJ_Entry);
+            negIndex = new Updatable(&negIndex_Entry);
+            lvls8DF = new Updatable(&lvls8DF_Entry);
+            errorEmptyList = new Fun1<Closure, Closure>(&errorEmptyList_Entry);
 
-            wgos8Hh = new Fun(1, CLR.LoadFunctionPointer<Closure, (Closure x0, Closure x1)>(wgos8Hh_Entry));
+            prel_list_str = new Updatable(&prel_list_str_Entry);
+            lvls8Dx = new Updatable(&lvls8Dx_Entry);
+            poly_init_s8Dp = new Fun2<Closure, Closure, Closure>(&poly_init_s8Dp_Entry);
 
-            unzip3 = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(unzip3_Entry));
+            splitAt = new Fun2<Closure, Closure, Closure>(&splitAt_Entry);
 
-            gos8Ha = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(gos8Ha_Entry));
+            splitAt_s8D5 = new Fun2<Closure, Closure, Closure>(&splitAt_s8D5_Entry);
 
-            wgos8GE = new Fun(1, CLR.LoadFunctionPointer<Closure, (Closure x0, Closure x1, Closure x2)>(wgos8GE_Entry));
+            wsplitAt_s8CG = new Fun2<Closure, Closure, (Closure x0, Closure x1)>(&wsplitAt_s8CG_Entry);
 
-            lvls8GD = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8GD_Entry));
+            drop = new Fun2<Closure, Closure, Closure>(&drop_Entry);
 
-            lvls8GC = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8GC_Entry));
+            wunsafeDrops8Cs = new Fun2<long, Closure, Closure>(&wunsafeDrops8Cs_Entry);
 
-            lvls8GA = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8GA_Entry));
-
-            lvls8Gz = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Gz_Entry));
-
-            minimum = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(minimum_Entry));
-
-            sminimums8Gd = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(sminimums8Gd_Entry));
-
-            wgos8G4 = new Fun(2, CLR.LoadFunctionPointer<Closure, long, long>(wgos8G4_Entry));
-
-            maximum = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(maximum_Entry));
-
-            smaximums8FJ = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(smaximums8FJ_Entry));
-
-            wgos8FA = new Fun(2, CLR.LoadFunctionPointer<Closure, long, long>(wgos8FA_Entry));
-
-            sminimums8Fv = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(sminimums8Fv_Entry));
-
-            gos8Fo = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(gos8Fo_Entry));
-
-            lvls8Fn = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Fn_Entry));
-
-            lvls8Fm = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Fm_Entry));
-
-            lvls8Fl = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Fl_Entry));
-
-            lvls8Fk = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Fk_Entry));
-
-            smaximums8Fe = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(smaximums8Fe_Entry));
-
-            gos8F7 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(gos8F7_Entry));
-
-            lvls8F6 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8F6_Entry));
-
-            lvls8F5 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8F5_Entry));
-
-            lvls8F4 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8F4_Entry));
-
-            lvls8F3 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8F3_Entry));
-
-            head = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(head_Entry));
-
-            badHead = new Updatable(CLR.LoadFunctionPointer<Closure>(badHead_Entry));
-
-            lvls8EV = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8EV_Entry));
-
-            tail = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(tail_Entry));
-
-            lvls8EO = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8EO_Entry));
-
-            lvls8EN = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8EN_Entry));
-
-            last = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(last_Entry));
-
-            poly_gos8EE = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(poly_gos8EE_Entry));
-
-            lastError = new Updatable(CLR.LoadFunctionPointer<Closure>(lastError_Entry));
-
-            lvls8EC = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8EC_Entry));
-
-            init = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(init_Entry));
-
-            lvls8Ev = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Ev_Entry));
-
-            lvls8Eu = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Eu_Entry));
-
-            foldr1 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(foldr1_Entry));
-
-            lvls8Eg = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Eg_Entry));
-
-            lvls8Ef = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Ef_Entry));
-
-            cycle = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(cycle_Entry));
-
-            lvls8E7 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8E7_Entry));
-
-            lvls8E6 = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8E6_Entry));
-
-            bangBang = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(bangBang_Entry));
-
-            wBangBangs8DW = new Fun(2, CLR.LoadFunctionPointer<Closure, long, Closure>(wBangBangs8DW_Entry));
-
-            poly_Dollwgos8DO = new Fun(2, CLR.LoadFunctionPointer<Closure, long, Closure>(poly_Dollwgos8DO_Entry));
-
-            poly_exits8DN = new Updatable(CLR.LoadFunctionPointer<Closure>(poly_exits8DN_Entry));
-
-            tooLarge = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(tooLarge_Entry));
-
-            lvls8DK = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8DK_Entry));
-
-            lvls8DJ = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8DJ_Entry));
-
-            negIndex = new Updatable(CLR.LoadFunctionPointer<Closure>(negIndex_Entry));
-
-            lvls8DF = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8DF_Entry));
-
-            errorEmptyList = new Fun(1, CLR.LoadFunctionPointer<Closure, Closure>(errorEmptyList_Entry));
-
-            prel_list_str = new Updatable(CLR.LoadFunctionPointer<Closure>(prel_list_str_Entry));
-
-            lvls8Dx = new Updatable(CLR.LoadFunctionPointer<Closure>(lvls8Dx_Entry));
-
-            poly_init_s8Dp = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(poly_init_s8Dp_Entry));
-
-            splitAt = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(splitAt_Entry));
-
-            splitAt_s8D5 = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(splitAt_s8D5_Entry));
-
-            wsplitAt_s8CG = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, (Closure x0, Closure x1)>(wsplitAt_s8CG_Entry));
-
-            drop = new Fun(2, CLR.LoadFunctionPointer<Closure, Closure, Closure>(drop_Entry));
-
-            wunsafeDrops8Cs = new Fun(2, CLR.LoadFunctionPointer<long, Closure, Closure>(wunsafeDrops8Cs_Entry));
-
-            lvls8PY = GHC.Integer.Type.smallInteger_Entry(0) as Data;
-            lvls8PX = GHC.Integer.Type.smallInteger_Entry(1) as Data;
+            lvls8PY = new GHC.Integer.Type.SHash(0);
+            lvls8PX = new GHC.Integer.Type.SHash(1);
         }
         public static Closure uncons_Entry(Closure dss8R7)
         {
@@ -672,7 +615,7 @@ namespace GHC
                     {
                         var xs8Qy = wilds8Qx_Cons.x0;
                         var xss8Qz = wilds8Qx_Cons.x1;
-                        var wilds8QA = _preds8Qv.Apply<Closure, Closure>(xs8Qy).Eval();
+                        var wilds8QA = _preds8Qv.Apply<Closure, Closure>(xs8Qy);
                         var wilds8QATags8QA = wilds8QA.Tag;
                         switch (wilds8QATags8QA)
                         {
@@ -685,16 +628,23 @@ namespace GHC
                             case 2:
                                 {
                                     var wilds8QA_True = wilds8QA as GHC.Types.True;
-                                    var sats8QB = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(filter_Entry), _preds8Qv, xss8Qz);
+                                    var sat_Frees8QB = (_preds8Qv, xss8Qz);
+                                    var sats8QB = new Updatable<(Closure x0, Closure x1)>(&sats8QB_Entry, sat_Frees8QB);
                                     return new GHC.Types.Cons(xs8Qy, sats8QB);
                                 }
                         }
                     }
             }
         }
+        public static Closure sats8QB_Entry(in (Closure x0, Closure x1) sat_Frees8QB)
+        {
+            var _preds8Qv = sat_Frees8QB.x0;
+            var xss8Qz = sat_Frees8QB.x1;
+            return filter_Entry(_preds8Qv, xss8Qz);
+        }
         public static Closure filterFB_Entry(Closure cs8Qp, Closure ps8Qq, Closure xs8Qr, Closure rs8Qs)
         {
-            var wilds8Qt = ps8Qq.Apply<Closure, Closure>(xs8Qr).Eval();
+            var wilds8Qt = ps8Qq.Apply<Closure, Closure>(xs8Qr);
             var wilds8QtTags8Qt = wilds8Qt.Tag;
             switch (wilds8QtTags8Qt)
             {
@@ -728,40 +678,43 @@ namespace GHC
         }
         public static Closure product_Entry(Closure dNums8Qf)
         {
-            var sats8Qh = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Qh_Entry), dNums8Qf);
-            var sats8Qg = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Qg_Entry), dNums8Qf);
+            var sats8Qh = new Updatable<Closure>(&sats8Qh_Entry, dNums8Qf);
+            var sats8Qg = new Updatable<Closure>(&sats8Qg_Entry, dNums8Qf);
             return GHC.List.foldl.Apply<Closure, Closure, Closure>(sats8Qg, sats8Qh);
         }
-        public static Closure sats8Qg_Entry(Closure dNums8Qf)
+        public static Closure sats8Qg_Entry(in Closure dNums8Qf)
         {
             return GHC.Num.astr_Entry(dNums8Qf);
         }
-        public static Closure sats8Qh_Entry(Closure dNums8Qf)
+        public static Closure sats8Qh_Entry(in Closure dNums8Qf)
         {
             return GHC.Num.fromInteger_Entry(dNums8Qf).Apply<Closure, Closure>(lvls8PX);
         }
         public static Closure sum_Entry(Closure dNums8Qb)
         {
-            var sats8Qd = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Qd_Entry), dNums8Qb);
-            var sats8Qc = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Qc_Entry), dNums8Qb);
+            var sats8Qd = new Updatable<Closure>(&sats8Qd_Entry, dNums8Qb);
+            var sats8Qc = new Updatable<Closure>(&sats8Qc_Entry, dNums8Qb);
             return GHC.List.foldl.Apply<Closure, Closure, Closure>(sats8Qc, sats8Qd);
         }
-        public static Closure sats8Qc_Entry(Closure dNums8Qb)
+        public static Closure sats8Qc_Entry(in Closure dNums8Qb)
         {
             return GHC.Num.plus_Entry(dNums8Qb);
         }
-        public static Closure sats8Qd_Entry(Closure dNums8Qb)
+        public static Closure sats8Qd_Entry(in Closure dNums8Qb)
         {
             return GHC.Num.fromInteger_Entry(dNums8Qb).Apply<Closure, Closure>(lvls8PY);
         }
         public static Closure foldl_Entry(Closure ks8Q0, Closure z0s8Q1, Closure xss8Q2)
         {
-            var gos8Q3 = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos8Q3_Entry), ks8Q0, null);
-            gos8Q3.x1 = gos8Q3;
+            var go_Frees8Q3 = (ks8Q0, (Closure)null);
+            var gos8Q3 = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&gos8Q3_Entry, go_Frees8Q3);
+            gos8Q3.free.x1 = gos8Q3;
             return gos8Q3.Apply<Closure, Closure, Closure>(xss8Q2, z0s8Q1);
         }
-        public static Closure gos8Q3_Entry(Closure ks8Q0, Closure gos8Q3, Closure dss8Q4, Closure etas8Q5)
+        public static Closure gos8Q3_Entry(in (Closure x0, Closure x1) go_Frees8Q3, Closure dss8Q4, Closure etas8Q5)
         {
+            var ks8Q0 = go_Frees8Q3.x0;
+            var gos8Q3 = go_Frees8Q3.x1;
             var wilds8Q6 = dss8Q4.Eval();
             switch (wilds8Q6)
             {
@@ -771,13 +724,17 @@ namespace GHC
                     {
                         var ys8Q7 = wilds8Q6_Cons.x0;
                         var yss8Q8 = wilds8Q6_Cons.x1;
-                        var sats8Q9 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8Q9_Entry), ks8Q0, etas8Q5, ys8Q7);
+                        var sat_Frees8Q9 = (ks8Q0, etas8Q5, ys8Q7);
+                        var sats8Q9 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8Q9_Entry, sat_Frees8Q9);
                         return gos8Q3.Apply<Closure, Closure, Closure>(yss8Q8, sats8Q9);
                     }
             }
         }
-        public static Closure sats8Q9_Entry(Closure ks8Q0, Closure etas8Q5, Closure ys8Q7)
+        public static Closure sats8Q9_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8Q9)
         {
+            var ks8Q0 = sat_Frees8Q9.x0;
+            var etas8Q5 = sat_Frees8Q9.x1;
+            var ys8Q7 = sat_Frees8Q9.x2;
             return ks8Q0.Apply<Closure, Closure, Closure>(etas8Q5, ys8Q7);
         }
         public static Closure foldl1__Entry(Closure fs8PS, Closure dss8PT)
@@ -797,12 +754,15 @@ namespace GHC
         }
         public static Closure foldl__Entry(Closure ks8PG, Closure z0s8PH, Closure xss8PI)
         {
-            var gos8PJ = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos8PJ_Entry), ks8PG, null);
-            gos8PJ.x1 = gos8PJ;
+            var go_Frees8PJ = (ks8PG, (Closure)null);
+            var gos8PJ = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&gos8PJ_Entry, go_Frees8PJ);
+            gos8PJ.free.x1 = gos8PJ;
             return gos8PJ.Apply<Closure, Closure, Closure>(xss8PI, z0s8PH);
         }
-        public static Closure gos8PJ_Entry(Closure ks8PG, Closure gos8PJ, Closure dss8PK, Closure etas8PL)
+        public static Closure gos8PJ_Entry(in (Closure x0, Closure x1) go_Frees8PJ, Closure dss8PK, Closure etas8PL)
         {
+            var ks8PG = go_Frees8PJ.x0;
+            var gos8PJ = go_Frees8PJ.x1;
             var wilds8PM = dss8PK.Eval();
             switch (wilds8PM)
             {
@@ -813,7 +773,7 @@ namespace GHC
                         var ys8PN = wilds8PM_Cons.x0;
                         var yss8PO = wilds8PM_Cons.x1;
                         var zs8PP = etas8PL.Eval();
-                        var sats8PQ = ks8PG.Apply<Closure, Closure, Closure>(zs8PP, ys8PN).Eval();
+                        var sats8PQ = ks8PG.Apply<Closure, Closure, Closure>(zs8PP, ys8PN);
                         return gos8PJ.Apply<Closure, Closure, Closure>(yss8PO, sats8PQ);
                     }
             }
@@ -832,13 +792,17 @@ namespace GHC
                     {
                         var xs8Pz = wilds8Py_Cons.x0;
                         var xss8PA = wilds8Py_Cons.x1;
-                        var sats8PE = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8PE_Entry), fs8Pw, xs8Pz, xss8PA);
+                        var sat_Frees8PE = (fs8Pw, xs8Pz, xss8PA);
+                        var sats8PE = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8PE_Entry, sat_Frees8PE);
                         return new GHC.Types.Cons(xs8Pz, sats8PE);
                     }
             }
         }
-        public static Closure sats8PE_Entry(Closure fs8Pw, Closure xs8Pz, Closure xss8PA)
+        public static Closure sats8PE_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8PE)
         {
+            var fs8Pw = sat_Frees8PE.x0;
+            var xs8Pz = sat_Frees8PE.x1;
+            var xss8PA = sat_Frees8PE.x2;
             var wws8PB = wscanlGos8Pb_Entry(fs8Pw, xs8Pz, xss8PA);
             var wws8PB_RawTuple = wws8PB;
             var wws8PC = wws8PB_RawTuple.x0;
@@ -858,11 +822,15 @@ namespace GHC
         }
         public static (Closure x0, Closure x1) wscanlGos8Pb_Entry(Closure ws8Pc, Closure ws8Pd, Closure ws8Pe)
         {
-            var sats8Pm = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8Pm_Entry), ws8Pc, ws8Pd, ws8Pe);
+            var sat_Frees8Pm = (ws8Pc, ws8Pd, ws8Pe);
+            var sats8Pm = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8Pm_Entry, sat_Frees8Pm);
             return (ws8Pd, sats8Pm);
         }
-        public static Closure sats8Pm_Entry(Closure ws8Pc, Closure ws8Pd, Closure ws8Pe)
+        public static Closure sats8Pm_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8Pm)
         {
+            var ws8Pc = sat_Frees8Pm.x0;
+            var ws8Pd = sat_Frees8Pm.x1;
+            var ws8Pe = sat_Frees8Pm.x2;
             var wilds8Pf = ws8Pe.Eval();
             switch (wilds8Pf)
             {
@@ -875,7 +843,8 @@ namespace GHC
                     {
                         var xs8Pg = wilds8Pf_Cons.x0;
                         var xss8Ph = wilds8Pf_Cons.x1;
-                        var sats8Pi = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8Pi_Entry), ws8Pc, ws8Pd, xs8Pg);
+                        var sat_Frees8Pi = (ws8Pc, ws8Pd, xs8Pg);
+                        var sats8Pi = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8Pi_Entry, sat_Frees8Pi);
                         var wws8Pj = wscanlGos8Pb_Entry(ws8Pc, sats8Pi, xss8Ph);
                         var wws8Pj_RawTuple = wws8Pj;
                         var wws8Pk = wws8Pj_RawTuple.x0;
@@ -884,22 +853,32 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8Pi_Entry(Closure ws8Pc, Closure ws8Pd, Closure xs8Pg)
+        public static Closure sats8Pi_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8Pi)
         {
+            var ws8Pc = sat_Frees8Pi.x0;
+            var ws8Pd = sat_Frees8Pi.x1;
+            var xs8Pg = sat_Frees8Pi.x2;
             return ws8Pc.Apply<Closure, Closure, Closure>(ws8Pd, xs8Pg);
         }
         public static Closure scanlFB_Entry(Closure fs8P4, Closure cs8P5, Closure bs8P6, Closure gs8P7, Closure vs8P8)
         {
-            var b_s8P9 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(b_s8P9_Entry), fs8P4, bs8P6, vs8P8);
-            var sats8Pa = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8Pa_Entry), gs8P7, b_s8P9);
+            var b__Frees8P9 = (fs8P4, bs8P6, vs8P8);
+            var b_s8P9 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&b_s8P9_Entry, b__Frees8P9);
+            var sat_Frees8Pa = (gs8P7, b_s8P9);
+            var sats8Pa = new Updatable<(Closure x0, Closure x1)>(&sats8Pa_Entry, sat_Frees8Pa);
             return cs8P5.Apply<Closure, Closure, Closure>(b_s8P9, sats8Pa);
         }
-        public static Closure sats8Pa_Entry(Closure gs8P7, Closure b_s8P9)
+        public static Closure sats8Pa_Entry(in (Closure x0, Closure x1) sat_Frees8Pa)
         {
+            var gs8P7 = sat_Frees8Pa.x0;
+            var b_s8P9 = sat_Frees8Pa.x1;
             return gs8P7.Apply<Closure, Closure>(b_s8P9);
         }
-        public static Closure b_s8P9_Entry(Closure fs8P4, Closure bs8P6, Closure vs8P8)
+        public static Closure b_s8P9_Entry(in (Closure x0, Closure x1, Closure x2) b__Frees8P9)
         {
+            var fs8P4 = b__Frees8P9.x0;
+            var bs8P6 = b__Frees8P9.x1;
+            var vs8P8 = b__Frees8P9.x2;
             return fs8P4.Apply<Closure, Closure, Closure>(vs8P8, bs8P6);
         }
         public static Closure constScanl_Entry(Closure etaB2, Closure etaB1)
@@ -921,11 +900,15 @@ namespace GHC
         public static (Closure x0, Closure x1) wscanlGo_s8OH_Entry(Closure ws8OI, Closure ws8OJ, Closure ws8OK)
         {
             var qs8OL = ws8OJ.Eval();
-            var sats8OT = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8OT_Entry), ws8OI, ws8OK, qs8OL);
+            var sat_Frees8OT = (ws8OI, ws8OK, qs8OL);
+            var sats8OT = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8OT_Entry, sat_Frees8OT);
             return (qs8OL, sats8OT);
         }
-        public static Closure sats8OT_Entry(Closure ws8OI, Closure ws8OK, Closure qs8OL)
+        public static Closure sats8OT_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8OT)
         {
+            var ws8OI = sat_Frees8OT.x0;
+            var ws8OK = sat_Frees8OT.x1;
+            var qs8OL = sat_Frees8OT.x2;
             var wilds8OM = ws8OK.Eval();
             switch (wilds8OM)
             {
@@ -938,7 +921,7 @@ namespace GHC
                     {
                         var xs8ON = wilds8OM_Cons.x0;
                         var xss8OO = wilds8OM_Cons.x1;
-                        var sats8OP = ws8OI.Apply<Closure, Closure, Closure>(qs8OL, xs8ON).Eval();
+                        var sats8OP = ws8OI.Apply<Closure, Closure, Closure>(qs8OL, xs8ON);
                         var wws8OQ = wscanlGo_s8OH_Entry(ws8OI, sats8OP, xss8OO);
                         var wws8OQ_RawTuple = wws8OQ;
                         var wws8OR = wws8OQ_RawTuple.x0;
@@ -949,12 +932,15 @@ namespace GHC
         }
         public static Closure scanlFB__Entry(Closure fs8OA, Closure cs8OB, Closure bs8OC, Closure gs8OD, Closure vs8OE)
         {
-            var b_s8OF = fs8OA.Apply<Closure, Closure, Closure>(vs8OE, bs8OC).Eval();
-            var sats8OG = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8OG_Entry), gs8OD, b_s8OF);
+            var b_s8OF = fs8OA.Apply<Closure, Closure, Closure>(vs8OE, bs8OC);
+            var sat_Frees8OG = (gs8OD, b_s8OF);
+            var sats8OG = new Updatable<(Closure x0, Closure x1)>(&sats8OG_Entry, sat_Frees8OG);
             return cs8OB.Apply<Closure, Closure, Closure>(b_s8OF, sats8OG);
         }
-        public static Closure sats8OG_Entry(Closure gs8OD, Closure b_s8OF)
+        public static Closure sats8OG_Entry(in (Closure x0, Closure x1) sat_Frees8OG)
         {
+            var gs8OD = sat_Frees8OG.x0;
+            var b_s8OF = sat_Frees8OG.x1;
             return gs8OD.Apply<Closure, Closure>(b_s8OF);
         }
         public static Closure flipSeqScanl__Entry(Closure as8Ow, Closure _bs8Ox)
@@ -991,34 +977,42 @@ namespace GHC
                     {
                         var xs8O2 = wilds8O1_Cons.x0;
                         var xss8O3 = wilds8O1_Cons.x1;
-                        var dss8O4 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(dss8O4_Entry), ws8NY, ws8NZ, xss8O3);
-                        var sats8Oh = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Oh_Entry), dss8O4);
-                        var sats8Od = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8Od_Entry), ws8NY, xs8O2, dss8O4);
+                        var ds_Frees8O4 = (ws8NY, ws8NZ, xss8O3);
+                        var dss8O4 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&dss8O4_Entry, ds_Frees8O4);
+                        var sats8Oh = new Updatable<Closure>(&sats8Oh_Entry, dss8O4);
+                        var sat_Frees8Od = (ws8NY, xs8O2, dss8O4);
+                        var sats8Od = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8Od_Entry, sat_Frees8Od);
                         return (sats8Od, sats8Oh);
                     }
             }
         }
-        public static Closure sats8Od_Entry(Closure ws8NY, Closure xs8O2, Closure dss8O4)
+        public static Closure sats8Od_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8Od)
         {
-            var sats8Oc = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Oc_Entry), dss8O4);
+            var ws8NY = sat_Frees8Od.x0;
+            var xs8O2 = sat_Frees8Od.x1;
+            var dss8O4 = sat_Frees8Od.x2;
+            var sats8Oc = new Updatable<Closure>(&sats8Oc_Entry, dss8O4);
             return ws8NY.Apply<Closure, Closure, Closure>(xs8O2, sats8Oc);
         }
-        public static Closure sats8Oc_Entry(Closure dss8O4)
+        public static Closure sats8Oc_Entry(in Closure dss8O4)
         {
             var dss8O9 = dss8O4.Eval();
             var dss8O9_Tuple2 = dss8O9 as GHC.Tuple.Tuple2;
             var qss8Oa = dss8O9_Tuple2.x0;
             var qs8Ob = dss8O9_Tuple2.x1; return qs8Ob.Eval();
         }
-        public static Closure sats8Oh_Entry(Closure dss8O4)
+        public static Closure sats8Oh_Entry(in Closure dss8O4)
         {
             var dss8Oe = dss8O4.Eval();
             var dss8Oe_Tuple2 = dss8Oe as GHC.Tuple.Tuple2;
             var qss8Of = dss8Oe_Tuple2.x0;
             var qs8Og = dss8Oe_Tuple2.x1; return qss8Of.Eval();
         }
-        public static Closure dss8O4_Entry(Closure ws8NY, Closure ws8NZ, Closure xss8O3)
+        public static Closure dss8O4_Entry(in (Closure x0, Closure x1, Closure x2) ds_Frees8O4)
         {
+            var ws8NY = ds_Frees8O4.x0;
+            var ws8NZ = ds_Frees8O4.x1;
+            var xss8O3 = ds_Frees8O4.x2;
             var wws8O5 = wscanrs8NX_Entry(ws8NY, ws8NZ, xss8O3);
             var wws8O5_RawTuple = wws8O5;
             var wws8O6 = wws8O5_RawTuple.x0;
@@ -1032,16 +1026,24 @@ namespace GHC
             var wilds8NS_Tuple2 = wilds8NS as GHC.Tuple.Tuple2;
             var rs8NT = wilds8NS_Tuple2.x0;
             var ests8NU = wilds8NS_Tuple2.x1;
-            var sats8NW = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8NW_Entry), cs8NP, rs8NT, ests8NU);
-            var sats8NV = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8NV_Entry), fs8NO, xs8NQ, rs8NT);
+            var sat_Frees8NW = (cs8NP, rs8NT, ests8NU);
+            var sats8NW = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8NW_Entry, sat_Frees8NW);
+            var sat_Frees8NV = (fs8NO, xs8NQ, rs8NT);
+            var sats8NV = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8NV_Entry, sat_Frees8NV);
             return new GHC.Tuple.Tuple2(sats8NV, sats8NW);
         }
-        public static Closure sats8NV_Entry(Closure fs8NO, Closure xs8NQ, Closure rs8NT)
+        public static Closure sats8NV_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8NV)
         {
+            var fs8NO = sat_Frees8NV.x0;
+            var xs8NQ = sat_Frees8NV.x1;
+            var rs8NT = sat_Frees8NV.x2;
             return fs8NO.Apply<Closure, Closure, Closure>(xs8NQ, rs8NT);
         }
-        public static Closure sats8NW_Entry(Closure cs8NP, Closure rs8NT, Closure ests8NU)
+        public static Closure sats8NW_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8NW)
         {
+            var cs8NP = sat_Frees8NW.x0;
+            var rs8NT = sat_Frees8NW.x1;
+            var ests8NU = sat_Frees8NW.x2;
             return cs8NP.Apply<Closure, Closure, Closure>(rs8NT, ests8NU);
         }
         public static Closure scanr1_Entry(Closure dss8Ns, Closure dss8Nt)
@@ -1070,37 +1072,44 @@ namespace GHC
                                 {
                                     var ipvs8Ny = wilds8Nx_Cons.x0;
                                     var ipvs8Nz = wilds8Nx_Cons.x1;
-                                    var dss8NA = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(dss8NA_Entry), dss8Ns, wilds8Nx);
-                                    var sats8NM = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8NM_Entry), dss8NA);
-                                    var sats8NI = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8NI_Entry), dss8Ns, xs8Nv, dss8NA);
+                                    var ds_Frees8NA = (dss8Ns, wilds8Nx);
+                                    var dss8NA = new Updatable<(Closure x0, Closure x1)>(&dss8NA_Entry, ds_Frees8NA);
+                                    var sats8NM = new Updatable<Closure>(&sats8NM_Entry, dss8NA);
+                                    var sat_Frees8NI = (dss8Ns, xs8Nv, dss8NA);
+                                    var sats8NI = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8NI_Entry, sat_Frees8NI);
                                     return new GHC.Types.Cons(sats8NI, sats8NM);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats8NI_Entry(Closure dss8Ns, Closure xs8Nv, Closure dss8NA)
+        public static Closure sats8NI_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8NI)
         {
-            var sats8NH = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8NH_Entry), dss8NA);
+            var dss8Ns = sat_Frees8NI.x0;
+            var xs8Nv = sat_Frees8NI.x1;
+            var dss8NA = sat_Frees8NI.x2;
+            var sats8NH = new Updatable<Closure>(&sats8NH_Entry, dss8NA);
             return dss8Ns.Apply<Closure, Closure, Closure>(xs8Nv, sats8NH);
         }
-        public static Closure sats8NH_Entry(Closure dss8NA)
+        public static Closure sats8NH_Entry(in Closure dss8NA)
         {
             var dss8NE = dss8NA.Eval();
             var dss8NE_Tuple2 = dss8NE as GHC.Tuple.Tuple2;
             var qss8NF = dss8NE_Tuple2.x0;
             var qs8NG = dss8NE_Tuple2.x1; return qs8NG.Eval();
         }
-        public static Closure sats8NM_Entry(Closure dss8NA)
+        public static Closure sats8NM_Entry(in Closure dss8NA)
         {
             var dss8NJ = dss8NA.Eval();
             var dss8NJ_Tuple2 = dss8NJ as GHC.Tuple.Tuple2;
             var qss8NK = dss8NJ_Tuple2.x0;
             var qs8NL = dss8NJ_Tuple2.x1; return qss8NK.Eval();
         }
-        public static Closure dss8NA_Entry(Closure dss8Ns, Closure wilds8Nx)
+        public static Closure dss8NA_Entry(in (Closure x0, Closure x1) ds_Frees8NA)
         {
-            var wilds8NB = scanr1_Entry(dss8Ns, wilds8Nx).Eval();
+            var dss8Ns = ds_Frees8NA.x0;
+            var wilds8Nx = ds_Frees8NA.x1;
+            var wilds8NB = scanr1_Entry(dss8Ns, wilds8Nx);
             switch (wilds8NB)
             {
                 default: { throw new ImpossibleException(); }
@@ -1127,40 +1136,57 @@ namespace GHC
         }
         public static Closure iterateFB_Entry(Closure cs8Nd, Closure fs8Ne, Closure x0s8Nf)
         {
-            var gos8Ng = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos8Ng_Entry), cs8Nd, fs8Ne, null);
-            gos8Ng.x2 = gos8Ng;
+            var go_Frees8Ng = (cs8Nd, fs8Ne, (Closure)null);
+            var gos8Ng = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos8Ng_Entry, go_Frees8Ng);
+            gos8Ng.free.x2 = gos8Ng;
             return gos8Ng.Apply<Closure, Closure>(x0s8Nf);
         }
-        public static Closure gos8Ng_Entry(Closure cs8Nd, Closure fs8Ne, Closure gos8Ng, Closure xs8Nh)
+        public static Closure gos8Ng_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees8Ng, Closure xs8Nh)
         {
-            var sats8Nj = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8Nj_Entry), fs8Ne, gos8Ng, xs8Nh);
+            var cs8Nd = go_Frees8Ng.x0;
+            var fs8Ne = go_Frees8Ng.x1;
+            var gos8Ng = go_Frees8Ng.x2;
+            var sat_Frees8Nj = (fs8Ne, gos8Ng, xs8Nh);
+            var sats8Nj = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8Nj_Entry, sat_Frees8Nj);
             return cs8Nd.Apply<Closure, Closure, Closure>(xs8Nh, sats8Nj);
         }
-        public static Closure sats8Nj_Entry(Closure fs8Ne, Closure gos8Ng, Closure xs8Nh)
+        public static Closure sats8Nj_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8Nj)
         {
-            var sats8Ni = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8Ni_Entry), fs8Ne, xs8Nh);
+            var fs8Ne = sat_Frees8Nj.x0;
+            var gos8Ng = sat_Frees8Nj.x1;
+            var xs8Nh = sat_Frees8Nj.x2;
+            var sat_Frees8Ni = (fs8Ne, xs8Nh);
+            var sats8Ni = new Updatable<(Closure x0, Closure x1)>(&sats8Ni_Entry, sat_Frees8Ni);
             return gos8Ng.Apply<Closure, Closure>(sats8Ni);
         }
-        public static Closure sats8Ni_Entry(Closure fs8Ne, Closure xs8Nh)
+        public static Closure sats8Ni_Entry(in (Closure x0, Closure x1) sat_Frees8Ni)
         {
+            var fs8Ne = sat_Frees8Ni.x0;
+            var xs8Nh = sat_Frees8Ni.x1;
             return fs8Ne.Apply<Closure, Closure>(xs8Nh);
         }
         public static (Closure x0, Closure x1) witerates8N3_Entry(Closure ws8N4, Closure ws8N5)
         {
-            var sats8Na = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8Na_Entry), ws8N4, ws8N5);
+            var sat_Frees8Na = (ws8N4, ws8N5);
+            var sats8Na = new Updatable<(Closure x0, Closure x1)>(&sats8Na_Entry, sat_Frees8Na);
             return (ws8N5, sats8Na);
         }
-        public static Closure sats8Na_Entry(Closure ws8N4, Closure ws8N5)
+        public static Closure sats8Na_Entry(in (Closure x0, Closure x1) sat_Frees8Na)
         {
-            var sats8N6 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8N6_Entry), ws8N4, ws8N5);
+            var ws8N4 = sat_Frees8Na.x0;
+            var ws8N5 = sat_Frees8Na.x1;
+            var sat_Frees8N6 = (ws8N4, ws8N5);
+            var sats8N6 = new Updatable<(Closure x0, Closure x1)>(&sats8N6_Entry, sat_Frees8N6);
             var wws8N7 = witerates8N3_Entry(ws8N4, sats8N6);
             var wws8N7_RawTuple = wws8N7;
             var wws8N8 = wws8N7_RawTuple.x0;
             var wws8N9 = wws8N7_RawTuple.x1;
             return new GHC.Types.Cons(wws8N8, wws8N9);
         }
-        public static Closure sats8N6_Entry(Closure ws8N4, Closure ws8N5)
+        public static Closure sats8N6_Entry(in (Closure x0, Closure x1) sat_Frees8N6)
         {
+            var ws8N4 = sat_Frees8N6.x0;
+            var ws8N5 = sat_Frees8N6.x1;
             return ws8N4.Apply<Closure, Closure>(ws8N5);
         }
         public static Closure iterate__Entry(Closure ws8MY, Closure ws8MZ)
@@ -1173,28 +1199,38 @@ namespace GHC
         }
         public static Closure iterate_FB_Entry(Closure cs8MR, Closure fs8MS, Closure x0s8MT)
         {
-            var gos8MU = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos8MU_Entry), cs8MR, fs8MS, null);
-            gos8MU.x2 = gos8MU;
+            var go_Frees8MU = (cs8MR, fs8MS, (Closure)null);
+            var gos8MU = new Fun1<(Closure x0, Closure x1, Closure x2), Closure, Closure>(&gos8MU_Entry, go_Frees8MU);
+            gos8MU.free.x2 = gos8MU;
             return gos8MU.Apply<Closure, Closure>(x0s8MT);
         }
-        public static Closure gos8MU_Entry(Closure cs8MR, Closure fs8MS, Closure gos8MU, Closure xs8MV)
+        public static Closure gos8MU_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees8MU, Closure xs8MV)
         {
-            var x_s8MW = fs8MS.Apply<Closure, Closure>(xs8MV).Eval();
-            var sats8MX = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8MX_Entry), gos8MU, x_s8MW);
+            var cs8MR = go_Frees8MU.x0;
+            var fs8MS = go_Frees8MU.x1;
+            var gos8MU = go_Frees8MU.x2;
+            var x_s8MW = fs8MS.Apply<Closure, Closure>(xs8MV);
+            var sat_Frees8MX = (gos8MU, x_s8MW);
+            var sats8MX = new Updatable<(Closure x0, Closure x1)>(&sats8MX_Entry, sat_Frees8MX);
             return cs8MR.Apply<Closure, Closure, Closure>(xs8MV, sats8MX);
         }
-        public static Closure sats8MX_Entry(Closure gos8MU, Closure x_s8MW)
+        public static Closure sats8MX_Entry(in (Closure x0, Closure x1) sat_Frees8MX)
         {
+            var gos8MU = sat_Frees8MX.x0;
+            var x_s8MW = sat_Frees8MX.x1;
             return gos8MU.Apply<Closure, Closure>(x_s8MW);
         }
         public static (Closure x0, Closure x1) witerate_s8MH_Entry(Closure ws8MI, Closure ws8MJ)
         {
-            var x_s8MK = ws8MI.Apply<Closure, Closure>(ws8MJ).Eval();
-            var sats8MO = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8MO_Entry), ws8MI, x_s8MK);
+            var x_s8MK = ws8MI.Apply<Closure, Closure>(ws8MJ);
+            var sat_Frees8MO = (ws8MI, x_s8MK);
+            var sats8MO = new Updatable<(Closure x0, Closure x1)>(&sats8MO_Entry, sat_Frees8MO);
             return (ws8MJ, sats8MO);
         }
-        public static Closure sats8MO_Entry(Closure ws8MI, Closure x_s8MK)
+        public static Closure sats8MO_Entry(in (Closure x0, Closure x1) sat_Frees8MO)
         {
+            var ws8MI = sat_Frees8MO.x0;
+            var x_s8MK = sat_Frees8MO.x1;
             var wws8ML = witerate_s8MH_Entry(ws8MI, x_s8MK);
             var wws8ML_RawTuple = wws8ML;
             var wws8MM = wws8ML_RawTuple.x0;
@@ -1213,42 +1249,53 @@ namespace GHC
                 case 1:
                     {
                         var lvls8MB = new GHC.Types.Cons(xs8Mx, GHC.Types.nil_DataCon);
-                        var wxss8MC = new Fun<Closure, Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, long, Closure>(wxss8MC_Entry), xs8Mx, lvls8MB, null);
-                        wxss8MC.x2 = wxss8MC;
+                        var wxs_Frees8MC = (xs8Mx, lvls8MB, (Closure)null);
+                        var wxss8MC = new Fun1<(Closure x0, Closure x1, Closure x2), long, Closure>(&wxss8MC_Entry, wxs_Frees8MC);
+                        wxss8MC.free.x2 = wxss8MC;
                         return wxss8MC.Apply<long, Closure>(ys8Mz);
                     }
             }
         }
-        public static Closure wxss8MC_Entry(Closure xs8Mx, Closure lvls8MB, Closure wxss8MC, long wws8MD)
+        public static Closure wxss8MC_Entry(in (Closure x0, Closure x1, Closure x2) wxs_Frees8MC, long wws8MD)
         {
+            var xs8Mx = wxs_Frees8MC.x0;
+            var lvls8MB = wxs_Frees8MC.x1;
+            var wxss8MC = wxs_Frees8MC.x2;
             var dss8ME = wws8MD;
             switch (dss8ME)
             {
                 default:
                     {
-                        var sats8MG = new Updatable<Closure, long>(CLR.LoadFunctionPointer<Closure, long, Closure>(sats8MG_Entry), wxss8MC, dss8ME);
+                        var sat_Frees8MG = (wxss8MC, dss8ME);
+                        var sats8MG = new Updatable<(Closure x0, long x1)>(&sats8MG_Entry, sat_Frees8MG);
                         return new GHC.Types.Cons(xs8Mx, sats8MG);
                     }
                 case 1: { return lvls8MB.Eval(); }
             }
         }
-        public static Closure sats8MG_Entry(Closure wxss8MC, long dss8ME)
+        public static Closure sats8MG_Entry(in (Closure x0, long x1) sat_Frees8MG)
         {
+            var wxss8MC = sat_Frees8MG.x0;
+            var dss8ME = sat_Frees8MG.x1;
             var sats8MF = dss8ME - 1;
             return wxss8MC.Apply<long, Closure>(sats8MF);
         }
         public static Closure repeatFB_Entry(Closure cs8Ms, Closure xs8Mt)
         {
-            var xss8Mu = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(xss8Mu_Entry), cs8Ms, xs8Mt, null);
-            xss8Mu.x2 = xss8Mu; return xss8Mu.Eval();
+            var xs_Frees8Mu = (cs8Ms, xs8Mt, (Closure)null);
+            var xss8Mu = new Updatable<(Closure x0, Closure x1, Closure x2)>(&xss8Mu_Entry, xs_Frees8Mu);
+            xss8Mu.free.x2 = xss8Mu; return xss8Mu.Eval();
         }
-        public static Closure xss8Mu_Entry(Closure cs8Ms, Closure xs8Mt, Closure xss8Mu)
+        public static Closure xss8Mu_Entry(in (Closure x0, Closure x1, Closure x2) xs_Frees8Mu)
         {
+            var cs8Ms = xs_Frees8Mu.x0;
+            var xs8Mt = xs_Frees8Mu.x1;
+            var xss8Mu = xs_Frees8Mu.x2;
             return cs8Ms.Apply<Closure, Closure, Closure>(xs8Mt, xss8Mu);
         }
         public static Closure repeat_Entry(Closure xs8Mq)
         {
-            var xss8Mr = new GHC.Types.Cons(xs8Mq, null);
+            var xss8Mr = new GHC.Types.Cons(xs8Mq, (Closure)null);
             xss8Mr.x1 = xss8Mr; return xss8Mr.Eval();
         }
         public static Closure takeWhile_Entry(Closure dss8Mh, Closure dss8Mi)
@@ -1265,7 +1312,7 @@ namespace GHC
                     {
                         var xs8Mk = wilds8Mj_Cons.x0;
                         var xss8Ml = wilds8Mj_Cons.x1;
-                        var wilds8Mm = dss8Mh.Apply<Closure, Closure>(xs8Mk).Eval();
+                        var wilds8Mm = dss8Mh.Apply<Closure, Closure>(xs8Mk);
                         var wilds8MmTags8Mm = wilds8Mm.Tag;
                         switch (wilds8MmTags8Mm)
                         {
@@ -1278,20 +1325,23 @@ namespace GHC
                             case 2:
                                 {
                                     var wilds8Mm_True = wilds8Mm as GHC.Types.True;
-                                    var sats8Mn = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8Mn_Entry), dss8Mh, xss8Ml);
+                                    var sat_Frees8Mn = (dss8Mh, xss8Ml);
+                                    var sats8Mn = new Updatable<(Closure x0, Closure x1)>(&sats8Mn_Entry, sat_Frees8Mn);
                                     return new GHC.Types.Cons(xs8Mk, sats8Mn);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats8Mn_Entry(Closure dss8Mh, Closure xss8Ml)
+        public static Closure sats8Mn_Entry(in (Closure x0, Closure x1) sat_Frees8Mn)
         {
+            var dss8Mh = sat_Frees8Mn.x0;
+            var xss8Ml = sat_Frees8Mn.x1;
             return takeWhile_Entry(dss8Mh, xss8Ml);
         }
         public static Closure takeWhileFB_Entry(Closure ps8Ma, Closure cs8Mb, Closure ns8Mc, Closure xs8Md, Closure rs8Me)
         {
-            var wilds8Mf = ps8Ma.Apply<Closure, Closure>(xs8Md).Eval();
+            var wilds8Mf = ps8Ma.Apply<Closure, Closure>(xs8Md);
             var wilds8MfTags8Mf = wilds8Mf.Tag;
             switch (wilds8MfTags8Mf)
             {
@@ -1322,7 +1372,7 @@ namespace GHC
                     {
                         var xs8M6 = wilds8M5_Cons.x0;
                         var xs_s8M7 = wilds8M5_Cons.x1;
-                        var wilds8M8 = dss8M3.Apply<Closure, Closure>(xs8M6).Eval();
+                        var wilds8M8 = dss8M3.Apply<Closure, Closure>(xs8M6);
                         var wilds8M8Tags8M8 = wilds8M8.Tag;
                         switch (wilds8M8Tags8M8)
                         {
@@ -1379,7 +1429,8 @@ namespace GHC
                         {
                             default:
                                 {
-                                    var sats8LQ = new Updatable<Closure, long>(CLR.LoadFunctionPointer<Closure, long, Closure>(sats8LQ_Entry), ipvs8LN, dss8LO);
+                                    var sat_Frees8LQ = (ipvs8LN, dss8LO);
+                                    var sats8LQ = new Updatable<(Closure x0, long x1)>(&sats8LQ_Entry, sat_Frees8LQ);
                                     return new GHC.Types.Cons(ipvs8LM, sats8LQ);
                                 }
                             case 1:
@@ -1390,8 +1441,10 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8LQ_Entry(Closure ipvs8LN, long dss8LO)
+        public static Closure sats8LQ_Entry(in (Closure x0, long x1) sat_Frees8LQ)
         {
+            var ipvs8LN = sat_Frees8LQ.x0;
+            var dss8LO = sat_Frees8LQ.x1;
             var sats8LP = dss8LO - 1;
             return wunsafeTakes8LI_Entry(sats8LP, ipvs8LN);
         }
@@ -1411,7 +1464,8 @@ namespace GHC
             {
                 default:
                     {
-                        var sats8LC = new Updatable<Closure, long>(CLR.LoadFunctionPointer<Closure, long, Closure>(sats8LC_Entry), etas8Lv, dss8Lz);
+                        var sat_Frees8LC = (etas8Lv, dss8Lz);
+                        var sats8LC = new Updatable<(Closure x0, long x1)>(&sats8LC_Entry, sat_Frees8LC);
                         return etas8Ls.Apply<Closure, Closure, Closure>(etas8Lu, sats8LC);
                     }
                 case 1:
@@ -1420,8 +1474,10 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8LC_Entry(Closure etas8Lv, long dss8Lz)
+        public static Closure sats8LC_Entry(in (Closure x0, long x1) sat_Frees8LC)
         {
+            var etas8Lv = sat_Frees8LC.x0;
+            var dss8Lz = sat_Frees8LC.x1;
             var sats8LA = dss8Lz - 1;
             var sats8LB = new GHC.Types.IHash(sats8LA);
             return etas8Lv.Apply<Closure, Closure>(sats8LB);
@@ -1448,7 +1504,7 @@ namespace GHC
                     {
                         var xs8L5 = wilds8L4_Cons.x0;
                         var xs_s8L6 = wilds8L4_Cons.x1;
-                        var wilds8L7 = ws8L2.Apply<Closure, Closure>(xs8L5).Eval();
+                        var wilds8L7 = ws8L2.Apply<Closure, Closure>(xs8L5);
                         var wilds8L7Tags8L7 = wilds8L7.Tag;
                         switch (wilds8L7Tags8L7)
                         {
@@ -1461,9 +1517,10 @@ namespace GHC
                             case 2:
                                 {
                                     var wilds8L7_True = wilds8L7 as GHC.Types.True;
-                                    var dss8L8 = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(dss8L8_Entry), ws8L2, xs_s8L6);
-                                    var sats8Lk = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Lk_Entry), dss8L8);
-                                    var sats8Lf = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Lf_Entry), dss8L8);
+                                    var ds_Frees8L8 = (ws8L2, xs_s8L6);
+                                    var dss8L8 = new Updatable<(Closure x0, Closure x1)>(&dss8L8_Entry, ds_Frees8L8);
+                                    var sats8Lk = new Updatable<Closure>(&sats8Lk_Entry, dss8L8);
+                                    var sats8Lf = new Updatable<Closure>(&sats8Lf_Entry, dss8L8);
                                     var sats8Lg = new GHC.Types.Cons(xs8L5, sats8Lf);
                                     return (sats8Lg, sats8Lk);
                                 }
@@ -1471,22 +1528,24 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8Lf_Entry(Closure dss8L8)
+        public static Closure sats8Lf_Entry(in Closure dss8L8)
         {
             var wilds8Lc = dss8L8.Eval();
             var wilds8Lc_Tuple2 = wilds8Lc as GHC.Tuple.Tuple2;
             var yss8Ld = wilds8Lc_Tuple2.x0;
             var zss8Le = wilds8Lc_Tuple2.x1; return yss8Ld.Eval();
         }
-        public static Closure sats8Lk_Entry(Closure dss8L8)
+        public static Closure sats8Lk_Entry(in Closure dss8L8)
         {
             var wilds8Lh = dss8L8.Eval();
             var wilds8Lh_Tuple2 = wilds8Lh as GHC.Tuple.Tuple2;
             var yss8Li = wilds8Lh_Tuple2.x0;
             var zss8Lj = wilds8Lh_Tuple2.x1; return zss8Lj.Eval();
         }
-        public static Closure dss8L8_Entry(Closure ws8L2, Closure xs_s8L6)
+        public static Closure dss8L8_Entry(in (Closure x0, Closure x1) ds_Frees8L8)
         {
+            var ws8L2 = ds_Frees8L8.x0;
+            var xs_s8L6 = ds_Frees8L8.x1;
             var wws8L9 = wspans8L1_Entry(ws8L2, xs_s8L6);
             var wws8L9_RawTuple = wws8L9;
             var wws8La = wws8L9_RawTuple.x0;
@@ -1515,7 +1574,7 @@ namespace GHC
                     {
                         var xs8KF = wilds8KE_Cons.x0;
                         var xs_s8KG = wilds8KE_Cons.x1;
-                        var wilds8KH = ws8KC.Apply<Closure, Closure>(xs8KF).Eval();
+                        var wilds8KH = ws8KC.Apply<Closure, Closure>(xs8KF);
                         var wilds8KHTags8KH = wilds8KH.Tag;
                         switch (wilds8KHTags8KH)
                         {
@@ -1523,9 +1582,10 @@ namespace GHC
                             case 1:
                                 {
                                     var wilds8KH_False = wilds8KH as GHC.Types.False;
-                                    var dss8KI = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(dss8KI_Entry), ws8KC, xs_s8KG);
-                                    var sats8KU = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8KU_Entry), dss8KI);
-                                    var sats8KP = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8KP_Entry), dss8KI);
+                                    var ds_Frees8KI = (ws8KC, xs_s8KG);
+                                    var dss8KI = new Updatable<(Closure x0, Closure x1)>(&dss8KI_Entry, ds_Frees8KI);
+                                    var sats8KU = new Updatable<Closure>(&sats8KU_Entry, dss8KI);
+                                    var sats8KP = new Updatable<Closure>(&sats8KP_Entry, dss8KI);
                                     var sats8KQ = new GHC.Types.Cons(xs8KF, sats8KP);
                                     return (sats8KQ, sats8KU);
                                 }
@@ -1538,22 +1598,24 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8KP_Entry(Closure dss8KI)
+        public static Closure sats8KP_Entry(in Closure dss8KI)
         {
             var wilds8KM = dss8KI.Eval();
             var wilds8KM_Tuple2 = wilds8KM as GHC.Tuple.Tuple2;
             var yss8KN = wilds8KM_Tuple2.x0;
             var zss8KO = wilds8KM_Tuple2.x1; return yss8KN.Eval();
         }
-        public static Closure sats8KU_Entry(Closure dss8KI)
+        public static Closure sats8KU_Entry(in Closure dss8KI)
         {
             var wilds8KR = dss8KI.Eval();
             var wilds8KR_Tuple2 = wilds8KR as GHC.Tuple.Tuple2;
             var yss8KS = wilds8KR_Tuple2.x0;
             var zss8KT = wilds8KR_Tuple2.x1; return zss8KT.Eval();
         }
-        public static Closure dss8KI_Entry(Closure ws8KC, Closure xs_s8KG)
+        public static Closure dss8KI_Entry(in (Closure x0, Closure x1) ds_Frees8KI)
         {
+            var ws8KC = ds_Frees8KI.x0;
+            var xs_s8KG = ds_Frees8KI.x1;
             var wws8KJ = wbreaks8KB_Entry(ws8KC, xs_s8KG);
             var wws8KJ_RawTuple = wws8KJ;
             var wws8KK = wws8KJ_RawTuple.x0;
@@ -1660,7 +1722,7 @@ namespace GHC
                     {
                         var xs8Kd = wilds8Kc_Cons.x0;
                         var xss8Ke = wilds8Kc_Cons.x1;
-                        var wilds8Kf = dss8Ka.Apply<Closure, Closure>(xs8Kd).Eval();
+                        var wilds8Kf = dss8Ka.Apply<Closure, Closure>(xs8Kd);
                         var wilds8KfTags8Kf = wilds8Kf.Tag;
                         switch (wilds8KfTags8Kf)
                         {
@@ -1693,7 +1755,7 @@ namespace GHC
                     {
                         var xs8K6 = wilds8K5_Cons.x0;
                         var xss8K7 = wilds8K5_Cons.x1;
-                        var wilds8K8 = dss8K3.Apply<Closure, Closure>(xs8K6).Eval();
+                        var wilds8K8 = dss8K3.Apply<Closure, Closure>(xs8K6);
                         var wilds8K8Tags8K8 = wilds8K8.Tag;
                         switch (wilds8K8Tags8K8)
                         {
@@ -1726,7 +1788,7 @@ namespace GHC
                     {
                         var ys8JZ = wilds8JY_Cons.x0;
                         var yss8K0 = wilds8JY_Cons.x1;
-                        var wilds8K1 = GHC.Classes.eqEq_Entry(dEqs8JV).Apply<Closure, Closure, Closure>(dss8JW, ys8JZ).Eval();
+                        var wilds8K1 = GHC.Classes.eqEq_Entry(dEqs8JV).Apply<Closure, Closure, Closure>(dss8JW, ys8JZ);
                         var wilds8K1Tags8K1 = wilds8K1.Tag;
                         switch (wilds8K1Tags8K1)
                         {
@@ -1759,7 +1821,7 @@ namespace GHC
                     {
                         var ys8JR = wilds8JQ_Cons.x0;
                         var yss8JS = wilds8JQ_Cons.x1;
-                        var wilds8JT = GHC.Classes.slshEq_Entry(dEqs8JN).Apply<Closure, Closure, Closure>(dss8JO, ys8JR).Eval();
+                        var wilds8JT = GHC.Classes.slshEq_Entry(dEqs8JN).Apply<Closure, Closure, Closure>(dss8JO, ys8JR);
                         var wilds8JTTags8JT = wilds8JT.Tag;
                         switch (wilds8JTTags8JT)
                         {
@@ -1796,7 +1858,7 @@ namespace GHC
                         var wilds8JI_Tuple2 = wilds8JI as GHC.Tuple.Tuple2;
                         var xs8JJ = wilds8JI_Tuple2.x0;
                         var ys8JK = wilds8JI_Tuple2.x1;
-                        var wilds8JL = GHC.Classes.eqEq_Entry(dEqs8JC).Apply<Closure, Closure, Closure>(_keys8JD, xs8JJ).Eval();
+                        var wilds8JL = GHC.Classes.eqEq_Entry(dEqs8JC).Apply<Closure, Closure, Closure>(_keys8JD, xs8JJ);
                         var wilds8JLTags8JL = wilds8JL.Tag;
                         switch (wilds8JLTags8JL)
                         {
@@ -1817,12 +1879,15 @@ namespace GHC
         }
         public static Closure concatMap_Entry(Closure fs8Js, Closure etas8Jt)
         {
-            var gos8Ju = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos8Ju_Entry), fs8Js, null);
-            gos8Ju.x1 = gos8Ju;
+            var go_Frees8Ju = (fs8Js, (Closure)null);
+            var gos8Ju = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos8Ju_Entry, go_Frees8Ju);
+            gos8Ju.free.x1 = gos8Ju;
             return gos8Ju.Apply<Closure, Closure>(etas8Jt);
         }
-        public static Closure gos8Ju_Entry(Closure fs8Js, Closure gos8Ju, Closure dss8Jv)
+        public static Closure gos8Ju_Entry(in (Closure x0, Closure x1) go_Frees8Ju, Closure dss8Jv)
         {
+            var fs8Js = go_Frees8Ju.x0;
+            var gos8Ju = go_Frees8Ju.x1;
             var wilds8Jw = dss8Jv.Eval();
             switch (wilds8Jw)
             {
@@ -1835,14 +1900,17 @@ namespace GHC
                     {
                         var ys8Jx = wilds8Jw_Cons.x0;
                         var yss8Jy = wilds8Jw_Cons.x1;
-                        var sats8JA = new SingleEntry<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8JA_Entry), gos8Ju, yss8Jy);
-                        var sats8Jz = fs8Js.Apply<Closure, Closure>(ys8Jx).Eval();
+                        var sat_Frees8JA = (gos8Ju, yss8Jy);
+                        var sats8JA = new SingleEntry<(Closure x0, Closure x1)>(&sats8JA_Entry, sat_Frees8JA);
+                        var sats8Jz = fs8Js.Apply<Closure, Closure>(ys8Jx);
                         return GHC.Base.plusPlus_Entry(sats8Jz, sats8JA);
                     }
             }
         }
-        public static Closure sats8JA_Entry(Closure gos8Ju, Closure yss8Jy)
+        public static Closure sats8JA_Entry(in (Closure x0, Closure x1) sat_Frees8JA)
         {
+            var gos8Ju = sat_Frees8JA.x0;
+            var yss8Jy = sat_Frees8JA.x1;
             return gos8Ju.Apply<Closure, Closure>(yss8Jy);
         }
         public static Closure concat_Entry(Closure etaB1)
@@ -1863,23 +1931,27 @@ namespace GHC
                     {
                         var ys8Jn = wilds8Jm_Cons.x0;
                         var yss8Jo = wilds8Jm_Cons.x1;
-                        var sats8Jp = new SingleEntry<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Jp_Entry), yss8Jo);
+                        var sats8Jp = new SingleEntry<Closure>(&sats8Jp_Entry, yss8Jo);
                         return GHC.Base.plusPlus_Entry(ys8Jn, sats8Jp);
                     }
             }
         }
-        public static Closure sats8Jp_Entry(Closure yss8Jo)
+        public static Closure sats8Jp_Entry(in Closure yss8Jo)
         {
             return gos8Jk_Entry(yss8Jo);
         }
         public static Closure foldr2_Entry(Closure ks8J6, Closure zs8J7, Closure etas8J8, Closure etas8J9)
         {
-            var gos8Ja = new Fun<Closure, Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(gos8Ja_Entry), ks8J6, zs8J7, null);
-            gos8Ja.x2 = gos8Ja;
+            var go_Frees8Ja = (ks8J6, zs8J7, (Closure)null);
+            var gos8Ja = new Fun2<(Closure x0, Closure x1, Closure x2), Closure, Closure, Closure>(&gos8Ja_Entry, go_Frees8Ja);
+            gos8Ja.free.x2 = gos8Ja;
             return gos8Ja.Apply<Closure, Closure, Closure>(etas8J8, etas8J9);
         }
-        public static Closure gos8Ja_Entry(Closure ks8J6, Closure zs8J7, Closure gos8Ja, Closure dss8Jb, Closure _yss8Jc)
+        public static Closure gos8Ja_Entry(in (Closure x0, Closure x1, Closure x2) go_Frees8Ja, Closure dss8Jb, Closure _yss8Jc)
         {
+            var ks8J6 = go_Frees8Ja.x0;
+            var zs8J7 = go_Frees8Ja.x1;
+            var gos8Ja = go_Frees8Ja.x2;
             var wilds8Jd = dss8Jb.Eval();
             switch (wilds8Jd)
             {
@@ -1898,25 +1970,32 @@ namespace GHC
                                 {
                                     var ipvs8Jh = wilds8Jg_Cons.x0;
                                     var ipvs8Ji = wilds8Jg_Cons.x1;
-                                    var sats8Jj = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8Jj_Entry), gos8Ja, ipvs8Jf, ipvs8Ji);
+                                    var sat_Frees8Jj = (gos8Ja, ipvs8Jf, ipvs8Ji);
+                                    var sats8Jj = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8Jj_Entry, sat_Frees8Jj);
                                     return ks8J6.Apply<Closure, Closure, Closure, Closure>(ipvs8Je, ipvs8Jh, sats8Jj);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats8Jj_Entry(Closure gos8Ja, Closure ipvs8Jf, Closure ipvs8Ji)
+        public static Closure sats8Jj_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8Jj)
         {
+            var gos8Ja = sat_Frees8Jj.x0;
+            var ipvs8Jf = sat_Frees8Jj.x1;
+            var ipvs8Ji = sat_Frees8Jj.x2;
             return gos8Ja.Apply<Closure, Closure, Closure>(ipvs8Jf, ipvs8Ji);
         }
         public static Closure zipWith_Entry(Closure fs8IS, Closure etas8IT, Closure etas8IU)
         {
-            var gos8IV = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos8IV_Entry), fs8IS, null);
-            gos8IV.x1 = gos8IV;
+            var go_Frees8IV = (fs8IS, (Closure)null);
+            var gos8IV = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&gos8IV_Entry, go_Frees8IV);
+            gos8IV.free.x1 = gos8IV;
             return gos8IV.Apply<Closure, Closure, Closure>(etas8IT, etas8IU);
         }
-        public static Closure gos8IV_Entry(Closure fs8IS, Closure gos8IV, Closure dss8IW, Closure dss8IX)
+        public static Closure gos8IV_Entry(in (Closure x0, Closure x1) go_Frees8IV, Closure dss8IW, Closure dss8IX)
         {
+            var fs8IS = go_Frees8IV.x0;
+            var gos8IV = go_Frees8IV.x1;
             var wilds8IY = dss8IW.Eval();
             switch (wilds8IY)
             {
@@ -1941,20 +2020,28 @@ namespace GHC
                                 {
                                     var ipvs8J2 = wilds8J1_Cons.x0;
                                     var ipvs8J3 = wilds8J1_Cons.x1;
-                                    var sats8J5 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8J5_Entry), gos8IV, ipvs8J0, ipvs8J3);
-                                    var sats8J4 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8J4_Entry), fs8IS, ipvs8IZ, ipvs8J2);
+                                    var sat_Frees8J5 = (gos8IV, ipvs8J0, ipvs8J3);
+                                    var sats8J5 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8J5_Entry, sat_Frees8J5);
+                                    var sat_Frees8J4 = (fs8IS, ipvs8IZ, ipvs8J2);
+                                    var sats8J4 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8J4_Entry, sat_Frees8J4);
                                     return new GHC.Types.Cons(sats8J4, sats8J5);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats8J4_Entry(Closure fs8IS, Closure ipvs8IZ, Closure ipvs8J2)
+        public static Closure sats8J4_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8J4)
         {
+            var fs8IS = sat_Frees8J4.x0;
+            var ipvs8IZ = sat_Frees8J4.x1;
+            var ipvs8J2 = sat_Frees8J4.x2;
             return fs8IS.Apply<Closure, Closure, Closure>(ipvs8IZ, ipvs8J2);
         }
-        public static Closure sats8J5_Entry(Closure gos8IV, Closure ipvs8J0, Closure ipvs8J3)
+        public static Closure sats8J5_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8J5)
         {
+            var gos8IV = sat_Frees8J5.x0;
+            var ipvs8J0 = sat_Frees8J5.x1;
+            var ipvs8J3 = sat_Frees8J5.x2;
             return gos8IV.Apply<Closure, Closure, Closure>(ipvs8J0, ipvs8J3);
         }
         public static Closure zip_Entry(Closure dss8II, Closure _bss8IJ)
@@ -1983,7 +2070,8 @@ namespace GHC
                                 {
                                     var ipvs8IO = wilds8IN_Cons.x0;
                                     var ipvs8IP = wilds8IN_Cons.x1;
-                                    var sats8IR = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8IR_Entry), ipvs8IM, ipvs8IP);
+                                    var sat_Frees8IR = (ipvs8IM, ipvs8IP);
+                                    var sats8IR = new Updatable<(Closure x0, Closure x1)>(&sats8IR_Entry, sat_Frees8IR);
                                     var sats8IQ = new GHC.Tuple.Tuple2(ipvs8IL, ipvs8IO);
                                     return new GHC.Types.Cons(sats8IQ, sats8IR);
                                 }
@@ -1991,8 +2079,10 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8IR_Entry(Closure ipvs8IM, Closure ipvs8IP)
+        public static Closure sats8IR_Entry(in (Closure x0, Closure x1) sat_Frees8IR)
         {
+            var ipvs8IM = sat_Frees8IR.x0;
+            var ipvs8IP = sat_Frees8IR.x1;
             return zip_Entry(ipvs8IM, ipvs8IP);
         }
         public static Closure foldr2_left_Entry(Closure _ks8Iw, Closure zs8Ix, Closure _xs8Iy, Closure _rs8Iz, Closure dss8IA)
@@ -2006,13 +2096,16 @@ namespace GHC
                     {
                         var ys8IC = wilds8IB_Cons.x0;
                         var yss8ID = wilds8IB_Cons.x1;
-                        var sats8IE = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8IE_Entry), _rs8Iz, yss8ID);
+                        var sat_Frees8IE = (_rs8Iz, yss8ID);
+                        var sats8IE = new Updatable<(Closure x0, Closure x1)>(&sats8IE_Entry, sat_Frees8IE);
                         return _ks8Iw.Apply<Closure, Closure, Closure, Closure>(_xs8Iy, ys8IC, sats8IE);
                     }
             }
         }
-        public static Closure sats8IE_Entry(Closure _rs8Iz, Closure yss8ID)
+        public static Closure sats8IE_Entry(in (Closure x0, Closure x1) sat_Frees8IE)
         {
+            var _rs8Iz = sat_Frees8IE.x0;
+            var yss8ID = sat_Frees8IE.x1;
             return _rs8Iz.Apply<Closure, Closure>(yss8ID);
         }
         public static Closure zipFB_Entry(Closure cs8Iq, Closure xs8Ir, Closure ys8Is, Closure rs8It)
@@ -2058,7 +2151,8 @@ namespace GHC
                                             {
                                                 var cs8Il = wilds8Ik_Cons.x0;
                                                 var css8Im = wilds8Ik_Cons.x1;
-                                                var sats8Io = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8Io_Entry), ass8Ig, bss8Ij, css8Im);
+                                                var sat_Frees8Io = (ass8Ig, bss8Ij, css8Im);
+                                                var sats8Io = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8Io_Entry, sat_Frees8Io);
                                                 var sats8In = new GHC.Tuple.Tuple3(as8If, bs8Ii, cs8Il);
                                                 return new GHC.Types.Cons(sats8In, sats8Io);
                                             }
@@ -2068,27 +2162,37 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8Io_Entry(Closure ass8Ig, Closure bss8Ij, Closure css8Im)
+        public static Closure sats8Io_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8Io)
         {
+            var ass8Ig = sat_Frees8Io.x0;
+            var bss8Ij = sat_Frees8Io.x1;
+            var css8Im = sat_Frees8Io.x2;
             return zip3_Entry(ass8Ig, bss8Ij, css8Im);
         }
         public static Closure zipWithFB_Entry(Closure cs8I4, Closure fs8I5, Closure xs8I6, Closure ys8I7, Closure rs8I8)
         {
-            var sats8I9 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8I9_Entry), fs8I5, xs8I6, ys8I7);
+            var sat_Frees8I9 = (fs8I5, xs8I6, ys8I7);
+            var sats8I9 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8I9_Entry, sat_Frees8I9);
             return cs8I4.Apply<Closure, Closure, Closure>(sats8I9, rs8I8);
         }
-        public static Closure sats8I9_Entry(Closure fs8I5, Closure xs8I6, Closure ys8I7)
+        public static Closure sats8I9_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8I9)
         {
+            var fs8I5 = sat_Frees8I9.x0;
+            var xs8I6 = sat_Frees8I9.x1;
+            var ys8I7 = sat_Frees8I9.x2;
             return fs8I5.Apply<Closure, Closure, Closure>(xs8I6, ys8I7);
         }
         public static Closure zipWith3_Entry(Closure zs8HK, Closure etas8HL, Closure etas8HM, Closure etas8HN)
         {
-            var gos8HO = new Fun<Closure, Closure>(3, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure, Closure>(gos8HO_Entry), zs8HK, null);
-            gos8HO.x1 = gos8HO;
+            var go_Frees8HO = (zs8HK, (Closure)null);
+            var gos8HO = new Fun3<(Closure x0, Closure x1), Closure, Closure, Closure, Closure>(&gos8HO_Entry, go_Frees8HO);
+            gos8HO.free.x1 = gos8HO;
             return gos8HO.Apply<Closure, Closure, Closure, Closure>(etas8HL, etas8HM, etas8HN);
         }
-        public static Closure gos8HO_Entry(Closure zs8HK, Closure gos8HO, Closure dss8HP, Closure dss8HQ, Closure dss8HR)
+        public static Closure gos8HO_Entry(in (Closure x0, Closure x1) go_Frees8HO, Closure dss8HP, Closure dss8HQ, Closure dss8HR)
         {
+            var zs8HK = go_Frees8HO.x0;
+            var gos8HO = go_Frees8HO.x1;
             var wilds8HS = dss8HP.Eval();
             switch (wilds8HS)
             {
@@ -2125,8 +2229,10 @@ namespace GHC
                                             {
                                                 var cs8HZ = wilds8HY_Cons.x0;
                                                 var css8I0 = wilds8HY_Cons.x1;
-                                                var sats8I2 = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats8I2_Entry), gos8HO, ass8HU, bss8HX, css8I0);
-                                                var sats8I1 = new Updatable<Closure, Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(sats8I1_Entry), zs8HK, as8HT, bs8HW, cs8HZ);
+                                                var sat_Frees8I2 = (gos8HO, ass8HU, bss8HX, css8I0);
+                                                var sats8I2 = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats8I2_Entry, sat_Frees8I2);
+                                                var sat_Frees8I1 = (zs8HK, as8HT, bs8HW, cs8HZ);
+                                                var sats8I1 = new Updatable<(Closure x0, Closure x1, Closure x2, Closure x3)>(&sats8I1_Entry, sat_Frees8I1);
                                                 return new GHC.Types.Cons(sats8I1, sats8I2);
                                             }
                                     }
@@ -2135,12 +2241,20 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8I1_Entry(Closure zs8HK, Closure as8HT, Closure bs8HW, Closure cs8HZ)
+        public static Closure sats8I1_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees8I1)
         {
+            var zs8HK = sat_Frees8I1.x0;
+            var as8HT = sat_Frees8I1.x1;
+            var bs8HW = sat_Frees8I1.x2;
+            var cs8HZ = sat_Frees8I1.x3;
             return zs8HK.Apply<Closure, Closure, Closure, Closure>(as8HT, bs8HW, cs8HZ);
         }
-        public static Closure sats8I2_Entry(Closure gos8HO, Closure ass8HU, Closure bss8HX, Closure css8I0)
+        public static Closure sats8I2_Entry(in (Closure x0, Closure x1, Closure x2, Closure x3) sat_Frees8I2)
         {
+            var gos8HO = sat_Frees8I2.x0;
+            var ass8HU = sat_Frees8I2.x1;
+            var bss8HX = sat_Frees8I2.x2;
+            var css8I0 = sat_Frees8I2.x3;
             return gos8HO.Apply<Closure, Closure, Closure, Closure>(ass8HU, bss8HX, css8I0);
         }
         public static Closure unzip_Entry(Closure etaB1)
@@ -2173,30 +2287,30 @@ namespace GHC
                         var wilds8Hm_Tuple2 = wilds8Hm as GHC.Tuple.Tuple2;
                         var as8Hn = wilds8Hm_Tuple2.x0;
                         var bs8Ho = wilds8Hm_Tuple2.x1;
-                        var dss8Hp = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(dss8Hp_Entry), yss8Hl);
-                        var sats8HB = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8HB_Entry), dss8Hp);
+                        var dss8Hp = new Updatable<Closure>(&dss8Hp_Entry, yss8Hl);
+                        var sats8HB = new Updatable<Closure>(&sats8HB_Entry, dss8Hp);
                         var sats8HC = new GHC.Types.Cons(bs8Ho, sats8HB);
-                        var sats8Hw = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8Hw_Entry), dss8Hp);
+                        var sats8Hw = new Updatable<Closure>(&sats8Hw_Entry, dss8Hp);
                         var sats8Hx = new GHC.Types.Cons(as8Hn, sats8Hw);
                         return (sats8Hx, sats8HC);
                     }
             }
         }
-        public static Closure sats8Hw_Entry(Closure dss8Hp)
+        public static Closure sats8Hw_Entry(in Closure dss8Hp)
         {
             var wilds8Ht = dss8Hp.Eval();
             var wilds8Ht_Tuple2 = wilds8Ht as GHC.Tuple.Tuple2;
             var ass8Hu = wilds8Ht_Tuple2.x0;
             var bss8Hv = wilds8Ht_Tuple2.x1; return ass8Hu.Eval();
         }
-        public static Closure sats8HB_Entry(Closure dss8Hp)
+        public static Closure sats8HB_Entry(in Closure dss8Hp)
         {
             var wilds8Hy = dss8Hp.Eval();
             var wilds8Hy_Tuple2 = wilds8Hy as GHC.Tuple.Tuple2;
             var ass8Hz = wilds8Hy_Tuple2.x0;
             var bss8HA = wilds8Hy_Tuple2.x1; return bss8HA.Eval();
         }
-        public static Closure dss8Hp_Entry(Closure yss8Hl)
+        public static Closure dss8Hp_Entry(in Closure yss8Hl)
         {
             var wws8Hq = wgos8Hh_Entry(yss8Hl);
             var wws8Hq_RawTuple = wws8Hq;
@@ -2236,18 +2350,18 @@ namespace GHC
                         var as8GK = wilds8GJ_Tuple3.x0;
                         var bs8GL = wilds8GJ_Tuple3.x1;
                         var cs8GM = wilds8GJ_Tuple3.x2;
-                        var dss8GN = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(dss8GN_Entry), yss8GI);
-                        var sats8H8 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8H8_Entry), dss8GN);
+                        var dss8GN = new Updatable<Closure>(&dss8GN_Entry, yss8GI);
+                        var sats8H8 = new Updatable<Closure>(&sats8H8_Entry, dss8GN);
                         var sats8H9 = new GHC.Types.Cons(cs8GM, sats8H8);
-                        var sats8H2 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8H2_Entry), dss8GN);
+                        var sats8H2 = new Updatable<Closure>(&sats8H2_Entry, dss8GN);
                         var sats8H3 = new GHC.Types.Cons(bs8GL, sats8H2);
-                        var sats8GW = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8GW_Entry), dss8GN);
+                        var sats8GW = new Updatable<Closure>(&sats8GW_Entry, dss8GN);
                         var sats8GX = new GHC.Types.Cons(as8GK, sats8GW);
                         return (sats8GX, sats8H3, sats8H9);
                     }
             }
         }
-        public static Closure sats8GW_Entry(Closure dss8GN)
+        public static Closure sats8GW_Entry(in Closure dss8GN)
         {
             var wilds8GS = dss8GN.Eval();
             var wilds8GS_Tuple3 = wilds8GS as GHC.Tuple.Tuple3;
@@ -2255,7 +2369,7 @@ namespace GHC
             var bss8GU = wilds8GS_Tuple3.x1;
             var css8GV = wilds8GS_Tuple3.x2; return ass8GT.Eval();
         }
-        public static Closure sats8H2_Entry(Closure dss8GN)
+        public static Closure sats8H2_Entry(in Closure dss8GN)
         {
             var wilds8GY = dss8GN.Eval();
             var wilds8GY_Tuple3 = wilds8GY as GHC.Tuple.Tuple3;
@@ -2263,7 +2377,7 @@ namespace GHC
             var bss8H0 = wilds8GY_Tuple3.x1;
             var css8H1 = wilds8GY_Tuple3.x2; return bss8H0.Eval();
         }
-        public static Closure sats8H8_Entry(Closure dss8GN)
+        public static Closure sats8H8_Entry(in Closure dss8GN)
         {
             var wilds8H4 = dss8GN.Eval();
             var wilds8H4_Tuple3 = wilds8H4 as GHC.Tuple.Tuple3;
@@ -2271,7 +2385,7 @@ namespace GHC
             var bss8H6 = wilds8H4_Tuple3.x1;
             var css8H7 = wilds8H4_Tuple3.x2; return css8H7.Eval();
         }
-        public static Closure dss8GN_Entry(Closure yss8GI)
+        public static Closure dss8GN_Entry(in Closure yss8GI)
         {
             var wws8GO = wgos8GE_Entry(yss8GI);
             var wws8GO_RawTuple = wws8GO;
@@ -2307,14 +2421,17 @@ namespace GHC
                     {
                         var ipvs8Gp = wilds8Go_Cons.x0;
                         var ipvs8Gq = wilds8Go_Cons.x1;
-                        var gos8Gr = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos8Gr_Entry), dOrds8Gm, null);
-                        gos8Gr.x1 = gos8Gr;
+                        var go_Frees8Gr = (dOrds8Gm, (Closure)null);
+                        var gos8Gr = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&gos8Gr_Entry, go_Frees8Gr);
+                        gos8Gr.free.x1 = gos8Gr;
                         return gos8Gr.Apply<Closure, Closure, Closure>(ipvs8Gq, ipvs8Gp);
                     }
             }
         }
-        public static Closure gos8Gr_Entry(Closure dOrds8Gm, Closure gos8Gr, Closure dss8Gs, Closure etas8Gt)
+        public static Closure gos8Gr_Entry(in (Closure x0, Closure x1) go_Frees8Gr, Closure dss8Gs, Closure etas8Gt)
         {
+            var dOrds8Gm = go_Frees8Gr.x0;
+            var gos8Gr = go_Frees8Gr.x1;
             var wilds8Gu = dss8Gs.Eval();
             switch (wilds8Gu)
             {
@@ -2324,13 +2441,17 @@ namespace GHC
                     {
                         var ys8Gv = wilds8Gu_Cons.x0;
                         var yss8Gw = wilds8Gu_Cons.x1;
-                        var sats8Gx = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8Gx_Entry), dOrds8Gm, etas8Gt, ys8Gv);
+                        var sat_Frees8Gx = (dOrds8Gm, etas8Gt, ys8Gv);
+                        var sats8Gx = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8Gx_Entry, sat_Frees8Gx);
                         return gos8Gr.Apply<Closure, Closure, Closure>(yss8Gw, sats8Gx);
                     }
             }
         }
-        public static Closure sats8Gx_Entry(Closure dOrds8Gm, Closure etas8Gt, Closure ys8Gv)
+        public static Closure sats8Gx_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8Gx)
         {
+            var dOrds8Gm = sat_Frees8Gx.x0;
+            var etas8Gt = sat_Frees8Gx.x1;
+            var ys8Gv = sat_Frees8Gx.x2;
             return GHC.Classes.min_Entry(dOrds8Gm).Apply<Closure, Closure, Closure>(etas8Gt, ys8Gv);
         }
         public static Closure sminimums8Gd_Entry(Closure ws8Ge)
@@ -2386,14 +2507,17 @@ namespace GHC
                     {
                         var ipvs8FV = wilds8FU_Cons.x0;
                         var ipvs8FW = wilds8FU_Cons.x1;
-                        var gos8FX = new Fun<Closure, Closure>(2, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure, Closure>(gos8FX_Entry), dOrds8FS, null);
-                        gos8FX.x1 = gos8FX;
+                        var go_Frees8FX = (dOrds8FS, (Closure)null);
+                        var gos8FX = new Fun2<(Closure x0, Closure x1), Closure, Closure, Closure>(&gos8FX_Entry, go_Frees8FX);
+                        gos8FX.free.x1 = gos8FX;
                         return gos8FX.Apply<Closure, Closure, Closure>(ipvs8FW, ipvs8FV);
                     }
             }
         }
-        public static Closure gos8FX_Entry(Closure dOrds8FS, Closure gos8FX, Closure dss8FY, Closure etas8FZ)
+        public static Closure gos8FX_Entry(in (Closure x0, Closure x1) go_Frees8FX, Closure dss8FY, Closure etas8FZ)
         {
+            var dOrds8FS = go_Frees8FX.x0;
+            var gos8FX = go_Frees8FX.x1;
             var wilds8G0 = dss8FY.Eval();
             switch (wilds8G0)
             {
@@ -2403,13 +2527,17 @@ namespace GHC
                     {
                         var ys8G1 = wilds8G0_Cons.x0;
                         var yss8G2 = wilds8G0_Cons.x1;
-                        var sats8G3 = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(sats8G3_Entry), dOrds8FS, etas8FZ, ys8G1);
+                        var sat_Frees8G3 = (dOrds8FS, etas8FZ, ys8G1);
+                        var sats8G3 = new Updatable<(Closure x0, Closure x1, Closure x2)>(&sats8G3_Entry, sat_Frees8G3);
                         return gos8FX.Apply<Closure, Closure, Closure>(yss8G2, sats8G3);
                     }
             }
         }
-        public static Closure sats8G3_Entry(Closure dOrds8FS, Closure etas8FZ, Closure ys8G1)
+        public static Closure sats8G3_Entry(in (Closure x0, Closure x1, Closure x2) sat_Frees8G3)
         {
+            var dOrds8FS = sat_Frees8G3.x0;
+            var etas8FZ = sat_Frees8G3.x1;
+            var ys8G1 = sat_Frees8G3.x2;
             return GHC.Classes.max_Entry(dOrds8FS).Apply<Closure, Closure, Closure>(etas8FZ, ys8G1);
         }
         public static Closure smaximums8FJ_Entry(Closure ws8FK)
@@ -2655,12 +2783,15 @@ namespace GHC
         }
         public static Closure foldr1_Entry(Closure fs8Ei, Closure etas8Ej)
         {
-            var gos8Ek = new Fun<Closure, Closure>(1, CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(gos8Ek_Entry), fs8Ei, null);
-            gos8Ek.x1 = gos8Ek;
+            var go_Frees8Ek = (fs8Ei, (Closure)null);
+            var gos8Ek = new Fun1<(Closure x0, Closure x1), Closure, Closure>(&gos8Ek_Entry, go_Frees8Ek);
+            gos8Ek.free.x1 = gos8Ek;
             return gos8Ek.Apply<Closure, Closure>(etas8Ej);
         }
-        public static Closure gos8Ek_Entry(Closure fs8Ei, Closure gos8Ek, Closure dss8El)
+        public static Closure gos8Ek_Entry(in (Closure x0, Closure x1) go_Frees8Ek, Closure dss8El)
         {
+            var fs8Ei = go_Frees8Ek.x0;
+            var gos8Ek = go_Frees8Ek.x1;
             var wilds8Em = dss8El.Eval();
             switch (wilds8Em)
             {
@@ -2679,15 +2810,18 @@ namespace GHC
                                 {
                                     var ipvs8Eq = wilds8Ep_Cons.x0;
                                     var ipvs8Er = wilds8Ep_Cons.x1;
-                                    var sats8Es = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8Es_Entry), gos8Ek, wilds8Ep);
+                                    var sat_Frees8Es = (gos8Ek, wilds8Ep);
+                                    var sats8Es = new Updatable<(Closure x0, Closure x1)>(&sats8Es_Entry, sat_Frees8Es);
                                     return fs8Ei.Apply<Closure, Closure, Closure>(xs8En, sats8Es);
                                 }
                         }
                     }
             }
         }
-        public static Closure sats8Es_Entry(Closure gos8Ek, Closure wilds8Ep)
+        public static Closure sats8Es_Entry(in (Closure x0, Closure x1) sat_Frees8Es)
         {
+            var gos8Ek = sat_Frees8Es.x0;
+            var wilds8Ep = sat_Frees8Es.x1;
             return gos8Ek.Apply<Closure, Closure>(wilds8Ep);
         }
         public static Closure lvls8Eg_Entry()
@@ -2709,13 +2843,17 @@ namespace GHC
                     {
                         var ipvs8Eb = wilds8Ea_Cons.x0;
                         var ipvs8Ec = wilds8Ea_Cons.x1;
-                        var xs_s8Ed = new Updatable<Closure, Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure, Closure>(xs_s8Ed_Entry), ipvs8Eb, ipvs8Ec, null);
-                        xs_s8Ed.x2 = xs_s8Ed; return xs_s8Ed.Eval();
+                        var xs__Frees8Ed = (ipvs8Eb, ipvs8Ec, (Closure)null);
+                        var xs_s8Ed = new Updatable<(Closure x0, Closure x1, Closure x2)>(&xs_s8Ed_Entry, xs__Frees8Ed);
+                        xs_s8Ed.free.x2 = xs_s8Ed; return xs_s8Ed.Eval();
                     }
             }
         }
-        public static Closure xs_s8Ed_Entry(Closure ipvs8Eb, Closure ipvs8Ec, Closure xs_s8Ed)
+        public static Closure xs_s8Ed_Entry(in (Closure x0, Closure x1, Closure x2) xs__Frees8Ed)
         {
+            var ipvs8Eb = xs__Frees8Ed.x0;
+            var ipvs8Ec = xs__Frees8Ed.x1;
+            var xs_s8Ed = xs__Frees8Ed.x2;
             return GHC.Base.plusPlus_DollsPlusPlus_Entry(xs_s8Ed, ipvs8Eb, ipvs8Ec);
         }
         public static Closure lvls8E7_Entry()
@@ -2731,9 +2869,9 @@ namespace GHC
             var wws8E3 = ws8E2.Eval();
             var wws8E3_IHash = wws8E3 as GHC.Types.IHash;
             var wws8E4 = wws8E3_IHash.x0;
-            return wBangBangs8DW_Entry(ws8E1, wws8E4);
+            return wBangBang_Entry(ws8E1, wws8E4);
         }
-        public static Closure wBangBangs8DW_Entry(Closure ws8DX, long wws8DY)
+        public static Closure wBangBang_Entry(Closure ws8DX, long wws8DY)
         {
             var lwilds8DZ = (wws8DY < 0) ? 1 : 0;
             switch (lwilds8DZ)
@@ -2784,7 +2922,7 @@ namespace GHC
         }
         public static Closure negIndex_Entry()
         {
-            var sats8DH = GHC.Base.plusPlus_Entry(GHC.List.prel_list_str, lvls8DF).Eval();
+            var sats8DH = GHC.Base.plusPlus_Entry(GHC.List.prel_list_str, lvls8DF);
             return GHC.Err.errorWithoutStackTrace_Entry<Closure>(sats8DH);
         }
         public static Closure lvls8DF_Entry()
@@ -2793,11 +2931,11 @@ namespace GHC
         }
         public static Closure errorEmptyList_Entry(Closure funs8DB)
         {
-            var sats8DC = new SingleEntry<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8DC_Entry), funs8DB);
-            var sats8DD = GHC.Base.plusPlus_Entry(GHC.List.prel_list_str, sats8DC).Eval();
+            var sats8DC = new SingleEntry<Closure>(&sats8DC_Entry, funs8DB);
+            var sats8DD = GHC.Base.plusPlus_Entry(GHC.List.prel_list_str, sats8DC);
             return GHC.Err.errorWithoutStackTrace_Entry<Closure>(sats8DD);
         }
-        public static Closure sats8DC_Entry(Closure funs8DB)
+        public static Closure sats8DC_Entry(in Closure funs8DB)
         {
             return GHC.Base.plusPlus_Entry(funs8DB, lvls8Dx);
         }
@@ -2823,13 +2961,16 @@ namespace GHC
                     {
                         var zs8Dt = wilds8Ds_Cons.x0;
                         var zss8Du = wilds8Ds_Cons.x1;
-                        var sats8Dv = new Updatable<Closure, Closure>(CLR.LoadFunctionPointer<Closure, Closure, Closure>(sats8Dv_Entry), zs8Dt, zss8Du);
+                        var sat_Frees8Dv = (zs8Dt, zss8Du);
+                        var sats8Dv = new Updatable<(Closure x0, Closure x1)>(&sats8Dv_Entry, sat_Frees8Dv);
                         return new GHC.Types.Cons(dss8Dq, sats8Dv);
                     }
             }
         }
-        public static Closure sats8Dv_Entry(Closure zs8Dt, Closure zss8Du)
+        public static Closure sats8Dv_Entry(in (Closure x0, Closure x1) sat_Frees8Dv)
         {
+            var zs8Dt = sat_Frees8Dv.x0;
+            var zss8Du = sat_Frees8Dv.x1;
             return poly_init_s8Dp_Entry(zs8Dt, zss8Du);
         }
         public static Closure splitAt_Entry(Closure ns8Dc, Closure lss8Dd)
@@ -2884,9 +3025,10 @@ namespace GHC
                         {
                             default:
                                 {
-                                    var dss8CP = new Updatable<Closure, long>(CLR.LoadFunctionPointer<Closure, long, Closure>(dss8CP_Entry), ipvs8CL, dss8CO);
-                                    var sats8D3 = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8D3_Entry), dss8CP);
-                                    var sats8CY = new Updatable<Closure>(CLR.LoadFunctionPointer<Closure, Closure>(sats8CY_Entry), dss8CP);
+                                    var ds_Frees8CP = (ipvs8CL, dss8CO);
+                                    var dss8CP = new Updatable<(Closure x0, long x1)>(&dss8CP_Entry, ds_Frees8CP);
+                                    var sats8D3 = new Updatable<Closure>(&sats8D3_Entry, dss8CP);
+                                    var sats8CY = new Updatable<Closure>(&sats8CY_Entry, dss8CP);
                                     var sats8CZ = new GHC.Types.Cons(ipvs8CK, sats8CY);
                                     return (sats8CZ, sats8D3);
                                 }
@@ -2899,22 +3041,24 @@ namespace GHC
                     }
             }
         }
-        public static Closure sats8CY_Entry(Closure dss8CP)
+        public static Closure sats8CY_Entry(in Closure dss8CP)
         {
             var wilds8CV = dss8CP.Eval();
             var wilds8CV_Tuple2 = wilds8CV as GHC.Tuple.Tuple2;
             var xs_s8CW = wilds8CV_Tuple2.x0;
             var xs__s8CX = wilds8CV_Tuple2.x1; return xs_s8CW.Eval();
         }
-        public static Closure sats8D3_Entry(Closure dss8CP)
+        public static Closure sats8D3_Entry(in Closure dss8CP)
         {
             var wilds8D0 = dss8CP.Eval();
             var wilds8D0_Tuple2 = wilds8D0 as GHC.Tuple.Tuple2;
             var xs_s8D1 = wilds8D0_Tuple2.x0;
             var xs__s8D2 = wilds8D0_Tuple2.x1; return xs__s8D2.Eval();
         }
-        public static Closure dss8CP_Entry(Closure ipvs8CL, long dss8CO)
+        public static Closure dss8CP_Entry(in (Closure x0, long x1) ds_Frees8CP)
         {
+            var ipvs8CL = ds_Frees8CP.x0;
+            var dss8CO = ds_Frees8CP.x1;
             var sats8CQ = dss8CO - 1;
             var sats8CR = new GHC.Types.IHash(sats8CQ);
             var wws8CS = wsplitAt_s8CG_Entry(sats8CR, ipvs8CL);
