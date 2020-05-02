@@ -48,7 +48,7 @@ public unsafe static class Primes
     }
     public static Closure mains5l7_Entry(GHC.Prim.Void void0E)
     {
-        var ds1s5l9 = wws5kP_Entry(100, 500, GHC.Prim.voidHash);
+        var ds1s5l9 = wws5kP_Entry(100, 1500, GHC.Prim.voidHash);
         var ipv1s5lb = ds1s5l9; return GHC.Tuple.unit_DataCon;
     }
     public static Closure ws5kZ_Entry(Closure ws5l0, Closure ws5l1, GHC.Prim.Void void0E)

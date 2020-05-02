@@ -73,7 +73,7 @@ public unsafe static class DigitsE1
     }
     public static Closure mains5yo_Entry(GHC.Prim.Void void0E)
     {
-        var sats5yq = wtakeDigitss5xZ_Entry(50, DigitsE1.eContFrac);
+        var sats5yq = wtakeDigitss5xZ_Entry(150, DigitsE1.eContFrac);
         var wilds5yr = gos5yi_Entry(sats5yq);
         var wilds5yrTags5yr = wilds5yr.Tag;
         switch (wilds5yrTags5yr)
