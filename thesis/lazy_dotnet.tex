@@ -465,10 +465,10 @@ If we now unpack \texttt{Just v'} and evaluate \texttt{v'} we will obtain the va
 This chapter presents an implementation of a lazy runtime environment
 on the .NET platform.
 The runtime is called \textit{Lazer} inspired by Razor and Blazor,
-web page frontend scripting systems that use C\shrp{}.
-Lazer has been implemented in C\shrp{} with some
-extensions to allow emitting certain Common Intermediate Language (CIL)
-instructions not available in the regular compiler.
+web page frontend scripting systems for the .NET platform.
+Lazer has been implemented in C\shrp{}.
+It uses a C\shrp{} 9.0 feature called \textit{function delegates}
+that at the time of writing was not yet released.
 
 The implementation is best explained by following the example code execution
 from chapter \myref{s:example_eval}.
@@ -501,6 +501,7 @@ In practice this means data constructors represent .NET classes.
         public I(int x0) {
             this.x0 = x0;
         }
+        public override int Tag => 1;
     }
 \end{verbatim}
 
@@ -528,7 +529,7 @@ means of type erasure.
 
 \subsection{Data superclass}
 
-Data constructors implemented in C\shrp{} like \texttt{I} defined above
+Data constructors implemented in C\shrp{}, like \texttt{I} defined above,
 will share some common properties. Thus, they will extend the \texttt{Data} class.
 As mentioned in \myref{s:closures}, data constructors are
 also closures, but very simple ones, having a simple
@@ -538,12 +539,11 @@ also closures, but very simple ones, having a simple
     public abstract partial class Data : Closure
     {
         public override Closure Eval() => this;
-        public override int Tag => 1;
     }
 \end{verbatim}
 
-The \texttt{Data} class also provides a default \texttt{Tag}
-value so that single constructor types don't have to override it.
+The \texttt{Data} class doesn't override the \texttt{Tag}
+property, thus forcing its subclasses to do so.
 
 \subsection{Data constructor definition}
 
@@ -597,8 +597,18 @@ class that is initialized with a reference to a static method.
 
 The first approach means that for every computation a type has to be created.
 Those types are loaded by the .NET runtime before first use and incur a small
-cost of initialization. With a huge amount of types this may visibly impact performance.
-There are additional problems with function application techniques.
+cost of initialization. With a huge amount of types this may visibly impact performance,
+not to mention the memory usage by their metadata.
+
+There are additional problems with function application techniques
+when working with overloaded instance methods,
+because there has to be an abstract method in the
+base class for each overloaded method.
+In comparison, given $n$ generic \texttt{Apply} methods for universal
+classes, there would have to be $k^n$ methods
+for non-universal classes, where $k$ is the number of
+distinct types used (this could be avoided by
+designing the runtime a bit differently, see \myref{s:Hunt}).
 Therefore, the second approach has been chosen for the Lazer runtime.
 
 \subsection{Computation as a static method}
@@ -617,7 +627,8 @@ The \verb|[RetType]| is the return type of the method,
 equivalent to the type of \verb|[Expression]|
 (for all lifted types it's \texttt{Closure}).
 The \verb|[Name]| is the bound identifier of the computation.
-The first $k$ arguments are the free variables of the computation.
+The first $k$ arguments are the free variables of the computation
+(see \myref{s:updatables} for a practical optimization).
 The following $n$ arguments are formal parameters, if the computation represents a function.
 
 \subsection{Computing a data cell}\label{s:compute_data}
@@ -635,7 +646,7 @@ This can be represented in C\shrp{} by the following methods:
             case 0:
                 return new Nothing();
             default:
-                var v = new Updatable<Closure, int>(divide_v_Entry, x, yVal);
+                var v = new Updatable<Closure, int>(&divide_v_Entry, x, yVal);
                 return new Just(v);
         }
     }
@@ -664,20 +675,20 @@ and partially applies function \texttt{bind} to the created function.
 This can be represented in C\shrp{} by the following methods:
 
 \begin{verbatim}
-    public static Function bind = new Fun(2, bind_Entry);
+    public static Function bind = new Fun2<Closure,Closure,Closure>(&bind_Entry);
     ...
     public static Closure add_Entry(Closure n) {
-        var f = new Fun<Closure>(1, add_f_Entry, n);
+        var f = new Fun1<Closure, Closure, Closure>(&add_f_Entry, n);
         return bind.Apply<Closure,Closure>(f);
     }
     public static Closure add_f_Entry(Closure n, Closure x) {
-        var v = new Updatable<Closure, Closure>(Int_add, x, n);
+        var v = new Updatable<Closure, Closure>(&Int_add, x, n);
         return new Just(v);
     }
 \end{verbatim}
 
-The \texttt{Fun} class takes a reference to the computation method
-and the function's arity -- number of arguments.
+The \texttt{FunN} class takes a reference to the computation method.
+The \texttt{N} in its name represents the function's arity -- number of arguments it can be applied to.
 It can also capture free variables,
 as is the case here when we pass \texttt{n} to the constructor.
 The \texttt{Apply} method checks the number of provided
@@ -829,7 +840,6 @@ From the previous section follow the definitions of  abstract \texttt{Computatio
     }
 \end{verbatim}
 
-\newpage
 \subsection{Abstract Function class}\label{s:function_class}
 
 While previous abstractions were pretty straight forward,
@@ -858,19 +868,16 @@ There are three possible situations:
             => throw new NotSupportedException(
                             "Accessing Tag on a function.");
         
-        public abstract int Arity { get; }
-            
-        public abstract R ApplyImpl<A0, R>(A0 a0);
-        public abstract R ApplyImpl<A0, A1, R>(A0 a0, A1 a1);
+        public int Arity;
         ...
     }
 \end{verbatim}
 
 The above part of the \texttt{Function} class implements \texttt{Eval}
 and \texttt{Tag} inherited from \texttt{Closure} and introduces
-new members: \texttt{Arity} property and \texttt{ApplyImpl} methods.
+a new member: the \texttt{Arity} field.
 Below is one of the overloaded \texttt{Apply} methods that shows
-the three situations outlined above:
+two of the situations outlined above:
 
 \begin{verbatim}
     public override R Apply<A0, A1, R>(A0 a0, A1 a1)
@@ -880,17 +887,21 @@ the three situations outlined above:
         {
             case 1:
                 // too few arguments
-                h = this.ApplyImpl<A0, Closure>(a0);
+                h = this.Apply<A0, Closure>(a0);
                 return h.Apply<A1, R>(a1);
-            case 2:
-                // exact number of arguments
-                return this.ApplyImpl<A0, A1, R>(a0, a1);
             default:
                 // too many arguments
-                return (R)(object)new PAP<A0, A1>(this, a0, a1);
+                var pap = new PAP<A0, A1>(this, a0, a1);
+                return Unsafe.As<R>(ref pap);
         }
     }
 \end{verbatim}
+
+The third case, exact number of arguments, is handled
+by an overload in the subclass for the given arity.
+This way when \texttt{Apply} is called with the right number
+of arguments, the proper code gets executed right away,
+without the need of another indirection.
 
 The partial application object holds a reference to the
 applied function and captured arguments.
@@ -976,7 +987,7 @@ The \texttt{Compute} method is implemented in subclasses
 and performs the actual computation.
 It's result is saved in the \texttt{ind} field.
 But during the computation \texttt{ind} is assigned a special
-value called the black hole that allows detecting
+value called the \textit{black hole} that allows detecting
 invalid self-references (computation loops).
 If the computation of thunk tries to evaluate itself
 again it will end up evaluating the black hole, which stops
@@ -996,59 +1007,6 @@ However, the currently used implementation is extremely simple:
 
 For explanation on the \texttt{Cleanup} method, see \myref{s:updatables}.
 
-\subsection{CLR intrinsic functions}
-
-The user code examples shown in \myref{s:computations}
-have been simplified for clarity. However,
-whenever a reference to a method is mentioned, it is
-understood as a pointer to the method's entry point.
-
-The .NET's Common Language Runtime (CLR) provides primitives
-that make it possible to obtain a pointer to a method
-and to later call this method indirectly via that pointer.
-Unfortunately, the C\shrp{} language doesn't provide means to
-utilize those features. As such, a modified version of the compiler
-had to be used that includes a sort of a hack that
-enables compiling C\shrp{} code with those CLR intrinsic instructions.
-
-Placing \texttt{CompilerIntrinsicAttribute} on a 
-\texttt{static unsafe extern} method named after
-the desired instruction tells the modified compiler to emit the
-instruction rather then a method call.
-This runtime uses the following two functions:
-
-\begin{itemize}
-    \item \texttt{LoadFunctionPointer} -- represents the 
-    \texttt{ldftn} instruction and takes a method group as a parameter;
-    \item \texttt{TailCallIndirectGeneric} -- represents a 
-    call to a generated method whose body is composed of a \texttt{calli} 
-    instruction with a \texttt{.tail} modifier --
-    this method takes arguments followed by the function pointer
-    to be called with those arguments.
-\end{itemize}
-
-The C\shrp{} language provides a type safe mechanism for manipulating
-functions -- delegates. However, due to the overhead of
-additional allocations and checks on delegate creation they
-don't seem to be a good fit for an efficient runtime implementation. For more details see \myref{perf:fun_pointers}.
-
-\begin{verbatim}
-    [CompilerIntrinsic]
-    public static unsafe extern void*
-        LoadFunctionPointer<T1, T2>(Func<T1, T2> fun);
-
-    [CompilerIntrinsic]
-    public static unsafe extern U
-        TailCallIndirectGeneric<T0, U>(T0 x0, void* funPtr);
-\end{verbatim}
-
-It is worth mentioning that the RyuJIT, which generates
-machine code during execution of a .NET program,
-can in fact optimize method calls in tail position
-to proper tail calls, even without the \texttt{.tail}
-modifier. In order to do so, the program has to be compiled
-in Release mode or with the optimization flag enabled.
-
 \subsection{Universal classes}
 
 In order to limit the amount of types, rather than having
@@ -1058,8 +1016,6 @@ indirect calls to it.
 They also have generic type parameters to allow creating
 type safe and efficient instances with customized fields.
 
-% point to performance difference
-
 \subsubsection{Updatable class family}\label{s:updatables}
 
 Section \myref{s:compute_data} presented usage of an Updatable class.
@@ -1067,25 +1023,41 @@ It is a subclass of \texttt{Thunk} that takes a function
 pointer and free variables. When evaluated, it performs an
 indirect call to the function pointer with those free variables as arguments.
 
-There is an \texttt{Updatable} class per number of free variables. The types of free variables are provided in generic parameters. Below is an example of such a class:
+In order to simplify these classes, rather than having
+an \texttt{Updatable} class per number of free variables,
+only two classes are created:
+one without free variables and one with a single generic
+field. However, this field can be a structure with multiple
+subfields, thus allowing for more free variables.
+This field is passed to the method by reference, rather
+than by value, which saves some time as there's no need to copy the structure onto the stack.
 
 \begin{verbatim}
-    public unsafe class Updatable<T0> : Thunk
+    public unsafe class Updatable : Thunk
     {
-        protected internal void* f;
-        public T0 x0;
+        private delegate*<Closure> f;
 
-        public Updatable(void* f, T0 x0)
+        public Updatable(delegate*<Closure> f)
+            => this.f = f;
+
+        protected override Closure Compute() => f();
+    }
+
+    public unsafe class Updatable<F> : Thunk
+    {
+        private delegate*<in F, Closure> f;
+        public F free;
+
+        public Updatable(delegate*<in F, Closure> f, F free)
         {
             this.f = f;
-            this.x0 = x0;
+            this.free = free;
         }
 
-        protected override Closure Compute()
-            => CLR.TailCallIndirectGeneric<T0, Closure>(x0, f);
+        protected override Closure Compute() => f(in free);
         
-        protected internal override void Cleanup()
-            => this.x0 = default;
+        protected override void Cleanup()
+            => this.free = default;
     }
 \end{verbatim}
 
@@ -1094,40 +1066,41 @@ any references to other heap allocated objects, so that
 they can be collected by the Garbage Collector (GC).
 Cleanup is invoked after the computation has finished
 and those free variables are no longer needed.
-It's currently not possible to only set object references to null,
-but all values are zeroed, because of the generic nature
-of the class.
+The JIT can use SIMD instructions to clear the whole
+structure in one swoop.
 
 \subsubsection{Fun class family}
 
-Similarly to \texttt{Updatable} classes the \texttt{Fun}
+Similarly to \texttt{Updatable} classes the \texttt{FunN}
 classes take a function pointer and free variables.
-They also take the arity of the function.
 Below is an example of such a class:
 
 \begin{verbatim}
-    public unsafe class Fun<F0> : Fun
+    public unsafe class Fun1<F, T0, R> : Function
     {
-        public F0 x0;
+        private delegate*<in F, T0, R> funPtr;
+        public F free;
 
-        public Fun(int arity, void* f, F0 x0) : base(arity, f)
-            => this.x0 = x0;
+        public Fun1(delegate*<in F, T0, R> f, F free)
+        {
+            this.Arity = 1;
+            this.funPtr = f;
+            this.free = free;
+        }
 
         public override R ApplyImpl<A0, R>(A0 a0)
-            => CLR.TailCallIndirectGeneric<F0, A0, R>(x0, a0, f);
-
-        public override R ApplyImpl<A0, A1, R>(A0 a0, A1 a1)
-            => CLR.TailCallIndirectGeneric<F0, A0, A1, R>(x0, a0, a1, f);
-        ...
+        {
+            var fun = (delegate*<in F,A0,R>)funPtr;
+            return fun(in free,a0);
+        }
     }
 \end{verbatim}
 
-The base \texttt{Fun} class without free variables declares
-the protected fields for the function pointer and arity.
-As was described in section \myref{s:function_class},
-the universal classes provide all the \texttt{ApplyImpl} methods,
-but depending on the \texttt{Arity} property,
-only the one with the exact number of arguments may be invoked.
+The function delegate is strongly typed and therefore
+requires the \texttt{FunN} to have generic parameters
+that match the methods signature. Moreover, compared
+to \textit{normal} delegates it can only point at a
+static method, but provides superior performance (see \myref{perf:fun_pointers}).
 
 \subsubsection{SingleEntry class family}
 
@@ -1153,25 +1126,24 @@ is free to be collected by the GC.
 Below is an example of such a class:
 
 \begin{verbatim}
-    public unsafe class SingleEntry<T0> : Computation
+    public unsafe class SingleEntry<F> : Computation
     {
-        protected internal void* f;
-        public T0 x0;
+        private delegate*<in F, Closure> f;
+        public F free;
 
-        public SingleEntry(void* f, T0 x0)
+        public SingleEntry(delegate*<in F, Closure> f, F free)
         {
             this.f = f;
-            this.x0 = x0;
+            this.free = free;
         }
 
-        public override Closure Eval()
-            => CLR.TailCallIndirectGeneric<T0, Closure>(x0, f);
+        public override Closure Eval() => f(in free);
     }
 \end{verbatim}
 
 \subsubsection{Number of universal classes}
 
-How many classes is enough? It is a hard question, because Haskell
+How many predefined classes is enough? It is a hard question, because Haskell
 programs have no limitation on the number of free variables in an
 expression. Same goes for number of function arguments.
 An approximation based on a few sample programs can be made.
@@ -1179,14 +1151,14 @@ In particular, compiling the Prelude, that is Haskell's standard
 library, should give a good view of most Haskell programs.
 
 In my efforts of compiling Prelude, described below, I came across
-functions with up to 8 free variables and up to 6 arguments to apply to.
+functions with up to 8 free variables and up to 7 arguments to apply to.
 For thunks it was 11 free variables.
-
-In order to simplify work on the runtime, and because all those classes
-are quite similar, it was possible to write a small class generating script.
-It takes the number of free variables and function arguments and renders
-the bodies of all universal classes, as well as \texttt{Apply} methods
-of abstract classes and the CLR instrinsic methods.
+With the structured free variables it is possible to just have
+\begin{itemize}
+    \item 2 updatable classes,
+    \item 2 single entry classes,
+    \item $2n$ function classes, where $n$ is the number of \texttt{Apply} methods.
+\end{itemize}
 
 \section{Standard library}
 
@@ -1216,8 +1188,10 @@ running some basic Haskell programs. Compiled modules include
     \item \texttt{GHC.Classes} - \texttt{Eq} and \texttt{Ord} type classes with
             instances for basic types.
     \item \texttt{GHC.Maybe} - the optional type with \texttt{Eq} and \texttt{Ord} instances.
+    \item \texttt{GHC.Char} - creating characters from integers.
     \item \texttt{GHC.Num} - the \texttt{Num} type class with instances for \texttt{Int},
             \texttt{Word} and \texttt{Integer}.
+    \item \texttt{GHC.Enum} - the \texttt{Bounded} and \texttt{Enum} type classes with some instances.
     \item \texttt{GHC.List} - list operations.
     \item \texttt{GHC.Base} - most common operations and type classes.
     \item \texttt{GHC.Integer.Type} - arbitrary precision integer arithmetics.
@@ -1363,7 +1337,7 @@ and then call the static method \texttt{call}.
 \begin{verbatim}
     // Lazer_map.cs
     public static Function map = 
-        new Fun(2, CLR.LoadFunctionPointer(map_Entry));
+        new Fun2<Closure,Closure,Closure>(&map_Entry);
 
     public static Closure map_Entry(Closure f, Closure l)
     {
@@ -1376,28 +1350,32 @@ and then call the static method \texttt{call}.
                 {
                     var h = l_Cons.x0;
                     var t = l_Cons.x1;
-                    var tail = Updatable.Make(
-                        CLR.LoadFunctionPointer(map_Entry), f, t);
-                    var head = Updatable.Make(
-                        CLR.LoadFunctionPointer(map_head_Entry), f, h);
+                    var tail = new Updatable<Closure,Closure>(
+                        &map_tail_Entry, (f, t));
+                    var head = new Updatable<Closure,Closure>(
+                        &map_head_Entry, (f, h));
                     return new Cons(head, tail);
                 }
         }
     }
-    public static Closure map_head_Entry(Closure f, Closure h)
+    public static Closure map_tail_Entry(in (Closure f, Closure t) free)
     {
-        return f.Apply<Closure,Closure>(h);
+        return map_Entry(free.f, free.t);
+    }
+    public static Closure map_head_Entry(in (Closure f, Closure h) free)
+    {
+        return free.f.Apply<Closure,Closure>(free.h);
     }
 \end{verbatim}
 
 The main difference is that there is no special class for map,
-but rather a universal class \texttt{Fun} is instantiated
+but rather a universal class \texttt{Fun2} is instantiated
 with the pointer to the static computation method.
 The same goes for the thunks created in the Cons branch.
 Thanks to tail calls no trampolines are involved, which
 increases performance.
 
-The \textit{eval/apply} model has been implemented a bit differently
+The \textit{eval/apply} model has been implemented just a bit differently
 in Eta in that there are abstract subclasses \texttt{FunctionN}
 of the base class \texttt{Function} that implement all
 apply methods except \texttt{applyN} that is implemented
@@ -1455,7 +1433,7 @@ where optimizations can be done:
             or by using \textit{eval/apply} method.
 \end{itemize}
 
-\section{Haskell.NET}
+\section{Haskell.NET}\label{s:HSNet}
 
 In 2005 appeared the first project to bring Haskell
 to the .NET platform.
@@ -1489,13 +1467,13 @@ explicit closure definitions that are easy to translate.
 
 However, it compiled Haskell straight to CIL rather than to C\shrp{}.
 This results in more flexibility in the compiler and removes the
-need to use a secondary compiler (especially a modified one).
+need to use a secondary compiler.
 The downside is the amount of work that has to be put into
 creating this compiler and its optimizations.
 Additionally, using C\shrp{} for Lazer cheaply allowed for error debugging
 using existing tools.
 
-\section{Oliver Hunt's work}
+\section{Oliver Hunt's work}\label{s:Hunt}
 
 In 2006 Oliver Hunt published his Master's paper
 on \textit{,,The Provision of Non-Strictness, Higher Kinded Types
@@ -1583,7 +1561,7 @@ However, the main motivation for this work was not to be different, but
 to provide a complete working runtime to the reader. The classes defined
 in \myref{s:runtime_impl} are the exact classes the runtime uses. Therefore,
 even if some time passes and the runtime's source code disappears, it can be recreated
-from this paper (except for the modified C\shrp{} compiler).
+from this paper.
 
 % ##########################
 \chapter{Performance}\label{r:perf}
@@ -1622,13 +1600,6 @@ sealed types. However, the sealed data constructors had a
 base class that the cast was made to. And the base class
 obviously could not be sealed.
 
-The current implementation of the runtime uses universal
-classes that perform indirect calls.
-In fact every method call on an object is already an indirect call.
-Too many indirections can be detrimental to the programs performance.
-However, currently the compiler doesn't optimize those, because implementing
-optimizations takes time.
-
 \subsection{Garbage Collection}
 
 In .NET there is a global GC that stops all threads
@@ -1642,7 +1613,7 @@ spent in GC and the program is faster.
 
 The way the GC works is that it traverses the stack looking
 for pointers. References between objects form a graph with
-the stack being a root. If there isn't a path from an object
+the stack being a root (and static objects). If there isn't a path from an object
 to the root, then this object can be collected.
 A side effect of this implementation is that
 non-tail recursive functions that grow the stack
@@ -1674,7 +1645,7 @@ the O(1) cost of push and pop operations.
 It often happens that we perceive one way as faster then the other,
 but in reality things are different. The best way to handle that
 is to run performance tests, because those usually don't lie.
-Below are three tests I felt necessary to present to support
+Below are four tests I felt necessary to present to support
 claims I make in this paper, regarding the efficiency of the runtime.
 
 \subsection{Switching on Tag vs Type}\label{perf:switching}
@@ -1754,23 +1725,21 @@ and cannot modify them. This forces the use of an indirect call.
 \begin{verbatim}
     public unsafe abstract class Thunk : Computation {
         public Closure ind;
-        private void* eval;
-        protected Thunk()
-            => eval = CLR.LoadFunctionPointer(PerformComputation);
+        private delegate*<Thunk,Closure> eval = &PerformCompuation;
         
         public override Closure Eval()
-            => CLR.TailCallIndirectGeneric<Thunk, Closure>(this, eval);
+            => this.eval(this);
         
-        private Closure PerformComputation() {
-            ind = Blackhole.Instance;
-            ind = Compute();
-            eval = CLR.LoadFunctionPointer(ReturnIndirection);
-            Cleanup();
-            return ind;
+        private static Closure PerformComputation(Thunk t) {
+            t.ind = Blackhole.Instance;
+            t.ind = Compute();
+            eval = &ReturnIndirection;
+            t.Cleanup();
+            return t.ind;
         }
 
-        private Closure ReturnIndirection()
-            => ind.Eval();
+        private static Closure ReturnIndirection(Thunk t)
+            => t.ind.Eval();
     }
 \end{verbatim}
 
@@ -1783,13 +1752,13 @@ implementation, keeping the idea intact:
     \cline{3-5}
 
     \multirow{2}{*}{Create a million thunks}
-    & Comparison & 0.3ms & 0.4ms & 0.7ms \\
-    & Dynamic method & 7.7ms & 10.4ms & 14.4ms \\
+    & Comparison & 0.3ms & 0.3ms & 0.5ms \\
+    & Dynamic method & 7.0ms & 7.5ms & 10.2ms \\
     \cline{2-5}
 
     \multirow{2}{*}{Call \texttt{Eval} a million times} 
-    & Comparison & 1ms & 1.2ms & 1.7ms \\
-    & Dynamic method & 4.8ms & 5.2ms & 6.2ms \\
+    & Comparison & 1.0ms & 1.1ms & 1.5ms \\
+    & Dynamic method & 3.5ms & 3.6ms & 4.0ms \\
     
 \end{tabular}
 \end{center}
@@ -1829,6 +1798,37 @@ The results show that invocation takes approximately the same time
 but there's nearly a 3x difference in creation time.
 This proves pointers to be a superior solution
 when efficiency is required.
+
+\subsection{Function application}\label{perf:application}
+
+Unknown function application is slower than known function
+application that can be performed by a direct call.
+To support this a simple test has been created that performs
+addition in a loop (100 thousand times).
+
+\begin{center}
+\begin{tabular}{r c c c}
+    & MIN & AVG & MAX \\
+    \cline{2-4}
+
+    Direct call inlined & 0.09ms & 0.09ms & 0.12ms \\
+    Direct call no-inline & 0.27ms & 0.28ms & 0.37ms \\
+    Static application & 0.30ms & 0.31ms & 0.40ms \\
+    Generic application & 0.93ms & 0.91ms & 1.19ms \\
+\end{tabular}
+\end{center}
+
+The inlining is done by the JIT when a function is small.
+The actual application process is very close to direct calls.
+However, the Lazer runtime uses overloaded generic methods for application
+and those have an additional invocation cost,
+because the .NET runtime needs to check if the method
+with that particular type signature has been emitted by the JIT.
+
+While this is a fairly big performance hit, in practice
+unknown function application happens less often then
+known function application. Moreover, the cost of Garbage Collection
+exceeds the generic application costs by a an order of magnitude.
 
 \section{Benchmarks}\label{s:benchmarks}
 
@@ -1891,13 +1891,13 @@ code and test results:
     \multirow{2}{*}{\texttt{int (3 \^{}\^{}\^{} 8)}}
     & GHC (compiled)& 0.160s & 0.163s & 0.168s \\
     & GHC (interpreted)& 1.87s & 1.89s & 1.91s \\
-    & Lazer (JIT)& 1.11s & 1.15s & 1.47s \\
+    & Lazer (JIT)& 1.09s & 1.14s & 1.30s \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{int (3 \^{}\^{}\^{} 9)}}
     & GHC (compiled)& 1.96s & 1.98s & 2.0s \\
     & GHC (interpreted)& 17.3s & 17.6s & 17.9s \\
-    & Lazer (JIT)& 15.6s & 15.9s & 17.0s \\
+    & Lazer (JIT)& 15.3s & 15.6s & 16.9s \\
 \end{tabular}
 \end{center}
 
@@ -1945,13 +1945,13 @@ Below are the Haskell source code and test results (function executed 100 times)
     \multirow{2}{*}{\texttt{e 50 $\cdot$ 100}}
     & GHC (compiled)& 0.36s & 0.35s & 0.38s \\
     & GHC (interpreted)& 1.90s & 1.91s & 1.96s \\
-    & Lazer (JIT)& 0.53s & 0.54s & 0.56s \\
+    & Lazer (JIT)& 0.45s & 0.48s & 0.56s \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{e 150 $\cdot$ 100}}
     & GHC (compiled)& 3.48s & 3.50s & 3.55s \\
     & GHC (interpreted)& 17.9s & 18.0s & 18.2s \\
-    & Lazer (JIT)& 5.50s & 5.70s & 5.91s \\
+    & Lazer (JIT)& 5.25s & 5.35s & 5.47s \\
 \end{tabular}
 \end{center}
 
@@ -1986,19 +1986,22 @@ Below are the Haskell source code and test results (function executed 100 times)
     \multirow{2}{*}{\texttt{primes 500 $\cdot$ 100}}
     & GHC (compiled)& 0.77s & 0.78s & 0.82s \\
     & GHC (interpreted)& 3.95s & 4.00s & 4.44s \\
-    & Lazer (JIT)& 2.21s & 2.26s & 2.49s \\
+    & Lazer (JIT)& 1.85s & 1.90s & 2.07s \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{primes 1500 $\cdot$ 100}}
     & GHC (compiled)& 4.0s & 4.0s & 4.1s \\
     & GHC (interpreted)& 37.9s & 38.1s & 38.4s \\
-    & Lazer (JIT)& 25.4s & 25.7s & 27.3s \\
+    & Lazer (JIT)& 29.2s & 29.9s & 31.4s \\
 \end{tabular}
 \end{center}
 
-Here Lazer is 3$\sim$6x slower than compiled GHC.
-Potential culprits are allocations and unknown function
-application (see \myref{bench:app}).
+Here Lazer is 2.5$\sim$7x slower than compiled GHC.
+Unknown function application and the garbage collections
+are what slows down code the most.
+Here we can see that the longer chains of lists
+allocate more long living objects, thus populating
+older GC generations which take more time to collect.
 
 \subsection{Sums}
 
@@ -2030,45 +2033,44 @@ Below is the Haskell source code and test results:
     \multirow{2}{*}{\texttt{sum (take 100000 inf)}}
     & GHC (compiled)& 2.27ms & 3.36ms & 7.54ms \\
     & GHC (interpreted)& 94.6ms & 106ms & 144ms \\
-    & Lazer (JIT)& 2.55ms & 3.54ms & 5.73ms \\
+    & Lazer (JIT)& 2.30ms & 2.55ms & 5.18ms \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{suma (take 100000 inf) 0}}
     & GHC (compiled)& 1.06ms & 1.18ms & 2.08ms \\
     & GHC (interpreted)& 75.2ms & 76.9ms & 84.0ms \\
-    & Lazer (JIT)& 2.08ms & 4.55ms & 10.6ms \\
+    & Lazer (JIT)& 1.23ms & 1.35ms & 2.8ms \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{sumfold (take 100000 inf)}}
     & GHC (compiled)& 1.08ms & 1.23ms & 2.44ms \\
     & GHC (interpreted)& 59.5ms & 71.1ms & 100.8ms \\
-    & Lazer (JIT)& 2.09ms & 2.90ms & 5.10ms \\
+    & Lazer (JIT)& 1.42ms & 1.63ms & 3.80ms \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{sum [1..100000]}}
     & GHC (compiled)& 2.06ms & 2.97ms & 6.47ms \\
     & GHC (interpreted)& 40.7ms & 52.5ms & 105ms \\
-    & Lazer (JIT)& 1.42ms & 1.86ms & 3.88ms \\
+    & Lazer (JIT)& 1.65ms & 1.79ms & 3.80ms \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{suma [1..100000] 0}}
     & GHC (compiled)& 0.84ms & 0.95ms & 1.28ms \\
     & GHC (interpreted)& 31.4ms & 32.6ms & 37.2ms \\
-    & Lazer (JIT)& 0.94ms & 1.30ms & 2.70ms \\
+    & Lazer (JIT)& 0.80ms & 0.90ms & 2.00ms \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{sumfold [1..100000]}}
     & GHC (compiled)& 0.60ms & 0.76ms & 2.65ms \\
     & GHC (interpreted)& 15.0ms & 27.3ms & 63.8ms \\
-    & Lazer (JIT)& 0.95ms & 1.29ms & 2.55ms \\
+    & Lazer (JIT)& 0.82ms & 0.89ms & 2.69ms \\
 \end{tabular}
 \end{center}
 
 The addition operation in those tests is executed
 eagerly. Thanks to strictness analysis special worker
 functions are created, which resamble imperative loops.
-Lazer is mostly within the 1-2x slower range with functions
-that use \texttt{take} going up to 2-4x slower.
+Lazer is mostly within the 1-2x slower range.
 
 \subsection{Tight arithmetic loops}
 
@@ -2136,24 +2138,19 @@ on an unknown function.
     \multirow{2}{*}{\texttt{loopApp add1 0 100000}}
     & GHC (compiled)& 0.88ms & 0.94ms & 1.19ms \\
     & GHC (interpreted)& 79.4ms & 95.6ms & 129ms \\
-    & Lazer (JIT)& 3.84ms & 4.30ms & 7.84ms \\
+    & Lazer (JIT)& 0.91ms & 0.94ms & 1.32ms \\
     \cline{2-5}
 
     \multirow{2}{*}{\texttt{loopCall 0 100000}}
     & GHC (compiled)& 0.460ms & 0.511ms & 0.823ms \\
     & GHC (interpreted)& 71.4ms & 94.3ms & 125ms \\
-    & Lazer (JIT)& 0.062ms & 0.081ms & 0.109ms \\
+    & Lazer (JIT)& 0.27ms & 0.28ms & 0.35ms \\
 \end{tabular}
 \end{center}
 
 For compiled GHC unknown function application is at most
-twice as slow as known function application.
-For Lazer its over 50x slower. The .NET runtime may
-apply additional checks on the object and the invoked
-method to assert type safety. Even without the checks
-we're still looking at
-an indirect call and 3-4 indirect jumps, which is
-much slower than a single direct call.
+2x as slow as known function application.
+For Lazer its 3-4x slower. See \myref{perf:application} for details.
 
 Why is Lazer faster than GHC when using direct calls?
 This probably comes from
@@ -2175,7 +2172,7 @@ others are unfortunately bound to the runtime limitations.
 Overall, the performance is decent and the runtime can be used
 for example with graphical user interfaces that don't require
 extremely low latency. The processing parts that do
-require high performance have to implemented eagerly
+require high performance have to ne implemented eagerly
 or reference external .NET libraries.
 
 % ##########################
