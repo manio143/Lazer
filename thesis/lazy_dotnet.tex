@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{multirow}
+\usepackage{array,collcell}
 
 % Dane magistranta:
 \autor{Marian Dziubiak}{370784}
@@ -51,6 +52,11 @@
   }}
 \newcommand{\myref}[1]{\ref{#1}.~\textit{\nameref{#1}}}
 
+\newcommand{\zeroright}[1]{\makebox[0pt][r]{#1}}
+\newcommand{\zeroleft}[1]{\makebox[0pt][l]{#1}}
+\newcolumntype{A}{>{\collectcell\zeroright}c<{\endcollectcell}}
+\newcolumntype{B}{>{\collectcell\zeroleft}c<{\endcollectcell}}
+
 \definecolor{brown}{RGB}{216,132,24}
 \definecolor{gray}{RGB}{110,110,110}
 \hypersetup{
@@ -60,7 +66,7 @@
     urlcolor=blue
 }
 
-\setcounter{secnumdepth}{3}
+\setcounter{secnumdepth}{2}
 
 % koniec definicji
 
@@ -68,7 +74,13 @@
 \maketitle
 
 \begin{abstract}
-  TODO: Write a nice abstract
+  Functional programming languages may have very desirable properties.
+We take a look at compiling Haskell, a non-strict functional language,
+to work on the .NET platform. In order to achieve that goal, a framework
+runtime for evaluation of lazy computations is presented. A lot of focus
+is placed on the performance of the runtime. To simplify the translation
+of Haskell programs to use this runtime an experimental compiler has been
+created and some of its details are presented.
 \end{abstract}
 
 \tableofcontents
@@ -148,6 +160,11 @@ ASP.NET. This also goes the other way -- .NET developers could access some of
 the libraries in the Hackage package repository.
 Ever tried debugging Haskell code? After compiling to C\shrp{} it's possible
 to setup breakpoints and analyze the state of the program (with some limitations).
+
+This paper presents a lazy runtime implementation called Lazer as well as
+a description of an experimental compiler from Haskell to C\shrp{}.
+You can find full source code for the runtime, compiler and benchmarks at GitHub:
+\href{https://github.com/manio143/Lazer}{github.com/manio143/Lazer}.
 
 \section*{Chapter contents}
 
@@ -2179,19 +2196,447 @@ or reference external .NET libraries.
 \chapter{Compiling Haskell to C\shrp{}}\label{r:compiler}
 % ##########################
 
+The primary objective of this paper was to create a lazy runtime.
+However, translating Haskell code to C\shrp{} by hand is a rather
+tedious task. Thus, an experimental compiler has been developed
+to aid this process. The compilation isn't fully automated and
+the produced code may require a few fixes here and there.
+
+This chapter presents the steps taken to create the compiler
+as well as what the compiler does and what could be better.
+The compiler has been named \texttt{stg2cs} after the fact
+that it performs translation of Haskell in STG form into C\shrp{}.
+
 \section{GHC compiler library}
+The Glasgow Haskell Compiler (GHC) can be used as a library
+by referencing the \texttt{ghc} package. This means that
+it is not necessary to fork the whole compiler.
+Instead only the important parts can be referenced.
 
-\section{Translating STG}
+Currently \texttt{stg2cs} can only compile one file at a time.
+First, the GHC loads and compiles the Haskell source code,
+producing \texttt{.hi} and \texttt{.o} files.
+Next, custom code can access the compilation pipeline and
+repeat the compilation process having therefore access to
+every step of the compilation.
+After generating and optimizing STG representation of closures
+the converter to C\shrp{} is called.
 
-\section{Optimizations}
+\subsection{Simplified example}
+The following code shows how to get declared types and bindings
+(functions and thunks) from the GHC. The imports have been removed
+for brevity.
+
+\begin{verbatim}
+    compile :: String -> IO ([StgTopBinding], [TyCon])
+    compile moduleName = runGhc (Just libdir) $ do
+        env <- getSession
+        
+        -- setup flags (i.e. optimizations to perform)
+        dflags_ <- getSessionDynFlags
+        let dflags = customModify dflags_
+        setSessionDynFlags dflags
+
+        target <- guessTarget moduleName Nothing
+        addTarget target
+        load LoadAllTargets  -- here GHC does the full compilation
+        depanal [] True
+        modSum <- getModSummary $ mkModuleName moduleName
+
+        -- redo the compilation steps
+        pmod <- parseModule modSum      -- ModuleSummary
+        tmod <- typecheckModule pmod    -- TypecheckedSource
+        dmod <- desugarModule tmod      -- DesugaredModule
+        let coreMod = coreModule dmod   -- CoreModule
+
+        -- extract information for further processing
+        let mod   = ms_mod modSum
+        let loc   = ms_location modSum
+        let core  = mg_binds coreMod
+        let tcs   = filter isDataTyCon (mg_tcs coreMod)
+
+        -- optimize Core and prepare for further processing
+        let env' = env {hsc_dflags = dflags'}
+        guts' <- liftIO $ core2core env' coreMod
+        let core' = mg_binds guts' 
+        (prep, _) <- liftIO $ corePrepPgm env' mod loc core' tcs
+
+        -- convert Core to STG and run optimizations
+        let (stg,_) = coreToStg dflags' mod prep
+        stg_binds2 <- liftIO $ stg2stg dflags' stg
+
+        return (stg_binds2, mg_tcs coreMod)
+\end{verbatim}
+
+\subsection{Working with GHC source code}
+While it may not feel like \texttt{stg2cs} is complex,
+the hard part of creating it was definitely a lack of
+examples on how to interract with the GHC.
+Some information could be obtained on the wiki of the GHC
+repository, but mostly I had to figure out in which
+module there might be a function that was needed,
+read its source code to make sure it is indeed what
+I want and how to use it, read any comments surrounding it,
+and finally try to use it in my code.
+
+Hackage is a very good platform for browsing source code,
+because it gives you a search box, if you can guess the
+functions name, and when viewing source there are links
+to declarations of the functions used. Although, I believe it doesn't
+support C preprocessor declarations, which break the links
+to declared functions in the module that uses CPP.
+
+\section{Conversion from STG to C\shrp{}}
+Following the steps outlined in the previous section
+we were able to obtain closure bindings in STG form
+as well as declared types that need to be translated.
+In the following subsections we'll dive into how
+this information is used to produce equivalent C\shrp{} code.
+
+\subsection{Module representation}
+While GHC performs further compilation to \verb|C--| and
+thus uses the C way of exposing labeled elements,
+like code and data, a different approach had to be
+used for C\shrp{}.
+A module is represented by a static class with fields
+for top level closures and constants, and methods
+for their computations. If the module name is dot-separated
+then the last part is the name of the class whereas the
+initial part forms the namespace.
+
+When a static class is referenced in executed code
+for the first time, the .NET runtime stops current execution
+to first make sure the static fields are initialized.
+The initialization is performed by a static constructor,
+which in C\shrp{} is declared like a normal constructor,
+but with just the static modifier and no arguments.
+
+\subsection{Processing types}
+There are two kinds of types that have actual representation:
+data types and type classes (their dictionaries).
+We extract data constructors from the types and
+extract the crucial information:
+
+\begin{enumerate}
+    \item data constructor name,
+    \item data constructor integer tag,
+    \item data constructor represantable arguments.
+\end{enumerate}
+
+The constructor name is processed by the \texttt{safeConName}
+function (see \myref{c:safe_names}). The tag is just a number,
+so it's directly copied. The arguments are types, which are
+translated according to the rules in \myref{c:typesToCs}. There is one type
+that has no actual representation and it is the state token.
+While it may appear in the data constructor definition it is not
+used when applying the constructor to arguments and therefore
+it is removed from the C\shrp{} representation.
+Data constructor types are emitted as inner classes in the module class,
+defined as in \myref{s:data_rep}.
+
+For type classes a dictionary data constructor is processed which
+contains fields for any other dictionaries it depends on (superclasses)
+and all the declared instance functions and constants.
+We also need to emit selector functions that extract the requested function
+from the dictionary. For example, given a \texttt{Functor} type class:
+
+\begin{verbatim}
+    class Functor f where
+        fmap :: (a -> b) -> f a -> f b
+\end{verbatim}
+
+We create a dictionary and a selector function:
+
+\begin{verbatim}
+    public sealed class CColFunctor : Data
+    {
+        public Closure x0;
+        public CColFunctor(Closure x0)
+        {
+            this.x0 = x0;
+        }
+        public override int Tag => 1;
+    }
+
+    public static Function fmap = new Fun1<Closure,Closure>(&fmap_Entry);
+    public static Closure fmap_Entry(Closure a0)
+    {
+        var dict = a0 as GHC.Base.CColFunctor;
+        var dictItem = dict.x0;
+        return dictItem.Eval();
+    }
+\end{verbatim}
+
+\subsubsection{Translating types}\label{c:typesToCs}
+Most Haskell types will be lifted and therefore uniformly represented
+by the \texttt{Closure} type. There's more to do when representing
+unlifted types and there's also a special case for levity polymorphism.
+
+Basic types are translated directly according to the following table:
+
+\begin{center}
+\begin{tabular}{A c B}
+    \texttt{Int\#} & $\rightarrow$ & \texttt{long} \\
+    \texttt{Int64\#} & $\rightarrow$ & \texttt{long} \\
+    \texttt{Word\#} & $\rightarrow$ & \texttt{ulong} \\
+    \texttt{Char\#} & $\rightarrow$ & \texttt{char} \\
+    \texttt{Float\#} & $\rightarrow$ & \texttt{float} \\
+    \texttt{Double\#} & $\rightarrow$ & \texttt{double} \\
+    \texttt{ByteArray\#} & $\rightarrow$ & \texttt{byte[]} \\
+    \texttt{MutableByteArray\#} & $\rightarrow$ & \texttt{byte[]} \\
+\end{tabular}
+\end{center}
+
+Then there are unlifted tuple types. In C\shrp{} 7 a new syntax for tuples was
+added as well as a family of generic types \texttt{System.ValueTuple}.
+GHC tuple representation is a bit complicated, because returing a tuple
+means returning multiple values in different registers. In C\shrp{} we
+leave the runtime representation up to the JIT. So the \texttt{RuntimeRep}
+arguments of a tuple type are dropped. Then if the state token is part of
+a tuple it is also dropped. Finally if a tuple has only one element then
+we drop the notion of it being a tuple and just treat it as just the argument type.
+
+There are some cases when expressions actually reference the state token or
+a void token, e.g. in imperative monadic compuations.
+Rather than removing those, they are represented by empty C\shrp{}
+structs which are eliminated on the JIT level.
+
+Finally, there's levity polymorphism \cite{levity}. Essentially, this
+notion describes functions that can return either a lifted type or
+an unlifted type, depending on the caller context.
+In GHC it is much more complex than it is in C\shrp{},
+because here we can just use generics. So a levity polymorphic function
+will be represented by a generic method with one generic type parameter.
+Whenever an expression has a type that is neither lifted or unlifted it is
+just generic.
+
+\begin{verbatim}
+    public static GenericR doll_Entry<GenericR>(Closure f, Closure a)
+    {
+        return f.Apply<Closure, GenericR>(a);
+    }
+\end{verbatim}
+
+\subsection{Processing bindings}
+Now that we have processed the types it's time to process bindings
+-- all thunks, closures and constants of the module.
+
+\subsubsection{Sorting declarations}
+First we need to sort the declarations into delayed closures,
+like thunks and functions, and initial closures, i.e. constructed constants.
+All top level closures may only have free variables that are also top level
+closures. Thunks and functions can be called \textit{delayed}, because they
+will only need to access static fields after the static class initialization has
+been completed. On the other hand, top level constants that are applications
+of data constructors need to access static fields during the initialization,
+e.g. a constant list \texttt{[1]} will reference the constant number \texttt{1}.
+
+The order of initialization for delayed closures doesn't matter, because
+it only relies on loading a pointer to the computation and creating a closure object.
+For initial closures a recursive \texttt{let} expression is generated that handles
+any dependencies between them.
+
+\subsubsection{Gathering callables}
+As noted in \myref{perf:application}, function application is slower than
+direct calls. Therefore an optimization is introduced. Whenever we declare
+a function that has no free variables (other than top level) it is marked
+as \textit{callable} and we may call its method directly. All top level
+functions are callable.
+
+\subsubsection{Translating expressions}
+The core of Haskell programs are expressions that can be translated into
+C\shrp{} statements fairly easily. There are some quirks mentioned below
+that need to be kept in mind. Every expression is placed inside a
+static method that can be used to invoke that computation.
+
+\paragraph{Literals}
+Literals are translated one to one, except for some character escape sequences
+that have symbolic representation in Haskell, but need hexadecimal representation
+in C\shrp{}.
+
+\begin{center}
+\verb|1##   =>   1.0|
+\end{center}
+
+\paragraph{Application}
+Application has a function and arguments. But it may also have no arguments.
+In that case it's the value of the function (or other type of variable).
+Here we also check the environment to see if the function is callable
+and if so we emit a method call rather than a slow application.
+
+\begin{center}
+\verb|     x  =>  x               |\\
+\verb|   f a  =>  f.Apply<T,R>(a) |\\
+\verb| cal a  =>  cal_Entry(a)    |
+\end{center}
+
+\paragraph{Constructor application}
+Data constructor application is trivial, as it's always saturated.
+However, in order not to create many identical instances of argumentless
+constructors, their static wrapper is used.
+
+\begin{center}
+\verb|  (:) x y  =>  new Cons(x, y)|\\
+\verb|     []  =>  nil_DataCon  |
+\end{center}
+
+\paragraph{Operation application}
+Operators are translated to equivalent operations in .NET. Some don't have
+direct equivalents (e.g. \texttt{IntQuotRemOp} is translated to two instructions instead of one).
+GHC defines a lot of operations and currently the compiler supports only the most frequently used onces.
+
+\begin{center}
+\verb|  +# x y  =>  x + y     |\\
+\verb|  uncheckedIShiftRL# x s   =>  (long)((ulong)x >> (int)s)|
+\end{center}
+
+What's worth noting is that operators are defined in a Haskell usable way in
+the \texttt{GHC.Prim} module. However, the data structure describing them
+uses different names, e.g. the shift above is \texttt{ISrlOp}.
+
+\paragraph{Alternative selection}
+Case expressions assign the evaluated value of the expression to an alias
+and then do alternative selection. There's additional logic to deal with
+switching on type vs on tag (see \myref{s:compute_cond}).
+
+\begin{center}
+\verb|       case f x of (as pf)     var pf = f.Apply<Closure,Closure>(x);      |\\
+\verb|           [] -> e1        =>  switch(pf) {                               |\\
+\verb|           (:) h t -> e2         default: throw new ImpossibleException();|\\
+\verb|                                 case Nil pf_Nil: return <e1>;            |\\
+\verb|                                 case Cons pf_Cons:                       |\\
+\verb|                                     var h = pf_Cons.x0;                  |\\
+\verb|                                     var t = pf_Cons.x1;                  |\\
+\verb|                                     return <e1>;                         |\\
+\end{center}
+
+While in theory case expressions should only be done on simple expressions,
+i.e. applications, there are cases when a more complex expression is given.
+To handle such a case the compiler generates a method that computes the subexpression
+(if it's small enough it may be inlined by the JIT).
+
+\paragraph{Let bindings}\label{c:let_bindings}
+Non-recursive binding are treated like recursive bindings of just one element.
+First there's analysis done on the free variables of each binding to determine
+recursive assignments. Then each right handside is emitted - either a data constructor
+application or a closure (i.e. thunk, function). Free variables of closures are passed via
+tuples. Every recursive free variable is replaced by \texttt{null} when instantiating closure objects
+and after initialization's completed they're assigned back.
+The closure's computation expression is placed in a new static method.
+
+\begin{center}
+\verb|let f =                 var f_Free = ((Closure)null, n);                   |\\
+\verb|     \[f n] r [x] ->     var f = new Fun1<(Closure,long)>(&f_Entry, f_Free);|\\
+\verb|         ...         =>  f.free.x0 = f;                                     |\\
+\verb|in ...                   ...                                                |\\
+\end{center}
+
+\paragraph{Safe names}\label{c:safe_names}
+Haskell is rather loose with what can be a name, whereas C\shrp{} isn't.
+This meant that all symbols in operators had to be converted to words,
+apostrophes removed, etc. Another issue was conflicting names.
+GHC assigns each variable a unique value that is appended to its name
+if the variable is only used locally. Finally, a module name is added.
+
+This results in \texttt{safeVarName} and \texttt{safeConName} functions in the compiler.
+They work great 90\% of the time. Unfortunately, GHC is riddled with weird undocumented
+quirks that make this a nightmare for the other 10\% of cases.
+
+For instance, local worker functions may be used from other modules as an optimization,
+but I haven't found any way to check that and prevent appending a unique value,
+which breaks callers code. Or sometimes GHC just adds a digit at the end of an imported name.
+This is one of the reasons why the compiler's output may have to be manually fixed.
+
+\newpage
+\subsection{Simplifying generated expressions}
+To simplify readability of the generated code a few simplification rules are applied:
+
+\begin{enumerate}
+    \item If a case expression has just one branch, skip the switch;
+    \item If a case expression has just one data constructor branch and a default impossible branch
+            then use a cast and skip the switch;
+    \item If the result of an application of method call is being evaluated, you can skip the evaluation
+        (computations have to return evaluated results).
+\end{enumerate}
+
+The first to are meant to lower the indentation level (which grows pretty quickly) and the last saves
+a little bit of time.
+
+\subsection{Emitting the code}
+The processing of STG bindings and types is done in a state monad and results in creating a data 
+structure that represents particular C\shrp{} declarations, expressions and statements.
+These structures are instances of the GHC \texttt{Outputable} class where the pretty printer
+is used to actually produce C\shrp{} code in text form. The text output is then printed to the user.
 
 % ##########################
 \chapter{Future work}\label{r:future}
 % ##########################
 
-TODO
-% blackholes with locks
+The runtime in the current form is working decently.
+There's a lot of potential for further improvements, especially on the compiler side.
+Let's take a look at the areas that could be further worked on.
 
+\section{Areas of improvement}
+\subsection{Multithreading}
+Currently, the runtime is only working in a single thread context. In order to allow multithreading
+Lazer's standard library would need to provide functions for managing threads or paralelizing
+computations. At the runtime level there's one thing that is required and that is thunk evaluation
+synchronization. Adapting work in \cite{multiprocessor} may be non-trivial, but .NET platform has
+a rich multithreading toolset, which should make things easier.
+
+Initial test with a simple implementation based on locks showed a slight performance degradation
+in a single thread context.
+
+\subsection{Foreign imports}
+During the porting of the \texttt{GHC.Integer.Type} module from the GHC's base package,
+foreign imports were used as stubs for \texttt{BigInteger} operations.
+However, current system validates what is imported and declines declarations that don't conform
+to C function names. This meant that imported functions had to be defined in the same class as the module.
+
+In order to support proper imports of static methods from the .NET world, modifications would have
+to be done in the GHC itself, adding new foreign import types with different validation rules.
+While it is currently not possible to declare a foreign import with a lifted type (or to declare a new unlifted type),
+additional support for non-constructible types could be added.
+
+\begin{verbatim}
+    data BigInteger#
+
+    foreign import dotnet unsafe "System.Numerics.BigInteger.Compare"
+        compareBigInt# :: BigInteger# -> BigInteger# -> Int#
+\end{verbatim}
+
+\subsection{Compiler optimizations}
+There are a couple of things that could be improved in the \texttt{stg2cs} compiler, but there wasn't
+enough time to get them done.
+\begin{itemize}
+    \item Partially applied functions that are later applied in the same computation
+            with all arguments can be modified into direct calls.
+    \item Let bindings that are shared among multiple branches as a final expression (\texttt{let-no-escape})
+            can skip allocations (there's quite a lot of work here).
+    \item Local recursive functions should recurse by direct calls rather than application.
+\end{itemize}
+
+\subsection{Compiler usefulness and correctness}
+Currently the compiler doesn't process multi-file projects at once, nor does it interact with .NET tools
+to compile what it produces. A fork of the GHC would be much more capable in this regard. It would probably
+also alleviate a lot of problems when compiling the \texttt{Prelude}.
+
+The fact that produced C\shrp{} code may not compile on it's own (without manual fixes) is especially
+working against the usefulness of \texttt{stg2cs}.
+
+\section{Final remarks}
+The work presented in this paper shows some potential.
+Unfortunately, a lot of performance issues linked to increased
+GC pressure may make it very hard to adopt Haskell on a general
+purpose OOVM like the .NET CLR.
+Very likely a middle ground would have to found that allows for
+easy use of laziness when it's most beneficial while falling back
+to eager computations whenever performance is key.
+
+It would be interesting to see the overall performance of a lazy .NET runtime
+in a more real world scenario. Further work on porting Haskell libraries
+would have to be done, but for that to be possible most of the noted
+improvements of the previous section would need to be done.
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliography}
@@ -2251,6 +2696,8 @@ of the National Academy of Sciences (U.S.A.)}, XX, pp. 584—590, 1936.
 \bibitem[TH,SM,SPJ-05]{multiprocessor} Tim Harris, Simon Marlow, Simon Peyton Jones, \textit{,,Haskell on a Shared-Memory Multiprocessor''}, 2005.
 
 \bibitem[PL-02]{coq_extract} Pierre Letouzey, \textit{,,A New Extraction for Coq''}, TYPES, 2002.
+
+\bibitem[RE,SJ-17]{levity} Richard A. Eisenberg, Simon Peyton Jones, \textit{,,Levity Polymorphism''}, 2017.
 
 \end{thebibliography}
 
