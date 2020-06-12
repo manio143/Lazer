@@ -6,6 +6,8 @@
 % Zmiany 05.05.2006 by Seweryn Karlowicz
 %
 % Zmiany 03.01.2017 by Kuba Pochrybniak
+%
+% Zmiany 10.06.2020 by Paweł Goldstein
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{pracamgr}[2017/01/03 v0.7.0 Praca magisterska]
@@ -81,7 +83,7 @@
 		\begin{center}%
 		  {\LARGE\textbf{ University of Warsaw}\\
 			Faculty of Mathematics, Informatics and Mechanics\par}
-		  \vspace{1cm plus .5fill} 
+		  \vspace{1cm plus .5fill}
 		{
 			\setlength{\parindent}{0em}
 			\setlength{\baselineskip}{60pt}
@@ -111,45 +113,14 @@
 			\end{tabular}
 		  \end{flushright}
 		  \vspace{1cm plus 1fill}
-		  {\large \@date\par}
+		  {\large Warsaw, \@date\par}
 		\end{center}
 		\@thanks
-	  \end{titlepage}%
+		\end{titlepage}%
+	
+	  
 	  \begin{titlepage}
-		\c@page=2
-		\large
-		\null
-		\vfill
-
-			
-	   \noindent\textbf{\Large Supervisor's statement}
-		  \vspace{10mm}
-		
-		\noindent Hereby I confirm that the presented thesis was prepared under my supervision
-		and that it fulfils the requirements for the degree of \@stopien\ of Computer Science.
-
-	   \vspace{15mm}
-	   
-	   Date \hfill Supervisor's signature
-	   
-	   \vspace{3cm}
-	   \noindent\textbf{\Large \ifnum\theliczbaAutorow=1 Author's statement\else Authors' statements\fi}
-		\vspace{10mm}
-		
-		\noindent Hereby I declare that the presented thesis was prepared by me and none of its contents was obtained by means
-		that are against the law.
-
-		The thesis has never before been a subject of any procedure of
-		obtaining an academic degree. 
-
-		Moreover, I declare that the present version of the thesis is identical to the attached electronic version.
-	 
-	   
-	\vspace{15mm}
-	   
-	   Date \hfill \ifnum\theliczbaAutorow=1 Author's signature\else Authors' signatures\fi
-		\vspace{4cm}
-	%\end{hyphenrules}
+	  \c@page=2
 	  \end{titlepage}
 	  \setcounter{footnote}{0}%
 	  \global\let\thanks\relax
@@ -179,10 +150,10 @@
 	\def\klasyfikacja#1{\gdef\@klasyfikacja{#1}}
 	\def\@klasyfikacja{???\ClassError{pracamgr}{Brak klasyfikacji tematycznej}\@ehc}
 	%-------------------nowe------------
-	%\def\tytulang#1{\gdef\@tytulang{#1}}
-	%\def\@tytulang{???\ClassError{pracamgr}{Brak tytulu po angielsku}\@ehc}
+	\def\tytulang#1{\gdef\@tytulang{#1}}
+	\def\@tytulang{???\ClassError{pracamgr}{Brak tytulu po angielsku}\@ehc}
 	\def\titlepl#1{\gdef\@titlepl{#1}}
-	\def\@titlepl{???\ClassError{pracamgr}{Brak tytulu po polski}\@ehc}
+	\def\@titlepl{???\ClassError{pracamgr}{Brak tytulu po polsku}\@ehc}
 
 
 	\renewenvironment{abstract}{%
@@ -193,7 +164,7 @@
 		\bfseries\large \abstractname
 		\@endparpenalty\@M
 	  \end{center}}%
-	{\par  
+	{\par
 	  \vspace*{26pt}%
 	  \begin{center}%
 		\bfseries\large Keywords
@@ -251,9 +222,9 @@
       \penalty\@highpenalty
     \endgroup
   \fi}
-  
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Wersja polska  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Wersja polska
 \else
 
 	\renewcommand\maketitle{%
@@ -264,7 +235,7 @@
 		\begin{center}%
 		  {\LARGE\textbf{Uniwersytet Warszawski}\\
 			Wydzia\l{} Matematyki, Informatyki i Mechaniki\par}
-		  \vspace{1cm plus .5fill} 
+		  \vspace{1cm plus .5fill}
 		{
 			\setlength{\parindent}{0em}
 			%\setlength{\baselineskip}{60pt}
@@ -294,43 +265,15 @@
 			\end{tabular}
 		  \end{flushright}
 		  \vspace{1cm plus 1fill}
-		  {\large \@date\par}
+		  {\large Warszawa, \@date\par}
 		\end{center}
 		\@thanks
 	  \end{titlepage}%
-	  \begin{titlepage}
-		\c@page=2
-		\large
-		\null
-		\vfill
-		
-	   \textbf{\Large Oświadczenie kierującego pracą }
-		  \vspace{10mm}
-		  
-	   Potwierdzam, że niniejsza praca została przygotowana pod moim 
-	   kierunkiem i kwalifikuje się do przedstawienia jej w postępowaniu 
-	   o nadanie tytułu zawodowego. 
-	   \vspace{15mm}
-	   
-	   Data \hfill Podpis kierującego pracą 
-	   
-	   \vspace{3cm}
-	   \textbf{\Large Oświadczenie autora (autorów) pracy}
-		\vspace{10mm}
-		
-	   \'{S}wiadom odpowiedzialności prawnej oświadczam, że niniejsza praca dyplomowa została 
-	   napisana przeze mnie samodzielnie i nie zawiera treści uzyskanych w sposób niezgodny 
-	   z obowiązującymi przepisami. 
-	   
-	   Oświadczam również, że przedstawiona praca nie była 
-	   wcześniej przedmiotem procedur związanych z uzyskaniem tytułu zawodowego w wyższej uczelni. 
-	   
-	   Oświadczam ponadto, że niniejsza wersja pracy jest identyczna z załączoną wersją elektroniczną. 
-	   \vspace{15mm}
-	   
-	   Data \hfill \ifnum\theliczbaAutorow=1 Podpis autora\else Podpisy autorów\fi\ pracy
-		\vspace{4cm}
+	   \begin{titlepage}
+	  \c@page=2
+	\vfill \mbox{}
 	  \end{titlepage}
+	  
 	  \setcounter{footnote}{0}%
 	  \global\let\thanks\relax
 	  \global\let\maketitle\relax
@@ -359,8 +302,8 @@
 	\def\klasyfikacja#1{\gdef\@klasyfikacja{#1}}
 	\def\@klasyfikacja{???\ClassError{pracamgr}{Brak klasyfikacji tematycznej}\@ehc}
 	%-------------------nowe------------
-	%\def\tytulang#1{\gdef\@tytulang{#1}}
-	%\def\@tytulang{???\ClassError{pracamgr}{Brak tytulu po angielsku}\@ehc}
+	\def\tytulang#1{\gdef\@tytulang{#1}}
+	\def\@tytulang{???\ClassError{pracamgr}{Brak tytulu po angielsku}\@ehc}
 
 
 	\renewenvironment{abstract}{%
@@ -371,7 +314,7 @@
 		\bfseries\large \abstractname
 		\@endparpenalty\@M
 	  \end{center}}%
-	{\par  
+	{\par
 	  \vspace*{26pt}%
 	  \begin{center}%
 		\bfseries\large Słowa kluczowe
@@ -392,11 +335,11 @@
 	  \@klasyfikacja\par
 	  \vspace*{26pt}%
 	%-------------------nowosc----------------
-%	  \begin{center}%
-%		\bfseries\large Tytuł pracy w języku angielskim
-%		\@endparpenalty\@M
-%	  \end{center}
-%	  \@tytulang\par
+	  \begin{center}%
+		\bfseries\large Tytuł pracy w języku angielskim
+		\@endparpenalty\@M
+	  \end{center}
+	  \@tytulang\par
 	  \nobreak\vfil\null\endtitlepage\cleardoublepage}
 
 	\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
