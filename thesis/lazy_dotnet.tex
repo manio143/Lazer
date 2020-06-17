@@ -10,6 +10,13 @@
 \usepackage{multirow}
 \usepackage{array,collcell}
 
+\usepackage[
+sorting=nyt,
+maxbibnames=5,
+style=alphabetic
+]{biblatex}
+\addbibresource{lazy_dotnet.bib}
+
 % Dane magistranta:
 \autor{Marian Dziubiak}{370784}
 
@@ -77,8 +84,9 @@
   Functional programming languages may have very desirable properties.
 We take a look at compiling Haskell, a non-strict functional language,
 to work on the .NET platform. In order to achieve that goal, a framework
-runtime for evaluation of lazy computations is presented. A lot of focus
-is placed on the performance of the runtime. To simplify the translation
+runtime for evaluation of lazy computations is presented. Native Haskell
+runtime is very fast, thus the performance of the .NET implementation is considered.
+To simplify the translation
 of Haskell programs to use this runtime an experimental compiler has been
 created and some of its details are presented.
 \end{abstract}
@@ -109,7 +117,7 @@ GHC is leading the language development and left competition far behind.
 
 There exist a couple of managed platforms that provide a common ecosystem
 for multiple languages. The two most popular are JVM and .NET.
-There has been some work done for the JVM \cite{Tullsen} \cite{Choi} \cite{Stewart}
+There has been some work done for the JVM \cite{Tullsen,Choi,Stewart}
 and there exist two Haskell implementations: 
 \href{https://github.com/Frege/frege}{Frege}~and~\href{https://eta-lang.org/}{Eta}.
 In~this work I will focus on the idea of bringing
@@ -133,7 +141,7 @@ Haskell to the .NET CLR (\textit{Common Language Runtime}):
   \item
   In 2001 Nigel Perry, Erik Meijer and Arjan van Yzendoorn implemented a 
   non-strict scripting language called Mondrian
-  \cite{MondrianImplDetails}\cite{PerryMeijer}.
+  \cite{MondrianImplDetails,PerryMeijer}.
   
   \item
   In 2005 Monique Monteiro, Mauro Ara\'ujo, Rafael Borges and Andr\'e Santos
@@ -187,7 +195,7 @@ benchmark results and compares those to Haskell compilers.
 Chapter \myref{r:compiler} presents some aspects of the translation
 mechanism from STG representation of a Haskell program into C\shrp{}.
 \item
-Chapter \myref{r:future} looks into future improvements to the runtime
+Chapter \myref{r:future} summarizes the thesis and looks into future improvements to the runtime
 and extending Haskell for CLI (\textit{Common Language Infrastructure}) interoperability.
 \end{itemize}
 
@@ -313,7 +321,7 @@ years different approaches were created to compute lazy languages:
 
 \newpage
 \begin{itemize}
-    \item combinator machines (e.g. SKIM) \cite{combinators} \cite{SKIM}
+    \item combinator machines (e.g. SKIM) \cite{combinators, SKIM}
 
         Any program in lambda calculus can be transformed into application
         of basic combinators S and K. The SKI Machine is a description
@@ -324,7 +332,7 @@ years different approaches were created to compute lazy languages:
     S = \f \g \x -> f x (g x)
     K = \x \y    -> x\end{verbatim}
 
-    \item lazy SECD machine CASE \cite{SECDM} \cite{CASE}
+    \item lazy SECD machine CASE \cite{SECDM,CASE}
     
         In this approach lambda expressions are reduced by following
         operational semantics of an abstract machine. CASE extends SECD
@@ -335,13 +343,14 @@ years different approaches were created to compute lazy languages:
         \texttt<Stack, Environment, Cotrol, Dump\texttt> \\
         \texttt<Code, Argument register, Stack, Environment\texttt>
     
-    \item G-Machine \cite{G-Machine} \cite{spj-book}
+    \item G-Machine \cite{G-Machine,spj-book}
     
         The Graph Reduction Machine was designed as a fairly efficient
         way to evaluate lazy functional programs on existing
-        hardware.
+        hardware. It was originally defined by Thomas Johnsson and Lennart
+        Augustsson \cite{G-Machine0}.
 
-    \item Categorical Abstract Machine \cite{CAM}
+    \item Categorical Abstract Machine \cite{CAM0,CAM}
     
         CAM similarly to CASE is a successor of SECD.
         However, it is based on Categorical Combinators
@@ -378,22 +387,22 @@ Every lambda expression containing free variables is represented by a closure --
 an object in memory holding references or values of those free variables
 as well as a pointer to the code that evaluates this expression.
 
-A closure can represent either a computation or
+A closure can represent either a delayed computation or
 a function that would be applied to some arguments.
 Even data can be represented by a closure, with its code
 being a simple expression returning this data.
 
 Section \myref{s:laziness} required lazy computations to
 save the computed value and return it on all future
-evaluations. A closure that represents an updatable
-computations is called a \textit{thunk}.
+evaluations. A closure that represents a computation that will
+be replaced by the computed value is called a \textit{thunk}.
 Most \texttt{let} expressions create thunks.
 
 After analyzing performance of lazy programs research shows that
 many algorithms are actually faster if they are evaluated eagerly.
 Therefore a process called strictness analysis is
 performed by the compiler to decide whether a value should be
-evaluated lazily or eagerly \cite{demand analysis}.
+evaluated lazily or eagerly \cite{demand_analysis}.
 Therefore, there are cases when a \texttt{let} expression
 may actually evaluate its subexpression instead of creating a thunk for it.
 
@@ -500,6 +509,12 @@ Actually, $\bot$ represents an infinite computation or
 a program error. Unlifted types on the other hand will
 always represent a proper value.
 
+The bottom value is quite interesting in lazy languages.
+It is possible to apply a function to an expression that
+will clearly result in an error, but because it's not evaluated
+eagerly, program execution will halt only when the applied function
+tries to evaluate this expression.
+
 Unlifted types such as \texttt{Int\#}, \texttt{Double\#}
 and \texttt{Char\#} can be represented in C\shrp{} by
 primitive types like \texttt{int}/\texttt{long}, \texttt{double} and \texttt{char}.
@@ -599,38 +614,56 @@ This value is the constructor's index in the type definition of
 the Haskell program and goes from 1 to $n$.
 Tag can be used for \texttt{case} expressions explained in \myref{s:compute_cond}.
 
+Let's take a look at the representation of the Haskell's \texttt{Maybe} type
+constructors \texttt{Nothing} and \texttt{Just}, which have been defined in
+\myref{s:example_eval}.
+
+\begin{verbatim}
+    public sealed class Nothing : Data {
+        public Nothing() { } 
+        public override int Tag => 1;
+    }
+    public sealed class Just : Data {
+        public Closure x0; 
+        public Just(Closure x0) {
+            this.x0 = x0;
+        }
+        public override int Tag => 2;
+    }
+\end{verbatim}
+
 \section{Computation representation}\label{s:computations}
 
 In C\shrp{} a unit of computation is a method.
-There are two kinds of methods:
-\begin{itemize}
-    \item instance methods -- they are bound to objects and may be overloaded,
-    \item static methods -- they are bound to types and globally accessible.
-\end{itemize}
-This leads to two ways of implementing closures.
-Either a closure is represented by an instance of a class with an
-overloaded instance method or by an instance of a predefined universal
-class that is initialized with a reference to a static method.
+Given a Haskell expression we can create method which
+when executed will return a value obtained by evaluating that expression.
 
-The first approach means that for every computation a type has to be created.
-Those types are loaded by the .NET runtime before first use and incur a small
-cost of initialization. With a huge amount of types this may visibly impact performance,
-not to mention the memory usage by their metadata.
+C\shrp{} is an Object Oriented language and it provides two kinds of methods:
+instance methods and static methods.
+An instance method is defined in a class and accessed through a method table
+on an object of that class. This allows for subclasses to override instance methods
+of their parent.
+Static methods are not bound to any objects and are accessed directly by their qualified name.
 
-There are additional problems with function application techniques
-when working with overloaded instance methods,
-because there has to be an abstract method in the
-base class for each overloaded method.
-In comparison, given $n$ generic \texttt{Apply} methods for universal
-classes, there would have to be $k^n$ methods
-for non-universal classes, where $k$ is the number of
-distinct types used (this could be avoided by
-designing the runtime a bit differently, see \myref{s:Hunt}).
-Therefore, the second approach has been chosen for the Lazer runtime.
+When we look at an expression as the steps to evaluate it,
+we don't have any state which would justify implementing expressions as objects.
+However, closures do have state -- the captured free variables,
+and as such will be represented by objects.
+
+For any expression we may construct a static method that describes the expression's evaluation.
+This method will be called from an object representing the closure.
+It may also be called directly from another static method as a performance optimization.
+
+The Lazer runtime uses generic classes to provide closure implementation (see \myref{s:universal_classes}).
+However, it is also possible to generate a class per closure which will call the static
+method in a specialized overloaded method. This requires a different design of the runtime
+(see \myref{r:alternatives}).
 
 \subsection{Computation as a static method}
 
-Every computation is represented by a static method that follows a simple template:
+The Haskell program consists of bindings -- named expressions.
+A binding is represented in memory as a closure with a pointer to the computation.
+A computation is represented by a static method that follows a simple template:
 
 \begin{verbatim}
     public static [RetType] [Name]_Entry(
@@ -678,9 +711,15 @@ This can be represented in C\shrp{} by the following methods:
 Creating a new heap allocated object ––~a data cell~--
 is easy in C\shrp{}. In STG all constructor applications are
 saturated so we don't have to deal with an
-insufficient number of constructor arguments. Here we can
-also see that \texttt{v} is not a data value, but a delayed,
-updatable computation. When \texttt{Eval} method is called
+insufficient number of constructor arguments.
+
+Here we can also see that \texttt{v} is not a data value, but a delayed,
+updatable computation. The class \texttt{Updatable} is a generic thunk
+that takes a pointer to a static function that performs the computation
+and captures the free variables (here \texttt{x} and \texttt{yVal}).
+Its implementation is described in \myref{s:updatables}.
+
+When \texttt{Eval} method is called
 on \texttt{v}, the \verb|divide_v_Entry| method will be
 invoked with captured values \texttt{x} and \texttt{yVal}.
 
@@ -859,7 +898,7 @@ From the previous section follow the definitions of  abstract \texttt{Computatio
 
 \subsection{Abstract Function class}\label{s:function_class}
 
-While previous abstractions were pretty straight forward,
+While previous abstractions were pretty straightforward,
 functions are a bit more complicated. As mentioned before,
 C\shrp{} methods have to be invoked with all of the
 parameters they require.
@@ -914,8 +953,8 @@ two of the situations outlined above:
     }
 \end{verbatim}
 
-The third case, exact number of arguments, is handled
-by an overload in the subclass for the given arity.
+The case when \texttt{Arity} is 2, when we provided the exact number of arguments,
+is handled by an overload in the subclass for the given arity.
 This way when \texttt{Apply} is called with the right number
 of arguments, the proper code gets executed right away,
 without the need of another indirection.
@@ -976,9 +1015,9 @@ The other one involves modifying the method that is called
 to perform evaluation.
 Performance tests show that on the .NET platform the first approach is more efficient
 due to a more expensive constructor call for every thunk
+in the second approach
 (see \myref{perf:thunk_ind} for more details).
 
-\newpage
 \begin{verbatim}
     public abstract class Thunk : Computation
     {
@@ -1006,7 +1045,7 @@ It's result is saved in the \texttt{ind} field.
 But during the computation \texttt{ind} is assigned a special
 value called the \textit{black hole} that allows detecting
 invalid self-references (computation loops).
-If the computation of thunk tries to evaluate itself
+If the computation of a thunk tries to evaluate itself
 again it will end up evaluating the black hole, which stops
 the program. Black holes can
 be further used to implement synchronization in
@@ -1024,7 +1063,7 @@ However, the currently used implementation is extremely simple:
 
 For explanation on the \texttt{Cleanup} method, see \myref{s:updatables}.
 
-\subsection{Universal classes}
+\subsection{Universal classes}\label{s:universal_classes}
 
 In order to limit the amount of types, rather than having
 a type per closure, a different approach has been chosen.
@@ -1088,7 +1127,7 @@ structure in one swoop.
 
 \subsubsection{Fun class family}
 
-Similarly to \texttt{Updatable} classes the \texttt{FunN}
+Similarly to \texttt{Updatable} classes, the \texttt{FunN}
 classes take a function pointer and free variables.
 Below is an example of such a class:
 
@@ -1121,7 +1160,7 @@ static method, but provides superior performance (see \myref{perf:fun_pointers})
 
 \subsubsection{SingleEntry class family}
 
-Thanks to the demand analysis \cite{demand analysis} the compiler can
+Thanks to the demand analysis \cite{demand_analysis} the compiler can
 tell that some thunks are evaluated just once.
 In that case it's not necessary for them to perform updates.
 For example, list concatenation \texttt{(++)} only evaluates its
@@ -1214,10 +1253,12 @@ running some basic Haskell programs. Compiled modules include
     \item \texttt{GHC.Integer.Type} - arbitrary precision integer arithmetics.
 \end{itemize}
 
-Some parts that aren't supported yet had to be cut out from those.
-In general compiling the base package turned out to be much harder
+Compiling the base package turned out to be much harder
 then initially expected. There is complex integration between the GHC compiler and the
 base library as well as holes in their documentation.
+The biggest issue is cyclic dependencies between the modules (solved in GHC with hs-boot files),
+because the experimental compiler currently processes only one file at a time.
+Therefore, some parts of the modules above had to be removed.
 Nonetheless, the achieved results are good enough to be usable in benchmarks
 (see \myref{s:benchmarks}).
 
@@ -1367,9 +1408,9 @@ and then call the static method \texttt{call}.
                 {
                     var h = l_Cons.x0;
                     var t = l_Cons.x1;
-                    var tail = new Updatable<Closure,Closure>(
+                    var tail = new Updatable<(Closure,Closure)>(
                         &map_tail_Entry, (f, t));
-                    var head = new Updatable<Closure,Closure>(
+                    var head = new Updatable<(Closure,Closure)>(
                         &map_head_Entry, (f, h));
                     return new Cons(head, tail);
                 }
@@ -1584,7 +1625,7 @@ from this paper.
 \chapter{Performance}\label{r:perf}
 % ##########################
 
-There are many consideration to be made when creating
+There are many considerations to be made when creating
 an efficient runtime. Some performance issues are easy
 to identify and others are extremely vague and dependent
 on very specific details of how the CPU interacts with
@@ -1630,8 +1671,8 @@ spent in GC and the program is faster.
 
 The way the GC works is that it traverses the stack looking
 for pointers. References between objects form a graph with
-the stack being a root (and static objects). If there isn't a path from an object
-to the root, then this object can be collected.
+the stack being a root (and static objects). If there is no path from the root
+to an object, then this object can be collected.
 A side effect of this implementation is that
 non-tail recursive functions that grow the stack
 make the traversal a bit more expensive.
@@ -2087,7 +2128,7 @@ Below is the Haskell source code and test results:
 The addition operation in those tests is executed
 eagerly. Thanks to strictness analysis special worker
 functions are created, which resamble imperative loops.
-Lazer is mostly within the 1-2x slower range.
+Lazer is mostly within the 1-1.5x slower range.
 
 \subsection{Tight arithmetic loops}
 
@@ -2189,7 +2230,7 @@ others are unfortunately bound to the runtime limitations.
 Overall, the performance is decent and the runtime can be used
 for example with graphical user interfaces that don't require
 extremely low latency. The processing parts that do
-require high performance have to ne implemented eagerly
+require high performance have to be implemented eagerly
 or reference external .NET libraries.
 
 % ##########################
@@ -2271,7 +2312,7 @@ for brevity.
 \subsection{Working with GHC source code}
 While it may not feel like \texttt{stg2cs} is complex,
 the hard part of creating it was definitely a lack of
-examples on how to interract with the GHC.
+examples on how to interact with the GHC.
 Some information could be obtained on the wiki of the GHC
 repository, but mostly I had to figure out in which
 module there might be a function that was needed,
@@ -2534,7 +2575,10 @@ The closure's computation expression is placed in a new static method.
 \paragraph{Safe names}\label{c:safe_names}
 Haskell is rather loose with what can be a name, whereas C\shrp{} isn't.
 This meant that all symbols in operators had to be converted to words,
-apostrophes removed, etc. Another issue was conflicting names.
+apostrophes removed, etc. For \verb|C--| name generation GHC uses
+z-encoding that escapes special characters (e.g. \texttt{\#} becomes \texttt{zh})
+and this can be borrowed.
+Another issue was conflicting names.
 GHC assigns each variable a unique value that is appended to its name
 if the variable is only used locally. Finally, a module name is added.
 
@@ -2543,9 +2587,12 @@ They work great 90\% of the time. Unfortunately, GHC is riddled with weird undoc
 quirks that make this a nightmare for the other 10\% of cases.
 
 For instance, local worker functions may be used from other modules as an optimization,
-but I haven't found any way to check that and prevent appending a unique value,
+but their not set to external in single module compilation, so I cannot check that
+and prevent appending a unique value,
 which breaks callers code. Or sometimes GHC just adds a digit at the end of an imported name.
 This is one of the reasons why the compiler's output may have to be manually fixed.
+I suspect most of the issues would disappear if all of the source files were processed
+in a single GHC session.
 
 \newpage
 \subsection{Simplifying generated expressions}
@@ -2559,7 +2606,7 @@ To simplify readability of the generated code a few simplification rules are app
         (computations have to return evaluated results).
 \end{enumerate}
 
-The first to are meant to lower the indentation level (which grows pretty quickly) and the last saves
+The first two are meant to lower the indentation level (which grows pretty quickly) and the last saves
 a little bit of time.
 
 \subsection{Emitting the code}
@@ -2568,15 +2615,132 @@ structure that represents particular C\shrp{} declarations, expressions and stat
 These structures are instances of the GHC \texttt{Outputable} class where the pretty printer
 is used to actually produce C\shrp{} code in text form. The text output is then printed to the user.
 
+\section{Debugging Haskell code}
+One of the interesting ideas was to enable debugging of Haskell code
+after it has been compiled to C\shrp{}. The .NET platform has very good debugging
+tools and this could be leveraged to allow for debugging Haskell code.
+However, it is not easy to properly support it.
+GHC performs a lot of code transformations to increase performance,
+which means the generated code looks very differently than the source code.
+Luckily there is an option to generate code mapping in the DWARF format (GHC \verb|-g| flag).
+
+Unfortunately the C\shrp{} compiler doesn't provide enough flexibility for external source information.
+Below is an example of what could be done, however, the current implementation of the Haskell
+to C\shrp{} compiler doesn't emit source mapping information.
+
+\subsection{Code mapping}
+The Roslyn compiler provides few preprocessor directives for use in C\shrp{} source code.
+One of them is the \verb|#line| directive which allows to annotate generated source code
+with information about its origin. This may be used to allow setting breakpoints in Haskell
+source code, while debugging the .NET program.
+
+\begin{verbatim}
+  1:  map f l =
+  2:      case l of
+  3:          [] -> []
+  4:          (x:xs) ->
+  5:              let nx  =
+  6:                       f x
+  7:                  nxs =
+  8:                       map f xs
+  9:              in nx : nxs
+\end{verbatim}
+\begin{verbatim}
+    public static Closure map_Entry(Closure f, Closure l)
+    {
+  #line 2 "map.hs"
+        var l_ = l.Eval();
+        switch (l_)
+        {
+            default: { throw new ImpossibleException(); }
+  #line 3 "map.hs"
+            case Nil l_Nil: { return nil; }
+            case Cons l_Cons:
+            {
+  #line 4 "map.hs"
+                var x = l_Cons.x0;
+                var xs = l_Cons.x1;
+  #line 5 "map.hs"
+                var nx = new Updatable<(Closure,Closure)>(
+                    &map_head_Entry, (f, x));
+  #line 7 "map.hs"
+                var nxs = new Updatable<(Closure,Closure)>(
+                    &map_tail_Entry, (f, xs));
+  #line 9 "map.hs"
+                return new Cons(nx, nxs);
+            }
+        }
+    }
+    public static Closure map_tail_Entry(in (Closure f, Closure xs) free)
+    {
+  #line 8 "map.hs"
+        return map_Entry(free.f, free.xs);
+    }
+    public static Closure map_head_Entry(in (Closure f, Closure x) free)
+    {
+  #line 6 "map.hs"
+        return free.f.Apply<Closure,Closure>(free.x);
+    }
+\end{verbatim}
+
+Unfortunately, this preprocessor directive is limited to just the line number.
+This means that column information will be taken from the C\shrp{} file rather than
+the Haskell file and wrong part of the line may be highlighted in the IDE.
+If there are multiple expressions on the same line, multiple usages of the directive
+will be ignored and only the last one may be used during debugging. \\
+
+It's worth noting that the .NET debugger uses unoptimized code by default which doesn't
+use tail calls and it's easy to overflow the stack. For proper debugging one should enable
+\textit{Optimize} flag in the C\shrp{} project and disable \textit{Just My Code} debugger option.
+
 % ##########################
-\chapter{Future work}\label{r:future}
+\chapter{Conclusions and future work}\label{r:future}
 % ##########################
 
-The runtime in the current form is working decently.
-There's a lot of potential for further improvements, especially on the compiler side.
+Compiling lazy functional languages isn't a trivial task
+and thanks to the research done on that topic in the last 40 years
+new solutions can be created more easily.
+Lazer, the .NET lazy runtime introduced in this work builds upon
+the work of people who previously tried to achieve the same goal --
+bring Haskell to .NET.
+
+The runtime in the current form is working decently and is small enough to be
+easily explained, provided the reader has prior knowledge of the C\shrp{} language.
+The experimental compiler was very useful in attempting to compile the
+Haskell's \texttt{Prelude} library and \texttt{nofib} benchmarks.
+It showed that the way code is compiled to work within the runtime is also very important
+and the compiler itself has to take care of many optimizations.
+
+Many scientific papers provide theoretical information on the solution,
+but lack practical examples of performance tests.
+Often we might percieve something as slow or fast, but without actual benchmarks
+we may be incorrect.
+I was able to test my runtime (with the compiler) and show when it works as fast as GHC and
+when it doesn't, providing a reference for future implementations whether they are
+an improvement or not.
+
+When choosing this topic I hoped to arrive at a great spot that merges
+the purity of a lazy functional language and the versatility of
+a mature programming framework such as the .NET platform.
+Unfortunately, a lot of performance issues linked to increased
+GC pressure and generic virtual methods may make it very hard 
+for programmers to adopt Haskell on a the .NET CLR.
+It would be interesting to see the overall performance of a lazy .NET runtime
+in a more real world scenario.
+
+There is still a lot of potential for further improvements, especially on the compiler side.
 Let's take a look at the areas that could be further worked on.
 
 \section{Areas of improvement}
+\subsection{GHC integration}
+The \texttt{stg2cs} compiler is a proof of concept which shows that compiling Haskell
+to C\shrp{} is generally possible. In order to properly compile programs that have many
+files and to make better use of GHC utilities, more work has to be put into forking the GHC,
+adding a .NET backend and emitting .NET assemblies directly,
+which will also allow to provide proper debug symbols.
+However, this means some code optimizations done by the Roslyn compiler
+may have to be reimplemented.
+
 \subsection{Multithreading}
 Currently, the runtime is only working in a single thread context. In order to allow multithreading
 Lazer's standard library would need to provide functions for managing threads or paralelizing
@@ -2616,96 +2780,14 @@ enough time to get them done.
     \item Local recursive functions should recurse by direct calls rather than application.
 \end{itemize}
 
-\subsection{Compiler usefulness and correctness}
-Currently the compiler doesn't process multi-file projects at once, nor does it interact with .NET tools
-to compile what it produces. A fork of the GHC would be much more capable in this regard. It would probably
-also alleviate a lot of problems when compiling the \texttt{Prelude}.
+\subsection{Providing libraries}
+Bringing Haskell to a new platform is an opportunity to provide new libraries.
+Compiling the \texttt{Prelude} is mandatory, as it is defined in the Haskell standard.
+It may even be possible to compile Haskell libraries that use native libraries
+with .NET's Platform Invoke.
+But whenever the solution is provided in the .NET standard libraries it should be favoured.
 
-The fact that produced C\shrp{} code may not compile on it's own (without manual fixes) is especially
-working against the usefulness of \texttt{stg2cs}.
-
-\section{Final remarks}
-The work presented in this paper shows some potential.
-Unfortunately, a lot of performance issues linked to increased
-GC pressure may make it very hard to adopt Haskell on a general
-purpose OOVM like the .NET CLR.
-Very likely a middle ground would have to found that allows for
-easy use of laziness when it's most beneficial while falling back
-to eager computations whenever performance is key.
-
-It would be interesting to see the overall performance of a lazy .NET runtime
-in a more real world scenario. Further work on porting Haskell libraries
-would have to be done, but for that to be possible most of the noted
-improvements of the previous section would need to be done.
-
-\begin{thebibliography}{99}
-\addcontentsline{toc}{chapter}{Bibliography}
-
-\bibitem[MT-96]{Tullsen} Mark Tullsen, \textit{,,Compiling Haskell to Java''}, YALEU/DCS/RR-1204
-1996.
-
-\bibitem[BA-07]{Alliet} Brian Alliet, \textit{,,Efficient Translation of Haskell to Java
-Master’s Thesis Proposal''}, 2007.
-
-\bibitem[KC,HL,TH-01]{Choi} Kwanghoon Choi, Hyun-il Lim, Taisook Han, \textit{,,Compiling Lazy Functional Programs Based othe Spineless Tagless G-machine for the Java Virtual Machine''}, FLOPS 2001.
-
-\bibitem[DS-02]{Stewart} Don Stewart, \textit{,,Multi-paradigm just-in-time compilation''}, 2002.
-
-\bibitem[NP,EM-04]{PerryMeijer} Nigel Perry, Erik Meijer, \textit{,,Implementing functional languages on object-oriented virtual machines''}, IEE Proceedings on Software, 151(1):1-9, 2004.
-
-\bibitem[OH-06]{Hunt} Oliver Hunt, \textit{,,The Provision of Non-Strictness, Higher Kinded Types
-and Higher Ranked Types on an Object Oriented Virtual Machine''}, 2006.
-
-\bibitem[EM,NP,AY-01]{MondrianImplDetails} Erik Meijer, Nigel Perry, Arjan van Yzendoorn, \textit{,,Scripting .NET using Mondrian''}, ECOOP 2001.
-
-\bibitem[MM,MA,RB,AS-05]{Brazil} Monique Monteiro, Mauro Ara\'ujo, Rafael Borges, Andr\'e Santos,  \textit{,,Compiling Non-strict Functional Languages for the .NET Platform''}, Journal of Universal Computer Science, vol. 11, no. 7 (2005), 1255-1274.
-
-\bibitem[HS,PS-90]{referentialTransparency} Harald Søndergaard, Peter Sestoft, \textit{,,Referential Transparency, Definiteness and Unfoldability''}, Acta Informatica 27, 505-517, 1990.
-
-\bibitem[VH,SB,TG-19]{lazySpark} Val\'erie Hayot-Sasson, Shawn T Brown, Tristan Glatard, \textit{,,Performance Evaluation of Big Data Processing Strategies for Neuroimaging''}, CCGRID, 2019.
-
-\bibitem[CO-96]{amortized} Chris Okasaki, \textit{,,The Role of Lazy Evaluation in Amortized Data Structures''} ICFP'96, 62-72, 1996.
-
-\bibitem[SPJ-87]{spj-book} Simon Peyton Jones, \textit{,,The Implementation of Functional Programming Languages''}, 1987.
-
-\bibitem[PL-64]{SECDM} P.J. Landin, \textit{,,The Mechanical Evaluation of Expressions''}, Computer Journal, Vol 6, No 4, 1964.
-
-\bibitem[AD,DM-90]{CASE} Anthony Davie, David McNally, \textit{,,CASE -- A Lazy Version of an SECD Machine with a Flat Environment''}, 1990.
-
-\bibitem[RK-85]{G-Machine} Richard B. Kieburtz, \textit{,,The G-machine: a fast, graph-reduction evaluator''}, Technical Report CS/E-85-002, Dept. of Computer Science, Oregon Graduate Center, January 1985.
-
-\bibitem[DT-79]{combinators} David A. Turner, \textit{,,A new implementation technique for applicative languages''}, Software -- Practice and Experience, 9:31–49, 1979.
-
-\bibitem[TC,PG,CM,AN-80]{SKIM} T.J.W. Clarke, P.J.S. Gladstone, C.D. MacLean, A.C. Norman, \textit{,,SKIM -- The S, K, I Reduction Machine''}, \texttt{Proceedings 1980 LISP conference}, pages 128-135, 1980.
-
-\bibitem[MM,AS-86]{CAM} Michel Mauny, Asc\'ander Su\'arez, \textit{,,Implementing functional languages in the categorical abstract machine''}, In \texttt{Proceedings 1986 ACM Conference on Lisp and Functional Programming}, pages 266–278, Cambridge, Massachusetts, August 1986.
-
-\bibitem[PC-86]{categorical_combinators} P.-L. Curien, \textit{,,Categorical Combinators''}, 1986.
-
-\bibitem[JF,SW-87]{TIM} Jon Fairbairn, Stuart Wray, \textit{,,Tim: a simple, lazy abstract machine to execute supercombinators''},  In \texttt{Proceedings of 1987 Functional Programming Languages and Computer Architecture Conference}, pages 34–45, Springer Verlag LNCS 274, September 1987.
-
-\bibitem[SPJ-92]{STGM} Simon Peyton Jones, \textit{,,Implementing lazy functional languages on stock hardware: the Spineless Tagless G-machine''}, 1992.
-
-\bibitem[IS,SPJ,DV-17]{demand analysis} Ilya Sergey, Simon Peyton Jones, Dimitrios Vytiniotis, \textit{,,Theory and Practice of Demand Analysis in Haskell''}, 2017.
-
-\bibitem[HC-36]{Curry} Haskell Curry, \textit{,,Functionality in combinatory logic''}, \texttt{Proceedings
-of the National Academy of Sciences (U.S.A.)}, XX, pp. 584—590, 1936.
-
-\bibitem[SM,SPJ-04]{fastcurry} Simon Marlow, Simon Peyton Jones, \textit{,,Making a fast Curry: Push/Enter vs. Eval/Apply for Higher-order Languages''} ICFP'04, pp. 4-15, 2004.
-
-\bibitem[TH,SM,SPJ-05]{multiprocessor} Tim Harris, Simon Marlow, Simon Peyton Jones, \textit{,,Haskell on a Shared-Memory Multiprocessor''}, 2005.
-
-\bibitem[PL-02]{coq_extract} Pierre Letouzey, \textit{,,A New Extraction for Coq''}, TYPES, 2002.
-
-\bibitem[RE,SJ-17]{levity} Richard A. Eisenberg, Simon Peyton Jones, \textit{,,Levity Polymorphism''}, 2017.
-
-\end{thebibliography}
+\printbibliography[heading=bibintoc]
 
 \end{document}
 
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% coding: latin-2
-%%% End:
