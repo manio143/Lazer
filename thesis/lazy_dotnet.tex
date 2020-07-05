@@ -36,7 +36,7 @@ style=alphabetic
   }
 
 % miesiąc i~rok:
-\date{May 2020}
+\date{June 2020}
 
 %Podać dziedzinę wg klasyfikacji Socrates-Erasmus:
 \dziedzina{ 
@@ -84,8 +84,8 @@ style=alphabetic
   Functional programming languages may have very desirable properties.
 We take a look at compiling Haskell, a non-strict functional language,
 to work on the .NET platform. In order to achieve that goal, a framework
-runtime for evaluation of lazy computations is presented. Native Haskell
-runtime is very fast, thus the performance of the .NET implementation is considered.
+runtime for evaluation of lazy computations is presented.
+The performance of the runtime is important in order for it to be practically usable.
 To simplify the translation
 of Haskell programs to use this runtime an experimental compiler has been
 created and some of its details are presented.
@@ -499,7 +499,7 @@ that at the time of writing was not yet released.
 The implementation is best explained by following the example code execution
 from chapter \myref{s:example_eval}.
 First, let's introduce some key concepts regarding data representation
-and then move into computation representation.
+and then move on to computation representation.
 
 \section{Types and data representation}\label{s:data_rep}
 
@@ -528,7 +528,7 @@ its data constructor \texttt{I\#} that has one field of type \texttt{Int\#}.
 In practice this means data constructors represent .NET classes.
 
 \begin{verbatim}
-    public sealed class I : Data {
+    public sealed class IHash : Data {
         public int x0;
         public I(int x0) {
             this.x0 = x0;
@@ -561,7 +561,7 @@ means of type erasure.
 
 \subsection{Data superclass}
 
-Data constructors implemented in C\shrp{}, like \texttt{I} defined above,
+Data constructors implemented in C\shrp{}, like \texttt{IHash} defined above,
 will share some common properties. Thus, they will extend the \texttt{Data} class.
 As mentioned in \myref{s:closures}, data constructors are
 also closures, but very simple ones, having a simple
@@ -634,9 +634,9 @@ constructors \texttt{Nothing} and \texttt{Just}, which have been defined in
 
 \section{Computation representation}\label{s:computations}
 
-In C\shrp{} a unit of computation is a method.
-Given a Haskell expression we can create method which
-when executed will return a value obtained by evaluating that expression.
+In C\shrp{} the unit of computation is a method.
+Given a Haskell expression we can create a method which
+when executed will return the value obtained by evaluating that expression.
 
 C\shrp{} is an Object Oriented language and it provides two kinds of methods:
 instance methods and static methods.
@@ -690,7 +690,7 @@ This can be represented in C\shrp{} by the following methods:
 
 \begin{verbatim}
     public static Closure divide_Entry(Closure x, Closure y) {
-        var yI = y.Eval() as I;
+        var yI = y.Eval() as IHash;
         var yVal = yI.x0;
         switch (yVal) {
             case 0:
@@ -701,10 +701,10 @@ This can be represented in C\shrp{} by the following methods:
         }
     }
     public static Closure divide_v_Entry(Closure x, int yVal)   {
-        var xI = x.Eval() as I;
+        var xI = x.Eval() as IHash;
         var xVal = xI.x0;
         var d = xVal / yVal;
-        return new I(d);
+        return new IHash(d);
     }
 \end{verbatim}
 
@@ -1006,7 +1006,7 @@ The \texttt{Thunk} class is going to extend
 mechanism. Upon invoking the \texttt{Eval} method the first
 time, the computation is performed and the result saved.
 The thunk now becomes an indirection and on future evaluations
-the the saved result is returned.
+the saved result is returned.
 
 This can be implemented in two ways. One is to perform a comparison
 of the result pointer with \texttt{null} to see if
@@ -1309,8 +1309,6 @@ Moreover, there is no efficient mechanism similar
 to CLR's function pointers in the JVM.
 Instead more emphasis is placed on passing around objects
 that implement a particular interface.
-This means the first approach described in \myref{s:computations}
-has to be used.
 Generics on the JVM are also \textit{weaker} in that they don't
 support primitive types.
 
@@ -1429,12 +1427,13 @@ and then call the static method \texttt{call}.
 The main difference is that there is no special class for map,
 but rather a universal class \texttt{Fun2} is instantiated
 with the pointer to the static computation method.
-The same goes for the thunks created in the Cons branch.
+The same goes for the thunks created in the \texttt{Cons} branch.
 Thanks to tail calls no trampolines are involved, which
 increases performance.
 
 The \textit{eval/apply} model has been implemented just a bit differently
-in Eta in that there are abstract subclasses \texttt{FunctionN}
+in Eta which doesn't use generics.
+Similarly to Lazer there are abstract subclasses \texttt{FunctionN}
 of the base class \texttt{Function} that implement all
 apply methods except \texttt{applyN} that is implemented
 by the actual function implementation.
@@ -2713,7 +2712,7 @@ and the compiler itself has to take care of many optimizations.
 
 Many scientific papers provide theoretical information on the solution,
 but lack practical examples of performance tests.
-Often we might percieve something as slow or fast, but without actual benchmarks
+Often we might perceive something as slow or fast, but without actual benchmarks
 we may be incorrect.
 I was able to test my runtime (with the compiler) and show when it works as fast as GHC and
 when it doesn't, providing a reference for future implementations whether they are
